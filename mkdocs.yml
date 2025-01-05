@@ -1,17 +1,42 @@
-site_name: Messy Notes...
+site_name: Messy Notes
+repo_url: https://github.com/JAILuo/notes
+site_url: https://jailuo.github.io/notes
+
 theme:
-    name: material
-    
+  name: material
+  icon:
+    previous: fontawesome/solid/angle-left
+    next: fontawesome/solid/angle-right
+#  font:
+#    text: JetBrains Mono
+#    code: JetBrains Mono
+  palette:
+    # Palette toggle for light mode
+    - scheme: default
+      toggle:
+        icon: material/weather-night 
+        name: Switch to dark mode
+
+    # Palette toggle for dark mode
+    - scheme: slate
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+
+markdown_extensions:
+  - pymdownx.superfences  # 用于改进代码块的显示
+  - pymdownx.highlight  # 用于改进代码高亮
+  - pymdownx.snippets  # 用于插入代码片段
+
 nav:
   - 首页: 'index.md'
-  # - PA:
-    # - PA0: ysyx/pa/pa0/pa0.md
-    # - PA1: ysyx/pa/pa1/pa1.md
-    # - PA2: ysyx/pa/pa2/pa2.md
-    # - PA3: ysyx/pa/pa3/pa3.md
-    # - PA4: ysyx/pa/pa4/pa4.md
-    # - Linux Porting: ysyx/pa/Linux_porting/porting.md
-    # - C Macro: ysyx/pa/c_marco/macro.md
-    # - Summary: ysyx/pa/summary/summary.md
   - ysyx:
+    - NJU-ICS2023-PA:
+      - PA1: ysyx/pa/pa1/pa1.md
+      - PA2: ysyx/pa/pa2/pa2.md
+      - PA3: ysyx/pa/pa3/pa3.md
+      - PA4: ysyx/pa/pa4/pa4.md
+      - C Macro: ysyx/pa/c_marco/macro.md
+      - Summary: ysyx/pa/summary/summary.md
+      - Linux Porting: ysyx/pa/Linux_porting/porting.md
     - Digital Circuit: ysyx\digital-circuit/digital circuit.md
