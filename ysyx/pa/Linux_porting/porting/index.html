@@ -1,0 +1,2078 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://jailuo.github.io/notes/ysyx/pa/Linux_porting/porting/">
+      
+      
+        <link rel="prev" href="../../summary/summary/">
+      
+      
+        <link rel="next" href="../../../digital-circuit/digital%20circuit/">
+      
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.48">
+    
+    
+      
+        <title>Linux Porting - Messy Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.6f8fc17f.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#task" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="Messy Notes" class="md-header__button md-logo" aria-label="Messy Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Messy Notes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Linux Porting
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256l137.3-137.4c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/JAILuo/notes" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="Messy Notes" class="md-nav__button md-logo" aria-label="Messy Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Messy Notes
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/JAILuo/notes" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    首页
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    ysyx
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            ysyx
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    NJU-ICS2023-PA
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            NJU-ICS2023-PA
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../pa1/pa1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PA1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../pa2/pa2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PA2
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../pa3/pa3/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PA3
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../pa4/pa4/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PA4
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../c_marco/macro/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    C Macro
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../summary/summary/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Summary
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Linux Porting
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Linux Porting
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#task" class="md-nav__link">
+    <span class="md-ellipsis">
+      Task
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      处理器
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="处理器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rv32ima" class="md-nav__link">
+    <span class="md-ellipsis">
+      ~~RV32I、M、A 扩展~~
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#zicsr" class="md-nav__link">
+    <span class="md-ellipsis">
+      实现 Zicsr 扩展
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="实现 Zicsr 扩展">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#basic-instructions" class="md-nav__link">
+    <span class="md-ellipsis">
+      basic instructions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#csr" class="md-nav__link">
+    <span class="md-ellipsis">
+      CSR
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      中断相关内容
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="中断相关内容">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#clint" class="md-nav__link">
+    <span class="md-ellipsis">
+      CLINT
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      外部中断
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      相关设备
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="相关设备">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#uart" class="md-nav__link">
+    <span class="md-ellipsis">
+      UART
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      按键
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      定时器
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      串口
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#plic" class="md-nav__link">
+    <span class="md-ellipsis">
+      PLIC
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#difftest" class="md-nav__link">
+    <span class="md-ellipsis">
+      DiffTest
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#linux" class="md-nav__link">
+    <span class="md-ellipsis">
+      Linux 系统移植
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Linux 系统移植">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#some-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Some questions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      快速上手体验
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      启动流程
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      交叉编译工具链
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#linker-script" class="md-nav__link">
+    <span class="md-ellipsis">
+      Linker Script
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#opensbi" class="md-nav__link">
+    <span class="md-ellipsis">
+      OpenSBI
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#u-boot" class="md-nav__link">
+    <span class="md-ellipsis">
+      U-Boot
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#busyboxbuildrootyocto" class="md-nav__link">
+    <span class="md-ellipsis">
+      busybox、buildroot、yocto
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      设备树
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#linux-kernel" class="md-nav__link">
+    <span class="md-ellipsis">
+      Linux kernel
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#risc-v-arch" class="md-nav__link">
+    <span class="md-ellipsis">
+      RISC-V Arch 相关
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kernel" class="md-nav__link">
+    <span class="md-ellipsis">
+      kernel
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="kernel">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#kernel_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      部分 kernel 代码学习
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#abi" class="md-nav__link">
+    <span class="md-ellipsis">
+      启动相关的ABI设置
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rootfs" class="md-nav__link">
+    <span class="md-ellipsis">
+      rootfs
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nommu-linux" class="md-nav__link">
+    <span class="md-ellipsis">
+      nommu-linux
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="nommu-linux">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#image" class="md-nav__link">
+    <span class="md-ellipsis">
+      如何加载 image 和设备树
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      一些启动上的问题
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一些启动上的问题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      参考资料
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#other-qemu-opensbi-risc-v" class="md-nav__link">
+    <span class="md-ellipsis">
+      Other: QEMU + OpenSBI + ... 学习RISC-V
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      参考文章
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../digital-circuit/digital%20circuit/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Digital Circuit
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#task" class="md-nav__link">
+    <span class="md-ellipsis">
+      Task
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      处理器
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="处理器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rv32ima" class="md-nav__link">
+    <span class="md-ellipsis">
+      ~~RV32I、M、A 扩展~~
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#zicsr" class="md-nav__link">
+    <span class="md-ellipsis">
+      实现 Zicsr 扩展
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="实现 Zicsr 扩展">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#basic-instructions" class="md-nav__link">
+    <span class="md-ellipsis">
+      basic instructions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#csr" class="md-nav__link">
+    <span class="md-ellipsis">
+      CSR
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      中断相关内容
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="中断相关内容">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#clint" class="md-nav__link">
+    <span class="md-ellipsis">
+      CLINT
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      外部中断
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      相关设备
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="相关设备">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#uart" class="md-nav__link">
+    <span class="md-ellipsis">
+      UART
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      按键
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      定时器
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      串口
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#plic" class="md-nav__link">
+    <span class="md-ellipsis">
+      PLIC
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#difftest" class="md-nav__link">
+    <span class="md-ellipsis">
+      DiffTest
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#linux" class="md-nav__link">
+    <span class="md-ellipsis">
+      Linux 系统移植
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Linux 系统移植">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#some-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Some questions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      快速上手体验
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      启动流程
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      交叉编译工具链
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#linker-script" class="md-nav__link">
+    <span class="md-ellipsis">
+      Linker Script
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#opensbi" class="md-nav__link">
+    <span class="md-ellipsis">
+      OpenSBI
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#u-boot" class="md-nav__link">
+    <span class="md-ellipsis">
+      U-Boot
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#busyboxbuildrootyocto" class="md-nav__link">
+    <span class="md-ellipsis">
+      busybox、buildroot、yocto
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      设备树
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#linux-kernel" class="md-nav__link">
+    <span class="md-ellipsis">
+      Linux kernel
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#risc-v-arch" class="md-nav__link">
+    <span class="md-ellipsis">
+      RISC-V Arch 相关
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kernel" class="md-nav__link">
+    <span class="md-ellipsis">
+      kernel
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="kernel">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#kernel_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      部分 kernel 代码学习
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#abi" class="md-nav__link">
+    <span class="md-ellipsis">
+      启动相关的ABI设置
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rootfs" class="md-nav__link">
+    <span class="md-ellipsis">
+      rootfs
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nommu-linux" class="md-nav__link">
+    <span class="md-ellipsis">
+      nommu-linux
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="nommu-linux">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#image" class="md-nav__link">
+    <span class="md-ellipsis">
+      如何加载 image 和设备树
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      一些启动上的问题
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一些启动上的问题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      参考资料
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#other-qemu-opensbi-risc-v" class="md-nav__link">
+    <span class="md-ellipsis">
+      Other: QEMU + OpenSBI + ... 学习RISC-V
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      参考文章
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+  <h1>Linux Porting</h1>
+
+<h2 id="task">Task</h2>
+<p>分为两部分：</p>
+<ul>
+<li>处理器<ul>
+<li>RV32IMA 扩展</li>
+<li>Zicsr 扩展</li>
+<li>时钟中断</li>
+<li>相关设备</li>
+</ul>
+</li>
+<li>Linux移植</li>
+</ul>
+<h2 id="_1">处理器</h2>
+<h3 id="rv32ima">~~RV32I、M、A 扩展~~</h3>
+<div class="highlight"><pre><span></span><code><span class="nb">test</span><span class="w"> </span>list<span class="w"> </span><span class="o">[</span><span class="m">56</span><span class="w"> </span>item<span class="o">(</span>s<span class="o">)]</span>:<span class="w"> </span>amoadd_w<span class="w"> </span>amoand_w<span class="w"> </span>amomaxu_w<span class="w"> </span>amomax_w<span class="w"> </span>amominu_w<span class="w"> </span>
+<span class="w">    </span>amomin_w<span class="w"> </span>amoor_w<span class="w"> </span>amoswap_w<span class="w"> </span>amoxor_w<span class="w"> </span>lrsc<span class="w"> </span>
+<span class="w">    </span>addi<span class="w"> </span>add<span class="w"> </span>andi<span class="w"> </span>and<span class="w"> </span>auipc<span class="w"> </span>beq<span class="w"> </span>bge<span class="w"> </span>bgeu<span class="w"> </span>blt<span class="w"> </span>bltu<span class="w"> </span>bne<span class="w"> </span>jalr<span class="w"> </span>jal<span class="w"> </span>
+<span class="w">    </span>lb<span class="w"> </span>lbu<span class="w"> </span>lh<span class="w"> </span>lhu<span class="w"> </span>lui<span class="w"> </span>lw<span class="w"> </span>ori<span class="w"> </span>or<span class="w"> </span>sb<span class="w"> </span>sh<span class="w"> </span>simple<span class="w"> </span>slli<span class="w"> </span>
+<span class="w">    </span>sll<span class="w"> </span>slti<span class="w"> </span>sltiu<span class="w"> </span>slt<span class="w"> </span>sltu<span class="w"> </span>srai<span class="w"> </span>sra<span class="w"> </span>srli<span class="w"> </span>
+<span class="w">    </span>srl<span class="w"> </span>sub<span class="w"> </span>sw<span class="w"> </span>xori<span class="w"> </span>xor<span class="w"> </span>div<span class="w"> </span>divu<span class="w"> </span>mulh<span class="w"> </span>mulhsu<span class="w"> </span>mulhu<span class="w"> </span>mul<span class="w"> </span>rem<span class="w"> </span>remu
+<span class="o">[</span><span class="w">      </span>amoadd_w<span class="o">]</span><span class="w"> </span>PASS
+<span class="o">[</span><span class="w">      </span>amoand_w<span class="o">]</span><span class="w"> </span>PASS
+<span class="o">[</span><span class="w">     </span>amomaxu_w<span class="o">]</span><span class="w"> </span>PASS
+<span class="o">[</span><span class="w">      </span>amomax_w<span class="o">]</span><span class="w"> </span>PASS
+<span class="o">[</span><span class="w">     </span>amominu_w<span class="o">]</span><span class="w"> </span>PASS
+<span class="o">[</span><span class="w">      </span>amomin_w<span class="o">]</span><span class="w"> </span>PASS
+<span class="o">[</span><span class="w">       </span>amoor_w<span class="o">]</span><span class="w"> </span>PASS
+<span class="o">[</span><span class="w">     </span>amoswap_w<span class="o">]</span><span class="w"> </span>***FAIL***
+<span class="o">[</span><span class="w">      </span>amoxor_w<span class="o">]</span><span class="w"> </span>PASS
+<span class="o">[</span><span class="w">          </span>lrsc<span class="o">]</span><span class="w"> </span>PASS
+<span class="o">[</span><span class="w">          </span>addi<span class="o">]</span><span class="w"> </span>PASS
+<span class="o">[</span><span class="w">           </span>add<span class="o">]</span><span class="w"> </span>PASS
+<span class="o">[</span><span class="w">          </span>andi<span class="o">]</span><span class="w"> </span>PASS
+<span class="o">[</span><span class="w">           </span>and<span class="o">]</span><span class="w"> </span>PASS
+<span class="o">[</span><span class="w">         </span>auipc<span class="o">]</span><span class="w"> </span>PASS
+<span class="o">[</span><span class="w">           </span>beq<span class="o">]</span><span class="w"> </span>PASS
+<span class="o">[</span><span class="w">           </span>bge<span class="o">]</span><span class="w"> </span>PASS
+<span class="o">[</span><span class="w">          </span>bgeu<span class="o">]</span><span class="w"> </span>PASS
+<span class="o">[</span><span class="w">           </span>blt<span class="o">]</span><span class="w"> </span>PASS
+<span class="o">[</span><span class="w">          </span>bltu<span class="o">]</span><span class="w"> </span>PASS
+<span class="o">[</span><span class="w">           </span>bne<span class="o">]</span><span class="w"> </span>PASS
+<span class="o">[</span><span class="w">          </span>jalr<span class="o">]</span><span class="w"> </span>PASS
+<span class="o">[</span><span class="w">           </span>jal<span class="o">]</span><span class="w"> </span>PASS
+<span class="o">[</span><span class="w">            </span>lb<span class="o">]</span><span class="w"> </span>PASS
+<span class="o">[</span><span class="w">           </span>lbu<span class="o">]</span><span class="w"> </span>PASS
+<span class="o">[</span><span class="w">            </span>lh<span class="o">]</span><span class="w"> </span>PASS
+<span class="o">[</span><span class="w">           </span>lhu<span class="o">]</span><span class="w"> </span>PASS
+<span class="o">[</span><span class="w">           </span>lui<span class="o">]</span><span class="w"> </span>PASS
+<span class="o">[</span><span class="w">            </span>lw<span class="o">]</span><span class="w"> </span>PASS
+<span class="o">[</span><span class="w">           </span>ori<span class="o">]</span><span class="w"> </span>PASS
+<span class="o">[</span><span class="w">            </span>or<span class="o">]</span><span class="w"> </span>PASS
+<span class="o">[</span><span class="w">            </span>sb<span class="o">]</span><span class="w"> </span>PASS
+<span class="o">[</span><span class="w">            </span>sh<span class="o">]</span><span class="w"> </span>PASS
+<span class="o">[</span><span class="w">        </span>simple<span class="o">]</span><span class="w"> </span>PASS
+<span class="o">[</span><span class="w">          </span>slli<span class="o">]</span><span class="w"> </span>PASS
+<span class="o">[</span><span class="w">           </span>sll<span class="o">]</span><span class="w"> </span>PASS
+<span class="o">[</span><span class="w">          </span>slti<span class="o">]</span><span class="w"> </span>PASS
+<span class="o">[</span><span class="w">         </span>sltiu<span class="o">]</span><span class="w"> </span>PASS
+<span class="o">[</span><span class="w">           </span>slt<span class="o">]</span><span class="w"> </span>PASS
+<span class="o">[</span><span class="w">          </span>sltu<span class="o">]</span><span class="w"> </span>PASS
+<span class="o">[</span><span class="w">          </span>srai<span class="o">]</span><span class="w"> </span>PASS
+<span class="o">[</span><span class="w">           </span>sra<span class="o">]</span><span class="w"> </span>PASS
+<span class="o">[</span><span class="w">          </span>srli<span class="o">]</span><span class="w"> </span>PASS
+<span class="o">[</span><span class="w">           </span>srl<span class="o">]</span><span class="w"> </span>PASS
+<span class="o">[</span><span class="w">           </span>sub<span class="o">]</span><span class="w"> </span>PASS
+<span class="o">[</span><span class="w">            </span>sw<span class="o">]</span><span class="w"> </span>PASS
+<span class="o">[</span><span class="w">          </span>xori<span class="o">]</span><span class="w"> </span>PASS
+<span class="o">[</span><span class="w">           </span>xor<span class="o">]</span><span class="w"> </span>PASS
+<span class="o">[</span><span class="w">           </span>div<span class="o">]</span><span class="w"> </span>PASS
+<span class="o">[</span><span class="w">          </span>divu<span class="o">]</span><span class="w"> </span>PASS
+<span class="o">[</span><span class="w">          </span>mulh<span class="o">]</span><span class="w"> </span>PASS
+<span class="o">[</span><span class="w">        </span>mulhsu<span class="o">]</span><span class="w"> </span>PASS
+<span class="o">[</span><span class="w">         </span>mulhu<span class="o">]</span><span class="w"> </span>PASS
+<span class="o">[</span><span class="w">           </span>mul<span class="o">]</span><span class="w"> </span>PASS
+<span class="o">[</span><span class="w">           </span>rem<span class="o">]</span><span class="w"> </span>PASS
+<span class="o">[</span><span class="w">          </span>remu<span class="o">]</span><span class="w"> </span>PASS
+</code></pre></div>
+<h3 id="zicsr">实现 <code>Zicsr</code> 扩展</h3>
+<h4 id="basic-instructions">basic instructions</h4>
+<p><img src="pic/image-20240919203457246.png" alt="image-20240919203457246" style="zoom: 50%;" /></p>
+<p><a href="https://ysyx.oscc.cc/docs/">第六期"一生一芯"课程主页 | 官方文档</a></p>
+<h4 id="csr">CSR</h4>
+<p>各个 CSR 改为用 bitfield 实现</p>
+<p>各个特权级</p>
+<ul>
+<li>
+<p>mcause </p>
+<p><img src="pic/image-20240915214238902.png" alt="image-20240915214238902" style="zoom:67%;" /></p>
+<p>再在 nemu 里添加一些枚举值即可。</p>
+<blockquote>
+<p>如果 etrace 再加功能一点，可以用 X-Macro 来弄弄？</p>
+<p>不行，比较麻烦，算了，直接枚举值自己查类型</p>
+</blockquote>
+</li>
+<li>
+<p>mstatus</p>
+<p>同上，但记得更改 mret、ecall 相关内容。</p>
+<p>这里再看看手册中的相关介绍。</p>
+<p><a href="https://gitee.com/hustos/pke-doc/blob/master/chapter1_riscv.md#13-">chapter1_riscv.md · 华中科技大学操作系统团队/pke-doc - Gitee.com</a></p>
+<p>可以看看相关 mstatus 各个位表示的含义，不过处理器这部分，我们只需提供好硬件实现即可，这些位应该是OS、ABI 那方面要做的。</p>
+</li>
+</ul>
+<p><a href="https://tinylab.org/riscv-non-mmu-linux-part1/">RISC-V Non-MMU Linux (1): 从内核到应用跑通一遍 - 泰晓科技 (tinylab.org)</a></p>
+<p><a href="https://tinylab.org/riscv-non-mmu-linux-part2/">RISC-V Non-MMU Linux (2): 从 M/S/U 到 M/U 的层级转变 - 泰晓科技 (tinylab.org)</a></p>
+<p><a href="https://tinylab.org/tinyemu-csr-and-privileged-isa/">从零开始，徒手写一个 RISC-V 模拟器（3）—— CSR 与特权级 ISA - 泰晓科技 (tinylab.org)</a></p>
+<h3 id="_2">中断相关内容</h3>
+<p>实际上，对于移植，主要就是实现 <strong>时钟中断</strong>，剩余的 软件中断、外部中断可以实现为空。</p>
+<ul>
+<li>
+<p>基础概念</p>
+<p>在种类上，RISC-V 将中断（interrupt）主要分为了三种：</p>
+<ul>
+<li>
+<p>software interrupt（软件中断）</p>
+<p>软件中断通常用于处理器内核之间的通信，即处理器间中断（Inter-Processor Interrupt, IPI），也称核间中断。</p>
+</li>
+<li>
+<p>timer interrupt（定时器中断）</p>
+<p>定时器中断为来自定时器的中断，通常用于操作系统的<strong>时钟中断</strong>，即用于产生系统的tick。</p>
+<blockquote>
+<p>RISC-V 体系结构规定处理器必须有一个定时器，通常为 <code>mtime</code> 。 </p>
+</blockquote>
+</li>
+<li>
+<p>external interrupt（外部中断）</p>
+<p>外部中断指的是来自处理器外部设备的中断（串口等）。</p>
+<p>一般来说，为了支持更多的外部中断源，处理器往往都会使用中断控制器来管理外部中断。</p>
+<p>如，RISC-V 使用平台级别的中断控制器来（Platform-Level Interrupt Controller，PLIC） 仲裁和派发外部中断。</p>
+</li>
+</ul>
+<blockquote>
+<p>当然，还有调试中断（用于硬件调试）、计数器溢出中断，这里不展开讨论。</p>
+</blockquote>
+<p>在 RISC-V 中，如果再按照中断功能来划分的话，可分为如下两类：</p>
+<ul>
+<li>
+<p>local interrupt（本地中断）</p>
+<p>本地中断为处理器私有的中断，有固定优先级，可直接发送给本地处理器 hart。所以，本地中断无需经过中断控制器的仲裁和查询，能够有效地缩短中断延时。</p>
+<p>本地中断一般由处理器内核本地中断器（Core-Local Interrupt, CLINT）产生。</p>
+<p><strong>具体包括：软件中断和定时器中断。</strong></p>
+</li>
+<li>
+<p>global interrupt（全局中断）</p>
+<p>通常指的就是外部中断了。通过 PLIC 的路由，送到合适的处理器内核。</p>
+</li>
+</ul>
+<p><img src="pic/image-20240918103948146.png" alt="image-20240918103948146" style="zoom:50%;" /></p>
+<p>这一点和 ARM 接不太一样，arm多核下，定时器中断、核间中断和外设中断都是统一由中断控制器管理的。</p>
+<p>应该能联想到 ARM Cortex-M 的NVIC 和 Cortex-A 系列的 GIC 。</p>
+<ul>
+<li>
+<p>参考资料</p>
+<ul>
+<li>
+<p>《RISC-V体系结构编程与实践》第 9 章 ——奔跑吧Linux社区 </p>
+</li>
+<li>
+<p><a href="https://www.cnblogs.com/harrypotterjackson/p/17548837.html#_label3">详解RISC v中断 - LightningStar - 博客园 (cnblogs.com)</a></p>
+<p>比较杂乱，但是内容还挺多，看不下去手册可以看这块别人总结的。</p>
+</li>
+<li>
+<p><a href="http://www.databusworld.cn/10468.html">RISCV基础开发（三） | 南京养鸡二厂 (databusworld.cn)</a></p>
+</li>
+<li>
+<p>[<a href="https://lore.kernel.org/lkml/20211007123632.697666-1-anup.patel@wdc.com/">RFC PATCH v4 00/10] Linux RISC-V ACLINT Support - Anup Patel (kernel.org)</a></p>
+</li>
+<li>
+<p><a href="https://github.com/riscv/riscv-plic-spec/blob/master/riscv-plic.adoc#interrupt-notifications">plic-spec (github.com)</a></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="clint">CLINT</h4>
+<p>软件中断和时钟中断，其中时钟中断是最关键的，OS 需要 Timer 来实现任务的切换，这一部分的内容其实在 PA4 已经做的差不多了：<code>alarm</code>、<code>timer</code> 。</p>
+<h4 id="_3">外部中断</h4>
+<h3 id="_4">相关设备</h3>
+<h4 id="uart">UART</h4>
+<blockquote>
+<p>起初的bug</p>
+<p>在设备树（Device Tree）中，这段代码定义了一个名为 <code>chosen</code> 的节点，它用于指定系统启动时的一些参数和配置。具体来说，这里的 <code>bootargs</code> 属性包含了内核启动时需要的一些参数。</p>
+<ul>
+<li>
+<p><code>earlycon=uart8250,mmio,0xa00003f8,8 console=ttyS0</code>：这部分是内核启动参数。</p>
+</li>
+<li>
+<p><code>earlycon</code>：指定了早期控制台（early console）的配置。早期控制台是在内核完全启动之前，用于输出调试信息的控制台。这里指定了使用 <code>uart8250</code> 串口控制器，<code>mmio</code> 表示内存映射输入输出（Memory-Mapped I/O）方式，<code>0xa00003f8</code> 是串口的物理地址，<code>8</code> 是串口的IRQ号。</p>
+</li>
+<li>
+<p><code>console=ttyS0</code>：指定了内核启动后的标准控制台设备。这里指定的是 <code>ttyS0</code>，即第一个串口设备。</p>
+</li>
+</ul>
+<p>简而言之，这段代码告诉内核在启动时使用指定的串口作为早期控制台和标准控制台，以便在系统启动过程中输出调试信息。这对于调试系统启动过程非常有用，尤其是在没有图形界面的嵌入式系统中。</p>
+</blockquote>
+<p>自己没有改，导致一直访存错误（0x10000000 + 3）</p>
+<p>相关寄存器没有实现，导致死循环</p>
+<ul>
+<li>参考资料<ul>
+<li><a href="https://www.baeldung.com/linux/kernel-images">Differences Between vmlinux, vmlinuz, vmlinux.bin, zimage, and bzimage | Baeldung on Linux</a></li>
+<li><a href="http://www.byterunner.com/16550.html">ByteRunner.com | TECHNICAL DATA ON 16550</a></li>
+<li><a href="https://dingfen.github.io/2020/08/01/2020-8-1-riscv-from-scratch-4/#UART-细节">RISC-V from Scratch 4</a></li>
+<li></li>
+</ul>
+</li>
+</ul>
+<h4 id="_5">按键</h4>
+<ol>
+<li><code>KEY_QUEUE_LEN</code> 宏定义：</li>
+<li>
+<p>定义了键盘事件队列的长度为1024，这意味着队列可以存储1024个键盘事件。</p>
+</li>
+<li>
+<p><code>key_queue</code> 数组：</p>
+</li>
+<li>
+<p>这是一个静态数组，用于存储键盘事件。它的大小由<code>KEY_QUEUE_LEN</code>定义。</p>
+</li>
+<li>
+<p><code>key_f</code> 和 <code>key_r</code> 变量：</p>
+</li>
+<li><code>key_f</code>（front）是队列的头部索引，表示下一个要被处理的事件。</li>
+<li>
+<p><code>key_r</code>（rear）是队列的尾部索引，表示下一个要被添加到队列中的事件的位置。</p>
+</li>
+<li>
+<p><code>key_enqueue</code> 函数：</p>
+</li>
+<li>这个函数用于将一个新的键盘事件（<code>am_scancode</code>）添加到队列中。</li>
+<li>它将事件存储在<code>key_r</code>索引的位置，并将<code>key_r</code>递增，如果达到队列末尾则回到开头（通过取模运算实现）。</li>
+<li>
+<p>然后，它检查队列是否已满（即<code>key_r</code>是否等于<code>key_f</code>），如果是，则断言失败，表示队列溢出。</p>
+</li>
+<li>
+<p><code>key_dequeue</code> 函数：</p>
+</li>
+<li>这个函数用于从队列中取出一个键盘事件。</li>
+<li>如果队列不为空（即<code>key_f</code>不等于<code>key_r</code>），它将<code>key_f</code>索引处的事件取出，并将<code>key_f</code>递增，如果达到队列末尾则回到开头。</li>
+<li>
+<p>如果队列为空，则返回<code>NEMU_KEY_NONE</code>，表示没有事件可取。</p>
+</li>
+<li>
+<p><code>send_key</code> 函数：</p>
+</li>
+<li>这个函数用于处理键盘事件。</li>
+<li>它首先检查虚拟机状态是否为运行中（<code>NEMU_RUNNING</code>），并且扫描码（<code>scancode</code>）在键位映射表（<code>keymap</code>）中有对应的事件。</li>
+<li>如果条件满足，它将扫描码转换为内部使用的扫描码（<code>am_scancode</code>），并根据按键是否被按下（<code>is_keydown</code>）来设置<code>KEYDOWN_MASK</code>。</li>
+<li>最后，它调用<code>key_enqueue</code>函数将事件添加到队列中。</li>
+</ol>
+<p>这个键盘逻辑的核心是使用一个循环队列来存储键盘事件，这样可以有效地处理事件，避免丢失，并且可以按顺序处理事件。队列的使用允许程序在事件产生时快速地将它们存储起来，然后在需要的时候逐个处理，这对于多任务环境或者需要处理大量异步事件的程序来说是非常有用的。</p>
+<h4 id="_6">定时器</h4>
+<blockquote>
+<p>当时在做 PA 的时候，对这个部分其实也是迷迷糊糊的，我有个 timer 就拿来计时？知道后来学到 分时多任务后，才知道抢占多任务的核心原理就是时钟中断，那时候再回来看相关 alarm 和 timer 代码，大概也能清楚一些基本的原理，也就是<strong>通过信号和定时器来实现周期性的回调函数调用</strong>，通过 <code>setitimer</code> 调用，定时器被设置为每隔一定时间（由 <code>TIMER_HZ</code> 决定）触发一次，每次触发都会执行所有注册的回调函数。<strong>这也是一种在操作系统或模拟器中实现周期性任务的常见方法。</strong></p>
+</blockquote>
+<p>这里再简单回顾一些内容，关于 timer、alarm、clock 的一些区别，这里不太区别很细节的概念，主要是为理解。</p>
+<blockquote>
+<p>想象一下，你正在做一个蛋糕，你需要计时。</p>
+<ol>
+<li><strong>Counter（计数器）</strong>：<ul>
+<li>就像你在做蛋糕时用来数鸡蛋的计数器。每次你敲开一个鸡蛋，你就在计数器上加一。计数器可以由任何事件触发，比如敲鸡蛋、倒面粉等，它只是简单地计数，不一定与时间有关。</li>
+</ul>
+</li>
+<li><strong>Clock（时钟）</strong>：<ul>
+<li>时钟就像你厨房里的挂钟，它以固定的速度“滴答”走着，每“滴答”一次就代表过去了一定的时间（比如一秒）。时钟是计数器的一种，但它是被一个规律的事件（比如秒针的移动）驱动的，用来测量时间。</li>
+</ul>
+</li>
+<li><strong>Alarm（闹钟）</strong>：<ul>
+<li>闹钟是设置在特定时间点提醒你的设备。你可以把它想象成你设置在蛋糕烤好时响起的计时器。它连接到一个计数器（在这个例子中，就是时钟），并在计数器达到你设置的值时发出提醒。闹钟可以是一次性的，也可以是周期性的（比如每10分钟提醒一次）。</li>
+</ul>
+</li>
+<li><strong>Timer（计时器）</strong>：<ul>
+<li>计时器其实和闹钟类似，但它是连接到时钟上的。在你做蛋糕的例子中，计时器就是你用来测量蛋糕烘烤时间的设备。它依赖于时钟的“滴答”来工作，可以是一次性的也可以是周期性的。</li>
+</ul>
+</li>
+</ol>
+<p>总结一下：</p>
+<ul>
+<li><strong>Counter</strong>：只是计数，可以由任何事件触发。</li>
+<li><strong>Clock</strong>：一种特殊的计数器，由规律的事件（如时间的流逝）驱动。</li>
+<li><strong>Alarm</strong>：基于计数器的值来触发事件，可以是一次性或周期性的。</li>
+<li><strong>Timer</strong>：一种特殊的闹钟，它连接到时钟上，用来测量时间。</li>
+</ul>
+<p>在计算机系统中，这些概念被用来管理时间相关的功能，比如任务调度、性能监控等。</p>
+<blockquote>
+<ul>
+<li>A Counter maintains a monotonically increasing counter that is driven by some source of ticks. </li>
+<li>A Clock is a counter driven by a regular source of ticks (i.e. it counts time). Clocks have a <strong><em>resolution</em></strong> associated with them. A default system Clock is driven by the periodic interrupt described above, and tracks real-time. Other interrupt sources may drive other Counters that may or may not track real-time at different resolutions. Some Counters may be driven by aperiodic events and thus have no relation to real-time at all.</li>
+<li>An Alarm is attached to a Counter and provides a mechanism for generating single-shot or periodic events based on the counter's value. </li>
+<li>A Timer is simply an Alarm that is attached to a Clock.</li>
+</ul>
+</blockquote>
+</blockquote>
+<p>​   </p>
+<h4 id="_7">串口</h4>
+<h4 id="plic">PLIC</h4>
+<h3 id="difftest">DiffTest</h3>
+<p><a href="https://blog.csdn.net/xy010902100449/article/details/48036609">dlopen Linux 动态库失败原因与解决办法总结_dl库找不到 linux-CSDN博客</a></p>
+<p><a href="https://www.kaizou.org/2015/01/linux-libraries.html">Better understanding Linux secondary dependencies solving with examples</a></p>
+<p><a href="https://stackoverflow.org.cn/questions/12851184">linux - dlopen 失败：无法打开共享对象文件：没有这样的文件或目录_Stack Overflow中文网</a></p>
+<h2 id="linux">Linux 系统移植</h2>
+<h3 id="some-questions">Some questions</h3>
+<ul>
+<li>
+<p><code>openSBI</code> 是什么？和 <code>uboot</code> 的关系？</p>
+</li>
+<li>
+<p>终端、TTY、串口是什么？</p>
+</li>
+<li>
+<p><code>buildroot</code> 和 <code>busybox</code> 是什么？为什么常常听到这两个混在一起？</p>
+</li>
+<li>
+<p>Linux 启动流程</p>
+</li>
+<li>
+<p>Linker script 的使用</p>
+</li>
+</ul>
+<p><a href="https://tinylab.org/introduction-to-qemu-and-riscv-upstream-boot-flow/">QEMU 启动方式分析（1）：QEMU 及 RISC-V 启动流程简介 - 泰晓科技 (tinylab.org)</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/342188138">在 QEMU 上运行 RISC-V 32 位版本的 Linux - 知乎 (zhihu.com)</a></p>
+<p><a href="https://2017zhangyuxuan.github.io/2022/03/19/2022-03/2022-03-19 环境搭建系列-xv6内核调试教程/">【99%环境搭建系列】xv6-riscv内核调试教程 - Hexo (2017zhangyuxuan.github.io)</a> xv6 课程</p>
+<h3 id="_8">快速上手体验</h3>
+<p>先在 QEMU 上从零构建一遍 Linux 系统，快速上手使用看看</p>
+<p><a href="https://zhuanlan.zhihu.com/p/258394849">在 QEMU 上运行 RISC-V 64 位版本的 Linux - 知乎 (zhihu.com)</a></p>
+<p>这里的流程还是挺详细的了，最后可以直接看到效果，最终运行命令：</p>
+<div class="highlight"><pre><span></span><code>qemu-system-riscv64<span class="w"> </span>-M<span class="w"> </span>virt<span class="w"> </span>-m<span class="w"> </span>256M<span class="w"> </span>-nographic<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-kernel<span class="w"> </span>linux/linux-5.15.167/arch/riscv/boot/Image<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-drive<span class="w"> </span><span class="nv">file</span><span class="o">=</span>rootfs.img,format<span class="o">=</span>raw,id<span class="o">=</span>hd0<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-device<span class="w"> </span>virtio-blk-device,drive<span class="o">=</span>hd0<span class="w"> </span>-append<span class="w"> </span><span class="s2">&quot;root=/dev/vda rw console=ttyS0&quot;</span>
+</code></pre></div>
+<blockquote>
+<ol>
+<li><code>qemu-system-riscv64</code>：</li>
+<li>这是QEMU的命令行工具，用于模拟RISC-V架构的系统。</li>
+</ol>
+<blockquote>
+<p><strong>回想 OS 课的笔记，关于 <code>qemu-system-riscv64</code> 和 <code>qemu-riscv64</code> 之间区别？</strong></p>
+</blockquote>
+<ol>
+<li>
+<p><code>-M virt</code>：</p>
+</li>
+<li>
+<p>指定QEMU使用的机器模型为<code>virt</code>，即虚拟化环境。</p>
+</li>
+<li>
+<p><code>-m 256M</code>：</p>
+</li>
+<li>
+<p>分配256MB的内存给虚拟机。</p>
+</li>
+<li>
+<p><code>-nographic</code>：</p>
+</li>
+<li>
+<p>指定不使用图形界面，即在没有图形显示的情况下运行虚拟机。</p>
+</li>
+<li>
+<p><code>-kernel linux/linux-5.15.167/arch/riscv/boot/Image</code>：</p>
+</li>
+<li>
+<p>指定要加载的内核映像文件路径，这里是RISC-V架构的Linux内核。</p>
+</li>
+<li>
+<p><code>-drive file=rootfs.img,format=raw,id=hd0</code>：</p>
+</li>
+<li>
+<p>创建一个虚拟的硬盘驱动器，并指定其文件名为<code>rootfs.img</code>，格式为原始（raw），并分配一个ID为<code>hd0</code>。</p>
+</li>
+<li>
+<p><code>-device virtio-blk-device,drive=hd0</code>：</p>
+</li>
+<li>
+<p>添加一个virtio块设备，这个设备会使用之前创建的<code>hd0</code>驱动器。</p>
+</li>
+<li>
+<p><code>-append "root=/dev/vda rw console=ttyS0"</code>：</p>
+</li>
+<li>指定内核启动参数。这里指定了根文件系统的位置为<code>/dev/vda</code>（通常是虚拟机的第一个硬盘设备），启动时为读写模式（<code>rw</code>），并且将控制台输出重定向到<code>ttyS0</code>（通常是虚拟机的串行端口）。</li>
+</ol>
+<p>总结来说，这条命令是在QEMU中启动一个RISC-V架构的虚拟机，使用256MB内存，不显示图形界面，加载指定的内核映像，并挂载一个名为<code>rootfs.img</code>的根文件系统，同时指定了一些内核启动参数。</p>
+<p>这里也有一篇相关的</p>
+<p><a href="https://developer.aliyun.com/article/1323996">教你在QEMU上运行RISC-V Linux-阿里云开发者社区 (aliyun.com)</a></p>
+<p>Linux 下生成的镜像：<code>arch/riscv/boot</code></p>
+<p>buildroot 生成的相关镜像：<code>output/images</code></p>
+<p>OpenSBI 生成的相关镜像：<code>build/platform/generic/firmware/</code>
+</p>
+</blockquote>
+<h3 id="_9">启动流程</h3>
+<p><a href="https://hackmd.io/@0xff07/linux-boot/%2F%400xff07%2Flinux-boot-toc#Linux-Booting-References">Table of Contents - HackMD</a></p>
+<p><strong>这篇专栏收录了 Linux booting 各种相关的内容，总结了 Linux 在 x86-64、Arm64、RISC-V上的 boot process。可以看看里面的相关内容。</strong></p>
+<p><img alt="img" src="../pic/ByZXGJajh.png" /></p>
+<p>每一步怎么做的，把bootROM放到哪里，然后loader哪里？</p>
+<p><a href="https://www.cnblogs.com/xingboy/p/14858853.html">Linux 系统的编译、镜像制作、以及烧录的概述 - 白菜没我白 - 博客园 (cnblogs.com)</a></p>
+<p><a href="https://www.cnblogs.com/xingboy/p/15610630.html">1- Linux系统移植前期准备概述 - 白菜没我白 - 博客园 (cnblogs.com)</a></p>
+<p><a href="https://crab2313.github.io/post/riscv-build-and-boot/">Linux内核在RISC-V架构下的构建与启动 - crab2313's blog</a></p>
+<h3 id="_10">交叉编译工具链</h3>
+<p>介绍一些背景知识。</p>
+<p><a href="https://ruvi-d.medium.com/a-master-guide-to-linux-cross-compiling-b894bf909386">A master guide to Linux cross compiling | by Ruvinda Dhambarage | Medium</a></p>
+<p><a href="https://crosstool-ng.github.io/docs/toolchain-construction/">How a toolchain is constructed (crosstool-ng.github.io)</a></p>
+<ul>
+<li>
+<p>使用别人打包好的</p>
+<p><a href="https://toolchains.bootlin.com/">Cross-compilation toolchains for Linux - Home (bootlin.com)</a></p>
+<p>直接在这里下载即可。</p>
+<p>下载完成后，解压放到系统下的某个位置，然后将交叉编译工具链的路径导入到系统环境变量。</p>
+<p>在 <code>/etc/profile</code> 写入：</p>
+<p><code>export PATH=$PATH:/usr/local/riscv64/riscv64-lp64d--glibc--stable-2024.05-1/bin</code></p>
+<blockquote>
+<p>当然，放在用户下的也可以：<code>~/.bashrc</code></p>
+<p><code>export PATH=/opt/riscv/gcc/bin:$PATH</code></p>
+</blockquote>
+</li>
+</ul>
+<h3 id="linker-script">Linker Script</h3>
+<p>主要参考：</p>
+<ul>
+<li>《RISC-V 体系结编程与实践》第 6 章</li>
+<li>官方文档 <a href="https://sourceware.org/binutils/docs/ld/index.html">Top (LD) (sourceware.org)</a></li>
+<li>
+<p><a href="https://www.cnblogs.com/HiDark/p/18166817">Linker Scripts语法解析 - HiDark - 博客园 (cnblogs.com)</a></p>
+</li>
+<li>
+<p>一些概念上的区分</p>
+<p>在阅读《RISC-V 体系结编程与实践》第 6 章 的时候，遇到了 链接地址、加载地址、运行地址（虚拟地址）这三个概念，在只谈到装载地址和运行地址时，这两个概念还是比较好理解的，但是引入了链接地址后，我对一些概念出现了混乱。故记录一下。</p>
+<p>首先，对于刚开始的加载地址和运行地址其实从字面上也很好理解，</p>
+<ul>
+<li>
+<p>加载地址：加载地址是操作系统加载程序到内存时的实际地址。</p>
+<p>在启动时，加载程序（如引导加载程序）会将内核映像加载到这个地址。</p>
+<p>在脚本中，<code>_start</code>符号被设置为<code>LOAD_OFFSET</code>，这意味着程序的入口点（通常是第一个执行的代码）被定位在装载地址。</p>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>实际存储设备映射到存储空间！</p>
+</blockquote>
+<p><a href="https://downloads.ti.com/docs/esd/SPRU513/load-and-run-addresses-slau1317366.html">downloads.ti.com/docs/esd/SPRU513/load-and-run-addresses-slau1317366.html</a></p>
+<h3 id="opensbi">OpenSBI</h3>
+<p><a href="https://hackmd.io/@0xff07/linux-boot/%2F%400xff07%2FryREmHYih">OpenSBI - HackMD</a></p>
+<p><a href="https://www.cnblogs.com/harrypotterjackson/p/17558399.html">opensbi入门 - LightningStar - 博客园 (cnblogs.com)</a></p>
+<h3 id="u-boot">U-Boot</h3>
+<h3 id="busyboxbuildrootyocto">busybox、buildroot、yocto</h3>
+<ul>
+<li>
+<p><strong>busybox</strong></p>
+<p><img alt="image-20240921170923524" src="../pic/image-20240921170923524.png" /></p>
+<p>实际上在做 PA4 的时候，就遇到了 busybox 。当时我们写的 NTerm 没有多少 Shell 工具可以运行，busybox 正是用来解决这个问题的，它是一个精简版 Shell 工具的集合，包含了大部分常用命令的功能。（也就是平时在 Linux 中使用命令行的经历）</p>
+<p>Busybox 中包含很多小工具，通过 <code>make menuconfig</code> 来打开一个配置菜单来查看它们。</p>
+<p>Busybox 会把其中的 Shell 工具链接成一个 ELF 可执行文件，而不是像 Ubuntu/Debian 等发行版中的 Shell 工具那样的 独立的 ELF 可执行文件。Busybox的 <code>main()</code> 函数会根据传入的参数来调用相应工具的功能：</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">strcmp</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="s">&quot;cat&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">cat_main</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="n">argv</span><span class="p">);</span>
+<span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">strcmp</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="s">&quot;ls&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">ls_main</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="n">argv</span><span class="p">);</span>
+<span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">strcmp</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="s">&quot;wc&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">wc_main</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="n">argv</span><span class="p">);</span>
+<span class="c1">// ......</span>
+</code></pre></div>
+<p>那上图那些 <code>xxx -&gt; busybox</code> 符号链接，软链接是怎么回事？</p>
+<blockquote>
+<p>kimi 的回答：</p>
+<p><strong>在 Linux 系统中，<code>busybox</code> 是一个集成了多达数百个最常用的 Unix 工具和命令的软件</strong>。它提供了轻量级的 shell 环境，通常用于嵌入式系统或者需要最小化系统环境的场景。由于 <code>busybox</code> 包含了很多工具，但是每个工具都是作为 <code>busybox</code> 的一个单独功能来实现的，所以当你在 <code>/bin</code> 目录下看到类似 <code>arch -&gt; busybox</code> 这样的链接时，这意味着 <code>arch</code> 命令实际上是 <code>busybox</code> 的一个符号链接。</p>
+<p><strong>这些符号链接（symbolic links），通常简称为 symlinks，是一种特殊的文件类型，它们指向另一个文件或目录。在这个例子中，当你执行 <code>arch</code> 命令时，实际上是在执行 <code>busybox</code> 并调用它的 <code>arch</code> 功能。</strong></p>
+<p>这种设计允许 <code>busybox</code> 通过单个可执行文件来提供多种命令，从而节省空间并简化系统。当你查看 <code>/bin</code> 目录下的这些链接时，你会看到许多常用的命令，如 <code>cp</code>、<code>grep</code>、<code>hostname</code> 等，它们都指向 <code>busybox</code>，表明这些命令都是由 <code>busybox</code> 实现的。</p>
+<p>例如，当你执行 <code>cp</code> 命令时，实际上是执行了 <code>busybox cp</code>。<code>busybox</code> 会根据提供的参数和选项来确定应该执行哪个具体的命令功能。这种设计使得 <code>busybox</code> 非常灵活且占用空间小。</p>
+</blockquote>
+</li>
+</ul>
+<p><a href="https://www.cnblogs.com/arnoldlu/p/9553995.html">buildroot使用介绍 - ArnoldLu - 博客园 (cnblogs.com)</a></p>
+<p>buildroot 网站 <a href="https://buildroot.org/download.html?spm=a2c6h.12873639.article-detail.9.5dda1bfbH3cvM2">Buildroot - Making Embedded Linux Easy</a></p>
+<h3 id="_11">设备树</h3>
+<p>主要借助下面的内容来学习：</p>
+<p><a href="https://uniondong.github.io/docs/linux/linux_driver_develop_basic/一文秒懂linux设备树详解/">【一文秒懂】Linux设备树详解 | Donge Blog</a></p>
+<p>devicetree-specification-v0.4</p>
+<p><a href="https://elinux.org/Device_Tree_Usage#chosen_Node">Device Tree Usage - eLinux.org</a></p>
+<p><a href="https://www.cnblogs.com/xinghuo123/p/12977093.html">linux设备驱动(20)设备树详解4-kernel解析dts - Action_er - 博客园</a></p>
+<blockquote>
+<p>其他问题</p>
+<p>设备树和 ACPI 的关系？</p>
+</blockquote>
+<h3 id="linux-kernel">Linux kernel</h3>
+<p><a href="https://www.cnblogs.com/harrypotterjackson/p/11846222.html">如何编译安装Linux内核 - LightningStar - 博客园 (cnblogs.com)</a></p>
+<p>这里我想到的第一个问题就是什么叫镜像？</p>
+<h3 id="risc-v-arch">RISC-V Arch 相关</h3>
+<p><a href="https://www.kernel.org/doc/html/v6.11/arch/riscv/index.html">RISC-V architecture — The Linux Kernel documentation</a></p>
+<p><a href="https://www.kernel.org/doc/Documentation/nommu-mmap.txt">kernel.org/doc/Documentation/nommu-mmap.txt</a></p>
+<p><a href="http://www.book-os.com/doc/nxos/programing-manual/port/riscv/riscv.html">riscv架构移植 · book for nxos (book-os.com)</a></p>
+<h3 id="kernel">kernel</h3>
+<p><a href="https://www.laumy.tech/category/risc-v">RISC-V归档 - Laumy的技术栈</a></p>
+<p>上面这个专题讲到了相关的 RISC-V Linux kernel 的启动流程，主要是 OS 的启动流程，OpenSBI、U-Boot不涉及。</p>
+<p><a href="https://crab2313.github.io/post/riscv-build-and-boot/">Linux内核在RISC-V架构下的构建与启动 - crab2313's blog</a></p>
+<h4 id="kernel_1">部分 kernel 代码学习</h4>
+<ul>
+<li>
+<p><code>linux/arch/riscv/include/asm/asm.h</code></p>
+<p>这段代码是Linux内核中针对RISC-V架构的汇编语言头文件，它定义了一些宏和指令，用于在RISC-V处理器上进行底层的内存操作和寄存器管理。这些宏和指令通常用于内核的汇编代码中，以实现对硬件的直接控制。下面是对这段代码的总结：</p>
+<ol>
+<li><strong>宏定义</strong>：</li>
+<li>
+<p><code>__ASM_STR(x)</code>：这个宏用于在汇编语言中直接插入字符串<code>x</code>。如果处于汇编模式（<code>__ASSEMBLY__</code>定义了），则直接使用<code>x</code>；否则，将其转换为字符串。</p>
+</li>
+<li>
+<p><strong>寄存器选择</strong>：</p>
+</li>
+<li>
+<p><code>__REG_SEL(a, b)</code>：这个宏根据<code>__riscv_xlen</code>的值选择寄存器操作。<code>__riscv_xlen</code>定义了RISC-V架构的字长，可以是32位或64位。<code>__REG_SEL</code>根据这个值选择<code>a</code>或<code>b</code>。</p>
+</li>
+<li>
+<p><strong>寄存器操作宏</strong>：</p>
+</li>
+<li><code>REG_L</code>和<code>REG_S</code>：这两个宏分别用于从内存加载（Load）和存储（Store）数据到寄存器。它们根据<code>__riscv_xlen</code>的值选择使用32位还是64位的指令。</li>
+<li><code>REG_SC</code>：原子存储并交换操作，用于多处理器同步。</li>
+<li>
+<p><code>REG_AMOSWAP_AQ</code>：原子交换操作，带有内存屏障。</p>
+</li>
+<li>
+<p><strong>指针和整数大小</strong>：</p>
+</li>
+<li><code>RISCV_PTR</code>、<code>RISCV_SZPTR</code>、<code>RISCV_LGPTR</code>：这些宏定义了指针的大小和对齐方式。</li>
+<li><code>RISCV_INT</code>、<code>RISCV_SZINT</code>、<code>RISCV_LGINT</code>：定义了整数的大小和对齐方式。</li>
+<li>
+<p><code>RISCV_SHORT</code>、<code>RISCV_SZSHORT</code>、<code>RISCV_LGSHORT</code>：定义了短整型的大小和对齐方式。</p>
+</li>
+<li>
+<p><strong>汇编宏</strong>：</p>
+</li>
+<li><code>nops</code>：定义了一个宏，用于生成指定数量的NOP（无操作）指令，通常用于填充或延迟执行。</li>
+<li><code>save_from_x6_to_x31</code>和<code>restore_from_x6_to_x31</code>：这两个宏用于保存和恢复寄存器x6到x31的值，通常在函数调用或中断处理中使用，以保存现场和恢复现场。</li>
+</ol>
+<p><strong>REG_S</strong>宏的作用是将一个寄存器的值存储到内存中。在这段代码中，<code>REG_S</code>根据RISC-V的字长（32位或64位）选择使用<code>sw</code>（store word，存储字）或<code>sd</code>（store double word，存储双字）指令。这个宏在内核中用于实现函数调用、中断处理等场景下的寄存器保存和恢复操作。</p>
+</li>
+</ul>
+<h4 id="abi">启动相关的ABI设置</h4>
+<p><a href="https://www.kernel.org/doc/html/v6.11-rc5/translations/zh_CN/arch/riscv/boot.html">RISC-V内核启动要求和限制 — The Linux Kernel documentation</a></p>
+<h3 id="rootfs">rootfs</h3>
+<p>一个问题就是什么叫 rootfs？</p>
+<h3 id="nommu-linux">nommu-linux</h3>
+<p>在移植Linux之前，先尝试学习 <code>mini-rv32ima</code> 这个项目，然后仿照它，将 <code>nommu-linux</code> 移植到 NEMU 上。</p>
+<p><img alt="image-20241104222612707" src="../pic/image-20241104222612707.png" /></p>
+<h4 id="image">如何加载 image 和设备树</h4>
+<h3 id="_12">一些启动上的问题</h3>
+<h4 id="_13">参考资料</h4>
+<p>TODO: 添加自己微信聊天的相关笔记</p>
+<p><a href="https://www.cnblogs.com/linhaostudy/p/9641439.html">Linux下1号进程的前世(kernel_init)今生(init进程)----Linux进程的管理与调度（六） - yooooooo - 博客园</a></p>
+<p>感觉似乎得基于某一版的 Linux kernel 来分析，不然国内的分析好像都是 4.x 的版本，没有比较新的。</p>
+<p>卡在某处bug：</p>
+<p><a href="https://xinqiu.gitbooks.io/linux-insides-cn/content/Concepts/linux-cpu-3.html">initcall 机制 · Linux ­Insides­</a></p>
+<p>内核镜像，为了用ftrace，了解 vmlinux，用于调试</p>
+<p><a href="https://www.baeldung.com/linux/kernel-images">Differences Between vmlinux, vmlinuz, vmlinux.bin, zimage, and bzimage | Baeldung on Linux</a></p>
+<p>现在进入了 idle 任务：</p>
+<p><a href="https://zhuanlan.zhihu.com/p/548268554">一文搞懂linux cpu idle - 知乎</a></p>
+<p>但实际上好像是UART的问题。</p>
+<p>进一步，关于 bootconsole、console 的区别？</p>
+<p>再进一步 TTY、 /dev/tty、/dev/ttyS0、/dev/console、uart等差异？</p>
+<p>韦东山老师的视频区别！！！讲的真的很好！！</p>
+<p><a href="https://www.kernel.org/doc/html/v5.6/admin-guide/serial-console.html">Linux Serial Console — The Linux Kernel documentation</a></p>
+<p><a href="https://taoshu.in/tty.html">解密 TTY 设备</a></p>
+<p>再补充：<a href="https://blog.csdn.net/caiji0169/article/details/144226525">深入解析Linux内核Console框架及虚拟UART控制台的实现-CSDN博客</a></p>
+<p>还有一个回答也挺好的：</p>
+<p><a href="https://stackoverflow.com/questions/67672191/difference-between-a-serial-driver-and-a-tty-driver">c - Difference between a serial driver and a tty driver - Stack Overflow</a></p>
+<p>进一步了解 ramdisk、initramfs、initrd....</p>
+<blockquote>
+<p><a href="https://stackoverflow.com/questions/15444917/initrd-ramdisk-initramfs-uclinux">embedded - Initrd, Ramdisk, Initramfs, uclinux - Stack Overflow</a></p>
+<p><a href="https://stackoverflow.com/questions/10603104/the-difference-between-initrd-and-initramfs">linux - The difference between initrd and initramfs - Stack Overflow</a></p>
+<p><a href="https://stackoverflow.com/questions/4192736/why-is-the-root-filesystem-is-loaded-into-a-ramdisk">boot - Why is the root filesystem is loaded into a ramdisk? - Stack Overflow</a></p>
+<p><a href="https://www.novell.com/documentation/suse91/suselinux-adminguide/html/ch12s03.html">12.3. Booting with the Initial Ramdisk</a></p>
+</blockquote>
+<p>简单理解，将内存中的一部分当成磁盘来使用：这样的磁盘有一个专门的名字：ramdisk。这种磁盘不像真正的磁盘，他是掉电丢失的。</p>
+<p>initrd、initramfs：用户空间早期的文件系统，让我们可以运行一个位于内存的比较小的文件系统。</p>
+<blockquote>
+<p>借此总结：</p>
+<p>从 Linux 启动的角度来总结，initrd（initial RAM disk）和 initramfs 是两种用于早期阶段用户空间根文件系统（rootfs）的技术，它们允许系统在内存中运行一个最小化的文件系统。</p>
+<ol>
+<li><strong>initrd</strong>：</li>
+<li>initrd 是一个由引导加载程序（如 GRUB 或 LILO）加载的初始 RAM 磁盘映像，它被挂载为根文件系统，允许系统在只有最小驱动集合的情况下启动。</li>
+<li>它的主要目的是在系统启动的两个阶段中，首先只加载内核中编译的最小驱动集合，然后从 initrd 中加载额外的模块。</li>
+<li>initrd 通常包含必要的驱动程序，特别是磁盘控制器的驱动，以便在实际的根文件系统被挂载之前加载这些驱动。</li>
+<li>
+<p>initrd 是使用 cpio 格式存储文件的，并且可以在构建内核时通过 usr/Kconfig 进行配置。</p>
+</li>
+<li>
+<p><strong>initramfs</strong>：</p>
+</li>
+<li>initramfs 是 initrd 的一个更早期阶段的文件系统，它被集成在内核中（由内核配置控制）。</li>
+<li>initramfs 的工作方式相对简单直接，启动时加载内核和 initramfs 到内存执行，内核初始化后，切换到用户态执行 initramfs 中的程序/脚本，加载所需的驱动模块和必要配置，然后加载 rootfs 切换到真正的 rootfs 上去执行后续的 init 过程。</li>
+<li>
+<p>从 Linux 内核 2.6 开始，initrd 文件格式由原来的文件系统镜像文件转变成了 cpio 格式，内核对这两种格式的处理有着明显的不同。</p>
+</li>
+<li>
+<p><strong>ramfs 和 tmpfs</strong>：</p>
+</li>
+<li>ramfs 是一种在内存中创建的虚拟文件系统，它使用内存而不是磁盘来存储文件数据，这使得访问速度非常快。</li>
+<li>tmpfs 是 ramfs 的增强版，也是一种基于内存的文件系统，通常用于实现 initrd。</li>
+<li>
+<p>新版本的内核中，initrd 通常使用 tmpfs 而不是 ramfs 来实现。</p>
+</li>
+<li>
+<p><strong>启动过程</strong>：</p>
+</li>
+<li>在使用 initrd 的系统中，引导加载程序会加载内核和 initrd 到内存中，内核将 initrd 转换为一个“正常”的 RAM 磁盘，并释放 initrd 使用的内存。</li>
+<li>然后，如果根设备不是 <code>/dev/ram0</code>，内核会挂载根设备，如果是 <code>/dev/ram0</code>，则 initrd 映像被挂载为根。</li>
+<li>接着执行 <code>/sbin/init</code>，这是 init 进程的开始，它会挂载“真正的”根文件系统，并使用 <code>pivot_root</code> 系统调用将根文件系统放到根目录下。</li>
+<li>最后，initrd 文件系统被移除，系统继续在新的根文件系统上执行。</li>
+</ol>
+<p>这些技术允许 Linux 系统在启动时有一个灵活的根文件系统，特别是在需要从网络或外部存储介质加载根文件系统时非常有用。</p>
+</blockquote>
+<p><a href="https://lifeislife.cn/posts/busybox-构建并启动-risc-v-linux-内核/">BusyBox 构建并启动 RISC-V Linux 内核 | 夜云泊</a></p>
+<p>关于Linux kernel 的启动流程到 init 之后 --&gt; 运行的文件系统。</p>
+<p><a href="https://blog.csdn.net/u014426028/article/details/108143827">Linux启动分析——init进程与app启动(init进程源码分析)_本文通过简要分析init进程源码,梳理其处理流程,重点关注init进程如何启动应用程序-CSDN博客</a></p>
+<p>突然想到可以看看 qemu 和 opensbi 关于 uart8250和 ns16550的实现？</p>
+<p><a href="https://blog.csdn.net/qq_16054639/article/details/112532327">qemu虚拟化-设备模拟详解_qemu中uart数据-CSDN博客</a>！</p>
+<p><a href="https://github.com/riscv-software-src/opensbi/blob/master/lib/utils/serial/uart8250.c">opensbi/lib/utils/serial/uart8250.c at master · riscv-software-src/opensbi</a></p>
+<p>学习 QEMU的设计：</p>
+<p><a href="https://www.cnblogs.com/from-zero/p/12383652.html">菜鸡读QEMU源码 - From_Zero - 博客园</a></p>
+<p><a href="https://github.com/lishuhuakai/qemu_reading/tree/main">lishuhuakai/qemu_reading: qemu源码的阅读笔记</a></p>
+<p><a href="https://lifeislife.cn/posts/qemu源码分析-外设模拟以gpio为例/">QEMU 源码分析-外设模拟（以 GPIO 为例） | 夜云泊</a></p>
+<p>补充更多 UART的学习</p>
+<p><a href="https://blog.csdn.net/qq_45226456/article/details/142097210">UART 16550的使用_uart16550-CSDN博客</a></p>
+<p><a href="https://blog.csdn.net/u013691997/article/details/23591087">ns16550串口驱动-CSDN博客</a></p>
+<p><a href="https://www.pe2bz.philpem.me.uk/Parts-Active/IC-Analog/- AN-National/AN-491.pdf">The NS16550A: UART Design and Applications Considerations</a></p>
+<p>关于设备树的：</p>
+<p>进一步看看文档，尤其是那个 compatible，区分 ns16550、8250、ns16850、ns16550a</p>
+<p>为什么设备树里写这个就行？那个就不行？kernel 怎么解析的？具体看UART的驱动实现？</p>
+<p><a href="https://elinux.org/Device_Tree_Usage#Basic_Data_Format">Device Tree Usage - eLinux.org</a></p>
+<p>进一步学习 hvc</p>
+<p><a href="https://unix.stackexchange.com/questions/751827/debian-vm-doesn-t-boot-on-qemu-with-console-hvc0-kernel-parameter">linux - Debian VM doesn’t boot on QEMU with "console=hvc0" kernel parameter - Unix &amp; Linux Stack Exchange</a></p>
+<p>下一步技术：</p>
+<p>开始学习 hypervisor 吧！！</p>
+<p><a href="http://www.prtos.org/xen_on_arm64_and_qemu/">基于Qemu ARM64搭建XEN Hypervisor运行环境 | 嵌入式分区实时系统</a></p>
+<p><a href="https://blog.csdn.net/jingyu_1/article/details/137539089?spm=1001.2014.3001.5502">blog.csdn.net/jingyu_1/article/details/137539089?spm=1001.2014.3001.5502</a></p>
+<p>应该买一块开发板以及？</p>
+<p>深入学习一些硬件架构？</p>
+<p>MMU、TLB、cache、异常处理、trustzone、bus、SIMD...</p>
+<h3 id="other-qemu-opensbi-risc-v">Other: QEMU + OpenSBI + ...  学习RISC-V</h3>
+<p><a href="https://www.cnblogs.com/arnoldlu/category/2405953.html">RISC-V - 随笔分类 - ArnoldLu - 博客园</a></p>
+<h3 id="_14">参考文章</h3>
+<p><img alt="1433771-20211127090358872-1174074498" src="../pic/1433771-20211127090358872-1174074498.png" /></p>
+<p><a href="https://www.cnblogs.com/xingboy/p/15610630.html">1- Linux系统移植前期准备概述 - 白菜没我白 - 博客园 (cnblogs.com)</a></p>
+<p><a href="https://blog.csdn.net/m0_66324986/article/details/133238073">嵌入式Linux系统移植原理与方法总结_怎么更换嵌入式板子的linux系统-CSDN博客</a></p>
+<p><a href="https://yintianyu.github.io/2019/01/29/porting-linux-1/">【文章翻译】将Linux移植到新的处理器架构（1）——基础篇 - 尹天宇的博客 | Jack's Blog (yintianyu.github.io)</a></p>
+<p><a href="https://lwn.net/Articles/597351/">Porting Linux to a new architecture LWN.net]</a></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../../..", "features": [], "search": "../../../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.83f73b43.min.js"></script>
+      
+    
+  </body>
+</html>

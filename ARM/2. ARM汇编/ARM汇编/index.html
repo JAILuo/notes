@@ -1,0 +1,1413 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://jailuo.github.io/notes/ARM/2.%20ARM%E6%B1%87%E7%BC%96/ARM%E6%B1%87%E7%BC%96/">
+      
+      
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.48">
+    
+    
+      
+        <title>ARM汇编 - Messy Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.6f8fc17f.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#arm" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Messy Notes" class="md-header__button md-logo" aria-label="Messy Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Messy Notes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              ARM汇编
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256l137.3-137.4c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/JAILuo/notes" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Messy Notes" class="md-nav__button md-logo" aria-label="Messy Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Messy Notes
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/JAILuo/notes" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    首页
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    ysyx
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            ysyx
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    NJU-ICS2023-PA
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            NJU-ICS2023-PA
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../ysyx/pa/pa1/pa1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PA1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../ysyx/pa/pa2/pa2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PA2
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../ysyx/pa/pa3/pa3/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PA3
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../ysyx/pa/pa4/pa4/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PA4
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../ysyx/pa/c_marco/macro/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    C Macro
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../ysyx/pa/summary/summary/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Summary
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../ysyx/pa/Linux_porting/porting/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Linux Porting
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../ysyx/digital-circuit/digital%20circuit/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Digital Circuit
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#arm" class="md-nav__link">
+    <span class="md-ellipsis">
+      ARM硬件系统组成和运行原理
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      工作模式及寄存器框图
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="工作模式及寄存器框图">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      框图
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cpsr" class="md-nav__link">
+    <span class="md-ellipsis">
+      CPSR寄存器
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      汇编指令初级
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="汇编指令初级">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      转移指令
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      指令的存储和解析
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      指令机器码
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      跳转指令
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      逻辑指令
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      算术指令
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      汇编指令高级
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="汇编指令高级">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#loadstore" class="md-nav__link">
+    <span class="md-ellipsis">
+      Load/Store架构
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gnu" class="md-nav__link">
+    <span class="md-ellipsis">
+      GNU汇编伪指令
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      批量操作指令
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      堆栈操作指令
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      异常处理（重要理解）
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#arm_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      ARM汇编的源头
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+  <h1>ARM汇编</h1>
+
+<h2 id="arm">ARM硬件系统组成和运行原理</h2>
+<blockquote>
+<p>详见计算机组成原理</p>
+</blockquote>
+<p><img alt="image-20231129205940142" src="../pic/image-20231129205940142.png" /></p>
+<blockquote>
+<p><strong>大概对内存/flash的位置有个大概印象, 知道指令取自哪里, 谁执行...</strong></p>
+<p><strong>异构计算: 对于这些部件( flash 内存... )放在哪里? 现代的芯片架构为了提高性能做了哪些架构的提升?</strong></p>
+</blockquote>
+<h2 id="_1">工作模式及寄存器框图</h2>
+<h4 id="_2">框图</h4>
+<p><img alt="image-20231127204124878" src="../pic/image-20231127204124878.png" /></p>
+<p>小三角: 表示该模式下独有的寄存器</p>
+<p>其余的寄存器都是共享的, 共享的值...</p>
+<h4 id="cpsr">CPSR寄存器</h4>
+<blockquote>
+<p>目前程序状态寄存器: 表示处理器的各个状态/模式</p>
+</blockquote>
+<p><img alt="image-20231127212845336" src="../pic/image-20231127212845336.png" /></p>
+<p><strong>重点知识点</strong></p>
+<p><img src="pic/image-20231128164448943.png" alt="image-20231128164448943" style="zoom: 25%;" /></p>
+<ol>
+<li>
+<p>7种模式。重点掌握 User模式、FIQ、IRQ、supervisor（SVC）模式</p>
+</li>
+<li>
+<p>37个寄存器</p>
+</li>
+<li>
+<p>程序计数器（PC） LR（连接寄存器：返回地址）</p>
+</li>
+<li>
+<p>堆栈指针</p>
+</li>
+<li>
+<p>User模式最少，其他的异常模式都多了一个SPSR_xx寄存器，用作保存各种状态</p>
+</li>
+<li>
+<p>ARM指令集是一种32位的指令集，每条指令都是32位长，可以实现高性能计算和处理。ARM指令集的特点是指令集丰富，操作灵活，适合处理复杂的计算任务。</p>
+<p>（<strong>比较少用</strong>）Thumb指令集是ARM处理器的一种压缩指令集，每条指令只有16位长，可以减小程序的存储空间和提高程序的执行速度。Thumb指令集的特点是指令集简单，执行速度快，适合处理简单的计算任务。</p>
+</li>
+<li>
+<p>0到4位</p>
+</li>
+</ol>
+<h2 id="_3">汇编指令初级</h2>
+<h4 id="_4">转移指令</h4>
+<h4 id="_5">指令的存储和解析</h4>
+<p><img src="pic/image-20231128165527136.png" alt="image-20231128165527136" style="zoom: 50%;" /></p>
+<h4 id="_6">指令机器码</h4>
+<p><img src="pic/image-20231128165648992.png" alt="image-20231128165648992" style="zoom: 50%;" /></p>
+<ul>
+<li>
+<p>立即数合法性</p>
+<div class="highlight"><pre><span></span><code>mov r3, #0x1101  
+// (报错) 源操作数只有12位 为了表示更大的数怎么办
+mov r3, #0x1100000
+// (不报错) 
+</code></pre></div>
+<p>0000 0001 0001</p>
+<p>前4位表示移位值</p>
+<blockquote>
+<p><strong>学习这个立即数合法性的目的</strong>: 理解即可, 编程的话还是用伪指令</p>
+<p>知道存储在flash中汇编指令是二进制的, 而这些指令也是像数据一样是二进制的. </p>
+<p>汇编指令中的各种模式/立即数/源寄存器/目的寄存器使用几位几位的二进制数来表示, </p>
+<p>又因为ARM的32位的指令表示的范围有限, 所以对于源寄存器只分配到了12位的空间, 那怎么用十二位的空间表示32位数呢? 就是像上面的操作了, 3个字节 前1一个字节表示移位值(0-15的偶数值),后两个字节表示 实际数字 (当然表示的数字也是有局限的,但也是扩大了可表示的范围)</p>
+<p><strong>另外</strong>: 北大《计算机组成》中的MIPS指令集的I型指令为了表示32位立即数的办法：如下图MIPS中扩展成32位数: <img alt="屏幕快照 2018-06-17 20.03.08" src="https://img2018.cnblogs.com/blog/605033/201812/605033-20181215161634370-916616442.png" /></p>
+<p>课程原话: </p>
+<p>从条件分支指令的格式可以看出，目标地址只能使用16位的位移量，这是一个很大的局限，但是我们还得考虑如何充分发挥这16位的作用。</p>
+<p>如果以当前的PC寄存器为基准，在MIPS中，指向下一条指令地址的寄存器称为PC，类似于X86中的IP寄存器。</p>
+<p>PC这个寄存器，是指向32位地址的，如果以它为基准，16位位移量可以表示出当前指令前后2的15次方字节这么一个范围。</p>
+<p>但是我们要注意一点，<strong>MIPS的指令长度固定位32个比特，因此每条指令的位置，一定会在四个字节对齐的地方，这样地址最低两位肯定为0。</strong>所以我们实际上可以用十六位的位移量去指示每四个字节为一个单位的地址，这样就可以把目标地址的范围扩大四倍，可以达到前后128KB。</p>
+</blockquote>
+</li>
+<li>
+<p>使用伪指令: 表示很大的数避免合法性判断<strong>: ldr r3,=0x3ffff</strong></p>
+</li>
+</ul>
+<p><img src="pic/image-20231128213310149.png" alt="image-20231128213310149" style="zoom:25%;" /></p>
+<div class="highlight"><pre><span></span><code>a√  b×  c√  d  e√  f×   
+</code></pre></div>
+<h4 id="_7">跳转指令</h4>
+<div class="highlight"><pre><span></span><code>b    main      跳转到标号为main地代码处 (只能短跳转32M) 
+
+bl   func      跳转函数func,并保存下一条要执行的指令的位置到 lr寄存器,
+               当跳转代码结束后,用mor pc,lr指令跳回来
+
+beq  addr     相等时，跳转到地址addr处
+                          相等（指CPSR寄存器中的Z条件码置位时)
+
+bne  addr     不等时，跳转到地址addr
+</code></pre></div>
+<ul>
+<li>用 汇编 实现C语言功能</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">ret</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="n">ret</span><span class="o">=</span><span class="n">func1</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span><span class="w">   </span>
+<span class="w">    </span><span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">){}</span><span class="w">  </span>
+<span class="p">}</span><span class="w">   </span>
+<span class="kt">int</span><span class="w">  </span><span class="nf">func1</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">a</span><span class="o">==</span><span class="mi">2</span><span class="p">)</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">func2</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
+<span class="w">    </span><span class="k">else</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">func3</span><span class="p">(</span><span class="n">a</span><span class="p">);</span><span class="w">  </span>
+<span class="p">}</span>
+<span class="kt">int</span><span class="w">  </span><span class="nf">func2</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">)</span><span class="w"> </span>
+<span class="p">{</span><span class="w">    </span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">a</span><span class="o">+</span><span class="mi">3</span><span class="p">;</span>
+<span class="p">}</span><span class="w"> </span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">func3</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">)</span>
+<span class="p">{</span><span class="w">    </span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">a</span><span class="mi">-1</span><span class="p">;</span>
+<span class="p">}</span><span class="w"> </span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code> @示例代码
+ .text
+ b   main  @eset 
+ nop
+ NOP
+ nop
+ nop
+ nop
+ nop
+ nop
+main: 
+  mov r2,#0  @r2 ~ ret
+  mov  r0,#2
+  bl   func1
+main_end:
+  b   main_end
+
+
+func1:      
+  mov  r12,lr  @注意函数嵌套调用 会覆盖LR寄存器
+  cmp  r0,#2
+  bleq func2
+  blne func3
+func1_end:
+  mov  pc,r12 
+
+func2:
+  add  r0,#3
+func2_end:
+  mov  pc,lr 
+
+func3:
+  sub  r0,#1
+func3_end:
+  mov  pc,lr
+
+  .end
+</code></pre></div>
+<h4 id="_8">逻辑指令</h4>
+<div class="highlight"><pre><span></span><code>and    r0,r1,r2       
+and    r0,r1,#0xFF    与
+
+orr    r0,r1,r2
+orr    r0,r1,#0xFF    或
+
+bic    r0,r0,#0x0B    清除r0中的位 0、1、和 3  
+tst    r0,#0x20       测试第6位是否为0 ，为0则Z标志置1 
+cmp    r1,r0          将寄存器R1的值与寄存器R0的值相减，
+                      并根据结果设置CPSR的标志位
+</code></pre></div>
+<blockquote>
+<p>测试: 1.判断当前工作状态是否是ARM状态，是则切换到user 工作模式？ 2.使能中断和快速中断？   </p>
+</blockquote>
+<div class="highlight"><pre><span></span><code>@ 示例代码
+.text
+ b   main  @eset 
+ nop
+ NOP
+ nop
+ nop
+ nop
+ nop
+ nop
+main: 
+ /* mov  r1,#0x03  @ 0000 0011
+  mov  r2,#0x0e  @ 0000 1110
+  orr  r0,r1,r2
+
+  mov  r1,#0x42
+  and  r1,#0xf0  
+
+  mov  r0,#0xff  @1111 0100 
+  bic  r0,#0x0b  @0000 1011
+  mov  r0,#0x56  @0101 0110
+  tst  r0,#0x20  @0010 0000
+
+  mov r0,#4
+  cmp r0,#4
+  */
+  /*
+  mrs r0,cpsr
+  tst r0,#0x20
+  bic r0,#0x1f
+  orr r0,#0x10  @switch user
+  msreq cpsr,r0
+  */
+  mrs r0,cpsr
+  bic r0,#0xc0
+  msr cpsr,r0
+
+
+main_end:
+  b   main_end
+  .end  
+</code></pre></div>
+<h4 id="_9">算术指令</h4>
+<div class="highlight"><pre><span></span><code>add     r0,r1,r2       默认是不影响CPSR的标志位的
+add     r0,#1
+
+sub     r0,r1,#3      类似  r0= r1 - 3
+sub     r0,#1
+
+sub     r0,r1,r2,LSL#1     
+</code></pre></div>
+<ul>
+<li><strong>延时1s</strong></li>
+</ul>
+<div class="highlight"><pre><span></span><code>delay1s:    
+    ldr  r4,=0x3FFFF
+loop_delay1s:
+    sub     r4,r4,#1
+    cmp     r4,#0          
+    bne     loop_delay1s
+    mov    pc,lr
+</code></pre></div>
+<div class="highlight"><pre><span></span><code> @示例代码
+ .text
+ b   main  @eset 
+ nop
+ NOP
+ nop
+ nop
+ nop
+ nop
+ nop
+main: 
+  /*mov r1,#1
+  mov r2,#2
+  add r0,r1,r2
+
+  add r0,#1
+
+  mov r1,#3
+  mov r2,#1
+  sub r0,r1,r2,lsl#1
+  */
+  mov r0,#1
+  bl  delay_1s
+  mov r1,#2 
+main_end:
+  b   main_end
+
+
+delay_1s:
+  @mov  r4,#0xfffff
+  ldr  r4,=0x1fffff
+delay_loop:  
+  cmp  r4,#0
+  beq  delay_1s_end
+  subne r4,#1
+  b   delay_loop
+delay_1s_end:
+  mov pc,lr
+
+
+  .end  
+</code></pre></div>
+<ul>
+<li><strong>最大公约数</strong></li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="nf">GCD</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="kt">int</span><span class="w"> </span><span class="n">b</span><span class="p">)</span>
+<span class="p">{</span><span class="w">         </span>
+<span class="w">    </span><span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="n">a</span><span class="o">==</span><span class="n">b</span><span class="p">)</span>
+<span class="w">            </span><span class="k">break</span><span class="p">;</span><span class="w">  </span>
+<span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="n">a</span><span class="o">&gt;</span><span class="n">b</span><span class="p">){</span>
+<span class="w">            </span><span class="n">a</span><span class="o">=</span><span class="n">a</span><span class="o">-</span><span class="n">b</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span><span class="k">else</span><span class="p">{</span>
+<span class="w">          </span><span class="n">b</span><span class="o">=</span><span class="n">b</span><span class="o">-</span><span class="n">a</span><span class="p">;</span><span class="w">    </span>
+<span class="w">        </span><span class="p">}</span><span class="w">   </span>
+<span class="w">    </span><span class="p">}</span><span class="w">       </span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">a</span><span class="p">;</span><span class="w">          </span>
+<span class="p">}</span><span class="w">   </span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code> .text
+ b   main  @eset 
+ nop
+ NOP
+ nop
+ nop
+ nop
+ nop
+ nop
+main: 
+  mov r0,#9
+  mov r1,#15
+  bl  gcd
+main_end:
+  b   main_end
+
+gcd:
+gcd_loop:
+  cmp  r0,r1
+  beq  gcd_end
+  subgt  r0,r1
+  sublt  r1,r0
+  b   gcd_loop
+
+gcd_end:
+  mov pc,lr
+
+  .end  
+</code></pre></div>
+<h2 id="_10">汇编指令高级</h2>
+<h4 id="loadstore">Load/Store架构</h4>
+<p><img alt="image-20231129155304253" src="../pic/image-20231129155304253.png" /></p>
+<ul>
+<li>
+<p><strong>前索引/后索引</strong></p>
+<p><strong>有点类似i++和++i</strong></p>
+<p>前索引: 地址先加, 再赋值(++i), <strong>但是不改变原来的r8里面的内容</strong></p>
+<div class="highlight"><pre><span></span><code>str r0,[r8,#8]     
+</code></pre></div>
+<p>后索引: 地址先赋值, 再加, **赋值之后, 将r8加8 **     (常用于循环拷贝)</p>
+<div class="highlight"><pre><span></span><code>str r0,[r8],#8   @i++
+</code></pre></div>
+</li>
+<li>
+<p><strong>汇编实现数据拷贝</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1">//用汇编实现C内容</span>
+<span class="n">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="k">const</span><span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="n">buf</span><span class="p">[]</span><span class="o">=</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">};</span>
+<span class="w">    </span><span class="kt">char</span><span class="w"> </span><span class="n">destBuf</span><span class="p">[</span><span class="mi">8</span><span class="p">];</span>
+<span class="w">    </span><span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">i</span><span class="o">&lt;</span><span class="mi">3</span><span class="p">,</span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">destBuf</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">buf</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>    .text
+    b   main  
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+main: 
+         mov r4,#0
+    ldr r7,=buf
+    ldr r8,=destBuf
+loop:
+        cmp  r4,#3
+    beq  main_end
+
+    ldrb  r0,[r7],#1
+    strb  r0,[r8],#1
+
+    add r4,#1
+    b  loop
+
+main_end:
+    b  main_end
+
+buf:
+    .byte 1,2,3
+
+    .data
+
+destBuf:
+    .space 8
+
+    .end
+</code></pre></div>
+</li>
+</ul>
+<h4 id="gnu">GNU汇编伪指令</h4>
+<blockquote>
+<p>让编译器去解释的 </p>
+</blockquote>
+<p><img alt="image-20231129204933210" src="../pic/image-20231129204933210.png" /></p>
+<div class="highlight"><pre><span></span><code>.section               //定义内存段
+.text                  //将定义符开始的代码编译到代码段
+.data                  //数据段
+.if  .else  .endif     //条件编译
+.end                   //文件结束
+
+.byte   0x11, ’a’,0    //定义char型数组(.byte 对应1字节)
+.word  0x12, 0x445566  //定义int型数组(. word 对应4字节)
+.quad  0x3FA0          //分配8字节的空间(.quad 对应8字节)
+.string  “abcd\0”      //定义字符串
+.align   4             //2^4 =16 字节对齐
+
+ ldr r0, =0xE0028008   //载入大常数0xE0028008 到r0中
+.equ  GPG3CON, 0XE03001C0     //定义宏
+.global  _start         //声明_start 为全局符号
+</code></pre></div>
+<h4 id="_11">批量操作指令</h4>
+<p><img alt="image-20231129205032685" src="../pic/image-20231129205032685.png" /></p>
+<div class="highlight"><pre><span></span><code>   ldr    r12,=srcBuf
+   ldr    r13,=dstBuf
+   ldmia  r12!,{r0 - r11}
+   stmia  r13!,{r0 - r11}
+
+  .data
+srcBuf:
+  .string &quot;abcdefghijkomnopqrstubwxyz\0&quot;
+dstBuf:
+   .space  12*4
+</code></pre></div>
+<h4 id="_12">堆栈操作指令</h4>
+<p><img alt="image-20231129205135516" src="../pic/image-20231129205135516.png" /></p>
+<h4 id="_13">异常处理（重要理解）</h4>
+<ul>
+<li>
+<p><strong>异常和中断</strong></p>
+<blockquote>
+<p>中断和异常是有关联的，它们都是计算机系统中处理外部事件和异常情况的机制。可以说中断和异常是包含关系，因为异常是中断的一种特殊情况。在处理器的设计中，通常会使用一个统一的中断/异常处理机制来处理中断和异常。因此，中断和异常可以说是并列存在的。</p>
+</blockquote>
+<p><strong>中断是由外部设备或其他处理器触发的，而异常是由程序执行中的错误或不正常情况引起的。通过一些代码例子和实际情况来说明这些概念。</strong></p>
+<ol>
+<li>中断的例子：
+假设有一个外部设备，比如一个<strong>定时器</strong>，当定时器计时结束时，它可以向处理器发送中断请求，以通知处理器进行相应的处理。下面是一个简单的伪代码例子：</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="c1">// 外部设备中断处理程序</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">externalInterruptHandler</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 处理外部设备中断</span>
+<span class="p">}</span>
+
+<span class="c1">// 主程序</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 初始化外部设备中断</span>
+<span class="w">    </span><span class="n">initExternalInterrupt</span><span class="p">(</span><span class="n">externalInterruptHandler</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// 执行主程序</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>在这个例子中，当外部设备的中断请求被触发时，处理器会跳转到外部设备中断处理程序进行处理。</p>
+<ol>
+<li>异常的例子：
+<strong>异常通常是由程序执行中的错误或不正常情况引起的</strong>，比如除零错误、内存访问越界等。下面是一个简单的伪代码例子：</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="c1">// 可能引发异常的代码</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">divide</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">b</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// 除零错误，触发异常</span>
+<span class="w">        </span><span class="n">raiseException</span><span class="p">(</span><span class="n">DIVIDE_BY_ZERO_EXCEPTION</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// 主程序</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">result</span><span class="p">;</span>
+<span class="w">    </span><span class="n">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">divide</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="n">catch</span><span class="w"> </span><span class="p">(</span><span class="n">Exception</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// 处理异常</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="c1">// 继续执行其他代码</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>在这个例子中，当除零错误发生时，会触发异常，并且处理器会跳转到异常处理程序进行处理。</p>
+</li>
+<li>
+<p><strong>异常向量表</strong></p>
+</li>
+</ul>
+<blockquote>
+<p>中断向量表是一个存储中断处理程序入口地址的表</p>
+</blockquote>
+<p><img alt="image-20231130161157494" src="../pic/image-20231130161157494.png" /></p>
+<p>为什么需要异常向量表呢？让我们回顾一下整个分析流程</p>
+<ol>
+<li>因为异常是随机产生，在程序运行的时候，我们不知道在什么时候会有异常，再加上有各种各样的异常，故我们编写汇编代码的时候，无法知道在哪里直接写一条b指令跳转到对应的异常服务函数。</li>
+<li>针对这个问题，我们分成硬件和软件两部分解决。</li>
+<li>首先，判断是什么异常的操作，由硬件电路来实现，这里不展开说。其次，知道了是什么异常，那我们要执行什么操作应对异常呢？也就是异常服务函数在哪里的问题。</li>
+<li>那我们就需要一个地方来存放异常服务函数的地址，以便异常来的时候，能知道去哪里执行对应的服务函数。</li>
+<li>
+<p>通过硬件判断出属于哪种异常之后，知道异常号（索引），在异常向量表里面找到对应的异常服务函数地址。之后载入PC，执行服务函数，返回被打断的函数</p>
+</li>
+<li>
+<p><strong>软中断最简</strong></p>
+<blockquote>
+<p><strong>作为最基本的框架分析其他的异常/中断</strong></p>
+</blockquote>
+<div class="highlight"><pre><span></span><code>    .text
+    @---------vector table
+    b   main    @0x00 reset
+    nop         @0x04 undef         
+    b sirq_hander   @0x08 soft irq
+    nop         @0x0c prefecth abort
+    nop         @0x10 data abort
+    nop     @0x14 reserved
+    nop     @0x18 irq
+    nop     @0x1C fiq
+
+    @ handler vector table
+sirq_hander:                
+        stmfd sp!,{r0-r12,lr}    @保存现场
+        add  r2,#1
+sirq_hander_end:
+    ldmfd sp!,{r0-r12,pc}        @LR返回地址的值要给PC,不然无法返回地址
+
+        @----------app----
+main: 
+    ldr sp,=stack_buf            @定义栈空间,使堆栈指针指向栈底,为了函数要 
+    mov r1,#1
+    mov r2,#2
+    swi 0x1   
+    cmp r2,#2
+    moveq r4,#4
+    movne r4,#6
+main_end:
+    b  main_end
+
+    .data
+
+        .space 15*4
+stack_buf:              @标号写在下面,因为ARM的栈是向下生长的,
+
+    .end
+</code></pre></div>
+</li>
+<li>
+<p>软中断完整</p>
+</li>
+</ol>
+<div class="highlight"><pre><span></span><code>    .text
+    @---------vector table
+    b   main    @0x00 reset
+    nop         @0x04 undef         
+    ldr pc,_sirq_hander @0x08 soft irq  @这一步操作的目的,为了扩大跳转地址为32M,可                        能就是异常服务函数放在内存中很远的地方
+    nop         @0x0c prefecth abort
+    nop         @0x10 data abort
+    nop      @0x14 reserved
+    nop      @0x18 irq
+    nop      @0x1C fiq
+
+_sirq_hander:
+    .word  sirq_hander
+
+    @ handler vector table
+sirq_hander:
+    stmfd sp!,{r0-r12,lr}
+    ldr r0,[lr,#-4]          @获取LR的内容,(LR存着返回地址,LR-4就获得了对应swi指令                             的地址,再由[]取出地址的内容,就是swi指令,由下图swi指令                             的机器码可知,软中断号就在机器码中,这样就可以完整地处理多                             个软中断了)
+    bic r0,#0xff000000       @清除最高两位,由指令的机器码可知,立即数最多就前6个字节
+    cmp r0,#1                @1号软中断
+    addeq  r2,#1
+    cmp r0,#2                @2号软中断
+    subeq  r2,#1  
+
+sirq_hander_end:
+    ldmfd sp!,{r0-r12,pc}
+    @----------app----
+main: 
+    ldr sp,=stack_buf
+    mov r1,#1
+    mov r2,#2                @LR-4
+    swi 0x1                  @LR
+    cmp r2,#2
+    moveq r4,#4
+    movne r4,#6
+    swi 0x2
+    mov r0,#3   
+main_end:
+    b  main_end
+
+
+    .data
+
+    .space 15*4
+stack_buf:
+
+    .end
+</code></pre></div>
+<blockquote>
+<p>大致内容同 "软中断最简"</p>
+</blockquote>
+<p><img alt="image-20231130170244169" src="../pic/image-20231130170244169.png" /></p>
+<blockquote>
+<p>**补充上面的ARMv7系列 Cortex-A5\A7\A8\A9的u-boot的具体格式: **</p>
+<p><img alt="image-20231130171649871" src="../pic/image-20231130171649871.png" /></p>
+</blockquote>
+<h2 id="arm_1">ARM汇编的源头</h2>
+<blockquote>
+<p>上面简单介绍 </p>
+<p>更多深入的、别的指令...详见ARM官方文档</p>
+<div class="highlight"><pre><span></span><code><span class="n">ARM</span><span class="w"> </span><span class="n">Cortex</span><span class="o">-</span><span class="n">A</span><span class="w"> </span><span class="n">系列</span><span class="w"> </span><span class="n">ARMv7</span><span class="o">-</span><span class="n">A</span><span class="w"> </span><span class="n">程序员指南</span><span class="w"> </span>
+<span class="c1">// https://developer.arm.com/documentation/den0013/d  </span>
+<span class="n">Armv7</span><span class="w"> </span><span class="n">和更早的</span><span class="w"> </span><span class="n">Arm</span><span class="w"> </span><span class="n">架构参考指南的指令集汇编指南</span><span class="w"> </span><span class="c1">//https://developer.arm.com/documentation/100076/0200/a32-t32-instruction-set-reference/a32-and-t32-instructions    </span>
+<span class="n">基本汇编语言程序设计</span><span class="w"> </span>
+<span class="c1">//https://developer.arm.com/documentation/dui0040/d/Basic-Assembly-Language-Programming    </span>
+</code></pre></div>
+</blockquote>
+<p><strong>目的: 构建知识地图 知道哪里能找各种资料</strong> </p>
+<ol>
+<li>
+<p>官网</p>
+</li>
+<li>
+<p>B站/YouTube</p>
+<p>......</p>
+</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.83f73b43.min.js"></script>
+      
+    
+  </body>
+</html>
