@@ -8,26 +8,24 @@
       
       
       
-        <link rel="canonical" href="https://jailuo.github.io/notes/index.html">
+        <link rel="canonical" href="https://jailuo.github.io/notes/Course/The%20Missing%20Semester%20of%20Your%20CS%20Education/Lecture4.%20Data%20Wrangling/data%20wrangling.html">
       
       
       
-        <link rel="next" href="Course/University%20Course/jyy%20OS2024/cousre%20note/1.%20introduction/introduction.html">
       
-      
-      <link rel="icon" href="assets/images/favicon.png">
+      <link rel="icon" href="../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.48">
     
     
       
-        <title>Messy Notes</title>
+        <title>Data wrangling - Messy Notes</title>
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.6f8fc17f.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.6f8fc17f.min.css">
       
         
-        <link rel="stylesheet" href="assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
       
       
 
@@ -46,9 +44,9 @@
       
     
     
-      <link rel="stylesheet" href="css/timeago.css">
+      <link rel="stylesheet" href="../../../css/timeago.css">
     
-    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -74,7 +72,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#messy-notes" class="md-skip">
+        <a href="#regular-expression" class="md-skip">
           Skip to content
         </a>
       
@@ -90,7 +88,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="index.html" title="Messy Notes" class="md-header__button md-logo" aria-label="Messy Notes" data-md-component="logo">
+    <a href="../../../index.html" title="Messy Notes" class="md-header__button md-logo" aria-label="Messy Notes" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -110,7 +108,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              首页
+              Data wrangling
             
           </span>
         </div>
@@ -223,7 +221,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="index.html" title="Messy Notes" class="md-nav__button md-logo" aria-label="Messy Notes" data-md-component="logo">
+    <a href="../../../index.html" title="Messy Notes" class="md-nav__button md-logo" aria-label="Messy Notes" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -250,19 +248,10 @@
       
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="index.html" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../../index.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -271,7 +260,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -423,7 +411,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Course/University%20Course/jyy%20OS2024/cousre%20note/1.%20introduction/introduction.html" class="md-nav__link">
+      <a href="../../University%20Course/jyy%20OS2024/cousre%20note/1.%20introduction/introduction.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -444,7 +432,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Course/University%20Course/jyy%20OS2024/cousre%20note/2.%20concurrency/concurrency.html" class="md-nav__link">
+      <a href="../../University%20Course/jyy%20OS2024/cousre%20note/2.%20concurrency/concurrency.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -465,7 +453,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Course/University%20Course/jyy%20OS2024/cousre%20note/3.%20virtualization/virtualization.html" class="md-nav__link">
+      <a href="../../University%20Course/jyy%20OS2024/cousre%20note/3.%20virtualization/virtualization.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -486,7 +474,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Course/University%20Course/jyy%20OS2024/cousre%20note/4.%20persistence/persistence.html" class="md-nav__link">
+      <a href="../../University%20Course/jyy%20OS2024/cousre%20note/4.%20persistence/persistence.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -550,7 +538,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Course/University%20Course/jyy%20OS2024/Mini%20Labs/M1/M1.html" class="md-nav__link">
+      <a href="../../University%20Course/jyy%20OS2024/Mini%20Labs/M1/M1.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -571,7 +559,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Course/University%20Course/jyy%20OS2024/Mini%20Labs/M2/M2.html" class="md-nav__link">
+      <a href="../../University%20Course/jyy%20OS2024/Mini%20Labs/M2/M2.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -592,7 +580,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Course/University%20Course/jyy%20OS2024/Mini%20Labs/M3/M3.html" class="md-nav__link">
+      <a href="../../University%20Course/jyy%20OS2024/Mini%20Labs/M3/M3.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -656,7 +644,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Course/University%20Course/jyy%20OS2024/OS%20Labs/L0/L0.html" class="md-nav__link">
+      <a href="../../University%20Course/jyy%20OS2024/OS%20Labs/L0/L0.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -677,7 +665,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Course/University%20Course/jyy%20OS2024/OS%20Labs/L1/L1.html" class="md-nav__link">
+      <a href="../../University%20Course/jyy%20OS2024/OS%20Labs/L1/L1.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -792,7 +780,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Course/GeekTime/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E4%B8%80%E5%91%A8%E7%9B%AE/1.%20%E6%8C%87%E4%BB%A4%E4%B8%8E%E8%BF%90%E7%AE%97/%E6%8C%87%E4%BB%A4%E4%B8%8E%E8%BF%90%E7%AE%97.html" class="md-nav__link">
+      <a href="../../GeekTime/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E4%B8%80%E5%91%A8%E7%9B%AE/1.%20%E6%8C%87%E4%BB%A4%E4%B8%8E%E8%BF%90%E7%AE%97/%E6%8C%87%E4%BB%A4%E4%B8%8E%E8%BF%90%E7%AE%97.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -813,7 +801,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Course/GeekTime/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E4%B8%80%E5%91%A8%E7%9B%AE/2.%20%E5%A4%84%E7%90%86%E5%99%A8/%E5%A4%84%E7%90%86%E5%99%A8.html" class="md-nav__link">
+      <a href="../../GeekTime/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E4%B8%80%E5%91%A8%E7%9B%AE/2.%20%E5%A4%84%E7%90%86%E5%99%A8/%E5%A4%84%E7%90%86%E5%99%A8.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -834,7 +822,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Course/GeekTime/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E4%B8%80%E5%91%A8%E7%9B%AE/3.%20%E5%AD%98%E5%82%A8%E4%B8%8EIO%E7%B3%BB%E7%BB%9F/%E5%AD%98%E5%82%A8%E4%B8%8EIO%E7%B3%BB%E7%BB%9F.html" class="md-nav__link">
+      <a href="../../GeekTime/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E4%B8%80%E5%91%A8%E7%9B%AE/3.%20%E5%AD%98%E5%82%A8%E4%B8%8EIO%E7%B3%BB%E7%BB%9F/%E5%AD%98%E5%82%A8%E4%B8%8EIO%E7%B3%BB%E7%BB%9F.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -855,7 +843,7 @@
   
   
     <li class="md-nav__item">
-      <a href="docs/Course/GeekTime/深入理解计算机组成原理/一周目/4. 应用/应用.md" class="md-nav__link">
+      <a href="../../../docs/Course/GeekTime/深入理解计算机组成原理/一周目/4. 应用/应用.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -919,7 +907,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/1.%20MiniCPU%E8%AE%BE%E8%AE%A1/MiniCPU%E8%AE%BE%E8%AE%A1.html" class="md-nav__link">
+      <a href="../../GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/1.%20MiniCPU%E8%AE%BE%E8%AE%A1/MiniCPU%E8%AE%BE%E8%AE%A1.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -940,7 +928,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/2.%20%E8%AF%AD%E8%A8%80%E5%92%8C%E6%8C%87%E4%BB%A4/%E8%AF%AD%E8%A8%80%E5%92%8C%E6%8C%87%E4%BB%A4.html" class="md-nav__link">
+      <a href="../../GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/2.%20%E8%AF%AD%E8%A8%80%E5%92%8C%E6%8C%87%E4%BB%A4/%E8%AF%AD%E8%A8%80%E5%92%8C%E6%8C%87%E4%BB%A4.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -961,7 +949,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/3.%20%E5%BA%94%E7%94%A8%E5%92%8C%E5%86%85%E5%AD%98/%E5%BA%94%E7%94%A8%E5%92%8C%E5%86%85%E5%AD%98.html" class="md-nav__link">
+      <a href="../../GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/3.%20%E5%BA%94%E7%94%A8%E5%92%8C%E5%86%85%E5%AD%98/%E5%BA%94%E7%94%A8%E5%92%8C%E5%86%85%E5%AD%98.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -982,7 +970,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/4.%20IO%E4%B8%8E%E6%96%87%E4%BB%B6/IO%E5%92%8C%E6%96%87%E4%BB%B6.html" class="md-nav__link">
+      <a href="../../GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/4.%20IO%E4%B8%8E%E6%96%87%E4%BB%B6/IO%E5%92%8C%E6%96%87%E4%BB%B6.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1003,7 +991,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/5.%20%E7%BB%BC%E5%90%88%E5%BA%94%E7%94%A8/synthesis.html" class="md-nav__link">
+      <a href="../../GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/5.%20%E7%BB%BC%E5%90%88%E5%BA%94%E7%94%A8/synthesis.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1024,7 +1012,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E5%92%8C%E5%B7%A5%E5%85%B7%E9%93%BE/%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE.html" class="md-nav__link">
+      <a href="../../GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E5%92%8C%E5%B7%A5%E5%85%B7%E9%93%BE/%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1138,7 +1126,7 @@
   
   
     <li class="md-nav__item">
-      <a href="ysyx/pa/pa1/pa1.html" class="md-nav__link">
+      <a href="../../../ysyx/pa/pa1/pa1.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1159,7 +1147,7 @@
   
   
     <li class="md-nav__item">
-      <a href="ysyx/pa/pa2/pa2.html" class="md-nav__link">
+      <a href="../../../ysyx/pa/pa2/pa2.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1180,7 +1168,7 @@
   
   
     <li class="md-nav__item">
-      <a href="ysyx/pa/pa3/pa3.html" class="md-nav__link">
+      <a href="../../../ysyx/pa/pa3/pa3.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1201,7 +1189,7 @@
   
   
     <li class="md-nav__item">
-      <a href="ysyx/pa/pa4/pa4.html" class="md-nav__link">
+      <a href="../../../ysyx/pa/pa4/pa4.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1222,7 +1210,7 @@
   
   
     <li class="md-nav__item">
-      <a href="ysyx/pa/c_marco/macro.html" class="md-nav__link">
+      <a href="../../../ysyx/pa/c_marco/macro.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1243,7 +1231,7 @@
   
   
     <li class="md-nav__item">
-      <a href="ysyx/pa/summary/summary.html" class="md-nav__link">
+      <a href="../../../ysyx/pa/summary/summary.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1264,7 +1252,7 @@
   
   
     <li class="md-nav__item">
-      <a href="ysyx/pa/Linux_porting/porting.html" class="md-nav__link">
+      <a href="../../../ysyx/pa/Linux_porting/porting.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1293,7 +1281,7 @@
   
   
     <li class="md-nav__item">
-      <a href="ysyx/digital-circuit/digital%20circuit.html" class="md-nav__link">
+      <a href="../../../ysyx/digital-circuit/digital%20circuit.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1331,8 +1319,83 @@
   
   
   
-    
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#regular-expression" class="md-nav__link">
+    <span class="md-ellipsis">
+      regular expression
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sed" class="md-nav__link">
+    <span class="md-ellipsis">
+      sed
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="sed">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sed-introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      sed introduction
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sed-and-regex" class="md-nav__link">
+    <span class="md-ellipsis">
+      sed and regex
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#more" class="md-nav__link">
+    <span class="md-ellipsis">
+      more
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#awk" class="md-nav__link">
+    <span class="md-ellipsis">
+      awk
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      分析数据
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -1350,11 +1413,169 @@
   
 
 
-<h1 id="messy-notes">Messy Notes</h1>
-<p>这里存放学习、生活各种各样的内容，课程/学习笔记、技术问题总结、感悟、业余爱好等。</p>
-<p>写得很乱，比较随心所欲，大多是当时学习的记录。</p>
-<p>当成是仓库好了，没有建博客的打算，可能会借助大型平台发布一部分内容？（未知</p>
-<h1 id="from-gdut">From GDUT</h1>
+  <h1>Data wrangling</h1>
+
+<h2 id="regular-expression">regular expression</h2>
+<p><a href="https://regexone.com/">RegexOne - Learn Regular Expressions - Lesson 1: An Introduction, and the ABCs</a></p>
+<p>直接上手用。</p>
+<p><img alt="image-20241007175554079" src="pic/image-20241007175554079.png" /></p>
+<p><code>[abc]</code> 匹配 <code>abc</code> 三个字符中的一个，要匹配多的，<code>[abc]+</code></p>
+<h2 id="sed">sed</h2>
+<blockquote>
+<p>以为 <code>ssh</code> 的 <code>log</code> 文件 为例子，具体看视频</p>
+</blockquote>
+<h3 id="sed-introduction">sed introduction</h3>
+<p><code>sed</code> 是一个基于文本编辑器 <code>ed</code> 构建的 “流编辑器” 。在 <code>sed</code> 中，您基本上是利用一些简短的命令来修改文件，而不是直接操作文件的内容（尽管您也可以选择这样做）。相关的命令行非常多，但是最常用的是 <code>s</code>，即 <em>替换</em> 命令，例如我们可以这样写：</p>
+<div class="highlight"><pre><span></span><code>ssh<span class="w"> </span>myserver<span class="w"> </span>journalctl
+<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>sshd
+<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;Disconnected from&quot;</span>
+<span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">&#39;s/.*Disconnected from //&#39;</span>
+</code></pre></div>
+<p>上面这段命令中，我们使用了一段简单的 <em>正则表达式</em>。正则表达式是一种非常强大的工具，可以让我们基于某种模式来对字符串进行匹配。<code>s</code> 命令的语法如下：<code>s/REGEX/SUBSTITUTION/flag</code>, 其中 <code>REGEX</code> 部分是我们需要使用的正则表达式，而 <code>SUBSTITUTION</code> 是用于替换匹配结果的文本。</p>
+<ul>
+<li><code>.*</code>：表示任意数量的任意字符，<code>.</code> 表示任意字符，<code>*</code> 表示前面的字符可以出现任意次数（包括零次）。</li>
+<li><code>/.*Disconnected from /</code>：表示正则表达式，匹配从行开始到 "Disconnected from "（包括空格）的所有字符。点号 <code>.</code> 表示任意字符，星号 <code>*</code> 表示前面的字符可以出现任意次数（包括零次），所以 <code>.*</code> 会匹配尽可能多的字符。</li>
+<li>第二个 <code>/</code> 后面没有内容，表示用空字符串替换匹配到的文本。</li>
+<li>最后一个 <code>/</code> 后面没有标志，所以没有特殊的替换行为。</li>
+</ul>
+<p>又：<code>echo 'aba' | sed 's/[ab]//'</code> or <code>echo 'abc' | sed 's/[ab]//g'</code></p>
+<h3 id="sed-and-regex">sed and regex</h3>
+<p>正则表达式非常常见也非常有用，值得您花些时间去理解它。让我们从这一句正则表达式开始学习： <code>/.*Disconnected from /</code>。正则表达式通常以（尽管并不总是） <code>/</code> 开始和结束。大多数的 ASCII 字符都表示它们本来的含义，但是有一些字符确实具有表示匹配行为的“特殊”含义。不同字符所表示的含义，根据正则表达式的实现方式不同，也会有所变化，这一点确实令人沮丧。常见的模式有：</p>
+<ul>
+<li><code>.</code> 除换行符之外的 “任意单个字符”</li>
+<li><code>*</code> 匹配前面字符零次或多次 （配合使用 <code>.*</code> 任意数量的任意字符）</li>
+<li><code>+</code> 匹配前面字符一次或多次</li>
+<li><code>[abc]</code> 匹配 <code>a</code>, <code>b</code> 和 <code>c</code> 中的任意一个</li>
+<li><code>(RX1|RX2)</code> 任何能够匹配 <code>RX1</code> 或 <code>RX2</code> 的结果</li>
+<li><code>^</code> 行首</li>
+<li><code>$</code> 行尾 （配合使用 's/^ ..... $//' 匹配整一行）</li>
+</ul>
+<p><strong><code>sed</code> 的正则表达式有些时候是比较奇怪的，它需要你在这些模式前添加 <code>\</code> 才能使其具有特殊含义。或者，您也可以添加 <code>-E</code> 选项来支持这些匹配。</strong></p>
+<p>一个有问题的例子：</p>
+<div class="highlight"><pre><span></span><code><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;an 17 03:13:00 thesquareplanet.com sshd[2631]: Disconnected from invalid user Disconnected from 46.97.239.16 port 55920 [preauth]&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">&#39;s/.*Disconnected from //&#39;</span>
+
+output:
+<span class="m">46</span>.97.239.16<span class="w"> </span>port<span class="w"> </span><span class="m">55920</span><span class="w"> </span><span class="o">[</span>preauth<span class="o">]</span>
+</code></pre></div>
+<p><code>*</code> 和 <code>+</code> 在默认情况下是贪婪模式，也就是说，它们会尽可能多的匹配文本。</p>
+<p>这可不是我们想要的结果。对于某些正则表达式的实现来说，您可以给 <code>*</code> 或 <code>+</code> 增加一个 <code>?</code> 后缀使其变成非贪婪模式，但是很可惜 <code>sed</code> 并不支持该后缀。不过，我们可以切换到 perl 的命令行模式，该模式支持编写这样的正则表达式：</p>
+<div class="highlight"><pre><span></span><code><span class="n">perl</span><span class="w"> </span><span class="o">-</span><span class="n">pe</span><span class="w"> </span><span class="s">&#39;s/.*?Disconnected from //&#39;</span>
+</code></pre></div>
+<p>回到 <code>sed</code>，完整的操作</p>
+<div class="highlight"><pre><span></span><code>sed<span class="w"> </span>-E<span class="w"> </span><span class="s1">&#39;s/.*Disconnected from (invalid |authenticating )?user .* [^ ]+ port [0-9]+( \[preauth\])?$//&#39;</span>
+</code></pre></div>
+<p>具体配合视频和 <a href="https://regex101.com/">regex101: build, test, and debug regex</a> 解析。</p>
+<blockquote>
+<p>好好利用 regex 和 GPT</p>
+</blockquote>
+<p>，需要用到 <code>(.*)</code> capture group 捕获组。</p>
+<div class="highlight"><pre><span></span><code>sed<span class="w"> </span>-E<span class="w"> </span><span class="s1">&#39;s/.*Disconnected from (invalid |authenticating )?user (.*) [^ ]+ port [0-9]+( \[preauth\])?$//&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>less
+</code></pre></div>
+<p>但是上面的处理还有问题，日志的内容全部被替换成了空字符串，整个日志的内容因此都被删除了。但是我们实际希望 user 后面的 name 保留下来，对此，我们可以使用“捕获组（capture groups）”来完成。<strong>被圆括号内的正则表达式匹配到的文本，都会被存入一系列以编号区分的捕获组中。</strong>捕获组的内容可以在替换字符串时使用（有些正则表达式的引擎甚至支持替换表达式本身），例如 <code>\1</code>、 <code>\2</code>、<code>\3</code> 等等，我们匹配第二个捕获组 <code>(.*)</code> 因此可以使用如下命令</p>
+<div class="highlight"><pre><span></span><code>sed<span class="w"> </span>-E<span class="w"> </span><span class="s1">&#39;s/.*Disconnected from (invalid |authenticating )?user (.*) [^ ]+ port [0-9]+( \[preauth\])?$/\2/&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>less
+</code></pre></div>
+<p>但是依然有问题，要是用户再搞怪，它的用户名为整条 log 文件怎么办？非贪婪模式。具体看视频。</p>
+<div class="highlight"><pre><span></span><code>sed<span class="w"> </span>-E<span class="w"> </span><span class="s1">&#39;s/.*?Disconnected from (invalid |authenticating )?user (.*) [^ ]+ port [0-9]+( \[preauth\])?$//&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>less
+</code></pre></div>
+<blockquote>
+<p>在正则表达式中，贪婪模式和非贪婪模式是指匹配时的两种不同行为：</p>
+<ol>
+<li><strong>贪婪模式</strong>：正则表达式在匹配时会尽可能多地匹配字符。也就是说，它会尝试找到最长的匹配字符串。</li>
+<li><strong>非贪婪模式</strong>：与贪婪模式相反，非贪婪模式会尽可能少地匹配字符。也就是说，它会尝试找到最短的匹配字符串。</li>
+</ol>
+</blockquote>
+<p><code>sed</code> 还可以做很多各种各样有趣的事情，例如文本注入：(使用 <code>i</code> 命令)，打印特定的行 (使用 <code>p</code> 命令)，基于索引选择特定行等等。详情请见 <code>man sed</code>!</p>
+<blockquote></blockquote>
+<h3 id="more">more</h3>
+<p>但是 <code>sed</code> 并不是完美的工具，它在<strong>搜索和替换方面</strong>确实很有用，但我们不能只用 <code>sed</code>。</p>
+<p>现在，我们已经得到了一个包含用户名的列表，列表中的用户都曾经尝试过登录我们的系统。但这还不够，让我们过滤出那些最常出现的用户：</p>
+<div class="highlight"><pre><span></span><code>ssh<span class="w"> </span>myserver<span class="w"> </span>journalctl
+<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>sshd
+<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;Disconnected from&quot;</span>
+<span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span>-E<span class="w"> </span><span class="s1">&#39;s/.*Disconnected from (invalid |authenticating )?user (.*) [^ ]+ port [0-9]+( \[preauth\])?$/\2/&#39;</span>
+<span class="w"> </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span><span class="p">|</span><span class="w"> </span>uniq<span class="w"> </span>-c
+</code></pre></div>
+<p><code>sort</code> 会对其输入数据进行排序。<code>uniq -c</code> 会把<strong>连续出现的行</strong>折叠为一行并使用出现次数作为前缀。我们希望按照出现次数排序，过滤出最常出现的用户名：</p>
+<div class="highlight"><pre><span></span><code>ssh<span class="w"> </span>myserver<span class="w"> </span>journalctl
+<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>sshd
+<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;Disconnected from&quot;</span>
+<span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span>-E<span class="w"> </span><span class="s1">&#39;s/.*Disconnected from (invalid |authenticating )?user (.*) [^ ]+ port [0-9]+( \[preauth\])?$/\2/&#39;</span>
+<span class="w"> </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span><span class="p">|</span><span class="w"> </span>uniq<span class="w"> </span>-c
+<span class="w"> </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span>-nk1,1<span class="w"> </span><span class="p">|</span><span class="w"> </span>tail<span class="w"> </span>-n10
+</code></pre></div>
+<blockquote>
+<p>补充</p>
+<p><code>uniq</code> 命令在 Unix 和类 Unix 系统中用于报告或省略重复的行。<code>-c</code> 参数是 <code>uniq</code> 命令的一个选项，用于显示每行的出现次数。</p>
+<p>具体来说，<code>uniq -c</code> 会为输入中的每行（在相邻的重复行中）显示该行及其出现的次数。这通常用于统计某个模式或文本行在文件中出现的次数。</p>
+<p>使用方法如下：</p>
+<div class="highlight"><pre><span></span><code>uniq<span class="w"> </span>-c<span class="w"> </span><span class="o">[</span>input_file<span class="o">]</span>
+</code></pre></div>
+<p>其中 <code>input_file</code> 是你想要检查重复行的文件。</p>
+<p>例如，如果你有一个文件 <code>example.txt</code>，内容如下：</p>
+<div class="highlight"><pre><span></span><code>apple
+banana
+apple
+orange
+banana
+apple
+</code></pre></div>
+<p>运行 <code>uniq -c example.txt</code> 将会得到：</p>
+<div class="highlight"><pre><span></span><code>      3 apple
+      2 banana
+      1 orange
+</code></pre></div>
+<p>这里的数字表示每行文本在文件中出现的次数。<strong>注意，<code>uniq</code> 只能识别连续的重复行</strong>，所以如果文件内容如下：</p>
+<div class="highlight"><pre><span></span><code>apple
+banana
+apple
+orange
+banana
+</code></pre></div>
+<p><code>uniq</code> 将不会将第一行的 <code>apple</code> 与第三行的 <code>apple</code> 视为重复，因此 <code>-c</code> 选项不会计数非连续的重复行。</p>
+<p>如果你想要忽略连续性的限制，可以使用 <code>-f</code> 参数指定忽略前几个字段（或在这种情况下，忽略前一行）：</p>
+<div class="highlight"><pre><span></span><code>uniq<span class="w"> </span>-c<span class="w"> </span>-f<span class="w"> </span><span class="m">1</span><span class="w"> </span>example.txt
+</code></pre></div>
+<p>这将统计文件中所有重复行的出现次数，无论它们是否相邻。</p>
+<p>但是这样做还是比较麻烦，比较推荐到做法是先对文件进行排序后，再使用 <code>uniq -c</code>：</p>
+<div class="highlight"><pre><span></span><code>sort<span class="w"> </span>example.txt<span class="w"> </span><span class="p">|</span><span class="w"> </span>uniq<span class="w"> </span>-c<span class="w"> </span><span class="p">|</span><span class="w"> </span>less
+</code></pre></div>
+</blockquote>
+<p>另外，<code>sort -n</code> 会按照数字顺序对输入进行排序（默认情况下是按照字典序排序 <code>-k1,1</code> 则表示“仅基于以空格分割的第一列进行排序”。<code>,n</code> 部分表示“仅排序到第 n 个部分”，默认情况是到行尾。就本例来说，针对整个行进行排序也没有任何问题，我们这里主要是为了学习这一用法！</p>
+<p>如果我们希望得到登录次数最少的用户，我们可以使用 <code>head</code> 来代替 <code>tail</code>。或者使用 <code>sort -r</code> 来进行倒序排序。</p>
+<p>相当不错。但我们只想获取用户名，而且不要一行一个地显示。</p>
+<div class="highlight"><pre><span></span><code>ssh<span class="w"> </span>myserver<span class="w"> </span>journalctl
+<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>sshd
+<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;Disconnected from&quot;</span>
+<span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span>-E<span class="w"> </span><span class="s1">&#39;s/.*Disconnected from (invalid |authenticating )?user (.*) [^ ]+ port [0-9]+( \[preauth\])?$/\2/&#39;</span>
+<span class="w"> </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span><span class="p">|</span><span class="w"> </span>uniq<span class="w"> </span>-c
+<span class="w"> </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span>-nk1,1<span class="w"> </span><span class="p">|</span><span class="w"> </span>tail<span class="w"> </span>-n10
+<span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">&#39;{print $2}&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>paste<span class="w"> </span>-sd,
+</code></pre></div>
+<p>我们可以利用 <code>paste</code> 命令来合并行(<code>-s</code>)，并指定一个分隔符进行分割 (<code>-d</code>)，（-s -d, 拼起来）</p>
+<p>那 <code>awk</code> 的作用又是什么呢？</p>
+<h2 id="awk">awk</h2>
+<p><strong><code>sed</code> 是一种基于行的 stream editor ，正则表达式也是逐行匹配的，自然也有基于列的 stream editor：<code>awk</code></strong></p>
+<p><code>awk</code> 其实是一种编程语言，只不过它碰巧非常善于处理文本。关于 <code>awk</code> 可以介绍的内容太多了，限于篇幅，这里我们仅介绍一些基础知识。</p>
+<p>首先， <code>{print $2}</code> 的作用是什么？ <code>awk</code> 程序接受一个模式串（可选），以及一个代码块，指定当模式匹配时应该做何种操作。默认当模式串即匹配所有行（上面命令中当用法）。</p>
+<p>在代码块中，<code>$0</code> 表示整行的内容，<code>$1</code> 到 <code>$n</code> 为一行中的 n 个区域，区域的分割基于 <code>awk</code> 的域分隔符（<strong>默认是空格，可以通过 <code>-F</code> 来修</strong>改）。在上面的例子中，我们的代码意思是：对于每一行文本，打印其第二个部分，也就是用户名。</p>
+<div class="highlight"><pre><span></span><code><span class="w"> </span><span class="m">111</span><span class="w"> </span>abc
+<span class="w"> </span><span class="m">100</span><span class="w"> </span>edd
+<span class="w"> </span><span class="m">98</span><span class="w"> </span>djao
+<span class="w"> </span><span class="m">82</span><span class="w"> </span>dapk
+<span class="w"> </span>....
+<span class="w"> </span>//<span class="w"> </span>match<span class="w"> </span>abc,<span class="w"> </span>edd...
+</code></pre></div>
+<p>让我们康康，还有什么炫酷的操作可以做。让我们统计一下所有以 <code>c</code> 开头，以 <code>e</code> 结尾，并且仅尝试过一次登录的用户。</p>
+<div class="highlight"><pre><span></span><code><span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">&#39;$1 == 1 &amp;&amp; $2 ~ /^c[^ ]*e$/ { print $2 }&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>wc<span class="w"> </span>-l
+</code></pre></div>
+<p>让我们好好分析一下。首先，注意这次我们为 <code>awk</code> 指定了一个匹配模式串（也就是 <code>{...}</code> 前面的那部分内容）。该匹配要求文本的第一部分需要等于 1（这部分刚好是 <code>uniq -c</code> 得到的计数值），然后其第二部分必须满足给定的一个正则表达式。代码块中的内容则表示打印用户名。然后我们使用 <code>wc -l</code> 统计输出结果的行数。</p>
+<p>不过，既然 <code>awk</code> 是一种编程语言，那么则可以这样：</p>
+<div class="highlight"><pre><span></span><code>BEGIN { rows = 0 }
+$1 == 1 &amp;&amp; $2 ~ /^c[^ ]*e$/ { rows += $1 }
+END { print rows }
+</code></pre></div>
+<p><code>BEGIN</code> 也是一种模式，它会匹配输入的开头（ <code>END</code> 则匹配结尾）。然后，对每一行第一个部分进行累加，最后将结果输出。事实上，我们完全可以抛弃 <code>grep</code> 和 <code>sed</code> ，因为 <code>awk</code> 就可以 <a href="https://backreference.org/2010/02/10/idiomatic-awk">解决所有问题</a>。至于怎么做，就留给读者们做课后练习吧。</p>
+<h2 id="_1">分析数据</h2>
 
 
 
@@ -1362,6 +1583,38 @@
 
 
 
+  
+    
+  
+  
+    
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Last update">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2025-01-05T17:02:30+01:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2025-01-05</span>
+  </span>
+
+    
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Created">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2025-01-05T17:02:30+01:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2025-01-05</span>
+  </span>
+
+    
+    
+    
+  </aside>
 
 
 
@@ -1379,28 +1632,6 @@
       
         <footer class="md-footer">
   
-    
-      
-      <nav class="md-footer__inner md-grid" aria-label="Footer" >
-        
-        
-          
-          <a href="Course/University%20Course/jyy%20OS2024/cousre%20note/1.%20introduction/introduction.html" class="md-footer__link md-footer__link--next" aria-label="Next: introduction">
-            <div class="md-footer__title">
-              <span class="md-footer__direction">
-                Next
-              </span>
-              <div class="md-ellipsis">
-                introduction
-              </div>
-            </div>
-            <div class="md-footer__button md-icon">
-              
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg>
-            </div>
-          </a>
-        
-      </nav>
     
   
   <div class="md-footer-meta md-typeset">
@@ -1437,14 +1668,14 @@
     </div>
     
     
-    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.footer"], "search": "assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.footer"], "search": "../../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="assets/javascripts/bundle.83f73b43.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.83f73b43.min.js"></script>
       
-        <script src="js/timeago.min.js"></script>
+        <script src="../../../js/timeago.min.js"></script>
       
-        <script src="js/timeago_mkdocs_material.js"></script>
+        <script src="../../../js/timeago_mkdocs_material.js"></script>
       
     
   </body>

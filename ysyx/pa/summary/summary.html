@@ -1,0 +1,2653 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://jailuo.github.io/notes/ysyx/pa/summary/summary.html">
+      
+      
+        <link rel="prev" href="../c_marco/macro.html">
+      
+      
+        <link rel="next" href="../Linux_porting/porting.html">
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.48">
+    
+    
+      
+        <title>Summary - Messy Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.6f8fc17f.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../css/timeago.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#goal" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../index.html" title="Messy Notes" class="md-header__button md-logo" aria-label="Messy Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Messy Notes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Summary
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256l137.3-137.4c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/JAILuo/notes" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../index.html" title="Messy Notes" class="md-nav__button md-logo" aria-label="Messy Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Messy Notes
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/JAILuo/notes" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    首页
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Course
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Course
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    University Course
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            University Course
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_1" id="__nav_2_1_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    jyy OS2024
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            jyy OS2024
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_1_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_1_1" id="__nav_2_1_1_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    course note
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_1_1_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            course note
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/University%20Course/jyy%20OS2024/cousre%20note/1.%20introduction/introduction.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    introduction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/University%20Course/jyy%20OS2024/cousre%20note/2.%20concurrency/concurrency.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    concurrency
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/University%20Course/jyy%20OS2024/cousre%20note/3.%20virtualization/virtualization.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    virtualization
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/University%20Course/jyy%20OS2024/cousre%20note/4.%20persistence/persistence.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    persistence
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_1_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_1_2" id="__nav_2_1_1_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Mini Labs
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_1_1_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            Mini Labs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/University%20Course/jyy%20OS2024/Mini%20Labs/M1/M1.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    M1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/University%20Course/jyy%20OS2024/Mini%20Labs/M2/M2.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    M2
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/University%20Course/jyy%20OS2024/Mini%20Labs/M3/M3.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    M3
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_1_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_1_3" id="__nav_2_1_1_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    OS Labs
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_1_1_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_1_3">
+            <span class="md-nav__icon md-icon"></span>
+            OS Labs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/University%20Course/jyy%20OS2024/OS%20Labs/L0/L0.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    L0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/University%20Course/jyy%20OS2024/OS%20Labs/L1/L1.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    L1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    GeekTime
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            GeekTime
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2_1" id="__nav_2_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    深入理解计算机组成原理
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            深入理解计算机组成原理
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/GeekTime/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E4%B8%80%E5%91%A8%E7%9B%AE/1.%20%E6%8C%87%E4%BB%A4%E4%B8%8E%E8%BF%90%E7%AE%97/%E6%8C%87%E4%BB%A4%E4%B8%8E%E8%BF%90%E7%AE%97.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1. 指令与运算
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/GeekTime/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E4%B8%80%E5%91%A8%E7%9B%AE/2.%20%E5%A4%84%E7%90%86%E5%99%A8/%E5%A4%84%E7%90%86%E5%99%A8.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2. 处理器
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/GeekTime/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E4%B8%80%E5%91%A8%E7%9B%AE/3.%20%E5%AD%98%E5%82%A8%E4%B8%8EIO%E7%B3%BB%E7%BB%9F/%E5%AD%98%E5%82%A8%E4%B8%8EIO%E7%B3%BB%E7%BB%9F.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3. 存储与IO系统
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/Course/GeekTime/深入理解计算机组成原理/一周目/4. 应用/应用.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4. 应用
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2_2" id="__nav_2_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    计算基础实战课
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            计算基础实战课
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/1.%20MiniCPU%E8%AE%BE%E8%AE%A1/MiniCPU%E8%AE%BE%E8%AE%A1.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1. MiniCPU设计
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/2.%20%E8%AF%AD%E8%A8%80%E5%92%8C%E6%8C%87%E4%BB%A4/%E8%AF%AD%E8%A8%80%E5%92%8C%E6%8C%87%E4%BB%A4.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2. 语言和指令
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/3.%20%E5%BA%94%E7%94%A8%E5%92%8C%E5%86%85%E5%AD%98/%E5%BA%94%E7%94%A8%E5%92%8C%E5%86%85%E5%AD%98.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3. 应用和内存
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/4.%20IO%E4%B8%8E%E6%96%87%E4%BB%B6/IO%E5%92%8C%E6%96%87%E4%BB%B6.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4. IO与文件
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/5.%20%E7%BB%BC%E5%90%88%E5%BA%94%E7%94%A8/synthesis.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    5. 综合应用
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E5%92%8C%E5%B7%A5%E5%85%B7%E9%93%BE/%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    环境配置和工具链
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    ysyx
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            ysyx
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    NJU-ICS2023-PA
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            NJU-ICS2023-PA
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pa1/pa1.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PA1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pa2/pa2.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PA2
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pa3/pa3.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PA3
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pa4/pa4.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PA4
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../c_marco/macro.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    C Macro
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Summary
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="summary.html" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Summary
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#goal" class="md-nav__link">
+    <span class="md-ellipsis">
+      Goal
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Goal">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      相关问题
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#learn-1-nemu-am-os-app-makefile" class="md-nav__link">
+    <span class="md-ellipsis">
+      Learn 1: NEMU &lt;-&gt; AM &lt;-&gt; os &lt;-&gt; app 的 Makefile 构建
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Learn 1: NEMU <-> AM <-> os <-> app 的 Makefile 构建">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nemu" class="md-nav__link">
+    <span class="md-ellipsis">
+      NEMU
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#am" class="md-nav__link">
+    <span class="md-ellipsis">
+      AM
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#os" class="md-nav__link">
+    <span class="md-ellipsis">
+      OS
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#basic-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Basic Summary
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Basic Summary">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#os_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      OS
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#amam-kilb" class="md-nav__link">
+    <span class="md-ellipsis">
+      AM（am + kilb）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nemu_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      NEMU
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#app" class="md-nav__link">
+    <span class="md-ellipsis">
+      APP
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      讲义答案
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#makefile" class="md-nav__link">
+    <span class="md-ellipsis">
+      遇到的一些Makefile
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="遇到的一些Makefile">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#q1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Q1
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#make" class="md-nav__link">
+    <span class="md-ellipsis">
+      $(MAKE)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      关于交叉编译工具链
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="关于交叉编译工具链">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      遇到的一些问题
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getopt_long" class="md-nav__link">
+    <span class="md-ellipsis">
+      getopt_long
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#c" class="md-nav__link">
+    <span class="md-ellipsis">
+      C 库的实现
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reference
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Linux_porting/porting.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Linux Porting
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../digital-circuit/digital%20circuit.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Digital Circuit
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#goal" class="md-nav__link">
+    <span class="md-ellipsis">
+      Goal
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Goal">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      相关问题
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#learn-1-nemu-am-os-app-makefile" class="md-nav__link">
+    <span class="md-ellipsis">
+      Learn 1: NEMU &lt;-&gt; AM &lt;-&gt; os &lt;-&gt; app 的 Makefile 构建
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Learn 1: NEMU <-> AM <-> os <-> app 的 Makefile 构建">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nemu" class="md-nav__link">
+    <span class="md-ellipsis">
+      NEMU
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#am" class="md-nav__link">
+    <span class="md-ellipsis">
+      AM
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#os" class="md-nav__link">
+    <span class="md-ellipsis">
+      OS
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#basic-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Basic Summary
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Basic Summary">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#os_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      OS
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#amam-kilb" class="md-nav__link">
+    <span class="md-ellipsis">
+      AM（am + kilb）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nemu_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      NEMU
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#app" class="md-nav__link">
+    <span class="md-ellipsis">
+      APP
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      讲义答案
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#makefile" class="md-nav__link">
+    <span class="md-ellipsis">
+      遇到的一些Makefile
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="遇到的一些Makefile">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#q1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Q1
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#make" class="md-nav__link">
+    <span class="md-ellipsis">
+      $(MAKE)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      关于交叉编译工具链
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="关于交叉编译工具链">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      遇到的一些问题
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getopt_long" class="md-nav__link">
+    <span class="md-ellipsis">
+      getopt_long
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#c" class="md-nav__link">
+    <span class="md-ellipsis">
+      C 库的实现
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reference
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+  <h1>Summary</h1>
+
+<h2 id="goal">Goal</h2>
+<ul>
+<li>
+<p>一定的计算机系统基础</p>
+</li>
+<li>
+<p>编码能力</p>
+</li>
+<li>
+<p>对每个问题有自己的思考和实践</p>
+<p><img alt="image-20240612154413047" src="pic/image-20240612154413047.png" /></p>
+</li>
+<li>
+<p>（*）对软硬件协同、嵌入式感兴趣</p>
+</li>
+<li>
+<p>（*）对系统软件（os、compiler等）感兴趣</p>
+</li>
+<li>
+<p>（*）对处理器设计感兴趣</p>
+</li>
+</ul>
+<p><img src="pic/image-20240612153332272.png" alt="image-20240612153332272" style="zoom:50%;" /></p>
+<p><img src="pic/image-20240612153256977.png" alt="image-20240612153256977" style="zoom:50%;" /></p>
+<p><img src="pic/image-20240612153611618.png" alt="image-20240612153611618" style="zoom:50%;" /></p>
+<h3 id="_1">相关问题</h3>
+<ol>
+<li>
+<p>如写下一句 <code>int x = 10;</code> 能明白计算机背后发生了什么</p>
+<p><img src="pic/v2-af891a81be32beb4693b0adc7b9c919a_720w.webp" style="zoom: 67%;" /></p>
+</li>
+<li>
+<p>回答</p>
+<p><img alt="image-20240612154203646" src="pic/image-20240612154203646.png" /></p>
+</li>
+<li>
+<p>从按下键盘到显示器上ppt换到下一页的过程。</p>
+</li>
+</ol>
+<p>【2024 jyy OS 课 总结30】</p>
+<ul>
+<li>
+<p>计算机系统线课程的根本问题：字节序列如何真正运行起来？这是如何和逻辑门连接起来的？</p>
+<p>编程语言如何和逻辑门连接起来的？应用和硬件视角之间是什么？</p>
+</li>
+<li>
+<p>如何实现一个调试器？</p>
+<p>NEMU 中 sdb 这个东西，说清楚原理？</p>
+<p>调试器的原理？</p>
+</li>
+<li>
+<p>syscall</p>
+<p>为了方便我们编程而造出来的东西？</p>
+</li>
+</ul>
+<h2 id="learn-1-nemu-am-os-app-makefile">Learn 1: <code>NEMU &lt;-&gt; AM &lt;-&gt; os &lt;-&gt; app</code> 的 <code>Makefile</code> 构建</h2>
+<p>在做 PA 和以前学习计算机的时候，被提及到最多的思想之一就是分层，这也让我在想，理论上是这么说，但是具体是如何构建的呢？</p>
+<p>AM 程序是怎么跑在 NEMU 上的？再往上的 OS、APP，简单过流程。</p>
+<h3 id="nemu">NEMU</h3>
+<p>...</p>
+<h3 id="am">AM</h3>
+<p>关键在于：<code>abstract machine/Makefile</code> 的这句话：</p>
+<div class="highlight"><pre><span></span><code><span class="w"> </span><span class="m">96</span><span class="w"> </span><span class="c1">### Paste in arch-specific configurations (e.g., from `scripts/x86_64-qemu.mk`)</span>
+<span class="w"> </span><span class="m">97</span><span class="w"> </span>-include<span class="w"> </span><span class="k">$(</span>AM_HOME<span class="k">)</span>/scripts/<span class="k">$(</span>ARCH<span class="k">)</span>.mk<span class="w">    </span>
+
+<span class="c"> # $(AM_HOME)/Makefile</span>
+</code></pre></div>
+<p>-include 和 C/C++ 的预处理器的 #include 指令类似，虽然原理上不太一样，但都有一种复制粘贴的能力。</p>
+<blockquote>
+<p><strong>From <code>kimi</code>:</strong></p>
+<p>Makefile 中的 <code>-include</code> 指令和 C 预处理器的 <code>#include</code> 指令在功能上有一些相似之处，但它们的作用和使用场景是不同的。</p>
+<ol>
+<li><strong>C预处理器的 <code>#include</code> 指令</strong>：</li>
+<li><code>#include</code> 是 C/C++ 预处理器的指令，用于在编译前将指定的头文件内容包含到源代码文件中。</li>
+<li>它的作用是复制粘贴，即将头文件的内容直接插入到源代码文件中相应的位置。</li>
+<li>
+<p>预处理器处理 <code>#include</code> 指令后，编译器才开始编译处理源代码。</p>
+</li>
+<li>
+<p><strong>Makefile 的 <code>-include</code> 指令</strong>：</p>
+</li>
+<li><code>-include</code> 是 Makefile 的一个指令，用于告诉 make 工具在构建目标之前先包含（读取）指定的 Makefile 文件。</li>
+<li>它并不是复制粘贴文件内容，而是将指定的 Makefile 文件中的规则和变量等合并到当前 Makefile 中。</li>
+<li><code>-include</code> 指令通常用于包含通用的 Makefile 片段，以实现代码的复用和模块化。</li>
+</ol>
+<p>具体来说，<code>-include</code> 指令在 Makefile 中的作用如下：</p>
+<ul>
+<li><strong>合并规则</strong>：将指定 Makefile 中定义的规则和变量合并到当前 Makefile 中。</li>
+<li><strong>条件包含</strong>：<code>-include</code> 指令会检查文件是否存在，<strong>如果文件不存在，make 工具会忽略该指令并继续执行后续的指令</strong>。</li>
+<li><strong>多次包含</strong>：如果同一个文件被多次包含，make 工具会忽略后续的包含，以避免重复包含。</li>
+</ul>
+<p>示例：
+<div class="highlight"><pre><span></span><code><span class="cp">-include config.mk</span>
+<span class="cp">-include common.mk</span>
+</code></pre></div></p>
+<p>在这个示例中，make 工具会首先尝试包含 <code>config.mk</code> 文件，然后是 <code>common.mk</code> 文件。如果这些文件存在，它们的内容会被合并到当前 Makefile 中。</p>
+<p>总结来说，虽然 <code>-include</code> 和 <code>#include</code> 在名称上相似，但它们的作用和使用场景是不同的。<code>#include</code> 是 C/C++ 预处理器的指令，用于在编译前包含头文件；而 <code>-include</code> 是 Makefile 的指令，用于在构建过程中包含其他 Makefile 文件。</p>
+<p>更多介绍参考 GNU make 手册:</p>
+<p><img alt="image-20241101205921394" src="pic/image-20241101205921394.png" /></p>
+</blockquote>
+<p>之后便是：</p>
+<div class="highlight"><pre><span></span><code><span class="w">  </span><span class="m">1</span><span class="w"> </span>include<span class="w"> </span><span class="k">$(</span>AM_HOME<span class="k">)</span>/scripts/isa/riscv.mk<span class="w">                                                                                     </span>
+<span class="w">  </span><span class="m">2</span><span class="w"> </span>include<span class="w"> </span><span class="k">$(</span>AM_HOME<span class="k">)</span>/scripts/platform/nemu.mk
+<span class="w">  </span><span class="m">3</span><span class="w"> </span><span class="nv">CFLAGS</span><span class="w">  </span><span class="o">+=</span><span class="w"> </span>-DISA_H<span class="o">=</span><span class="se">\&quot;</span>riscv/riscv.h<span class="se">\&quot;</span>
+<span class="w">  </span><span class="m">4</span><span class="w"> </span><span class="nv">COMMON_CFLAGS</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>-march<span class="o">=</span>rv32im_zicsr<span class="w"> </span>-mabi<span class="o">=</span>ilp32<span class="w">   </span><span class="c1"># overwrite</span>
+<span class="w">  </span><span class="m">5</span><span class="w"> </span><span class="nv">LDFLAGS</span><span class="w">       </span><span class="o">+=</span><span class="w"> </span>-melf32lriscv<span class="w">                     </span><span class="c1"># overwrite</span>
+<span class="w">  </span><span class="m">6</span><span class="w"> </span>
+<span class="w">  </span><span class="m">7</span><span class="w"> </span><span class="nv">AM_SRCS</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>riscv/nemu/start.S<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="m">8</span><span class="w">            </span>riscv/nemu/cte.c<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="m">9</span><span class="w">            </span>riscv/nemu/trap.S<span class="w"> </span><span class="se">\</span>
+<span class="w"> </span><span class="m">10</span><span class="w">            </span>riscv/nemu/vme.c
+
+<span class="w"> </span>//<span class="w"> </span>abstract-machine/scripts/riscv32-nemu.mk
+</code></pre></div>
+<p>对于架构相关的配置和平台相关的配置，这里关注整个流程的话就看 <code>abstract-machine/scripts/platform/nemu.mk</code></p>
+<div class="highlight"><pre><span></span><code><span class="nv">AM_SRCS</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span>platform/nemu/trm.c<span class="w"> </span><span class="se">\</span>
+<span class="w">           </span>platform/nemu/ioe/ioe.c<span class="w"> </span><span class="se">\</span>
+<span class="w">           </span>platform/nemu/ioe/timer.c<span class="w"> </span><span class="se">\</span>
+<span class="w">           </span>platform/nemu/ioe/input.c<span class="w"> </span><span class="se">\</span>
+<span class="w">           </span>platform/nemu/ioe/gpu.c<span class="w"> </span><span class="se">\</span>
+<span class="w">           </span>platform/nemu/ioe/audio.c<span class="w"> </span><span class="se">\</span>
+<span class="w">           </span>platform/nemu/ioe/disk.c<span class="w"> </span><span class="se">\</span>
+<span class="w">           </span>platform/nemu/mpe.c
+
+<span class="nv">CFLAGS</span><span class="w">    </span><span class="o">+=</span><span class="w"> </span>-fdata-sections<span class="w"> </span>-ffunction-sections
+<span class="nv">LDFLAGS</span><span class="w">   </span><span class="o">+=</span><span class="w"> </span>-T<span class="w"> </span><span class="k">$(</span>AM_HOME<span class="k">)</span>/scripts/linker.ld<span class="w"> </span><span class="se">\</span>
+<span class="w">             </span>--defsym<span class="o">=</span><span class="nv">_pmem_start</span><span class="o">=</span>0x80000000<span class="w"> </span>--defsym<span class="o">=</span><span class="nv">_entry_offset</span><span class="o">=</span>0x0
+<span class="nv">LDFLAGS</span><span class="w">   </span><span class="o">+=</span><span class="w"> </span>--gc-sections<span class="w"> </span>-e<span class="w"> </span>_start
+<span class="nv">NEMUFLAGS</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>-l<span class="w"> </span><span class="k">$(</span>shell<span class="w"> </span>dirname<span class="w"> </span><span class="k">$(</span>IMAGE<span class="k">)</span>.elf<span class="k">)</span>/nemu-log.txt
+<span class="nv">NEMUFLAGS</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>-b
+<span class="nv">NEMUFLAGS</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>-e<span class="w"> </span><span class="k">$(</span>IMAGE<span class="k">)</span>.elf
+
+<span class="nv">CFLAGS</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>-DMAINARGS<span class="o">=</span><span class="se">\&quot;</span><span class="k">$(</span>mainargs<span class="k">)</span><span class="se">\&quot;</span>
+<span class="nv">CFLAGS</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>-I<span class="k">$(</span>AM_HOME<span class="k">)</span>/am/src/platform/nemu/include
+<span class="nf">.PHONY</span><span class="o">:</span><span class="w"> </span><span class="k">$(</span><span class="nv">AM_HOME</span><span class="k">)</span>/<span class="n">am</span>/<span class="n">src</span>/<span class="n">platform</span>/<span class="n">nemu</span>/<span class="n">trm</span>.<span class="n">c</span>
+
+<span class="nf">image</span><span class="o">:</span><span class="w"> </span><span class="k">$(</span><span class="nv">IMAGE</span><span class="k">)</span>.<span class="n">elf</span>
+<span class="w">    </span>@<span class="k">$(</span>OBJDUMP<span class="k">)</span><span class="w"> </span>-d<span class="w"> </span><span class="k">$(</span>IMAGE<span class="k">)</span>.elf<span class="w"> </span>&gt;<span class="w"> </span><span class="k">$(</span>IMAGE<span class="k">)</span>.txt
+<span class="w">    </span>@echo<span class="w"> </span>+<span class="w"> </span>OBJCOPY<span class="w"> </span><span class="s2">&quot;-&gt;&quot;</span><span class="w"> </span><span class="k">$(</span>IMAGE_REL<span class="k">)</span>.bin
+<span class="w">    </span>@<span class="k">$(</span>OBJCOPY<span class="k">)</span><span class="w"> </span>-S<span class="w"> </span>--set-section-flags<span class="w"> </span>.bss<span class="o">=</span>alloc,contents<span class="w"> </span>-O<span class="w"> </span>binary<span class="w"> </span><span class="k">$(</span>IMAGE<span class="k">)</span>.elf<span class="w"> </span><span class="k">$(</span>IMAGE<span class="k">)</span>.bin
+
+<span class="nf">run</span><span class="o">:</span><span class="w"> </span><span class="n">image</span>
+<span class="w">    </span><span class="k">$(</span>MAKE<span class="k">)</span><span class="w"> </span>-C<span class="w"> </span><span class="k">$(</span>NEMU_HOME<span class="k">)</span><span class="w"> </span><span class="nv">ISA</span><span class="o">=</span><span class="k">$(</span>ISA<span class="k">)</span><span class="w"> </span>run<span class="w"> </span><span class="nv">ARGS</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>NEMUFLAGS<span class="k">)</span><span class="s2">&quot;</span><span class="w"> </span><span class="nv">IMG</span><span class="o">=</span><span class="k">$(</span>IMAGE<span class="k">)</span>.bin
+
+<span class="nf">gdb</span><span class="o">:</span><span class="w"> </span><span class="n">image</span>
+<span class="w">    </span><span class="k">$(</span>MAKE<span class="k">)</span><span class="w"> </span>-C<span class="w"> </span><span class="k">$(</span>NEMU_HOME<span class="k">)</span><span class="w"> </span><span class="nv">ISA</span><span class="o">=</span><span class="k">$(</span>ISA<span class="k">)</span><span class="w"> </span>gdb<span class="w"> </span><span class="nv">ARGS</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>NEMUFLAGS<span class="k">)</span><span class="s2">&quot;</span><span class="w"> </span><span class="nv">IMG</span><span class="o">=</span><span class="k">$(</span>IMAGE<span class="k">)</span>.bin
+</code></pre></div>
+<p>最上面 <code>AM_SRCS</code> 的就是要构建的 AM 程序的源文件（一部分）。</p>
+<p>下面就是具体 AM 怎么和 NEMU 相互配合构建。配合 GPT 解释，如果较好地完成了 PA，应该都是配合一些文档资料都能比较熟悉下面的内容。</p>
+<ul>
+<li>
+<p><strong>CFLAGS</strong></p>
+<ul>
+<li><code>-fdata-sections</code> 和 <code>-ffunction-sections</code>：<ul>
+<li>这两个标志告诉编译器将每个函数和数据分别放入不同的段（section）中。这样做的好处是链接器可以通过 <code>--gc-sections</code> 标志来删除未引用的段，从而减小最终生成的二进制文件的大小。</li>
+</ul>
+</li>
+<li><code>-DMAINARGS=\"$(mainargs)\"</code>：<ul>
+<li>这个标志定义了一个宏 <code>MAINARGS</code>，并将其值设置为 <code>$(mainargs)</code> 变量的值。这通常用于传递命令行参数给程序。</li>
+</ul>
+</li>
+<li><code>-I$(AM_HOME)/am/src/platform/nemu/include</code>：<ul>
+<li>这个标志指定了一个头文件搜索路径。编译器会在指定的路径中搜索包含的头文件。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>LDFLAGS</strong></p>
+<ul>
+<li>
+<p><code>-T $(AM_HOME)/scripts/linker.ld</code>：</p>
+<ul>
+<li>这个标志指定了链接脚本的路径。链接脚本（<code>linker.ld</code>）定义了程序的内存布局，包括各个段（如代码段、数据段、BSS段等）在内存中的放置位置。</li>
+</ul>
+</li>
+<li>
+<p><code>--defsym=_pmem_start=0x80000000</code> 和 <code>--defsym=_entry_offset=0x0</code>：</p>
+<ul>
+<li>这两个标志<strong>定义了两个符号</strong>的值。<code>--defsym</code> 用于在链接时定义一个符号的值。</li>
+<li><code>_pmem_start</code> 被定义为 <code>0x80000000</code>，这通常表示程序的物理内存开始地址。在嵌入式系统中，这可能对应于一个特定的内存区域的起始地址。</li>
+<li><code>_entry_offset</code> 被定义为 <code>0x0</code>，这表示程序的入口点（通常是 <code>_start</code> 符号）相对于某个基地址的偏移量。在这里，<code>_entry_offset</code> 被设置为 <code>0x0</code>，意味着入口点就是基地址本身。</li>
+</ul>
+<p>这里看起来有两个 <code>--defsym</code> 标志，但实际上它们定义了两个不同的符号。这并不是错误，而是两个独立的指令，每个指令定义了一个不同的符号。</p>
+</li>
+<li>
+<p><code>--gc-sections</code>：</p>
+<ul>
+<li>这个标志告诉链接器在生成最终的二进制文件时，删除未引用的段。这有助于减小二进制文件的大小，特别是在使用 <code>-fdata-sections</code> 和 <code>-ffunction-sections</code> 时，因为这些标志会生成许多小的段。</li>
+</ul>
+</li>
+<li>
+<p><code>-e _start</code>：</p>
+<ul>
+<li>这个标志指定了程序的入口点。<code>_start</code> 是一个符号，通常在启动文件（如 <code>crt0.S</code> 或类似的文件）中定义，表示程序的起始执行点。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>NEMUFLAGS</strong></p>
+<ul>
+<li>
+<p><code>-l $(shell dirname $(IMAGE).elf)/nemu-log.txt</code>：</p>
+<ul>
+<li>这个标志指定了 NEMU 模拟器的日志文件路径。<code>$(shell dirname $(IMAGE).elf)</code> 会展开为 <code>$(IMAGE).elf</code> 文件所在的目录路径。</li>
+</ul>
+</li>
+<li>
+<p><code>-b</code>：</p>
+<ul>
+<li>这个标志可能是 NEMU 模拟器的一个选项，用于指定二进制模式或其他特定的行为。</li>
+</ul>
+</li>
+<li>
+<p><code>-e $(IMAGE).elf</code>：</p>
+<ul>
+<li>这个标志指定了要执行的 ELF 文件的路径。</li>
+</ul>
+<p><strong>通过这里，也能理解一部分了分层的构建流程了，AM 程序编译好生成 <code>$(IMAGE).elf</code> 后，将这个文件传给 NEMU 程序。（回想自己做 ftrace 的时候看看）。</strong></p>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>这里的那个伪目标有点不知道怎么理解：</p>
+<blockquote>
+<div class="highlight"><pre><span></span><code>.PHONY: $(AM_HOME)/am/src/platform/nemu/trm.c
+</code></pre></div>
+<p>这个指令告诉 make，<code>$(AM_HOME)/am/src/platform/nemu/trm.c</code> 不是一个文件，而是一个伪目标。这通常用于防止 make 错误地认为这个目标是一个文件，并尝试找到它。这在包含多个源文件和目录的 Makefile 中很常见，以确保所有目标都被正确地视为需要构建的目标。</p>
+</blockquote>
+<p><img src="pic/image-20241101212102866.png" alt="image-20241101212102866" style="zoom:50%;" /></p>
+<p>总结，使用伪目标可以确保 <code>make</code> 工具按照我的意图执行构建过程，而不是简单地依赖于文件的存在与否。</p>
+</blockquote>
+<p>剩下的就是构建相关的目标了，应该都是挺好理解的。</p>
+<p><strong>另外补充：am、klib 中的内容是怎么构建的？</strong></p>
+<div class="highlight"><pre><span></span><code><span class="nf">60 LIBS     </span><span class="o">:</span>= <span class="k">$(</span><span class="nv">sort</span> <span class="k">$(</span><span class="nv">LIBS</span><span class="k">)</span> <span class="nv">am</span> <span class="nv">klib</span><span class="k">)</span> <span class="c"># lazy evaluation (&quot;=&quot;) causes infinite recursions</span>
+
+<span class="err">126</span><span class="w"> </span>
+<span class="nf">127 ### Rule (recursive make)</span><span class="o">:</span><span class="w"> </span><span class="n">build</span> <span class="n">a</span> <span class="n">dependent</span> <span class="n">library</span> (<span class="n">am</span><span class="p">,</span> <span class="n">klib</span><span class="p">,</span> ...)
+<span class="nf">128 $(LIBS)</span><span class="o">:</span><span class="w"> </span>%:
+<span class="err">129</span><span class="w">     </span><span class="err">@</span><span class="k">$(</span><span class="nv">MAKE</span><span class="k">)</span><span class="w"> </span><span class="err">-s</span><span class="w"> </span><span class="err">-C</span><span class="w"> </span><span class="k">$(</span><span class="nv">AM_HOME</span><span class="k">)</span><span class="err">/</span><span class="k">$*</span><span class="w"> </span><span class="err">archive</span>
+
+<span class="err">//abstract-machine/Makefile</span>
+</code></pre></div>
+<p><img src="pic/image-20241102213237366.png" alt="image-20241102213237366" style="zoom:50%;" /></p>
+<h3 id="os">OS</h3>
+<p>之后再到 OS 怎么连接到 am 的，猜测应该也是 <code>$(IMAGE).elf</code> ，还是看 <code>Makefile</code></p>
+<div class="highlight"><pre><span></span><code><span class="nv">HAS_NAVY</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span>
+<span class="nv">RAMDISK_FILE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>build/ramdisk.img
+
+<span class="nv">NAME</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>nanos-lite
+<span class="nv">SRCS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">$(</span>shell<span class="w"> </span>find<span class="w"> </span>-L<span class="w"> </span>./src/<span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot;*.c&quot;</span><span class="w"> </span>-o<span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot;*.cpp&quot;</span><span class="w"> </span>-o<span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot;*.S&quot;</span><span class="k">)</span>
+<span class="cp">include $(AM_HOME)/Makefile</span>
+
+<span class="cp">ifeq ($(ARCH),native)</span>
+<span class="nv">ISA</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>am_native
+<span class="cp">else</span>
+<span class="nv">INC_PATH</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>include<span class="w"> </span><span class="k">$(</span>NAVY_HOME<span class="k">)</span>/libs/libc/include
+<span class="cp">endif</span>
+
+<span class="nf">./src/resources.S</span><span class="o">:</span><span class="w"> </span><span class="k">$(</span><span class="nv">RAMDISK_FILE</span><span class="k">)</span>
+<span class="w">    </span>@touch<span class="w"> </span><span class="nv">$@</span>
+
+<span class="cp">ifeq ($(HAS_NAVY),)</span>
+<span class="nv">files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">$(</span>RAMDISK_FILE<span class="k">)</span><span class="w"> </span>src/files.h<span class="w"> </span>src/syscall.h
+<span class="c"># create an empty file if it does not exist</span>
+<span class="k">$(</span><span class="nv">foreach</span> <span class="nv">f</span>,<span class="k">$(</span><span class="nv">files</span><span class="k">)</span>,<span class="k">$(</span><span class="nv">if</span> <span class="k">$(</span><span class="nv">wildcard</span> <span class="k">$</span><span class="nv">f</span><span class="k">)</span>,, <span class="k">$(</span><span class="nv">shell</span> <span class="nv">touch</span> <span class="k">$</span><span class="nv">f</span><span class="k">)))</span>
+<span class="cp">else</span>
+
+<span class="cp">ifeq ($(wildcard $(NAVY_HOME)/libs/libos/src/syscall.h),)</span>
+<span class="w">  </span><span class="k">$(</span><span class="nv">error</span> <span class="k">$$</span><span class="nv">NAVY_HOME</span> <span class="nv">must</span> <span class="nv">be</span> <span class="nv">a</span> <span class="nv">Navy-apps</span> <span class="nv">repo</span><span class="k">)</span>
+<span class="cp">endif</span>
+
+<span class="nf">update</span><span class="o">:</span>
+<span class="w">    </span><span class="k">$(</span>MAKE<span class="k">)</span><span class="w"> </span>-s<span class="w"> </span>-C<span class="w"> </span><span class="k">$(</span>NAVY_HOME<span class="k">)</span><span class="w"> </span><span class="nv">ISA</span><span class="o">=</span><span class="k">$(</span>ISA<span class="k">)</span><span class="w"> </span>ramdisk
+<span class="w">    </span>@ln<span class="w"> </span>-sf<span class="w"> </span><span class="k">$(</span>NAVY_HOME<span class="k">)</span>/build/ramdisk.img<span class="w"> </span><span class="k">$(</span>RAMDISK_FILE<span class="k">)</span>
+<span class="w">    </span>@ln<span class="w"> </span>-sf<span class="w"> </span><span class="k">$(</span>NAVY_HOME<span class="k">)</span>/build/ramdisk.h<span class="w"> </span>src/files.h
+<span class="w">    </span>@ln<span class="w"> </span>-sf<span class="w"> </span><span class="k">$(</span>NAVY_HOME<span class="k">)</span>/libs/libos/src/syscall.h<span class="w"> </span>src/syscall.h
+
+<span class="nf">.PHONY</span><span class="o">:</span><span class="w"> </span><span class="n">update</span>
+<span class="cp">endif</span>
+</code></pre></div>
+<p>上面的内容不难，我自己需要注意的是获取当前 <code>./src/</code> 目录下文件的方式。我已经看到很多种获取要编译的源文件的方式，这里做个简单的总结。</p>
+<div class="highlight"><pre><span></span><code><span class="nv">SRCS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">$(</span>shell<span class="w"> </span>find<span class="w"> </span>-L<span class="w"> </span>./src/<span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot;*.c&quot;</span><span class="w"> </span>-o<span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot;*.cpp&quot;</span><span class="w"> </span>-o<span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot;*.S&quot;</span><span class="k">)</span>
+
+<span class="nv">AM_SRCS</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span>platform/nemu/trm.c<span class="w"> </span><span class="se">\</span>
+<span class="w">           </span>platform/nemu/ioe/ioe.c<span class="w"> </span><span class="se">\</span>
+<span class="w">           </span>platform/nemu/ioe/timer.c<span class="w"> </span><span class="se">\</span>
+<span class="w">           </span>platform/nemu/ioe/input.c<span class="w"> </span><span class="se">\</span>
+<span class="w">           </span>platform/nemu/ioe/gpu.c<span class="w"> </span><span class="se">\</span>
+<span class="w">           </span>platform/nemu/ioe/audio.c<span class="w"> </span><span class="se">\</span>
+<span class="w">           </span>platform/nemu/ioe/disk.c<span class="w"> </span><span class="se">\</span>
+<span class="w">           </span>platform/nemu/mpe.c<span class="w"> </span>
+
+<span class="c"># -------- 变量 --------</span>
+<span class="nv">SOURCES</span><span class="o">=</span><span class="k">$(</span>wildcard<span class="w"> </span><span class="k">$(</span>SRC_DIR<span class="k">)</span>/**/*.c<span class="w"> </span><span class="k">$(</span>SRC_DIR<span class="k">)</span>/*.c<span class="k">)</span>
+<span class="c"># 修改OBJECTS变量，将生成的.o文件放到src/lcthw/build目录中</span>
+<span class="nv">OBJECTS</span><span class="o">=</span><span class="k">$(</span>patsubst<span class="w"> </span>%.c,%.o,<span class="k">$(</span>SOURCES<span class="k">))</span>
+
+<span class="nv">TEST_SRC</span><span class="o">=</span><span class="k">$(</span>wildcard<span class="w"> </span><span class="k">$(</span>TEST_DIR<span class="k">)</span>/*_tests.c<span class="k">)</span>
+<span class="nv">TESTS</span><span class="o">=</span><span class="k">$(</span>patsubst<span class="w"> </span>%.c,%,<span class="k">$(</span>TEST_SRC<span class="k">))</span>
+</code></pre></div>
+<blockquote>
+<p>方法 1: 使用 <code>shell</code> 命令
+<div class="highlight"><pre><span></span><code><span class="nv">SRCS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">$(</span>shell<span class="w"> </span>find<span class="w"> </span>-L<span class="w"> </span>./src/<span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot;*.c&quot;</span><span class="w"> </span>-o<span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot;*.cpp&quot;</span><span class="w"> </span>-o<span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot;*.S&quot;</span><span class="k">)</span>
+</code></pre></div>
+- <strong>优点</strong>：
+  - 能够递归地查找所有匹配的文件，包括子目录。
+  - 可以直接通过 <code>find</code> 命令的参数来匹配多种类型的文件。
+- <strong>缺点</strong>：
+  - 每次 <code>make</code> 运行时都会执行 <code>find</code> 命令，这可能会增加构建时间，尤其是在有大量文件或深层目录结构时。
+  - <code>find</code> 命令可能会受到当前 shell 环境的影响，比如路径别名等。
+</p>
+<p>方法 2: 使用 <code>wildcard</code> 函数 或者结合 <code>wildcard</code> 和 <code>patsubst</code>
+<div class="highlight"><pre><span></span><code><span class="nv">SOURCES</span><span class="o">=</span><span class="k">$(</span>wildcard<span class="w"> </span><span class="k">$(</span>SRC_DIR<span class="k">)</span>/**/*.c<span class="w"> </span><span class="k">$(</span>SRC_DIR<span class="k">)</span>/*.c<span class="k">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="nv">SOURCES</span><span class="o">=</span><span class="k">$(</span>wildcard<span class="w"> </span><span class="k">$(</span>SRC_DIR<span class="k">)</span>/**/*.c<span class="w"> </span><span class="k">$(</span>SRC_DIR<span class="k">)</span>/*.c<span class="k">)</span>
+<span class="nv">OBJECTS</span><span class="o">=</span><span class="k">$(</span>patsubst<span class="w"> </span>%.c,%.o,<span class="k">$(</span>SOURCES<span class="k">))</span>
+</code></pre></div></p>
+<ul>
+<li>
+<p><strong>优点</strong>：</p>
+</li>
+<li>
+<p><code>wildcard</code> 函数可以匹配当前目录和子目录中的文件。</p>
+</li>
+<li><code>patsubst</code> 函数可以方便地将源文件名转换为目标文件名。</li>
+<li>
+<p>语法简单，易于理解和使用。</p>
+</li>
+<li>
+<p><strong>缺点</strong>：</p>
+</li>
+<li>
+<p>不能直接递归地匹配所有子目录，需要手动为每个子目录添加模式匹配。</p>
+</li>
+<li>
+<p><strong>对于深层目录结构，需要为每个目录单独添加模式匹配，这可能会变得繁琐。</strong></p>
+<blockquote>
+<p><strong>有一次移植 <code>FreeRTOS</code> 的时候就遇到这部分的问题，编译的时候一直对于 <code>FreeRTOS</code> 内部的东西符号未定义。</strong>
+</p>
+</blockquote>
+</li>
+</ul>
+<p>方法 3: 手动添加</p>
+<div class="highlight"><pre><span></span><code><span class="nv">AM_SRCS</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span>platform/nemu/trm.c<span class="w"> </span><span class="se">\</span>
+<span class="w">           </span>platform/nemu/ioe/ioe.c<span class="w"> </span><span class="se">\</span>
+<span class="w">           </span>platform/nemu/ioe/timer.c<span class="w"> </span><span class="se">\</span>
+<span class="w">           </span>platform/nemu/ioe/input.c<span class="w"> </span><span class="se">\</span>
+<span class="w">           </span>platform/nemu/ioe/gpu.c<span class="w"> </span><span class="se">\</span>
+<span class="w">           </span>platform/nemu/ioe/audio.c<span class="w"> </span><span class="se">\</span>
+<span class="w">           </span>platform/nemu/ioe/disk.c<span class="w"> </span><span class="se">\</span>
+<span class="w">           </span>platform/nemu/mpe.c<span class="w"> </span>
+</code></pre></div>
+<p>这种就适用文件不多的时候吧。</p>
+<p>哪种方法比较好？
+选择哪种方法取决于具体的项目需求和个人偏好。以下是一些考虑因素：</p>
+<ul>
+<li><strong>性能</strong>：如果项目文件数量非常多，或者目录结构非常深，使用 <code>shell</code> 命令可能会更高效，因为它可以递归地查找所有文件，而不需要为每个子目录单独添加模式匹配。</li>
+<li><strong>可读性</strong>：<code>wildcard</code> 和 <code>patsubst</code> 的组合通常更易于理解和维护，特别是对于 Makefile 的新手来说。</li>
+<li><strong>灵活性</strong>：<code>shell</code> 命令提供了更多的灵活性，可以通过调整 <code>find</code> 命令的参数来匹配不同的文件模式或执行更复杂的文件查找逻辑。</li>
+<li><strong>环境依赖</strong>：<code>shell</code> 命令可能会受到当前 shell 环境的影响，而 <code>wildcard</code> 和 <code>patsubst</code> 函数则更加稳定和可靠。</li>
+</ul>
+<p>如果项目文件数量不多，目录结构也不复杂，使用 <code>wildcard</code> 和 <code>patsubst</code> 的组合可能是一个简单且易于维护的选择。</p>
+<p>如果要处理大量的文件或深层的目录结构，使用 <code>shell</code> 命令可能会更合适，因为它可以递归地查找所有文件，减少手动添加模式匹配的工作量。</p>
+</blockquote>
+<p>另外，这里使用但是 <code>include $(AM_HOME)/Makefile</code>：</p>
+<blockquote>
+<p>在 Makefile 中，<code>include</code> 指令用于包含另一个 Makefile 文件，将其内容合并到当前 Makefile 中。<code>include</code> 指令的行为取决于它前面是否有 <code>-</code>。
+</p>
+<p>无 <code>-</code> 的 <code>include</code>：
+<div class="highlight"><pre><span></span><code><span class="cp">include $(AM_HOME)/Makefile</span>
+</code></pre></div>
+- 当使用没有 <code>-</code> 的 <code>include</code> 指令时，如果指定的文件不存在，<strong><code>make</code> 将会报错并停止执行。</strong>这意味着，<code>include</code> 指令是强制性的，必须包含指定的文件。
+</p>
+<p>有 <code>-</code> 的 <code>include</code>：
+<div class="highlight"><pre><span></span><code><span class="cp">-include $(AM_HOME)/Makefile</span>
+</code></pre></div>
+- 当使用有 <code>-</code> 的 <code>include</code> 指令时，如果指定的文件不存在，<code>make</code> 会忽略这个指令，继续执行后续的指令，不会报错。<code>-</code> 使得 <code>include</code> 指令变得“可选”，即使文件不存在，也不会影响 make 的执行。</p>
+<p>在你提供的代码 <code>include $(AM_HOME)/Makefile</code> 中，没有使用 <code>-</code>，这通常意味着这个包含是必须的。如果 <code>$(AM_HOME)/Makefile</code> 文件不存在，<code>make</code> 将会报错并停止构建过程。这通常用于确保一些关键的构建规则或变量定义被包含进来。</p>
+<p>选择是否使用 <code>-</code> 取决于你的构建逻辑和需求：
+- 如果你希望确保某些 Makefile 片段被包含，无论它们是否存在，可以使用 <code>-include</code>。
+- 如果你希望确保必须包含某些 Makefile 片段，否则构建失败，那么使用 <code>include</code>。</p>
+<p>在你的上下文中，没有使用 <code>-</code> 可能是因为 <code>$(AM_HOME)/Makefile</code> 是构建过程中的关键文件，需要确保其存在。</p>
+</blockquote>
+<p>再回到整个构建流程，获取了 SRCS 变量后，确实又是要用到：<code>include $(AM_HOME)/Makefile</code></p>
+<div class="highlight"><pre><span></span><code><span class="c">### Collect the files to be linked: object files (`.o`) and libraries (`.a`)</span>
+<span class="nv">OBJS</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="k">$(</span>addprefix<span class="w"> </span><span class="k">$(</span>DST_DIR<span class="k">)</span>/,<span class="w"> </span><span class="k">$(</span>addsuffix<span class="w"> </span>.o,<span class="w"> </span><span class="k">$(</span>basename<span class="w"> </span><span class="k">$(</span>SRCS<span class="k">))))</span>
+<span class="nv">LIBS</span><span class="w">     </span><span class="o">:=</span><span class="w"> </span><span class="k">$(</span>sort<span class="w"> </span><span class="k">$(</span>LIBS<span class="k">)</span><span class="w"> </span>am<span class="w"> </span>klib<span class="k">)</span><span class="w"> </span><span class="c1"># lazy evaluation (&quot;=&quot;) causes infinite recursions</span>
+<span class="nv">LINKAGE</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="k">$(</span>OBJS<span class="k">)</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="k">$(</span>addsuffix<span class="w"> </span>-<span class="k">$(</span>ARCH<span class="k">)</span>.a,<span class="w"> </span><span class="k">$(</span>join<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="k">$(</span>addsuffix<span class="w"> </span>/build/,<span class="w"> </span><span class="k">$(</span>addprefix<span class="w"> </span><span class="k">$(</span>AM_HOME<span class="k">)</span>/,<span class="w"> </span><span class="k">$(</span>LIBS<span class="k">)))</span>,<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="k">$(</span>LIBS<span class="k">)</span><span class="w"> </span><span class="o">))</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="w">  </span><span class="m">1</span><span class="w"> </span>NAME<span class="w">     </span>:<span class="o">=</span><span class="w"> </span>am<span class="w">                                                                                                              </span>
+<span class="w">  </span><span class="m">2</span><span class="w"> </span><span class="nv">SRCS</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="k">$(</span>addprefix<span class="w"> </span>src/,<span class="w"> </span><span class="k">$(</span>AM_SRCS<span class="k">))</span>
+<span class="w">  </span><span class="m">3</span><span class="w"> </span><span class="nv">INC_PATH</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="k">$(</span>AM_HOME<span class="k">)</span>/am/src
+<span class="w">  </span><span class="m">4</span><span class="w"> </span>
+<span class="w">  </span><span class="m">5</span><span class="w"> </span>include<span class="w"> </span><span class="k">$(</span>AM_HOME<span class="k">)</span>/Makefile
+
+<span class="err">//</span><span class="w"> </span><span class="err">以这个的SRCS</span><span class="w"> </span><span class="err">abstract-machine/am/Makefile</span><span class="w"> </span><span class="err">为例</span>
+</code></pre></div>
+<p>再配合前面的 <code>nemu.mk</code> 中的 <code>AM_SRCS</code></p>
+<div class="highlight"><pre><span></span><code> 1 include $(AM_HOME)/scripts/isa/riscv.mk
+  2 include $(AM_HOME)/scripts/platform/nemu.mk
+  3 CFLAGS  += -DISA_H=\&quot;riscv/riscv.h\&quot;
+  4 COMMON_CFLAGS += -march=rv32im_zicsr -mabi=ilp32   # overwrite
+  5 LDFLAGS       += -melf32lriscv                     # overwrite
+  6 
+  7 AM_SRCS += riscv/nemu/start.S \
+  8            riscv/nemu/cte.c \
+  9            riscv/nemu/trap.S \
+ 10            riscv/nemu/vme.c   
+
+// abstract-machine/scripts/platform/nemu.mk
+</code></pre></div>
+<h3 id="basic-summary">Basic Summary</h3>
+<h4 id="os_1">OS</h4>
+<p>到这里，可以直接 <code>make -nB</code> 看看前面的 NEMU AM OS 的 make 过程：</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Building nanos-lite-run [riscv32-nemu]</span>
+touch<span class="w"> </span>src/resources.S
+riscv64-linux-gnu-gcc<span class="w"> </span>-MMD<span class="w"> </span>-I./include<span class="w"> </span>-IAM/am/include/<span class="w"> </span>-IAM/klib/include/<span class="w"> </span>-Iinclude<span class="w"> </span>-I/home/jai/ysyx-workbench/navy-apps/libs/libc/include<span class="w"> </span>-fno-pic<span class="w"> </span>-march<span class="o">=</span>rv64g<span class="w"> </span>-mcmodel<span class="o">=</span>medany<span class="w"> </span>-mstrict-align<span class="w"> </span>-march<span class="o">=</span>rv32im_zicsr<span class="w"> </span>-mabi<span class="o">=</span>ilp32<span class="w">    </span>-O0<span class="w"> </span>-c<span class="w"> </span>-o<span class="w"> </span>./build/riscv32-nemu/./src/resources.o<span class="w"> </span>./src/resources.S
+riscv64-linux-gnu-gcc<span class="w"> </span>-I./include<span class="w"> </span>-IAM/am/include/<span class="w"> </span>-IAM/klib/include/<span class="w"> </span>-Iinclude<span class="w"> </span>-I/home/jai/ysyx-workbench/navy-apps/libs/libc/include<span class="w"> </span>-c<span class="w"> </span>-o<span class="w"> </span>./build/riscv32-nemu/./src/device.o<span class="w"> </span>./src/device.c
+riscv64-linux-gnu-gcc<span class="w"> </span>-I./include<span class="w"> </span>-IAM/am/include/<span class="w"> </span>-IAM/klib/include/<span class="w"> </span>-Iinclude<span class="w"> </span>-I/home/jai/ysyx-workbench/navy-apps/libs/libc/include<span class="w"> </span>-c<span class="w"> </span>-o<span class="w"> </span>./build/riscv32-nemu/./src/syscall.o<span class="w"> </span>./src/syscall.c
+riscv64-linux-gnu-gcc<span class="w"> </span>-I./include<span class="w"> </span>-IAM/am/include/<span class="w"> </span>-IAM/klib/include/<span class="w"> </span>-Iinclude<span class="w"> </span>-I/home/jai/ysyx-workbench/navy-apps/libs/libc/include<span class="w"> </span>-c<span class="w"> </span>-o<span class="w"> </span>./build/riscv32-nemu/./src/proc.o<span class="w"> </span>./src/proc.c
+riscv64-linux-gnu-gcc<span class="w"> </span>-I./include<span class="w"> </span>-IAM/am/include/<span class="w"> </span>-IAM/klib/include/<span class="w"> </span>-Iinclude<span class="w"> </span>-I/home/jai/ysyx-workbench/navy-apps/libs/libc/include<span class="w"> </span>-c<span class="w"> </span>-o<span class="w"> </span>./build/riscv32-nemu/./src/mm.o<span class="w"> </span>./src/mm.c
+riscv64-linux-gnu-gcc<span class="w"> </span>-I./include<span class="w"> </span>-IAM/am/include/<span class="w"> </span>-IAM/klib/include/<span class="w"> </span>-Iinclude<span class="w"> </span>-I/home/jai/ysyx-workbench/navy-apps/libs/libc/include<span class="w"> </span>-c<span class="w"> </span>-o<span class="w"> </span>./build/riscv32-nemu/./src/main.o<span class="w"> </span>./src/main.c
+riscv64-linux-gnu-gcc<span class="w"> </span>-I./include<span class="w"> </span>-IAM/am/include/<span class="w"> </span>-IAM/klib/include/<span class="w"> </span>-Iinclude<span class="w"> </span>-I/home/jai/ysyx-workbench/navy-apps/libs/libc/include<span class="w"> </span>-c<span class="w"> </span>-o<span class="w"> </span>./build/riscv32-nemu/./src/irq.o<span class="w"> </span>./src/irq.c
+riscv64-linux-gnu-gcc<span class="w"> </span>-I./include<span class="w"> </span>-IAM/am/include/<span class="w"> </span>-IAM/klib/include/<span class="w"> </span>-Iinclude<span class="w"> </span>-I/home/jai/ysyx-workbench/navy-apps/libs/libc/include<span class="w"> </span>-c<span class="w"> </span>-o<span class="w"> </span>./build/riscv32-nemu/./src/fs.o<span class="w"> </span>./src/fs.c
+riscv64-linux-gnu-gcc<span class="w"> </span>-I./include<span class="w"> </span>-IAM/am/include/<span class="w"> </span>-IAM/klib/include/<span class="w"> </span>-Iinclude<span class="w"> </span>-I/home/jai/ysyx-workbench/navy-apps/libs/libc/include<span class="w"> </span>-c<span class="w"> </span>-o<span class="w"> </span>./build/riscv32-nemu/./src/loader.o<span class="w"> </span>./src/loader.c
+riscv64-linux-gnu-gcc<span class="w"> </span>-I./include<span class="w"> </span>-IAM/am/include/<span class="w"> </span>-IAM/klib/include/<span class="w"> </span>-Iinclude<span class="w"> </span>-I/home/jai/ysyx-workbench/navy-apps/libs/libc/include<span class="w"> </span>-c<span class="w"> </span>-o<span class="w"> </span>./build/riscv32-nemu/./src/ramdisk.o<span class="w"> </span>./src/ramdisk.c
+</code></pre></div>
+<p>这部分获取的是 OS 的代码进行编译，自己再配合 Makefile 基本就能懂。</p>
+<h4 id="amam-kilb">AM（am + kilb）</h4>
+<div class="highlight"><pre><span></span><code>make<span class="w"> </span>-s<span class="w"> </span>-C<span class="w"> </span>/home/jai/ysyx-workbench/abstract-machine/am<span class="w"> </span>archive
+
+<span class="c1"># Building am-archive [riscv32-nemu]</span>
+riscv64-linux-gnu-gcc<span class="w">  </span>-c<span class="w"> </span>-o<span class="w"> </span>AM/am/build/riscv32-nemu/src/platform/nemu/trm.o<span class="w"> </span>AM/am/src/platform/nemu/trm.c
+riscv64-linux-gnu-gcc<span class="w">  </span>-c<span class="w"> </span>-o<span class="w"> </span>AM/am/build/riscv32-nemu/src/platform/nemu/ioe/ioe.o<span class="w"> </span>AM/am/src/platform/nemu/ioe/ioe.c
+riscv64-linux-gnu-gcc<span class="w">  </span>-c<span class="w"> </span>-o<span class="w"> </span>AM/am/build/riscv32-nemu/src/platform/nemu/ioe/timer.o<span class="w"> </span>AM/am/src/platform/nemu/ioe/timer.c
+riscv64-linux-gnu-gcc<span class="w">  </span>-c<span class="w"> </span>-o<span class="w"> </span>AM/am/build/riscv32-nemu/src/platform/nemu/ioe/input.o<span class="w"> </span>AM/am/src/platform/nemu/ioe/input.c
+riscv64-linux-gnu-gcc<span class="w">  </span>-c<span class="w"> </span>-o<span class="w"> </span>AM/am/build/riscv32-nemu/src/platform/nemu/ioe/gpu.o<span class="w"> </span>AM/am/src/platform/nemu/ioe/gpu.c
+riscv64-linux-gnu-gcc<span class="w">  </span>-c<span class="w"> </span>-o<span class="w"> </span>AM/am/build/riscv32-nemu/src/platform/nemu/ioe/audio.o<span class="w"> </span>AM/am/src/platform/nemu/ioe/audio.c
+riscv64-linux-gnu-gcc<span class="w">  </span>-c<span class="w"> </span>-o<span class="w"> </span>AM/am/build/riscv32-nemu/src/platform/nemu/ioe/disk.o<span class="w"> </span>AM/am/src/platform/nemu/ioe/disk.c
+riscv64-linux-gnu-gcc<span class="w">  </span>-c<span class="w"> </span>-o<span class="w"> </span>AM/am/build/riscv32-nemu/src/platform/nemu/mpe.o<span class="w"> </span>AM/am/src/platform/nemu/mpe.c
+riscv64-linux-gnu-gcc<span class="w"> </span>-c<span class="w"> </span>-o<span class="w"> </span>AM/am/build/riscv32-nemu/src/riscv/nemu/start.o<span class="w"> </span>AM/am/src/riscv/nemu/start.S
+riscv64-linux-gnu-gcc<span class="w"> </span>-c<span class="w"> </span>-o<span class="w"> </span>AM/am/build/riscv32-nemu/src/riscv/nemu/cte.o<span class="w"> </span>AM/am/src/riscv/nemu/cte.c
+riscv64-linux-gnu-gcc<span class="w"> </span>-O0<span class="w"> </span>-c<span class="w"> </span>-o<span class="w"> </span>AM/am/build/riscv32-nemu/src/riscv/nemu/trap.o<span class="w"> </span>AM/am/src/riscv/nemu/trap.S
+riscv64-linux-gnu-gcc<span class="w"> </span>-c<span class="w"> </span>-o<span class="w"> </span>AM/am/build/riscv32-nemu/src/riscv/nemu/vme.o<span class="w"> </span>AM/am/src/riscv/nemu/vme.c
+
+riscv64-linux-gnu-ar<span class="w"> </span>rcs<span class="w"> </span>AM/am/build/am-riscv32-nemu.a<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>AM/am/build/riscv32-nemu/src/platform/nemu/trm.o<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>AM/am/build/riscv32-nemu/src/platform/nemu/ioe/ioe.o<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>AM/am/build/riscv32-nemu/src/platform/nemu/ioe/timer.o<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>AM/am/build/riscv32-nemu/src/platform/nemu/ioe/input.o<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>AM/am/build/riscv32-nemu/src/platform/nemu/ioe/gpu.o<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>AM/am/build/riscv32-nemu/src/platform/nemu/ioe/audio.o<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>AM/am/build/riscv32-nemu/src/platform/nemu/ioe/disk.o<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>AM/am/build/riscv32-nemu/src/platform/nemu/mpe.o<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>AM/am/build/riscv32-nemu/src/riscv/nemu/start.o<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>AM/am/build/riscv32-nemu/src/riscv/nemu/cte.o<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>AM/am/build/riscv32-nemu/src/riscv/nemu/trap.o<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>AM/am/build/riscv32-nemu/src/riscv/nemu/vme.o
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># Building klib-archive [riscv32-nemu]</span>
+riscv64-linux-gnu-gcc<span class="w"> </span>-c<span class="w"> </span>-o<span class="w"> </span>AM/klib/build/riscv32-nemu/src/int64.o<span class="w"> </span>AM/klib/src/int64.c
+riscv64-linux-gnu-gcc<span class="w"> </span>-c<span class="w"> </span>-o<span class="w"> </span>AM/klib/build/riscv32-nemu/src/stdlib.o<span class="w"> </span>AM/klib/src/stdlib.c
+riscv64-linux-gnu-gcc<span class="w"> </span>-c<span class="w"> </span>-o<span class="w"> </span>AM/klib/build/riscv32-nemu/src/cpp.o<span class="w"> </span>AM/klib/src/cpp.c
+riscv64-linux-gnu-gcc<span class="w"> </span>-c<span class="w"> </span>-o<span class="w"> </span>AM/klib/build/riscv32-nemu/src/string.o<span class="w"> </span>AM/klib/src/string.c
+riscv64-linux-gnu-gcc<span class="w"> </span>-c<span class="w"> </span>-o<span class="w"> </span>AM/klib/build/riscv32-nemu/src/stdio.o<span class="w"> </span>AM/klib/src/stdio.c
+riscv64-linux-gnu-ar<span class="w"> </span>rcs<span class="w"> </span>AM/klib/build/klib-riscv32-nemu.a<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>AM/klib/build/riscv32-nemu/src/int64.o<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>AM/klib/build/riscv32-nemu/src/stdlib.o<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>AM/klib/build/riscv32-nemu/src/cpp.o<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>AM/klib/build/riscv32-nemu/src/string.o<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>AM/klib/build/riscv32-nemu/src/stdio.o
+
+riscv64-linux-gnu-ld<span class="w"> </span>-z<span class="w"> </span>noexecstack<span class="w"> </span>-melf64lriscv<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-T<span class="w"> </span>AM/scripts/linker.ld<span class="w"> </span>--defsym<span class="o">=</span><span class="nv">_pmem_start</span><span class="o">=</span>0x80000000<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--defsym<span class="o">=</span><span class="nv">_entry_offset</span><span class="o">=</span>0x0<span class="w"> </span>--gc-sections<span class="w"> </span>-e<span class="w"> </span>_start<span class="w"> </span>-melf32lriscv<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-o<span class="w"> </span>./build/nanos-lite-riscv32-nemu.elf<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--start-group<span class="w"> </span>resources.o<span class="w"> </span>device.o<span class="w"> </span>syscall.o<span class="w"> </span>proc.o<span class="w"> </span>mm.o<span class="w"> </span>main.o<span class="w"> </span>irq.o<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>fs.o<span class="w"> </span>loader.o<span class="w"> </span>ramdisk.o<span class="w"> </span>am-riscv32-nemu.a<span class="w"> </span>klib-riscv32-nemu.a<span class="w"> </span>--end-group
+</code></pre></div>
+<p><strong>gcc 将这部分编译成目标文件后，使用 ar 将程序依赖库编译打包成归档文件。</strong></p>
+<p><strong>再通过链接脚本对整个可执行文件进行布局，生成可执行文件。</strong></p>
+<div class="highlight"><pre><span></span><code><span class="nb">echo</span><span class="w"> </span><span class="se">\#</span><span class="w"> </span>Creating<span class="w"> </span>image<span class="w"> </span><span class="o">[</span>riscv32-nemu<span class="o">]</span>
+riscv64-linux-gnu-objdump<span class="w"> </span>-d<span class="w"> </span>
+<span class="w">    </span>nanos-lite-riscv32-nemu.elf<span class="w"> </span>&gt;<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>nanos-lite-riscv32-nemu.txt
+<span class="nb">echo</span><span class="w"> </span>+<span class="w"> </span>OBJCOPY<span class="w"> </span><span class="s2">&quot;-&gt;&quot;</span><span class="w"> </span>build/nanos-lite-riscv32-nemu.bin
+riscv64-linux-gnu-objcopy<span class="w"> </span>-S<span class="w"> </span>
+<span class="w">    </span>--set-section-flags<span class="w"> </span>.bss<span class="o">=</span>alloc,contents<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-O<span class="w"> </span>binary<span class="w"> </span>nanos-lite-riscv32-nemu.elf<span class="w"> </span>nanos-lite-riscv32-nemu.bin
+</code></pre></div>
+<blockquote>
+<p><code>.elf</code> 文件（Executable and Linkable Format）是一种标准文件格式，用于存储编译后的目标代码、可执行代码或可重定位代码。它包含了程序的文本（代码）、数据、符号表、重定位信息等，是链接器用于生成最终可执行文件的中间产物。</p>
+<p>而 <code>.bin</code> 文件（Binary File）是一种二进制文件，它直接包含了可以在硬件上运行的机器代码。<code>.bin</code> 文件通常不包含任何额外的元数据或重定位信息，它是一个纯净的、可直接被硬件执行的文件。</p>
+<p>在嵌入式系统或裸机编程中，通常需要将 <code>.elf</code> 文件转换为 <code>.bin</code> 文件，原因包括：</p>
+<ol>
+<li>
+<p><strong>简化文件内容</strong>：<code>.elf</code> 文件包含了许多对嵌入式系统不必要的信息，如调试信息、符号表等。<code>.bin</code> 文件只包含实际的机器代码和数据，没有这些额外信息，因此文件更小，适合存储和传输。</p>
+</li>
+<li>
+<p><strong>直接执行</strong>：在某些情况下，嵌入式系统的启动加载器（bootloader）可能只能理解和执行 <code>.bin</code> 文件。<code>.bin</code> 文件的格式更简单，更容易被硬件直接加载和执行。</p>
+</li>
+<li>
+<p><strong>内存布局</strong>：<code>.elf</code> 文件中的数据和代码可能需要在内存中重新布局以适应特定的硬件架构。使用 <code>objcopy</code> 工具可以调整内存布局，确保代码和数据被放置在正确的内存地址。</p>
+</li>
+<li>
+<p><strong>去除不必要的段</strong>：<code>.elf</code> 文件可能包含一些在最终产品中不需要的段，如 <code>.bss</code> 段（未初始化的数据）。使用 <code>objcopy</code> 可以去除这些段，减少最终二进制文件的大小。</p>
+</li>
+<li>
+<p><strong>兼容性</strong>：不同的目标系统可能需要不同格式的二进制文件。<code>objcopy</code> 工具提供了灵活性，可以生成适合特定系统或处理器架构的二进制文件。</p>
+</li>
+</ol>
+<p>在你提供的命令中，<code>riscv64-linux-gnu-objcopy</code> 工具被用来从 <code>.elf</code> 文件生成 <code>.bin</code> 文件，并且指定了一些特定的选项：</p>
+<ul>
+<li><code>-S</code>：去除所有符号信息。</li>
+<li><code>--set-section-flags .bss=alloc,contents</code>：设置 <code>.bss</code> 段的属性，<code>alloc</code> 表示为该段分配空间，<code>contents</code> 表示包含该段的内容。</li>
+<li><code>-O binary</code>：指定输出格式为二进制。</li>
+</ul>
+<p>这些步骤确保了生成的 <code>.bin</code> 文件是适合目标系统使用的，并且去除了不必要的信息，优化了文件大小和性能。</p>
+</blockquote>
+<h4 id="nemu_1">NEMU</h4>
+<div class="highlight"><pre><span></span><code>make<span class="w"> </span>-C<span class="w"> </span>/home/jai/ysyx-workbench/nemu<span class="w"> </span><span class="nv">ISA</span><span class="o">=</span>riscv32<span class="w"> </span>run<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="nv">ARGS</span><span class="o">=</span><span class="s2">&quot;-l /home/jai/ysyx-workbench/nanos-lite/build/nemu-log.txt \</span>
+<span class="s2">    -b -e /home/jai/ysyx-workbench/nanos-lite/build/nanos-lite-riscv32-nemu.elf&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="nv">IMG</span><span class="o">=</span>/home/jai/ysyx-workbench/nanos-lite/build/nanos-lite-riscv32-nemu.bin
+
+make<span class="o">[</span><span class="m">1</span><span class="o">]</span>:<span class="w"> </span>Entering<span class="w"> </span>directory<span class="w"> </span><span class="s1">&#39;/home/jai/ysyx-workbench/nemu&#39;</span>
+gcc<span class="w"> </span>-c<span class="w"> </span>-o<span class="w"> </span>build/obj-riscv32-nemu-interpreter/src/device/device.o<span class="w"> </span>src/device/device.c
+gcc<span class="w"> </span>-c<span class="w"> </span>-o<span class="w"> </span>build/obj-riscv32-nemu-interpreter/src/device/alarm.o<span class="w"> </span>src/device/alarm.c
+<span class="w">    </span>......<span class="o">(</span>很多.c文件编译成.o文件<span class="o">)</span>
+gcc<span class="w"> </span>-c<span class="w"> </span>-o<span class="w"> </span>build/obj-riscv32-nemu-interpreter/src/memory/vaddr.o<span class="w"> </span>src/memory/vaddr.c
+gcc<span class="w"> </span>-c<span class="w"> </span>-o<span class="w"> </span>build/obj-riscv32-nemu-interpreter/src/memory/paddr.o<span class="w"> </span>src/memory/paddr.c
+g++<span class="w"> </span>-o<span class="w"> </span>/home/jai/ysyx-workbench/nemu/build/riscv32-nemu-interpreter<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>/home/jai/ysyx-workbench/nemu/build/obj-riscv32-nemu-interpreter/src/device/device.o<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>/home/jai/ysyx-workbench/nemu/build/obj-riscv32-nemu-interpreter/src/device/alarm.o<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>...<span class="o">(</span>上面的.o文件<span class="o">)</span>
+<span class="w">    </span>NEMU/build/obj-riscv32-nemu-interpreter/src/memory/vaddr.o<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>NEMU/build/obj-riscv32-nemu-interpreter/src/memory/paddr.o<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-O2<span class="w"> </span>-O2<span class="w">  </span>-Og<span class="w"> </span>-ggdb3<span class="w">   </span>-lSDL2<span class="w"> </span>-lreadline<span class="w"> </span>-ldl<span class="w"> </span>-pie
+
+//执行：
+/home/jai/ysyx-workbench/nemu/build/riscv32-nemu-interpreter<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-l<span class="w"> </span>/home/jai/ysyx-workbench/nanos-lite/build/nemu-log.txt<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-b<span class="w"> </span>-e<span class="w"> </span>/home/jai/ysyx-workbench/nanos-lite/build/nanos-lite-riscv32-nemu.elf<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>/home/jai/ysyx-workbench/nanos-lite/build/nanos-lite-riscv32-nemu.bin
+</code></pre></div>
+<p>编译好 NEMU 的源代码，然后打包成 <code>riscv32-nemu-interpreter</code>，其作为一个C程序，接受命令行传进来的参数，使用各种参数（<code>-b -l -e</code>）接收镜像文件。</p>
+<h3 id="app">APP</h3>
+<p>在前面构建好流程后，在这上的应用程序就是以另一种方式装载进 OS 了：<code>nanos-lite/src/proc.c</code> 、<code>nanos-lite/src/loader.c</code></p>
+<div class="highlight"><pre><span></span><code><span class="k">static</span><span class="w"> </span><span class="kt">uintptr_t</span><span class="w"> </span><span class="n">loader</span><span class="p">(</span><span class="n">PCB</span><span class="w"> </span><span class="o">*</span><span class="n">pcb</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">filename</span><span class="p">)</span><span class="w"> </span>
+<span class="kt">void</span><span class="w"> </span><span class="n">naive_uload</span><span class="p">(</span><span class="n">PCB</span><span class="w"> </span><span class="o">*</span><span class="n">pcb</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">filename</span><span class="p">)</span>
+<span class="kt">void</span><span class="w"> </span><span class="n">context_uload</span><span class="p">(</span><span class="n">PCB</span><span class="w"> </span><span class="o">*</span><span class="n">pcb</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">filename</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="k">const</span><span class="w"> </span><span class="n">argv</span><span class="p">[],</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="k">const</span><span class="w"> </span><span class="n">envp</span><span class="p">[])</span>
+</code></pre></div>
+<p>使用不同的进程 loader 装载不同的应用。</p>
+<p>这里就不展开分析 <code>navy-apps/Makefile</code> ，其内容和 AM 的很像。</p>
+<div class="highlight"><pre><span></span><code><span class="nf">118 ### Rule (recursive make)</span><span class="o">:</span><span class="w"> </span><span class="n">build</span> <span class="n">dependent</span> <span class="n">libraries</span> (<span class="n">libc</span><span class="p">,</span> <span class="n">libos</span><span class="p">,</span> ...)
+<span class="nf">119 libs</span><span class="o">:</span>
+<span class="err">120</span><span class="w">     </span><span class="err">@for</span><span class="w"> </span><span class="err">t</span><span class="w"> </span><span class="err">in</span><span class="w"> </span><span class="k">$(</span><span class="nv">LIBS</span><span class="k">)</span><span class="err">;</span><span class="w"> </span><span class="err">do</span><span class="w"> </span><span class="k">$(</span><span class="nv">MAKE</span><span class="k">)</span><span class="w"> </span><span class="err">-s</span><span class="w"> </span><span class="err">-C</span><span class="w"> </span><span class="k">$(</span><span class="nv">NAVY_HOME</span><span class="k">)</span><span class="err">/libs/</span><span class="k">$$</span><span class="err">t</span><span class="w"> </span><span class="err">archive;</span><span class="w"> </span><span class="err">done</span>
+<span class="err">121</span><span class="w"> </span>
+<span class="nf">122 ### Rule (link)</span><span class="o">:</span><span class="w"> </span><span class="n">objects</span> (`*.<span class="n">o</span>`) <span class="n">and</span> <span class="n">libraries</span> (`*.<span class="n">a</span>`) -&gt; `<span class="k">$(</span><span class="nv">APP</span><span class="k">)</span>`<span class="p">,</span> <span class="n">the</span> <span class="n">final</span> <span class="n">ELF</span> <span class="n">binary</span> <span class="n">to</span> <span class="n">be</span> <span class="n">packed</span> <span class="n">into</span> <span class="n">application</span> (<span class="n">ld</span>)
+<span class="nf">123 $(APP)</span><span class="o">:</span><span class="w"> </span><span class="k">$(</span><span class="nv">OBJS</span><span class="k">)</span> <span class="n">libs</span>
+<span class="err">124</span><span class="w">     </span><span class="err">@echo</span><span class="w"> </span><span class="err">+</span><span class="w"> </span><span class="err">LD</span><span class="w"> </span><span class="s2">&quot;-&gt;&quot;</span><span class="w"> </span><span class="k">$(</span><span class="nv">shell</span> <span class="nv">realpath</span> <span class="k">$</span>@ <span class="nv">--relative-to</span> <span class="nv">.</span><span class="k">)</span>
+<span class="err">125</span><span class="w">     </span><span class="err">@</span><span class="k">$(</span><span class="nv">LD</span><span class="k">)</span><span class="w"> </span><span class="k">$(</span><span class="nv">LDFLAGS</span><span class="k">)</span><span class="w"> </span><span class="err">-o</span><span class="w"> </span><span class="k">$@</span><span class="w"> </span><span class="k">$(</span><span class="nv">WL</span><span class="k">)</span><span class="err">--start-group</span><span class="w"> </span><span class="k">$(</span><span class="nv">LINKAGE</span><span class="k">)</span><span class="w"> </span><span class="k">$(</span><span class="nv">WL</span><span class="k">)</span><span class="err">--end-group</span>
+</code></pre></div>
+<p>从这里开始再一步步向下分析编译的内容即可。</p>
+<h3 id="_2">讲义答案</h3>
+<blockquote>
+<p>在让NEMU运行客户程序之前, 我们需要将客户程序的代码编译成可执行文件. 需要说明的是, 我们不能使用gcc的默认选项直接编译, 因为默认选项会根据GNU/Linux的运行时环境将代码编译成运行在GNU/Linux下的可执行文件. 但此时的NEMU并不能为客户程序提供GNU/Linux的运行时环境, 在NEMU中无法正确运行上述可执行文件, 因此我们不能使用gcc的默认选项来编译用户程序.</p>
+<p>解决这个问题的方法是<a href="http://en.wikipedia.org/wiki/Cross_compiler">交叉编译</a>. 我们需要在GNU/Linux下根据AM的运行时环境编译出能够在<code>$ISA-nemu</code>这个新环境中运行的可执行文件. 为了不让链接器ld使用默认的方式链接, 我们还需要提供描述<code>$ISA-nemu</code>的运行时环境的链接脚本. AM的框架代码已经把相应的配置准备好了, 上述编译和链接选项主要位于<code>abstract-machine/Makefile</code> 以及<code>abstract-machine/scripts/</code>目录下的相关<code>.mk</code>文件中. 编译生成一个可以在NEMU的运行时环境上运行的程序的过程大致如下:</p>
+<ul>
+<li>gcc将<code>$ISA-nemu</code>的AM实现源文件编译成目标文件, 然后通过ar将这些目标文件作为一个库, 打包成一个归档文件<code>abstract-machine/am/build/am-$ISA-nemu.a</code></li>
+<li>gcc把应用程序源文件(如<code>am-kernels/tests/cpu-tests/tests/dummy.c</code>)编译成目标文件</li>
+<li>通过gcc和ar把程序依赖的运行库(如<code>abstract-machine/klib/</code>)也编译并打包成归档文件</li>
+<li>根据Makefile文件<code>abstract-machine/scripts/$ISA-nemu.mk</code>中的指示, 让ld根据链接脚本<code>abstract-machine/scripts/linker.ld</code>, 将上述目标文件和归档文件链接成可执行文件</li>
+</ul>
+<p><strong>根据上述链接脚本的指示, 可执行程序重定位后的节从<code>0x100000</code>或<code>0x80000000</code>开始 (取决于<code>_pmem_start</code>和<code>_entry_offset</code>的值), 首先是<code>.text</code>节, 其中又以<code>abstract-machine/am/src/$ISA/nemu/start.S</code>中自定义的<code>entry</code>节开始, 然后接下来是其它目标文件的<code>.text</code>节. 这样, 可执行程序起始处总是放置<code>start.S</code>的代码, 而不是其它代码, 保证客户程序总能从<code>start.S</code>开始正确执行. 链接脚本也定义了其它节(包括<code>.rodata</code>, <code>.data</code>, <code>.bss</code>)的链接顺序, 还定义了一些关于位置信息的符号, 包括每个节的末尾, 栈顶位置, 堆区的起始和末尾.</strong></p>
+<p>我们对编译得到的可执行文件的行为进行简单的梳理:</p>
+<ol>
+<li>第一条指令从<code>abstract-machine/am/src/$ISA/nemu/start.S</code>开始, 设置好栈顶之后就跳转到<code>abstract-machine/am/src/platform/nemu/trm.c</code>的<code>_trm_init()</code>函数处执行.</li>
+<li>在<code>_trm_init()</code>中调用<code>main()</code>函数执行程序的主体功能, <code>main()</code>函数还带一个参数, 目前我们暂时不会用到, 后面我们再介绍它.</li>
+<li>从<code>main()</code>函数返回后, 调用<code>halt()</code>结束运行.</li>
+</ol>
+<p>有了TRM这个简单的运行时环境, 我们就可以很容易地在上面运行各种"简单"的程序了. 当然, 我们也可以运行"不简单"的程序: 我们可以实现任意复杂的算法, 甚至是各种理论上可计算的问题, 都可以在TRM上解决.</p>
+</blockquote>
+<p><a href="https://ysyx.oscc.cc/docs/ics-pa/2.3.html#rtfsc-3">程序, 运行时环境与AM  RTFSC(3)</a></p>
+<h2 id="makefile">遇到的一些Makefile</h2>
+<h3 id="q1">Q1</h3>
+<p>对于这部分的makefile，我常常看到OBJS      = $(addprefix $(DST_DIR)/, $(addsuffix .o, $(basename $(SRCS)))) 这种直接将.c文件转为.o文件不用经过编译的吗？不用调用gcc编译的吗？ 我有点迷糊</p>
+<ol>
+<li>
+<p><strong>关于 <code>%</code> 的问题：</strong></p>
+<p>在 Makefile 中，<code>%</code> 是一个特殊的自动变量，它代表规则中的目标文件（<code>$@</code>）的名称部分。当你在规则中使用 <code>%</code> 时，Make 会自动将其替换为匹配模式中的目标文件名。例如，如果你有一个规则：</p>
+<div class="highlight"><pre><span></span><code><span class="nf">$(DST_DIR)/%.o</span><span class="o">:</span><span class="w"> </span>%.<span class="n">c</span>
+</code></pre></div>
+<p>这个规则可以匹配任何以 <code>.c</code> 结尾的文件，并生成一个同名但以 <code>.o</code> 结尾的目标文件。如果目标文件是 <code>obj/main.o</code>，那么 <code>%</code> 将被替换为 <code>main</code>，<code>%.c</code> 将被替换为 <code>main.c</code>。</p>
+<p>这里的 <code>%</code> 相当于一个通配符，可以匹配任何字符串。在规则中，<code>%</code> 用于表示目标文件和依赖文件之间的对应关系。</p>
+</li>
+<li>
+<p><strong>如果没有写具体的编译动作，会出错吗？</strong></p>
+<p>如果你定义了 <code>OBJS</code> 或其他类似的变量，但没有提供相应的编译规则来生成这些文件，那么当你运行 <code>make</code> 命令时，Make 会尝试找到生成这些目标文件的规则。如果没有找到合适的规则，Make 会报错，提示无法生成这些文件。</p>
+<p>例如，如果你有：</p>
+<div class="highlight"><pre><span></span><code><span class="nv">OBJS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>foo.o<span class="w"> </span>bar.o
+</code></pre></div>
+<p>但没有提供如何从 <code>.c</code> 文件生成 <code>foo.o</code> 和 <code>bar.o</code> 的规则，当你运行 <code>make</code> 时，Make 会尝试编译 <code>foo.o</code> 和 <code>bar.o</code>，但由于没有规则告诉它如何从 <code>.c</code> 文件生成 <code>.o</code> 文件，它将无法找到生成这些文件的方法，并报错。</p>
+<p>为了避免这种错误，你需要为每个目标文件提供相应的编译规则，告诉 Make 如何从源文件生成目标文件。这些规则通常包括如何调用编译器（如 <code>gcc</code> 或 <code>g++</code>），以及需要哪些编译选项。</p>
+<p>总结来说，仅仅定义目标文件列表（如 <code>OBJS</code>）是不够的，你还需要提供生成这些文件的具体规则。这些规则定义了如何从源文件（如 <code>.c</code>、<code>.cpp</code> 等）编译生成目标文件（<code>.o</code> 文件）。如果没有这些规则，Make 将不知道如何构建目标文件，从而导致构建失败。</p>
+</li>
+</ol>
+<h3 id="make">$(MAKE)</h3>
+<p><a href="https://www.gnu.org/software/make/manual/html_node/MAKE-Variable.html#MAKE-Variable">MAKE Variable (GNU make)</a></p>
+<p><a href="https://stackoverflow.com/questions/38978627/what-is-the-variable-make-in-a-makefile">build - What is the variable $(MAKE) in a makefile? - Stack Overflow</a></p>
+<h2 id="_3">关于交叉编译工具链</h2>
+<p>由于是在自己虚拟机（x64）上模拟riscv的程序，自然就会想到去了解交叉编译的内容 <a href="https://en.wikipedia.org/wiki/Cross_compiler">Cross compiler</a>。</p>
+<h3 id="_4">遇到的一些问题</h3>
+<p>有问题，在做 os lab的同时好像不能同事去做 pa的内容？
+不然编译工具会有问题？</p>
+<div class="highlight"><pre><span></span><code>The<span class="w"> </span>following<span class="w"> </span>additional<span class="w"> </span>packages<span class="w"> </span>will<span class="w"> </span>be<span class="w"> </span>installed:
+<span class="w">  </span>g++-11-riscv64-linux-gnu
+The<span class="w"> </span>following<span class="w"> </span>NEW<span class="w"> </span>packages<span class="w"> </span>will<span class="w"> </span>be<span class="w"> </span>installed:
+<span class="w">  </span>g++-11-riscv64-linux-gnu<span class="w"> </span>g++-riscv64-linux-gnu
+<span class="m">0</span><span class="w"> </span>upgraded,<span class="w"> </span><span class="m">2</span><span class="w"> </span>newly<span class="w"> </span>installed,<span class="w"> </span><span class="m">0</span><span class="w"> </span>to<span class="w"> </span>remove<span class="w"> </span>and<span class="w"> </span><span class="m">74</span><span class="w"> </span>not<span class="w"> </span>upgraded.
+Need<span class="w"> </span>to<span class="w"> </span>get<span class="w"> </span><span class="m">9</span>,142<span class="w"> </span>kB<span class="w"> </span>of<span class="w"> </span>archives.
+After<span class="w"> </span>this<span class="w"> </span>operation,<span class="w"> </span><span class="m">24</span>.8<span class="w"> </span>MB<span class="w"> </span>of<span class="w"> </span>additional<span class="w"> </span>disk<span class="w"> </span>space<span class="w"> </span>will<span class="w"> </span>be<span class="w"> </span>used.
+</code></pre></div>
+<p>这个是属于包管理的问题吗？</p>
+<p>我明明是已经自己用编译安装的了，我应该是没有添加进环境变量。</p>
+<h2 id="getopt_long"><code>getopt_long</code></h2>
+<div class="highlight"><pre><span></span><code><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="p">(</span><span class="n">o</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getopt_long</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="n">argv</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;-bhl:d:p:e:&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">table</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">))</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">-1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">o</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="sc">&#39;b&#39;</span><span class="p">:</span><span class="w"> </span><span class="n">sdb_set_batch_mode</span><span class="p">();</span><span class="w">                   </span><span class="k">break</span><span class="p">;</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="sc">&#39;p&#39;</span><span class="p">:</span><span class="w"> </span><span class="n">sscanf</span><span class="p">(</span><span class="n">optarg</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;%d&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">difftest_port</span><span class="p">);</span><span class="w">   </span><span class="k">break</span><span class="p">;</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="sc">&#39;l&#39;</span><span class="p">:</span><span class="w"> </span><span class="n">log_file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">optarg</span><span class="p">;</span><span class="w">                      </span><span class="k">break</span><span class="p">;</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="sc">&#39;d&#39;</span><span class="p">:</span><span class="w"> </span><span class="n">diff_so_file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">optarg</span><span class="p">;</span><span class="w">                  </span><span class="k">break</span><span class="p">;</span>
+<span class="w">    </span><span class="k">case</span><span class="w">  </span><span class="mi">1</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">img_file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">optarg</span><span class="p">;</span><span class="w">                      </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="sc">&#39;e&#39;</span><span class="p">:</span><span class="w"> </span><span class="n">elf_file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">optarg</span><span class="p">;</span><span class="w">                      </span><span class="k">break</span><span class="p">;</span>
+<span class="w">    </span><span class="k">default</span><span class="o">:</span>
+<span class="w">      </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Usage: %s [OPTION...] IMAGE [args]</span><span class="se">\n\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+<span class="w">      </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\t</span><span class="s">-b,--batch              run with batch mode</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">      </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\t</span><span class="s">-l,--log=FILE           output log to FILE</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">      </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\t</span><span class="s">-d,--diff=REF_SO        run DiffTest with reference REF_SO</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">      </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\t</span><span class="s">-p,--port=PORT          run DiffTest with port PORT</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">      </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\t</span><span class="s">-e,--elf=elf_file       parse elf_file&quot;</span><span class="p">);</span>
+<span class="w">      </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">      </span><span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span><span class="w">                                                                                                                       </span>
+<span class="p">}</span>
+</code></pre></div>
+<p>这里的 <code>img_file</code> 为什么和 <code>case 1</code> 匹配上了？</p>
+<p>关键是 <code>"-bhl:d:p:e:"</code> 开头是 <code>-</code> 。</p>
+<p><img alt="image-20241103170053022" src="pic/image-20241103170053022.png" /></p>
+<p>如果<code>optstring</code>参数的第一个字符是<code>-</code>，那么非选项参数会被当作选项字符<code>1</code>的参数处理。这意味着，如果<code>getopt_long()</code>在处理完所有选项后，遇到非选项参数，它会将该参数视为选项<code>1</code>的参数，并返回<code>1</code>。这就是<code>case 1</code>被触发的情况。</p>
+<p>还可以再看看 <code>mini-rv32ima</code> 的实现。</p>
+<blockquote>
+<p>这段代码是一个命令行参数解析的循环，它处理了一系列以 <code>-</code> 开头的参数（通常称为选项或开关），并根据参数的不同执行不同的操作。以下是每个参数的功能总结：</p>
+<ol>
+<li>
+<p><code>-m</code>：后面跟随一个参数，用于设置内存量（<code>ram_amt</code>）。如果用户没有提供具体的值，<code>SimpleReadNumberInt</code> 函数会使用 <code>ram_amt</code> 的当前值作为默认值。</p>
+</li>
+<li>
+<p><code>-c</code>：后面跟随一个参数，用于设置指令计数（<code>instct</code>）。如果用户没有提供具体的值，<code>SimpleReadNumberInt</code> 函数会使用 <code>-1</code> 作为默认值。</p>
+</li>
+<li>
+<p><code>-k</code>：后面跟随一个参数，用于设置内核命令行（<code>kernel_command_line</code>）。</p>
+</li>
+<li>
+<p><code>-f</code>：后面跟随一个参数，用于设置映像文件名（<code>image_file_name</code>）。</p>
+</li>
+<li>
+<p><code>-b</code>：后面跟随一个参数，用于设置设备树二进制文件名（<code>dtb_file_name</code>）。</p>
+</li>
+<li>
+<p><code>-l</code>：这个参数不需要跟随参数，用于设置 <code>fixed_update</code> 标志为 1，并使 <code>param_continue</code> 为 1，表示后续的参数应该继续处理。</p>
+</li>
+<li>
+<p><code>-p</code>：这个参数不需要跟随参数，用于设置 <code>do_sleep</code> 标志为 0，并使 <code>param_continue</code> 为 1。</p>
+</li>
+<li>
+<p><code>-s</code>：这个参数不需要跟随参数，用于设置 <code>single_step</code> 标志为 1，并使 <code>param_continue</code> 为 1。</p>
+</li>
+<li>
+<p><code>-d</code>：这个参数不需要跟随参数，用于设置 <code>fail_on_all_faults</code> 标志为 1，并使 <code>param_continue</code> 为 1。</p>
+</li>
+<li>
+<p><code>-t</code>：后面跟随一个参数，用于设置时间除数（<code>time_divisor</code>）。如果用户没有提供具体的值，<code>SimpleReadNumberInt</code> 函数会使用 <code>1</code> 作为默认值。</p>
+</li>
+</ol>
+<p>如果参数不是以 <code>-</code> 开头的（即不是选项），或者在处理参数时遇到不识别的选项，<code>show_help</code> 会被设置为 1，这通常会触发程序显示帮助信息。</p>
+<p><code>param_continue</code> 变量用于指示当前参数是否需要继续处理后续的参数。例如，如果一个参数后面需要跟随一个值，那么 <code>param_continue</code> 会被设置为 1，直到处理完这个值。</p>
+<p><code>SimpleReadNumberInt</code> 函数可能是一个自定义函数，用于将字符串转换为整数，并可能提供默认值。如果 <code>argv[i]</code> 是一个有效的参数，那么 <code>SimpleReadNumberInt</code> 会读取 <code>argv[i]</code> 的值；否则，它会使用提供的默认值。</p>
+</blockquote>
+<h2 id="c">C 库的实现</h2>
+<h2 id="reference">Reference</h2>
+<p><a href="https://s4plus.ustc.edu.cn/_upload/article/files/05/ff/cce7c4694b97a01489dea9daa1a9/bbff49ab-19fe-4bc5-b105-8ac63232a75d.pdf">从mov指令到仙剑：通过NEMU 构建简单完整的计算机系统</a></p>
+<p><a href="https://www.bilibili.com/video/BV1Zb4y1k7RJ/">【余子濠】NEMU：一个效率接近QEMU的高性能解释器 - 第一届 RISC-V 中国峰会</a></p>
+
+
+
+
+
+
+
+  
+    
+  
+  
+    
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Last update">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2025-01-05T17:02:30+01:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2025-01-05</span>
+  </span>
+
+    
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Created">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2025-01-05T17:02:30+01:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2025-01-05</span>
+  </span>
+
+    
+    
+    
+  </aside>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../c_marco/macro.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: C Macro">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256l137.3-137.4c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                C Macro
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../Linux_porting/porting.html" class="md-footer__link md-footer__link--next" aria-label="Next: Linux Porting">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Linux Porting
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://github.com/JAILuo" target="_blank" rel="noopener" title="squidfunk on Fosstodon" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.footer"], "search": "../../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.83f73b43.min.js"></script>
+      
+        <script src="../../../js/timeago.min.js"></script>
+      
+        <script src="../../../js/timeago_mkdocs_material.js"></script>
+      
+    
+  </body>
+</html>

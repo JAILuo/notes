@@ -8,26 +8,28 @@
       
       
       
-        <link rel="canonical" href="https://jailuo.github.io/notes/index.html">
+        <link rel="canonical" href="https://jailuo.github.io/notes/Course/University%20Course/jyy%20OS2024/cousre%20note/2.%20concurrency/concurrency.html">
       
       
+        <link rel="prev" href="../1.%20introduction/introduction.html">
       
-        <link rel="next" href="Course/University%20Course/jyy%20OS2024/cousre%20note/1.%20introduction/introduction.html">
+      
+        <link rel="next" href="../3.%20virtualization/virtualization.html">
       
       
-      <link rel="icon" href="assets/images/favicon.png">
+      <link rel="icon" href="../../../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.48">
     
     
       
-        <title>Messy Notes</title>
+        <title>concurrency - Messy Notes</title>
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.6f8fc17f.min.css">
+      <link rel="stylesheet" href="../../../../../assets/stylesheets/main.6f8fc17f.min.css">
       
         
-        <link rel="stylesheet" href="assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../../../../../assets/stylesheets/palette.06af60db.min.css">
       
       
 
@@ -46,9 +48,9 @@
       
     
     
-      <link rel="stylesheet" href="css/timeago.css">
+      <link rel="stylesheet" href="../../../../../css/timeago.css">
     
-    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -74,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#messy-notes" class="md-skip">
+        <a href="#_1" class="md-skip">
           Skip to content
         </a>
       
@@ -90,7 +92,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="index.html" title="Messy Notes" class="md-header__button md-logo" aria-label="Messy Notes" data-md-component="logo">
+    <a href="../../../../../index.html" title="Messy Notes" class="md-header__button md-logo" aria-label="Messy Notes" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -110,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              首页
+              concurrency
             
           </span>
         </div>
@@ -223,7 +225,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="index.html" title="Messy Notes" class="md-nav__button md-logo" aria-label="Messy Notes" data-md-component="logo">
+    <a href="../../../../../index.html" title="Messy Notes" class="md-nav__button md-logo" aria-label="Messy Notes" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -250,19 +252,10 @@
       
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="index.html" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../../../../index.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -271,7 +264,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -280,17 +272,19 @@
       
   
   
+    
   
   
+  
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
         
           
           <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
@@ -304,7 +298,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             Course
@@ -315,17 +309,19 @@
                 
   
   
+    
   
   
+  
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" checked>
         
           
           <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
@@ -339,7 +335,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2_1">
             <span class="md-nav__icon md-icon"></span>
             University Course
@@ -350,17 +346,19 @@
                 
   
   
+    
   
   
+  
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_1" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_1" checked>
         
           
           <label class="md-nav__link" for="__nav_2_1_1" id="__nav_2_1_1_label" tabindex="0">
@@ -374,7 +372,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_1_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_1_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2_1_1">
             <span class="md-nav__icon md-icon"></span>
             jyy OS2024
@@ -385,17 +383,19 @@
                 
   
   
+    
   
   
+  
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_1_1" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_1_1" checked>
         
           
           <label class="md-nav__link" for="__nav_2_1_1_1" id="__nav_2_1_1_1_label" tabindex="0">
@@ -409,7 +409,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_1_1_1_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_1_1_1_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2_1_1_1">
             <span class="md-nav__icon md-icon"></span>
             course note
@@ -423,7 +423,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Course/University%20Course/jyy%20OS2024/cousre%20note/1.%20introduction/introduction.html" class="md-nav__link">
+      <a href="../1.%20introduction/introduction.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -441,10 +441,28 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="Course/University%20Course/jyy%20OS2024/cousre%20note/2.%20concurrency/concurrency.html" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    concurrency
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="concurrency.html" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -453,6 +471,138 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      多处理器编程
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      并发控制：互斥（1）
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="并发控制：互斥（1）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      阻止并发（并行）的发生
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#loadstore" class="md-nav__link">
+    <span class="md-ellipsis">
+      使用 load/store 实现互斥（）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      在多处理器上实现互斥
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      并发控制：互斥（2）
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      调试理论与实践
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      并发控制：同步（1）
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      并发控制：同步（2）
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      真实世界的并发编程
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bugs" class="md-nav__link">
+    <span class="md-ellipsis">
+      并发bugs
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bugs_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      应对并发bugs
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -465,7 +615,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Course/University%20Course/jyy%20OS2024/cousre%20note/3.%20virtualization/virtualization.html" class="md-nav__link">
+      <a href="../3.%20virtualization/virtualization.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -486,7 +636,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Course/University%20Course/jyy%20OS2024/cousre%20note/4.%20persistence/persistence.html" class="md-nav__link">
+      <a href="../4.%20persistence/persistence.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -550,7 +700,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Course/University%20Course/jyy%20OS2024/Mini%20Labs/M1/M1.html" class="md-nav__link">
+      <a href="../../Mini%20Labs/M1/M1.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -571,7 +721,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Course/University%20Course/jyy%20OS2024/Mini%20Labs/M2/M2.html" class="md-nav__link">
+      <a href="../../Mini%20Labs/M2/M2.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -592,7 +742,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Course/University%20Course/jyy%20OS2024/Mini%20Labs/M3/M3.html" class="md-nav__link">
+      <a href="../../Mini%20Labs/M3/M3.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -656,7 +806,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Course/University%20Course/jyy%20OS2024/OS%20Labs/L0/L0.html" class="md-nav__link">
+      <a href="../../OS%20Labs/L0/L0.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -677,7 +827,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Course/University%20Course/jyy%20OS2024/OS%20Labs/L1/L1.html" class="md-nav__link">
+      <a href="../../OS%20Labs/L1/L1.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -792,7 +942,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Course/GeekTime/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E4%B8%80%E5%91%A8%E7%9B%AE/1.%20%E6%8C%87%E4%BB%A4%E4%B8%8E%E8%BF%90%E7%AE%97/%E6%8C%87%E4%BB%A4%E4%B8%8E%E8%BF%90%E7%AE%97.html" class="md-nav__link">
+      <a href="../../../../GeekTime/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E4%B8%80%E5%91%A8%E7%9B%AE/1.%20%E6%8C%87%E4%BB%A4%E4%B8%8E%E8%BF%90%E7%AE%97/%E6%8C%87%E4%BB%A4%E4%B8%8E%E8%BF%90%E7%AE%97.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -813,7 +963,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Course/GeekTime/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E4%B8%80%E5%91%A8%E7%9B%AE/2.%20%E5%A4%84%E7%90%86%E5%99%A8/%E5%A4%84%E7%90%86%E5%99%A8.html" class="md-nav__link">
+      <a href="../../../../GeekTime/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E4%B8%80%E5%91%A8%E7%9B%AE/2.%20%E5%A4%84%E7%90%86%E5%99%A8/%E5%A4%84%E7%90%86%E5%99%A8.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -834,7 +984,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Course/GeekTime/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E4%B8%80%E5%91%A8%E7%9B%AE/3.%20%E5%AD%98%E5%82%A8%E4%B8%8EIO%E7%B3%BB%E7%BB%9F/%E5%AD%98%E5%82%A8%E4%B8%8EIO%E7%B3%BB%E7%BB%9F.html" class="md-nav__link">
+      <a href="../../../../GeekTime/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E4%B8%80%E5%91%A8%E7%9B%AE/3.%20%E5%AD%98%E5%82%A8%E4%B8%8EIO%E7%B3%BB%E7%BB%9F/%E5%AD%98%E5%82%A8%E4%B8%8EIO%E7%B3%BB%E7%BB%9F.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -855,7 +1005,7 @@
   
   
     <li class="md-nav__item">
-      <a href="docs/Course/GeekTime/深入理解计算机组成原理/一周目/4. 应用/应用.md" class="md-nav__link">
+      <a href="../../../../../docs/Course/GeekTime/深入理解计算机组成原理/一周目/4. 应用/应用.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -919,7 +1069,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/1.%20MiniCPU%E8%AE%BE%E8%AE%A1/MiniCPU%E8%AE%BE%E8%AE%A1.html" class="md-nav__link">
+      <a href="../../../../GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/1.%20MiniCPU%E8%AE%BE%E8%AE%A1/MiniCPU%E8%AE%BE%E8%AE%A1.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -940,7 +1090,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/2.%20%E8%AF%AD%E8%A8%80%E5%92%8C%E6%8C%87%E4%BB%A4/%E8%AF%AD%E8%A8%80%E5%92%8C%E6%8C%87%E4%BB%A4.html" class="md-nav__link">
+      <a href="../../../../GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/2.%20%E8%AF%AD%E8%A8%80%E5%92%8C%E6%8C%87%E4%BB%A4/%E8%AF%AD%E8%A8%80%E5%92%8C%E6%8C%87%E4%BB%A4.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -961,7 +1111,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/3.%20%E5%BA%94%E7%94%A8%E5%92%8C%E5%86%85%E5%AD%98/%E5%BA%94%E7%94%A8%E5%92%8C%E5%86%85%E5%AD%98.html" class="md-nav__link">
+      <a href="../../../../GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/3.%20%E5%BA%94%E7%94%A8%E5%92%8C%E5%86%85%E5%AD%98/%E5%BA%94%E7%94%A8%E5%92%8C%E5%86%85%E5%AD%98.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -982,7 +1132,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/4.%20IO%E4%B8%8E%E6%96%87%E4%BB%B6/IO%E5%92%8C%E6%96%87%E4%BB%B6.html" class="md-nav__link">
+      <a href="../../../../GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/4.%20IO%E4%B8%8E%E6%96%87%E4%BB%B6/IO%E5%92%8C%E6%96%87%E4%BB%B6.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1003,7 +1153,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/5.%20%E7%BB%BC%E5%90%88%E5%BA%94%E7%94%A8/synthesis.html" class="md-nav__link">
+      <a href="../../../../GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/5.%20%E7%BB%BC%E5%90%88%E5%BA%94%E7%94%A8/synthesis.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1024,7 +1174,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E5%92%8C%E5%B7%A5%E5%85%B7%E9%93%BE/%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE.html" class="md-nav__link">
+      <a href="../../../../GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E5%92%8C%E5%B7%A5%E5%85%B7%E9%93%BE/%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1138,7 +1288,7 @@
   
   
     <li class="md-nav__item">
-      <a href="ysyx/pa/pa1/pa1.html" class="md-nav__link">
+      <a href="../../../../../ysyx/pa/pa1/pa1.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1159,7 +1309,7 @@
   
   
     <li class="md-nav__item">
-      <a href="ysyx/pa/pa2/pa2.html" class="md-nav__link">
+      <a href="../../../../../ysyx/pa/pa2/pa2.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1180,7 +1330,7 @@
   
   
     <li class="md-nav__item">
-      <a href="ysyx/pa/pa3/pa3.html" class="md-nav__link">
+      <a href="../../../../../ysyx/pa/pa3/pa3.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1201,7 +1351,7 @@
   
   
     <li class="md-nav__item">
-      <a href="ysyx/pa/pa4/pa4.html" class="md-nav__link">
+      <a href="../../../../../ysyx/pa/pa4/pa4.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1222,7 +1372,7 @@
   
   
     <li class="md-nav__item">
-      <a href="ysyx/pa/c_marco/macro.html" class="md-nav__link">
+      <a href="../../../../../ysyx/pa/c_marco/macro.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1243,7 +1393,7 @@
   
   
     <li class="md-nav__item">
-      <a href="ysyx/pa/summary/summary.html" class="md-nav__link">
+      <a href="../../../../../ysyx/pa/summary/summary.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1264,7 +1414,7 @@
   
   
     <li class="md-nav__item">
-      <a href="ysyx/pa/Linux_porting/porting.html" class="md-nav__link">
+      <a href="../../../../../ysyx/pa/Linux_porting/porting.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1293,7 +1443,7 @@
   
   
     <li class="md-nav__item">
-      <a href="ysyx/digital-circuit/digital%20circuit.html" class="md-nav__link">
+      <a href="../../../../../ysyx/digital-circuit/digital%20circuit.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1331,8 +1481,128 @@
   
   
   
-    
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      多处理器编程
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      并发控制：互斥（1）
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="并发控制：互斥（1）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      阻止并发（并行）的发生
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#loadstore" class="md-nav__link">
+    <span class="md-ellipsis">
+      使用 load/store 实现互斥（）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      在多处理器上实现互斥
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      并发控制：互斥（2）
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      调试理论与实践
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      并发控制：同步（1）
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      并发控制：同步（2）
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      真实世界的并发编程
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bugs" class="md-nav__link">
+    <span class="md-ellipsis">
+      并发bugs
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bugs_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      应对并发bugs
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -1350,11 +1620,59 @@
   
 
 
-<h1 id="messy-notes">Messy Notes</h1>
-<p>这里存放学习、生活各种各样的内容，课程/学习笔记、技术问题总结、感悟、业余爱好等。</p>
-<p>写得很乱，比较随心所欲，大多是当时学习的记录。</p>
-<p>当成是仓库好了，没有建博客的打算，可能会借助大型平台发布一部分内容？（未知</p>
-<h1 id="from-gdut">From GDUT</h1>
+  <h1>concurrency</h1>
+
+<h2 id="_1">多处理器编程</h2>
+<p><img src="pic/image-20241110231300436.png" alt="image-20241110231300436" style="zoom:50%;" /></p>
+<ul>
+<li>
+<p>证明共享内存</p>
+<blockquote>
+<p><strong><mark>DEMO</mark></strong></p>
+<p><strong>并发线程模型</strong>：<strong>并发线程能够读写共享的 heap 堆区</strong>。除此之外，每个线程持有局部变量的副本。Mosaic 不会自动在每条语句之后进行线程调度：我们需要手工插入 <code>sys_sched</code>。</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="1">并发控制：互斥（1）</h2>
+<p><img src="pic/image-20241118211713662.png" alt="image-20241118211713662" style="zoom:50%;" /></p>
+<p>怎么应对？</p>
+<h3 id="_2">阻止并发（并行）的发生</h3>
+<p>什么叫互斥？什么叫并发？</p>
+<blockquote>
+<p><strong>Concurrent</strong> means happening at the same time</p>
+</blockquote>
+<p>”要求整个世界有小段时间只属于自己，任何人都不能打断“ ”人想象成线程，多线程想象成物理世界“</p>
+<ul>
+<li><strong>互斥</strong> (互相排斥)：阻止并发</li>
+</ul>
+<p><img src="pic/image-20241118211611213.png" alt="image-20241118211611213" style="zoom:50%;" /></p>
+<p>单核实现互斥：</p>
+<p><img src="pic/image-20241118214211804.png" alt="image-20241118214211804" style="zoom:50%;" /></p>
+<p><img src="pic/image-20241118211902945.png" alt="image-20241118211902945" style="zoom:50%;" /></p>
+<h3 id="loadstore">使用 load/store 实现互斥（）</h3>
+<p>主要是<strong>Peterson 算法</strong>。直接看看讲义和视频讲解吧。</p>
+<h3 id="_3">在多处理器上实现互斥</h3>
+<p><img src="pic/image-20241118212608893.png" alt="image-20241118212608893" style="zoom:50%;" /></p>
+<p>需要意识到：<strong>因为人类是“sequential creatures”，导致过去的很多设计是没有考虑并发的（多处理器、共享内存），而我们在共享内存上实现互斥的失败和成功尝试后，我们意识到软件需要和硬件协同工作，并在硬件原子指令基础上实现了基础版本的自旋锁。</strong></p>
+<p>关键在于硬件实现，在 OS 课上可不用深究，不属于本门课的范围。</p>
+<blockquote>
+<p>更多内容：</p>
+<p><a href="https://stackoverflow.com/questions/14758088/how-are-atomic-operations-implemented-at-a-hardware-level">x86 - How are atomic operations implemented at a hardware level? - Stack Overflow</a></p>
+<p><a href="https://superuser.com/questions/400786/how-does-an-atomic-operation-guarantee-consistency-from-a-hardware-perspective">computer architecture - How does an atomic operation guarantee consistency from a hardware perspective? - Super User</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/649646816">计算机原子（atomic）操作的实现原理解析 - 知乎</a></p>
+<p>这里可以总结为：</p>
+<p>Extra transistors in the chip to implement <strong>special cache</strong> and memory coherency and <strong>bus synchronization procotols</strong>. The long answer is way too long.</p>
+<p>再进一步总结相关实现手段：</p>
+<p>总线锁定 --&gt; 缓存锁定 相关缓存一致性协议 / LL/SC</p>
+</blockquote>
+<p><img src="pic/image-20241118212545883.png" alt="image-20241118212545883" style="zoom: 50%;" /></p>
+<h2 id="2">并发控制：互斥（2）</h2>
+<h2 id="_4">调试理论与实践</h2>
+<h2 id="1_1">并发控制：同步（1）</h2>
+<h2 id="2_1">并发控制：同步（2）</h2>
+<h2 id="_5">真实世界的并发编程</h2>
+<h2 id="bugs">并发bugs</h2>
+<h2 id="bugs_1">应对并发bugs</h2>
 
 
 
@@ -1362,6 +1680,38 @@
 
 
 
+  
+    
+  
+  
+    
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Last update">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2025-01-05T17:02:30+01:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2025-01-05</span>
+  </span>
+
+    
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Created">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2025-01-05T17:02:30+01:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2025-01-05</span>
+  </span>
+
+    
+    
+    
+  </aside>
 
 
 
@@ -1383,15 +1733,31 @@
       
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
+          
+          <a href="../1.%20introduction/introduction.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: introduction">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256l137.3-137.4c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                introduction
+              </div>
+            </div>
+          </a>
+        
         
           
-          <a href="Course/University%20Course/jyy%20OS2024/cousre%20note/1.%20introduction/introduction.html" class="md-footer__link md-footer__link--next" aria-label="Next: introduction">
+          <a href="../3.%20virtualization/virtualization.html" class="md-footer__link md-footer__link--next" aria-label="Next: virtualization">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                introduction
+                virtualization
               </div>
             </div>
             <div class="md-footer__button md-icon">
@@ -1437,14 +1803,14 @@
     </div>
     
     
-    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.footer"], "search": "assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../../../../..", "features": ["navigation.footer"], "search": "../../../../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="assets/javascripts/bundle.83f73b43.min.js"></script>
+      <script src="../../../../../assets/javascripts/bundle.83f73b43.min.js"></script>
       
-        <script src="js/timeago.min.js"></script>
+        <script src="../../../../../js/timeago.min.js"></script>
       
-        <script src="js/timeago_mkdocs_material.js"></script>
+        <script src="../../../../../js/timeago_mkdocs_material.js"></script>
       
     
   </body>

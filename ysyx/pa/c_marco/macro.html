@@ -1,0 +1,3180 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://jailuo.github.io/notes/ysyx/pa/c_marco/macro.html">
+      
+      
+        <link rel="prev" href="../pa4/pa4.html">
+      
+      
+        <link rel="next" href="../summary/summary.html">
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.48">
+    
+    
+      
+        <title>C Macro - Messy Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.6f8fc17f.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../css/timeago.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#introduction" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../index.html" title="Messy Notes" class="md-header__button md-logo" aria-label="Messy Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Messy Notes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              C Macro
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256l137.3-137.4c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/JAILuo/notes" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../index.html" title="Messy Notes" class="md-nav__button md-logo" aria-label="Messy Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Messy Notes
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/JAILuo/notes" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    首页
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Course
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Course
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    University Course
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            University Course
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_1" id="__nav_2_1_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    jyy OS2024
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            jyy OS2024
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_1_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_1_1" id="__nav_2_1_1_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    course note
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_1_1_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            course note
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/University%20Course/jyy%20OS2024/cousre%20note/1.%20introduction/introduction.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    introduction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/University%20Course/jyy%20OS2024/cousre%20note/2.%20concurrency/concurrency.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    concurrency
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/University%20Course/jyy%20OS2024/cousre%20note/3.%20virtualization/virtualization.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    virtualization
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/University%20Course/jyy%20OS2024/cousre%20note/4.%20persistence/persistence.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    persistence
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_1_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_1_2" id="__nav_2_1_1_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Mini Labs
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_1_1_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            Mini Labs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/University%20Course/jyy%20OS2024/Mini%20Labs/M1/M1.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    M1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/University%20Course/jyy%20OS2024/Mini%20Labs/M2/M2.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    M2
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/University%20Course/jyy%20OS2024/Mini%20Labs/M3/M3.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    M3
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_1_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_1_3" id="__nav_2_1_1_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    OS Labs
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_1_1_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_1_3">
+            <span class="md-nav__icon md-icon"></span>
+            OS Labs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/University%20Course/jyy%20OS2024/OS%20Labs/L0/L0.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    L0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/University%20Course/jyy%20OS2024/OS%20Labs/L1/L1.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    L1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    GeekTime
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            GeekTime
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2_1" id="__nav_2_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    深入理解计算机组成原理
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            深入理解计算机组成原理
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/GeekTime/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E4%B8%80%E5%91%A8%E7%9B%AE/1.%20%E6%8C%87%E4%BB%A4%E4%B8%8E%E8%BF%90%E7%AE%97/%E6%8C%87%E4%BB%A4%E4%B8%8E%E8%BF%90%E7%AE%97.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1. 指令与运算
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/GeekTime/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E4%B8%80%E5%91%A8%E7%9B%AE/2.%20%E5%A4%84%E7%90%86%E5%99%A8/%E5%A4%84%E7%90%86%E5%99%A8.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2. 处理器
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/GeekTime/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E4%B8%80%E5%91%A8%E7%9B%AE/3.%20%E5%AD%98%E5%82%A8%E4%B8%8EIO%E7%B3%BB%E7%BB%9F/%E5%AD%98%E5%82%A8%E4%B8%8EIO%E7%B3%BB%E7%BB%9F.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3. 存储与IO系统
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../docs/Course/GeekTime/深入理解计算机组成原理/一周目/4. 应用/应用.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4. 应用
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2_2" id="__nav_2_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    计算基础实战课
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            计算基础实战课
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/1.%20MiniCPU%E8%AE%BE%E8%AE%A1/MiniCPU%E8%AE%BE%E8%AE%A1.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1. MiniCPU设计
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/2.%20%E8%AF%AD%E8%A8%80%E5%92%8C%E6%8C%87%E4%BB%A4/%E8%AF%AD%E8%A8%80%E5%92%8C%E6%8C%87%E4%BB%A4.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2. 语言和指令
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/3.%20%E5%BA%94%E7%94%A8%E5%92%8C%E5%86%85%E5%AD%98/%E5%BA%94%E7%94%A8%E5%92%8C%E5%86%85%E5%AD%98.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3. 应用和内存
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/4.%20IO%E4%B8%8E%E6%96%87%E4%BB%B6/IO%E5%92%8C%E6%96%87%E4%BB%B6.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4. IO与文件
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/5.%20%E7%BB%BC%E5%90%88%E5%BA%94%E7%94%A8/synthesis.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    5. 综合应用
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E5%92%8C%E5%B7%A5%E5%85%B7%E9%93%BE/%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    环境配置和工具链
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    ysyx
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            ysyx
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    NJU-ICS2023-PA
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            NJU-ICS2023-PA
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pa1/pa1.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PA1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pa2/pa2.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PA2
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pa3/pa3.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PA3
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pa4/pa4.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PA4
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    C Macro
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="macro.html" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    C Macro
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introduction
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Introduction">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#basic-usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Basic usage
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#c-macro-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      C Macro Summary
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="C Macro Summary">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#preprocessor-process" class="md-nav__link">
+    <span class="md-ellipsis">
+      Preprocessor process
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Preprocessor process">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-initial-processing" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Initial processing
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-tokenization" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Tokenization
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-the-preprocessing-language" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. The Preprocessing Language
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#and" class="md-nav__link">
+    <span class="md-ellipsis">
+      # and ##
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="# and ##">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#stringizing" class="md-nav__link">
+    <span class="md-ellipsis">
+      # 字符串化操作符（Stringizing）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#token-pasting" class="md-nav__link">
+    <span class="md-ellipsis">
+      ## 标记粘贴操作符（token-pasting）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      # 和 ## 特殊情况
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#macro-expansion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Macro expansion
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Macro expansion">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#introduction_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introduction
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      递归与宏
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#variadic-macros" class="md-nav__link">
+    <span class="md-ellipsis">
+      变参宏（Variadic Macros）
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="变参宏（Variadic Macros）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#__va_args__-bug" class="md-nav__link">
+    <span class="md-ellipsis">
+      __VA_ARGS__ 的 bug
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#genericc11" class="md-nav__link">
+    <span class="md-ellipsis">
+      Generic（C11）
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Generic（C11）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#introduction_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introduction
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_generic" class="md-nav__link">
+    <span class="md-ellipsis">
+      关键字 _Generic
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#x-macro" class="md-nav__link">
+    <span class="md-ellipsis">
+      X-Macro
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="X-Macro">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#introduction_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      introduction
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#application" class="md-nav__link">
+    <span class="md-ellipsis">
+      application
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      打印颜色配合宏
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      宏模拟函数式编程
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      预定义宏
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      其他复杂宏
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#macro-pitfalls" class="md-nav__link">
+    <span class="md-ellipsis">
+      Macro Pitfalls
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      一些比较好用的宏
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      参考资料
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../summary/summary.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Summary
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Linux_porting/porting.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Linux Porting
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../digital-circuit/digital%20circuit.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Digital Circuit
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introduction
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Introduction">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#basic-usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Basic usage
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#c-macro-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      C Macro Summary
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="C Macro Summary">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#preprocessor-process" class="md-nav__link">
+    <span class="md-ellipsis">
+      Preprocessor process
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Preprocessor process">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-initial-processing" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Initial processing
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-tokenization" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Tokenization
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-the-preprocessing-language" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. The Preprocessing Language
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#and" class="md-nav__link">
+    <span class="md-ellipsis">
+      # and ##
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="# and ##">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#stringizing" class="md-nav__link">
+    <span class="md-ellipsis">
+      # 字符串化操作符（Stringizing）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#token-pasting" class="md-nav__link">
+    <span class="md-ellipsis">
+      ## 标记粘贴操作符（token-pasting）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      # 和 ## 特殊情况
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#macro-expansion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Macro expansion
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Macro expansion">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#introduction_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introduction
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      递归与宏
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#variadic-macros" class="md-nav__link">
+    <span class="md-ellipsis">
+      变参宏（Variadic Macros）
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="变参宏（Variadic Macros）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#__va_args__-bug" class="md-nav__link">
+    <span class="md-ellipsis">
+      __VA_ARGS__ 的 bug
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#genericc11" class="md-nav__link">
+    <span class="md-ellipsis">
+      Generic（C11）
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Generic（C11）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#introduction_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introduction
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_generic" class="md-nav__link">
+    <span class="md-ellipsis">
+      关键字 _Generic
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#x-macro" class="md-nav__link">
+    <span class="md-ellipsis">
+      X-Macro
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="X-Macro">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#introduction_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      introduction
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#application" class="md-nav__link">
+    <span class="md-ellipsis">
+      application
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      打印颜色配合宏
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      宏模拟函数式编程
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      预定义宏
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      其他复杂宏
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#macro-pitfalls" class="md-nav__link">
+    <span class="md-ellipsis">
+      Macro Pitfalls
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      一些比较好用的宏
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      参考资料
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+  <h1>C Macro</h1>
+
+<h2 id="introduction">Introduction</h2>
+<p>关于宏，实际上就不得不谈到预处理器。</p>
+<blockquote>
+<p><a href="https://en.cppreference.com/w/c/preprocessor">Preprocessor - cppreference.com</a></p>
+<p>The preprocessor has the source file translation capabilities:</p>
+<ul>
+<li><strong><a href="https://en.cppreference.com/w/c/preprocessor/conditional">conditionally</a></strong> compile of parts of source file (controlled by directive , , , , , <code>#elifdef</code>, <code>#elifndef</code>(since C23) and ). <code>#if``#ifdef``#ifndef``#else``#elif``#endif</code></li>
+<li><strong><a href="https://en.cppreference.com/w/c/preprocessor/replace">replace</a></strong> text macros while possibly concatenating or quoting identifiers (controlled by directives and , and operators and <code>#define</code>、<code>#undef</code>、<code>#</code>、<code>##</code>)</li>
+<li><strong><a href="https://en.cppreference.com/w/c/preprocessor/include">include</a></strong> other files (controlled by directive <code>#include</code> and checked with __has_include(since C23))</li>
+<li>cause an <strong><a href="https://en.cppreference.com/w/c/preprocessor/error">error</a></strong> or <strong><a href="https://en.cppreference.com/w/c/preprocessor/error">warning</a></strong>(since C23) (controlled by directive or <code>#warning</code> respectively(since C23)<code>#error</code>)</li>
+</ul>
+<p>The following aspects of the preprocessor can be controlled:</p>
+<ul>
+<li><strong><a href="https://en.cppreference.com/w/c/preprocessor/impl">implementation defined</a></strong> behavior (controlled by directive and operator <code>_Pragma</code>(since C99)<code>#pragma</code>)</li>
+<li><strong><a href="https://en.cppreference.com/w/c/preprocessor/line">file name and line information</a></strong> available to the preprocessor (controlled by directives <code>#line</code>)</li>
+</ul>
+</blockquote>
+<p>这里我只是总结些我在做 PA 时遇到的一些宏，所以，我仅关注 replace 这一功能。</p>
+<h3 id="basic-usage">Basic usage</h3>
+<p>下面直接由 <code>kimi</code> 生成。</p>
+<blockquote>
+<p>C语言中的宏是一种预处理器功能，它允许你在编译之前进行文本替换。宏的基本使用包括以下几个方面：</p>
+<ol>
+<li>
+<p><strong>定义常量</strong>： 使用宏定义来创建常量可以提高代码的可读性和可维护性。例如：</p>
+<div class="highlight"><pre><span></span><code> #define PI 3.14159
+</code></pre></div>
+</li>
+<li>
+<p><strong>代码复用</strong>： 宏可以用来定义代码片段，以避免在程序中重复编写相同的代码。例如：</p>
+<div class="highlight"><pre><span></span><code> #define SQUARE(x) ((x)*(x))
+</code></pre></div>
+</li>
+<li>
+<p><strong>条件编译</strong>： 宏可以用于条件编译，使得在编译时可以根据特定的条件包含或排除代码段。例如：</p>
+<div class="highlight"><pre><span></span><code> #define DEBUG 1
+ #ifdef DEBUG
+ printf(&quot;Debugging information: variable value = %d\n&quot;, variable);
+ #endif
+</code></pre></div>
+</li>
+<li>
+<p><strong>字符串化和标记粘贴</strong>： 宏提供了字符串化（<code>#</code>）和标记粘贴（<code>##</code>）操作符，用于特殊的文本处理。</p>
+<ul>
+<li>
+<p>字符串化操作符将宏参数转换为字符串：</p>
+<div class="highlight"><pre><span></span><code> #define LOG(msg) printf(&quot;Message: %s\n&quot;, #msg)
+</code></pre></div>
+</li>
+<li>
+<p>标记粘贴操作符用于连接两个符号或宏参数：</p>
+<div class="highlight"><pre><span></span><code> #define UNIQUE_NAME(x) x##_unique
+ int UNIQUE_NAME(my_var);
+</code></pre></div>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>多行宏</strong>： 当宏定义跨越多行时，需要使用反斜杠（<code>\</code>）来继续行。例如：</p>
+<div class="highlight"><pre><span></span><code> #define INIT_ARRAY(arr, size) { \
+     int i; \
+     for (i = 0; i &lt; size; i++) { \
+         arr[i] = 0; \
+     } \
+ }
+</code></pre></div>
+</li>
+<li>
+<p><strong>宏与函数的区别</strong>： 宏没有类型检查，不占用运行时资源，且在编译时展开。而函数调用有类型检查，占用栈空间，且在运行时调用。</p>
+</li>
+<li>
+<p><strong>宏的副作用</strong>： 由于宏是简单的文本替换，可能会导致一些不期望的副作用，尤其是当宏参数是表达式时。例如：</p>
+<div class="highlight"><pre><span></span><code> #define SQUARE_AND_ADD(x) (x * x + x)
+ int a = 10;
+ int result = SQUARE_AND_ADD(a++);
+ // 这里 a 会被增加三次，而不是预期的一次
+</code></pre></div>
+</li>
+<li>
+<p><strong>宏的可见性</strong>： 宏在定义它们的文件中是全局可见的，除非它们被定义在 <code>#ifndef</code> 保护块中，以防止头文件的重复包含。</p>
+</li>
+<li>
+<p><strong>取消宏定义</strong>： 可以使用 <code>#undef</code> 来取消宏的定义。例如：</p>
+<div class="highlight"><pre><span></span><code> #undef PI
+</code></pre></div>
+</li>
+<li>
+<p><strong>宏的限制</strong>： 宏不能访问局部变量，它们只能用于全局可见的符号。此外，宏没有作用域的概念，它们的作用域是整个文件。</p>
+</li>
+</ol>
+<p>使用宏时应该谨慎，因为不当的使用可能会导致代码难以理解和维护。在可能的情况下，可以考虑使用内联函数（C99 引入）作为宏的替代，因为内联函数提供了类型检查和更清晰的调试信息。</p>
+</blockquote>
+<p>实际上，配合<a href="https://gcc.gnu.org/onlinedocs/cpp/Macros.html">Macros (The C Preprocessor) (gnu.org)</a> 手册大概即可弄得一些基本的使用和概念了。</p>
+<p>有了一定的编程经验和 LLM 的帮助，应该是可以对宏基本上手使用。另一方面，无论是在教材还是各大交流平台上，总有人说宏会导致各种各样的问题，不要乱用。由于本人经验还是很有限，所以目前仅记录一些比较多人用且前人总结好的一些功能。</p>
+<p>本文笔记 记录的是 GNU C preprocessor。</p>
+<h2 id="c-macro-summary">C Macro Summary</h2>
+<h3 id="preprocessor-process">Preprocessor process</h3>
+<p>宏作为预处理语句的一部分，我还是想总结了一些关于预处理器进行预处理的一些流程。原本我以为的流程很简单（ <code>include</code>、展开、替换），但查阅手册和标准后才发现预处理器原来不只有做这些事情。另一方面也是为了整个笔记的完整性吧，稍微有点强迫症。</p>
+<p>实际上这部分的内容我觉得对于大部分人员都是不用了解的（除非你是写 preprocessor 的），唯一需要关注的是 <code>Preprocessing Language</code> 中宏展开的那部分。</p>
+<h4 id="1-initial-processing">1. Initial processing</h4>
+<ol>
+<li>
+<p>将输入文件读入到内存中并划分行</p>
+<p>这里不同的系统有不同约定来表示行尾，目前不深入了解。</p>
+</li>
+<li>
+<p>如果启用了三字符序列（trigraphs），它们会被替换为对应的单个字符(选) </p>
+<p>trigraphs 都是以 <code>??</code> 开头的。总共有 9 个 trigraphs：</p>
+<div class="highlight"><pre><span></span><code><span class="nl">Trigraph</span><span class="p">:</span><span class="w">       </span><span class="o">??</span><span class="p">(</span><span class="w">  </span><span class="o">??</span><span class="p">)</span><span class="w">  </span><span class="o">??&lt;</span><span class="w">  </span><span class="o">??&gt;</span><span class="w">  </span><span class="o">??=</span><span class="w">  </span><span class="o">??/</span><span class="w">  </span><span class="o">??</span><span class="err">&#39;</span><span class="w">  </span><span class="o">??!</span><span class="w">  </span><span class="o">??-</span>
+<span class="nl">Replacement</span><span class="p">:</span><span class="w">      </span><span class="p">[</span><span class="w">    </span><span class="p">]</span><span class="w">    </span><span class="p">{</span><span class="w">    </span><span class="p">}</span><span class="w">    </span><span class="err">#</span><span class="w">    </span><span class="err">\</span><span class="w">    </span><span class="o">^</span><span class="w">    </span><span class="o">|</span><span class="w">    </span><span class="o">~</span>
+</code></pre></div>
+</li>
+<li>
+<p>连续行合并为长行</p>
+<p>如果在代码中有使用反斜杠 <code>\</code> 来跨行的话，预处理器会将多行合并为一个长行。eg：</p>
+<div class="highlight"><pre><span></span><code><span class="cp">#define FORMAT_STRACE &quot;syscall: %s sys_num: %d(d)\n&quot; \</span>
+<span class="cp">                      &quot;        reg: a0: 0x%x  a1: 0x%x  a2: 0x%x\n&quot; \</span>
+<span class="cp">                      &quot;        ret: 0x%x\n&quot;   </span>
+</code></pre></div>
+</li>
+<li>
+<p>所有注释替换为单个空格</p>
+<p>无论是块注释 <code>/*   */</code> 还是 行注释 <code>//</code></p>
+</li>
+</ol>
+<h4 id="2-tokenization">2. Tokenization</h4>
+<p>完成第一步的文本转换后，输入文件将会被转换为 token 序列，这个 token 和编译器中的词法分析单元很类似，只是有一些小不同，我们目前不深入理解。我们只关注重要的特点。</p>
+<ul>
+<li>
+<p>空白分隔 token</p>
+<div class="highlight"><pre><span></span><code><span class="cp">#define foo() bar</span>
+<span class="n">foo</span><span class="p">()</span><span class="n">baz</span>
+<span class="w">     </span><span class="err">→</span><span class="w"> </span><span class="n">bar</span><span class="w"> </span><span class="n">baz</span>
+<span class="n">not</span>
+<span class="w">     </span><span class="err">→</span><span class="w"> </span><span class="n">barbaz</span>
+</code></pre></div>
+</li>
+<li>
+<p>化为 token 的过程中，预处理器会尽可能地将字符序列解释为尽可能大的 token。</p>
+<p>如： <code>a+++++b</code> 会被解释为 <code>a++ ++ +b</code>，而不是被解释为 <code>a ++ + ++ b</code>，哪怕后面这个可能才是对的。（别这么写代码）</p>
+</li>
+<li>
+<p>拆分为 token 后，各个 token 序列的边界就不会再变了，除非用 <code>##</code> 来串连 token。</p>
+</li>
+<li>
+<p>编译器不会再重新 token 化预处理器的输出，每个预处理器部分的 token 直接为编译器词法分析的词法单元。</p>
+</li>
+<li>
+<p>预处理的 token 分为五类：标识符、预处理数字、字符串字面量、标点符号和其他。</p>
+<p>详细看：<a href="https://gcc.gnu.org/onlinedocs/cpp/Tokenization.html">Tokenization (The C Preprocessor) (gnu.org)</a></p>
+<ul>
+<li><strong><em>identifier</em></strong> 标识符：这个和 C 语言的标识符定义一致</li>
+<li><strong><em>preprocessing number</em></strong> 预处理数字：包含 C 所有的整数和浮点数，另外还包括一些特别的内容，</li>
+<li><strong><em>String literals</em></strong> 字符串字面量：“hello world!”</li>
+<li><strong>character-constant</strong> 字符常量：就是'a', '\n' </li>
+<li><strong><em>punctuator</em></strong> 标点符号 + - -&gt; ：同 C/C++</li>
+<li>除了上边所列情况以外的所有非空白字符</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-the-preprocessing-language">3. <strong>The Preprocessing Language</strong></h4>
+<p>完成 token 化之后，token 序列就会被传递给编译器的 parser。</p>
+<p>但是如果我们还用了预处理语言的话，那在这之前的最后一步就是将其<strong>转化</strong>为对应的源文件代码，<strong>实际上，这一步骤才是大多数人认为预处理器做的事情。</strong></p>
+<p>预处理语言以 <code>#</code> 开始，主要包含：指令、扩展的宏。</p>
+<ul>
+<li>
+<p><code>#include</code> 头文件，其主要作用就是文本替换，但实际上你可以 <code>include</code> 各种各样的内容进去，不单单是 <code>.h</code>。</p>
+</li>
+<li>
+<p>条件编译：<code>#if</code> <code>#elif</code></p>
+</li>
+<li>
+<p>宏</p>
+<p>Macro expansion. You can define <strong><em>macros</em></strong>, which are abbreviations for arbitrary fragments of C code. The preprocessor will replace the macros with their definitions throughout the program. Some macros are automatically defined for you.</p>
+</li>
+</ul>
+<p>所以，我们常玩的宏滥用、黑魔法就是这一部分的内容，而我们之后关注的也就是这部分内容：<strong><em>Macro expansion</em></strong></p>
+<h3 id="and"><code>#</code> and <code>##</code></h3>
+<p>我这里通过一些运算符的实例来引入关于宏展开的内容。</p>
+<p><strong>这里只看常用的功能，更多具体的限制和规则，自行查看标准。</strong></p>
+<h4 id="stringizing"># 字符串化操作符（Stringizing）</h4>
+<p>运算符 # 在宏中会将<strong>实参</strong>直接转化为字符串常量。</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// macro stringizing</span>
+<span class="cp">#define str_temp(x) #x</span>
+<span class="c1">//#define str(x) str_temp(x)</span>
+
+<span class="n">puts</span><span class="p">(</span><span class="n">str_temp</span><span class="p">(</span><span class="n">abcde1234</span><span class="p">));</span>
+<span class="nl">result</span><span class="p">:</span><span class="w"> </span><span class="n">puts</span><span class="p">(</span><span class="s">&quot;abcde1234&quot;</span><span class="p">);</span>
+</code></pre></div>
+<blockquote>
+<p>这里为什么要包一层，明明一层就能搞定的事情？</p>
+</blockquote>
+<h4 id="token-pasting">## 标记粘贴操作符（token-pasting）</h4>
+<blockquote>
+<p>预处理器在处理 <code>##</code> 操作符时，会将前后的标记合并为一个新的标记，但这要求这两个标记能够形成一个有效的C语言标识符。</p>
+</blockquote>
+<p>对于这个操作符在生成复杂的宏定义时非常有用，但是我们目前最常用的就是拼接功能，所以我也更习惯叫拼接符。</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// macro concatenation</span>
+<span class="cp">#define concat_temp(x, y) x ## y</span>
+<span class="c1">//#define concat(x, y) concat_temp(x, y)</span>
+
+<span class="cp">#define RISCV_32 &quot;test-RISCV32&quot;</span>
+<span class="cp">#define RISCV_64 &quot;test-RISCV64&quot;</span>
+
+<span class="n">puts</span><span class="p">(</span><span class="n">concat_temp</span><span class="p">(</span><span class="n">RISCV_</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p">));</span>
+<span class="n">puts</span><span class="p">(</span><span class="n">concat_temp</span><span class="p">(</span><span class="n">RISCV_</span><span class="p">,</span><span class="w"> </span><span class="mi">64</span><span class="p">));</span>
+<span class="nl">result</span><span class="p">:</span><span class="w"> </span>
+<span class="n">puts</span><span class="p">(</span><span class="s">&quot;test-RISCV32&quot;</span><span class="p">);</span>
+<span class="n">puts</span><span class="p">(</span><span class="s">&quot;test-RISCV64&quot;</span><span class="p">);</span>
+</code></pre></div>
+<blockquote>
+<p>又包一层？</p>
+</blockquote>
+<h4 id="_1"># 和 ## 特殊情况</h4>
+<p>上面使用的这两个操作符，常常会将功能再包一层，再对外给出接口。但是明明一层就能做的事，为什么还要再包一层？</p>
+<p>我们具体看几个例子：</p>
+<div class="highlight"><pre><span></span><code><span class="cp">#define concat_temp(x, y) x ## y</span>
+<span class="c1">//#define concat(x, y) concat_temp(x, y)</span>
+
+<span class="cp">#define RISCV_32 &quot;test-RISCV32&quot;</span>
+<span class="c1">//#define RISCV_ARCH &quot;no&quot;                                                                                                </span>
+<span class="cp">#define ARCH 32</span>
+
+<span class="n">puts</span><span class="p">(</span><span class="n">concat_temp</span><span class="p">(</span><span class="n">RISCV_</span><span class="p">,</span><span class="w"> </span><span class="n">ARCH</span><span class="p">));</span>
+<span class="n">puts</span><span class="p">(</span><span class="n">concat_temp</span><span class="p">(</span><span class="n">RISCV_</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p">));</span>
+</code></pre></div>
+<p>如上场景和要求，我们通过 <code>Makefile</code> 定义了一些关于ARCH 的宏，我们想要得到效果是 <code>RISCV_32</code>，即输出 <code>test-RISCV32</code>。</p>
+<p>但是实际展开却是 RISCV_ARCH，并没有达到我们想要的效果。</p>
+<p><img alt="image-20240823181512360" src="pic/image-20240823181512360.png" /></p>
+<p>这个时候我们再改一改：</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// macro concatenation</span>
+<span class="cp">#define concat_temp(x, y) x ## y</span>
+<span class="cp">#define concat(x, y) concat_temp(x, y)</span>
+
+<span class="cp">#define RISCV_32 &quot;test-RISCV32&quot;</span>
+<span class="c1">//#define RISCV_ARCH &quot;no&quot;</span>
+
+<span class="cp">#define ARCH 32</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
+<span class="w">    </span><span class="n">puts</span><span class="p">(</span><span class="n">concat</span><span class="p">(</span><span class="n">RISCV_</span><span class="p">,</span><span class="w"> </span><span class="n">ARCH</span><span class="p">));</span>
+<span class="w">    </span><span class="n">puts</span><span class="p">(</span><span class="n">concat_temp</span><span class="p">(</span><span class="n">RISCV_</span><span class="p">,</span><span class="w"> </span><span class="mi">64</span><span class="p">));</span><span class="w">               </span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>没有报错，正常输出。</p>
+<p>实际上，<code>#</code> 和 <code>##</code> 运算符在接收到参数后立刻将其变为字符串，如果参数还是一个宏，那这个宏并不会展开，而是直接将其转化为字符串，如图 error。</p>
+<p>所以问题在于传入的参数宏 <code>ARCH</code> 没有替换展开（传入宏的实参只是被当作一个符号，并不会被识别成变量、别的宏等内容展开）。</p>
+<p>为了解决这一问题，多加一层中间转换宏 (<code>concat</code>)，<strong>这一层宏的作用就在于把所有宏的参数在这里全部替换，这样在实际功能宏 (<code>concat_temp</code>) 中就能得到正确的宏参数。</strong></p>
+<p>但是这一解决措施好像并没有说中它内部的原理？预处理器究竟是怎么扫描这个宏的？以什么方式？需要知道它的具体算法是什么吗？</p>
+<h3 id="macro-expansion">Macro expansion</h3>
+<blockquote>
+<p>前面对于预处理器的各个阶段，如果不是专门做这方面的内容，简单了解即可，甚至于说直接看第四步这里就可以了。宏展开才是重点。</p>
+</blockquote>
+<h4 id="introduction_1">Introduction</h4>
+<p>A <strong><em>macro</em></strong> is a fragment of code which has been given a name. Whenever the name is used, it is replaced by the contents of the macro. </p>
+<p>There are two kinds of macros. They differ mostly in what they look like when they are used. <strong><em>Object-like</em></strong> macros resemble data objects when used, <strong><em>function-like</em></strong> macros resemble function calls.</p>
+<div class="highlight"><pre><span></span><code><span class="cp">#define &lt;identifier&gt; &lt;replacement token list&gt; new line                   </span><span class="c1">// object-like macro</span>
+<span class="cp">#define &lt;identifier&gt;(&lt;parameter list(identifier list)&gt;) &lt;replacement token list&gt; new line </span><span class="c1">// function-like macro, note parameters</span>
+</code></pre></div>
+<p>我们主要关注 func-like 宏的展开顺序，obj-like 宏的也是类似，只是少了更多的规则。</p>
+<p>下面是在 Wikipedia 上给出的顺序；</p>
+<blockquote>
+<p><strong>Order of expansion</strong></p>
+<p><strong><em>Function-like</em></strong> macro expansion occurs in the following stages:</p>
+<ol>
+<li>Stringification operations are replaced with the textual representation of their argument's replacement list (without performing expansion).</li>
+<li>Parameters are replaced with their replacement list (without performing expansion).</li>
+<li>Concatenation operations are replaced with the concatenated result of the two operands (without expanding the resulting token).</li>
+<li>Tokens originating from parameters are expanded.</li>
+<li>The resulting tokens are substituted as normal.</li>
+</ol>
+<p>This may produce surprising results:</p>
+<div class="highlight"><pre><span></span><code><span class="cp">#define HE HI</span>
+<span class="cp">#define LLO _THERE</span>
+<span class="cp">#define HELLO &quot;HI THERE&quot;</span>
+
+<span class="cp">#define CAT(a,b) a##b</span>
+<span class="cp">#define XCAT(a,b) CAT(a,b)</span>
+<span class="cp">#define CALL(fn) fn(HE,LLO)</span>
+
+<span class="n">CAT</span><span class="p">(</span><span class="n">HE</span><span class="p">,</span><span class="w"> </span><span class="n">LLO</span><span class="p">)</span><span class="w"> </span><span class="c1">// &quot;HI THERE&quot;, because concatenation occurs before normal expansion</span>
+<span class="n">XCAT</span><span class="p">(</span><span class="n">HE</span><span class="p">,</span><span class="w"> </span><span class="n">LLO</span><span class="p">)</span><span class="w"> </span><span class="c1">// HI_THERE, because the tokens originating from parameters (&quot;HE&quot; and &quot;LLO&quot;) are expanded first</span>
+<span class="n">CALL</span><span class="p">(</span><span class="n">CAT</span><span class="p">)</span><span class="w"> </span><span class="c1">// &quot;HI THERE&quot;, because this evaluates to CAT(a,b)</span>
+</code></pre></div>
+<p>这里有些概念需要区分：参数替换、token 展开、宏展开，我在学习的时候有时会弄混。</p>
+<p>这里以具体的例子来说明更好。</p>
+<div class="highlight"><pre><span></span><code><span class="cp">#define ADD(x, y) x + y</span>
+</code></pre></div>
+<p>调用这个宏：</p>
+<div class="highlight"><pre><span></span><code><span class="n">ADD</span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">d</span><span class="p">)</span>
+</code></pre></div>
+<p>具体过程：</p>
+<ol>
+<li>
+<p><strong>宏名展开</strong>：</p>
+<p><code>ADD</code> 被展开为 <code>x + y</code>。</p>
+</li>
+<li>
+<p><strong>参数替换</strong>：</p>
+<ul>
+<li><code>x</code> 被替换为 <code>a + b</code>。</li>
+<li><code>y</code> 被替换为 <code>c * d</code>。</li>
+</ul>
+</li>
+<li>
+<p><strong>完全展开</strong>：</p>
+<p><code>(a + b) + (c * d)</code></p>
+</li>
+<li>
+<p><strong>总结</strong>：</p>
+<ul>
+<li><strong>宏名展开</strong>是预处理器将宏名替换为宏定义的过程。</li>
+<li><strong>参数替换</strong>是预处理器将宏定义中的参数替换为宏调用中的具体值或表达式的过程。</li>
+</ul>
+</li>
+</ol>
+</blockquote>
+<p>这里实在是难写，还是直接看看网上的内容：</p>
+<p>先总结宏展开基本注意点。</p>
+<ul>
+<li>宏的参数先展开</li>
+<li>参数替换后重新扫描</li>
+<li>蓝色集合中不展开</li>
+<li>遇到 <code>#</code>、<code>##</code>  不展开（想要展开再添一层）</li>
+<li>最后的括号检查</li>
+<li>在展开的过程中，如果 replacement list 中出现了 被展开宏，那么该被展开宏不会被展开。</li>
+<li>更进一步的，在展开的过程中，任何嵌套的展开过程中出现了被展开宏，该被展开宏也不会被展开。</li>
+</ul>
+<h3 id="_2">递归与宏</h3>
+<blockquote>
+<p>后来更新：</p>
+<p>写完的时候发现，在 ysyx 的分享会上，有人分享过类似的内容，更加深入且有理论分析，入门了解之后，看看这部分视频。</p>
+<p><a href="https://www.bilibili.com/video/BV1S84y1X7HF/?spm_id_from=333.999.0.0&amp;vd_source=ecc99d78ae961113010161a48a475a35">第六期双周分享会10月29日 分享</a> 35:01 宏与预处理器</p>
+<p><a href="https://www.bilibili.com/video/BV1pB4y1f79q/?spm_id_from=333.999.0.0&amp;vd_source=ecc99d78ae961113010161a48a475a35">第六期双周分享会10月15日 NEMU分享</a>1:00:10 “宏”的奇技淫巧</p>
+</blockquote>
+<p>还是先启动吧，这个事情先放一放。</p>
+<h3 id="variadic-macros">变参宏（Variadic Macros）</h3>
+<p>C99 允许在宏中定义可变长度的参数列表。</p>
+<p>其语法类似于变参函数的语法：</p>
+<ul>
+<li>
+<p>定义变参宏时，在参数列表的最后使用三个点 <code>...</code> 来表示这个宏可以接受可变数量的参数。</p>
+</li>
+<li>
+<p>对应的，可以使用 <code>__VA_ARGS__</code> 来引用所有传递给宏的参数 <code>...</code>。<code>__VA_ARGS__</code> 会将所有传递的参数视为一个整体。</p>
+</li>
+<li>
+<p>When the macro is invoked, all the tokens in its argument list after the last named argument (this macro has none), including any commas, become the <strong><em>variable argument</em>.</strong> </p>
+<p>This sequence of tokens replaces the identifier <code>__VA_ARGS__</code> in the macro body wherever it appears.</p>
+</li>
+</ul>
+<p>examples：</p>
+<ol>
+<li>
+<p>Simple version</p>
+<div class="highlight"><pre><span></span><code><span class="n">eprintf</span><span class="w"> </span><span class="p">(</span><span class="s">&quot;%s:%d: &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">input_file</span><span class="p">,</span><span class="w"> </span><span class="n">lineno</span><span class="p">)</span>
+<span class="w">     </span><span class="err">→</span><span class="w">  </span><span class="n">fprintf</span><span class="w"> </span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;%s:%d: &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">input_file</span><span class="p">,</span><span class="w"> </span><span class="n">lineno</span><span class="p">)</span>
+</code></pre></div>
+</li>
+<li>
+<p>More complicated</p>
+<div class="highlight"><pre><span></span><code><span class="cp">#define PRINT_MESSAGES(...) printf(&quot;Messages: &quot; __VA_ARGS__ &quot;\n&quot;)</span>
+<span class="n">PRINT_MESSAGES</span><span class="p">(</span><span class="s">&quot;Hello, &quot;</span><span class="p">);</span>
+<span class="w">     </span><span class="err">→</span><span class="w"> </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Messages: &quot;</span><span class="w"> </span><span class="s">&quot;Hello, &quot;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="cp">#define eprintf(format, ...) fprintf (stderr, format, __VA_ARGS__)</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+<span class="n">eprintf</span><span class="p">(</span><span class="s">&quot;new: %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">);</span>
+<span class="w">     </span><span class="err">→</span><span class="w"> </span><span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;new: %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">);</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="cp">#define eprintf(args...) fprintf (stderr, args)</span>
+</code></pre></div>
+<blockquote>
+<p>注意，使用第三种格式：命名参数 + ... ，在同一个宏种就不能再使用 <code>__VA_ARGS__</code> 宏及相关扩展。</p>
+</blockquote>
+</li>
+</ol>
+<h4 id="__va_args__-bug"><code>__VA_ARGS__</code> 的 bug</h4>
+<p>上面的 <code>__VA_ARGS__</code> 存在一些问题：</p>
+<blockquote>
+<p>来自 <code>gcc</code> 手册：</p>
+<p>This formulation(上面的 <code>eprintf</code> ) looks more descriptive, but historically it was less flexible: <strong>you had to supply at least one argument after the format string.</strong> </p>
+<p>In standard C, you could not omit the comma separating the named argument from the variable arguments. (Note that this restriction has been lifted in C++20, and never existed in GNU C; see below.)</p>
+</blockquote>
+<p>也就是在格式字符串 <code>format</code> 至少提供一个参数，否则将会出错。</p>
+<div class="highlight"><pre><span></span><code><span class="n">eprintf</span><span class="p">(</span><span class="s">&quot;success!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">);</span>
+<span class="w">     </span><span class="err">→</span><span class="w"> </span><span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;success!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">);</span>
+</code></pre></div>
+<p>这个问题在 C++20 已经修复了，并且 GNU C++ 对这个问题还有一些扩展。</p>
+<p>首先：在GNU CPP以及从C++20开始的C++中，允许完全省略变量参数</p>
+<div class="highlight"><pre><span></span><code><span class="n">eprintf</span><span class="w"> </span><span class="p">(</span><span class="s">&quot;success!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)</span>
+<span class="w">     </span><span class="err">→</span><span class="w"> </span><span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;success!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">)</span>
+</code></pre></div>
+<p>其次，C++20引入了 <code>__VA_OPT__</code> 函数宏。该宏只能用于变参宏的定义中：</p>
+<ul>
+<li>只有当可变参数 <code>...</code> 至少接收了一个参数时，<code>__VA_OPT__()</code> 展开为其参数的内容；</li>
+<li>否则该宏展开为空。所以，<code>eprintf</code> 改为：</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="cp">#define eprintf(format, ...) \</span>
+<span class="cp">  fprintf (stderr, format __VA_OPT__(,) __VA_ARGS__)</span>
+</code></pre></div>
+<p>另外，<code>__VA_OPT__</code> 也可以在 GNU C 和 GNU 预处理器 使用，而且，<code>__VA_OPT__</code> 也已经被 C23 接收使用。</p>
+<p>实际上，有一些编译器针对这个问题也做了一些处理，如GCC。
+这也就是经常在一些格式化字符串和变参宏配合使用的地方常常看到的：通过在逗号 <code>,</code> 和 <code>__VA_ARGS__</code> 中使用 <code>##</code> 预处理运算符。</p>
+<div class="highlight"><pre><span></span><code><span class="cp">#define eprintf(format, ...) fprintf (stderr, format, ##__VA_ARGS__)</span>
+</code></pre></div>
+<p>使用 <code>eprintf</code> 宏时省略变量参数（传入空），则 <code>##</code> 前的逗号将被删除。如果传递空参数，则不会发生这种情况，如果“##”前面的标记不是逗号，则不会发生这种情况。</p>
+<h3 id="genericc11">Generic（C11）</h3>
+<h4 id="introduction_2">Introduction</h4>
+<blockquote>
+<p>C11 引入了泛型的概念，<strong>允许编写与类型无关的函数和结构体</strong>，使代码更加灵活和可重用。如果使用过别的更高级的编程语言的话（如 C++ 的模板），对这个概念应该比较熟悉。</p>
+<p>C11 引入的泛型主要包括 _Generic 关键字、类型泛化的复合字面量、静态断言（ <code>_Static_assert</code>）。</p>
+</blockquote>
+<p>笔记主要总结 _Generic 关键字的内容。</p>
+<h4 id="_generic">关键字 _Generic</h4>
+<blockquote>
+<p>C 标准委员会引入 <code>_Generic</code> 关键字的目的、以及 <code>_Generic</code> 最广泛的作用之一 就是<strong>通过选择不同的函数指针，将 <code>_Generic</code> 用于泛型宏接口。</strong></p>
+<p><code>_Generic</code> 关键字本身并不具备宏的特征，但其可以方便地用于宏扩展。</p>
+</blockquote>
+<p><code>_Generic</code> 关键字允许编写<strong>基于类型</strong>的编译时决策。</p>
+<p>它根据给定表达式的类型，从提供的选项中选择一个表达式进行编译。</p>
+<div class="highlight"><pre><span></span><code><span class="k">_Generic</span><span class="w"> </span><span class="p">(</span><span class="n">controlling</span><span class="w"> </span><span class="n">expression</span><span class="p">,</span>
+<span class="w">          </span><span class="nl">type1</span><span class="p">:</span><span class="w"> </span><span class="n">expression1</span><span class="p">,</span>
+<span class="w">          </span><span class="p">...</span><span class="w"> </span><span class="p">,</span>
+<span class="w">          </span><span class="nl">typeN</span><span class="p">:</span><span class="w"> </span><span class="n">expressionN</span>
+<span class="w">          </span><span class="k">default</span><span class="o">:</span><span class="w"> </span><span class="n">expression</span><span class="p">)</span>
+</code></pre></div>
+<ul>
+<li><code>type</code> 是要检查的表达式。</li>
+<li><code>type1</code>, <code>type2</code>, ... 是类型名称。</li>
+<li><code>exprssion1</code>, <code>expression2</code>, ... 是与每种类型相关联的表达式。</li>
+<li><code>default</code> 是其他所有类型都不匹配时使用的默认表达式。</li>
+</ul>
+<p>注意：</p>
+<ul>
+<li><code>_Generic</code> 很像 <code>switch case</code>，但是 <code>_Generic</code> 的表达式判断仅用于对 <code>controlling expression</code> 的类型进行判断。</li>
+<li><strong>另外，<code>_Generic</code> 关键字虽然配合宏使用，但是它并不在预处理阶段展开它的结果，而是在编译阶段进行类型判断的。</strong></li>
+</ul>
+<p>这里总结两个例子，主要都是实现泛型编程的。</p>
+<ol>
+<li>
+<p>函数重载</p>
+<div class="highlight"><pre><span></span><code><span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="nf">min</span><span class="p">(</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;default.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="nf">minl</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;minl.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="nf">minf</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;minf.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/**</span>
+<span class="cm">** @brief Type - generic minimum for floating - point values</span>
+<span class="cm">**/</span>
+<span class="cp"># define min(A, B) \</span>
+<span class="cp">    _Generic ((A)+(B), \</span>
+<span class="cp">    float : minf , \</span>
+<span class="cp">    long double : minl , \</span>
+<span class="cp">    default : min)((A), (B))</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">a1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2.1</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">a2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">123.21</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">//long double a2 = 123.21;</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">min</span><span class="p">(</span><span class="n">a1</span><span class="p">,</span><span class="w"> </span><span class="n">a2</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">a1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;dsfsdf</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>如上例子，我们实现了最小值（两个数）的泛型接口。</p>
+<p>这样做的好处：对于三元运算符 <code>a ? b : c</code> 究竟要做出哪个选择，那就要看运行时 <code>a</code> 的值是多少，并且每次运行 <code>a</code> 的值可能都会不同。而使用 <code>_Generic</code> 基于类型来判断的话 就让三元运算符的选择推前到了编译阶段。这样编译器也就能根据相应的类型结果来做出对应的优化。</p>
+<p>另一方面，使用上述的接口，我们可以实现为变量选择合适的类型，这样就不会出现 明明使用 int 就够了，但还用 long 的情况。</p>
+<blockquote>
+<div class="highlight"><pre><span></span><code><span class="n">define</span><span class="w"> </span><span class="n">min</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="n">B</span><span class="p">)</span><span class="w"> </span>\
+<span class="w"> </span><span class="k">_Generic</span><span class="w"> </span><span class="p">((</span><span class="n">A</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="n">B</span><span class="p">),</span><span class="w"> </span>\
+<span class="w"> </span><span class="nl">float</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">minf</span><span class="w"> </span><span class="p">,</span><span class="w"> </span>\
+<span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">minl</span><span class="w"> </span><span class="p">,</span><span class="w"> </span>\
+<span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">min</span><span class="p">)((</span><span class="n">A</span><span class="p">),</span><span class="w"> </span><span class="p">(</span><span class="n">B</span><span class="p">))</span>
+</code></pre></div>
+<p>对于上面的 宏名字 min 和 默认的函数名 min 同名，这样子不会导致预处理器无限展开吗？</p>
+<p>这里需要明白一点：预处理器并不会扩展自引用宏，防止无限展开。</p>
+<p>书上的例子：</p>
+<p>Also for the above example, a keen observer might notice that the name of the macro <code>cbrt</code> is the same as the default function <code>cbrt</code> and wonder why that doesn’t cause an infinite preprocessor macro expansion loop. It doesn’t because the preprocessor will <em>not</em> expand a macro that references itself. Hence, if the resulting expression of <code>_Generic</code> is <code>cbrt</code>, that will <em>not</em> be expanded again.</p>
+</blockquote>
+</li>
+<li>
+<p>类型自动匹配</p>
+<blockquote>
+<p>网上的例子</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="cpf">&lt;stdio.h&gt;</span>
+<span class="cp">#define GET_TYPENAME(var) _Generic((var), \</span>
+<span class="cp">    int:&quot;int&quot;,\</span>
+<span class="cp">    char:&quot;char&quot;, \</span>
+<span class="cp">    float:&quot;float&quot;, \</span>
+<span class="cp">    double:&quot;double&quot;, \</span>
+<span class="cp">    char *:&quot;char *&quot;,   \</span>
+<span class="cp">    default: &quot;other type&quot;)</span>
+
+<span class="cp">#define GET_FORMAT(signal) _Generic((signal),\</span>
+<span class="cp">                                    int:&quot;%d\n&quot;, \</span>
+<span class="cp">                                    char:&quot;%c\n&quot;, \</span>
+<span class="cp">                                    char *:&quot;%s\n&quot;,\</span>
+<span class="cp">                                    default:&quot;%f\n&quot;)</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">**</span><span class="w"> </span><span class="n">argv</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">x1</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="o">*</span><span class="w"> </span><span class="n">x2</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">char</span><span class="w"> </span><span class="n">x3</span><span class="p">[</span><span class="mi">20</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;hello world!&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">x1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">666666</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// 范例1</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="n">GET_FORMAT</span><span class="p">(</span><span class="n">x1</span><span class="p">),</span><span class="w"> </span><span class="n">x1</span><span class="p">);</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="n">GET_FORMAT</span><span class="p">(</span><span class="n">x3</span><span class="p">),</span><span class="w"> </span><span class="n">x3</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// 范例2</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;type: x1 = %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">GET_TYPENAME</span><span class="p">(</span><span class="n">x1</span><span class="p">));</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;type: x2 = %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">GET_TYPENAME</span><span class="p">(</span><span class="n">x2</span><span class="p">));</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;type: x3 = %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">GET_TYPENAME</span><span class="p">(</span><span class="n">x3</span><span class="p">));</span>
+
+<span class="w">    </span><span class="c1">// 范例3</span>
+<span class="w">    </span><span class="c1">// 泛型中的值会不会发生改变？</span>
+<span class="w">    </span><span class="c1">// 答案：不会</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="n">GET_TYPENAME</span><span class="p">(</span><span class="n">k</span><span class="o">++</span><span class="p">);</span>
+<span class="w">    </span><span class="n">GET_TYPENAME</span><span class="p">(</span><span class="o">++</span><span class="n">k</span><span class="p">);</span>
+<span class="w">    </span><span class="n">GET_TYPENAME</span><span class="p">(</span><span class="n">k</span><span class="o">*=</span><span class="mi">2</span><span class="p">);</span>
+<span class="w">    </span><span class="n">GET_TYPENAME</span><span class="p">(</span><span class="n">k</span><span class="o">=</span><span class="mi">4</span><span class="p">);</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;k = %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;math.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span>
+
+<span class="cp">#define PI 3.14</span>
+
+<span class="cp">#define BUFSIZE 256</span>
+<span class="cp">#define PTR_TYPE(X) _Generic((X),\</span>
+<span class="cp">    int: &quot;%d&quot;, float : &quot;%f&quot;, double: &quot;%f&quot;, \</span>
+<span class="cp">    char: &quot;%c&quot;, char*: &quot;%s&quot;, void *: &quot;%p&quot;, default: &quot;%p&quot;)</span>
+<span class="cp">#define printv(var) do {                                                     \</span>
+<span class="cp">    char __print_buf[BUFSIZE], __format_buf[BUFSIZE] = &quot;val of &quot; #var &quot;: &quot;;  \</span>
+<span class="cp">    sprintf(__print_buf, strcat(__format_buf, PTR_TYPE(var)), var);          \</span>
+<span class="cp">    puts(__print_buf);                                                       \</span>
+<span class="cp">} while(0)</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">sin10</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sin</span><span class="p">(</span><span class="n">PI</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">9</span><span class="p">);</span>
+<span class="w">    </span><span class="kt">char</span><span class="w"> </span><span class="n">ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sc">&#39;6&#39;</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">greeting</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Hello&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">malloc</span><span class="p">(</span><span class="n">num</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">printv</span><span class="p">(</span><span class="n">num</span><span class="p">);</span><span class="w">        </span><span class="c1">// val of num: 10</span>
+<span class="w">    </span><span class="n">printv</span><span class="p">(</span><span class="n">sin10</span><span class="p">);</span><span class="w">      </span><span class="c1">// val of sin10: 0.342020</span>
+<span class="w">    </span><span class="n">printv</span><span class="p">(</span><span class="n">ch</span><span class="p">);</span><span class="w">         </span><span class="c1">// val of ch: 6</span>
+<span class="w">    </span><span class="n">printv</span><span class="p">(</span><span class="n">greeting</span><span class="p">);</span><span class="w">   </span><span class="c1">// val of greeting: Hello</span>
+<span class="w">    </span><span class="n">printv</span><span class="p">(</span><span class="n">data</span><span class="p">);</span><span class="w">       </span><span class="c1">// val of data: 00000000009B2430</span>
+
+<span class="w">    </span><span class="n">free</span><span class="p">(</span><span class="n">data</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+</li>
+<li>
+<p>模拟模板</p>
+<p><a href="https://www.cnblogs.com/realHarvey/p/16636010.html">【C】利用 _Generic 重载 参数数目不同的函数 - realHarvey - 博客园 (cnblogs.com)</a></p>
+</li>
+</ol>
+<p>虽然说能借助宏模拟泛型，但是这样子 debug 是不是会比较困难？而且本质上这并没有减少代码量。如果遇到更加复杂的代码，这样做起来应该很复杂繁琐？看看他人的最佳实践/例子？</p>
+<blockquote>
+<p>数组类型转为 <code>void*</code>，能比较任何类型的数组了，这怎么用上面的 <code>_Generic</code> 呢？</p>
+<div class="highlight"><pre><span></span><code><span class="w"> </span><span class="n">qsort</span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">Base</span><span class="p">,</span><span class="w">                                      </span><span class="c1">// 数组地址</span>
+<span class="w">       </span><span class="kt">size_t</span><span class="w"> </span><span class="n">NumOfElements</span><span class="p">,</span><span class="w">                            </span><span class="c1">// 元素数量</span>
+<span class="w">       </span><span class="kt">size_t</span><span class="w"> </span><span class="n">SizeOfElements</span><span class="p">,</span><span class="w">                           </span><span class="c1">// 元素大小</span>
+<span class="w">       </span><span class="kt">int</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">PtFuncCompare</span><span class="p">)(</span><span class="k">const</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="c1">// 比较函数</span>
+<span class="w"> </span><span class="p">);</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span>
+
+<span class="c1">// 定义比较函数</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">compare_int</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">ia</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="n">a</span><span class="p">;</span>
+<span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">ib</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="n">b</span><span class="p">;</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="o">*</span><span class="n">ia</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="o">*</span><span class="n">ib</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">compare_float</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="o">*</span><span class="n">fa</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="n">a</span><span class="p">;</span>
+<span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="o">*</span><span class="n">fb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="n">b</span><span class="p">;</span>
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="o">*</span><span class="n">fa</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="o">*</span><span class="n">fb</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="mi">-1</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">fa</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="o">*</span><span class="n">fb</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// 定义一个泛型比较宏</span>
+<span class="cp">#define compare(A, B) _Generic((A), \</span>
+<span class="cp"> int*: compare_int, \</span>
+<span class="cp"> float*: compare_float, \</span>
+<span class="cp"> default: ((void)(A), (void)(B), 0))((A), (B))</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">intArray</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">};</span>
+<span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">floatArray</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mf">2.1f</span><span class="p">,</span><span class="w"> </span><span class="mf">3.1f</span><span class="p">,</span><span class="w"> </span><span class="mf">1.1f</span><span class="p">,</span><span class="w"> </span><span class="mf">4.1f</span><span class="p">};</span>
+
+<span class="w"> </span><span class="n">qsort</span><span class="p">(</span><span class="n">intArray</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">intArray</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">intArray</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">intArray</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span><span class="w"> </span><span class="n">compare</span><span class="p">);</span>
+<span class="w"> </span><span class="n">qsort</span><span class="p">(</span><span class="n">floatArray</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">floatArray</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">floatArray</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">floatArray</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span><span class="w"> </span><span class="n">compare</span><span class="p">);</span>
+
+<span class="w"> </span><span class="c1">// 打印排序后的数组</span>
+<span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">intArray</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">intArray</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">     </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">intArray</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+<span class="w"> </span><span class="p">}</span>
+<span class="w"> </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+
+<span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">floatArray</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">floatArray</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">     </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%f &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">floatArray</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+<span class="w"> </span><span class="p">}</span>
+<span class="w"> </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+
+<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+</blockquote>
+<p>more example：</p>
+<p><a href="https://dev.to/pauljlucas/generic-in-c-i48">_Generic in C - DEV Community</a></p>
+<h3 id="x-macro">X-Macro</h3>
+<h4 id="introduction_3">introduction</h4>
+<p>做 AM keyboard 部分的时候遇到一些看起来比较厉害的宏技巧，生成了大量的键盘枚举值。了解后发现是一种叫 X macro 的技巧。</p>
+<blockquote>
+<p><strong>X macros</strong> are an idiomatic usage of <a href="https://en.wikipedia.org/wiki/Programming_language">programming language</a> <a href="https://en.wikipedia.org/wiki/Macro_(computer_science)">macros</a> for generating list-like structures of data or code. They are most useful when at least some of the lists cannot be composed by indexing, such as <a href="https://en.wikipedia.org/wiki/Compile_time">compile time</a>. They provide reliable maintenance of parallel lists whose corresponding items must be declared or executed in the same order.</p>
+<p>Examples of such lists particularly <strong>include initialization of arrays</strong>, <strong>in concert with declarations of enumeration constants and function prototypes</strong>; generation of statement sequences and switch arms; etc.</p>
+<p>Usage of X macros dates back to the 1960s.[<a href="https://en.wikipedia.org/wiki/X_macro#cite_note-1">1]</a> It remains useful in modern-day <a href="https://en.wikipedia.org/wiki/C_(programming_language)">C</a> and <a href="https://en.wikipedia.org/wiki/C%2B%2B">C++</a> programming languages, but remains relatively unknown.[<a href="https://en.wikipedia.org/wiki/X_macro#cite_note-2">2]</a> [<a href="https://en.wikipedia.org/wiki/X_macro#cite_note-3">3]</a></p>
+<p><a href="https://en.wikipedia.org/wiki/X_macro">X macro - Wikipedia</a></p>
+</blockquote>
+<p>如果没有学习过python等高级语言的话，第一次听到列表状结构时可能会有点懵。"列表状结构的数据和代码"（list-like structures of data or code）是指那些以<strong>列表形式组织</strong>的数据结构或代码块，它们需要以一定对顺序被声明或执行，这个结构通常包含一系列元素，这些元素可以是数据项、代码指令或其他任何可以序列化的内容。</p>
+<blockquote>
+<p>这里可以直接看python的内容：</p>
+<p>创建一个列表，只要把逗号分隔的不同的数据项使用方括号括起来即可：</p>
+<div class="highlight"><pre><span></span><code><span class="n">list1</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;physics&#39;</span><span class="p">,</span> <span class="s1">&#39;chemistry&#39;</span><span class="p">,</span> <span class="mi">1997</span><span class="p">,</span> <span class="mi">2000</span><span class="p">]</span>
+<span class="n">list2</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span> <span class="p">]</span>
+<span class="n">list3</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">,</span> <span class="s2">&quot;d&quot;</span><span class="p">]</span>
+</code></pre></div>
+<p>Python列表支持随机访问，即可以直接通过索引访问任何元素。</p>
+</blockquote>
+<p>对于 X-Macro 的应用组成，可以分为两部分：</p>
+<ol>
+<li>The definition of the list's elements.</li>
+<li>Expansion(s) of the list to generate fragments of declarations or statements.</li>
+</ol>
+<blockquote>
+<p>The list is defined by a macro or header file (named, <code>LIST</code>) which generates no code by itself, but merely consists of a sequence of invocations of a macro (classically named "<code>X</code>") with the elements' data. Each expansion of <code>LIST</code> is preceded by a definition of <code>X</code> with the syntax for a list element. The invocation of <code>LIST</code> expands <code>X</code> for each element in the list.</p>
+</blockquote>
+<p>这里直接以一些实际例子来看看上面的组成。</p>
+<ol>
+<li>
+<p>初始化数组</p>
+<p><strong>数据项</strong>：数组中的每个元素值。</p>
+<p><strong>代码指令</strong>：定义数组和初始化数组的操作。</p>
+<div class="highlight"><pre><span></span><code><span class="n">c</span><span class="err">#</span><span class="n">define</span><span class="w"> </span><span class="n">COLORS</span><span class="w"> </span>\
+<span class="w">    </span><span class="n">X</span><span class="p">(</span><span class="n">RED</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;red&quot;</span><span class="p">),</span><span class="w"> </span>\
+<span class="w">    </span><span class="n">X</span><span class="p">(</span><span class="n">GREEN</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;green&quot;</span><span class="p">),</span><span class="w"> </span>\
+<span class="w">    </span><span class="n">X</span><span class="p">(</span><span class="n">BLUE</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;blue&quot;</span><span class="p">)</span>
+
+<span class="cp">#define X(value, str) { #value, str }</span>
+
+<span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">name</span><span class="p">;</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">color</span><span class="p">;</span>
+<span class="p">}</span><span class="w"> </span><span class="n">Color</span><span class="p">;</span>
+
+<span class="n">Color</span><span class="w"> </span><span class="n">colors</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">COLORS</span>
+<span class="p">};</span>
+</code></pre></div>
+<ul>
+<li><code>RED</code>, <code>GREEN</code>, <code>BLUE</code> 是数据项，它们是枚举值。</li>
+<li><code>"red"</code>, <code>"green"</code>, <code>"blue"</code> 也是数据项，它们是字符串。</li>
+<li><code>X(RED, "red")</code>, <code>X(GREEN, "green")</code>, <code>X(BLUE, "blue")</code> 是代码指令，它们定义了数组的初始化。</li>
+</ul>
+</li>
+<li>
+<p>定义枚举常量和函数原型</p>
+<p><strong>数据项</strong>：枚举常量的值。</p>
+<p><strong>代码指令</strong>：定义枚举和函数原型的操作。</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// 定义枚举常量</span>
+<span class="cp">#define COMMANDS(_) \</span>
+<span class="cp">    _(OPEN, open_file), \</span>
+<span class="cp">    _(CLOSE, close_file), \</span>
+<span class="cp">    _(READ, read_file), \</span>
+<span class="cp">    _(COUNT, NULL) </span><span class="c1">// 添加一个计数项，用于数组大小</span>
+
+<span class="c1">// 定义枚举类型</span>
+<span class="cp">#define X(cmd, func) cmd</span>
+<span class="k">enum</span><span class="w"> </span><span class="n">Command</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">COMMANDS</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="w"> </span><span class="p">};</span>
+
+<span class="c1">// 定义函数原型</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">open_file</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">close_file</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">read_file</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span>
+
+<span class="c1">// 定义函数指针数组</span>
+<span class="cp">#define Y(cmd, func) func</span>
+<span class="kt">void</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">command_functions</span><span class="p">[])(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">COMMANDS</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span>
+<span class="p">};</span>
+</code></pre></div>
+<p>在这个例子中：</p>
+<ul>
+<li><code>OPEN</code>, <code>CLOSE</code>, <code>READ</code> 是数据项，它们是枚举值。</li>
+<li><code>open_file</code>, <code>close_file</code>, <code>read_file</code> 是代码指令，它们是函数原型。</li>
+</ul>
+</li>
+<li>
+<p>生成代码块</p>
+<p><strong>数据项</strong>：代码块中的具体操作或值。</p>
+<p><strong>代码指令</strong>：生成代码块的操作。</p>
+<div class="highlight"><pre><span></span><code><span class="n">c</span><span class="err">#</span><span class="n">define</span><span class="w"> </span><span class="n">CALCULATIONS</span><span class="w"> </span>\
+<span class="w">    </span><span class="n">X</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">add</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">),</span><span class="w"> </span>\
+<span class="w">    </span><span class="n">X</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">subtract</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">),</span><span class="w"> </span>\
+<span class="w">    </span><span class="n">X</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="n">multiply</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
+
+<span class="cp">#define X(id, operation, value) void operation_##id(int *result) { *result operation value; }</span>
+
+<span class="n">X</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">add</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span>
+<span class="n">X</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">subtract</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span>
+<span class="n">X</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="n">multiply</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
+</code></pre></div>
+<p>在这个例子中：</p>
+<ul>
+<li><code>1</code>, <code>2</code>, <code>3</code> 是数据项，它们是函数的标识符。</li>
+<li><code>add</code>, <code>subtract</code>, <code>multiply</code> 是代码指令，它们是操作的名称。</li>
+<li><code>5</code>, <code>3</code>, <code>2</code> 是数据项，它们是操作的参数。</li>
+</ul>
+</li>
+</ol>
+<p>初步印象之后，再来看看 PA2 实现的键盘列表：</p>
+<div class="highlight"><pre><span></span><code><span class="cp">#define AM_KEYS(_) \</span>
+<span class="cp">    _(ESCAPE) _(F1) _(F2) _(F3) _(F4) _(F5) _(F6) _(F7) _(F8) _(F9) _(F10) _(F11) _(F12) \</span>
+<span class="cp">    _(GRAVE) _(1) _(2) _(3) _(4) _(5) _(6) _(7) _(8) _(9) _(0) _(MINUS) _(EQUALS) _(BACKSPACE) \</span>
+<span class="cp">    _(TAB) _(Q) _(W) _(E) _(R) _(T) _(Y) _(U) _(I) _(O) _(P) _(LEFTBRACKET) _(RIGHTBRACKET) _(BACKSLASH) \</span>
+<span class="cp">    _(CAPSLOCK) _(A) _(S) _(D) _(F) _(G) _(H) _(J) _(K) _(L) _(SEMICOLON) _(APOSTROPHE) _(RETURN) \</span>
+<span class="cp">    _(LSHIFT) _(Z) _(X) _(C) _(V) _(B) _(N) _(M) _(COMMA) _(PERIOD) _(SLASH) _(RSHIFT) \</span>
+<span class="cp">    _(LCTRL) _(APPLICATION) _(LALT) _(SPACE) _(RALT) _(RCTRL) \</span>
+<span class="cp">    _(UP) _(DOWN) _(LEFT) _(RIGHT) _(INSERT) _(DELETE) _(HOME) _(END) _(PAGEUP) _(PAGEDOWN)</span>
+
+<span class="cp">#define AM_KEY_NAMES(key) AM_KEY_##key,</span>
+<span class="k">enum</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">AM_KEY_NONE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">    </span><span class="n">AM_KEYS</span><span class="p">(</span><span class="n">AM_KEY_NAMES</span><span class="p">)</span>
+<span class="p">};</span>
+</code></pre></div>
+<ol>
+<li><strong><code>AM_KEYS</code> 宏</strong>：<strong>按键列表</strong><ul>
+<li>定义一个长列表的键盘按键名。每个按键名都是通过传递给宏的参数 <code>_</code> 来生成的。这个参数是一个占位符，用于在宏展开时被替换。</li>
+</ul>
+</li>
+<li><strong><code>AM_KEY_NAMES</code> 宏</strong>：<strong>按键名宏</strong><ul>
+<li>这个宏用于生成每个按键名对应的枚举值。它使用标记粘贴操作符（<code>##</code>）将 <code>AM_KEY_</code> 前缀和按键名连接起来。</li>
+</ul>
+</li>
+<li><strong>枚举定义</strong>：<ul>
+<li>使用 <code>AM_KEYS</code> 宏和 <code>AM_KEY_NAMES</code> 宏来定义一个枚举类型，其中包含所有键盘按键的枚举值。</li>
+</ul>
+</li>
+</ol>
+<p>展开：</p>
+<div class="highlight"><pre><span></span><code><span class="k">enum</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">AM_KEY_NONE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">    </span><span class="n">AM_KEY_ESCAPE</span><span class="p">,</span><span class="w"> </span><span class="n">AM_KEY_F1</span><span class="p">,</span><span class="w"> </span><span class="n">AM_KEY_F2</span><span class="p">,</span><span class="w"> </span><span class="n">AM_KEY_F3</span><span class="p">,</span><span class="w"> </span><span class="n">AM_KEY_F4</span><span class="p">,</span><span class="w"> </span><span class="n">AM_KEY_F5</span><span class="p">,</span><span class="w"> </span><span class="n">AM_KEY_F6</span><span class="p">,</span><span class="w"> </span><span class="n">AM_KEY_F7</span><span class="p">,</span><span class="w"> </span><span class="n">AM_KEY_F8</span><span class="p">,</span><span class="w"> </span><span class="n">AM_KEY_F9</span><span class="p">,</span><span class="w"> </span><span class="n">AM_KEY_F10</span><span class="p">,</span><span class="w"> </span><span class="n">AM_KEY_F11</span><span class="p">,</span><span class="w"> </span><span class="n">AM_KEY_F12</span><span class="p">,</span><span class="w"> </span><span class="n">AM_KEY_GRAVE</span><span class="p">,</span><span class="w"> </span><span class="n">AM_KEY_1</span><span class="p">,</span><span class="w"> </span><span class="n">AM_KEY_2</span><span class="p">,</span><span class="w"> </span><span class="n">AM_KEY_3</span><span class="p">,</span><span class="w"> </span><span class="n">AM_KEY_4</span><span class="p">,</span><span class="w"> </span><span class="n">AM_KEY_5</span><span class="p">,</span><span class="w"> </span><span class="n">AM_KEY_6</span><span class="p">,</span><span class="w"> </span><span class="n">AM_KEY_7</span><span class="p">,</span><span class="w"> </span><span class="n">AM_KEY_8</span><span class="p">,</span><span class="w"> </span><span class="n">AM_KEY_9</span><span class="p">,</span><span class="w"> </span><span class="n">AM_KEY_0</span><span class="p">,</span><span class="w"> </span><span class="n">AM_KEY_MINUS</span><span class="p">,</span><span class="w"> </span><span class="n">AM_KEY_EQUALS</span><span class="p">,</span><span class="w"> </span><span class="n">AM_KEY_BACKSPACE</span><span class="p">,</span><span class="w"> </span><span class="n">AM_KEY_TAB</span><span class="p">,</span><span class="w"> </span><span class="n">AM_KEY_Q</span><span class="p">,</span><span class="w"> </span><span class="n">AM_KEY_W</span><span class="p">,</span><span class="w"> </span><span class="n">AM_KEY_E</span><span class="p">,</span><span class="w"> </span><span class="n">AM_KEY_R</span><span class="p">,</span><span class="w"> </span><span class="n">AM_KEY_T</span><span class="p">,</span><span class="w"> </span><span class="n">AM_KEY_Y</span><span class="p">,</span><span class="w"> </span><span class="n">AM_KEY_U</span><span class="p">,</span><span class="w"> </span><span class="n">AM_KEY_I</span><span class="p">,</span><span class="w"> </span><span class="n">AM_KEY_O</span><span class="p">,</span><span class="w"> </span><span class="n">AM_KEY_P</span><span class="p">,</span><span class="w"> </span><span class="n">AM_KEY_LEFTBRACKET</span><span class="p">,</span><span class="w"> </span><span class="n">AM_KEY_RIGHTBRACKET</span><span class="p">,</span><span class="w"> </span><span class="n">AM_KEY_BACKSLASH</span><span class="p">,</span><span class="w"> </span><span class="n">AM_KEY_CAPSLOCK</span><span class="p">,</span><span class="w"> </span><span class="n">AM_KEY_A</span><span class="p">,</span><span class="w"> </span><span class="n">AM_KEY_S</span><span class="p">,</span><span class="w"> </span><span class="n">AM_KEY_D</span><span class="p">,</span><span class="w"> </span><span class="n">AM_KEY_F</span><span class="p">,</span><span class="w"> </span><span class="n">AM_KEY_G</span><span class="p">,</span><span class="w"> </span><span class="n">AM_KEY_H</span><span class="p">,</span><span class="w"> </span><span class="n">AM_KEY_J</span><span class="p">,</span><span class="w"> </span><span class="n">AM_KEY_K</span><span class="p">,</span><span class="w"> </span><span class="n">AM_KEY_L</span><span class="p">,</span><span class="w"> </span><span class="n">AM_KEY_SEMICOLON</span><span class="p">,</span><span class="w"> </span><span class="n">AM_KEY_APOSTROPHE</span><span class="p">,</span><span class="w"> </span><span class="n">AM_KEY_RETURN</span><span class="p">,</span><span class="w"> </span><span class="n">AM_KEY_LSHIFT</span><span class="p">,</span><span class="w"> </span><span class="n">AM_KEY_Z</span><span class="p">,</span><span class="w"> </span><span class="n">AM_KEY_X</span><span class="p">,</span><span class="w"> </span><span class="n">AM_KEY_C</span><span class="p">,</span><span class="w"> </span><span class="n">AM_KEY_V</span><span class="p">,</span><span class="w"> </span><span class="n">AM_KEY_B</span><span class="p">,</span><span class="w"> </span><span class="n">AM_KEY_N</span><span class="p">,</span><span class="w"> </span><span class="n">AM_KEY_M</span><span class="p">,</span><span class="w"> </span><span class="n">AM_KEY_COMMA</span><span class="p">,</span><span class="w"> </span><span class="n">AM_KEY_PERIOD</span><span class="p">,</span><span class="w"> </span><span class="n">AM_KEY_SLASH</span><span class="p">,</span><span class="w"> </span><span class="n">AM_KEY_RSHIFT</span><span class="p">,</span><span class="w"> </span><span class="n">AM_KEY_LCTRL</span><span class="p">,</span><span class="w"> </span><span class="n">AM_KEY_APPLICATION</span><span class="p">,</span><span class="w"> </span><span class="n">AM_KEY_LALT</span><span class="p">,</span><span class="w"> </span><span class="n">AM_KEY_SPACE</span><span class="p">,</span><span class="w"> </span><span class="n">AM_KEY_RALT</span><span class="p">,</span><span class="w"> </span><span class="n">AM_KEY_RCTRL</span><span class="p">,</span><span class="w"> </span><span class="n">AM_KEY_UP</span><span class="p">,</span><span class="w"> </span><span class="n">AM_KEY_DOWN</span><span class="p">,</span><span class="w"> </span><span class="n">AM_KEY_LEFT</span><span class="p">,</span><span class="w"> </span><span class="n">AM_KEY_RIGHT</span><span class="p">,</span><span class="w"> </span><span class="n">AM_KEY_INSERT</span><span class="p">,</span><span class="w"> </span><span class="n">AM_KEY_DELETE</span><span class="p">,</span><span class="w"> </span><span class="n">AM_KEY_HOME</span><span class="p">,</span><span class="w"> </span><span class="n">AM_KEY_END</span><span class="p">,</span><span class="w"> </span><span class="n">AM_KEY_PAGEUP</span><span class="p">,</span><span class="w"> </span><span class="n">AM_KEY_PAGEDOWN</span><span class="p">,</span>
+<span class="p">};</span>
+</code></pre></div>
+<h4 id="application">application</h4>
+<p>我在写 strace 的时候也使用了这种技巧</p>
+<div class="highlight"><pre><span></span><code><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">syscall_name</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">SYSCALLS</span><span class="p">(</span><span class="n">SYSCALL_STRINGS_NAMES</span><span class="p">)</span>
+<span class="p">};</span>
+<span class="c1">// src/syscall.c</span>
+
+<span class="c1">// use X macro like AM KEY(abstract-machine/am/include/amdev.h)</span>
+<span class="cp">#define SYSCALLS(_) \</span>
+<span class="cp">    _(exit),       \</span>
+<span class="cp">    _(yield),      \</span>
+<span class="cp">    _(open),       \</span>
+<span class="cp">    _(read),       \</span>
+<span class="cp">    _(write),      \</span>
+<span class="cp">    _(kill),       \</span>
+<span class="cp">    _(getpid),     \</span>
+<span class="cp">    _(close),      \</span>
+<span class="cp">    _(lseek),      \</span>
+<span class="cp">    _(brk),        \</span>
+<span class="cp">    _(fstat),      \</span>
+<span class="cp">    _(time),       \</span>
+<span class="cp">    _(signal),     \</span>
+<span class="cp">    _(execve),     \</span>
+<span class="cp">    _(fork),       \</span>
+<span class="cp">    _(link),       \</span>
+<span class="cp">    _(unlink),     \</span>
+<span class="cp">    _(wait),       \</span>
+<span class="cp">    _(times),      \</span>
+<span class="cp">    _(gettimeofday) \</span>
+
+<span class="cp">#define SYSCALL_NAMES(name) SYS_##name</span>
+<span class="cp">#define SYSCALL_STRINGS_NAMES(name) [SYS_##name] = #name</span>
+
+<span class="k">enum</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">SYSCALLS</span><span class="p">(</span><span class="n">SYSCALL_NAMES</span><span class="p">)</span>
+<span class="p">};</span>
+
+<span class="cp">#endif</span>
+
+<span class="c1">//src/syscall.h</span>
+</code></pre></div>
+<p>个人认为这种宏技巧非常强大，通过简单的宏定义我们就能生成大量的枚举值、函数声明、完成数组初始化。这样感觉可维护性高点，相对不容易出错。</p>
+<h3 id="_3">打印颜色配合宏</h3>
+<h3 id="_4">宏模拟函数式编程</h3>
+<h3 id="_5">预定义宏</h3>
+<p><a href="https://gcc.gnu.org/onlinedocs/cpp/Predefined-Macros.html">Predefined Macros (The C Preprocessor) (gnu.org)</a></p>
+<h3 id="_6">其他复杂宏</h3>
+<p>PA 中有挺多例子的，这里就看看 <code>navy-apps/libs/libos/src/syscall.c</code> 的寄存器选择宏。</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// helper macros</span>
+<span class="cp">#define _concat(x, y) x ## y</span>
+<span class="cp">#define concat(x, y) _concat(x, y)</span>
+<span class="cp">#define _args(n, list) concat(_arg, n) list</span>
+<span class="cp">#define _arg0(a0, ...) a0</span>
+<span class="cp">#define _arg1(a0, a1, ...) a1</span>
+<span class="cp">#define _arg2(a0, a1, a2, ...) a2</span>
+<span class="cp">#define _arg3(a0, a1, a2, a3, ...) a3</span>
+<span class="cp">#define _arg4(a0, a1, a2, a3, a4, ...) a4</span>
+<span class="cp">#define _arg5(a0, a1, a2, a3, a4, a5, ...) a5</span>
+
+<span class="c1">// extract an argument from the macro array</span>
+<span class="cp">#define SYSCALL  _args(0, ARGS_ARRAY)</span>
+<span class="cp">#define GPR1 _args(1, ARGS_ARRAY)</span>
+<span class="cp">#define GPR2 _args(2, ARGS_ARRAY)</span>
+<span class="cp">#define GPR3 _args(3, ARGS_ARRAY)</span>
+<span class="cp">#define GPR4 _args(4, ARGS_ARRAY)</span>
+<span class="cp">#define GPRx _args(5, ARGS_ARRAY)</span>
+
+<span class="cp"># define ARGS_ARRAY (&quot;ecall&quot;, &quot;a7&quot;, &quot;a0&quot;, &quot;a1&quot;, &quot;a2&quot;, &quot;a0&quot;)</span>
+
+<span class="kt">intptr_t</span><span class="w"> </span><span class="nf">_syscall_</span><span class="p">(</span><span class="kt">intptr_t</span><span class="w"> </span><span class="n">type</span><span class="p">,</span><span class="w"> </span><span class="kt">intptr_t</span><span class="w"> </span><span class="n">a0</span><span class="p">,</span><span class="w"> </span><span class="kt">intptr_t</span><span class="w"> </span><span class="n">a1</span><span class="p">,</span><span class="w"> </span><span class="kt">intptr_t</span><span class="w"> </span><span class="n">a2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">register</span><span class="w"> </span><span class="kt">intptr_t</span><span class="w"> </span><span class="n">_gpr1</span><span class="w"> </span><span class="k">asm</span><span class="w"> </span><span class="p">(</span><span class="n">GPR1</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">type</span><span class="p">;</span>
+<span class="w">  </span><span class="k">register</span><span class="w"> </span><span class="kt">intptr_t</span><span class="w"> </span><span class="n">_gpr2</span><span class="w"> </span><span class="k">asm</span><span class="w"> </span><span class="p">(</span><span class="n">GPR2</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a0</span><span class="p">;</span>
+<span class="w">  </span><span class="k">register</span><span class="w"> </span><span class="kt">intptr_t</span><span class="w"> </span><span class="n">_gpr3</span><span class="w"> </span><span class="k">asm</span><span class="w"> </span><span class="p">(</span><span class="n">GPR3</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a1</span><span class="p">;</span>
+<span class="w">  </span><span class="k">register</span><span class="w"> </span><span class="kt">intptr_t</span><span class="w"> </span><span class="n">_gpr4</span><span class="w"> </span><span class="k">asm</span><span class="w"> </span><span class="p">(</span><span class="n">GPR4</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a2</span><span class="p">;</span>
+<span class="w">  </span><span class="k">register</span><span class="w"> </span><span class="kt">intptr_t</span><span class="w"> </span><span class="n">ret</span><span class="w"> </span><span class="k">asm</span><span class="w"> </span><span class="p">(</span><span class="n">GPRx</span><span class="p">);</span>
+<span class="w">  </span><span class="k">asm</span><span class="w"> </span><span class="k">volatile</span><span class="w"> </span><span class="p">(</span><span class="n">SYSCALL</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s">&quot;=r&quot;</span><span class="w"> </span><span class="p">(</span><span class="n">ret</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s">&quot;r&quot;</span><span class="p">(</span><span class="n">_gpr1</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;r&quot;</span><span class="p">(</span><span class="n">_gpr2</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;r&quot;</span><span class="p">(</span><span class="n">_gpr3</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;r&quot;</span><span class="p">(</span><span class="n">_gpr4</span><span class="p">));</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">ret</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>手动展开了解即可，充分利用宏展开中<strong>空格</strong>的内容。</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">argv</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">GPR1</span><span class="p">;</span>
+<span class="w">    </span><span class="n">_args</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">ARGS_ARRAY</span><span class="p">);</span><span class="w">  </span>
+<span class="w">    </span><span class="n">_args</span><span class="p">(</span><span class="mi">1</span><span class="p">,(</span><span class="s">&quot;ecall&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;a7&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;a0&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;a1&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;a2&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;a0&quot;</span><span class="p">));</span><span class="w"> </span>
+<span class="w">    </span><span class="n">concat</span><span class="p">(</span><span class="n">_arg</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="s">&quot;ecall&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;a7&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;a0&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;a1&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;a2&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;a0&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">_concat</span><span class="p">(</span><span class="n">_arg</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="s">&quot;ecall&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;a7&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;a0&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;a1&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;a2&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;a0&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">_arg1</span><span class="w"> </span><span class="p">(</span><span class="s">&quot;ecall&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;a7&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;a0&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;a1&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;a2&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;a0&quot;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="s">&quot;a7&quot;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="macro-pitfalls">Macro Pitfalls</h2>
+<p><a href="https://gcc.gnu.org/onlinedocs/cpp/Macro-Pitfalls.html">Macro Pitfalls (The C Preprocessor) (gnu.org)</a></p>
+<p>手册总结的这部分还是挺好的，再配合网上的一些最佳实践合理的使用宏即可。</p>
+<h2 id="_7">一些比较好用的宏</h2>
+<ol>
+<li>数组元素个数</li>
+<li>位操作</li>
+<li>内存对齐宏</li>
+<li>打印颜色</li>
+<li>选择宏/IF宏</li>
+<li>调试宏：</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="c1">// macro stringizing</span>
+<span class="cp">#define str_temp(x) #x</span>
+<span class="cp">#define str(x) str_temp(x)</span>
+
+<span class="c1">// strlen() for string constant</span>
+<span class="cp">#define STRLEN(CONST_STR) (sizeof(CONST_STR) - 1)</span>
+
+<span class="c1">// calculate the length of an array</span>
+<span class="cp">#define ARRLEN(arr) (int)(sizeof(arr) / sizeof(arr[0]))</span>
+
+<span class="c1">// macro concatenation</span>
+<span class="cp">#define concat_temp(x, y) x ## y</span>
+<span class="cp">#define concat(x, y) concat_temp(x, y)</span>
+<span class="cp">#define concat3(x, y, z) concat(concat(x, y), z)</span>
+<span class="cp">#define concat4(x, y, z, w) concat3(concat(x, y), z, w)</span>
+<span class="cp">#define concat5(x, y, z, v, w) concat4(concat(x, y), z, v, w)</span>
+
+<span class="c1">// macro testing</span>
+<span class="c1">// See https://stackoverflow.com/questions/26099745/test-if-preprocessor-symbol-is-defined-inside-macro</span>
+<span class="cp">#define CHOOSE2nd(a, b, ...) b</span>
+<span class="cp">#define MUX_WITH_COMMA(contain_comma, a, b) CHOOSE2nd(contain_comma a, b)</span>
+<span class="cp">#define MUX_MACRO_PROPERTY(p, macro, a, b) MUX_WITH_COMMA(concat(p, macro), a, b)</span>
+<span class="c1">// define placeholders for some property</span>
+<span class="cp">#define __P_DEF_0  X,</span>
+<span class="cp">#define __P_DEF_1  X,</span>
+<span class="cp">#define __P_ONE_1  X,</span>
+<span class="cp">#define __P_ZERO_0 X,</span>
+<span class="c1">// define some selection functions based on the properties of BOOLEAN macro</span>
+<span class="cp">#define MUXDEF(macro, X, Y)  MUX_MACRO_PROPERTY(__P_DEF_, macro, X, Y)</span>
+<span class="cp">#define MUXNDEF(macro, X, Y) MUX_MACRO_PROPERTY(__P_DEF_, macro, Y, X)</span>
+<span class="cp">#define MUXONE(macro, X, Y)  MUX_MACRO_PROPERTY(__P_ONE_, macro, X, Y)</span>
+<span class="cp">#define MUXZERO(macro, X, Y) MUX_MACRO_PROPERTY(__P_ZERO_,macro, X, Y)</span>
+
+<span class="c1">// test if a boolean macro is defined</span>
+<span class="cp">#define ISDEF(macro) MUXDEF(macro, 1, 0)</span>
+<span class="c1">// test if a boolean macro is undefined</span>
+<span class="cp">#define ISNDEF(macro) MUXNDEF(macro, 1, 0)</span>
+<span class="c1">// test if a boolean macro is defined to 1</span>
+<span class="cp">#define ISONE(macro) MUXONE(macro, 1, 0)</span>
+<span class="c1">// test if a boolean macro is defined to 0</span>
+<span class="cp">#define ISZERO(macro) MUXZERO(macro, 1, 0)</span>
+<span class="c1">// test if a macro of ANY type is defined</span>
+<span class="c1">// NOTE1: it ONLY works inside a function, since it calls `strcmp()`</span>
+<span class="c1">// NOTE2: macros defined to themselves (#define A A) will get wrong results</span>
+<span class="cp">#define isdef(macro) (strcmp(&quot;&quot; #macro, &quot;&quot; str(macro)) != 0)</span>
+
+<span class="c1">// simplification for conditional compilation</span>
+<span class="cp">#define __IGNORE(...)</span>
+<span class="cp">#define __KEEP(...) __VA_ARGS__</span>
+<span class="c1">// keep the code if a boolean macro is defined</span>
+<span class="cp">#define IFDEF(macro, ...) MUXDEF(macro, __KEEP, __IGNORE)(__VA_ARGS__)</span>
+<span class="c1">// keep the code if a boolean macro is undefined</span>
+<span class="cp">#define IFNDEF(macro, ...) MUXNDEF(macro, __KEEP, __IGNORE)(__VA_ARGS__)</span>
+<span class="c1">// keep the code if a boolean macro is defined to 1</span>
+<span class="cp">#define IFONE(macro, ...) MUXONE(macro, __KEEP, __IGNORE)(__VA_ARGS__)</span>
+<span class="c1">// keep the code if a boolean macro is defined to 0</span>
+<span class="cp">#define IFZERO(macro, ...) MUXZERO(macro, __KEEP, __IGNORE)(__VA_ARGS__)</span>
+
+<span class="c1">// functional-programming-like macro (X-macro)</span>
+<span class="c1">// apply the function `f` to each element in the container `c`</span>
+<span class="c1">// NOTE1: `c` should be defined as a list like:</span>
+<span class="c1">//   f(a0) f(a1) f(a2) ...</span>
+<span class="c1">// NOTE2: each element in the container can be a tuple</span>
+<span class="cp">#define MAP(c, f) c(f)</span>
+
+<span class="cp">#define BITMASK(bits) ((1ull &lt;&lt; (bits)) - 1)</span>
+<span class="cp">#define BITS(x, hi, lo) (((x) &gt;&gt; (lo)) &amp; BITMASK((hi) - (lo) + 1)) </span><span class="c1">// similar to x[hi:lo] in verilog</span>
+<span class="cp">#define SEXT(x, len) ({ struct { int64_t n : len; } __x = { .n = x }; (uint64_t)__x.n; })</span>
+
+<span class="cp">#define ROUNDUP(a, sz)   ((((uintptr_t)a) + (sz) - 1) &amp; ~((sz) - 1))</span>
+<span class="cp">#define ROUNDDOWN(a, sz) ((((uintptr_t)a)) &amp; ~((sz) - 1))</span>
+
+<span class="cp">#define PG_ALIGN __attribute((aligned(4096)))</span>
+
+<span class="cp">#if !defined(likely)</span>
+<span class="cp">#define likely(cond)   __builtin_expect(cond, 1)</span>
+<span class="cp">#define unlikely(cond) __builtin_expect(cond, 0)</span>
+<span class="cp">#endif</span>
+
+<span class="c1">// for AM IOE</span>
+<span class="cp">#define io_read(reg) \</span>
+<span class="cp">  ({ reg##_T __io_param; \</span>
+<span class="cp">    ioe_read(reg, &amp;__io_param); \</span>
+<span class="cp">    __io_param; })</span>
+
+<span class="cp">#define io_write(reg, ...) \</span>
+<span class="cp">  ({ reg##_T __io_param = (reg##_T) { __VA_ARGS__ }; \</span>
+<span class="cp">    ioe_write(reg, &amp;__io_param); })</span>
+
+<span class="cp">#endif</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="cp">#define Log(format, ...) \</span>
+<span class="cp">    _Log(ANSI_FMT(&quot;[%s:%d %s] &quot; format, ANSI_FG_BLUE) &quot;\n&quot;, \</span>
+<span class="cp">        __FILE__, __LINE__, __func__, ## __VA_ARGS__)</span>
+
+<span class="cp">#define Assert(cond, format, ...) \</span>
+<span class="cp">  do { \</span>
+<span class="cp">    if (!(cond)) { \</span>
+<span class="cp">      MUXDEF(CONFIG_TARGET_AM, printf(ANSI_FMT(format, ANSI_FG_RED) &quot;\n&quot;, ## __VA_ARGS__), \</span>
+<span class="cp">        (fflush(stdout), fprintf(stderr, ANSI_FMT(format, ANSI_FG_RED) &quot;\n&quot;, ##  __VA_ARGS__))); \</span>
+<span class="cp">      IFNDEF(CONFIG_TARGET_AM, extern FILE* log_fp; fflush(log_fp)); \</span>
+<span class="cp">      extern void assert_fail_msg(); \</span>
+<span class="cp">      assert_fail_msg(); \</span>
+<span class="cp">      assert(cond); \</span>
+<span class="cp">    } \</span>
+<span class="cp">  } while (0)</span>
+
+<span class="cp">#define panic(format, ...) Assert(0, format, ## __VA_ARGS__)</span>
+
+<span class="cp">#define TODO() panic(&quot;please implement me&quot;)</span>
+
+
+<span class="cp">#endif</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">例如</span><span class="err">，</span><span class="n">以下代码使用这些预定义宏</span><span class="err">，</span><span class="n">定义了一个用于提示错误信息的宏</span><span class="err">，</span><span class="n">当这个宏被调用时会输出一条详细的错误信息</span><span class="err">：</span>
+
+<span class="cp">#if __STDC_VERSION__ &gt;= 199900L</span>
+<span class="w">    </span><span class="cp">#define ERROR(message)                            \</span>
+<span class="cp">        fprintf(stderr, &quot;%s:%d:(in %s) error: %s \n&quot;, \</span>
+<span class="cp">                __FILE__, __LINE__, __func__, message)</span>
+<span class="cp">#else</span>
+<span class="w">    </span><span class="cp">#define ERROR(message)                     \</span>
+<span class="cp">        fprintf(stderr, &quot;%s:%d: error: %s \n&quot;, \</span>
+<span class="cp">                __FILE__, __LINE__, message)</span>
+<span class="cp">#endif</span>
+<span class="n">这个宏可以这样使用</span><span class="err">：</span>
+
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">node</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span>
+<span class="w">    </span><span class="n">ERROR</span><span class="p">(</span><span class="s">&quot;find NULL expression&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// .\macro.c:53:(in main) error: find NULL expression</span>
+</code></pre></div>
+<h2 id="_8">参考资料</h2>
+<p><a href="https://en.cppreference.com/w/c/preprocessor">Preprocessor - cppreference.com</a></p>
+<p><a href="https://gcc.gnu.org/onlinedocs/cpp/Macros.html">Macros (The C Preprocessor) (gnu.org)</a></p>
+<p>《C99 Standard》</p>
+<p><a href="https://en.wikipedia.org/wiki/X_macro">X macro - Wikipedia</a></p>
+<p><a href="https://gcc.gnu.org/onlinedocs/cppinternals/Macro-Expansion.html#Macro-expansion-overview">Macro Expansion (The GNU C Preprocessor Internals)</a></p>
+<p><a href="https://www.boost.org/doc/libs/1_40_0/libs/wave/doc/macro_expansion_process.html">The Macro Expansion Process (boost.org)</a></p>
+<p><a href="https://gcc.gnu.org/onlinedocs/cppinternals/index.html#SEC_Contents">Top (The GNU C Preprocessor Internals)</a></p>
+<p><a href="https://en.wikipedia.org/wiki/Painted_blue">Painted blue - Wikipedia</a></p>
+<p><a href="https://www.cnblogs.com/nosae/p/17471808.html">C语言宏（macro）小技巧 - NOSAE - 博客园 (cnblogs.com)</a></p>
+<p><a href="https://blog.csdn.net/Apollon_krj/article/details/82911180">C语言宏定义、宏函数、内置宏与常用宏_vc6.0 宏函数-CSDN博客</a></p>
+
+
+
+
+
+
+
+  
+    
+  
+  
+    
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Last update">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2025-01-05T17:02:30+01:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2025-01-05</span>
+  </span>
+
+    
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Created">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2025-01-05T17:02:30+01:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2025-01-05</span>
+  </span>
+
+    
+    
+    
+  </aside>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../pa4/pa4.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: PA4">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256l137.3-137.4c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                PA4
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../summary/summary.html" class="md-footer__link md-footer__link--next" aria-label="Next: Summary">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Summary
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://github.com/JAILuo" target="_blank" rel="noopener" title="squidfunk on Fosstodon" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.footer"], "search": "../../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.83f73b43.min.js"></script>
+      
+        <script src="../../../js/timeago.min.js"></script>
+      
+        <script src="../../../js/timeago_mkdocs_material.js"></script>
+      
+    
+  </body>
+</html>

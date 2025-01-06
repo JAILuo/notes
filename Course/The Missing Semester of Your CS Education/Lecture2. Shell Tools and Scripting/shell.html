@@ -8,26 +8,24 @@
       
       
       
-        <link rel="canonical" href="https://jailuo.github.io/notes/index.html">
+        <link rel="canonical" href="https://jailuo.github.io/notes/Course/The%20Missing%20Semester%20of%20Your%20CS%20Education/Lecture2.%20Shell%20Tools%20and%20Scripting/shell.html">
       
       
       
-        <link rel="next" href="Course/University%20Course/jyy%20OS2024/cousre%20note/1.%20introduction/introduction.html">
       
-      
-      <link rel="icon" href="assets/images/favicon.png">
+      <link rel="icon" href="../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.48">
     
     
       
-        <title>Messy Notes</title>
+        <title>Shell - Messy Notes</title>
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.6f8fc17f.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.6f8fc17f.min.css">
       
         
-        <link rel="stylesheet" href="assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
       
       
 
@@ -46,9 +44,9 @@
       
     
     
-      <link rel="stylesheet" href="css/timeago.css">
+      <link rel="stylesheet" href="../../../css/timeago.css">
     
-    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -74,7 +72,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#messy-notes" class="md-skip">
+        <a href="#shell" class="md-skip">
           Skip to content
         </a>
       
@@ -90,7 +88,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="index.html" title="Messy Notes" class="md-header__button md-logo" aria-label="Messy Notes" data-md-component="logo">
+    <a href="../../../index.html" title="Messy Notes" class="md-header__button md-logo" aria-label="Messy Notes" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -110,7 +108,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              首页
+              Shell
             
           </span>
         </div>
@@ -223,7 +221,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="index.html" title="Messy Notes" class="md-nav__button md-logo" aria-label="Messy Notes" data-md-component="logo">
+    <a href="../../../index.html" title="Messy Notes" class="md-nav__button md-logo" aria-label="Messy Notes" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -250,19 +248,10 @@
       
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="index.html" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../../index.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -271,7 +260,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -423,7 +411,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Course/University%20Course/jyy%20OS2024/cousre%20note/1.%20introduction/introduction.html" class="md-nav__link">
+      <a href="../../University%20Course/jyy%20OS2024/cousre%20note/1.%20introduction/introduction.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -444,7 +432,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Course/University%20Course/jyy%20OS2024/cousre%20note/2.%20concurrency/concurrency.html" class="md-nav__link">
+      <a href="../../University%20Course/jyy%20OS2024/cousre%20note/2.%20concurrency/concurrency.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -465,7 +453,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Course/University%20Course/jyy%20OS2024/cousre%20note/3.%20virtualization/virtualization.html" class="md-nav__link">
+      <a href="../../University%20Course/jyy%20OS2024/cousre%20note/3.%20virtualization/virtualization.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -486,7 +474,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Course/University%20Course/jyy%20OS2024/cousre%20note/4.%20persistence/persistence.html" class="md-nav__link">
+      <a href="../../University%20Course/jyy%20OS2024/cousre%20note/4.%20persistence/persistence.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -550,7 +538,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Course/University%20Course/jyy%20OS2024/Mini%20Labs/M1/M1.html" class="md-nav__link">
+      <a href="../../University%20Course/jyy%20OS2024/Mini%20Labs/M1/M1.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -571,7 +559,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Course/University%20Course/jyy%20OS2024/Mini%20Labs/M2/M2.html" class="md-nav__link">
+      <a href="../../University%20Course/jyy%20OS2024/Mini%20Labs/M2/M2.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -592,7 +580,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Course/University%20Course/jyy%20OS2024/Mini%20Labs/M3/M3.html" class="md-nav__link">
+      <a href="../../University%20Course/jyy%20OS2024/Mini%20Labs/M3/M3.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -656,7 +644,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Course/University%20Course/jyy%20OS2024/OS%20Labs/L0/L0.html" class="md-nav__link">
+      <a href="../../University%20Course/jyy%20OS2024/OS%20Labs/L0/L0.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -677,7 +665,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Course/University%20Course/jyy%20OS2024/OS%20Labs/L1/L1.html" class="md-nav__link">
+      <a href="../../University%20Course/jyy%20OS2024/OS%20Labs/L1/L1.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -792,7 +780,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Course/GeekTime/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E4%B8%80%E5%91%A8%E7%9B%AE/1.%20%E6%8C%87%E4%BB%A4%E4%B8%8E%E8%BF%90%E7%AE%97/%E6%8C%87%E4%BB%A4%E4%B8%8E%E8%BF%90%E7%AE%97.html" class="md-nav__link">
+      <a href="../../GeekTime/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E4%B8%80%E5%91%A8%E7%9B%AE/1.%20%E6%8C%87%E4%BB%A4%E4%B8%8E%E8%BF%90%E7%AE%97/%E6%8C%87%E4%BB%A4%E4%B8%8E%E8%BF%90%E7%AE%97.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -813,7 +801,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Course/GeekTime/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E4%B8%80%E5%91%A8%E7%9B%AE/2.%20%E5%A4%84%E7%90%86%E5%99%A8/%E5%A4%84%E7%90%86%E5%99%A8.html" class="md-nav__link">
+      <a href="../../GeekTime/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E4%B8%80%E5%91%A8%E7%9B%AE/2.%20%E5%A4%84%E7%90%86%E5%99%A8/%E5%A4%84%E7%90%86%E5%99%A8.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -834,7 +822,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Course/GeekTime/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E4%B8%80%E5%91%A8%E7%9B%AE/3.%20%E5%AD%98%E5%82%A8%E4%B8%8EIO%E7%B3%BB%E7%BB%9F/%E5%AD%98%E5%82%A8%E4%B8%8EIO%E7%B3%BB%E7%BB%9F.html" class="md-nav__link">
+      <a href="../../GeekTime/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E4%B8%80%E5%91%A8%E7%9B%AE/3.%20%E5%AD%98%E5%82%A8%E4%B8%8EIO%E7%B3%BB%E7%BB%9F/%E5%AD%98%E5%82%A8%E4%B8%8EIO%E7%B3%BB%E7%BB%9F.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -855,7 +843,7 @@
   
   
     <li class="md-nav__item">
-      <a href="docs/Course/GeekTime/深入理解计算机组成原理/一周目/4. 应用/应用.md" class="md-nav__link">
+      <a href="../../../docs/Course/GeekTime/深入理解计算机组成原理/一周目/4. 应用/应用.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -919,7 +907,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/1.%20MiniCPU%E8%AE%BE%E8%AE%A1/MiniCPU%E8%AE%BE%E8%AE%A1.html" class="md-nav__link">
+      <a href="../../GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/1.%20MiniCPU%E8%AE%BE%E8%AE%A1/MiniCPU%E8%AE%BE%E8%AE%A1.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -940,7 +928,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/2.%20%E8%AF%AD%E8%A8%80%E5%92%8C%E6%8C%87%E4%BB%A4/%E8%AF%AD%E8%A8%80%E5%92%8C%E6%8C%87%E4%BB%A4.html" class="md-nav__link">
+      <a href="../../GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/2.%20%E8%AF%AD%E8%A8%80%E5%92%8C%E6%8C%87%E4%BB%A4/%E8%AF%AD%E8%A8%80%E5%92%8C%E6%8C%87%E4%BB%A4.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -961,7 +949,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/3.%20%E5%BA%94%E7%94%A8%E5%92%8C%E5%86%85%E5%AD%98/%E5%BA%94%E7%94%A8%E5%92%8C%E5%86%85%E5%AD%98.html" class="md-nav__link">
+      <a href="../../GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/3.%20%E5%BA%94%E7%94%A8%E5%92%8C%E5%86%85%E5%AD%98/%E5%BA%94%E7%94%A8%E5%92%8C%E5%86%85%E5%AD%98.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -982,7 +970,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/4.%20IO%E4%B8%8E%E6%96%87%E4%BB%B6/IO%E5%92%8C%E6%96%87%E4%BB%B6.html" class="md-nav__link">
+      <a href="../../GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/4.%20IO%E4%B8%8E%E6%96%87%E4%BB%B6/IO%E5%92%8C%E6%96%87%E4%BB%B6.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1003,7 +991,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/5.%20%E7%BB%BC%E5%90%88%E5%BA%94%E7%94%A8/synthesis.html" class="md-nav__link">
+      <a href="../../GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/5.%20%E7%BB%BC%E5%90%88%E5%BA%94%E7%94%A8/synthesis.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1024,7 +1012,7 @@
   
   
     <li class="md-nav__item">
-      <a href="Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E5%92%8C%E5%B7%A5%E5%85%B7%E9%93%BE/%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE.html" class="md-nav__link">
+      <a href="../../GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E5%92%8C%E5%B7%A5%E5%85%B7%E9%93%BE/%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1138,7 +1126,7 @@
   
   
     <li class="md-nav__item">
-      <a href="ysyx/pa/pa1/pa1.html" class="md-nav__link">
+      <a href="../../../ysyx/pa/pa1/pa1.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1159,7 +1147,7 @@
   
   
     <li class="md-nav__item">
-      <a href="ysyx/pa/pa2/pa2.html" class="md-nav__link">
+      <a href="../../../ysyx/pa/pa2/pa2.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1180,7 +1168,7 @@
   
   
     <li class="md-nav__item">
-      <a href="ysyx/pa/pa3/pa3.html" class="md-nav__link">
+      <a href="../../../ysyx/pa/pa3/pa3.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1201,7 +1189,7 @@
   
   
     <li class="md-nav__item">
-      <a href="ysyx/pa/pa4/pa4.html" class="md-nav__link">
+      <a href="../../../ysyx/pa/pa4/pa4.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1222,7 +1210,7 @@
   
   
     <li class="md-nav__item">
-      <a href="ysyx/pa/c_marco/macro.html" class="md-nav__link">
+      <a href="../../../ysyx/pa/c_marco/macro.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1243,7 +1231,7 @@
   
   
     <li class="md-nav__item">
-      <a href="ysyx/pa/summary/summary.html" class="md-nav__link">
+      <a href="../../../ysyx/pa/summary/summary.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1264,7 +1252,7 @@
   
   
     <li class="md-nav__item">
-      <a href="ysyx/pa/Linux_porting/porting.html" class="md-nav__link">
+      <a href="../../../ysyx/pa/Linux_porting/porting.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1293,7 +1281,7 @@
   
   
     <li class="md-nav__item">
-      <a href="ysyx/digital-circuit/digital%20circuit.html" class="md-nav__link">
+      <a href="../../../ysyx/digital-circuit/digital%20circuit.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1331,8 +1319,65 @@
   
   
   
-    
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#shell" class="md-nav__link">
+    <span class="md-ellipsis">
+      Shell 脚本
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#shell_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Shell 工具
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Shell 工具">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      查看命令的用法
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#find" class="md-nav__link">
+    <span class="md-ellipsis">
+      查找文件：find...
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#grep" class="md-nav__link">
+    <span class="md-ellipsis">
+      查找代码：grep...
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -1350,11 +1395,84 @@
   
 
 
-<h1 id="messy-notes">Messy Notes</h1>
-<p>这里存放学习、生活各种各样的内容，课程/学习笔记、技术问题总结、感悟、业余爱好等。</p>
-<p>写得很乱，比较随心所欲，大多是当时学习的记录。</p>
-<p>当成是仓库好了，没有建博客的打算，可能会借助大型平台发布一部分内容？（未知</p>
-<h1 id="from-gdut">From GDUT</h1>
+  <h1>Shell</h1>
+
+<p>Shell 最好的特性就是只调用程序，因此我们只要找到合适的替代程序即可（甚至自己编写）</p>
+<p>有些问题使用合适的工具就会迎刃而解，而具体选择哪个工具则不是那么重要。</p>
+<p>最重要的是，现在有了 GPT，学会使用 GPT 更加重要。</p>
+<h2 id="shell">Shell 脚本</h2>
+<ul>
+<li>
+<p>特殊变量</p>
+<ul>
+<li><code>$0</code> - 脚本名</li>
+<li><code>$1</code> 到 <code>$9</code> - 脚本的参数。 <code>$1</code> 是第一个参数，依此类推。</li>
+<li><code>$@</code> - 所有参数</li>
+<li><code>$#</code> - 参数个数</li>
+<li><code>$?</code> - 前一个命令的返回值</li>
+<li><code>$$</code> - 当前脚本的进程识别码</li>
+<li><code>!!</code> - 完整的上一条命令，包括参数。常见应用：当你因为权限不足执行命令失败时，可以使用 <code>sudo !!</code> 再尝试一次。</li>
+<li><code>$_</code> - 上一条命令的最后一个参数。如果你正在使用的是交互式 shell，你可以通过按下 <code>Esc</code> 之后键入 . 来获取这个值。</li>
+</ul>
+<p>更详细：<a href="https://tldp.org/LDP/abs/html/special-chars.html">Special Characters (tldp.org)</a></p>
+</li>
+</ul>
+<h2 id="shell_1">Shell 工具</h2>
+<h3 id="_1">查看命令的用法</h3>
+<ul>
+<li>
+<p><code>man</code></p>
+</li>
+<li>
+<p><code>-h</code>、<code>--help</code></p>
+</li>
+<li>
+<p><a href="https://tldr.sh/">tldr pages</a></p>
+</li>
+</ul>
+<h3 id="find">查找文件：<code>find...</code></h3>
+<p>程序员们面对的最常见的重复任务就是查找文件或目录。所有的类 UNIX 系统都包含一个名为 <a href="https://man7.org/linux/man-pages/man1/find.1.html"><code>find</code></a> 的工具，它是 shell 上用于查找文件的绝佳工具。<code>find</code> 命令会递归地搜索符合条件的文件，例如：</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 查找所有名称为src的文件夹</span>
+find<span class="w"> </span>.<span class="w"> </span>-name<span class="w"> </span>src<span class="w"> </span>-type<span class="w"> </span>d
+<span class="c1"># 查找所有文件夹路径中包含test的python文件</span>
+find<span class="w"> </span>.<span class="w"> </span>-path<span class="w"> </span><span class="s1">&#39;*/test/*.py&#39;</span><span class="w"> </span>-type<span class="w"> </span>f
+<span class="c1"># 查找前一天修改的所有文件</span>
+find<span class="w"> </span>.<span class="w"> </span>-mtime<span class="w"> </span>-1
+<span class="c1"># 查找所有大小在500k至10M的tar.gz文件</span>
+find<span class="w"> </span>.<span class="w"> </span>-size<span class="w"> </span>+500k<span class="w"> </span>-size<span class="w"> </span>-10M<span class="w"> </span>-name<span class="w"> </span><span class="s1">&#39;*.tar.gz&#39;</span>
+</code></pre></div>
+<p>除了列出所寻找的文件之外，find 还能对所有查找到的文件进行操作。这能极大地简化一些单调的任务。</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 删除全部扩展名为.tmp 的文件</span>
+find<span class="w"> </span>.<span class="w"> </span>-name<span class="w"> </span><span class="s1">&#39;*.tmp&#39;</span><span class="w"> </span>-exec<span class="w"> </span>rm<span class="w"> </span><span class="o">{}</span><span class="w"> </span><span class="se">\;</span>
+<span class="c1"># 查找全部的 PNG 文件并将其转换为 JPG</span>
+find<span class="w"> </span>.<span class="w"> </span>-name<span class="w"> </span><span class="s1">&#39;*.png&#39;</span><span class="w"> </span>-exec<span class="w"> </span>convert<span class="w"> </span><span class="o">{}</span><span class="w"> </span><span class="o">{}</span>.jpg<span class="w"> </span><span class="se">\;</span>
+</code></pre></div>
+<p><strong>尽管 <code>find</code> 用途广泛，它的语法却比较难以记忆</strong>。例如，为了查找满足模式 <code>PATTERN</code> 的文件，您需要执行 <code>find -name '*PATTERN*'</code> (如果您希望模式匹配时是不区分大小写，可以使用 <code>-iname</code> 选项）</p>
+<p>您当然可以使用 alias 设置别名来简化上述操作，但 shell 的哲学之一便是寻找（更好用的）替代方案。 记住，shell 最好的特性就是您只是在调用程序，因此您只要找到合适的替代程序即可（甚至自己编写）。</p>
+<p>例如，<a href="https://github.com/sharkdp/fd"><code>fd</code></a> 就是一个更简单、更快速、更友好的程序，它可以用来作为 <code>find</code> 的替代品。它有很多不错的默认设置，例如输出着色、默认支持正则匹配、支持 unicode 并且我认为它的语法更符合直觉。以模式 <code>PATTERN</code> 搜索的语法是 <code>fd PATTERN</code>。</p>
+<p>大多数人都认为 <code>find</code> 和 <code>fd</code> 已经很好用了，但是有的人可能想知道，我们是不是可以有更高效的方法，例如不要每次都搜索文件而是通过编译索引或建立数据库的方式来实现更加快速地搜索。</p>
+<p>这就要靠 <a href="https://man7.org/linux/man-pages/man1/locate.1.html"><code>locate</code></a> 了。 <code>locate</code> 使用一个由 <a href="https://man7.org/linux/man-pages/man1/updatedb.1.html"><code>updatedb</code></a> 负责更新的数据库，在大多数系统中 <code>updatedb</code> 都会通过 <a href="https://man7.org/linux/man-pages/man8/cron.8.html"><code>cron</code></a> 每日更新。这便需要我们在速度和时效性之间作出权衡。而且，<code>find</code> 和类似的工具可以通过别的属性比如文件大小、修改时间或是权限来查找文件，<code>locate</code> 则只能通过文件名。 <a href="https://unix.stackexchange.com/questions/60205/locate-vs-find-usage-pros-and-cons-of-each-other">这里</a> 有一个更详细的对比。</p>
+<h3 id="grep">查找代码：<code>grep...</code></h3>
+<p>查找文件是很有用的技能，但是很多时候您的目标其实是查看文件的内容。一个最常见的场景是您希望查找具有某种模式的全部文件，并找它们的位置。</p>
+<p>为了实现这一点，很多类 UNIX 的系统都提供了 <a href="https://man7.org/linux/man-pages/man1/grep.1.html"><code>grep</code></a> 命令，它是用于对输入文本进行匹配的通用工具。它是一个非常重要的 shell 工具，我们会在后续的数据清理课程中深入的探讨它。</p>
+<p><code>grep</code> 有很多选项，这也使它成为一个非常全能的工具。</p>
+<ul>
+<li>其中我经常使用的有 <code>-C</code> ：获取查找结果的上下文（Context）；</li>
+<li><code>-v</code> 将对结果进行反选（Invert），也就是输出不匹配的结果。举例来说， <code>grep -C 5</code> 会输出匹配结果前后五行。</li>
+<li>当需要搜索大量文件的时候，使用 <code>-R</code> 会递归地进入子目录并搜索所有的文本文件。</li>
+<li><code>-n</code> 显示行号</li>
+</ul>
+<p>一些替代品：<a href="https://beyondgrep.com/">ack</a>, <a href="https://github.com/ggreer/the_silver_searcher">ag</a> 和 <a href="https://github.com/BurntSushi/ripgrep">rg</a>。它们都特别好用，但是功能也都差不多，我比较常用的是 ripgrep (<code>rg</code>) ，因为它速度快，而且用法非常符合直觉。例子如下：</p>
+<div class="highlight"><pre><span></span><code># 查找所有使用了 requests 库的文件
+rg -t py &#39;import requests&#39;
+# 查找所有没有写 shebang 的文件（包含隐藏文件）
+rg -u --files-without-match &quot;^#!&quot;
+# 查找所有的foo字符串，并打印其之后的5行
+rg foo -A 5
+# 打印匹配的统计信息（匹配的行和文件的数量）
+rg --stats PATTERN
+</code></pre></div>
+<p>与 <code>find</code>/<code>fd</code> 一样，重要的是你要知道有些问题使用合适的工具就会迎刃而解，而具体选择哪个工具则不是那么重要。</p>
 
 
 
@@ -1362,6 +1480,38 @@
 
 
 
+  
+    
+  
+  
+    
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Last update">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2025-01-05T17:02:30+01:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2025-01-05</span>
+  </span>
+
+    
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Created">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2025-01-05T17:02:30+01:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2025-01-05</span>
+  </span>
+
+    
+    
+    
+  </aside>
 
 
 
@@ -1379,28 +1529,6 @@
       
         <footer class="md-footer">
   
-    
-      
-      <nav class="md-footer__inner md-grid" aria-label="Footer" >
-        
-        
-          
-          <a href="Course/University%20Course/jyy%20OS2024/cousre%20note/1.%20introduction/introduction.html" class="md-footer__link md-footer__link--next" aria-label="Next: introduction">
-            <div class="md-footer__title">
-              <span class="md-footer__direction">
-                Next
-              </span>
-              <div class="md-ellipsis">
-                introduction
-              </div>
-            </div>
-            <div class="md-footer__button md-icon">
-              
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg>
-            </div>
-          </a>
-        
-      </nav>
     
   
   <div class="md-footer-meta md-typeset">
@@ -1437,14 +1565,14 @@
     </div>
     
     
-    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.footer"], "search": "assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.footer"], "search": "../../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="assets/javascripts/bundle.83f73b43.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.83f73b43.min.js"></script>
       
-        <script src="js/timeago.min.js"></script>
+        <script src="../../../js/timeago.min.js"></script>
       
-        <script src="js/timeago_mkdocs_material.js"></script>
+        <script src="../../../js/timeago_mkdocs_material.js"></script>
       
     
   </body>
