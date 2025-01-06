@@ -1,9 +1,12 @@
 site_name: Messy Notes
 repo_url: https://github.com/JAILuo/notes
 site_url: https://jailuo.github.io/notes
+use_directory_urls: false
 
 theme:
   name: material
+  features:
+    - navigation.footer
   icon:
     previous: fontawesome/solid/angle-left
     next: fontawesome/solid/angle-right
@@ -27,9 +30,59 @@ markdown_extensions:
   - pymdownx.superfences  # 用于改进代码块的显示
   - pymdownx.highlight  # 用于改进代码高亮
   - pymdownx.snippets  # 用于插入代码片段
+  - pymdownx.mark
+  - pymdownx.caret
 
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/JAILuo
+      name: squidfunk on Fosstodon
+
+plugins:
+  - search
+  - git-revision-date-localized:
+      type: timeago
+      custom_format: "%d %B %Y"
+      timezone: Europe/Amsterdam
+      locale: en
+      fallback_to_build_date: false
+      enable_creation_date: true
+      exclude:
+        - index.md
+      enabled: true
+      strict: true
+      
 nav:
   - 首页: 'index.md'
+  - Course:
+    - University Course: 
+      - jyy OS2024:
+        - course note: 
+          - introduction: Course/University Course/jyy OS2024/cousre note/1. introduction/introduction.md
+          - concurrency: Course/University Course/jyy OS2024/cousre note/2. concurrency/concurrency.md
+          - virtualization: Course/University Course/jyy OS2024/cousre note/3. virtualization/virtualization.md
+          - persistence: Course/University Course/jyy OS2024/cousre note/4. persistence/persistence.md
+        - Mini Labs:
+          - M1: Course/University Course/jyy OS2024/Mini Labs/M1/M1.md
+          - M2: Course/University Course/jyy OS2024/Mini Labs/M2/M2.md
+          - M3: Course/University Course/jyy OS2024/Mini Labs/M3/M3.md
+        - OS Labs:
+          - L0: Course/University Course/jyy OS2024/OS Labs/L0/L0.md
+          - L1: Course/University Course/jyy OS2024/OS Labs/L1/L1.md
+    - GeekTime: 
+      - 深入理解计算机组成原理: 
+        - 1. 指令与运算: Course/GeekTime/深入理解计算机组成原理/一周目/1. 指令与运算/指令与运算.md
+        - 2. 处理器: Course/GeekTime/深入理解计算机组成原理/一周目/2. 处理器/处理器.md
+        - 3. 存储与IO系统: Course/GeekTime/深入理解计算机组成原理/一周目/3. 存储与IO系统/存储与IO系统.md
+        - 4. 应用: docs/Course/GeekTime/深入理解计算机组成原理/一周目/4. 应用/应用.md
+      - 计算基础实战课:
+        - 1. MiniCPU设计: Course/GeekTime/计算机基础实战课/1. MiniCPU设计/MiniCPU设计.md
+        - 2. 语言和指令: Course/GeekTime/计算机基础实战课/2. 语言和指令/语言和指令.md
+        - 3. 应用和内存: Course/GeekTime/计算机基础实战课/3. 应用和内存/应用和内存.md
+        - 4. IO与文件: Course/GeekTime/计算机基础实战课/4. IO与文件/IO和文件.md
+        - 5. 综合应用: Course/GeekTime/计算机基础实战课/5. 综合应用/synthesis.md
+        - 环境配置和工具链: Course/GeekTime/计算机基础实战课/环境配置和工具链/相关配置.md
   - ysyx:
     - NJU-ICS2023-PA:
       - PA1: ysyx/pa/pa1/pa1.md

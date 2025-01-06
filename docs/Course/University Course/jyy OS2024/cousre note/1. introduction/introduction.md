@@ -1,3 +1,14 @@
+**2024 Nanjing University, Operating System: Design and Implementation**
+
+Mini Labs & OS Labs
+
+The individual learning implementation version, without Online Judge, only local test
+
+- Course Homepage: https://jyywiki.cn/OS/2024/
+- Lesson Video: https://www.bilibili.com/video/BV1Xm411f7CM
+
+
+
 ## 概述
 
 **本讲内容**：个人/课程简介、操作系统的发展历史，回答三个问题：
