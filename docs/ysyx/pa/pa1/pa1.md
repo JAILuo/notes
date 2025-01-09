@@ -2,7 +2,7 @@
 
 - ==**task PA1.1: 实现单步执行, 打印寄存器状态, 扫描内存**==
 - ==**task PA1.2: 实现算术表达式求值**==
-- task PA1.3: 实现所有要求, 提交完整的实验报告**==
+- ==**task PA1.3: 实现所有要求, 提交完整的实验报告**==
 
 
 
@@ -4133,10 +4133,10 @@ int add_token(char *substr_start, int substr_len, int i) {
 >     ```C
 >     int arr[10];
 >     printf("Size of arr: %zu\n", sizeof(arr));
->                                                                                                     
+>                                                                                                         
 >     int i;
 >     printf("Size of int: %zu\n", sizeof(i));
->                                                                                                     
+>                                                                                                         
 >     char *ptr = "Hello, World!";
 >     printf("Size of ptr: %zu\n", sizeof(ptr));
 >     ```

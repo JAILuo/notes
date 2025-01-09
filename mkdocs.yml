@@ -37,7 +37,7 @@ extra:
   social:
     - icon: fontawesome/brands/github
       link: https://github.com/JAILuo
-      name: squidfunk on Fosstodon
+      name: JAILuo
 
 plugins:
   - search
@@ -53,6 +53,9 @@ plugins:
       enabled: true
       strict: true
       
+extra_javascript:
+    - '//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js'
+    - custom.js
 nav:
   - 首页: 'index.md'
   - Course:
@@ -75,7 +78,7 @@ nav:
         - 1. 指令与运算: Course/GeekTime/深入理解计算机组成原理/一周目/1. 指令与运算/指令与运算.md
         - 2. 处理器: Course/GeekTime/深入理解计算机组成原理/一周目/2. 处理器/处理器.md
         - 3. 存储与IO系统: Course/GeekTime/深入理解计算机组成原理/一周目/3. 存储与IO系统/存储与IO系统.md
-        - 4. 应用: docs/Course/GeekTime/深入理解计算机组成原理/一周目/4. 应用/应用.md
+        - 4. 应用: Course/GeekTime/深入理解计算机组成原理/一周目/4. 应用/应用.md
       - 计算基础实战课:
         - 1. MiniCPU设计: Course/GeekTime/计算机基础实战课/1. MiniCPU设计/MiniCPU设计.md
         - 2. 语言和指令: Course/GeekTime/计算机基础实战课/2. 语言和指令/语言和指令.md
