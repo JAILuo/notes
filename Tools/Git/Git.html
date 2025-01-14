@@ -1,0 +1,2593 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://jailuo.github.io/notes/Tools/Git/Git.html">
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.48">
+    
+    
+      
+        <title>Git - Messy Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.6f8fc17f.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/timeago.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../index.html" title="Messy Notes" class="md-header__button md-logo" aria-label="Messy Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Messy Notes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Git
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256l137.3-137.4c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/JAILuo/notes" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../index.html" title="Messy Notes" class="md-nav__button md-logo" aria-label="Messy Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Messy Notes
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/JAILuo/notes" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    首页
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Course
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Course
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    University Course
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            University Course
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_1" id="__nav_2_1_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    jyy OS2024
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            jyy OS2024
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_1_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_1_1" id="__nav_2_1_1_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    course note
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_1_1_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            course note
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Course/University%20Course/jyy%20OS2024/cousre%20note/1.%20introduction/introduction.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    introduction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Course/University%20Course/jyy%20OS2024/cousre%20note/2.%20concurrency/concurrency.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    concurrency
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Course/University%20Course/jyy%20OS2024/cousre%20note/3.%20virtualization/virtualization.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    virtualization
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Course/University%20Course/jyy%20OS2024/cousre%20note/4.%20persistence/persistence.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    persistence
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_1_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_1_2" id="__nav_2_1_1_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Mini Labs
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_1_1_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            Mini Labs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Course/University%20Course/jyy%20OS2024/Mini%20Labs/M1/M1.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    M1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Course/University%20Course/jyy%20OS2024/Mini%20Labs/M2/M2.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    M2
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Course/University%20Course/jyy%20OS2024/Mini%20Labs/M3/M3.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    M3
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_1_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_1_3" id="__nav_2_1_1_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    OS Labs
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_1_1_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_1_3">
+            <span class="md-nav__icon md-icon"></span>
+            OS Labs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Course/University%20Course/jyy%20OS2024/OS%20Labs/L0/L0.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    L0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Course/University%20Course/jyy%20OS2024/OS%20Labs/L1/L1.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    L1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    GeekTime
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            GeekTime
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2_1" id="__nav_2_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    深入理解计算机组成原理
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            深入理解计算机组成原理
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Course/GeekTime/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E4%B8%80%E5%91%A8%E7%9B%AE/1.%20%E6%8C%87%E4%BB%A4%E4%B8%8E%E8%BF%90%E7%AE%97/%E6%8C%87%E4%BB%A4%E4%B8%8E%E8%BF%90%E7%AE%97.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1. 指令与运算
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Course/GeekTime/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E4%B8%80%E5%91%A8%E7%9B%AE/2.%20%E5%A4%84%E7%90%86%E5%99%A8/%E5%A4%84%E7%90%86%E5%99%A8.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2. 处理器
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Course/GeekTime/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E4%B8%80%E5%91%A8%E7%9B%AE/3.%20%E5%AD%98%E5%82%A8%E4%B8%8EIO%E7%B3%BB%E7%BB%9F/%E5%AD%98%E5%82%A8%E4%B8%8EIO%E7%B3%BB%E7%BB%9F.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3. 存储与IO系统
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Course/GeekTime/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E4%B8%80%E5%91%A8%E7%9B%AE/4.%20%E5%BA%94%E7%94%A8/%E5%BA%94%E7%94%A8.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4. 应用
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2_2" id="__nav_2_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    计算基础实战课
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            计算基础实战课
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/1.%20MiniCPU%E8%AE%BE%E8%AE%A1/MiniCPU%E8%AE%BE%E8%AE%A1.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1. MiniCPU设计
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/2.%20%E8%AF%AD%E8%A8%80%E5%92%8C%E6%8C%87%E4%BB%A4/%E8%AF%AD%E8%A8%80%E5%92%8C%E6%8C%87%E4%BB%A4.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2. 语言和指令
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/3.%20%E5%BA%94%E7%94%A8%E5%92%8C%E5%86%85%E5%AD%98/%E5%BA%94%E7%94%A8%E5%92%8C%E5%86%85%E5%AD%98.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3. 应用和内存
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/4.%20IO%E4%B8%8E%E6%96%87%E4%BB%B6/IO%E5%92%8C%E6%96%87%E4%BB%B6.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4. IO与文件
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/5.%20%E7%BB%BC%E5%90%88%E5%BA%94%E7%94%A8/synthesis.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    5. 综合应用
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E5%92%8C%E5%B7%A5%E5%85%B7%E9%93%BE/%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    环境配置和工具链
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    ysyx
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            ysyx
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    NJU-ICS2023-PA
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            NJU-ICS2023-PA
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ysyx/pa/pa1/pa1.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PA1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ysyx/pa/pa2/pa2.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PA2
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ysyx/pa/pa3/pa3.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PA3
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ysyx/pa/pa4/pa4.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PA4
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ysyx/pa/c_marco/macro.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    C Macro
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ysyx/pa/summary/summary.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Summary
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ysyx/pa/Linux_porting/porting.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Linux Porting
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ysyx/digital-circuit/digital%20circuit.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Digital Circuit
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      上手使用
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="上手使用">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ssh-key" class="md-nav__link">
+    <span class="md-ellipsis">
+      创建 SSH key
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      上传代码
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      分支管理
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      实际开发
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      相关问题
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="相关问题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#git" class="md-nav__link">
+    <span class="md-ellipsis">
+      关于Git提交时的身份信息未配置
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vim-plug" class="md-nav__link">
+    <span class="md-ellipsis">
+      关于 vim-plug 下载时出现的问题：使用/更换镜像站
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#git-push1" class="md-nav__link">
+    <span class="md-ellipsis">
+      关于Git push问题1
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ssh" class="md-nav__link">
+    <span class="md-ellipsis">
+      ssh登录
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rejected-master-master-fetch-first" class="md-nav__link">
+    <span class="md-ellipsis">
+      ! [rejected] master -&gt; master (fetch first)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fatal-unable-to-access-xxxx-failed-to-connect-to-xxxx-connection-refused" class="md-nav__link">
+    <span class="md-ellipsis">
+      fatal: unable to access xxxx: Failed to connect to xxxx : Connection refused
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      想要切换到别的分支，但是不想要这次的修改
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vim-plug_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      关于 vim-plug 管理插件的镜像站
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      设置不同的远程仓库
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      提交不同的内容
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      提交分支
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      更改仓库名称
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      更新子模块仓库名称
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#git-reabse-i-headn" class="md-nav__link">
+    <span class="md-ellipsis">
+      清理提交历史：git reabse -i HEAD~n
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+  <h1>Git</h1>
+
+<h2 id="_1">上手使用</h2>
+<h4 id="ssh-key">创建 SSH key</h4>
+<p><a href="https://zhuanlan.zhihu.com/p/34584694">使用GitHub（一）：添加SSHkey - 知乎 (zhihu.com)</a></p>
+<h4 id="_2">上传代码</h4>
+<p><a href="https://zhuanlan.zhihu.com/p/34585267">使用GitHub（二）：配置并使用Git创建版本库 - 知乎 (zhihu.com)</a></p>
+<ol>
+<li>
+<p>在 github 上创建一个新的仓库，给它一个合适的名字，比如 your-project。</p>
+</li>
+<li>
+<p>在本地创建一个文件夹，用来存放你的项目文件，比如 your-project。</p>
+</li>
+<li>
+<p>进入文件夹，输入 <code>git init</code> 命令，初始化一个本地仓库。</p>
+</li>
+<li>
+<p>将你的项目文件复制或移动到本地文件夹中，然后输入 <code>git add .</code> 命令，将所有文件添加到暂存区。</p>
+</li>
+<li>
+<p>输入 <code>git commit -m "first commit"</code> 命令，将暂存区的文件提交到本地仓库，并添加一个提交信息。</p>
+</li>
+<li>
+<p>输入 <code>git remote add origin git@github.com:yourname/yourproject.git</code> </p>
+<p>将本地仓库与远程仓库关联起来，其中 yourname 是你的 github 用户名，youproject 是你的 github 仓库名。</p>
+<p>如：<code>git remote add origin git@github.com:JAILuo/lcthw-for-leanring.git</code></p>
+</li>
+<li>
+<p>输入 <code>git branch -M main</code> 和 <code>git push -u origin main</code> </p>
+<p>你将本地仓库的主分支设置为<code>main</code>，</p>
+<p>并将内容推送到远程仓库的<code>main</code>分支。保</p>
+</li>
+<li>
+<p>在 github 上查看你的仓库，应该项目文件已经上传成功了。</p>
+</li>
+</ol>
+<blockquote>
+<p>之后使用：</p>
+<ol>
+<li>
+<p><code>git add . /git add all</code></p>
+<blockquote>
+<p>但注意更新的时候的记录，上面这条命令是对全部文件的：</p>
+<p>具体对某一个文件：</p>
+<p>To commit a specific file with a specific comment in Git, you need to follow these steps:</p>
+<p>Add the changes to the staging area using the git add command. For example, to add a specific file named “file.txt”, use:</p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>add<span class="w"> </span>file.txt
+</code></pre></div>
+<p>Check the status of the files using the git status command to ensure that only the desired file is staged for commit.</p>
+<p>Commit the changes using the git commit command and provide a comment for the specific file. For example, to commit “file.txt” with the comment “Updated file.txt”, use:</p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Updated file.txt&quot;</span>
+</code></pre></div>
+<p>This way, only the specified file will have the given comment associated with it.</p>
+</blockquote>
+</li>
+<li>
+<p><code>git commit</code></p>
+</li>
+<li>
+<p><code>git push</code></p>
+</li>
+</ol>
+</blockquote>
+<h4 id="_3">分支管理</h4>
+<p>Git 中关于分支（branch）的操作是非常重要的，以下是一些常用的 Git 分支操作：</p>
+<ol>
+<li><strong>创建分支</strong>：</li>
+<li><code>git branch &lt;branch_name&gt;</code>：创建一个新的分支。</li>
+<li>
+<p><code>git checkout -b &lt;branch_name&gt;</code>：创建一个新的分支并切换到该分支。</p>
+</li>
+<li>
+<p><strong>切换分支</strong>：</p>
+</li>
+<li>
+<p><code>git checkout &lt;branch_name&gt;</code>：切换到指定的分支。</p>
+</li>
+<li>
+<p><strong>查看分支</strong>：</p>
+</li>
+<li><code>git branch</code>：列出所有本地分支，当前分支前会有一个 <code>*</code> 号。</li>
+<li>
+<p><code>git branch -a</code>：列出所有本地和远程分支。</p>
+</li>
+<li>
+<p><strong>删除分支</strong>：</p>
+</li>
+<li><code>git branch -d &lt;branch_name&gt;</code>：删除指定的本地分支。</li>
+<li>
+<p><code>git branch -D &lt;branch_name&gt;</code>：强制删除指定的本地分支（未合并的分支）。</p>
+</li>
+<li>
+<p><strong>合并分支</strong>：</p>
+</li>
+<li>
+<p><code>git merge &lt;branch_name&gt;</code>：将指定分支合并到当前分支。</p>
+</li>
+<li>
+<p><strong>推送分支</strong>：</p>
+</li>
+<li>
+<p><code>git push origin &lt;branch_name&gt;</code>：推送本地分支到远程仓库。</p>
+</li>
+<li>
+<p><strong>拉取远程分支</strong>：</p>
+</li>
+<li>
+<p><code>git fetch origin &lt;branch_name&gt;</code>：拉取远程分支到本地，但不会自动合并。</p>
+</li>
+<li>
+<p><strong>重命名分支</strong>：</p>
+</li>
+<li>
+<p><code>git branch -m &lt;new_branch_name&gt;</code>：重命名当前分支。</p>
+</li>
+<li>
+<p><strong>查看分支历史</strong>：</p>
+</li>
+<li><code>git log --oneline --decorate --graph --all</code>：查看所有分支的提交历史。</li>
+</ol>
+<p>以上是一些常用的 Git 分支操作，可以帮助您在项目开发中更好地管理和协作不同的功能和版本。</p>
+<h4 id="_4">实际开发</h4>
+<p>在实际公司开发中，团队通常会使用 Git 进行版本控制和协作，以下是在公司开发中常见的 Git 功能和操作：</p>
+<ol>
+<li><strong>分支管理</strong>：</li>
+<li>创建新分支用于开发新功能或修复 bug。</li>
+<li>合并分支以将新功能或修复的代码合并到主分支。</li>
+<li>
+<p>删除已经合并的分支以保持分支结构清晰。</p>
+</li>
+<li>
+<p><strong>代码提交</strong>：</p>
+</li>
+<li>提交代码以保存当前工作进度。</li>
+<li>
+<p>编写有意义的提交信息以便他人理解代码变更的目的。</p>
+</li>
+<li>
+<p><strong>代码审查</strong>：</p>
+</li>
+<li>发起代码审查以确保代码质量和一致性。</li>
+<li>
+<p>回顾他人提交的代码并提出反馈或建议。</p>
+</li>
+<li>
+<p><strong>解决冲突</strong>：</p>
+</li>
+<li>
+<p>处理代码合并时可能出现的冲突，解决冲突后提交更改。</p>
+</li>
+<li>
+<p><strong>版本回退</strong>：</p>
+</li>
+<li>
+<p>回滚到先前的提交版本以修复错误或恢复之前的状态。</p>
+</li>
+<li>
+<p><strong>远程仓库同步</strong>：</p>
+</li>
+<li>拉取远程仓库最新代码以保持本地代码同步。</li>
+<li>
+<p>推送本地代码到远程仓库以分享最新更改。</p>
+</li>
+<li>
+<p><strong>标签管理</strong>：</p>
+</li>
+<li>创建标签以标记重要的版本发布。</li>
+<li>
+<p>查看和共享特定标签对应的代码版本。</p>
+</li>
+<li>
+<p><strong>忽略文件</strong>：</p>
+</li>
+<li>
+<p>使用 <code>.gitignore</code> 文件来忽略不需要版本控制的文件或文件夹。</p>
+</li>
+<li>
+<p><strong>子模块管理</strong>：</p>
+</li>
+<li>
+<p>将其他 Git 仓库作为子模块引入主项目中，方便管理依赖。</p>
+</li>
+<li>
+<p><strong>Hooks 使用</strong>：</p>
+<ul>
+<li>使用 Git 钩子（hooks）来触发自定义脚本，在提交、合并等操作时执行特定任务。</li>
+</ul>
+</li>
+</ol>
+<p>以上是在公司开发中常见的 Git 功能和操作，通过合理使用这些功能，团队可以更高效地协作、管理和追踪代码变更。</p>
+<h2 id="_5">相关问题</h2>
+<h4 id="git">关于Git提交时的身份信息未配置</h4>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>git<span class="w"> </span>commit
+Author<span class="w"> </span>identity<span class="w"> </span>unknown
+
+***<span class="w"> </span>Please<span class="w"> </span>tell<span class="w"> </span>me<span class="w"> </span>who<span class="w"> </span>you<span class="w"> </span>are.
+
+Run
+
+<span class="w">  </span>git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>user.email<span class="w"> </span><span class="s2">&quot;you@example.com&quot;</span>
+<span class="w">  </span>git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>user.name<span class="w"> </span><span class="s2">&quot;Your Name&quot;</span>
+
+to<span class="w"> </span><span class="nb">set</span><span class="w"> </span>your<span class="w"> </span>account<span class="s1">&#39;s default identity.</span>
+<span class="s1">Omit --global to set the identity only in this repository.</span>
+
+<span class="s1">fatal: unable to auto-detect email address (got &#39;</span><span class="m">16707</span>@▒▒ֻ▒▒С▒▒.<span class="o">(</span>none<span class="o">)</span><span class="err">&#39;</span><span class="o">)</span>
+</code></pre></div>
+<p>这个错误提示表明 Git 在提交时无法确定你的身份信息（用户名和邮箱地址），因此需要你配置这些信息。你可以按照提示中的指引，通过以下命令来设置你的用户名和邮箱地址：</p>
+<div class="highlight"><pre><span></span><code>git config --global user.email &quot;you@example.com&quot;
+git config --global user.name &quot;Your Name&quot;
+</code></pre></div>
+<p>在上面的命令中，将 <code>you@example.com</code> 替换为你的邮箱地址，将 <code>Your Name</code> 替换为你的用户名。这样设置后，Git 就能正确识别你的身份信息，你就可以成功提交代码了。</p>
+<p>如果你只想在当前仓库中设置身份信息而不是全局设置，可以去掉 <code>--global</code> 参数，例如：</p>
+<div class="highlight"><pre><span></span><code>git config user.email &quot;you@example.com&quot;
+git config user.name &quot;Your Name&quot;
+</code></pre></div>
+<p>设置完身份信息后，再次尝试提交代码，应该就不会再出现上述错误了。</p>
+<p><mark>解决</mark></p>
+<h4 id="vim-plug">关于 vim-plug 下载时出现的问题：使用/更换镜像站</h4>
+<p>当使用<code>https://kkgithub.com</code>作为镜像站时，您可以按照以下步骤重新配置Git的镜像站设置：</p>
+<ol>
+<li>
+<p>打开终端，并输入以下命令来查看当前Git的镜像站点设置：
+   <div class="highlight"><pre><span></span><code>git config --global --get http.proxy
+git config --global --get https.proxy
+</code></pre></div></p>
+</li>
+<li>
+<p>如果上述命令返回了镜像站点地址，您可以使用以下命令来移除镜像站点设置：
+   <div class="highlight"><pre><span></span><code>git config --global --unset http.proxy
+git config --global --unset https.proxy
+</code></pre></div></p>
+</li>
+<li>
+<p>然后，您可以设置新的镜像站点地址为<code>https://kkgithub.com</code>。请注意，<code>https://kkgithub.com</code>可能不是一个有效的Git镜像站点，您可能需要使用其他可靠的镜像站点。但是，如果您仍然希望使用<code>https://kkgithub.com</code>，您可以尝试设置如下：
+   <div class="highlight"><pre><span></span><code>git config --global url.&quot;https://kkgithub.com/&quot;.insteadOf &quot;https://github.com/&quot;
+</code></pre></div></p>
+</li>
+<li>
+<p>然后再次尝试克隆<code>ycmd</code>子模块，看看是否可以成功。</p>
+</li>
+</ol>
+<p>请注意，镜像站点的可靠性和稳定性对于Git操作非常重要，建议您选择经过验证和可靠的镜像站点。希望这些信息对您有帮助。如果您有任何其他问题，请随时告诉我。</p>
+<h4 id="git-push1">关于Git push问题1</h4>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>git<span class="w"> </span>push<span class="w"> </span>-u<span class="w"> </span>orign<span class="w"> </span>main
+fatal:<span class="w"> </span><span class="s1">&#39;orign&#39;</span><span class="w"> </span>does<span class="w"> </span>not<span class="w"> </span>appear<span class="w"> </span>to<span class="w"> </span>be<span class="w"> </span>a<span class="w"> </span>git<span class="w"> </span>repository
+fatal:<span class="w"> </span>Could<span class="w"> </span>not<span class="w"> </span><span class="nb">read</span><span class="w"> </span>from<span class="w"> </span>remote<span class="w"> </span>repository.
+
+Please<span class="w"> </span>make<span class="w"> </span>sure<span class="w"> </span>you<span class="w"> </span>have<span class="w"> </span>the<span class="w"> </span>correct<span class="w"> </span>access<span class="w"> </span>rights
+and<span class="w"> </span>the<span class="w"> </span>repository<span class="w"> </span>exists.
+</code></pre></div>
+<p>这个错误提示表明 Git 在尝试推送到远程仓库时遇到了权限问题，可能是因为 SSH 密钥认证失败。以下是可能导致这个问题的一些原因和解决方法：</p>
+<ol>
+<li>
+<p><strong>SSH密钥未正确配置</strong>：请确保你在GitHub账户中添加了正确的公钥。你可以在GitHub的设置中找到 SSH and GPG keys 来添加公钥。</p>
+</li>
+<li>
+<p><strong>SSH代理问题</strong>：有时候 SSH 代理可能会导致权限问题。你可以尝试在终端中运行以下命令来关闭 SSH 代理，然后再次尝试推送：</p>
+<div class="highlight"><pre><span></span><code>eval &quot;$(ssh-agent -s)&quot;
+ssh-add ~/.ssh/id_rsa
+</code></pre></div>
+</li>
+<li>
+<p><strong>检查远程仓库地址</strong>：确保你使用的远程仓库地址是正确的。你可以运行以下命令来检查远程仓库地址：</p>
+<div class="highlight"><pre><span></span><code>git remote -v
+</code></pre></div>
+</li>
+<li>
+<p><strong>检查SSH配置</strong>：确保你的SSH配置文件中包含正确的私钥路径。你可以检查 <code>~/.ssh/config</code> 文件或者 <code>~/.ssh/authorized_keys</code> 文件。</p>
+</li>
+<li>
+<p><strong>尝试使用HTTPS方式推送</strong>：如果以上方法无法解决问题，你可以尝试使用HTTPS方式推送代码。你可以将远程仓库地址改为HTTPS方式：</p>
+<div class="highlight"><pre><span></span><code>git remote set-url origin https://github.com/yourusername/your-repo.git
+</code></pre></div>
+</li>
+<li>
+<p>直接使用了<code>git remote set-url origin https://github.com/yourusername/your-repo.git</code>解决</p>
+<p><mark>解决</mark></p>
+</li>
+</ol>
+<h4 id="ssh">ssh登录</h4>
+<p>在Ubuntu 22.04上，你可以使用以下步骤来生成新的SSH密钥对、将其添加到SSH代理并配置SSH客户端：</p>
+<ol>
+<li>生成新的SSH密钥对：</li>
+<li>
+<p>打开终端并输入以下命令来生成新的SSH密钥对：
+     <div class="highlight"><pre><span></span><code>ssh-keygen -t rsa -f ~/.ssh/id_rsa_github -C &quot;your_email@example.com&quot;
+</code></pre></div>
+     这里<code>-t</code>参数指定密钥类型为RSA，<code>-f</code>参数指定生成的密钥文件名为id_rsa_github，<code>-C</code>参数用于指定注释，通常可以填写你的邮箱地址。</p>
+</li>
+<li>
+<p>同样的方式生成Jetson Nano的SSH密钥对：
+     <div class="highlight"><pre><span></span><code>ssh-keygen -t rsa -f ~/.ssh/id_rsa_jetson -C &quot;your_email@example.com&quot;
+</code></pre></div></p>
+</li>
+<li>
+<p>将新的SSH密钥添加到SSH代理：</p>
+</li>
+<li>
+<p>使用以下命令将新生成的SSH密钥添加到SSH代理中：
+     <div class="highlight"><pre><span></span><code>ssh-add ~/.ssh/id_rsa_github
+ssh-add ~/.ssh/id_rsa_jetson
+</code></pre></div></p>
+</li>
+<li>
+<p>配置SSH客户端：</p>
+</li>
+<li>使用文本编辑器打开<code>~/.ssh/config</code>文件，并添加以下内容：
+     <div class="highlight"><pre><span></span><code># GitHub
+Host github.com
+HostName github.com
+IdentityFile ~/.ssh/id_rsa_github
+
+# Jetson Nano
+Host jetson
+HostName &lt;jetson_nano_ip&gt;
+IdentityFile ~/.ssh/id_rsa_jetson
+</code></pre></div></li>
+</ol>
+<p>通过以上步骤，你可以在不同的场景下使用不同的SSH密钥对，而无需每次重新生成SSH密钥。同时，确保在GitHub和Jetson Nano上配置相应的公钥以进行授权访问。</p>
+<h4 id="rejected-master-master-fetch-first">! [rejected]          master -&gt; master (fetch first)</h4>
+<div class="highlight"><pre><span></span><code>!<span class="w"> </span><span class="o">[</span>rejected<span class="o">]</span><span class="w">          </span>master<span class="w"> </span>-&gt;<span class="w"> </span>master<span class="w"> </span><span class="o">(</span>fetch<span class="w"> </span>first<span class="o">)</span>
+error:<span class="w"> </span>failed<span class="w"> </span>to<span class="w"> </span>push<span class="w"> </span>some<span class="w"> </span>refs<span class="w"> </span>to<span class="w"> </span><span class="s1">&#39;https://github.com/JAILuo/ics2023-ysyx.git&amp;#39;  </span>
+<span class="s1">hint: Updates were rejected because the remote contains work that you do</span>
+<span class="s1">hint: not have locally. This is usually caused by another repository pushing</span>
+<span class="s1">hint: to the same ref. You may want to first integrate the remote changes</span>
+<span class="s1">hint: (e.g., &#39;</span>git<span class="w"> </span>pull<span class="w"> </span>...<span class="s1">&#39;) before pushing again.</span>
+<span class="s1">hint: See the &#39;</span>Note<span class="w"> </span>about<span class="w"> </span>fast-forwards<span class="s1">&#39; in &#39;</span>git<span class="w"> </span>push<span class="w"> </span>--help<span class="err">&#39;</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>details.
+</code></pre></div>
+<p>这个错误信息表明你尝试将本地的Git仓库推送到远程仓库时，远程仓库中存在一些你本地没有的更新。这通常是因为其他人已经推送了更改到远程仓库，而你的本地仓库还没有同步这些更改。</p>
+<p>要解决这个问题，你可以按照以下步骤操作：</p>
+<ol>
+<li>
+<p><strong>拉取远程仓库的最新更改</strong>：
+   使用命令 <code>git pull origin master</code> 来拉取远程仓库的最新更改到你的本地仓库。这将会合并远程仓库的更改到你的当前分支。</p>
+</li>
+<li>
+<p><strong>解决任何潜在的合并冲突</strong>：
+   如果在合并过程中出现冲突，Git会提示你解决这些冲突。你需要手动编辑冲突的文件，选择保留哪部分更改，然后提交更改。</p>
+</li>
+<li>
+<p><strong>再次尝试推送</strong>：
+   一旦解决了所有合并冲突并且本地仓库是最新的，你可以使用 <code>git push origin master</code> 再次尝试推送你的更改到远程仓库。</p>
+</li>
+</ol>
+<p>如果你希望保留你本地的更改而不是合并远程的更改，你可以使用 <code>git pull --rebase</code> 来拉取远程更改，这样可以保持你的提交历史更干净。</p>
+<p>请注意，如果你不是仓库的协作者或者没有写入权限，你可能需要先 fork 仓库，然后推送到你的 fork 中。如果你需要进一步的帮助，请提供更多的上下文信息。</p>
+<blockquote>
+<p>more：<code>git pull</code> 和 <code>git pull --rebase</code></p>
+<p><code>git pull --rebase</code> 和 <code>git pull</code> 都是用来将远程仓库的更改合并到你的本地仓库中，但它们在合并更改时的策略有所不同，这会影响到你的提交历史。</p>
+<ul>
+<li>
+<p><code>git pull</code>（默认行为）</p>
+<p>当你使用不带参数的 <code>git pull</code> 时，Git 会执行以下步骤：</p>
+<ol>
+<li>首先，它会将远程分支的当前状态保存为一个临时的本地分支。</li>
+<li>然后，它会将你的当前分支重置为远程分支的当前状态。</li>
+<li>接着，它会尝试将你的本地更改合并到这个远程状态上。</li>
+<li>如果合并成功，你会得到一个包含两个父提交的合并提交，表示你的本地更改和远程更改的合并。</li>
+</ol>
+<p>这种方式的优点是简单直接，但缺点是它会在你的提交历史中引入一个额外的合并提交，这可能会使历史变得复杂和难以追踪。</p>
+</li>
+<li>
+<p><code>git pull --rebase</code></p>
+<p>使用 <code>git pull --rebase</code> 时，Git 会执行以下步骤：</p>
+<ol>
+<li>它会首先记录下你当前分支上相对于远程分支的提交（即你的本地更改）。</li>
+<li>然后，它会将远程分支的更改拉取到你的当前分支上，将你的本地分支更新到远程分支的最新状态。</li>
+<li>接着，它会将你在第一步记录的本地更改重新应用到更新后的分支上，一个接一个地进行。</li>
+<li>
+<p>如果过程中没有冲突，你会得到一个线性的提交历史，就像你的本地更改是在远程更改之后直接进行的。</p>
+</li>
+<li>
+<p>使用 <code>git pull --rebase</code> 的好处包括：</p>
+<ul>
+<li><strong>更清晰的提交历史</strong>：避免了不必要的合并提交，使得提交历史更加线性和清晰。</li>
+<li><strong>更容易的回滚</strong>：如果你需要回滚一些更改，线性的提交历史使得这个过程更加简单。</li>
+<li><strong>更好的协作</strong>：在团队中使用 rebase 可以帮助保持一致的提交历史，使得团队成员更容易理解项目的发展。</li>
+</ul>
+</li>
+<li>然而，<code>git pull --rebase</code> 也有潜在的缺点：<ul>
+<li>如果团队成员也在使用相同的分支进行工作，使用 rebase 可能会导致冲突，因为 rebase 改变了提交的顺序和哈希值。</li>
+<li>如果不恰当地使用 rebase，可能会不小心丢失他人的工作或者混淆提交历史。</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<p>总的来说，选择使用 <code>git pull</code> 还是 <code>git pull --rebase</code> 取决于你的团队工作流程和个人偏好。如果你希望保持一个干净、线性的提交历史，<code>git pull --rebase</code> 是一个很好的选择。如果你更倾向于保留每次合并的上下文，那么 <code>git pull</code> 可能更适合你。</p>
+</blockquote>
+<h4 id="fatal-unable-to-access-xxxx-failed-to-connect-to-xxxx-connection-refused">fatal: unable to access xxxx: Failed to connect to xxxx : Connection refused</h4>
+<blockquote>
+<p>git clone 拒绝连接，Connection refused 解决方法
+一、使用env指令查询系统代理并取消对应http代理
+二、使用git config指令查询代理并取消代理
+三、直接修改.gitconfig配置文档查询代理并取消代理</p>
+<p>git clone经常出现代理错误，报错如下：
+fatal: unable to access 'https://<a href="https://so.csdn.net/so/search?q=github&amp;spm=1001.2101.3001.7020">github</a>.com/xbg/myproject.git/': Failed to connect to 127.0.0.1 port 8888: 拒绝连接
+1
+普遍的解决方案都是取消代理，但是本人经常遇到常见的取消代理无效的问题，所以把各种方案都总结如下。</p>
+<p>一、使用env指令查询系统代理并取消对应http代理
+使用指令：</p>
+<p>env | grep -i proxy 
+1
+会显示系统所有的代理信息：</p>
+<p>NO_PROXY=localhost,127.0.0.0/8,::1
+http_proxy=http://127.0.0.1:8888/
+https_proxy=http://127.0.0.1:8888/
+HTTPS_PROXY=http://127.0.0.1:8888/
+no_proxy=localhost,127.0.0.0/8,::1
+HTTP_PROXY=http://127.0.0.1:8888/
+1
+2
+3
+4
+5
+6
+使用unset指令取消代理：</p>
+<p>unset http_proxy
+unset  https_proxy
+unset  HTTPS_PROXY
+unset  HTTP_PROXY
+1
+2
+3
+4
+二、使用git config指令查询代理并取消代理
+查看代理：</p>
+<p>git config --global http.proxy
+1
+显示已有的http代理信息：</p>
+<p>http://127.0.0.1:8888
+1
+取消代理：</p>
+<p>git config --global --unset http.proxy
+1
+三、直接修改.gitconfig配置文档查询代理并取消代理
+经常以上两种方式都不能查询到系统代理，但是git clone仍有相同报错，则可以直接查看.gitconfig来查询git使用代理，若有代理则将其删除。
+1
+使用指令：</p>
+<p>vim ~/.gitconfig
+1
+.gitconfig如下：</p>
+<p>可以看到有https的代理，将那两行删除。</p>
+<p>此时再git clone问题解决。</p>
+</blockquote>
+<p><a href="https://blog.csdn.net/qq_40296909/article/details/134285451">解决使用git时遇到Failed to connect to github.com port 443 after 21090 ms: Couldn‘t connect to server_git couldn't connect to server</a></p>
+<p>改端口，该补充一些计算机网路的知识了。</p>
+<h4 id="_6">想要切换到别的分支，但是不想要这次的修改</h4>
+<p>如果你在分支上进行了一些改动并进行了测试，但并不想提交这些改动，你可以采取以下几种方法来处理这些未提交的更改：</p>
+<ol>
+<li>
+<p><strong>放弃工作目录中的所有更改</strong>：
+   如果你确定不想保留这些更改，可以使用 <code>git checkout</code> 或 <code>git reset</code> 命令来放弃自上次提交以来的所有更改。
+   <div class="highlight"><pre><span></span><code>git<span class="w"> </span>reset<span class="w"> </span>--hard
+git<span class="w"> </span>checkout<span class="w"> </span>.
+</code></pre></div>
+   这将重置你的工作目录和索引（暂存区）到最后一次提交的状态。</p>
+</li>
+<li>
+<p><strong>暂存改动</strong>：
+   如果你想要保留这些改动，但目前不想提交，你可以使用 <code>git stash</code> 命令来暂存这些改动。
+   <div class="highlight"><pre><span></span><code>git<span class="w"> </span>stash
+</code></pre></div>
+   这会将你的改动存储在一个“暂存栈”中，你的工作目录将会被清理干净。</p>
+</li>
+<li>
+<p><strong>创建一个新的分支</strong>：
+   如果你想要保留这些改动并且将来可能会用到，可以创建一个新的分支来保存这些改动。</p>
+</li>
+</ol>
+<p><div class="highlight"><pre><span></span><code>git<span class="w"> </span>checkout<span class="w"> </span>-b<span class="w"> </span>new-branch-name
+</code></pre></div>
+   这样，你的改动将会保存在新的分支上，你可以在任何时候回到这个分支继续工作。</p>
+<ol>
+<li>
+<p><strong>使用 <code>git restore</code> 命令</strong>：
+   在 Git 2.23 版本及以后，你可以使用 <code>git restore</code> 命令来放弃工作目录中的特定文件或所有文件的更改。
+   <div class="highlight"><pre><span></span><code>git<span class="w"> </span>restore<span class="w"> </span>.
+</code></pre></div>
+   或者放弃特定文件的更改：
+   <div class="highlight"><pre><span></span><code>git<span class="w"> </span>restore<span class="w"> </span>&lt;file-path&gt;
+</code></pre></div></p>
+</li>
+<li>
+<p><strong>使用 <code>git clean</code> 命令</strong>：
+   如果你想要删除未跟踪的文件（例如，那些没有加入到 Git 仓库中的新文件），可以使用 <code>git clean</code> 命令。
+   <div class="highlight"><pre><span></span><code>git<span class="w"> </span>clean<span class="w"> </span>-f
+</code></pre></div>
+   这个命令会删除所有未跟踪的文件和目录，但不会删除已跟踪的文件。</p>
+</li>
+</ol>
+<p>选择适合你情况的方法来处理你的改动。如果你只是想要回到上次提交的状态并且不保留任何未提交的更改，那么使用 <code>git reset --hard</code> 和 <code>git checkout .</code> 是最快的方法。如果你想要保留这些更改以备将来使用，那么 <code>git stash</code> 或创建一个新的分支会是更好的选择。</p>
+<p>​   </p>
+<h4 id="vim-plug_1">关于 vim-plug 管理插件的镜像站</h4>
+<div class="highlight"><pre><span></span><code>Plug<span class="w"> </span><span class="s1">&#39;git://github.com/junegunn/fzf&#39;</span>,<span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="s1">&#39;do&#39;</span>:<span class="w"> </span><span class="o">{</span><span class="w"> </span>-&gt;<span class="w"> </span>fzf#install<span class="o">()</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="o">}</span>
+Plug<span class="w"> </span><span class="s1">&#39;git://github.com/junegunn/fzf.vim&#39;</span>
+
+Plug<span class="w"> </span><span class="s1">&#39;git://github.com/Shougo/defx.nvim.git&#39;</span>
+Plug<span class="w"> </span><span class="s1">&#39;git://github.com/roxma/nvim-yarp.git&#39;</span>
+Plug<span class="w"> </span><span class="s1">&#39;git://github.com/roxma/vim-hug-neovim-rpc.git&#39;</span>
+Plug<span class="w"> </span><span class="s1">&#39;git://github.com/kristijanhusak/defx-icons.git&#39;</span>
+</code></pre></div>
+<p>直接深入仓库的全称</p>
+<h4 id="_7">设置不同的远程仓库</h4>
+<p>为了避免远程仓库名称冲突，你可以为不同的远程仓库指定不同的名称。以下是如何操作的步骤：</p>
+<ol>
+<li><strong>创建新的远程仓库名称</strong>：</li>
+<li>当你想要添加一个新的远程仓库时，不要使用默认的 <code>origin</code>，而是指定一个新的名字。例如：
+     <div class="highlight"><pre><span></span><code>git<span class="w"> </span>remote<span class="w"> </span>add<span class="w"> </span>upstream<span class="w"> </span>https://github.com/your-username/your-repo.git
+</code></pre></div></li>
+<li>
+<p>这里 <code>upstream</code> 是你为远程仓库指定的新名称，<code>https://github.com/your-username/your-repo.git</code> 是你的远程仓库的URL。</p>
+</li>
+<li>
+<p><strong>推送到新的远程仓库</strong>：</p>
+</li>
+<li>一旦你添加了一个新的远程仓库，你可以使用这个新的名称来推送代码：
+     <div class="highlight"><pre><span></span><code>git<span class="w"> </span>push<span class="w"> </span>upstream<span class="w"> </span>main
+</code></pre></div></li>
+<li>
+<p>这会将你的 <code>main</code> 分支推送到名为 <code>upstream</code> 的远程仓库。</p>
+</li>
+<li>
+<p><strong>查看远程仓库</strong>：</p>
+</li>
+<li>要查看所有远程仓库的名称和URL，可以使用：
+     <div class="highlight"><pre><span></span><code>git<span class="w"> </span>remote<span class="w"> </span>-v
+</code></pre></div></li>
+<li>
+<p>这将列出所有的远程仓库及其对应的URL。</p>
+</li>
+<li>
+<p><strong>修改远程仓库URL</strong>：</p>
+</li>
+<li>如果你需要修改远程仓库的URL（例如，从HTTP切换到SSH），可以使用：
+     <div class="highlight"><pre><span></span><code>git<span class="w"> </span>remote<span class="w"> </span>set-url<span class="w"> </span>upstream<span class="w"> </span>https://github.com/your-username/your-repo.git
+</code></pre></div></li>
+<li>
+<p>这将更新名为 <code>github</code> 的远程仓库的URL。</p>
+</li>
+<li>
+<p><strong>删除远程仓库</strong>：</p>
+</li>
+<li>如果你不再需要某个远程仓库，可以使用以下命令删除它：
+     <div class="highlight"><pre><span></span><code>git<span class="w"> </span>remote<span class="w"> </span>remove<span class="w"> </span>github
+</code></pre></div></li>
+<li>
+<p>这将删除名为 <code>github</code> 的远程仓库。</p>
+</li>
+<li>
+<p><strong>重命名远程仓库</strong>：</p>
+</li>
+<li>如果你想要改变远程仓库的名称，可以使用以下命令：
+     <div class="highlight"><pre><span></span><code>git<span class="w"> </span>remote<span class="w"> </span>rename<span class="w"> </span>old-name<span class="w"> </span>new-name
+</code></pre></div></li>
+<li>这将把远程仓库的名称从 <code>old-name</code> 改为 <code>new-name</code>。</li>
+</ol>
+<p>通过使用不同的名称为不同的远程仓库，你可以轻松地管理和推送到多个远程仓库，而不会发生冲突。</p>
+<h4 id="_8">提交不同的内容</h4>
+<p>在 Git 中，如果你想为不同的文件编写不同的提交注释，你可以使用部分提交（partial commits）或者分别对每个文件进行提交。以下是几种方法：</p>
+<ul>
+<li>
+<p>方法 1：使用 <code>git add</code> 部分提交</p>
+<ol>
+<li>
+<p><strong>添加文件到暂存区</strong>：</p>
+<ul>
+<li>
+<p>首先，使用 <code>git add</code> 将你想要提交的文件添加到暂存区（stage area）。</p>
+</li>
+<li>
+<p>例如，如果你有两个文件 <code>file1.txt</code> 和 <code>file2.txt</code>，你只想提交 <code>file1.txt</code>，你可以运行：</p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>add<span class="w"> </span>file1.txt
+</code></pre></div>
+</li>
+<li>
+<p>然后，编写提交注释并提交：</p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;提交 file1.txt 的更改&quot;</span>
+</code></pre></div>
+</li>
+<li>
+<p>接下来，你可以再次运行 <code>git add</code> 添加 <code>file2.txt</code>：</p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>add<span class="w"> </span>file2.txt
+</code></pre></div>
+</li>
+<li>
+<p>编写另一个提交注释并提交：</p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;提交 file2.txt 的更改&quot;</span>
+</code></pre></div>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>
+<p>方法 2：使用 <code>git commit</code> 的 <code>-C</code> 或 <code>-c</code> 选项</p>
+<p>如果你已经将所有更改添加到暂存区，但想要为不同的更改编写不同的提交注释，你可以使用 <code>-C</code> 或 <code>-c</code> 选项来复制之前的提交信息。</p>
+<ol>
+<li>
+<p><strong>添加所有更改到暂存区</strong>：</p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>add<span class="w"> </span>.
+</code></pre></div>
+</li>
+<li>
+<p><strong>提交更改</strong>：</p>
+<ul>
+<li>
+<p>首先，提交所有更改：</p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Initial commit with all changes&quot;</span>
+</code></pre></div>
+</li>
+<li>
+<p>然后，你可以使用 <code>git rebase</code> 来修改提交信息：</p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>rebase<span class="w"> </span>-i<span class="w"> </span>HEAD~1
+</code></pre></div>
+</li>
+<li>
+<p>这将打开一个编辑器，列出最近的提交。你可以将提交更改为 <code>edit</code>，保存并退出。</p>
+</li>
+<li>
+<p>然后，你可以修改提交信息：</p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>commit<span class="w"> </span>--amend<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;提交 file1.txt 的更改&quot;</span>
+</code></pre></div>
+</li>
+<li>
+<p>重复上述步骤，为 <code>file2.txt</code> 修改提交信息。</p>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>
+<p>方法 3：使用 <code>git add -p</code> 交互式添加</p>
+<ol>
+<li>
+<p><strong>交互式添加更改</strong>：</p>
+<ul>
+<li>
+<p>运行 <code>git add -p</code>，Git 会提示你选择哪些更改要添加到暂存区。</p>
+</li>
+<li>
+<p>你可以选择只添加 <code>file1.txt</code> 的更改，然后提交：</p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;提交 file1.txt 的更改&quot;</span>
+</code></pre></div>
+</li>
+<li>
+<p>然后，你可以再次运行 <code>git add -p</code> 来添加 <code>file2.txt</code> 的更改，并提交：</p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;提交 file2.txt 的更改&quot;</span>
+</code></pre></div>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<h4 id="_9">提交分支</h4>
+<blockquote>
+<p>从你提供的错误信息来看，你在尝试将本地的 <code>L0</code> 分支推送到远程仓库时遇到了两个问题：</p>
+<ol>
+<li>
+<p><strong>fatal: 'L0' does not appear to be a git repository</strong>：
+   这个错误表明 <code>L0</code> 被误认为是远程仓库的名称，而不是分支名称。你需要确保在 <code>git push</code> 命令中正确指定了远程仓库和分支。</p>
+</li>
+<li>
+<p><strong>error: src refspec upstream does not match any</strong>：
+   这个错误表明你尝试将本地分支推送到 <code>upstream</code> 远程仓库，但是 <code>upstream</code> 远程仓库中没有对应的分支可以接收推送。</p>
+</li>
+</ol>
+<p>针对这些问题，你可以按照以下步骤操作：</p>
+<ul>
+<li>
+<p>步骤1：检查远程仓库的分支</p>
+<p>首先，你需要检查远程仓库 <code>origin</code> 和 <code>upstream</code> 中有哪些分支。使用以下命令：</p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>branch<span class="w"> </span>-r
+</code></pre></div>
+<p>这将列出所有远程分支。</p>
+</li>
+<li>
+<p>步骤2：推送到正确的远程仓库</p>
+<p>根据你的需求，你似乎想要将 <code>L0</code> 分支推送到 <code>origin</code> 远程仓库。确保使用正确的远程仓库名称和分支名称。使用以下命令：</p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>L0
+</code></pre></div>
+<p>这个命令将 <code>L0</code> 分支推送到 <code>origin</code> 远程仓库。</p>
+</li>
+<li>
+<p>步骤3：检查权限和仓库存在性</p>
+<p>如果仍然遇到权限问题或仓库不存在的错误，请确保：</p>
+<ul>
+<li>你有正确的访问权限。</li>
+<li>远程仓库URL正确无误。</li>
+</ul>
+</li>
+<li>
+<p>步骤4：解决分支不匹配问题</p>
+<p>如果 <code>upstream</code> 远程仓库中没有 <code>L0</code> 分支，你可以选择：</p>
+<ul>
+<li>
+<p>在 <code>upstream</code> 仓库中创建一个新的分支，然后推送：</p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>push<span class="w"> </span>upstream<span class="w"> </span>L0
+</code></pre></div>
+</li>
+<li>
+<p>或者，如果你只想推送到 <code>origin</code> 仓库，确保使用正确的远程仓库名称。</p>
+</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h4 id="_10">更改仓库名称</h4>
+<p>当你在远程仓库（比如GitHub、GitLab等）更改了仓库名称后，你需要更新本地仓库的远程URL以匹配新的仓库名称。以下是你可以按照的步骤：</p>
+<ol>
+<li>
+<p><strong>打开命令行工具</strong>：
+   打开你的命令行工具（在Windows上是CMD或PowerShell，在macOS或Linux上是Terminal）。</p>
+</li>
+<li>
+<p><strong>切换到你的本地仓库目录</strong>：
+   使用<code>cd</code>命令切换到你的本地仓库目录。例如：
+   <div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>path/to/your/local/repo
+</code></pre></div></p>
+</li>
+<li>
+<p><strong>查看当前的远程仓库URL</strong>：
+   你可以使用以下命令来查看当前配置的远程仓库URL：
+   <div class="highlight"><pre><span></span><code>git<span class="w"> </span>remote<span class="w"> </span>-v
+</code></pre></div></p>
+</li>
+<li>
+<p><strong>更改远程仓库的URL</strong>：
+   使用<code>git remote set-url</code>命令来更改远程仓库的URL。你需要将<code>origin</code>（这是默认的远程仓库名称）的URL更改为新的URL。假设你的新仓库URL是<code>https://github.com/username/ics2024.git</code>，你可以这样做：
+   <div class="highlight"><pre><span></span><code>git<span class="w"> </span>remote<span class="w"> </span>set-url<span class="w"> </span>origin<span class="w"> </span>https://github.com/username/ics2024.git
+</code></pre></div></p>
+</li>
+<li>
+<p><strong>再次查看远程仓库URL</strong>：
+   再次使用<code>git remote -v</code>来确认URL已经更改：
+   <div class="highlight"><pre><span></span><code>git<span class="w"> </span>remote<span class="w"> </span>-v
+</code></pre></div></p>
+</li>
+<li>
+<p><strong>拉取最新的更改</strong>：
+   如果远程仓库中有新的更改，你可以使用以下命令来拉取这些更改：
+   <div class="highlight"><pre><span></span><code>git<span class="w"> </span>pull<span class="w"> </span>origin<span class="w"> </span>main
+</code></pre></div>
+   这里假设<code>main</code>是你的默认分支名称。如果你的仓库使用的是<code>master</code>或其他分支名称，请相应地替换。</p>
+</li>
+<li>
+<p><strong>推送本地更改</strong>：
+   如果你有本地更改需要推送到远程仓库，可以使用以下命令：
+   <div class="highlight"><pre><span></span><code>git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>main
+</code></pre></div></p>
+</li>
+</ol>
+<p>通过这些步骤，你的本地仓库就会同步到新的远程仓库名称。记得在团队协作中通知其他成员也更新他们的远程仓库URL。</p>
+<h4 id="_11">更新子模块仓库名称</h4>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>submodule<span class="w"> </span>update<span class="w"> </span>--remote<span class="w"> </span>--merge
+</code></pre></div>
+<h4 id="git-reabse-i-headn"><strong>清理提交历史</strong>：git reabse -i HEAD~n</h4>
+<p>起初是因为在做 NJU OS lab的时候往GitHub上提交了很多的垃圾日志（编译记录），就想着有没有什么办法能够去除掉已经提交的日志，我能想到的，别人肯定也想到过，也肯定有相关工具，就 AI 搜到了 rebase。</p>
+<p><a href="https://git-scm.com/docs/git-rebase">Git - git-rebase Documentation</a></p>
+<p><a href="https://www.atlassian.com/git/tutorials/rewriting-history/git-rebase">git rebase | Atlassian Git Tutorial</a></p>
+<blockquote>
+<p>比如，删除本地仓库中 M2 分支的某个特定提交，可以使用 <code>git rebase -i</code> 命令进行交互式变基操作。以下是具体步骤：</p>
+<ol>
+<li>
+<p><strong>切换到 M2 分支</strong>（如果尚未切换）：
+   <div class="highlight"><pre><span></span><code>git<span class="w"> </span>checkout<span class="w"> </span>M2
+</code></pre></div></p>
+</li>
+<li>
+<p><strong>启动交互式变基</strong>：
+   <div class="highlight"><pre><span></span><code>git<span class="w"> </span>rebase<span class="w"> </span>-i<span class="w"> </span>HEAD~N
+</code></pre></div></p>
+</li>
+<li>
+<p><code>N</code> 是你想要回溯的提交数量。例如，如果你想要回溯到包含垃圾日志的提交，可以将 <code>N</code> 设置为包含这些提交的数量。假设你知道垃圾日志是在最近的 5 个提交中，那么可以使用 <code>HEAD~5</code>。</p>
+</li>
+<li>
+<p><strong>编辑提交历史</strong>：</p>
+</li>
+<li>执行上述命令后，Git 会打开一个文本编辑器（通常是 Vim 或 Nano），列出最近的 <code>N</code> 个提交。</li>
+<li>在编辑器中，你会看到类似以下的内容：
+     <div class="highlight"><pre><span></span><code>pick 1234567 Commit message 1
+pick 2345678 Commit message 2
+pick 3456789 Commit message 3
+pick 4567890 Commit message 4
+pick 5678901 Commit message 5
+</code></pre></div></li>
+<li>找到包含垃圾日志的提交，将其前面的 <code>pick</code> 改为 <code>drop</code>。例如，如果垃圾日志在第三个提交中，修改为：
+     <div class="highlight"><pre><span></span><code>pick 1234567 Commit message 1
+pick 2345678 Commit message 2
+drop 3456789 Commit message 3
+pick 4567890 Commit message 4
+pick 5678901 Commit message 5
+</code></pre></div></li>
+<li>
+<p>保存并退出编辑器。在 Vim 中，可以按 <code>:wq</code> 保存并退出；在 Nano 中，可以按 <code>Ctrl+X</code>，然后按 <code>Y</code> 确认保存，最后按 <code>Enter</code> 退出。</p>
+</li>
+<li>
+<p><strong>完成变基</strong>：</p>
+</li>
+<li>Git 会根据你的修改重新应用提交，垃圾日志的提交会被删除。</li>
+<li>
+<p>如果在变基过程中遇到冲突，Git 会提示你解决冲突。解决冲突后，使用 <code>git add</code> 添加更改，并继续变基：
+     <div class="highlight"><pre><span></span><code>git<span class="w"> </span>rebase<span class="w"> </span>--continue
+</code></pre></div></p>
+</li>
+<li>
+<p>注意事项</p>
+<ul>
+<li>
+<p><strong>备份</strong>：在进行交互式变基之前，建议备份你的代码，以防意外丢失重要数据。</p>
+</li>
+<li>
+<p><strong>强制推送</strong>：如果你已经将 M2 分支推送到远程仓库，删除提交后需要使用 <code>git push --force</code> 强制推送到远程仓库：</p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>push<span class="w"> </span>--force<span class="w"> </span>origin<span class="w"> </span>M2
+</code></pre></div>
+<ul>
+<li><strong>注意</strong>：强制推送会覆盖远程仓库的历史，可能会对其他协作者造成影响。在执行强制推送之前，请确保与团队成员沟通，并确保不会丢失重要的提交.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<p>通过这些步骤，你可以删除 M2 分支中的特定提交，从而清理垃圾日志。</p>
+</blockquote>
+<p>更多操作：</p>
+<blockquote>
+<p>在 Git 的交互式变基（Interactive Rebase）中，<code>pick</code>、<code>edit</code>、<code>squash</code> 和 <code>fixup</code> 是一些常用的命令，用于在变基过程中对提交进行操作和优化。以下是对这些操作的详细解释：</p>
+<ol>
+<li>
+<p><code>pick</code></p>
+</li>
+<li>
+<p><strong>作用</strong>：选择一个提交，将其应用到新的基底上。</p>
+</li>
+<li>
+<p><strong>示例</strong>：
+  <div class="highlight"><pre><span></span><code>pick 1234567 Commit message for the first commit
+pick 2345678 Commit message for the second commit
+</code></pre></div>
+  这将按顺序应用这两个提交。</p>
+</li>
+<li>
+<p><code>edit</code></p>
+</li>
+<li>
+<p><strong>作用</strong>：选择一个提交，将其应用到新的基底上，并在应用后暂停，允许你编辑该提交。</p>
+</li>
+<li>
+<p><strong>示例</strong>：
+  <div class="highlight"><pre><span></span><code>pick 1234567 Commit message for the first commit
+edit 2345678 Commit message for the second commit
+</code></pre></div>
+  这将首先应用第一个提交，然后在第二个提交应用后暂停，你可以在这个阶段修改文件、添加或删除更改，然后继续变基。</p>
+</li>
+<li>
+<p><code>squash</code></p>
+</li>
+<li>
+<p><strong>作用</strong>：将多个提交合并为一个提交。合并后的提交将包含所有被合并提交的更改，但只会保留一个提交记录。</p>
+</li>
+<li>
+<p><strong>示例</strong>：
+  <div class="highlight"><pre><span></span><code>pick 1234567 Commit message for the first commit
+squash 2345678 Commit message for the second commit
+squash 3456789 Commit message for the third commit
+</code></pre></div>
+  这将把第二个和第三个提交合并到第一个提交中，最终只有一个提交记录。</p>
+</li>
+<li>
+<p><code>fixup</code></p>
+</li>
+<li>
+<p><strong>作用</strong>：类似于 <code>squash</code>，但 <code>fixup</code> 会将多个提交合并为一个提交，并且不会保留被合并提交的提交信息。</p>
+</li>
+<li>
+<p><strong>示例</strong>：
+  <div class="highlight"><pre><span></span><code>pick 1234567 Commit message for the first commit
+fixup 2345678 Commit message for the second commit
+fixup 3456789 Commit message for the third commit
+</code></pre></div>
+  这将把第二个和第三个提交的更改合并到第一个提交中，但不会保留第二个和第三个提交的提交信息。</p>
+</li>
+<li>
+<p><code>reword</code></p>
+</li>
+<li>
+<p><strong>作用</strong>：选择一个提交，将其应用到新的基底上，并在应用后暂停，允许你修改该提交的提交信息。</p>
+</li>
+<li>
+<p><strong>示例</strong>：
+  <div class="highlight"><pre><span></span><code>pick 1234567 Commit message for the first commit
+reword 2345678 Commit message for the second commit
+</code></pre></div>
+  这将首先应用第一个提交，然后在第二个提交应用后暂停，你可以在这个阶段修改提交信息，然后继续变基。</p>
+</li>
+<li>
+<p><code>drop</code></p>
+</li>
+<li>
+<p><strong>作用</strong>：删除一个提交，不将其应用到新的基底上。</p>
+</li>
+<li>
+<p><strong>示例</strong>：
+  <div class="highlight"><pre><span></span><code>pick 1234567 Commit message for the first commit
+drop 2345678 Commit message for the second commit
+</code></pre></div>
+  这将应用第一个提交，但不会应用第二个提交，第二个提交将被删除。</p>
+</li>
+<li>
+<p>示例</p>
+<p>假设你有以下提交历史：</p>
+<div class="highlight"><pre><span></span><code>A - B - C - D [main]
+     \
+      E - F - G [feature]
+</code></pre></div>
+<p>你希望将 <code>feature</code> 分支变基到 <code>main</code> 分支，并优化提交历史。你可以使用以下命令：</p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>checkout<span class="w"> </span>feature
+git<span class="w"> </span>rebase<span class="w"> </span>-i<span class="w"> </span>main
+</code></pre></div>
+<p>这将打开一个文本编辑器，列出 <code>feature</code> 分支上的所有提交：</p>
+<div class="highlight"><pre><span></span><code>pick e123456 Commit message for E
+pick f234567 Commit message for F
+pick g345678 Commit message for G
+</code></pre></div>
+<p>你可以修改这个文件，例如：</p>
+<div class="highlight"><pre><span></span><code>pick e123456 Commit message for E
+squash f234567 Commit message for F
+fixup g345678 Commit message for G
+</code></pre></div>
+<p>保存并关闭编辑器后，Git 将开始变基操作。如果选择 <code>squash</code> 或 <code>fixup</code>，Git 会暂停并要求你合并提交信息。你可以编辑合并后的提交信息，然后保存并退出编辑器，继续变基。</p>
+</li>
+<li>
+<p>总结</p>
+<ul>
+<li><strong><code>pick</code></strong>：选择并应用提交。</li>
+<li><strong><code>edit</code></strong>：选择并应用提交，暂停以便编辑。</li>
+<li><strong><code>squash</code></strong>：合并多个提交为一个提交，保留提交信息。</li>
+<li><strong><code>fixup</code></strong>：合并多个提交为一个提交，不保留提交信息。</li>
+<li><strong><code>reword</code></strong>：选择并应用提交，暂停以便修改提交信息。</li>
+<li><strong><code>drop</code></strong>：删除提交，不应用。</li>
+</ul>
+</li>
+</ol>
+<p>通过这些操作，你可以灵活地优化和清理提交历史，使项目的历史更加清晰和易于维护。</p>
+</blockquote>
+
+
+
+
+
+
+
+  
+    
+  
+  
+    
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Last update">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2025-01-14T16:43:18+01:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2025-01-14</span>
+  </span>
+
+    
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Created">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2025-01-14T16:43:18+01:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2025-01-14</span>
+  </span>
+
+    
+    
+    
+  </aside>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://github.com/JAILuo" target="_blank" rel="noopener" title="JAILuo" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.footer"], "search": "../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.83f73b43.min.js"></script>
+      
+        <script src="../../js/timeago.min.js"></script>
+      
+        <script src="../../js/timeago_mkdocs_material.js"></script>
+      
+        <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+      
+    
+  </body>
+</html>
