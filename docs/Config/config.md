@@ -2,7 +2,7 @@
 
 笔记主要记录个人的相关配置，以便之后更换电脑后能快速配置成个人熟悉的。
 
-另外，本人并不爱折腾这些工具配置，仅仅只是为了让自己有一个舒适护眼的开发环境。
+另外，本人并不爱折腾这些工具配置，仅仅只是为了让自己有一个舒适的开发环境。
 
 本人对于这些工具的配置以默认为主，仅仅适合自己。
 
@@ -52,37 +52,108 @@ sh install.sh -s Dracula -p dracula --skip-dircolors
 
 
 
-### `.vimrc` &  `.vim-complex`
+### `.vimrc`
 
-通过 `.vimrc` 和 `.vim-complex` 的配置。
+通过 `.vimrc` 和 `.vim-plugin-config` 的配置。
 
 ```bash
-" =============> 插件安装 <============= "
+"" vim: ft=vim :
+" =============> plugin install <============= "
 call plug#begin('~/.vim/plugged')
 
 Plug 'vim-airline/vim-airline'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'vhda/verilog_systemverilog.vim'
-Plug 'rust-lang/rust.vim'
+
+Plug 'git://github.com/junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'git://github.com/junegunn/fzf.vim'
 
 Plug 'git://github.com/Shougo/defx.nvim.git'
 Plug 'git://github.com/roxma/nvim-yarp.git'
 Plug 'git://github.com/roxma/vim-hug-neovim-rpc.git'
 Plug 'git://github.com/kristijanhusak/defx-icons.git'
+Plug 'git://github.com/esukram/vim-taglist'
 
-"显示dev图片
-" 结束插件管理
+Plug 'vhda/verilog_systemverilog.vim'
+Plug 'rust-lang/rust.vim'
+
 call plug#end()
 
+
+" =============> theme config <============= "
 packadd! dracula
 syntax enable
 colorscheme dracula
 
+"" The "syntax on" command have to be before the "highlight ..." commands to make highlight working.
+"" For more information, see :highlight and :syntax
+syntax on
+
+highlight Error NONE
+highlight Comment cterm=italic guifg=#808080
+"highlight Statement cterm=bold
+"highlight String cterm=underline
 
 
-" =============> 插件配置 <============= "
+" =============> File type-specific config <============= "
+au FileType c,cpp       setlocal expandtab shiftwidth=4 softtabstop=4 tabstop=4 cinoptions=:0,g0,(0,w1
+au FileType json        setlocal expandtab shiftwidth=2 softtabstop=2
+au FileType vim         setlocal expandtab shiftwidth=2 softtabstop=2
 
-" =============> defx 配置 <============= "
+
+" =============> Shortcut mappings <============= "
+nnoremap <space>b :buffers<cr>:b<space>
+nnoremap <space>B :buffers<cr>:b<space>
+nnoremap <space>e :b#<cr>
+nnoremap <space>E :b#<cr>
+nnoremap <space>w :w<cr>
+nnoremap <space>W :w<cr>
+nnoremap <space>q :qa<cr>
+nnoremap <space>Q :qa<cr>
+nnoremap ZZ zz
+inoremap jf <esc>
+inoremap JF <esc>
+
+
+" =============> basic config <============= "
+set nocompatible
+set encoding=utf-8
+set nosmartindent autoindent cindent
+set shiftwidth=4 softtabstop=4 tabstop=4
+set laststatus=2 ruler title showmode cmdheight=1
+set belloff=all noerrorbells novisualbell
+set modeline modelines=6
+set number
+set nowrap
+set incsearch hlsearch
+set cursorline
+setlocal noswapfile
+set bufhidden=hide
+set magic
+
+" more complex plugin config
+source ~/.vim-plugin-config
+
+
+" =============> TODO <============= "
+" 分屏跳转 ctrl + w + ... --> alt + w + ...
+
+"" "jumpoptions=stack" is not supported in old Vim. (older than Vim 9.0.1921)
+"set jumpoptions=stack
+
+```
+
+```bash
+" .vim-plugin-config
+"" vim: ft=vim :
+
+"autocmd BufRead,BufNewFile *.xrl,*.yrl setlocal filetype=erlang
+"autocmd FileType c,cpp setlocal cinoptions=(s,:0,l1,g0,t0,N-s,E-s
+
+" =============> plugin config <============= "
+filetype plugin on
+
+
+" ===========> defx config <=========== "
 " the defx
 " Define mappings
 "cnoreabbrev sf Defx -listed -new
@@ -187,126 +258,8 @@ call defx#custom#column('git', 'indicators', {
   \ })
 
 
-" Unknown
-au FileType c,cpp,objc  setlocal expandtab shiftwidth=4 softtabstop=4 tabstop=4 cinoptions=:0,g0,(0,w1
-au FileType json        setlocal expandtab shiftwidth=2 softtabstop=2
-au FileType vim         setlocal expandtab shiftwidth=2 softtabstop=2
-
-
-
-" =============> Universal Ctags 配置 <============= "
-let g:tagbar_ctags_bin = '/path/to/ctags'
-nnoremap <Space>] <C-]>
-nnoremap <Space>[ <C-t>
-
-
-
-" =============> coc.nvim配置 <============= "
-" coc.nvim补全
-inoremap <expr> <cr> coc#pum#visible() ? coc#pum#confirm() : "\<cr>"
-
-
-
-" =============> rust.vim配置 <============= "
-syntax enable                           " 打开语法高亮
-filetype plugin indent on               " 启动文件类型插件、缩进和语法高亮功能
-
-let g:rustfmt_autosave = 1              " 保存时自动运行 :RustFmt 格式化代码
-let g:rustfmt_command = "rustfmt"       " 自定义格式化命令
-
-" 快捷键 F5 编译运行 Rust 程序，快捷键 F6 运行测试 Rust 程序
-autocmd filetype rust nnoremap <F5> : <bar> exec 'RustRun'<CR>
-autocmd filetype rust nnoremap <F6> : <bar> exec 'RustTest'<CR>
-
-
-" =============> verilog.vim配置 <============= "
-" 启用文件类型检测，插件载入
-filetype plugin on
-
-" 设置 Omni 补全
-set omnifunc=v:omnifunc
-
-" =============> 基础配置 <============= "
-set nu
-set showmode
-set ruler
-syntax on
-set shiftwidth=4
-set softtabstop=4
-set tabstop=4
-set cindent
-set autoindent
-set background=dark
-set cursorline
-" set cursorcolumn
-set nohlsearch
-
-setlocal noswapfile " 不要生成swap文件
-set bufhidden=hide " 当buffer被丢弃的时候隐藏它
-set hlsearch " 搜索时高亮显示被找到的文本
-set noerrorbells " 关闭错误信息响铃
-set novisualbell " 关闭使用可视响铃代替呼叫
-set magic " 设置魔术
-
-set cmdheight=1 " 设定命令行的行数为 1
-set laststatus=2 " 显示状态栏 (默认值为 1, 无法显示状态栏)
-
-" 分屏跳转 ctrl + w + ... --> alt + w + ...
-" 将 ctags 的跳转操作绑定到空格 + ] 和空格 + t
-map <Space>] <C-]>
-map <Space>t <C-t>
-
-
-nnoremap <space>b :buffers<cr>:b<space>
-nnoremap <space>B :buffers<cr>:b<space>
-nnoremap <space>e :b#<cr>
-nnoremap <space>E :b#<cr>
-nnoremap <space>w :w<cr>
-nnoremap <space>W :w<cr>
-nnoremap <space>q :qa<cr>
-nnoremap <space>Q :qa<cr>
-nnoremap ZZ zz
-inoremap jf <esc>
-inoremap JF <esc>
-
-source ~/.vim-complex
-
-// .vimrc
-```
-
-```bash
-"" vim: ft=vim :
-
-"autocmd BufRead,BufNewFile *.xrl,*.yrl setlocal filetype=erlang
-"autocmd FileType c,cpp setlocal cinoptions=(s,:0,l1,g0,t0,N-s,E-s
-
-set nocompatible nosmartindent autoindent noincsearch title ruler modeline modelines=6 laststatus=0 encoding=utf-8 
-set belloff=all
-set visualbell
-"set number numberwidth=9 relativenumber
-"set expandtab tabstop=2 softtabstop=2 shiftwidth=2
-"set fileformat=unix fileformats=unix
-"set lispwords-=if lispwords+=match
-
-"" "jumpoptions=stack" is not supported in old Vim. (older than Vim 9.0.1921)
-"set jumpoptions=stack
-
-"let mapleader = "\<space>"
-
-filetype plugin on
-
-"" The "syntax on" command have to be before the "highlight ..." commands to make highlight working.
-syntax on
-
-highlight Error NONE
-"highlight Statement cterm=bold
-"highlight Comment cterm=bold
-"highlight String cterm=underline
-
-"" Install "https://github.com/junegunn/vim-plug", then run ":PlugInstall" and ":CocInstall coc-tsserver coc-clangd".
-"" Use ":CocConfig" to open the config file of COC. Add `"inlayHint.enable": false` to that file.
-
-
+" ===========> coc.nvim config <=========== "
+inoremap <expr> <cr> coc#pum#visible() ? coc#pum#confirm() : "\<cr>" 
 nmap <space>d <Plug>(coc-definition)
 nmap <space>r <Plug>(coc-references)
 nmap <space>t <Plug>(coc-type-definition)
@@ -316,11 +269,30 @@ nmap <space>h <Plug>(coc-diagnostic-prev)
 nmap <space>l <Plug>(coc-diagnostic-next)
 nmap <space>p <Plug>(coc-format)
 
+
+
+" ===========> Universal Ctags config <=========== "
+let g:tagbar_ctags_bin = '/path/to/ctags'
+nnoremap <Space>] <C-]>
+nnoremap <Space>[ <C-t>
+
+
+" ===========> taglist config <=========== "
+" let Tlist_Auto_Open = 1
+
+
+"============> verilog.vim config <=========== "
+" 启用文件类型检测，插件载入
+filetype plugin on
+
+" 设置 Omni 补全
+set omnifunc=v:omnifunc
+
+
+" ===========> FZF config <=========== "
 nnoremap <space>f :FZF<cr>
 
-"let g:rust_recommended_style = 0
 
-// .vim-complex
 ```
 
 
