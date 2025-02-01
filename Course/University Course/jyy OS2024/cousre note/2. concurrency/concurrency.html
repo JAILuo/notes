@@ -4922,7 +4922,7 @@ vim:
 <p>示例：OpenMP</p>
 <p>使用 OpenMP 可以轻松地将循环并行化：</p>
 <div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;omp.h&gt;</span>
-<span class="w">                                                                </span>
+<span class="w">                                                                        </span>
 <span class="kt">void</span><span class="w"> </span><span class="nf">compute</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="cp">#pragma omp parallel for</span>
 <span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -4945,7 +4945,7 @@ vim:
 <p>示例：动态调度</p>
 <p>使用 OpenMP 的动态调度：</p>
 <div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;omp.h&gt;</span>
-<span class="w">                                                                </span>
+<span class="w">                                                                        </span>
 <span class="kt">void</span><span class="w"> </span><span class="nf">compute</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="cp">#pragma omp parallel for schedule(dynamic)</span>
 <span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -4968,15 +4968,15 @@ vim:
 <p>示例：批量通信</p>
 <p>使用 MPI 进行批量通信：</p>
 <div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;mpi.h&gt;</span>
-<span class="w">                                                                </span>
+<span class="w">                                                                        </span>
 <span class="kt">void</span><span class="w"> </span><span class="nf">communicate</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">MPI_Request</span><span class="w"> </span><span class="n">requests</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>
 <span class="w">    </span><span class="n">MPI_Status</span><span class="w"> </span><span class="n">statuses</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>
-<span class="w">                                                                </span>
+<span class="w">                                                                        </span>
 <span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="n">MPI_Isend</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="w"> </span><span class="n">count</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_INT</span><span class="p">,</span><span class="w"> </span><span class="n">dest</span><span class="p">,</span><span class="w"> </span><span class="n">tag</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_COMM_WORLD</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">requests</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
 <span class="w">    </span><span class="p">}</span>
-<span class="w">                                                                </span>
+<span class="w">                                                                        </span>
 <span class="w">    </span><span class="n">MPI_Waitall</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="n">requests</span><span class="p">,</span><span class="w"> </span><span class="n">statuses</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre></div>
@@ -4991,7 +4991,7 @@ vim:
 <p>示例：并行归并排序</p>
 <p>使用 OpenMP 实现并行归并排序：</p>
 <div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;omp.h&gt;</span>
-<span class="w">                                                                </span>
+<span class="w">                                                                        </span>
 <span class="kt">void</span><span class="w"> </span><span class="nf">merge_sort_parallel</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">array</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">left</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">right</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">left</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">right</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">mid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">left</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">right</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
@@ -5399,11 +5399,11 @@ return 0;
 <div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;event2/event.h&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span>
-<span class="w">    </span>
+<span class="w">        </span>
 <span class="kt">void</span><span class="w"> </span><span class="nf">onEvent</span><span class="p">(</span><span class="n">evutil_socket_t</span><span class="w"> </span><span class="n">fd</span><span class="p">,</span><span class="w"> </span><span class="kt">short</span><span class="w"> </span><span class="n">what</span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">arg</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Event occurredn&quot;</span><span class="p">);</span>
 <span class="p">}</span>
-<span class="w">    </span>
+<span class="w">        </span>
 <span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">event_base</span><span class="w"> </span><span class="o">*</span><span class="n">base</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">event_base_new</span><span class="p">();</span>
 <span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">event</span><span class="w"> </span><span class="o">*</span><span class="n">ev</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">event_new</span><span class="p">(</span><span class="n">base</span><span class="p">,</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w"> </span><span class="n">EV_TIMEOUT</span><span class="o">|</span><span class="n">EV_PERSIST</span><span class="p">,</span><span class="w"> </span><span class="n">onEvent</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
@@ -5662,26 +5662,26 @@ return 0;
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;linux/types.h&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;linux/sched.h&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;linux/wait.h&gt;</span>
-<span class="w">    </span>
+<span class="w">        </span>
 <span class="cp">#define DEVICE_NAME &quot;my_device&quot;</span>
 <span class="cp">#define IRQ_NUMBER 1 </span><span class="c1">// 假设使用中断号1</span>
-<span class="w">    </span>
+<span class="w">        </span>
 <span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">my_open</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">inode</span><span class="w"> </span><span class="o">*</span><span class="n">inode</span><span class="p">,</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">file</span><span class="w"> </span><span class="o">*</span><span class="n">file</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">printk</span><span class="p">(</span><span class="n">KERN_INFO</span><span class="w"> </span><span class="s">&quot;Device openedn&quot;</span><span class="p">);</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
-<span class="w">    </span>
+<span class="w">        </span>
 <span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">my_release</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">inode</span><span class="w"> </span><span class="o">*</span><span class="n">inode</span><span class="p">,</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">file</span><span class="w"> </span><span class="o">*</span><span class="n">file</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">printk</span><span class="p">(</span><span class="n">KERN_INFO</span><span class="w"> </span><span class="s">&quot;Device closedn&quot;</span><span class="p">);</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
-<span class="w">    </span>
+<span class="w">        </span>
 <span class="c1">// 中断处理函数</span>
 <span class="k">static</span><span class="w"> </span><span class="n">irqreturn_t</span><span class="w"> </span><span class="nf">my_interrupt_handler</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">irq</span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">dev_id</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">printk</span><span class="p">(</span><span class="n">KERN_INFO</span><span class="w"> </span><span class="s">&quot;Interrupt receivedn&quot;</span><span class="p">);</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">IRQ_HANDLED</span><span class="p">;</span>
 <span class="p">}</span>
-<span class="w">    </span>
+<span class="w">        </span>
 <span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">__init</span><span class="w"> </span><span class="nf">my_init</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">result</span><span class="p">;</span>
 <span class="w">    </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">request_irq</span><span class="p">(</span><span class="n">IRQ_NUMBER</span><span class="p">,</span><span class="w"> </span><span class="n">my_interrupt_handler</span><span class="p">,</span><span class="w"> </span><span class="n">IRQF_SHARED</span><span class="p">,</span><span class="w"> </span><span class="n">DEVICE_NAME</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
@@ -5692,15 +5692,15 @@ return 0;
 <span class="w">    </span><span class="n">printk</span><span class="p">(</span><span class="n">KERN_INFO</span><span class="w"> </span><span class="s">&quot;Driver loadedn&quot;</span><span class="p">);</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
-<span class="w">    </span>
+<span class="w">        </span>
 <span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">__exit</span><span class="w"> </span><span class="nf">my_exit</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">free_irq</span><span class="p">(</span><span class="n">IRQ_NUMBER</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
 <span class="w">    </span><span class="n">printk</span><span class="p">(</span><span class="n">KERN_INFO</span><span class="w"> </span><span class="s">&quot;Driver unloadedn&quot;</span><span class="p">);</span>
 <span class="p">}</span>
-<span class="w">    </span>
+<span class="w">        </span>
 <span class="n">module_init</span><span class="p">(</span><span class="n">my_init</span><span class="p">);</span>
 <span class="n">module_exit</span><span class="p">(</span><span class="n">my_exit</span><span class="p">);</span>
-<span class="w">    </span>
+<span class="w">        </span>
 <span class="n">MODULE_LICENSE</span><span class="p">(</span><span class="s">&quot;GPL&quot;</span><span class="p">);</span>
 <span class="n">MODULE_AUTHOR</span><span class="p">(</span><span class="s">&quot;Your Name&quot;</span><span class="p">);</span>
 <span class="n">MODULE_DESCRIPTION</span><span class="p">(</span><span class="s">&quot;A simple event-driven device driver&quot;</span><span class="p">);</span>
@@ -5939,7 +5939,7 @@ return 0;
 <p>首先，锁顺序通过规定所有线程以相同的顺序获取锁。例如，如果所有线程都先获取锁A再获取锁B，那么就不会出现线程1持有锁A等待锁B，而线程2持有锁B等待锁A的情况。</p>
 <p>也就不会出现上面定义说的你等我，我等你。</p>
 <p>具体例子：</p>
-<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;pthread.h&gt;</span>
+<p><div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;pthread.h&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;unistd.h&gt;</span>
 
@@ -5997,6 +5997,7 @@ return 0;
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div>
+</p>
 </blockquote>
 </li>
 <li>
@@ -6221,6 +6222,14 @@ return 0;
 <p>The best locks are encapsulated: they <strong>never get exposed in headers</strong>, and are <strong>never held around calls to non-trivial functions outside the same file</strong>. You can read through this code and see that it will never deadlock, because it never tries to grab another lock while it has that one. People using your code don't even need to know you are using a lock.</p>
 </blockquote>
 <p>锁的末端？</p>
+<blockquote>
+<p>额外看到了一篇：<a href="https://yarchive.net/comp/linux/lock_ordering.html">Lock ordering (Linus Torvalds)</a></p>
+<ul>
+<li><strong>加锁顺序很重要</strong>：为了避免死锁，加锁顺序必须一致。</li>
+<li><strong>解锁顺序不重要</strong>：解锁顺序可以与加锁顺序相同，也可以不同，只要逻辑正确即可。</li>
+</ul>
+<p>不太理解？</p>
+</blockquote>
 <p>死锁进一步导致死局，怎么办？人类总有办法应对：动态程序分析</p>
 <p><img alt="image-20250122213445098" src="pic/image-20250122213445098.png" /></p>
 <h3 id="_40">应对死局：绝处逢生</h3>
@@ -6289,7 +6298,7 @@ return 0;
 <li><code>mtrace</code>：访存也是必不可少的</li>
 </ul>
 </blockquote>
-<p>自然，为了进一步满足 lock ordering（不出现你等我，我等你的情况），那自然也会想到能不能在 lock 和 unlock 之间打印日志，上的哪一把锁、哪一个线程、锁的状态...这样就能找出代码中不满足 lock ordering 的地方进行修改。</p>
+<p>为了进一步满足 lock ordering（不出现你等我，我等你的情况），那自然也会想到能不能在 lock 和 unlock 之间打印日志，告诉我们这是上的哪一把锁、哪一个线程、锁的状态...这样就能找出代码中不满足 lock ordering 的地方进行修改。</p>
 <blockquote>
 <ul>
 <li>
@@ -6313,8 +6322,8 @@ T2<span class="w"> </span>REL<span class="w"> </span>b
 </code></pre></div>
 </p>
 </blockquote>
-<p>这里也就提出了个问题，在真实的系统中，也是这样做的？像那种几万行代码的项目，产生超级大的 log？这样拖慢系统运行速度能接受吗？</p>
-<p>像上面那种 trace 一个合格的计算机系学生应该都能想到，工程上更加复杂，好像这些锁还是会动态创建的！那上面锁的图的边一直增加/删除。为每一个锁都追踪上锁的顺序会带来相当的开销。（这里老师还真讲了这个问题！！）</p>
+<p>有个问题，真实应用系统中，也是这样做的？像几万行代码的项目，产生超级大的 log？这样拖慢系统运行速度和开发速度能接受吗？</p>
+<p>像上面那种 trace 一个合格的计算机系学生应该都能想到，工程上更加复杂，好像这些锁还是会动态创建的！那上面锁的图的边一直增加/删除。为每一个锁都追踪上锁的顺序会带来相当的开销。（这里老师还真讲了这个问题）</p>
 <p>实际解决什么问题？<strong>解决锁的 “命名” 问题</strong>：</p>
 <ul>
 <li>
@@ -6400,7 +6409,8 @@ T2<span class="w"> </span>REL<span class="w"> </span>b
 <p><code>T1: t = t + 1;</code></p>
 <p><code>T2: store(x);</code></p>
 </blockquote>
-<p>那怎么进行spec的检查，检查什么？对于发生在不同线程且至少有一个是写的 x,y 检查，具体反映到代码上，怎么实现？我们是通过加锁来解决共享变量 data race 的，那，进一步体现到就是这个共享变量存在 “Happens-before race”，那也就是说，怎么观测这个 Happens-before 关系，观测到这个就知道自己的锁上的对不对，具体来说就是强行让他存在时间先后关系？怎么在代码上实现？</p>
+<p>那怎么进行spec的检查，检查什么？对于发生在不同线程且至少有一个是写的 x,y 检查，具体反映到代码上，怎么实现？</p>
+<p>我们是通过加锁来解决共享变量 data race 的，那，进一步体现到就是这个共享变量存在 “Happens-before race”，那也就是说，怎么观测这个 Happens-before 关系，观测到这个就知道自己的锁上的对不对，具体来说就是强行让他存在时间先后关系？怎么在代码上实现？</p>
 <ul>
 <li>“Happens-before race”</li>
 <li>实现：Lamport's Vector Clock: <a href="https://dl.acm.org/doi/10.1145/359545.359563">Time, clocks, and the ordering of events in a distributed system</a></li>
@@ -6640,7 +6650,7 @@ T2<span class="w"> </span>REL<span class="w"> </span>b
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2025-01-24T08:29:17+01:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2025-01-24</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2025-02-01T08:16:34+01:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2025-02-01</span>
   </span>
 
     
