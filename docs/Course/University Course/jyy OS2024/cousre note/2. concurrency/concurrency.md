@@ -1722,7 +1722,7 @@ void T_scheduler() {
 >
 >         ```c
 >         #include <omp.h>
->                                                                         
+>                                                                                 
 >         void compute() {
 >             #pragma omp parallel for
 >             for (int i = 0; i < N; i++) {
@@ -1745,7 +1745,7 @@ void T_scheduler() {
 >
 >         ```c
 >         #include <omp.h>
->                                                                         
+>                                                                                 
 >         void compute() {
 >             #pragma omp parallel for schedule(dynamic)
 >             for (int i = 0; i < N; i++) {
@@ -1768,15 +1768,15 @@ void T_scheduler() {
 >
 >         ```c
 >         #include <mpi.h>
->                                                                         
+>                                                                                 
 >         void communicate() {
 >             MPI_Request requests[10];
 >             MPI_Status statuses[10];
->                                                                         
+>                                                                                 
 >             for (int i = 0; i < 10; i++) {
 >                 MPI_Isend(data[i], count, MPI_INT, dest, tag, MPI_COMM_WORLD, &requests[i]);
 >             }
->                                                                         
+>                                                                                 
 >             MPI_Waitall(10, requests, statuses);
 >         }
 >         ```
@@ -1792,7 +1792,7 @@ void T_scheduler() {
 >
 >         ```c
 >         #include <omp.h>
->                                                                         
+>                                                                                 
 >         void merge_sort_parallel(int *array, int left, int right) {
 >             if (left < right) {
 >                 int mid = (left + right) / 2;
@@ -1836,40 +1836,40 @@ void T_scheduler() {
 >             int n = 1024;
 >             int *a, *b, *c;
 >             int *d_a, *d_b, *d_c;
->                                                                             
+>                                                                                     
 >             // 分配主机内存
 >             a = (int *)malloc(n * sizeof(int));
 >             b = (int *)malloc(n * sizeof(int));
 >             c = (int *)malloc(n * sizeof(int));
->                                                                             
+>                                                                                     
 >             // 分配设备内存
 >             cudaMalloc((void **)&d_a, n * sizeof(int));
 >             cudaMalloc((void **)&d_b, n * sizeof(int));
 >             cudaMalloc((void **)&d_c, n * sizeof(int));
->                                                                             
+>                                                                                     
 >             // 初始化数据
 >             for (int i = 0; i < n; i++) {
 >                 a[i] = i;
 >                 b[i] = i;
 >             }
->                                                                             
+>                                                                                     
 >             // 从主机复制数据到设备
 >             cudaMemcpy(d_a, a, n * sizeof(int), cudaMemcpyHostToDevice);
 >             cudaMemcpy(d_b, b, n * sizeof(int), cudaMemcpyHostToDevice);
->                                                                         
+>                                                                                 
 >             // 启动内核
 >             int threadsPerBlock = 256;
 >             int blocksPerGrid = (n + threadsPerBlock - 1) / threadsPerBlock;
 >             vector_add<<<blocksPerGrid, threadsPerBlock>>>(d_a, d_b, d_c, n);
->                                                                             
+>                                                                                     
 >             // 从设备复制数据到主机
 >             cudaMemcpy(c, d_c, n * sizeof(int), cudaMemcpyDeviceToHost);
->                                                                             
+>                                                                                     
 >             // 释放设备内存
 >             cudaFree(d_a);
 >             cudaFree(d_b);
 >             cudaFree(d_c);
->                                                                             
+>                                                                                     
 >             // 释放主机内存
 >             free(a);
 >             free(b);
@@ -2240,11 +2240,11 @@ lock ordering
 > >         #include <event2/event.h>
 > >         #include <stdio.h>
 > >         #include <stdlib.h>
-> >             
+> >                 
 > >         void onEvent(evutil_socket_t fd, short what, void *arg) {
 > >             printf("Event occurredn");
 > >         }
-> >             
+> >                 
 > >         int main() {
 > >             struct event_base *base = event_base_new();
 > >             struct event *ev = event_new(base, -1, EV_TIMEOUT|EV_PERSIST, onEvent, NULL);
@@ -2464,26 +2464,26 @@ lock ordering
 > >     #include <linux/types.h>
 > >     #include <linux/sched.h>
 > >     #include <linux/wait.h>
-> >         
+> >             
 > >     #define DEVICE_NAME "my_device"
 > >     #define IRQ_NUMBER 1 // 假设使用中断号1
-> >         
+> >             
 > >     static int my_open(struct inode *inode, struct file *file) {
 > >         printk(KERN_INFO "Device openedn");
 > >         return 0;
 > >     }
-> >         
+> >             
 > >     static int my_release(struct inode *inode, struct file *file) {
 > >         printk(KERN_INFO "Device closedn");
 > >         return 0;
 > >     }
-> >         
+> >             
 > >     // 中断处理函数
 > >     static irqreturn_t my_interrupt_handler(int irq, void *dev_id) {
 > >         printk(KERN_INFO "Interrupt receivedn");
 > >         return IRQ_HANDLED;
 > >     }
-> >         
+> >             
 > >     static int __init my_init(void) {
 > >         int result;
 > >         result = request_irq(IRQ_NUMBER, my_interrupt_handler, IRQF_SHARED, DEVICE_NAME, NULL);
@@ -2494,15 +2494,15 @@ lock ordering
 > >         printk(KERN_INFO "Driver loadedn");
 > >         return 0;
 > >     }
-> >         
+> >             
 > >     static void __exit my_exit(void) {
 > >         free_irq(IRQ_NUMBER, NULL);
 > >         printk(KERN_INFO "Driver unloadedn");
 > >     }
-> >         
+> >             
 > >     module_init(my_init);
 > >     module_exit(my_exit);
-> >         
+> >             
 > >     MODULE_LICENSE("GPL");
 > >     MODULE_AUTHOR("Your Name");
 > >     MODULE_DESCRIPTION("A simple event-driven device driver");
@@ -2850,12 +2850,14 @@ AI 解释。
     > }
     > ```
     >
-    > 
+
+
 
 - **Proof (sketch)**
-
     - 任意时刻，总有一个线程获得 “编号最大” 的锁
     - 这个线程总是可以继续运行
+
+
 
 
 
@@ -3097,6 +3099,13 @@ AI 解释。
 
 锁的末端？
 
+> 额外看到了一篇：[Lock ordering (Linus Torvalds)](https://yarchive.net/comp/linux/lock_ordering.html)
+>
+> - **加锁顺序很重要**：为了避免死锁，加锁顺序必须一致。
+> - **解锁顺序不重要**：解锁顺序可以与加锁顺序相同，也可以不同，只要逻辑正确即可。
+>
+> 不太理解？
+
 
 
 死锁进一步导致死局，怎么办？人类总有办法应对：动态程序分析
@@ -3167,7 +3176,7 @@ AI 解释。
 >- `strace(syscall strace`：查看各个 应用程序的代码怎么借助操作系统提供的资源的
 > - `mtrace`：访存也是必不可少的
 
-自然，为了进一步满足 lock ordering（不出现你等我，我等你的情况），那自然也会想到能不能在 lock 和 unlock 之间打印日志，上的哪一把锁、哪一个线程、锁的状态...这样就能找出代码中不满足 lock ordering 的地方进行修改。
+为了进一步满足 lock ordering（不出现你等我，我等你的情况），那自然也会想到能不能在 lock 和 unlock 之间打印日志，告诉我们这是上的哪一把锁、哪一个线程、锁的状态...这样就能找出代码中不满足 lock ordering 的地方进行修改。
 
 > - 为每一个 acquire/release 记录 tid 和 lock name
 >
@@ -3188,9 +3197,9 @@ AI 解释。
 > ```
 >
 
-这里也就提出了个问题，在真实的系统中，也是这样做的？像那种几万行代码的项目，产生超级大的 log？这样拖慢系统运行速度能接受吗？
+有个问题，真实应用系统中，也是这样做的？像几万行代码的项目，产生超级大的 log？这样拖慢系统运行速度和开发速度能接受吗？
 
-像上面那种 trace 一个合格的计算机系学生应该都能想到，工程上更加复杂，好像这些锁还是会动态创建的！那上面锁的图的边一直增加/删除。为每一个锁都追踪上锁的顺序会带来相当的开销。（这里老师还真讲了这个问题！！）
+像上面那种 trace 一个合格的计算机系学生应该都能想到，工程上更加复杂，好像这些锁还是会动态创建的！那上面锁的图的边一直增加/删除。为每一个锁都追踪上锁的顺序会带来相当的开销。（这里老师还真讲了这个问题）
 
 实际解决什么问题？**解决锁的 “命名” 问题**：
 
@@ -3298,7 +3307,9 @@ AI 解释。
 >
 > `T2: store(x);`
 
-那怎么进行spec的检查，检查什么？对于发生在不同线程且至少有一个是写的 x,y 检查，具体反映到代码上，怎么实现？我们是通过加锁来解决共享变量 data race 的，那，进一步体现到就是这个共享变量存在 “Happens-before race”，那也就是说，怎么观测这个 Happens-before 关系，观测到这个就知道自己的锁上的对不对，具体来说就是强行让他存在时间先后关系？怎么在代码上实现？
+那怎么进行spec的检查，检查什么？对于发生在不同线程且至少有一个是写的 x,y 检查，具体反映到代码上，怎么实现？
+
+我们是通过加锁来解决共享变量 data race 的，那，进一步体现到就是这个共享变量存在 “Happens-before race”，那也就是说，怎么观测这个 Happens-before 关系，观测到这个就知道自己的锁上的对不对，具体来说就是强行让他存在时间先后关系？怎么在代码上实现？
 
 - “Happens-before race”
 - 实现：Lamport's Vector Clock: [Time, clocks, and the ordering of events in a distributed system](https://dl.acm.org/doi/10.1145/359545.359563)

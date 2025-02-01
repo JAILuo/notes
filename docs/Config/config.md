@@ -95,6 +95,7 @@ highlight Comment cterm=italic guifg=#808080
 
 
 " =============> File type-specific config <============= "
+"" TODO: cinoptions
 au FileType c,cpp       setlocal expandtab shiftwidth=4 softtabstop=4 tabstop=4 cinoptions=:0,g0,(0,w1
 au FileType json        setlocal expandtab shiftwidth=2 softtabstop=2
 au FileType vim         setlocal expandtab shiftwidth=2 softtabstop=2
