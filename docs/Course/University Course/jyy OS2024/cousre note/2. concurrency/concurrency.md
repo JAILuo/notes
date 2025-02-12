@@ -267,7 +267,7 @@ void unlock() {
 
 ![image-20250109122200699](pic/image-20250109122200699.png)
 
-也就是说，能改变当前计算机的状态的，还有中断。
+**能改变当前计算机的状态的，还有中断。**
 
 > - 操作系统接管了完整的计算机系统
 >     - 每个处理器都并行 x++
@@ -275,7 +275,7 @@ void unlock() {
 >     - (假想 x 是操作系统中的数据结构，例如进程表)
 > - 如何正确实现 x 的原子访问？
 >     - 仅仅自旋是不够的
->     - **因为还有中断**
+>     - **==因为还有中断==**
 
 lock() -> sum++ -> 中断来了 -> (有临界区，中断也想对sum++) -> (但是之前已经lock过，所以就死在这里了！deadlock)
 
@@ -289,13 +289,19 @@ lock() -> sum++ -> 中断来了 -> (有临界区，中断也想对sum++) -> (但
 
 自然是在 lock 前关中断，如果是在lock后，那在那一瞬间还是会来中断，依然会造成deadlock。
 
-> `disable irq` -> `lock` -> `sum++` ->`enable irq`
+> Thread A 在内核态运行且 acquire 锁lock1时，触发中断进入中断处理程序，中断处理程序也在内核态中请求锁lock1，由于锁lock1在 Thread A 手上，且只有 Thread A 执行时才能release 锁lock1，因此中断处理程序必须返回，锁才能被释放。那么此时中断处理程序会永远拿不到锁，陷入无限循环，进入死锁。
 
-有个问题，到最后的时候，变成了开中断，但如果在 `disable irq` 之前的 CPU 状态就是 关中断呢？
+> ```
+> Thread A: 获取锁  ------------------> 关中断
+> 						|
+> 				   	  	|-----> ISR: 尝试获取同一个锁 --> 一直自旋 deadlock
+> ```
 
-所以，需要保存中断状态！
+正确的为：`disable irq` -> `lock` -> `sum++` ->`enable irq`
 
-> 哦，这就是我在 NEMU 移植 Linux 的时候看的 Linux kernel 代码里的 `arch/risc-v` 里看到的 `arch_local_save_flags` ？
+但还有问题，lock前关了中断，但到最后的时候，变成了开中断。但如果在 `disable irq` 之前的 CPU 状态就是 关中断呢？所以，需要保存中断状态！
+
+> 这就是我在 NEMU 移植 Linux 的时候看的 Linux kernel 的 `arch/risc-v` 里看到的 `arch_local_save_flags` ？
 >
 > ```C
 > #ifdef CONFIG_TRACE_IRQFLAGS_SUPPORT
@@ -336,6 +342,10 @@ lock() -> sum++ -> 中断来了 -> (有临界区，中断也想对sum++) -> (但
 > 无论实现什么，先认为是对的，先写一个测试用例？
 >
 > 实现一个自旋锁，相比实现一个自旋锁的test driver 不那么重要。？？
+
+关于 老师的移植实现分析，见：[L1] ==**TODO**==
+
+
 
 
 
@@ -1722,7 +1732,7 @@ void T_scheduler() {
 >
 >         ```c
 >         #include <omp.h>
->                                                                                 
+>                                                                                         
 >         void compute() {
 >             #pragma omp parallel for
 >             for (int i = 0; i < N; i++) {
@@ -1745,7 +1755,7 @@ void T_scheduler() {
 >
 >         ```c
 >         #include <omp.h>
->                                                                                 
+>                                                                                         
 >         void compute() {
 >             #pragma omp parallel for schedule(dynamic)
 >             for (int i = 0; i < N; i++) {
@@ -1768,15 +1778,15 @@ void T_scheduler() {
 >
 >         ```c
 >         #include <mpi.h>
->                                                                                 
+>                                                                                         
 >         void communicate() {
 >             MPI_Request requests[10];
 >             MPI_Status statuses[10];
->                                                                                 
+>                                                                                         
 >             for (int i = 0; i < 10; i++) {
 >                 MPI_Isend(data[i], count, MPI_INT, dest, tag, MPI_COMM_WORLD, &requests[i]);
 >             }
->                                                                                 
+>                                                                                         
 >             MPI_Waitall(10, requests, statuses);
 >         }
 >         ```
@@ -1792,7 +1802,7 @@ void T_scheduler() {
 >
 >         ```c
 >         #include <omp.h>
->                                                                                 
+>                                                                                         
 >         void merge_sort_parallel(int *array, int left, int right) {
 >             if (left < right) {
 >                 int mid = (left + right) / 2;
@@ -1836,40 +1846,40 @@ void T_scheduler() {
 >             int n = 1024;
 >             int *a, *b, *c;
 >             int *d_a, *d_b, *d_c;
->                                                                                     
+>                                                                                             
 >             // 分配主机内存
 >             a = (int *)malloc(n * sizeof(int));
 >             b = (int *)malloc(n * sizeof(int));
 >             c = (int *)malloc(n * sizeof(int));
->                                                                                     
+>                                                                                             
 >             // 分配设备内存
 >             cudaMalloc((void **)&d_a, n * sizeof(int));
 >             cudaMalloc((void **)&d_b, n * sizeof(int));
 >             cudaMalloc((void **)&d_c, n * sizeof(int));
->                                                                                     
+>                                                                                             
 >             // 初始化数据
 >             for (int i = 0; i < n; i++) {
 >                 a[i] = i;
 >                 b[i] = i;
 >             }
->                                                                                     
+>                                                                                             
 >             // 从主机复制数据到设备
 >             cudaMemcpy(d_a, a, n * sizeof(int), cudaMemcpyHostToDevice);
 >             cudaMemcpy(d_b, b, n * sizeof(int), cudaMemcpyHostToDevice);
->                                                                                 
+>                                                                                         
 >             // 启动内核
 >             int threadsPerBlock = 256;
 >             int blocksPerGrid = (n + threadsPerBlock - 1) / threadsPerBlock;
 >             vector_add<<<blocksPerGrid, threadsPerBlock>>>(d_a, d_b, d_c, n);
->                                                                                     
+>                                                                                             
 >             // 从设备复制数据到主机
 >             cudaMemcpy(c, d_c, n * sizeof(int), cudaMemcpyDeviceToHost);
->                                                                                     
+>                                                                                             
 >             // 释放设备内存
 >             cudaFree(d_a);
 >             cudaFree(d_b);
 >             cudaFree(d_c);
->                                                                                     
+>                                                                                             
 >             // 释放主机内存
 >             free(a);
 >             free(b);
@@ -2240,11 +2250,11 @@ lock ordering
 > >         #include <event2/event.h>
 > >         #include <stdio.h>
 > >         #include <stdlib.h>
-> >                 
+> >                     
 > >         void onEvent(evutil_socket_t fd, short what, void *arg) {
 > >             printf("Event occurredn");
 > >         }
-> >                 
+> >                     
 > >         int main() {
 > >             struct event_base *base = event_base_new();
 > >             struct event *ev = event_new(base, -1, EV_TIMEOUT|EV_PERSIST, onEvent, NULL);
@@ -2464,26 +2474,26 @@ lock ordering
 > >     #include <linux/types.h>
 > >     #include <linux/sched.h>
 > >     #include <linux/wait.h>
-> >             
+> >                 
 > >     #define DEVICE_NAME "my_device"
 > >     #define IRQ_NUMBER 1 // 假设使用中断号1
-> >             
+> >                 
 > >     static int my_open(struct inode *inode, struct file *file) {
 > >         printk(KERN_INFO "Device openedn");
 > >         return 0;
 > >     }
-> >             
+> >                 
 > >     static int my_release(struct inode *inode, struct file *file) {
 > >         printk(KERN_INFO "Device closedn");
 > >         return 0;
 > >     }
-> >             
+> >                 
 > >     // 中断处理函数
 > >     static irqreturn_t my_interrupt_handler(int irq, void *dev_id) {
 > >         printk(KERN_INFO "Interrupt receivedn");
 > >         return IRQ_HANDLED;
 > >     }
-> >             
+> >                 
 > >     static int __init my_init(void) {
 > >         int result;
 > >         result = request_irq(IRQ_NUMBER, my_interrupt_handler, IRQF_SHARED, DEVICE_NAME, NULL);
@@ -2494,15 +2504,15 @@ lock ordering
 > >         printk(KERN_INFO "Driver loadedn");
 > >         return 0;
 > >     }
-> >             
+> >                 
 > >     static void __exit my_exit(void) {
 > >         free_irq(IRQ_NUMBER, NULL);
 > >         printk(KERN_INFO "Driver unloadedn");
 > >     }
-> >             
+> >                 
 > >     module_init(my_init);
 > >     module_exit(my_exit);
-> >             
+> >                 
 > >     MODULE_LICENSE("GPL");
 > >     MODULE_AUTHOR("Your Name");
 > >     MODULE_DESCRIPTION("A simple event-driven device driver");
