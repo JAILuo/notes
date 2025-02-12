@@ -1658,6 +1658,7 @@
 <p>即：涉及到机器码层面，两份二进制文件怎么进行交互，而这怎么访问对方的数据内容。</p>
 <p>OSDEV Wiki System V ABI</p>
 <p>System V Application Binary Interface (System V ABI) 是一套规范，用于定义符合 X/Open Common Application Environment Specification 和 System V Interface Definition 的系统中的各种技术细节。</p>
+<p>推荐阅读：<a href="https://accu.org/conf-docs/PDFs_2015/JonathanWakely-What Is An ABI And Why Is It So Complicated.pdf">JonathanWakely-What Is An ABI And Why Is It So Complicated.pdf</a></p>
 </blockquote>
 <p>相关定义也不是第一次见了，而各网站说了一堆又十分抽象，做个总结。自己理解的ABI包括最少包括以下内容：</p>
 <ul>
@@ -1715,6 +1716,8 @@
 <p><strong>arm：AAPCS(64)（ARM Architecture Procedure Call Standard）</strong></p>
 <p>AI总结: arm的calling convention</p>
 <p><a href="https://developer.arm.com/documentation/109246/0100/Toolchains-and-model-support/Calling-conventions">Calling conventions</a></p>
+<p><a href="https://learn.microsoft.com/en-us/cpp/build/arm64-windows-abi-conventions?view=msvc-170">Overview of ARM64 ABI conventions | Microsoft Learn</a></p>
+<p>这些手册都挺精简，价值很高的，没事都可以翻着看看。</p>
 </li>
 <li>
 <p>RISC-V：</p>
@@ -2032,6 +2035,7 @@
 </blockquote>
 <p>来自 GeekTIime 某课程的图，伴随上面理解。</p>
 <p><img src="https://static001.geekbang.org/resource/image/9c/28/9ca51546a4d204c6e5d5da2674c2a928.png?wh=1544x1686" alt="img" style="zoom:50%;" /></p>
+<p>偶然看到的：<a href="https://zhuanlan.zhihu.com/p/386106883">什么是应用程序二进制接口ABI </a></p>
 <h3 id="_3">栈切换</h3>
 <p>刚开始第一版的时候，64位的勉强能跑，还是会有问题：switch/if 的选择竟然都会有问题。</p>
 <p>32位运行测试到一半 segmentation fault，实在是无语了。</p>
@@ -2544,7 +2548,7 @@ Low<span class="w"> </span>Address
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2025-02-01T08:16:34+01:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2025-02-01</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2025-02-12T18:33:04+01:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2025-02-12</span>
   </span>
 
     

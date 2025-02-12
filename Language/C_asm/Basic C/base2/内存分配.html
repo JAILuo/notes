@@ -1,0 +1,3194 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://jailuo.github.io/notes/Language/C_asm/Basic%20C/base2/%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D.html">
+      
+      
+      
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.48">
+    
+    
+      
+        <title>内存分配 - Messy Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.6f8fc17f.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../css/timeago.css">
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../../index.html" title="Messy Notes" class="md-header__button md-logo" aria-label="Messy Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Messy Notes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              内存分配
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256l137.3-137.4c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/JAILuo/notes" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../../index.html" title="Messy Notes" class="md-nav__button md-logo" aria-label="Messy Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Messy Notes
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/JAILuo/notes" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    首页
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Course
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Course
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    University Course
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            University Course
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_1" id="__nav_2_1_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    jyy OS2024
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            jyy OS2024
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_1_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_1_1" id="__nav_2_1_1_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    course note
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_1_1_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            course note
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Course/University%20Course/jyy%20OS2024/cousre%20note/1.%20introduction/introduction.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    introduction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Course/University%20Course/jyy%20OS2024/cousre%20note/2.%20concurrency/concurrency.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    concurrency
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Course/University%20Course/jyy%20OS2024/cousre%20note/3.%20virtualization/virtualization.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    virtualization
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Course/University%20Course/jyy%20OS2024/cousre%20note/4.%20persistence/persistence.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    persistence
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_1_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_1_2" id="__nav_2_1_1_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Mini Labs
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_1_1_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            Mini Labs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Course/University%20Course/jyy%20OS2024/Mini%20Labs/M1/M1.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    M1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Course/University%20Course/jyy%20OS2024/Mini%20Labs/M2/M2.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    M2
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Course/University%20Course/jyy%20OS2024/Mini%20Labs/M3/M3.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    M3
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_1_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_1_3" id="__nav_2_1_1_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    OS Labs
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_1_1_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_1_3">
+            <span class="md-nav__icon md-icon"></span>
+            OS Labs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Course/University%20Course/jyy%20OS2024/OS%20Labs/L0/L0.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    L0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Course/University%20Course/jyy%20OS2024/OS%20Labs/L1/L1.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    L1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    GeekTime
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            GeekTime
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2_1" id="__nav_2_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    深入理解计算机组成原理
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            深入理解计算机组成原理
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Course/GeekTime/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E4%B8%80%E5%91%A8%E7%9B%AE/1.%20%E6%8C%87%E4%BB%A4%E4%B8%8E%E8%BF%90%E7%AE%97/%E6%8C%87%E4%BB%A4%E4%B8%8E%E8%BF%90%E7%AE%97.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1. 指令与运算
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Course/GeekTime/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E4%B8%80%E5%91%A8%E7%9B%AE/2.%20%E5%A4%84%E7%90%86%E5%99%A8/%E5%A4%84%E7%90%86%E5%99%A8.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2. 处理器
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Course/GeekTime/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E4%B8%80%E5%91%A8%E7%9B%AE/3.%20%E5%AD%98%E5%82%A8%E4%B8%8EIO%E7%B3%BB%E7%BB%9F/%E5%AD%98%E5%82%A8%E4%B8%8EIO%E7%B3%BB%E7%BB%9F.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3. 存储与IO系统
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Course/GeekTime/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E4%B8%80%E5%91%A8%E7%9B%AE/4.%20%E5%BA%94%E7%94%A8/%E5%BA%94%E7%94%A8.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4. 应用
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2_2" id="__nav_2_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    计算基础实战课
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            计算基础实战课
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/1.%20MiniCPU%E8%AE%BE%E8%AE%A1/MiniCPU%E8%AE%BE%E8%AE%A1.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1. MiniCPU设计
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/2.%20%E8%AF%AD%E8%A8%80%E5%92%8C%E6%8C%87%E4%BB%A4/%E8%AF%AD%E8%A8%80%E5%92%8C%E6%8C%87%E4%BB%A4.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2. 语言和指令
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/3.%20%E5%BA%94%E7%94%A8%E5%92%8C%E5%86%85%E5%AD%98/%E5%BA%94%E7%94%A8%E5%92%8C%E5%86%85%E5%AD%98.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3. 应用和内存
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/4.%20IO%E4%B8%8E%E6%96%87%E4%BB%B6/IO%E5%92%8C%E6%96%87%E4%BB%B6.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4. IO与文件
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/5.%20%E7%BB%BC%E5%90%88%E5%BA%94%E7%94%A8/synthesis.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    5. 综合应用
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E5%92%8C%E5%B7%A5%E5%85%B7%E9%93%BE/%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    环境配置和工具链
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    ysyx
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            ysyx
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    NJU-ICS2023-PA
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            NJU-ICS2023-PA
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../ysyx/pa/pa1/pa1.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PA1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../ysyx/pa/pa2/pa2.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PA2
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../ysyx/pa/pa3/pa3.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PA3
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../ysyx/pa/pa4/pa4.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PA4
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../ysyx/pa/c_marco/macro.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    C Macro
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../ysyx/pa/summary/summary.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Summary
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../ysyx/pa/Linux_porting/porting.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Linux Porting
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../ysyx/digital-circuit/digital%20circuit.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Digital Circuit
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      总体概述
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      堆的动态申请释放
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="堆的动态申请释放">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      基本操作
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      通过函数分配空间
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#free" class="md-nav__link">
+    <span class="md-ellipsis">
+      给已经Free的空间赋值
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      内存泄漏
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="内存泄漏">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      未配对释放
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      丢失地址
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      未分级释放
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gdb-" class="md-nav__link">
+    <span class="md-ellipsis">
+      GDB调试--以栈溢出为例子
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="GDB调试--以栈溢出为例子">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      函数调用返回
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gdb" class="md-nav__link">
+    <span class="md-ellipsis">
+      （重要）GDB调试
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="（重要）GDB调试">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 开始调试
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 执行到哪里
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. 栈查看
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. 进一步调试
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. 大脑中建立内存图
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gdb-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      GDB 实际运用1
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="GDB 实际运用1">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      前置知识
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      分析
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      改进
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gdb-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      GDB 实际运用2
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      大小端
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="大小端">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      编写函数判断
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      实际题目:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      指针偏移
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="指针偏移">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      例子1
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      例子2
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      越界
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="越界">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#0" class="md-nav__link">
+    <span class="md-ellipsis">
+      字符串 ’\0’ 数组越界
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#0-strcpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      无结尾’\0’ 的strcpy
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#strlen0" class="md-nav__link">
+    <span class="md-ellipsis">
+      strlen未统计’\0’
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      越界拷贝
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      字节对齐
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pragma-pack-pragma-pack" class="md-nav__link">
+    <span class="md-ellipsis">
+      pragma pack 指令：有些编译器提供了#pragma pack指令，可以通过指定对齐单位来修改结构体的对齐方式。这可以用来优化内存占用或与其他系统进行数据交互。
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="pragma pack 指令：有些编译器提供了#pragma pack指令，可以通过指定对齐单位来修改结构体的对齐方式。这可以用来优化内存占用或与其他系统进行数据交互。">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_20" class="md-nav__link">
+    <span class="md-ellipsis">
+      逐段对齐
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_21" class="md-nav__link">
+    <span class="md-ellipsis">
+      带位数指定的 逐段对齐
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_22" class="md-nav__link">
+    <span class="md-ellipsis">
+      带联合体 的对齐
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_23" class="md-nav__link">
+    <span class="md-ellipsis">
+      实例
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_24" class="md-nav__link">
+    <span class="md-ellipsis">
+      常用的关键字
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="常用的关键字">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#const" class="md-nav__link">
+    <span class="md-ellipsis">
+      const
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="const">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_25" class="md-nav__link">
+    <span class="md-ellipsis">
+      例子
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#const_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      const 在不同位置的意义
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#static" class="md-nav__link">
+    <span class="md-ellipsis">
+      static
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="static">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_26" class="md-nav__link">
+    <span class="md-ellipsis">
+      基础知识
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_27" class="md-nav__link">
+    <span class="md-ellipsis">
+      静态局部变量
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_28" class="md-nav__link">
+    <span class="md-ellipsis">
+      静态全局变量
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_29" class="md-nav__link">
+    <span class="md-ellipsis">
+      静态函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_30" class="md-nav__link">
+    <span class="md-ellipsis">
+      总结
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#volatile" class="md-nav__link">
+    <span class="md-ellipsis">
+      volatile
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="volatile">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_31" class="md-nav__link">
+    <span class="md-ellipsis">
+      读硬件寄存器时(如某传感器的端口)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_32" class="md-nav__link">
+    <span class="md-ellipsis">
+      多线程中对共享的变量的修改
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_33" class="md-nav__link">
+    <span class="md-ellipsis">
+      中断中对共享变量的修改
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_34" class="md-nav__link">
+    <span class="md-ellipsis">
+      思考
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#define" class="md-nav__link">
+    <span class="md-ellipsis">
+      define
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h2 id="_1">总体概述</h2>
+<p><img alt="image-20231030164044063" src="pic/image-20231030164044063-17054079600971.png" /></p>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span>
+
+<span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w">    </span><span class="n">g_A</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w">         </span><span class="c1">//常量区 </span>
+<span class="kt">int</span><span class="w">          </span><span class="n">g_B</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="mi">20</span><span class="p">;</span><span class="w">         </span><span class="c1">//数据段  </span>
+<span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w">   </span><span class="n">g_C</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="mi">30</span><span class="p">;</span><span class="w">         </span><span class="c1">//数据段  </span>
+<span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w">   </span><span class="n">g_D</span><span class="p">;</span><span class="w">                    </span><span class="c1">//BSS段  </span>
+<span class="kt">int</span><span class="w">          </span><span class="n">g_E</span><span class="p">;</span><span class="w">                    </span><span class="c1">//BSS段  </span>
+<span class="kt">char</span><span class="w">        </span><span class="o">*</span><span class="n">p1</span><span class="p">;</span><span class="w">                     </span><span class="c1">//BSS段  </span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w">           </span><span class="n">local_A</span><span class="p">;</span><span class="w">            </span><span class="c1">//栈  </span>
+<span class="w">    </span><span class="kt">int</span><span class="w">           </span><span class="n">local_B</span><span class="p">;</span><span class="w">            </span><span class="c1">//栈  </span>
+<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w">    </span><span class="n">local_C</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w">        </span><span class="c1">//BSS段(初值为0 等于没初始化，会放在BSS段 )  </span>
+<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w">    </span><span class="n">local_D</span><span class="p">;</span><span class="w">            </span><span class="c1">//数据段  </span>
+
+<span class="w">    </span><span class="kt">char</span><span class="w">        </span><span class="o">*</span><span class="n">p3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;123456&quot;</span><span class="p">;</span><span class="w">       </span><span class="c1">//123456在代码段，p3在栈上  </span>
+
+<span class="w">    </span><span class="n">p1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="p">);</span><span class="w">        </span><span class="c1">//堆，分配得来得10字节的区域在堆区  </span>
+<span class="w">    </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">p2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="w"> </span><span class="mi">20</span><span class="w"> </span><span class="p">);</span><span class="w">  </span><span class="c1">//堆上再分配，向上生长</span>
+<span class="w">    </span><span class="n">strcpy</span><span class="p">(</span><span class="w"> </span><span class="n">p1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;123456&quot;</span><span class="w"> </span><span class="p">);</span><span class="w">           </span><span class="c1">//123456{post.content}放在常量区，编译器可能会将它与p3所指向 的&quot;123456&quot;优化成一块  </span>
+
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;hight address</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span><span class="w">  </span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;-------------栈--------------</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span><span class="w">  </span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="w"> </span><span class="s">&quot;栈,    局部变量,                           local_A, addr:0x%08x</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">local_A</span><span class="w"> </span><span class="p">);</span><span class="w">  </span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="w"> </span><span class="s">&quot;栈,    局部变量,(后进栈地址相对local_A低)  local_B, addr:0x%08x</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">local_B</span><span class="w"> </span><span class="p">);</span><span class="w">  </span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;-------------堆--------------</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span><span class="w">  </span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="w"> </span><span class="s">&quot;堆,    malloc分配内存,             p2,     addr:0x%08x</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">p2</span><span class="w"> </span><span class="p">);</span><span class="w">  </span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="w"> </span><span class="s">&quot;堆,    malloc分配内存,             p1,     addr:0x%08x</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">p1</span><span class="w"> </span><span class="p">);</span><span class="w">  </span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;------------BSS段------------</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span><span class="w">  </span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="w"> </span><span class="s">&quot;BSS段, 全局变量,       未初始化    g_E,     addr:0x%08x</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">g_E</span><span class="p">,</span><span class="w"> </span><span class="n">g_E</span><span class="w"> </span><span class="p">);</span><span class="w">      </span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="w"> </span><span class="s">&quot;BSS段, 静态全局变量,   未初始化,   g_D,     addr:0x%08x</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">g_D</span><span class="w"> </span><span class="p">);</span><span class="w">  </span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="w"> </span><span class="s">&quot;BSS段, 静态局部变量,   未初始化,   local_C, addr:0x%08x</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">local_C</span><span class="p">);</span><span class="w">  </span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="w"> </span><span class="s">&quot;BSS段, 静态局部变量,   未初始化,   local_D, addr:0x%08x</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">local_D</span><span class="p">);</span><span class="w">  </span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;-----------数据段------------</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span><span class="w">  </span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="w"> </span><span class="s">&quot;数据段,全局变量,       初始化      g_B,     addr:0x%08x</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">g_B</span><span class="p">);</span><span class="w">  </span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="w"> </span><span class="s">&quot;数据段,静态全局变量,   初始化,     g_C,     addr:0x%08x</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">g_C</span><span class="p">);</span><span class="w">  </span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;-----------代码段------------</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span><span class="w">  </span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="w"> </span><span class="s">&quot; 常量区                只读const,  g_A,     addr:0x%08x</span><span class="se">\n\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">g_A</span><span class="p">);</span><span class="w">  </span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="w"> </span><span class="s">&quot; 程序代码，可反汇编看 objdump -d a.out </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;low address</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span><span class="w">  </span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nl">运行结果</span><span class="p">:</span>
+<span class="n">hight</span><span class="w"> </span><span class="n">address</span>
+<span class="o">-------------</span><span class="n">栈</span><span class="o">--------------</span>
+<span class="n">栈</span><span class="p">,</span><span class="w">    </span><span class="n">局部变量</span><span class="p">,</span><span class="w">                  </span><span class="n">local_A</span><span class="p">,</span><span class="w"> </span><span class="n">addr</span><span class="o">:</span><span class="mh">0xc8419530</span>
+<span class="n">栈</span><span class="p">,</span><span class="w">    </span><span class="n">局部变量</span><span class="p">,</span><span class="w">                  </span><span class="n">local_B</span><span class="p">,</span><span class="w"> </span><span class="n">addr</span><span class="o">:</span><span class="mh">0xc8419534</span>
+<span class="o">-------------</span><span class="n">堆</span><span class="o">--------------</span>
+<span class="n">堆</span><span class="p">,</span><span class="w">    </span><span class="n">malloc分配内存</span><span class="p">,</span><span class="w">             </span><span class="n">p2</span><span class="p">,</span><span class="w">     </span><span class="n">addr</span><span class="o">:</span><span class="mh">0xe22852c0</span>
+<span class="n">堆</span><span class="p">,</span><span class="w">    </span><span class="n">malloc分配内存</span><span class="p">,</span><span class="w">             </span><span class="n">p1</span><span class="p">,</span><span class="w">     </span><span class="n">addr</span><span class="o">:</span><span class="mh">0xe22852a0</span>
+<span class="o">------------</span><span class="n">BSS段</span><span class="o">------------</span>
+<span class="n">BSS段</span><span class="p">,</span><span class="w"> </span><span class="n">全局变量</span><span class="p">,</span><span class="w">       </span><span class="n">未初始化</span><span class="w">    </span><span class="n">g_E</span><span class="p">,</span><span class="w">     </span><span class="n">addr</span><span class="o">:</span><span class="mh">0xe19c0020</span>
+<span class="n">BSS段</span><span class="p">,</span><span class="w"> </span><span class="n">静态全局变量</span><span class="p">,</span><span class="w">   </span><span class="n">未初始化</span><span class="p">,</span><span class="w">   </span><span class="n">g_D</span><span class="p">,</span><span class="w">      </span><span class="n">addr</span><span class="o">:</span><span class="mh">0xe19c0030</span>
+<span class="n">BSS段</span><span class="p">,</span><span class="w"> </span><span class="n">静态局部变量</span><span class="p">,</span><span class="w">   </span><span class="n">未初始化</span><span class="p">,</span><span class="w">   </span><span class="n">local_C</span><span class="p">,</span><span class="w">  </span><span class="n">addr</span><span class="o">:</span><span class="mh">0xe19c0034</span>
+<span class="n">BSS段</span><span class="p">,</span><span class="w"> </span><span class="n">静态局部变量</span><span class="p">,</span><span class="w">   </span><span class="n">未初始化</span><span class="p">,</span><span class="w">   </span><span class="n">local_D</span><span class="p">,</span><span class="w">  </span><span class="n">addr</span><span class="o">:</span><span class="mh">0xe19c0038</span>
+<span class="o">-----------</span><span class="n">数据段</span><span class="o">------------</span>
+<span class="n">数据段</span><span class="p">,</span><span class="n">全局变量</span><span class="p">,</span><span class="w">       </span><span class="n">初始化</span><span class="w">      </span><span class="n">g_B</span><span class="p">,</span><span class="w">      </span><span class="n">addr</span><span class="o">:</span><span class="mh">0xe19c0010</span>
+<span class="n">数据段</span><span class="p">,</span><span class="n">静态全局变量</span><span class="p">,</span><span class="w">    </span><span class="n">初始化</span><span class="p">,</span><span class="w">     </span><span class="n">g_C</span><span class="p">,</span><span class="w"> </span><span class="n">addr</span><span class="o">:</span><span class="mh">0xe19c0014</span>
+<span class="o">-----------</span><span class="n">代码段</span><span class="o">------------</span>
+<span class="n">常量区</span><span class="w">                </span><span class="n">只读const</span><span class="p">,</span><span class="w">  </span><span class="n">g_A</span><span class="p">,</span><span class="w">      </span><span class="n">addr</span><span class="o">:</span><span class="mh">0xe19be008</span>
+
+<span class="w"> </span><span class="n">程序代码</span><span class="err">，</span><span class="n">可反汇编看</span><span class="w"> </span><span class="n">objdump</span><span class="w"> </span><span class="o">-</span><span class="n">d</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">out</span><span class="w"> </span>
+<span class="n">low</span><span class="w"> </span><span class="n">address</span>
+</code></pre></div>
+<blockquote>
+<p>在函数调用时，每个局部变量都会被分配到栈上，栈是一种后进先出（LIFO）的数据结构，也就是说后定义的变量会先进栈，先定义的变量会后进栈，所以在这个例子中，local_A先定义，但是后进栈，所以它的地址比local_B的地址高。另外，<strong>编译器可能会对变量的内存布局进行优化，所以实际的地址分配可能不完全按照代码中的顺序进行。</strong></p>
+</blockquote>
+<h2 id="_2">堆的动态申请释放</h2>
+<h4 id="_3">基本操作</h4>
+<h4 id="_4">通过函数分配空间</h4>
+<div class="highlight"><pre><span></span><code><span class="c1">//错:</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">getmemory</span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">p</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">   </span><span class="n">p</span><span class="o">=</span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="n">malloc</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span><span class="w"> </span>
+<span class="w">   </span><span class="n">strcpy</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="s">&quot;hello world&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="w"> </span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">   </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">str</span><span class="o">=</span><span class="nb">NULL</span><span class="p">;</span>
+<span class="w">   </span><span class="n">getmemory</span><span class="p">(</span><span class="n">str</span><span class="p">);</span><span class="w"> </span>
+<span class="w">   </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%s&quot;</span><span class="p">,</span><span class="n">str</span><span class="p">);</span>
+<span class="w">   </span><span class="n">free</span><span class="p">(</span><span class="n">str</span><span class="p">);</span>
+<span class="w">   </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+
+<span class="c1">//改:</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">getmemory</span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="w">  </span><span class="n">p</span><span class="p">)</span><span class="w">  </span>
+<span class="p">{</span><span class="w"> </span>
+
+<span class="w">   </span><span class="o">*</span><span class="n">p</span><span class="o">=</span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="n">malloc</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span><span class="w"> </span><span class="c1">//申请空间首地址付给传入的被p指向的指针，即str</span>
+<span class="w">   </span><span class="n">strcpy</span><span class="p">(</span><span class="o">*</span><span class="n">p</span><span class="p">,</span><span class="s">&quot;hello world&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="c1">//p: 指向指针的指针</span>
+<span class="c1">//*p: p指向的指针(即str)</span>
+<span class="c1">//**p: 最终malloc分配的空间(str指向的堆空间)</span>
+
+<span class="c1">//getmemory传入指针str的地址给p </span>
+<span class="c1">//而*p取得是传入参数的地址(也就是str指针变量的地址)</span>
+<span class="c1">//最后再用**p访问到了*str具体的值</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="w"> </span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">   </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">str</span><span class="o">=</span><span class="nb">NULL</span><span class="p">;</span>
+<span class="w">   </span><span class="n">getmemory</span><span class="p">(</span><span class="o">&amp;</span><span class="n">str</span><span class="p">);</span><span class="w"> </span><span class="c1">//传入指针变量本身的地址</span>
+<span class="w">   </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%s&quot;</span><span class="p">,</span><span class="n">str</span><span class="p">);</span>
+<span class="w">   </span><span class="n">free</span><span class="p">(</span><span class="n">str</span><span class="p">);</span>
+<span class="w">   </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>当我们在函数中需要修改一个指针的值时，<strong>我们需要传递指针的地址</strong>，而不是直接传递指针本身。</p>
+<p>因为C语言中，<strong>函数参数传递是按值传递的，即函数内部对参数的修改不会影响到函数外部的变量。</strong></p>
+<p>在原始代码中，getmemory函数中的参数p是一个指针，当我们将p指针重新赋值为malloc分配的内存地址时，只是修改了函数内部的p指针，并不会修改main函数中的str指针。所以在main函数中打印str时，会输出NULL。</p>
+<p>为了解决这个问题，我们需要传递str指针的地址给getmemory函数，这样在函数内部就可以通过修改*p来修改main函数中的str指针。通过传递指针的地址，我们可以实现对指针的间接修改。</p>
+<p>所以我们将getmemory函数的参数改为char *<em>p，即传递指针的指针。在函数内部，通过</em>p来访问和修改str指针指向的内存。这样就能够正确地分配内存并将字符串复制到str指针指向的内存中。</p>
+<p>在main函数中，我们传递str指针的地址给getmemory函数，这样在函数内部通过修改*p来修改main函数中的str指针。然后我们可以正确地打印str指针指向的字符串，并在程序结束前释放str指针指向的内存。</p>
+<p>通过这样的修改，我们可以实现对指针的间接修改，确保在函数内部对指针的修改能够影响到函数外部的变量。</p>
+<h4 id="free">给已经Free的空间赋值</h4>
+<div class="highlight"><pre><span></span><code><span class="c1">// 问: 输出结果是什么? 为什么 </span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span><span class="c1"> #include &lt;stdlib.h&gt; </span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">GetMemory</span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">p</span><span class="p">,</span><span class="kt">int</span><span class="w"> </span><span class="n">num</span><span class="p">)</span>
+<span class="p">{</span><span class="w"> </span>
+<span class="w">    </span><span class="o">*</span><span class="n">p</span><span class="o">=</span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="n">num</span><span class="p">);</span><span class="w"> </span>
+<span class="p">}</span><span class="w"> </span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span><span class="w"> </span>
+<span class="w">    </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">str</span><span class="o">=</span><span class="nb">NULL</span><span class="p">;</span><span class="w"> </span>
+<span class="w">    </span><span class="n">GetMemory</span><span class="p">(</span><span class="o">&amp;</span><span class="n">str</span><span class="p">,</span><span class="mi">100</span><span class="p">);</span><span class="w"> </span>
+<span class="w">    </span><span class="n">strcpy</span><span class="p">(</span><span class="n">str</span><span class="p">,</span><span class="s">&quot;hello&quot;</span><span class="p">);</span><span class="w"> </span>
+<span class="w">    </span><span class="n">free</span><span class="p">(</span><span class="n">str</span><span class="p">);</span><span class="w"> </span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">str</span><span class="o">!=</span><span class="nb">NULL</span><span class="p">)</span><span class="w"> </span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span>
+<span class="w">        </span><span class="n">strcpy</span><span class="p">(</span><span class="n">str</span><span class="p">,</span><span class="s">&quot;world&quot;</span><span class="p">);</span><span class="w"> </span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s"> str is %s&quot;</span><span class="p">,</span><span class="n">str</span><span class="p">);</span><span class="w"> </span>
+<span class="p">}</span>
+</code></pre></div>
+<p>答案：输出str is world。</p>
+<p><strong>进程中的内存管理 是由库函数完成，不是由操作系统。</strong> malloc时, 库函数会向操作系统申请空间，并做记录, 但free时, 库函数不会把空间马上还给操作系统, 还能继续访问。 但后面可能这个空间分配给别人。 <strong>所以为避免误操作 free(str) 后 需 str=NULL;</strong></p>
+<div class="highlight"><pre><span></span><code><span class="w">    </span><span class="n">free</span><span class="p">(</span><span class="n">str</span><span class="p">);</span>
+<span class="w">    </span><span class="n">str</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span><span class="w"> </span><span class="c1">// 将指针设置为NULL</span>
+</code></pre></div>
+<h4 id="_5">内存泄漏</h4>
+<blockquote>
+<p>malloc后没有进行free, 系统运行几天后, 不停地申请内存, 最后导致内存崩溃, </p>
+<p>可能在某个Switch中偶尔申请</p>
+</blockquote>
+<h6 id="_6">未配对释放</h6>
+<div class="highlight"><pre><span></span><code><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">pt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span><span class="w"> </span><span class="c1">//堆上申请空间，未配对free(pt)</span>
+</code></pre></div>
+<h6 id="_7">丢失地址</h6>
+<div class="highlight"><pre><span></span><code><span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">pt</span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span><span class="w">     </span>
+<span class="p">...</span>
+<span class="p">...</span>
+<span class="p">...</span>
+<span class="w">    </span><span class="c1">//可能中间隔了好多的函数</span>
+<span class="w">    </span><span class="n">pt</span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="mi">20</span><span class="p">);</span><span class="w">     </span><span class="c1">//覆盖了指针，导致前面10个空间的地址丢失。</span>
+</code></pre></div>
+<h6 id="_8">未分级释放</h6>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w">  </span><span class="cpf">&lt;stdio.h&gt;</span>
+<span class="cp">#include</span><span class="w">  </span><span class="cpf">&lt;stdlib.h&gt;</span>
+<span class="k">struct</span><span class="w"> </span><span class="nc">birth</span>
+<span class="p">{</span>
+<span class="w">   </span><span class="kt">int</span><span class="w"> </span><span class="n">year</span><span class="p">;</span>
+<span class="w">   </span><span class="kt">int</span><span class="w"> </span><span class="n">month</span><span class="p">;</span>
+<span class="w">   </span><span class="kt">int</span><span class="w"> </span><span class="n">day</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="k">struct</span><span class="w"> </span><span class="nc">student</span>
+<span class="p">{</span>
+<span class="w">   </span><span class="kt">char</span><span class="w"> </span><span class="n">is_male</span><span class="p">;</span>
+<span class="w">   </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">name</span><span class="p">;</span>
+<span class="w">   </span><span class="k">struct</span><span class="w"> </span><span class="nc">birth</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">bi</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">//int a[1000];</span>
+<span class="p">};</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">   </span><span class="k">struct</span><span class="w"> </span><span class="nc">student</span><span class="w"> </span><span class="o">*</span><span class="n">pt</span><span class="p">;</span>
+<span class="w">   </span><span class="n">pt</span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">student</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">student</span><span class="p">));</span><span class="w"> </span><span class="c1">//堆上申请空间</span>
+
+<span class="w">   </span><span class="n">pt</span><span class="o">-&gt;</span><span class="n">is_male</span><span class="w"> </span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
+<span class="w">   </span><span class="n">pt</span><span class="o">-&gt;</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;wangwei&quot;</span><span class="p">;</span>
+<span class="w">   </span><span class="n">pt</span><span class="o">-&gt;</span><span class="n">bi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">birth</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">birth</span><span class="p">));</span><span class="w"> </span><span class="c1">//堆上申请空间</span>
+<span class="w">   </span><span class="n">pt</span><span class="o">-&gt;</span><span class="n">bi</span><span class="o">-&gt;</span><span class="n">year</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2000</span><span class="p">;</span>
+<span class="w">   </span><span class="n">pt</span><span class="o">-&gt;</span><span class="n">bi</span><span class="o">-&gt;</span><span class="n">month</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span><span class="w">  </span>
+<span class="w">   </span><span class="n">pt</span><span class="o">-&gt;</span><span class="n">bi</span><span class="o">-&gt;</span><span class="n">day</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w">  </span>
+
+<span class="w">   </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%s %d </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="n">pt</span><span class="o">-&gt;</span><span class="n">name</span><span class="p">,</span><span class="n">pt</span><span class="o">-&gt;</span><span class="n">bi</span><span class="o">-&gt;</span><span class="n">day</span><span class="p">);</span>
+
+<span class="w">   </span><span class="c1">//逐级释放空间，避免内存泄漏</span>
+<span class="w">   </span><span class="c1">//pt-&gt;name 是字符串常量 不用释放 </span>
+<span class="w">   </span><span class="k">if</span><span class="p">(</span><span class="n">pt</span><span class="o">-&gt;</span><span class="n">bi</span><span class="o">!=</span><span class="nb">NULL</span><span class="p">){</span><span class="w"> </span>
+<span class="w">      </span><span class="n">free</span><span class="p">(</span><span class="n">pt</span><span class="o">-&gt;</span><span class="n">bi</span><span class="p">);</span><span class="w"> </span><span class="c1">//先释放子空间</span>
+<span class="w">      </span><span class="n">pt</span><span class="o">-&gt;</span><span class="n">bi</span><span class="o">=</span><span class="nb">NULL</span><span class="p">;</span>
+<span class="w">   </span><span class="p">}</span>
+<span class="w">   </span><span class="n">free</span><span class="p">(</span><span class="n">pt</span><span class="p">);</span><span class="w"> </span><span class="c1">//后释放父空间</span>
+<span class="w">   </span><span class="n">pt</span><span class="w"> </span><span class="o">=</span><span class="nb">NULL</span><span class="p">;</span><span class="w"> </span><span class="c1">//避免野指针 (操作已释放的空间)</span>
+
+<span class="w">   </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span><span class="w">   </span>
+</code></pre></div>
+<p><code>struct student *pt;</code>   </p>
+<p><code>pt= (struct student *)malloc(sizeof(struct student)); //堆上申请空间</code></p>
+<p>相比直接<code>struct student Student_A</code>(会计算这个结构体的大小, 然后申请了各种局部变量,如a[1000]就很浪费空间)</p>
+<p><strong>使用堆分配,更加节省空间.</strong></p>
+<blockquote>
+<p>在C语言中，内存空间可以分为两种类型：栈空间和堆空间。</p>
+<p>栈空间是由编译器自动分配和管理的内存空间，用于存储局部变量和函数调用的参数、返回值等信息。栈空间的大小和生命周期是在编译时就确定的，不能动态地增加或减少。</p>
+<p>堆空间是由程序员手动分配和释放的内存空间，用于存储动态分配的变量、数组、结构体等数据结构。堆空间的大小和生命周期是在运行时动态确定的，可以根据需要动态增加或减少。</p>
+<p>在上述代码中，使用了malloc函数来动态分配内存空间，这个函数会在堆上分配一块指定大小的内存空间，并返回一个指向该内存空间的指针。因此，通过malloc函数动态分配内存空间就是在堆上分配内存空间。</p>
+<p>而如果直接定义结构体变量，变量的内存空间就会在栈上分配，其大小和生命周期在编译时就已经确定，无法动态调整。因此，如果需要动态管理结构体对象，就需要使用指针来动态分配内存空间，以便在程序运行时动态创建和管理结构体对象。</p>
+</blockquote>
+<h2 id="gdb-">GDB调试--以栈溢出为例子</h2>
+<blockquote>
+<p>栈越界，覆盖别的数据  --&gt; 提升调试能力</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><span class="c1">//栈: 是一种 先进后出 的数据结构 -&gt; 函数调用返回 </span>
+<span class="o">---</span><span class="w">    </span><span class="o">---</span>
+<span class="w">  </span><span class="o">|</span><span class="w">    </span><span class="o">|</span>
+<span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="mi">3</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="o">&lt;--</span><span class="w"> </span><span class="n">rsp</span><span class="o">/</span><span class="n">esp</span><span class="w"> </span><span class="n">栈顶指针</span><span class="p">(</span><span class="n">进出栈时它会变化</span><span class="p">)</span>
+<span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="mi">2</span><span class="w">  </span><span class="o">|</span><span class="w"> </span>
+<span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="mi">1</span><span class="w">  </span><span class="o">|</span><span class="w"> </span>
+<span class="w"> </span><span class="o">-----</span><span class="w">  </span><span class="o">&lt;--</span><span class="w"> </span><span class="n">rbp</span><span class="o">/</span><span class="n">ebp</span><span class="w"> </span><span class="n">栈底指针</span>
+</code></pre></div>
+<h4 id="_9">函数调用返回</h4>
+<p><img alt="image-20231030165118491" src="pic/image-20231030165118491.png" /></p>
+<blockquote>
+<p>入栈顺序: 一般是从函数的下面到上面, 参数从左到右 ( 由栈的特点FILO可知 )</p>
+<p><mark><strong>(上面这个图有问题，返回地址和前栈栈底反过来了 )</strong></mark></p>
+<p>入栈顺序：1. 返回地址 2. 前栈栈底（rbp） 3. 相关参数</p>
+<p>出栈顺序：1. 相关参数 2. 前栈栈底（rbp） 3. 返回地址</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">func2</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="p">){</span>
+<span class="w">   </span><span class="kt">char</span><span class="w"> </span><span class="n">name</span><span class="p">[</span><span class="mi">6</span><span class="p">];</span>
+<span class="w">   </span><span class="kt">int</span><span class="w"> </span><span class="n">sum</span><span class="p">;</span><span class="w"> </span>
+<span class="w">   </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;input: &quot;</span><span class="p">);</span><span class="w"> </span>
+<span class="w">   </span><span class="n">gets</span><span class="p">(</span><span class="n">name</span><span class="p">);</span><span class="w"> </span><span class="c1">//输入字符过多，name会越界，栈溢出崩溃</span>
+<span class="w">   </span><span class="k">return</span><span class="w"> </span><span class="n">x</span><span class="o">+</span><span class="n">y</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">func1</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">){</span>
+<span class="w">   </span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
+<span class="w">   </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot; func1 a=%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="n">a</span><span class="p">);</span>
+<span class="w">   </span><span class="n">func2</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">);</span>
+<span class="w">   </span><span class="k">return</span><span class="w"> </span><span class="n">a</span><span class="o">+</span><span class="n">x</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">argv</span><span class="p">[])</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">func1</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;main end</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span><span class="w"> </span>
+</code></pre></div>
+<p><img alt="image-20231030165014470" src="pic/image-20231030165014470.png" /></p>
+<h4 id="gdb"><mark>（重要）GDB调试</mark></h4>
+<blockquote>
+<p>这部分以后用来可以复习GDB的操作,顺便复习栈的存储, 在大脑中建立一张内存的地图 </p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><span class="c1">//测试函数</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span><span class="c1"> </span>
+<span class="c1">//入栈顺序：是从下到上，从右至左，反向进栈</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">func</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="kt">int</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="p">)</span><span class="w">   </span><span class="c1">//4.b    5.a  (从右至左) 这里编译器优化了好像</span>
+<span class="p">{</span><span class="w"> </span>
+<span class="w">    </span><span class="kt">char</span><span class="w"> </span><span class="n">name</span><span class="p">[</span><span class="mi">6</span><span class="p">];</span><span class="w"> </span><span class="c1">//3. name[]</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">sum</span><span class="p">;</span><span class="w">      </span><span class="c1">//2.sum     从下到上</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Please type your name: &quot;</span><span class="p">);</span><span class="w"> </span>
+<span class="w">    </span><span class="n">gets</span><span class="p">(</span><span class="n">name</span><span class="p">);</span><span class="w"> </span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Hello, %s!&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sum</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">sum</span><span class="p">;</span><span class="w"> </span>
+<span class="p">}</span><span class="w"> </span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">argv</span><span class="p">[])</span><span class="w"> </span>
+<span class="p">{</span><span class="w"> </span>
+<span class="w">    </span><span class="n">func</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">);</span><span class="w"> </span><span class="c1">//调用函数时，入栈顺序</span>
+<span class="w">               </span><span class="c1">//1. 返回地址入栈( 如return 0; ) </span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span>
+<span class="p">}</span><span class="w">      </span>
+</code></pre></div>
+<h5 id="1">1.  开始调试</h5>
+<div class="highlight"><pre><span></span><code><span class="n">$</span><span class="w"> </span><span class="n">gcc</span><span class="w"> </span><span class="o">-</span><span class="n">g</span><span class="w"> </span><span class="o">-</span><span class="n">fno</span><span class="o">-</span><span class="n">stack</span><span class="o">-</span><span class="n">protector</span><span class="w"> </span><span class="o">-</span><span class="n">z</span><span class="w"> </span><span class="n">execstack</span><span class="w">  </span><span class="n">main</span><span class="p">.</span><span class="n">c</span><span class="w">  </span><span class="c1">//编译时 关闭栈保护</span>
+<span class="n">$</span><span class="w"> </span><span class="n">gdb</span><span class="w"> </span><span class="p">.</span><span class="o">/</span><span class="n">a</span><span class="p">.</span><span class="n">out</span>
+<span class="p">(</span><span class="n">gdb</span><span class="p">)</span><span class="w"> </span><span class="n">l</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="mi">25</span><span class="w">   </span><span class="c1">//查看1到25行代码</span>
+<span class="p">(</span><span class="n">gdb</span><span class="p">)</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="mi">15</span><span class="w">     </span><span class="c1">//断点设在第15行(char name[6]处)</span>
+<span class="p">(</span><span class="n">gdb</span><span class="p">)</span><span class="w"> </span><span class="n">r</span><span class="w">        </span><span class="c1">//全速运行</span>
+
+
+<span class="cm">/*    常用的GDB调试命令</span>
+<span class="cm">run 或 r：启动程序的执行。</span>
+<span class="cm">break 或 b：设置断点。通过指定行号或函数名来设置断点，如 break main 或 break 10。</span>
+<span class="cm">continue 或 c：继续执行程序，直到下一个断点或程序结束。</span>
+<span class="cm">next 或 n：执行下一行代码，不进入函数调用。</span>
+<span class="cm">step 或 s：执行下一行代码，并进入函数调用。</span>
+<span class="cm">print 或 p：打印变量的值。例如 print x。</span>
+<span class="cm">examine 或者 x : 显示内存信息 显示某地址的内存值 </span>
+<span class="cm">info 或者 i: 显示内存信息</span>
+<span class="cm">list 或者 l: 显示源码 </span>
+<span class="cm">backtrace 或 bt：打印函数调用栈的信息。</span>
+<span class="cm">info locals：打印当前函数的局部变量。</span>
+<span class="cm">info breakpoints：显示当前设置的所有断点。</span>
+<span class="cm">delete：删除指定的断点。例如 delete 1。</span>
+<span class="cm">watch：设置观察点，当变量的值发生改变时，程序会停下来。</span>
+<span class="cm">quit 或 q：退出GDB调试。</span>
+<span class="cm">*/</span>
+</code></pre></div>
+<p><img alt="image-20231031211613282" src="pic/image-20231031211613282.png" /></p>
+<div class="highlight"><pre><span></span><code><span class="c1">// 看main的栈帧地址 argc = 1, argv = 0x7fffffffe158 对应地址 0x7ffffffe030</span>
+</code></pre></div>
+<blockquote>
+<p>对于函数的参数，一般都是从右到左（argv[] -&gt;argc）入栈的,  也就是右边的先入栈到栈底（也就是高地址）， 但是gdb调试出来的结果又不是这样？argc先入了栈？</p>
+<p>可能是编译器优化的缘故</p>
+</blockquote>
+<h5 id="2">2. 执行到哪里</h5>
+<div class="highlight"><pre><span></span><code><span class="p">(</span><span class="n">gdb</span><span class="p">)</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="n">reg</span><span class="w">   </span><span class="c1">//查看寄存器</span>
+<span class="w">              </span><span class="c1">//rsp : 栈顶指针(进出栈时它会变化 ),有些cpu里叫esp</span>
+<span class="w">              </span><span class="c1">//rbp : 栈底指针</span>
+<span class="w">              </span><span class="c1">//rip : 指令指针(下一条 等待执行的 指令地址)</span>
+<span class="p">(</span><span class="n">gdb</span><span class="p">)</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="n">$rip</span><span class="w">  </span><span class="c1">//查看rip寄存器内容 (知道程序执行到那了)</span>
+<span class="w">              </span><span class="c1">// x/16x $rip   查看16个将要执行代码的机器码   </span>
+
+<span class="p">(</span><span class="n">gdb</span><span class="p">)</span><span class="w"> </span><span class="n">disas</span><span class="w"> </span><span class="n">main</span><span class="w"> </span><span class="c1">//反汇编main函数</span>
+<span class="n">Dump</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">assembler</span><span class="w"> </span><span class="n">code</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">function</span><span class="w"> </span><span class="n">main</span><span class="o">:</span>
+<span class="w">   </span><span class="mh">0x000055555555520e</span><span class="w"> </span><span class="o">&lt;+</span><span class="mi">0</span><span class="o">&gt;:</span><span class="w"> </span><span class="n">endbr64</span><span class="w"> </span>
+<span class="w">   </span><span class="mh">0x0000555555555212</span><span class="w"> </span><span class="o">&lt;+</span><span class="mi">4</span><span class="o">&gt;:</span><span class="w"> </span><span class="n">push</span><span class="w">   </span><span class="o">%</span><span class="n">rbp</span>
+<span class="w">   </span><span class="mh">0x0000555555555213</span><span class="w"> </span><span class="o">&lt;+</span><span class="mi">5</span><span class="o">&gt;:</span><span class="w"> </span><span class="n">mov</span><span class="w">    </span><span class="o">%</span><span class="n">rsp</span><span class="p">,</span><span class="o">%</span><span class="n">rbp</span>
+<span class="w">   </span><span class="mh">0x0000555555555216</span><span class="w"> </span><span class="o">&lt;+</span><span class="mi">8</span><span class="o">&gt;:</span><span class="w"> </span><span class="n">sub</span><span class="w">    </span><span class="n">$0x10</span><span class="p">,</span><span class="o">%</span><span class="n">rsp</span>
+<span class="w">   </span><span class="mh">0x000055555555521a</span><span class="w"> </span><span class="o">&lt;+</span><span class="mi">12</span><span class="o">&gt;:</span><span class="w">    </span><span class="n">mov</span><span class="w">    </span><span class="o">%</span><span class="n">edi</span><span class="p">,</span><span class="mh">-0x4</span><span class="p">(</span><span class="o">%</span><span class="n">rbp</span><span class="p">)</span>
+<span class="w">   </span><span class="mh">0x000055555555521d</span><span class="w"> </span><span class="o">&lt;+</span><span class="mi">15</span><span class="o">&gt;:</span><span class="w">    </span><span class="n">mov</span><span class="w">    </span><span class="o">%</span><span class="n">rsi</span><span class="p">,</span><span class="mh">-0x10</span><span class="p">(</span><span class="o">%</span><span class="n">rbp</span><span class="p">)</span>
+<span class="w">       </span><span class="c1">//func(3,4); 代码的内存位置和反汇编代码</span>
+<span class="w">   </span><span class="mh">0x0000555555555221</span><span class="w"> </span><span class="o">&lt;+</span><span class="mi">19</span><span class="o">&gt;:</span><span class="w">    </span><span class="n">mov</span><span class="w">    </span><span class="n">$0x4</span><span class="p">,</span><span class="o">%</span><span class="n">esi</span><span class="w">   </span><span class="c1">//func 传参 4</span>
+<span class="w">   </span><span class="mh">0x0000555555555226</span><span class="w"> </span><span class="o">&lt;+</span><span class="mi">24</span><span class="o">&gt;:</span><span class="w">    </span><span class="n">mov</span><span class="w">    </span><span class="n">$0x3</span><span class="p">,</span><span class="o">%</span><span class="n">edi</span><span class="w">   </span><span class="c1">//func 传参 3</span>
+<span class="w">   </span><span class="mh">0x000055555555522b</span><span class="w"> </span><span class="o">&lt;+</span><span class="mi">29</span><span class="o">&gt;:</span><span class="w">    </span><span class="n">call</span><span class="w">   </span><span class="mh">0x555555555189</span><span class="w"> </span><span class="o">&lt;</span><span class="n">func</span><span class="o">&gt;</span>
+<span class="w">                                                   </span><span class="c1">//跳到函数 func中 </span>
+<span class="w">   </span><span class="mh">0x0000555555555230</span><span class="w"> </span><span class="o">&lt;+</span><span class="mi">34</span><span class="o">&gt;:</span><span class="w">    </span><span class="n">mov</span><span class="w">    </span><span class="n">$0x0</span><span class="p">,</span><span class="o">%</span><span class="n">eax</span><span class="w">   </span><span class="c1">//调用func后的返回地址</span>
+<span class="w">   </span><span class="mh">0x0000555555555235</span><span class="w"> </span><span class="o">&lt;+</span><span class="mi">39</span><span class="o">&gt;:</span><span class="w">    </span><span class="n">leave</span><span class="w">  </span>
+<span class="w">   </span><span class="mh">0x0000555555555236</span><span class="w"> </span><span class="o">&lt;+</span><span class="mi">40</span><span class="o">&gt;:</span><span class="w">    </span><span class="n">ret</span><span class="w">    </span>
+<span class="n">End</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">assembler</span><span class="w"> </span><span class="n">dump</span><span class="p">.</span>
+</code></pre></div>
+<p>0x7fffffffdb33</p>
+<h5 id="3">3. 栈查看</h5>
+<div class="highlight"><pre><span></span><code><span class="c1">//进入func函数后</span>
+
+<span class="p">(</span><span class="n">gdb</span><span class="p">)</span><span class="w"> </span><span class="n">bt</span><span class="w"> </span><span class="n">full</span><span class="w">  </span><span class="c1">//查看全部的 函数调用栈信息</span>
+<span class="w"> </span><span class="cp">#0  main (argc=1, argv=0x7fffffffe158) </span>
+<span class="w">           </span><span class="c1">//argc=1: 参数个数 1    对应 ./a.out</span>
+<span class="w">       </span><span class="c1">//argv=0x7fffffffe158 参数指针数组起始位置  如 ./a.out  hello  word 时</span>
+<span class="w">       </span><span class="c1">//argv[0] 对应 ./a.out字符串起始地址  argv[1] 对应 hello 字符串起始地址</span>
+
+<span class="p">(</span><span class="n">gdb</span><span class="p">)</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="n">$rbp</span><span class="w">    </span><span class="c1">//查看栈底</span>
+<span class="w">  </span><span class="mh">0x7fffffffdf90</span><span class="o">:</span><span class="w">   </span><span class="mh">0x00000000</span><span class="w"> </span><span class="c1">//main函数的栈低</span>
+<span class="p">(</span><span class="n">gdb</span><span class="p">)</span><span class="w"> </span><span class="n">x</span><span class="o">/</span><span class="mi">28</span><span class="w"> </span><span class="n">$rsp</span><span class="w"> </span><span class="c1">//查看栈顶 (进出栈时它会变化 ) </span>
+<span class="w">      </span><span class="c1">//28：查看从栈顶地址开始 连续28个int 内存单元</span>
+<span class="w">      </span><span class="c1">// eg.(gdb) x/20xw $rsp  (x:16进制，w:word)</span>
+<span class="w">      </span><span class="c1">//入栈:   argv=0x7fffffffe158           字节对齐补0       argc=1</span>
+<span class="mh">0x7fffffffdff0</span><span class="o">:</span><span class="w"> </span><span class="mh">0x00000d30</span><span class="w">  </span><span class="mh">0x00000000</span><span class="w">  </span><span class="mh">0x00000004</span><span class="w">  </span><span class="mh">0x00000003</span><span class="c1">//这一行注意</span>
+<span class="mh">0x7fffffffe000</span><span class="o">:</span><span class="w"> </span><span class="mh">0xf7fc1000</span><span class="w">  </span><span class="mh">0x00007fff</span><span class="w">  </span><span class="mh">0x01000000</span><span class="w">  </span><span class="mh">0x00000101</span>
+<span class="mh">0x7fffffffe010</span><span class="o">:</span><span class="w"> </span><span class="mh">0x00000002</span><span class="w">  </span><span class="mh">0x00000000</span><span class="w">  </span><span class="mh">0x078bfbff</span><span class="w">  </span><span class="mh">0x00000000</span>
+<span class="mh">0x7fffffffe020</span><span class="o">:</span><span class="w"> </span><span class="mh">0xffffe040</span><span class="w">  </span><span class="mh">0x00007fff</span><span class="w">  </span><span class="mh">0x55555230</span><span class="w">  </span><span class="mh">0x00005555</span><span class="c1">//这一行注意</span>
+<span class="mh">0x7fffffffe030</span><span class="o">:</span><span class="w"> </span><span class="mh">0xffffe158</span><span class="w">  </span><span class="mh">0x00007fff</span><span class="w">  </span><span class="mh">0x555550a0</span><span class="w">  </span><span class="mh">0x00000001</span><span class="c1">//这一行注意</span>
+<span class="mh">0x7fffffffe040</span><span class="o">:</span><span class="w"> </span><span class="mh">0x00000001</span><span class="w">  </span><span class="mh">0x00000000</span><span class="w">  </span><span class="mh">0xf7c29d90</span><span class="w">  </span><span class="mh">0x00007fff</span>
+<span class="mh">0x7fffffffe050</span><span class="o">:</span><span class="w"> </span><span class="mh">0x00000000</span><span class="w">  </span><span class="mh">0x00000000</span><span class="w">  </span><span class="mh">0x5555520e</span><span class="w">  </span><span class="mh">0x00005555</span>
+</code></pre></div>
+<p>进入到func函数之后,已经将func返回地址和main函数的栈帧入栈了</p>
+<p>先记住一点, 程序不断向下运行, 栈顶指针(rsp)不断递减</p>
+<p>所以, 从e030地址到e020地址. e020到e030地址的低地址部分里面存着main函数栈帧(e040).</p>
+<p>高地址部分存着返回地址(0x555555555230), 这个地址可以参考2. 中的main函数的反汇编,查看call下面的那条mov指令的地址刚好就是0x555555555230</p>
+<h5 id="4">4.  进一步调试</h5>
+<blockquote>
+<p>查看覆盖内存</p>
+<p>输入name[6] </p>
+</blockquote>
+<ul>
+<li>未覆盖(输入了abc) </li>
+</ul>
+<p><img alt="image-20231031215807564" src="pic/image-20231031215807564.png" /></p>
+<p>地址: 0x7fffffffe010存的内容:abcd</p>
+<ul>
+<li>覆盖</li>
+</ul>
+<p><img src="pic/image-20231031215809208.png" alt="image-20231031215809208" style="zoom:80%;" /></p>
+<p>直接无法返回</p>
+<h5 id="5">5. 大脑中建立内存图</h5>
+<p><img alt="img" src="pic/image-20231031215807564.jpeg" /></p>
+<blockquote>
+<p><strong>上图的返回地址和前栈栈底反过来了</strong></p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><span class="o">-------</span><span class="mi">-4</span><span class="n">G</span><span class="o">--------</span><span class="mh">-0xFFFFFFFF</span><span class="w">  </span><span class="n">高地址</span>
+<span class="o">|</span><span class="w">      </span><span class="o">-----</span><span class="w">      </span><span class="o">|</span><span class="w"> </span><span class="mh">0xffffffffff601000</span><span class="w">  </span>
+<span class="o">|</span><span class="w">       </span><span class="n">内核</span><span class="w">      </span><span class="o">|</span><span class="w">   </span>
+<span class="o">|</span><span class="w">      </span><span class="o">-----</span><span class="w">      </span><span class="o">|</span><span class="w"> </span><span class="mh">0xffffffffff600000</span><span class="w">  </span><span class="c1">//内核系统调用 起始地址</span>
+<span class="o">|</span><span class="w">                 </span><span class="o">|</span><span class="w">   </span>
+<span class="o">========</span><span class="mi">3</span><span class="n">G</span><span class="o">=========</span><span class="mh">0xC0000000</span>
+<span class="o">|</span><span class="w">                 </span><span class="o">|</span>
+<span class="o">|-----------------|</span><span class="w"> </span><span class="mh">0x7ffffffde050</span><span class="w">  </span><span class="c1">//系统栈的起始地址: 栈是向下生长</span>
+<span class="o">|</span><span class="w">    </span><span class="n">栈</span><span class="p">(</span><span class="n">stack</span><span class="p">)</span><span class="w">    </span><span class="o">|</span><span class="w">    </span>
+<span class="o">|</span><span class="w">    </span><span class="o">--------</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="mh">0x7fffffffe040</span><span class="w">  </span><span class="c1">//main函数的栈底</span>
+<span class="o">|</span><span class="w">   </span><span class="mh">0x00000001</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="c1">//argc=1   调用main函数时入栈 </span>
+<span class="o">|</span><span class="w">   </span><span class="mh">0x00000000</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="c1">//字节对齐  </span>
+<span class="o">|</span><span class="w">   </span><span class="mh">0x00007fff</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="c1">//argv=0x7fffffffe158 指针数组首地址(64位机 8字节 小端)</span>
+<span class="o">|</span><span class="w">   </span><span class="mh">0xffffe158</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="mh">0x7fffffffe030</span>
+<span class="o">|</span><span class="w">    </span><span class="o">-------</span><span class="w">      </span><span class="o">|</span><span class="w"> </span><span class="c1">//当main函数栈进完后，会rbp存入下一地址中，把下一地址存入rbp中，作为新栈的栈底        </span>
+<span class="o">|</span><span class="w">   </span><span class="mh">0x55555230</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="c1">//返回地址： 调用func后，返回到main的地址</span>
+<span class="o">|</span><span class="w">   </span><span class="mh">0x00005555</span><span class="w">    </span><span class="o">|</span><span class="w">  </span>
+<span class="o">|</span><span class="w">   </span><span class="mh">0xffffe040</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="c1">//func函数的栈底：存储的上一栈的栈底(main函数的栈底 8字节)  </span>
+<span class="o">|</span><span class="w">   </span><span class="mh">0x00007fff</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="mh">0x7fffffffe020</span>
+<span class="o">|</span><span class="w">   </span><span class="mh">0x10f911f6</span><span class="w">    </span><span class="o">|</span>
+<span class="o">|</span><span class="w">   </span><span class="mh">0x79b1cf00</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="c1">//sum 局部变量(未初始化)入栈  -&gt; 从下到上，从右至左进栈</span>
+<span class="o">|</span><span class="w">   </span><span class="mh">0x00006463</span><span class="w">    </span><span class="o">|</span>
+<span class="o">|</span><span class="w">   </span><span class="mh">0x62610002</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="mh">0x7fffffffe010</span><span class="w"> </span><span class="c1">//name[6]</span>
+<span class="o">|</span><span class="w">   </span><span class="mh">0x00007fff</span><span class="w">    </span><span class="o">|</span>
+<span class="o">|</span><span class="w">   </span><span class="mh">0xf7facfc8</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="mh">0x7fffffffe000</span><span class="w">  </span><span class="c1">//补全</span>
+<span class="o">|</span><span class="w">   </span><span class="mh">0x00000003</span><span class="w">    </span><span class="o">|</span><span class="w">  </span><span class="c1">//实参拷贝到形参 b=4 a=3; </span>
+<span class="o">|</span><span class="w">   </span><span class="mh">0x00000004</span><span class="w">    </span><span class="o">|</span><span class="w">                </span>
+<span class="o">|-----------------|</span><span class="w"> </span><span class="mh">0x7ffffffff000</span><span class="w"> </span>
+<span class="o">|</span><span class="w">                 </span><span class="o">|</span>
+<span class="o">|</span><span class="w">      </span><span class="p">.....</span><span class="w">      </span><span class="o">|</span><span class="w">          </span>
+<span class="o">|</span><span class="w">                 </span><span class="o">|</span>
+<span class="o">|-----------------|</span>
+<span class="o">|</span><span class="w">    </span><span class="n">堆</span><span class="p">(</span><span class="n">heap</span><span class="p">)</span><span class="w">     </span><span class="o">|</span><span class="w">   </span>
+<span class="o">-------------------</span>
+<span class="o">|</span><span class="w">    </span><span class="n">DATA数据段</span><span class="w">   </span><span class="o">|</span><span class="w"> </span>
+<span class="o">-------------------</span>
+<span class="o">|</span><span class="w">                 </span><span class="o">|</span>
+<span class="o">|</span><span class="w">      </span><span class="o">-----</span><span class="w">      </span><span class="o">|</span><span class="w"> </span><span class="mh">0x555555558000</span><span class="w"> </span>
+<span class="o">|</span><span class="w">   </span><span class="n">代码区</span><span class="p">(</span><span class="n">只读</span><span class="p">)</span><span class="w">   </span><span class="o">|</span><span class="w"> </span>
+<span class="o">|</span><span class="w">      </span><span class="o">-----</span><span class="w">      </span><span class="o">|</span><span class="w"> </span><span class="mh">0x555555554000</span><span class="w">  </span><span class="c1">//a.out 程序的 起始地址</span>
+<span class="o">|</span><span class="w">                 </span><span class="o">|</span><span class="w"> </span>
+<span class="o">------------------</span><span class="mh">-0x00000000</span><span class="w"> </span><span class="n">低地址</span><span class="w">   </span>
+</code></pre></div>
+<h2 id="gdb-1">GDB 实际运用1</h2>
+<div class="highlight"><pre><span></span><code><span class="cm">/*</span>
+<span class="cm">当运行  ./a.out abcd 正常</span>
+<span class="cm">当运行  ./a.out abcdefghijkomk 时 溢出崩溃</span>
+<span class="cm">尝试用gdb调试分析 栈溢出 的过程</span>
+<span class="cm">*/</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string.h&gt;</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">function2</span><span class="p">(){</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Execution flow changed</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">function1</span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">str</span><span class="p">){</span>
+<span class="w">    </span><span class="kt">char</span><span class="w"> </span><span class="n">buffer</span><span class="p">[</span><span class="mi">5</span><span class="p">];</span>
+<span class="w">    </span><span class="n">strcpy</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span><span class="n">str</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">argv</span><span class="p">[]){</span>
+<span class="w">   </span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
+<span class="w">   </span><span class="kt">int</span><span class="w"> </span><span class="n">b</span><span class="o">=</span><span class="mi">2</span><span class="p">;</span>
+<span class="w">   </span><span class="kt">int</span><span class="w"> </span><span class="n">c</span><span class="o">=</span><span class="mi">3</span><span class="p">;</span>
+<span class="w">    </span><span class="n">function1</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="s">&quot;Executed normally&quot;</span><span class="p">);</span>
+<span class="p">}</span><span class="w">   </span>
+</code></pre></div>
+<h4 id="_10">前置知识</h4>
+<p>在C语言中，<code>main</code>函数是程序的入口点，也是程序开始执行的地方。它接受两个参数：<code>argc</code>和<code>argv</code>。</p>
+<ul>
+<li><code>argc</code>（argument count）是一个整数，表示命令行参数的数量。它包括程序名称本身作为第一个参数。例如，如果在命令行中运行程序时输入了3个参数，那么<code>argc</code>的值将为4。</li>
+<li><code>argv</code>（argument vector）是一个指向字符串数组的指针，其中每个字符串都是一个命令行参数。数组中的第一个元素（<code>argv[0]</code>）是程序的名称，后续元素（<code>argv[1]</code>、<code>argv[2]</code>等）是传递给程序的实际参数。</li>
+</ul>
+<p>在Ubuntu下运行程序时，可以通过命令行输入参数。例如，假设你的程序名为<code>myprogram</code>，你可以在终端中输入以下命令来运行程序并传递参数：</p>
+<div class="highlight"><pre><span></span><code>./myprogram arg1 arg2 arg3
+</code></pre></div>
+<p>在这个例子中，<code>argc</code>的值将为4，<code>argv</code>的值将是一个指向包含<code>"./myprogram"、"arg1"、"arg2"、"arg3"</code>的字符串数组的指针。</p>
+<p>在代码中，<code>main</code>函数的参数<code>argc</code>和<code>argv</code>被用来接收命令行参数。<code>argc</code>用于检查传递给程序的参数数量是否足够，<code>argv[1]</code>用于传递给<code>function1</code>函数的参数。</p>
+<h4 id="_11">分析</h4>
+<blockquote>
+<p>当运行  ./a.out abcd 正常
+当运行  ./a.out abcdefghijkomk 时 溢出崩溃</p>
+<p>可以看出, 就是命令行参数的问题.</p>
+<p>数组只有5个空间,但是命令行参数太多了,导致溢出</p>
+</blockquote>
+<p><img alt="image-20231104115355659" src="pic/image-20231104115355659.png" /></p>
+<p><img alt="img" src="pic/image-20231031220014362.jpeg" /></p>
+<h4 id="_12">改进</h4>
+<table>
+<thead>
+<tr>
+<th>问题</th>
+<th>描述</th>
+<th>修复方法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>缓冲区溢出</td>
+<td><code>function1</code>中的<code>strcpy</code>函数可能导致缓冲区溢出</td>
+<td>使用<code>strncpy</code>函数，并指定目标数组的大小</td>
+</tr>
+<tr>
+<td>缺少命令行参数检查</td>
+<td><code>main</code>函数中没有检查命令行参数的数量</td>
+<td>添加对<code>argc</code>的检查，确保有足够的命令行参数</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="nf">function1</span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">str</span><span class="p">){</span>
+<span class="w">    </span><span class="kt">char</span><span class="w"> </span><span class="n">buffer</span><span class="p">[</span><span class="mi">5</span><span class="p">];</span>
+<span class="w">    </span><span class="n">strncpy</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span><span class="w"> </span><span class="n">str</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">buffer</span><span class="p">)</span><span class="mi">-1</span><span class="p">);</span>
+<span class="w">    </span><span class="n">buffer</span><span class="p">[</span><span class="k">sizeof</span><span class="p">(</span><span class="n">buffer</span><span class="p">)</span><span class="mi">-1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sc">&#39;\0&#39;</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="c1">//main 函数中:</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">argc</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">2</span><span class="p">){</span>
+<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Insufficient command line arguments</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+</code></pre></div>
+<h2 id="gdb-2">GDB 实际运用2</h2>
+<p><strong>挑战：用栈溢出漏洞，不知道密码情况下，如何验证通过</strong></p>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string.h&gt;</span>
+<span class="cp">#define PASS_WORD &quot;1234567&quot; </span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">verify_password</span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">password</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">authentitated</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">char</span><span class="w"> </span><span class="n">buffer</span><span class="p">[</span><span class="mi">8</span><span class="p">];</span>
+<span class="w">    </span><span class="n">authentitated</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">strcmp</span><span class="p">(</span><span class="n">password</span><span class="p">,</span><span class="n">PASS_WORD</span><span class="p">);</span>
+<span class="w">    </span><span class="n">strcpy</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span><span class="n">password</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">authentitated</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">valid_flag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">char</span><span class="w"> </span><span class="n">password</span><span class="p">[</span><span class="mi">1024</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;please input password:&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">scanf</span><span class="p">(</span><span class="s">&quot;%s&quot;</span><span class="p">,</span><span class="n">password</span><span class="p">);</span>
+<span class="w">        </span><span class="n">valid_f</span><span class="w"> </span><span class="n">lag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">verify_password</span><span class="p">(</span><span class="n">password</span><span class="p">);</span>
+<span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="n">valid_flag</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;incorrect password!</span><span class="se">\r\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">else</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Congratulation ! you have passed the verification !</span><span class="se">\r\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><strong>目前卡住</strong></p>
+<h2 id="_13">大小端</h2>
+<blockquote>
+<p><strong>大端（存储）模式</strong>: 是指数据的<strong>低位</strong>保存在内存的<strong>高地址</strong>中，而数据的高位，保存在内存的低地址中；(读取数据就是从低字节空间开始读)</p>
+<p><strong>小端（存储）模式</strong>: 是指数据的<strong>低位</strong>保存在内存的<strong>低地址</strong>中，而数据的高位,，保存在内存的高地址中。(读取数据就是从高字节空间开始读)</p>
+<p><strong>绝大多数CPU都是小端存储</strong></p>
+<p><img alt="img" src="pic/b26decdfeeb44524bcce61f5e7a13e12.png" /></p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x12345678</span><span class="p">;</span><span class="w"> </span><span class="c1">//(gdb) p/t  a</span>
+<span class="w">                    </span><span class="c1">//(gdb) x   &amp;a 查看内存值</span>
+<span class="w">    </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="p">(</span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">a</span><span class="p">;</span><span class="w">  </span><span class="c1">//通过地址 强转为char型，让指针 指向字节地址</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%x %x %x %x&quot;</span><span class="p">,</span><span class="o">*</span><span class="p">(</span><span class="n">b</span><span class="o">+</span><span class="mi">3</span><span class="p">),</span><span class="o">*</span><span class="p">(</span><span class="n">b</span><span class="o">+</span><span class="mi">2</span><span class="p">),</span><span class="o">*</span><span class="p">(</span><span class="n">b</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span><span class="o">*</span><span class="n">b</span><span class="p">);</span><span class="w">  </span>
+<span class="p">}</span>
+
+<span class="mi">12</span><span class="w"> </span><span class="mi">34</span><span class="w"> </span><span class="mi">56</span><span class="w"> </span><span class="mi">78</span>
+</code></pre></div>
+<h4 id="_14">编写函数判断</h4>
+<div class="highlight"><pre><span></span><code><span class="c1">//方式一: 指针转型</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w">   </span>
+<span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">pointer</span><span class="p">;</span><span class="w">   </span>
+<span class="n">pointer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">i</span><span class="p">;</span><span class="w"> </span><span class="c1">//int 强转char型 时 只保留最低位字节的数据。   </span>
+<span class="c1">// （低） 00 00 00 01（高）  大端序</span>
+<span class="c1">// 01 00 00 00  小端序</span>
+<span class="k">if</span><span class="p">(</span><span class="o">*</span><span class="n">pointer</span><span class="p">){</span>
+<span class="w">   </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;little&quot;</span><span class="p">);</span><span class="w"> </span><span class="c1">//小端(大部分是小端存储)</span>
+<span class="p">}</span><span class="k">else</span><span class="p">{</span>
+<span class="w">   </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;big&quot;</span><span class="p">);</span>
+<span class="p">}</span><span class="w"> </span>
+
+<span class="c1">//方式二: 联合体</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">checkCPU</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="k">union</span><span class="w"> </span><span class="nc">w</span>
+<span class="w">  </span><span class="p">{</span><span class="w"> </span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">char</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span><span class="n">c</span><span class="p">;</span>
+<span class="w">  </span><span class="n">c</span><span class="p">.</span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w">  </span><span class="c1">//联合体的所有成员都从低地址开始存放，</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="n">c</span><span class="p">.</span><span class="n">b</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span><span class="w">  </span><span class="c1">//0:大端  1:小端</span>
+<span class="p">}</span><span class="w"> </span>
+</code></pre></div>
+<h4 id="_15">实际题目:</h4>
+<blockquote>
+<p>指针偏移 + 大小端</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">   </span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x12345678</span><span class="p">;</span>
+<span class="w">   </span><span class="kt">int</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x0A0B0C0D</span><span class="p">;</span>
+
+<span class="w">   </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">c</span><span class="o">=</span><span class="p">(</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">a</span><span class="p">;</span><span class="w"> </span>
+<span class="w">   </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%x &quot;</span><span class="p">,</span><span class="o">*</span><span class="p">(</span><span class="n">c</span><span class="o">+</span><span class="mi">1</span><span class="p">));</span>
+<span class="w">   </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%x &quot;</span><span class="p">,</span><span class="o">*</span><span class="p">(</span><span class="kt">int</span><span class="o">*</span><span class="p">)(</span><span class="n">c</span><span class="o">+</span><span class="mi">1</span><span class="p">));</span>
+<span class="w">   </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span><span class="w">   </span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">   </span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x12345678</span><span class="p">;</span>
+<span class="w">   </span><span class="kt">int</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x0A0B0C0D</span><span class="p">;</span><span class="w">  </span>
+<span class="w">   </span><span class="c1">// 局部变量 会顺序分配地址(注意函数局部变量入栈的顺序:从下到上):  </span>
+<span class="w">   </span><span class="c1">//(gdb) x &amp;a</span>
+<span class="w">   </span><span class="c1">// 0x7fffffffdf78:   0x12345678  </span>
+<span class="w">   </span><span class="c1">//(gdb) x &amp;b</span>
+<span class="w">   </span><span class="c1">// 0x7fffffffdf7c:   0x0a0b0c0d</span>
+<span class="w">   </span><span class="c1">//因是小端 故内存为</span>
+<span class="w">   </span><span class="c1">//内存： 高 0x0A0B0C0D 0x12345678  低(下图)                </span>
+<span class="w">   </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">c</span><span class="o">=</span><span class="p">(</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">a</span><span class="p">;</span><span class="w"> </span><span class="c1">//小端 a 地址指向低字节 78</span>
+<span class="w">   </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%x &quot;</span><span class="p">,</span><span class="o">*</span><span class="p">(</span><span class="n">c</span><span class="o">+</span><span class="mi">1</span><span class="p">));</span><span class="w"> </span><span class="c1">// 0x56</span>
+<span class="w">   </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%x &quot;</span><span class="p">,</span><span class="o">*</span><span class="p">(</span><span class="kt">int</span><span class="o">*</span><span class="p">)(</span><span class="n">c</span><span class="o">+</span><span class="mi">1</span><span class="p">));</span><span class="w"> </span><span class="c1">//0d123456</span>
+<span class="w">    </span><span class="c1">//先进行加1后再进行强转:</span>
+<span class="w">    </span><span class="c1">//78 下一个 56 之后转为int型,取四个字节的内容</span>
+<span class="w">    </span><span class="c1">//再根据地址的顺序,向上取四个字节的内容 56 34 12 0D</span>
+<span class="w">    </span><span class="c1">//最后读出来: 0d123456</span>
+<span class="w">   </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span><span class="w">   </span>
+</code></pre></div>
+<p><img alt="image-20231101155126405" src="pic/image-20231101155126405.png" /></p>
+<h2 id="_16">指针偏移</h2>
+<h4 id="1_1">例子1</h4>
+<blockquote>
+<p>在C语言中，<strong>指针运算是以指针所指向的数据类型的大小为单位进行的</strong>。</p>
+<p>例如，对于一个<code>int*</code>类型的指针，指针运算将以<code>sizeof(int)</code>的大小为单位进行。对于一个<code>char*</code>类型的指针，指针运算将以<code>sizeof(char)</code>（即1字节）的大小为单位进行。</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><span class="c1">//例:指针偏移 + 类型转换</span>
+<span class="c1">//问：下题输出信息是？</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="o">=</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">};</span><span class="w"> </span>
+<span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">ptr</span><span class="o">=</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="p">)(</span><span class="o">&amp;</span><span class="n">a</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span><span class="w"> </span>
+<span class="w">    </span><span class="c1">//&amp;a:取数组的地址。    </span>
+<span class="w">    </span><span class="c1">//&amp;a+1:下一个对象的地址(对象是 数组类型，长度单位 是 4*5,偏移1个数组的大小),</span>
+<span class="w">    </span><span class="c1">//指针的偏移: 是以它指向的对象的数据类型的长度为偏移的单位</span>
+<span class="w">    </span><span class="c1">//          指针的类型就像人的身份，你是以个人，还是老板的身份</span>
+<span class="w">    </span><span class="c1">//          不同的身份，你的贷款额度不一样</span>
+<span class="w">    </span><span class="c1">//(int *): 把指向数组类型的地址，强转为指向int型的地址 </span>
+<span class="w">    </span><span class="c1">//是先进行了加1,指向下一个对象,之后再转换为int型的地址,让加减可以访问数组的每一个元素,不然就是访问下一个对象了.</span>
+<span class="w">    </span><span class="c1">//int 型是4 ，double型是8  数组型是数组长度。                         </span>
+<span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d,%d&quot;</span><span class="p">,</span><span class="o">*</span><span class="p">(</span><span class="n">a</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span><span class="o">*</span><span class="p">(</span><span class="n">ptr</span><span class="mi">-1</span><span class="p">));</span><span class="w"> </span>
+<span class="w">    </span><span class="c1">//a: 数组名，是数组首个元素的地址，指向的数据类型是元素的类型 int</span>
+<span class="w">    </span><span class="c1">//a+1:  下一元素的地址，即a[1]  (对象是 int类型，长度单位是 4)    </span>
+<span class="w">    </span><span class="c1">//*(a+1): a地址偏移1个单位(int 是4)，再取里面内容(int型)      是2</span>
+<span class="w">    </span><span class="c1">//ptr: 是指向int型的指针</span>
+<span class="w">    </span><span class="c1">//ptr-1: 地址减1个单位(int型是4)</span>
+<span class="w">    </span><span class="c1">//*(ptr-1): 取里面内容(int型)                              是5</span>
+</code></pre></div>
+<p>**注意分清 (a+1) 和 (&amp;a+1) **</p>
+<h4 id="2_1">例子2</h4>
+<blockquote>
+<p>指针偏移 + 类型转换 +大小端</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><span class="c1">//问：下面程序，变量a的内存地址为：0x0034fc50  问printf输出值是多少</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w">    </span>
+<span class="p">{</span><span class="w">    </span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="p">};</span><span class="w">  </span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">p1</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="o">*</span><span class="p">)(</span><span class="o">&amp;</span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span><span class="w">    </span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">p2</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="p">)((</span><span class="kt">int</span><span class="p">)</span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span><span class="w">    </span>
+
+<span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;0x%x, 0x%x</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">p1</span><span class="p">[</span><span class="mi">-1</span><span class="p">],</span><span class="w"> </span><span class="o">*</span><span class="n">p2</span><span class="p">);</span><span class="w">  </span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w">    </span>
+<span class="p">}</span><span class="w">   </span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1">//解答:</span>
+<span class="n">首先分析p1</span>
+<span class="o">&amp;</span><span class="n">a为数组指针</span><span class="err">，</span><span class="n">类型是</span><span class="s">&quot;int (*)[5]&quot;</span><span class="err">，</span><span class="n">数组指针是指向数组首元素的地址的指针</span>
+<span class="o">&amp;</span><span class="n">a的内存地址为</span><span class="err">：</span><span class="mh">0x0034fc50</span>
+<span class="o">&amp;</span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="n">指针加一</span><span class="err">，</span><span class="n">向后移动一个元素</span><span class="err">，</span><span class="n">这里的元素类型是</span><span class="s">&quot;int (*)[5]&quot;</span><span class="err">，</span><span class="n">其空间大小为20字节</span><span class="err">，</span><span class="n">因此</span><span class="c1">//指向了下一个对象了</span>
+<span class="o">&amp;</span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="n">的内存地址为</span><span class="err">：</span><span class="mh">0x0034fc64</span><span class="err">（</span><span class="mh">0x0034fc50</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mh">0x14</span><span class="err">）</span>
+<span class="n">p1的内存地址为</span><span class="err">：</span><span class="mh">0x0034fc64</span>
+<span class="n">p1</span><span class="p">[</span><span class="mi">-1</span><span class="p">]</span><span class="n">数组下标为负数</span><span class="err">，</span><span class="n">向前移动一个元素</span><span class="err">（</span><span class="n">注</span><span class="err">：</span><span class="n">数组越界在编译时与运行时都不会报错</span><span class="err">，</span><span class="n">除非操作非法内存</span><span class="err">）</span>
+<span class="n">p1</span><span class="p">[</span><span class="mi">-1</span><span class="p">]</span><span class="n">元素所在的地址为</span><span class="err">：</span><span class="mh">0x0034fc60</span>
+<span class="n">因此</span><span class="err">，</span><span class="n">可知p1</span><span class="p">[</span><span class="mi">-1</span><span class="p">]</span><span class="n">的地址为a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">4</span><span class="n">的地址</span>
+<span class="n">p1</span><span class="p">[</span><span class="mi">-1</span><span class="p">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="o">*</span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">5</span>
+
+
+<span class="n">继续分析p2</span>
+<span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">a的值为0x0034fc50</span><span class="c1">//注意,转换为int类型后,这个地址就变成一个数了,所以加1可以直接加</span>
+<span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="n">等于0x0034fc51</span>
+<span class="n">分析内存结构</span><span class="err">，</span><span class="n">测试环境字节序为little</span><span class="w"> </span><span class="n">endian</span>
+<span class="mo">01</span><span class="w"> </span><span class="mo">00</span><span class="w"> </span><span class="mo">00</span><span class="w"> </span><span class="mo">00</span><span class="w"> </span><span class="mo">02</span><span class="w"> </span><span class="mo">00</span><span class="w"> </span><span class="mo">00</span><span class="w"> </span><span class="mo">00</span><span class="w"> </span><span class="mo">03</span><span class="w"> </span><span class="mo">00</span><span class="w"> </span><span class="mf">0.</span><span class="p">..</span>
+<span class="o">*</span><span class="n">p2等于0x2000000</span>
+<span class="c1">//这里还有一点要考虑,在64位机和32机上的结果不一样(下图)</span>
+<span class="c1">//32机能正常运行,因为指针变量占了4个字节 为:0x(7f)ffffe021</span>
+<span class="c1">//但是64位机:0x7ffffffe021 进行了强制类型转换后 p2变成4字节的了,</span>
+<span class="c1">//这个之后又用(int*)把它转回8个字节的指针变量类型, 自动补全为:0xffffffffe021 这段内存是非法的</span>
+<span class="c1">//由前面的知识可知,这部分,大概处于内核区 </span>
+</code></pre></div>
+<p><img alt="image-20231101163919824" src="pic/image-20231101163919824.png" /></p>
+<h2 id="_17">越界</h2>
+<div class="highlight"><pre><span></span><code><span class="kt">char</span><span class="w"> </span><span class="n">s</span><span class="o">=</span><span class="sc">&#39;a&#39;</span><span class="p">;</span>
+<span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">pt</span><span class="p">;</span>
+<span class="n">pt</span><span class="o">=</span><span class="p">(</span><span class="kt">int</span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">s</span><span class="p">;</span>
+<span class="o">*</span><span class="n">pt</span><span class="o">=</span><span class="mh">0x1234</span><span class="p">;</span><span class="w">    </span><span class="c1">//访问未知区域(pt指向空间未完全分配，只有1个字节是s的，其它的未知)</span>
+<span class="w">               </span><span class="c1">//可gdb调试看看: (gdb) x &amp;s   (gdb) x pt </span>
+<span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="o">*</span><span class="n">pt</span><span class="p">);</span><span class="w"> </span><span class="c1">//段错误：访问未知区域</span>
+</code></pre></div>
+<h4 id="0">字符串 ’\0’ 数组越界</h4>
+<div class="highlight"><pre><span></span><code><span class="kt">char</span><span class="w"> </span><span class="n">astr</span><span class="p">[</span><span class="mi">5</span><span class="p">];</span>
+<span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">pstr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;12345&quot;</span><span class="p">;</span><span class="w"> </span><span class="c1">//包括末尾的’\0’, </span>
+<span class="n">strcpy</span><span class="p">(</span><span class="w"> </span><span class="n">astr</span><span class="p">,</span><span class="w"> </span><span class="n">pstr</span><span class="w"> </span><span class="p">);</span><span class="w"> </span><span class="c1">//数组越界(pstr 需6个字节空间)  </span>
+</code></pre></div>
+<h4 id="0-strcpy">无结尾’\0’ 的strcpy</h4>
+<div class="highlight"><pre><span></span><code><span class="kt">char</span><span class="w"> </span><span class="n">string</span><span class="p">[</span><span class="mi">10</span><span class="p">],</span><span class="w"> </span><span class="n">str1</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+<span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">&lt;</span><span class="mi">10</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">){</span><span class="w"> </span>
+<span class="w">    </span><span class="n">str1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sc">&#39;a&#39;</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="n">strcpy</span><span class="p">(</span><span class="n">string</span><span class="p">,</span><span class="w"> </span><span class="n">str1</span><span class="w"> </span><span class="p">);</span><span class="w"> </span>
+<span class="c1">//解答:</span>
+<span class="c1">//  1. 无结尾字符’\0’， strcpy拷贝不会结束  给3分</span>
+<span class="c1">//  2. 从str1内存起复制到string内存起所复制的字节数具有不确定性 给7分</span>
+<span class="c1">//  3. 指出库函数strcpy工作方式的  给10 分</span>
+<span class="cm">/*</span>
+<span class="cm">1. 在循环中，数组str1被填充了字符&#39;a&#39;。然而，由于没有在数组末尾添加结尾字符&#39;\0&#39;，所以strcpy函数无法确定复制的结束位置。这可能导致复制的结果不可预测，因为strcpy函数会一直复制直到遇到&#39;\0&#39;为止。这个问题给予3分。</span>
+
+<span class="cm">2. 由于没有明确指定复制的长度，复制的字节数具有不确定性。这是因为strcpy函数会一直复制直到遇到源字符串的结尾字符&#39;\0&#39;为止。由于源字符串str1中没有结尾字符，复制的长度可能超过目标字符串string的长度限制，导致内存越界。这个问题给予7分。</span>
+
+<span class="cm">3. strcpy函数是一个库函数，用于将一个字符串复制到另一个字符串。它的工作方式是从源字符串的起始位置开始，逐个复制字符直到遇到源字符串的结尾字符&#39;\0&#39;。这个问题给予10分。</span>
+<span class="cm">*/</span>
+</code></pre></div>
+<h4 id="strlen0">strlen未统计’\0’</h4>
+<div class="highlight"><pre><span></span><code><span class="kt">char</span><span class="w"> </span><span class="n">a</span><span class="p">[</span><span class="mi">5</span><span class="p">];</span>
+<span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;12345&quot;</span><span class="p">;</span>
+<span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">strlen</span><span class="p">(</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="p">){</span><span class="w"> </span><span class="c1">//去掉=号，  因strlen的结果未统计’\0’</span>
+<span class="w">  </span><span class="n">strcpy</span><span class="p">(</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>特点</th>
+<th>sizeof</th>
+<th>strlen</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>返回类型</td>
+<td>size_t</td>
+<td>size_t</td>
+</tr>
+<tr>
+<td>参数类型</td>
+<td>任何类型</td>
+<td>字符串指针</td>
+</tr>
+<tr>
+<td>返回值</td>
+<td>对象或类型的大小（以字节为单位）</td>
+<td>字符串的长度（不包括结尾的'\0'）</td>
+</tr>
+<tr>
+<td>计算方式</td>
+<td>在编译时计算对象或类型的大小</td>
+<td>在运行时计算字符串的长度</td>
+</tr>
+<tr>
+<td>适用范围</td>
+<td>任何类型的对象或类型</td>
+<td>仅适用于以'\0'结尾的字符串</td>
+</tr>
+<tr>
+<td>注意事项</td>
+<td>不会计算指针所指向的对象或类型的动态分配内存的大小</td>
+<td>不会计算'\0'字符的长度，只返回第一个出现的'\0'之前的字符数</td>
+</tr>
+</tbody>
+</table>
+<p>总之，<code>sizeof</code>和<code>strlen</code>都是C语言中常用的运算符和函数，用于计算对象或字符串的大小或长度。它们的主要区别在于计算方式和适用范围，需要根据具体的使用场景选择合适的运算符或函数。</p>
+<h4 id="_18">越界拷贝</h4>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">   </span><span class="kt">char</span><span class="w"> </span><span class="n">a</span><span class="p">;</span>
+<span class="w">   </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">str</span><span class="o">=&amp;</span><span class="n">a</span><span class="p">;</span>
+<span class="w">   </span><span class="n">strcpy</span><span class="p">(</span><span class="n">str</span><span class="p">,</span><span class="s">&quot;hello&quot;</span><span class="p">);</span>
+<span class="w">   </span><span class="n">printf</span><span class="p">(</span><span class="n">str</span><span class="p">);</span>
+<span class="w">   </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span><span class="w">   </span>
+<span class="c1">//解答:</span>
+<span class="c1">//  str未分配空间, 越界拷贝，崩溃。</span>
+<span class="c1">//  应改为 char *str = malloc(6);</span>
+</code></pre></div>
+<h2 id="_19">字节对齐</h2>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+<span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">stu</span>
+<span class="p">{</span>
+<span class="w">   </span><span class="kt">char</span><span class="w"> </span><span class="n">sex</span><span class="p">;</span>
+<span class="w">   </span><span class="kt">int</span><span class="w"> </span><span class="n">age</span><span class="p">;</span>
+<span class="p">}</span><span class="n">stu</span><span class="p">;</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(){</span>
+<span class="w">  </span><span class="n">stu</span><span class="w"> </span><span class="n">s</span><span class="o">=</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">};</span>
+<span class="w">  </span><span class="c1">//问题：如不对齐，长度为5, 取age数据，需要读两次的数据来拼接。</span>
+<span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="n">s</span><span class="p">.</span><span class="n">age</span><span class="p">);</span>
+<span class="w">  </span><span class="c1">//字节对齐：补空成，类型最大的元素 的整数倍 -&gt; 空间换时间(避免读两次来拼接数据)</span>
+<span class="w">  </span><span class="c1">//          sex 补齐3个char 与int想等对齐后，只需读一次 </span>
+<span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="k">sizeof</span><span class="p">(</span><span class="n">stu</span><span class="p">));</span><span class="w">  </span><span class="c1">//8 </span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>结构体对齐的关键知识点：</p>
+<ol>
+<li>
+<p>对齐原则：结构体的对齐是<strong>按照成员中占用空间最大的数据类型进行对齐</strong>的。通常情况下，对齐的基本单位是字节，即<strong>结构体的起始地址必须是成员中最大数据类型的倍数</strong>。</p>
+</li>
+<li>
+<p><strong>成员对齐</strong>：<strong>结构体的成员变量按照定义的顺序依次排列在内存中。</strong>每个成员变量的对齐要求是其数据类型的大小。如果一个成员变量的大小不能被当前位置的对齐单位整除，则需要在其后插入适当数量的填充字节，以满足对齐要求。</p>
+</li>
+<li>
+<p>结构体对齐：结构体的总大小是所有成员变量大小之和，加上填充字节的大小。填充字节的大小取决于前面的成员变量的对齐要求和当前位置的对齐单位。</p>
+</li>
+<li>
+<h1 id="pragma-pack-pragma-pack">pragma pack 指令：有些编译器提供了<code>#pragma pack</code>指令，可以通过指定对齐单位来修改结构体的对齐方式。这可以用来优化内存占用或与其他系统进行数据交互。</h1>
+</li>
+<li>
+<p>结构体对齐的影响：结构体对齐可以提高内存访问的效率，减少内存碎片和浪费。但是，过度的对齐可能会导致内存浪费，因为填充字节会占用额外的空间。</p>
+</li>
+<li>
+<p>结构体对齐的可移植性：结构体对齐是与编译器和平台相关的。不同的编译器和平台可能有不同的对齐规则和默认对齐方式。为了确保代码的可移植性，应该遵循标准的对齐规则，并避免依赖于特定的对齐方式。</p>
+</li>
+</ol>
+<p>总之，结构体对齐是为了提高内存访问效率和优化内存占用而进行的一种内存布局方式。了解结构体对齐的知识点可以帮助我们更好地理解和控制结构体在内存中的存储方式。</p>
+<h4 id="_20">逐段对齐</h4>
+<div class="highlight"><pre><span></span><code><span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">stu</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">char</span><span class="w"> </span><span class="n">sex</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">short</span><span class="w"> </span><span class="n">num</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">age</span><span class="p">;</span>
+<span class="p">}</span><span class="n">stu</span><span class="p">;</span><span class="w">   </span><span class="c1">// 1 2补1 + 4 =8</span>
+
+<span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">stu</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">char</span><span class="w"> </span><span class="n">sex</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">age</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">short</span><span class="w"> </span><span class="n">num</span><span class="p">;</span>
+<span class="p">}</span><span class="n">stu</span><span class="p">;</span><span class="w">   </span><span class="c1">//1补3 + 4 + 2补2 =12     </span>
+</code></pre></div>
+<h4 id="_21">带位数指定的 逐段对齐</h4>
+<div class="highlight"><pre><span></span><code><span class="k">struct</span><span class="w"> </span><span class="nc">s</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="o">:</span><span class="w"> </span><span class="mi">8</span><span class="p">;</span><span class="w"> </span><span class="c1">//占int型里的8位</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">j</span><span class="o">:</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span><span class="w"> </span><span class="c1">//占int型里的4位</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">b</span><span class="p">;</span><span class="w"> </span><span class="c1">//8</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="o">:</span><span class="mi">3</span><span class="p">;</span>
+<span class="p">};</span><span class="w"> </span><span class="c1">//4补4 +  8 + 4补4  = 24 逐段对齐 </span>
+<span class="n">printf</span><span class="p">(</span><span class="s">&quot;sizeof(s1)= %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">s2</span><span class="p">));</span>
+</code></pre></div>
+<h4 id="_22">带联合体 的对齐</h4>
+<div class="highlight"><pre><span></span><code><span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">stu</span>
+<span class="p">{</span>
+<span class="w">   </span><span class="kt">int</span><span class="w"> </span><span class="n">num</span><span class="p">;</span><span class="w">       </span><span class="c1">//4</span>
+<span class="w">   </span><span class="kt">char</span><span class="w"> </span><span class="n">name</span><span class="p">[</span><span class="mi">30</span><span class="p">];</span><span class="w"> </span><span class="c1">//30  </span>
+<span class="w">   </span><span class="kt">char</span><span class="w"> </span><span class="n">job</span><span class="p">;</span><span class="w">             </span><span class="c1">//1   </span>
+<span class="w">   </span><span class="kt">double</span><span class="w"> </span><span class="n">sex</span><span class="p">;</span><span class="w">       </span><span class="c1">//8</span>
+<span class="w">   </span><span class="k">union</span><span class="w">    </span><span class="c1">//只分配最大元素的空间（8）</span>
+<span class="w">   </span><span class="p">{</span>
+<span class="w">     </span><span class="kt">int</span><span class="w"> </span><span class="n">grade</span><span class="p">;</span><span class="w"> </span><span class="c1">//4</span>
+<span class="w">     </span><span class="kt">double</span><span class="w"> </span><span class="n">d</span><span class="p">;</span><span class="w">      </span><span class="c1">//8   类型最大值</span>
+<span class="w">   </span><span class="p">}</span><span class="n">gorp</span><span class="p">;</span>
+<span class="p">}</span><span class="n">stu</span><span class="p">;</span><span class="w">  </span><span class="c1">//类型最大值8 ，总长51，补成8的倍数 为56</span>
+</code></pre></div>
+<h4 id="_23">实例</h4>
+<div class="highlight"><pre><span></span><code><span class="k">typedef</span><span class="w"> </span><span class="k">union</span>
+<span class="p">{</span>
+<span class="w">   </span><span class="kt">long</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+<span class="w">   </span><span class="kt">int</span><span class="w"> </span><span class="n">k</span><span class="p">[</span><span class="mi">5</span><span class="p">];</span>
+<span class="w">   </span><span class="kt">char</span><span class="w"> </span><span class="n">c</span><span class="p">;</span>
+<span class="p">}</span><span class="w"> </span><span class="n">DATE</span><span class="p">;</span><span class="w"> 　</span>
+
+<span class="k">struct</span><span class="w"> </span><span class="nc">data</span>
+<span class="p">{</span>
+<span class="w">   </span><span class="kt">int</span><span class="w"> </span><span class="n">cat</span><span class="p">;</span>
+<span class="w">   </span><span class="n">DATE</span><span class="w"> </span><span class="n">cow</span><span class="p">;</span>
+<span class="w">   </span><span class="kt">double</span><span class="w"> </span><span class="n">dog</span><span class="p">;</span>
+<span class="p">}</span><span class="w"> </span><span class="n">too</span><span class="p">;</span>
+<span class="w">　 </span>
+<span class="n">DATE</span><span class="w"> </span><span class="n">max</span><span class="p">;</span><span class="w"> </span>
+
+<span class="c1">//则语句 printf(&quot;%d&quot;,sizeof(struct data)+sizeof(max));的执行结果是___,</span>
+<span class="cm">/*</span>
+<span class="cm">20+32= 52</span>
+<span class="cm">typedef union //最大元素空间 为20</span>
+<span class="cm">{</span>
+<span class="cm">    long i;   //8</span>
+<span class="cm">    int k[5]; //4*5=20</span>
+<span class="cm">    char c;   //1</span>
+<span class="cm">} DATE; 　</span>
+
+<span class="cm">struct data</span>
+<span class="cm">{</span>
+<span class="cm">    int cat;  //4</span>
+<span class="cm">    DATE cow; //20</span>
+<span class="cm">    double dog; //8</span>
+<span class="cm">} too;   // 4 +20 +8 = 32 刚好是8的倍数</span>
+<span class="cm">*/</span>
+</code></pre></div>
+<blockquote>
+<p>带函数指针的结构体大小计算 </p>
+<p>看函数指针前面的返回参数类型就知道这是什么类型的函数指针</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">description</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">init</span><span class="p">)(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">self</span><span class="p">);</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">describe</span><span class="p">)(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">self</span><span class="p">);</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">destroy</span><span class="p">)(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">self</span><span class="p">);</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="p">(</span><span class="o">*</span><span class="n">move</span><span class="p">)(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="n">Direction</span><span class="w"> </span><span class="n">direction</span><span class="p">);</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">attack</span><span class="p">)(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">damage</span><span class="p">);</span>
+<span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="n">Object</span><span class="p">;</span>
+
+<span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">Object_init</span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">self</span><span class="p">);</span>
+<span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">Object_destroy</span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">self</span><span class="p">);</span>
+<span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">Object_describe</span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">self</span><span class="p">);</span>
+<span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="nf">Object_move</span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="n">Direction</span><span class="w"> </span><span class="n">direction</span><span class="p">);</span>
+<span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">Object_attack</span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">damage</span><span class="p">);</span>
+<span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="nf">Object_new</span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">size</span><span class="p">,</span><span class="w"> </span><span class="n">Object</span><span class="w"> </span><span class="n">proto</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">description</span><span class="p">);</span>
+
+<span class="w"> </span><span class="cp">#define NEW(T, N) Object_new(sizeof(T), T##Proto, N)</span>
+<span class="w"> </span><span class="cp">#define _(N) proto.N</span>
+
+<span class="w"> </span><span class="cp">#endif</span>
+</code></pre></div>
+<h2 id="_24">常用的关键字</h2>
+<h3 id="const">const</h3>
+<div class="highlight"><pre><span></span><code><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">;</span><span class="w"> </span>
+<span class="kt">int</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">a</span><span class="p">;</span><span class="w">    </span><span class="c1">//都一样，声明a是一个常整型数(a不可更改)</span>
+<span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">a</span><span class="p">;</span><span class="w">   </span><span class="c1">//a是一个指向常整型数的指针(指向的整型数(指向的内容)不可改，但指针(地址)可以)</span>
+<span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">a</span><span class="p">;</span><span class="w">  </span><span class="c1">//a是一个指向整型数的常指针(也就是说，指向的整型数可改，但指针(地址)不可改)</span>
+<span class="kt">int</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w">  </span><span class="c1">//a是一个指向常整型数的常指针(都不可改)</span>
+
+<span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="o">*</span><span class="n">argv</span><span class="p">;</span><span class="w"> </span><span class="c1">// Declaration of a pointer to constant character data</span>
+<span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">str</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Hello&quot;</span><span class="p">;</span>
+<span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="o">*</span><span class="n">ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">str</span><span class="p">;</span><span class="w"> </span><span class="c1">// Pointer to constant character data</span>
+<span class="kt">char</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="o">*</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;John&quot;</span><span class="p">;</span><span class="w"> </span><span class="c1">// Another example of a pointer to constant character data</span>
+
+<span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="o">*</span><span class="n">argv</span><span class="p">;</span><span class="w"> </span><span class="c1">// Declaration of a constant pointer to a constant pointer to constant characters</span>
+<span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">str</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Hello&quot;</span><span class="p">;</span>
+<span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">str</span><span class="p">;</span><span class="w"> </span><span class="c1">// Constant pointer to constant character data</span>
+<span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="k">const</span><span class="w"> </span><span class="o">*</span><span class="n">names</span><span class="p">;</span><span class="w"> </span><span class="c1">// Pointer to constant pointer to characters</span>
+
+
+<span class="n">注</span><span class="w">  </span><span class="c1">//声明为const后，编译器会把它，放在常量区，保护起来，只读不可篡改(避免bug 增强健壮性)</span>
+<span class="w">   </span><span class="c1">//单独考，没问题，但自己编写程序时常被遗忘， 其根本时，程序的安全意识没建立。</span>
+</code></pre></div>
+<h4 id="_25">例子</h4>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="o">=</span><span class="mi">248</span><span class="p">;</span><span class="w"> </span><span class="n">b</span><span class="o">=</span><span class="mi">4</span><span class="p">;</span>
+<span class="kt">int</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">c</span><span class="o">=</span><span class="mi">21</span><span class="p">;</span>
+<span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">d</span><span class="o">=&amp;</span><span class="n">a</span><span class="p">;</span>
+<span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="k">const</span><span class="w"> </span><span class="n">e</span><span class="o">=&amp;</span><span class="n">b</span><span class="p">;</span>
+<span class="kt">int</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="o">*</span><span class="n">f</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="o">=&amp;</span><span class="n">a</span><span class="p">;</span>
+
+<span class="n">请问下列表达式哪些会被编译器禁止</span><span class="err">？</span><span class="n">为什么</span><span class="err">？</span>
+<span class="o">*</span><span class="n">c</span><span class="o">=</span><span class="mi">32</span><span class="p">;</span>
+<span class="n">d</span><span class="o">=&amp;</span><span class="n">b</span><span class="p">;</span><span class="o">*</span><span class="n">d</span><span class="o">=</span><span class="mi">43</span><span class="p">;</span>
+<span class="o">*</span><span class="n">e</span><span class="o">=</span><span class="mi">34</span><span class="p">;</span><span class="n">e</span><span class="o">=&amp;</span><span class="n">a</span><span class="p">;</span>
+<span class="n">f</span><span class="o">=</span><span class="mh">0x321f</span><span class="p">;</span>
+
+
+<span class="o">*</span><span class="n">c</span><span class="o">=</span><span class="mi">32</span><span class="w"> </span><span class="c1">//禁止: c是整型数，不是指针</span>
+<span class="o">*</span><span class="n">d</span><span class="o">=</span><span class="mi">43</span><span class="w"> </span><span class="c1">//禁止: d指向的整型数已const声明是只读</span>
+<span class="n">e</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">a</span><span class="w"> </span><span class="c1">//禁止: e已const声明是常指针</span>
+<span class="n">f</span><span class="o">=</span><span class="mh">0x321f</span><span class="p">;</span><span class="w"> </span><span class="c1">//禁止: f 已const声明是常指针</span>
+</code></pre></div>
+<h4 id="const_1">const 在不同位置的意义</h4>
+<div class="highlight"><pre><span></span><code><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">p</span><span class="p">;</span><span class="w"> </span><span class="c1">//常量指针，p的值（地址）不可以修改</span>
+<span class="kt">char</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">p</span><span class="p">;</span><span class="w"> </span><span class="c1">//指向常量的指针，指向的常量值不可以改</span>
+<span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">p</span><span class="err">；</span><span class="w"> </span><span class="c1">//和char const *p</span>
+</code></pre></div>
+<h3 id="static">static</h3>
+<h4 id="_26">基础知识</h4>
+<ul>
+<li>静态变量(用了static的局部变量)</li>
+</ul>
+<blockquote>
+<p>在代码块之外声明的变量, 且存储于静态内存中, 不属于堆栈的内存</p>
+</blockquote>
+<ul>
+<li>全局变量</li>
+</ul>
+<blockquote>
+<p>在函数外部或者代码块之外声明的变量, 且存储于静态内存中, 不属于堆栈的内存</p>
+</blockquote>
+<ul>
+<li>自动变量</li>
+</ul>
+<blockquote>
+<p>在代码块之内声明的变量, 存储于堆栈中</p>
+</blockquote>
+<ul>
+<li>寄存器变量</li>
+</ul>
+<h4 id="_27">静态局部变量</h4>
+<p><strong>让局部变量能 持久存在 (改变生存周期)</strong></p>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">count</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="c1">//定义静态局部变量 -&gt; 数据持久(改变生存周期)</span>
+<span class="w">                        </span><span class="c1">//底层: 从栈区移到全局数据区,实现持久(程序退出时才释放)</span>
+<span class="w">                        </span><span class="c1">//思想: 想数据持久存在，又避免全局变量的强耦合问题</span>
+<span class="w">    </span><span class="n">num</span><span class="o">++</span><span class="p">;</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="n">num</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">count</span><span class="p">();</span><span class="w">  </span><span class="c1">//能持久保持上一次的值</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<h4 id="_28">静态全局变量</h4>
+<p><strong>使变量 外部文件，不可访问 - - -&gt; 避免名字冲突和强耦合</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1">//---main.c</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">fn</span><span class="p">();</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">num</span><span class="p">;</span><span class="w">   </span><span class="c1">//定义 全局变量</span>
+<span class="c1">//static int num; //定义静态全局变量(限定仅本文件内 可见)</span>
+<span class="w">                  </span><span class="c1">//底层: 存储在全局数据区(程序退出时才释放，不像栈和堆)</span>
+<span class="w">                  </span><span class="c1">//思想: 避免名字冲突(仅文件内可见),和强耦合(避免全局变量的多文件强耦合)</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(){</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;init num=%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="n">num</span><span class="p">);</span><span class="w">  </span><span class="c1">//自动初始化为0</span>
+<span class="w">    </span><span class="n">num</span><span class="w"> </span><span class="o">=</span><span class="mi">10</span><span class="p">;</span><span class="w"> </span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;main num=%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="n">num</span><span class="p">);</span>
+<span class="w">    </span><span class="n">fn</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="c1">//---fn.c</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+<span class="k">extern</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">num</span><span class="p">;</span><span class="w"> </span><span class="c1">//声明 num 是外部变量 //static int num</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">fn</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">num</span><span class="o">++</span><span class="p">;</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;fn n=%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="n">num</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="c1">//---使用</span>
+<span class="n">$</span><span class="w"> </span><span class="n">gcc</span><span class="w"> </span><span class="n">main</span><span class="p">.</span><span class="n">c</span><span class="w"> </span><span class="n">fn</span><span class="p">.</span><span class="n">c</span><span class="w"> </span><span class="c1">//当用static时，链接错误(外部文件 不可访问 static 静态全局变量)</span>
+<span class="n">$</span><span class="w"> </span><span class="p">.</span><span class="o">/</span><span class="n">a</span><span class="p">.</span><span class="n">out</span><span class="w"> </span>
+</code></pre></div>
+<h4 id="_29">静态函数</h4>
+<p><strong>使函数，外部文件，不可访问 - - -&gt;隐藏 隔离(限定作用域)</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1">//---main.c</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+<span class="k">extern</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">fn</span><span class="p">();</span><span class="w"> </span><span class="c1">//声明 fn 是外部函数</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(){</span>
+<span class="w">    </span><span class="n">fn</span><span class="p">();</span>
+<span class="p">}</span>
+<span class="c1">//---fn.c</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+
+<span class="c1">//声明为静态函数 -&gt; 隐藏 隔离 保护(外部文件不能访问 改变作用域)                  </span>
+<span class="c1">//注:在C++中就比较重要，赋予对象，唯一共享的概念</span>
+<span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">fn</span><span class="p">()</span><span class="w">  </span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;fn go</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="c1">//---使用</span>
+<span class="n">$</span><span class="w"> </span><span class="n">gcc</span><span class="w"> </span><span class="n">main</span><span class="p">.</span><span class="n">c</span><span class="w"> </span><span class="n">fn</span><span class="p">.</span><span class="n">c</span><span class="w"> </span><span class="c1">//当用static时，链接错误(外部文件 不可访问 static 静态函数)</span>
+<span class="n">$</span><span class="w"> </span><span class="p">.</span><span class="o">/</span><span class="n">a</span><span class="p">.</span><span class="n">out</span><span class="w"> </span>
+</code></pre></div>
+<h4 id="_30">总结</h4>
+<ul>
+<li>用于函数定义、或者代码块之外的声明变量</li>
+</ul>
+<blockquote>
+<p>此时static用于改变其==链接属性==, 将externa改为internal, 但是它们的存储类型和作用域不受影响. 此种方式生命的函数或变量只能在声明它们的源文件中访问</p>
+</blockquote>
+<ul>
+<li>用于代码块内部的变量声明</li>
+</ul>
+<blockquote>
+<p>此时static修改变量的==存储类型==, 从自动变量改为静态变量, 但是变量的连接类型和作用域不影响. 这种方式声明的变量在程序执行前创建,在整个程序执行期间一直存在.</p>
+</blockquote>
+<h3 id="volatile">volatile</h3>
+<blockquote>
+<p>声明变量是易变的, 避免被编译器优化</p>
+</blockquote>
+<h4 id="_31">读硬件寄存器时(如某传感器的端口)</h4>
+<div class="highlight"><pre><span></span><code><span class="c1">//假设某烟雾传感器的 硬件寄存器如下(当又烟雾时报警变为1)</span>
+<span class="cp">#define GPA1DAT *((volatile unsigned int*)0xE0200084) </span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(){</span>
+<span class="w"> </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">){</span><span class="c1">//反复读取GPA1DAT值，当为1时火灾报警</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">GPA1DAT</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">  </span><span class="c1">//如不加volatile，编译器优化后，变成只读一次，</span>
+<span class="w">                    </span><span class="c1">//后面用的是副本数据。一直为0</span>
+<span class="w">    </span><span class="n">fire</span><span class="p">()</span><span class="w">      </span>
+<span class="w">    </span><span class="k">break</span><span class="p">;</span>
+<span class="w">     </span><span class="p">}</span>
+<span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h4 id="_32">多线程中对共享的变量的修改</h4>
+<div class="highlight"><pre><span></span><code><span class="k">volatile</span><span class="w">  </span><span class="kt">char</span><span class="w">  </span><span class="n">bStop</span><span class="w">  </span><span class="o">=</span><span class="w">  </span><span class="mi">0</span><span class="p">;</span><span class="w">  </span><span class="c1">//注意：需声明为volatile，线程而才能通过它停止线程1</span>
+<span class="w">                          </span><span class="c1">//如不声明，编译器优化后，变成一直读副本数据。</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">thread1</span><span class="p">(){</span><span class="w">  </span>
+<span class="w">  </span><span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">bStop</span><span class="p">)</span><span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">//...一直循环做一些事情</span>
+<span class="w">  </span><span class="p">}</span><span class="w">  </span>
+<span class="p">}</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">thread2</span><span class="p">(){</span><span class="w">  </span>
+<span class="w">   </span><span class="c1">//...处理一些事情后。</span>
+<span class="w">   </span><span class="n">bStop</span><span class="w"> </span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="c1">//终止线程2  </span>
+<span class="p">}</span><span class="w"> </span>
+</code></pre></div>
+<h4 id="_33">中断中对共享变量的修改</h4>
+<div class="highlight"><pre><span></span><code><span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="c1">//应加static修饰</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">     </span><span class="p">...</span>
+<span class="w">     </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">){</span>
+<span class="w">     </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">//虽中断中更改了i的值，但因未声明i 是易变的，</span>
+<span class="w">        </span><span class="c1">//编译器优化后，导致它读的是副本数据，导致一直循环不退出</span>
+<span class="w">       </span><span class="k">break</span><span class="p">;</span>
+<span class="w">     </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">interrupt</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">      </span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="w">  </span><span class="c1">//中断中改变 i的值，但</span>
+<span class="p">}</span>
+</code></pre></div>
+<h4 id="_34">思考</h4>
+<ol>
+<li>
+<p>思考: 一个参数既可以是const还可以是volatile吗</p>
+<blockquote>
+<p>一个实际的例子是使用 const volatile 修饰的一个<strong>指向硬件寄存器的指针</strong>。在嵌入式系统中，常常需要直接访问硬件寄存器来读取或写入硬件状态。这些寄存器通常是易变的，因为硬件状态可能会随着时间的推移而发生变化。同时，这些寄存器也是只读的，因为我们不能直接修改硬件状态。(对我们来说是只读的, 只能由设备本身自己更改)</p>
+<p>例如，假设我们有一个只读的状态寄存器，用于检测某个外部设备的状态。我们可以使用 const volatile 修饰一个指向该寄存器的指针，以确保编译器不会对该指针进行优化，并且我们不能通过该指针修改硬件状态。</p>
+<div class="highlight"><pre><span></span><code><span class="k">const</span><span class="w"> </span><span class="k">volatile</span><span class="w"> </span><span class="kt">uint32_t</span><span class="o">*</span><span class="w"> </span><span class="n">statusRegister</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">uint32_t</span><span class="o">*</span><span class="p">)</span><span class="mh">0x12345678</span><span class="p">;</span>
+</code></pre></div>
+<p>在上面的例子中，<strong>statusRegister 是一个指向地址 0x12345678 的只读状态寄存器的指针。</strong>由于使用了 const volatile 修饰，编译器将确保对该指针的任何读取操作都不会被优化，并且我们不能通过该指针修改硬件状态。这样，我们可以安全地读取硬件状态而不会受到编译器的优化干扰。</p>
+</blockquote>
+</li>
+<li>
+<p>下面函数有问题:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="nf">square</span><span class="p">(</span><span class="k">volatile</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">ptr</span><span class="p">)</span><span class="w"> </span>
+<span class="p">{</span><span class="w"> </span>
+<span class="w">   </span><span class="k">return</span><span class="w"> </span><span class="o">*</span><span class="n">ptr</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="o">*</span><span class="n">ptr</span><span class="p">;</span><span class="w">  </span>
+<span class="p">}</span><span class="w">   </span>
+<span class="c1">//改：</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">square</span><span class="p">(</span><span class="k">volatile</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">ptr</span><span class="p">)</span><span class="w"> </span>
+<span class="p">{</span><span class="w"> </span>
+<span class="w">   </span><span class="k">return</span><span class="w"> </span><span class="o">*</span><span class="n">ptr</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="o">*</span><span class="n">ptr</span><span class="p">;</span><span class="w">  </span><span class="c1">// ptr指向的数据是易变的，前面*ptr和后面的*ptr可能不一样。</span>
+<span class="w">                    </span><span class="c1">// 改为 int  a = *ptr; return a*a; 即可</span>
+<span class="p">}</span><span class="w">   </span>
+</code></pre></div>
+</li>
+</ol>
+<h3 id="define">define</h3>
+
+
+
+
+
+
+
+  
+    
+  
+  
+    
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Last update">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2025-02-12T18:33:26+01:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2025-02-12</span>
+  </span>
+
+    
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Created">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2025-02-12T18:33:27+01:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2025-02-12</span>
+  </span>
+
+    
+    
+    
+  </aside>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://github.com/JAILuo" target="_blank" rel="noopener" title="JAILuo" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../../..", "features": ["navigation.footer"], "search": "../../../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.83f73b43.min.js"></script>
+      
+        <script src="../../../../js/timeago.min.js"></script>
+      
+        <script src="../../../../js/timeago_mkdocs_material.js"></script>
+      
+        <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+      
+    
+  </body>
+</html>

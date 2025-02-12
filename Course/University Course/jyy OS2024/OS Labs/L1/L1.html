@@ -75,6 +75,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#implement" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -679,6 +684,17 @@
       
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    L1
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="L1.html" class="md-nav__link md-nav__link--active">
         
   
@@ -688,6 +704,404 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#implement" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implement
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Implement">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#spinlock" class="md-nav__link">
+    <span class="md-ellipsis">
+      spinlock
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pmm-version1" class="md-nav__link">
+    <span class="md-ellipsis">
+      pmm Version1
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      页表元数据初始化
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      空闲链表初始化
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 哨兵节点的作用
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 链表操作的安全性
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. 实际源码分析
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. 结论
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      问题1
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      进一步学习使用哨兵节点
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vs" class="md-nav__link">
+    <span class="md-ellipsis">
+      逐步解释：指针成员 vs 结构体实例成员
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="逐步解释：指针成员 vs 结构体实例成员">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 指针成员需要手动分配内存
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 结构体实例成员无需额外分配内存
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      操作系统内核中的内存分配
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="操作系统内核中的内存分配">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 内核中的内存分配责任
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 用户代码的问题分析
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      修正后的代码示例
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="修正后的代码示例">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 结构体定义修正
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 初始化链表头
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. 链表操作
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      关键总结
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      直接定义结构体实例的优势
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      应用例子代码
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="应用例子代码">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 使用指针作为链表头
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 使用结构体实例作为链表头
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      为什么操作系统内核场景下推荐直接定义结构体实例？
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      结论
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#misc" class="md-nav__link">
+    <span class="md-ellipsis">
+      misc
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="misc">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      模块化设计
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#apic" class="md-nav__link">
+    <span class="md-ellipsis">
+      APIC
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="APIC">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#basic-concept" class="md-nav__link">
+    <span class="md-ellipsis">
+      basic concept
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parse-apic" class="md-nav__link">
+    <span class="md-ellipsis">
+      parse APIC 模拟
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      多核启动流程
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="多核启动流程">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      硬件
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      软件/固件
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c" class="md-nav__link">
+    <span class="md-ellipsis">
+      C 学习
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1335,6 +1749,395 @@
   
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#implement" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implement
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Implement">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#spinlock" class="md-nav__link">
+    <span class="md-ellipsis">
+      spinlock
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pmm-version1" class="md-nav__link">
+    <span class="md-ellipsis">
+      pmm Version1
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      页表元数据初始化
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      空闲链表初始化
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 哨兵节点的作用
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 链表操作的安全性
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. 实际源码分析
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. 结论
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      问题1
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      进一步学习使用哨兵节点
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vs" class="md-nav__link">
+    <span class="md-ellipsis">
+      逐步解释：指针成员 vs 结构体实例成员
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="逐步解释：指针成员 vs 结构体实例成员">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 指针成员需要手动分配内存
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 结构体实例成员无需额外分配内存
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      操作系统内核中的内存分配
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="操作系统内核中的内存分配">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 内核中的内存分配责任
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 用户代码的问题分析
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      修正后的代码示例
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="修正后的代码示例">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 结构体定义修正
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 初始化链表头
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. 链表操作
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      关键总结
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      直接定义结构体实例的优势
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      应用例子代码
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="应用例子代码">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 使用指针作为链表头
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 使用结构体实例作为链表头
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      为什么操作系统内核场景下推荐直接定义结构体实例？
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      结论
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#misc" class="md-nav__link">
+    <span class="md-ellipsis">
+      misc
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="misc">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      模块化设计
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#apic" class="md-nav__link">
+    <span class="md-ellipsis">
+      APIC
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="APIC">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#basic-concept" class="md-nav__link">
+    <span class="md-ellipsis">
+      basic concept
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parse-apic" class="md-nav__link">
+    <span class="md-ellipsis">
+      parse APIC 模拟
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      多核启动流程
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="多核启动流程">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      硬件
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      软件/固件
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c" class="md-nav__link">
+    <span class="md-ellipsis">
+      C 学习
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1353,7 +2156,745 @@
 
   <h1>L1</h1>
 
+<h2 id="implement">Implement</h2>
+<h3 id="spinlock">spinlock</h3>
+<p>这里直接使用老师在课上讲的 xv6 实现 <a href="https://www.bilibili.com/video/BV1d2421A7uh?spm_id_from=333.788.videopod.sections&amp;vd_source=ecc99d78ae961113010161a48a475a35">互斥 (2) (内核中的自旋锁、Read-Copy-Update、互斥锁和 futex)</a></p>
+<p>Xv6中实现了自旋锁(Spinlock)用于内核临界区访问的同步和互斥。自旋锁最大的特征是当进程拿不到锁时会进入无限循环，直到拿到锁退出循环。Xv6使用100ms一次的时钟中断和Round-Robin调度算法来避免陷入自旋锁的进程一直无限循环下去。显然，自旋锁看上去效率很低，我们很容易想到更加高效的基于等待队列的方法，让等待进程陷入阻塞而不是无限循环。然而，Xv6允许同时运行多个CPU核，多核CPU上的等待队列实现相当复杂，因此使用自旋锁是相对比较简单且能正确执行的实现方案。</p>
+<p>实际使用：</p>
+<ul>
+<li>
+<p>实际系统中比较常见的做法，而不是直接用 <code>LOCK_INIT</code>：将锁绑定到对象（对象初始化的时候就初始化这把锁），因为在真实的系统中绝大数内容都是动态分配的。</p>
+<div class="highlight"><pre><span></span><code><span class="n">lock_t</span><span class="w"> </span><span class="n">lk1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LOCK_INIT</span><span class="p">();</span>
+<span class="n">lock_t</span><span class="w"> </span><span class="n">lk2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LOCK_INIT</span><span class="p">();</span>
+<span class="n">lock_t</span><span class="w"> </span><span class="n">lk3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LOCK_INIT</span><span class="p">();</span>
 
+<span class="k">struct</span><span class="w"> </span><span class="nc">some_object</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">lock_t</span><span class="w"> </span><span class="n">lock</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">data</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">object_init</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">some_object</span><span class="w"> </span><span class="o">*</span><span class="n">obj</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">obj</span><span class="o">-&gt;</span><span class="n">lock</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LOCK_INIT</span><span class="p">();</span>
+<span class="w">    </span><span class="n">obj</span><span class="o">-&gt;</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">create_object</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">some_object</span><span class="w"> </span><span class="o">*</span><span class="n">obj</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">some_object</span><span class="p">));</span>
+<span class="w">    </span><span class="n">assert</span><span class="p">(</span><span class="n">obj</span><span class="p">);</span>
+<span class="w">    </span><span class="n">object_init</span><span class="p">(</span><span class="n">obj</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">lock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">obj</span><span class="o">-&gt;</span><span class="n">lock</span><span class="p">);</span>
+<span class="w">    </span><span class="n">unlock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">obj</span><span class="o">-&gt;</span><span class="n">lock</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">free</span><span class="p">(</span><span class="n">obj</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+</li>
+</ul>
+<h3 id="pmm-version1">pmm Version1</h3>
+<p>块分配：</p>
+<ul>
+<li>请求size &lt;= 阈值（如4KB - sizeof(header_t)）。</li>
+<li>计算总需要的大小：total = sizeof(header_t) + align_size（对齐后的用户大小）。</li>
+<li>在空闲链表中寻找足够大的块。</li>
+<li>分割块，分配后，写入header_t，设置is_page为false，size为align_size。</li>
+<li>返回header之后的内存地址。</li>
+</ul>
+<p>页分配：</p>
+<ul>
+<li>请求size &gt; 阈值。</li>
+<li>计算需要的页数：pages = (size + sizeof(header_t) + PAGE_SIZE - 1) / PAGE_SIZE.</li>
+<li>从页分配器中分配连续的pages页。</li>
+<li>在页的起始地址写入header_t，设置is_page为true，size为pages。</li>
+<li>返回header之后的内存地址。</li>
+</ul>
+<p>这样，释放时：</p>
+<ul>
+<li>用户调用kfree(ptr)。</li>
+<li>ptr减去sizeof(header_t)得到header地址。</li>
+<li>读取header中的is_page和size。</li>
+<li>如果是页分配，则释放pages页。</li>
+<li>如果是块分配，则将整个块（header + size）加入块空闲链表。</li>
+</ul>
+<h3 id="_1">页表元数据初始化</h3>
+<p>还是指针的问题</p>
+<p>靠！！！</p>
+<p>原来是动态分配的！！！</p>
+<p>一直定义成静态分配的全局数组！！！我在开发os呀！</p>
+<p>又一个问题：</p>
+<blockquote>
+<p>head_pfn: 0x500  head_page: 0x307800 head_page-&gt;compound_head: 0x307800 free_lists[10].head: 0x0 ====now order: 10  start_pfn: 0xbd  end_pfn: 0x7cff(31999)  remaining_pages: 0x443  block_size: 0x400(1024)==== head_pfn: 0x100  head_page: 0x301800 head_page-&gt;compound_head: 0x301800 free_lists[10].head: 0x0 ====now order: 10  start_pfn: 0xbd  end_pfn: 0x7cff(31999)  remaining_pages: 0x43  block_size: 0x400(1024)==== head_pfn: 0xc0  head_page: 0x301200 head_page-&gt;compound_head: 0x301200 free_lists[6].head: 0x3bb860 ====now order: 6  start_pfn: 0xbd  end_pfn: 0x7cff(31999)  remaining_pages: 0x3  block_size: 0x40(64)==== head_pfn: 0xbe  head_page: 0x3011d0 head_page-&gt;compound_head: 0x3011d0 free_lists[1].head: 0x3bb820 ====now order: 1  start_pfn: 0xbd  end_pfn: 0x7cff(31999)  remaining_pages: 0x1  block_size: 0x2(2)==== head_pfn: 0xbd  head_page: 0x3011b8 head_page-&gt;compound_head: 0x3011b8 free_lists[0].head: 0x3bb800 ====now order: 0  start_pfn: 0xbd  end_pfn: 0x7cff(31999)  remaining_pages: 0x0  block_size: 0x1(1)====  </p>
+<p>奇怪，为什么低阶的空闲块链表都接上了啊，但那时高阶的还是NULL？不可能啊？我还是从高阶到低阶插入的！</p>
+</blockquote>
+<p>这么解决就可以了？？</p>
+<p>虽然虚拟机还是神秘重启，但是好歹输出的上面内容对了。</p>
+<ol>
+<li>
+<p><strong><code>struct page</code> 的 <code>buddy_list</code> 初始化问题</strong>：</p>
+<ul>
+<li>
+<p>你的 <code>struct page</code> 定义中，<code>buddy_list</code> 是一个 <code>struct list_head *</code> 类型的指针，而不是一个 <code>struct list_head</code> 类型的结构体。</p>
+</li>
+<li>
+<p>你应该将其定义为：</p>
+<p>c复制</p>
+<div class="highlight"><pre><span></span><code><span class="k">struct</span><span class="w"> </span><span class="nc">list_head</span><span class="w"> </span><span class="n">buddy_list</span><span class="p">;</span>
+</code></pre></div>
+</li>
+<li>
+<p>这样可以避免使用指针，直接初始化和使用链表。</p>
+</li>
+</ul>
+</li>
+</ol>
+<p>发现 <code>nr_free</code> 破坏：</p>
+<p><img alt="image-20250209180812835" src="pic/image-20250209180812835.png" /></p>
+<p><img alt="image-20250209181257511" src="pic/image-20250209181257511.png" /></p>
+<p>调试发现，在刚进 <code>init_free_block</code> 的时候，就出现nr_free被破坏了的情况了。</p>
+<p>发现在这个 fa0xx 刚好就是存 free_lists 的地址。基本就是自己的free_lists初始化覆盖了一些。</p>
+<h3 id="_2">空闲链表初始化</h3>
+<blockquote>
+<p>在 Linux 伙伴系统中，<code>free_area</code> 的 <code>head</code> 节点确实被设计为一个哨兵节点，其主要作用是避免空指针问题，并简化链表操作。根据搜索结果中的源码分析，以下是关于哨兵节点和链表操作的详细说明：</p>
+<h3 id="1">1. 哨兵节点的作用</h3>
+<ul>
+<li>
+<p><strong>哨兵节点不存储实际数据</strong>：在 Linux 伙伴系统中，<code>free_area</code> 的 <code>head</code> 节点是一个哨兵节点，它本身不存储任何页块数据，而是作为链表的起始点。哨兵节点的存在主要是为了简化链表操作，避免空指针的处理问题。</p>
+</li>
+<li>
+<p><strong>链表头节点的初始化</strong>：在初始化 <code>free_area</code> 时，每个 <code>free_area</code> 的 <code>head</code> 节点都会被初始化为一个空的哨兵节点。例如：</p>
+<p>c复制</p>
+<div class="highlight"><pre><span></span><code><span class="n">INIT_LIST_HEAD</span><span class="p">(</span><span class="n">free_area</span><span class="o">-&gt;</span><span class="n">free_list</span><span class="p">[</span><span class="n">migratetype</span><span class="p">]);</span>
+</code></pre></div>
+<p>这确保了链表在初始化时是一个空链表。</p>
+</li>
+</ul>
+<h3 id="2">2. 链表操作的安全性</h3>
+<ul>
+<li>
+<p><strong>链表操作的正确性</strong>：在 Linux 伙伴系统中，链表操作（如 <code>list_add</code>、<code>list_del</code>）都是基于哨兵节点进行的。哨兵节点的存在确保了链表操作的安全性，避免了空指针的处理问题。</p>
+</li>
+<li>
+<p><strong>链表头节点的使用</strong>：哨兵节点作为链表的头节点，所有链表操作都以哨兵节点为起点。例如，在分配内存时，从链表中移除一个页块：</p>
+<p>c复制</p>
+<div class="highlight"><pre><span></span><code><span class="n">page</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">get_page_from_free_area</span><span class="p">(</span><span class="n">area</span><span class="p">,</span><span class="w"> </span><span class="n">migratetype</span><span class="p">);</span>
+<span class="n">del_page_from_free_list</span><span class="p">(</span><span class="n">page</span><span class="p">,</span><span class="w"> </span><span class="n">zone</span><span class="p">,</span><span class="w"> </span><span class="n">order</span><span class="p">);</span>
+</code></pre></div>
+<p>这里的 <code>get_page_from_free_area</code> 和 <code>del_page_from_free_list</code> 都是基于哨兵节点进行操作的。</p>
+</li>
+</ul>
+<h3 id="3">3. 实际源码分析</h3>
+<ul>
+<li>
+<p><strong>哨兵节点的初始化</strong>：在 <code>free_area</code> 的初始化过程中，每个 <code>free_list</code> 都会被初始化为一个空的哨兵节点：</p>
+<p>c复制</p>
+<div class="highlight"><pre><span></span><code><span class="k">struct</span><span class="w"> </span><span class="nc">free_area</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">list_head</span><span class="w"> </span><span class="n">free_list</span><span class="p">[</span><span class="n">MIGRATE_TYPES</span><span class="p">];</span>
+<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">nr_free</span><span class="p">;</span>
+<span class="p">};</span>
+<span class="n">INIT_LIST_HEAD</span><span class="p">(</span><span class="n">free_area</span><span class="o">-&gt;</span><span class="n">free_list</span><span class="p">[</span><span class="n">migratetype</span><span class="p">]);</span>
+</code></pre></div>
+<p>这确保了链表在初始化时是一个空链表。</p>
+</li>
+<li>
+<p><strong>链表操作的示例</strong>：在内存分配过程中，从链表中移除一个页块并将其添加到另一个链表中：</p>
+<p>c复制</p>
+<div class="highlight"><pre><span></span><code><span class="n">page</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">get_page_from_free_area</span><span class="p">(</span><span class="n">area</span><span class="p">,</span><span class="w"> </span><span class="n">migratetype</span><span class="p">);</span>
+<span class="n">del_page_from_free_list</span><span class="p">(</span><span class="n">page</span><span class="p">,</span><span class="w"> </span><span class="n">zone</span><span class="p">,</span><span class="w"> </span><span class="n">order</span><span class="p">);</span>
+<span class="n">add_to_free_list</span><span class="p">(</span><span class="n">page</span><span class="p">,</span><span class="w"> </span><span class="n">zone</span><span class="p">,</span><span class="w"> </span><span class="n">order</span><span class="p">,</span><span class="w"> </span><span class="n">migratetype</span><span class="p">);</span>
+</code></pre></div>
+<p>这里的 <code>get_page_from_free_area</code>、<code>del_page_from_free_list</code> 和 <code>add_to_free_list</code> 都是基于哨兵节点进行操作的。</p>
+</li>
+</ul>
+<h3 id="4">4. 结论</h3>
+<p>在 Linux 伙伴系统中，<code>free_area</code> 的 <code>head</code> 节点确实是一个哨兵节点，其主要作用是避免空指针问题，并简化链表操作。哨兵节点本身不存储任何页块数据，而是作为链表的起始点。链表操作（如 <code>list_add</code>、<code>list_del</code>）都是基于哨兵节点进行的，确保了链表操作的安全性和正确性。</p>
+<p>如果你的代码中将 <code>free_area</code> 的 <code>head</code> 节点用作存储实际数据的节点，这与 Linux 伙伴系统的实现方式不一致。建议你将 <code>head</code> 节点初始化为一个空的哨兵节点，并确保所有链表操作都基于哨兵节点进行。</p>
+</blockquote>
+<p>无论链表是否为空，都直接将新的页块节点添加到哨兵节点之后。这样，链表的操作就变得一致了。所以，这个地方的条件判断其实可以去掉，直接使用 <code>list_add_tail</code> 或 <code>list_add</code> 将页块节点添加到哨兵节点的链表中。</p>
+<h3 id="1_1">问题1</h3>
+<p><img alt="image-20250211135032339" src="pic/image-20250211135032339.png" /></p>
+<p>block_page传进来是0，导致<code>block_pfn</code>、<code>buddy_pfn</code>、<code>buddy_page</code> 计算错误。</p>
+<h3 id="_3">进一步学习使用哨兵节点</h3>
+<div class="highlight"><pre><span></span><code>inssssssssssssssssssssssssss<span class="w"> </span>nr_free:<span class="w"> </span><span class="m">0</span>
+head:<span class="w"> </span>0x3fa030
+<span class="p">&amp;</span>head:<span class="w"> </span>0x3fa030
+head-&gt;prev:<span class="w"> </span>0x3fa030
+head-&gt;next:<span class="w"> </span>0x3fa030
+page-&gt;next<span class="w"> </span>to<span class="w"> </span>page,<span class="w"> </span>and<span class="w"> </span>order<span class="w"> </span>is<span class="w"> </span>0x0
+page-&gt;next<span class="w"> </span>to<span class="w"> </span>page,<span class="w"> </span>and<span class="w"> </span>buddy_list<span class="w"> </span>is<span class="w"> </span>0x3fa030
+current_order:<span class="w"> </span><span class="m">3</span>
+</code></pre></div>
+<blockquote>
+<p>刚开始的做法：</p>
+<p><strong>2. 结构体定义的修正</strong></p>
+<p>原代码中 <code>struct free_area</code> 的 <code>head</code> 是 <code>struct list_head*</code> 类型（指针），这需要手动分配内存给哨兵节点，容易导致错误。
+<strong>修正后的结构体应为：</strong></p>
+<div class="highlight"><pre><span></span><code>struct free_area {
+    struct list_head head;  // 直接作为哨兵节点（结构体实例，非指针）
+    unsigned long nr_free;
+};
+</code></pre></div>
+<ul>
+<li>这样，每个 <code>free_area</code> 的 <code>head</code> 自身就是一个独立的哨兵节点，无需额外分配内存。</li>
+</ul>
+</blockquote>
+<p>实际上还是对内存分配理解的并不深刻。</p>
+<p>里面定义一个指针？还要分配内存给他？为什么？这和直接用一个变量的区别在哪？</p>
+<p>继续复习理解。</p>
+<blockquote>
+<p>来自deepseek：</p>
+<h3 id="vs"><strong>逐步解释：指针成员 vs 结构体实例成员</strong></h3>
+<h4 id="1_2"><strong>1. 指针成员需要手动分配内存</strong></h4>
+<p><strong>定义示例：</strong>
+<div class="highlight"><pre><span></span><code><span class="k">struct</span><span class="w"> </span><span class="nc">free_area</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">list_head</span><span class="w"> </span><span class="o">*</span><span class="n">head</span><span class="p">;</span><span class="w">  </span><span class="c1">// 指针成员</span>
+<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">nr_free</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div>
+<strong>问题</strong>：<br />
+指针 <code>head</code> 本身只是一个地址（4/8 字节），它指向的内存区域需要<strong>手动分配</strong>。如果未分配内存直接使用，会导致访问非法内存（野指针）。</p>
+<p><strong>操作示例：</strong>
+<div class="highlight"><pre><span></span><code><span class="c1">// 错误用法：未分配内存</span>
+<span class="k">struct</span><span class="w"> </span><span class="nc">free_area</span><span class="w"> </span><span class="n">area</span><span class="p">;</span>
+<span class="n">INIT_LIST_HEAD</span><span class="p">(</span><span class="n">area</span><span class="p">.</span><span class="n">head</span><span class="p">);</span><span class="w">  </span><span class="c1">// area.head 是野指针，崩溃！</span>
+
+<span class="c1">// 正确用法：手动分配内存</span>
+<span class="k">struct</span><span class="w"> </span><span class="nc">free_area</span><span class="w"> </span><span class="n">area</span><span class="p">;</span>
+<span class="n">area</span><span class="p">.</span><span class="n">head</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">list_head</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="n">kmalloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">list_head</span><span class="p">));</span><span class="w">  </span><span class="c1">// 分配内存</span>
+<span class="n">INIT_LIST_HEAD</span><span class="p">(</span><span class="n">area</span><span class="p">.</span><span class="n">head</span><span class="p">);</span><span class="w">  </span><span class="c1">// 初始化链表头</span>
+</code></pre></div></p>
+<hr />
+<h4 id="2_1"><strong>2. 结构体实例成员无需额外分配内存</strong></h4>
+<p><strong>定义示例：</strong>
+<div class="highlight"><pre><span></span><code><span class="k">struct</span><span class="w"> </span><span class="nc">free_area</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">list_head</span><span class="w"> </span><span class="n">head</span><span class="p">;</span><span class="w">  </span><span class="c1">// 结构体实例成员</span>
+<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">nr_free</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div>
+<strong>优势</strong>：<br />
+结构体 <code>head</code> 的内存会随着 <code>free_area</code> 的分配自动分配，无需手动管理。例如：
+<div class="highlight"><pre><span></span><code><span class="k">struct</span><span class="w"> </span><span class="nc">free_area</span><span class="w"> </span><span class="n">area</span><span class="p">;</span><span class="w">  </span><span class="c1">// head 的内存已随 area 分配</span>
+<span class="n">INIT_LIST_HEAD</span><span class="p">(</span><span class="o">&amp;</span><span class="n">area</span><span class="p">.</span><span class="n">head</span><span class="p">);</span><span class="w">  </span><span class="c1">// 直接使用地址，无需额外分配</span>
+</code></pre></div></p>
+<hr />
+<h3 id="_4"><strong>操作系统内核中的内存分配</strong></h3>
+<h4 id="1_3"><strong>1. 内核中的内存分配责任</strong></h4>
+<p>在操作系统内核中，<strong>所有动态内存分配必须由开发者显式管理</strong>，包括：
+- <strong>静态分配</strong>：全局变量或栈变量（如 <code>struct free_area free_lists[MAX_ORDER]</code>）。
+- <strong>动态分配</strong>：通过内核内存分配器（如 <code>kmalloc</code>）手动申请。</p>
+<h4 id="2_2"><strong>2. 用户代码的问题分析</strong></h4>
+<p>原代码中 <code>free_lists</code> 的 <code>head</code> 定义为指针：
+<div class="highlight"><pre><span></span><code><span class="k">struct</span><span class="w"> </span><span class="nc">free_area</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">list_head</span><span class="w"> </span><span class="o">*</span><span class="n">head</span><span class="p">;</span><span class="w">  </span><span class="c1">// 指针成员</span>
+<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">nr_free</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div>
+在 <code>init_free_lists</code> 中未给 <code>head</code> 分配内存，直接调用：
+<div class="highlight"><pre><span></span><code><span class="n">INIT_LIST_HEAD</span><span class="p">(</span><span class="n">free_lists</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">head</span><span class="p">);</span><span class="w">  </span><span class="c1">// 野指针操作！</span>
+</code></pre></div>
+这会导致内核崩溃，因为 <code>head</code> 指向无效地址。</p>
+<hr />
+<h3 id="_5"><strong>修正后的代码示例</strong></h3>
+<h4 id="1_4"><strong>1. 结构体定义修正</strong></h4>
+<div class="highlight"><pre><span></span><code><span class="k">struct</span><span class="w"> </span><span class="nc">free_area</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">list_head</span><span class="w"> </span><span class="n">head</span><span class="p">;</span><span class="w">  </span><span class="c1">// 直接作为结构体实例</span>
+<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">nr_free</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div>
+<h4 id="2_3"><strong>2. 初始化链表头</strong></h4>
+<div class="highlight"><pre><span></span><code><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">init_free_lists</span><span class="p">(...)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">MAX_ORDER</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">INIT_LIST_HEAD</span><span class="p">(</span><span class="o">&amp;</span><span class="n">free_lists</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">head</span><span class="p">);</span><span class="w">  </span><span class="c1">// 直接操作结构体实例的地址</span>
+<span class="w">        </span><span class="n">free_lists</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">nr_free</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h4 id="3_1"><strong>3. 链表操作</strong></h4>
+<div class="highlight"><pre><span></span><code><span class="c1">// 添加头页到 free_lists[order] 的链表</span>
+<span class="n">list_add</span><span class="p">(</span><span class="o">&amp;</span><span class="n">head_page</span><span class="o">-&gt;</span><span class="n">buddy_list</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">free_lists</span><span class="p">[</span><span class="n">order</span><span class="p">].</span><span class="n">head</span><span class="p">);</span>
+<span class="n">free_lists</span><span class="p">[</span><span class="n">order</span><span class="p">].</span><span class="n">nr_free</span><span class="o">++</span><span class="p">;</span>
+</code></pre></div>
+<hr />
+<h3 id="_6"><strong>关键总结</strong></h3>
+<ul>
+<li><strong>指针成员</strong>：需要手动分配内存（如 <code>kmalloc</code>），否则是野指针。</li>
+<li><strong>结构体实例成员</strong>：内存随父结构体自动分配，无需额外操作。</li>
+<li><strong>内核开发准则</strong>：优先使用结构体实例成员，避免手动内存管理错误。</li>
+</ul>
+<p>通过这种方式，哨兵节点（<code>free_lists[order].head</code>）的内存会随 <code>free_lists</code> 数组的分配自动存在，无需单独处理，既安全又高效。</p>
+<p>来自kimi：<strong>为什么结构体中定义指针需要分配内存？</strong></p>
+<p>在 C 语言中，<strong>指针本身只是一个变量</strong>，它存储的是某个内存地址。如果在结构体中定义了一个指针（例如 <code>struct list_head *head</code>），这意味着该指针指向某个内存位置，但<strong>它自身并不包含实际的数据结构</strong>。</p>
+<p>为了使指针能够正确引用一个 <code>struct list_head</code> 实例，必须在运行时为其分配内存。例如：</p>
+<p>c复制</p>
+<div class="highlight"><pre><span></span><code><span class="k">struct</span><span class="w"> </span><span class="nc">free_area</span><span class="w"> </span><span class="n">my_area</span><span class="p">;</span>
+<span class="n">my_area</span><span class="p">.</span><span class="n">head</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">list_head</span><span class="p">));</span><span class="w">  </span><span class="c1">// 动态分配内存</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">my_area</span><span class="p">.</span><span class="n">head</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 处理内存分配失败的情况</span>
+<span class="p">}</span>
+<span class="n">INIT_LIST_HEAD</span><span class="p">(</span><span class="n">my_area</span><span class="p">.</span><span class="n">head</span><span class="p">);</span><span class="w"> </span><span class="c1">// 初始化链表头</span>
+</code></pre></div>
+<h3 id="_7"><strong>直接定义结构体实例的优势</strong></h3>
+<p>如果将 <code>struct list_head</code> 直接定义为结构体实例（即非指针类型），例如 <code>struct list_head head;</code>，则该结构体在内存中已经有了一个分配的区域。无需额外分配内存，初始化也更简单：</p>
+<p>c复制</p>
+<div class="highlight"><pre><span></span><code><span class="k">struct</span><span class="w"> </span><span class="nc">free_area</span><span class="w"> </span><span class="n">my_area</span><span class="p">;</span>
+<span class="n">INIT_LIST_HEAD</span><span class="p">(</span><span class="o">&amp;</span><span class="n">my_area</span><span class="p">.</span><span class="n">head</span><span class="p">);</span><span class="w">  </span><span class="c1">// 初始化链表头</span>
+</code></pre></div>
+<h3 id="_8"><strong>应用例子代码</strong></h3>
+<p>以下是一个简单的例子，演示不同定义方式的区别：</p>
+<h4 id="1_5"><strong>1. 使用指针作为链表头</strong></h4>
+<p>c复制</p>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string.h&gt;</span>
+
+<span class="c1">// 定义链表节点</span>
+<span class="k">struct</span><span class="w"> </span><span class="nc">list_head</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">list_head</span><span class="w"> </span><span class="o">*</span><span class="n">next</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="n">prev</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="c1">// 定义一个使用指针作为链表头的结构体</span>
+<span class="k">struct</span><span class="w"> </span><span class="nc">free_area_ptr</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">list_head</span><span class="w"> </span><span class="o">*</span><span class="n">head</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="c1">// 初始化链表头</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">init_list_head</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">list_head</span><span class="w"> </span><span class="o">*</span><span class="n">head</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">head</span><span class="o">-&gt;</span><span class="n">next</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">head</span><span class="p">;</span>
+<span class="w">    </span><span class="n">head</span><span class="o">-&gt;</span><span class="n">prev</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">head</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">free_area_ptr</span><span class="w"> </span><span class="n">area_ptr</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// 为链表头分配内存</span>
+<span class="w">    </span><span class="n">area_ptr</span><span class="p">.</span><span class="n">head</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">list_head</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">list_head</span><span class="p">));</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">area_ptr</span><span class="p">.</span><span class="n">head</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Memory allocation failed</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// 初始化链表头</span>
+<span class="w">    </span><span class="n">init_list_head</span><span class="p">(</span><span class="n">area_ptr</span><span class="p">.</span><span class="n">head</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// 使用链表...</span>
+<span class="w">    </span><span class="c1">// ...</span>
+
+<span class="w">    </span><span class="c1">// 释放分配的内存</span>
+<span class="w">    </span><span class="n">free</span><span class="p">(</span><span class="n">area_ptr</span><span class="p">.</span><span class="n">head</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<h4 id="2_4"><strong>2. 使用结构体实例作为链表头</strong></h4>
+<p>c复制</p>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string.h&gt;</span>
+
+<span class="c1">// 定义链表节点</span>
+<span class="k">struct</span><span class="w"> </span><span class="nc">list_head</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">list_head</span><span class="w"> </span><span class="o">*</span><span class="n">next</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="n">prev</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="c1">// 定义一个使用结构体实例作为链表头的结构体</span>
+<span class="k">struct</span><span class="w"> </span><span class="nc">free_area_instance</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">list_head</span><span class="w"> </span><span class="n">head</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="c1">// 初始化链表头</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">init_list_head</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">list_head</span><span class="w"> </span><span class="o">*</span><span class="n">head</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">head</span><span class="o">-&gt;</span><span class="n">next</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">head</span><span class="p">;</span>
+<span class="w">    </span><span class="n">head</span><span class="o">-&gt;</span><span class="n">prev</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">head</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">free_area_instance</span><span class="w"> </span><span class="n">area_instance</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// 初始化链表头</span>
+<span class="w">    </span><span class="n">init_list_head</span><span class="p">(</span><span class="o">&amp;</span><span class="n">area_instance</span><span class="p">.</span><span class="n">head</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// 使用链表...</span>
+<span class="w">    </span><span class="c1">// ...</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="_9"><strong>为什么操作系统内核场景下推荐直接定义结构体实例？</strong></h3>
+<p>在操作系统内核中，内存管理非常关键，因为任何内存分配错误都可能导致整个系统崩溃。使用静态分配的结构体实例（而非指针）有以下优势：</p>
+<ol>
+<li>
+<p><strong>无需手动分配内存</strong>：</p>
+<ul>
+<li>
+<p>结构体实例的内存由内核静态分配，无需额外调用 <code>malloc</code> 或其他内存分配函数。</p>
+</li>
+<li>
+<p>例如，在内核中，<code>struct free_area</code> 可以直接作为全局数组或嵌入到其他结构体中：</p>
+<p>c复制</p>
+<div class="highlight"><pre><span></span><code><span class="k">struct</span><span class="w"> </span><span class="nc">free_area</span><span class="w"> </span><span class="n">free_lists</span><span class="p">[</span><span class="n">MAX_ORDER</span><span class="p">]</span><span class="w"> </span><span class="n">__initdata</span><span class="p">;</span><span class="w">  </span><span class="c1">// 静态全局数组</span>
+</code></pre></div>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>简化内存管理</strong>：</p>
+<ul>
+<li>避免因内存分配失败导致的系统崩溃。</li>
+<li>无需担心内核中复杂的内存回收机制。</li>
+</ul>
+</li>
+<li>
+<p><strong>减少代码复杂度</strong>：</p>
+<ul>
+<li>
+<p>初始化更简单，无需显式分配和释放内存。例如：</p>
+<p>c复制</p>
+<div class="highlight"><pre><span></span><code><span class="k">static</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">free_area</span><span class="w"> </span><span class="n">free_lists</span><span class="p">[</span><span class="n">MAX_ORDER</span><span class="p">];</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">MAX_ORDER</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">INIT_LIST_HEAD</span><span class="p">(</span><span class="o">&amp;</span><span class="n">free_lists</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">head</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="_10"><strong>结论</strong></h3>
+<p>在你的代码中，将 <code>struct free_area</code> 的 <code>head</code> 定义为 <code>struct list_head</code> 而非指针，不仅可以简化内存管理，还可避免因指针使用不当导致的错误。以下是修正后的 <code>struct free_area</code> 定义：</p>
+<p>c复制</p>
+<div class="highlight"><pre><span></span><code><span class="k">struct</span><span class="w"> </span><span class="nc">free_area</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">list_head</span><span class="w"> </span><span class="n">head</span><span class="p">;</span><span class="w">  </span><span class="c1">// 直接定义为结构体实例</span>
+<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">nr_free</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div>
+<p>这样，在初始化时只需调用 <code>INIT_LIST_HEAD</code> 即可：</p>
+<p>c复制</p>
+<div class="highlight"><pre><span></span><code><span class="n">INIT_LIST_HEAD</span><span class="p">(</span><span class="o">&amp;</span><span class="n">free_lists</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">head</span><span class="p">);</span>
+</code></pre></div>
+<p>建议按照上述方式修改代码，以避免潜在的内存管理和链表操作错误。</p>
+</blockquote>
+<h2 id="misc">misc</h2>
+<h3 id="_11">模块化设计</h3>
+<p><code>os</code> 是一个操作系统的 “模块”，可以看成是我们用 C 实现的面向对象编程，能增加代码的可读性。随着实验的进展，你会发现模块机制清晰地勾勒出了操作系统中各个部分以及它们之间的交互。</p>
+<p>其实看到了很多次这种写法了，并没有系统学习过用起来。</p>
+<div class="highlight"><pre><span></span><code><span class="cp">#define MODULE(mod) \</span>
+<span class="cp">  typedef struct mod_##mod##_t mod_##mod##_t; \</span>
+<span class="cp">  extern mod_##mod##_t *mod; \</span>
+<span class="cp">  struct mod_##mod##_t</span>
+
+<span class="cp">#define MODULE_DEF(mod) \</span>
+<span class="cp">  extern mod_##mod##_t __##mod##_obj; \</span>
+<span class="cp">  mod_##mod##_t *mod = &amp;__##mod##_obj; \</span>
+<span class="cp">  mod_##mod##_t __##mod##_obj</span>
+</code></pre></div>
+<p>使用 <code>MODULE</code> 声明一个模块，用 <code>MODULE_DEF</code> 实际定义它。比如 <code>os</code>：</p>
+<div class="highlight"><pre><span></span><code><span class="n">MODULE</span><span class="p">(</span><span class="n">os</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">init</span><span class="p">)();</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">run</span><span class="p">)();</span><span class="w">                                                                                                        </span>
+<span class="p">};</span>
+<span class="n">MODULE_DEF</span><span class="p">(</span><span class="n">os</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w">                                                                                                        </span>
+<span class="w">    </span><span class="p">.</span><span class="n">init</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">os_init</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">run</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">os_run</span><span class="p">,</span>
+<span class="p">};</span><span class="w">              </span>
+
+<span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">mod_os_t</span><span class="w"> </span><span class="n">mod_os_t</span><span class="p">;</span>
+<span class="k">extern</span><span class="w"> </span><span class="n">mod_os_t</span><span class="w"> </span><span class="o">*</span><span class="n">os</span><span class="p">;</span>
+<span class="k">struct</span><span class="w"> </span><span class="nc">mod_os_t</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">init</span><span class="p">)();</span>
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">run</span><span class="p">)();</span>
+<span class="p">};</span>
+
+<span class="p">...</span>
+
+<span class="k">extern</span><span class="w"> </span><span class="n">mod_os_t</span><span class="w"> </span><span class="n">__os_obj</span><span class="p">;</span>
+<span class="n">mod_os_t</span><span class="w"> </span><span class="o">*</span><span class="n">os</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">__os_obj</span><span class="p">;</span>
+<span class="n">mod_os_t</span><span class="w"> </span><span class="n">__os_obj</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="p">.</span><span class="n">init</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">os_init</span><span class="p">,</span>
+<span class="w">  </span><span class="p">.</span><span class="n">run</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">os_run</span><span class="p">,</span>
+<span class="p">};</span>
+</code></pre></div>
+<h3 id="apic">APIC</h3>
+<blockquote>
+<p>Advanced Programmable Interrupt Controller</p>
+</blockquote>
+<p>其实这里学习过 RISC-V 的 PLIC 和 CLINT，类比过来也是很好理解的。</p>
+<p>直接 AI 生成好，顺便解析 <code>abstract-machine/am/src/x86/qemu/ioe.c</code> 里 APIC 部分的代码。</p>
+<h4 id="basic-concept">basic concept</h4>
+<ul>
+<li><strong>本地APIC（LAPIC）</strong><ul>
+<li><strong>功能</strong>：每个CPU核心都有一个本地APIC，用于处理本地中断（如定时器中断、IPIs等）。</li>
+<li><strong>特点</strong>：<ul>
+<li>可以发送和接收中断。</li>
+<li>支持多种中断类型（如固定、低优先级、周期性等）。</li>
+<li>可以通过内存映射的方式访问其寄存器。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>I/O APIC</strong><ul>
+<li><strong>功能</strong>：用于管理外部设备的中断，将外部中断信号转换为APIC中断。</li>
+<li><strong>特点</strong>：<ul>
+<li>支持多个中断源。</li>
+<li>可以将中断分配给特定的CPU核心。</li>
+<li>通过内存映射访问其寄存器。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="parse-apic">parse APIC 模拟</h4>
+<ul>
+<li>
+<p><mark><strong>宏定义</strong></mark></p>
+<div class="highlight"><pre><span></span><code><span class="cp">#define ID      (0x0020/4)   </span><span class="c1">// ID</span>
+<span class="cp">#define VER     (0x0030/4)   </span><span class="c1">// Version</span>
+<span class="cp">#define TPR     (0x0080/4)   </span><span class="c1">// Task Priority</span>
+<span class="cp">#define EOI     (0x00B0/4)   </span><span class="c1">// EOI</span>
+<span class="cp">#define SVR     (0x00F0/4)   </span><span class="c1">// Spurious Interrupt Vector</span>
+<span class="cp">#define ENABLE     0x00000100   </span><span class="c1">// Unit Enable</span>
+<span class="cp">#define ESR     (0x0280/4)   </span><span class="c1">// Error Status</span>
+<span class="cp">#define ICRLO   (0x0300/4)   </span><span class="c1">// Interrupt Command</span>
+<span class="cp">#define ICRHI   (0x0310/4)   </span><span class="c1">// Interrupt Command [63:32]</span>
+<span class="cp">#define TIMER   (0x0320/4)   </span><span class="c1">// Local Vector Table 0 (TIMER)</span>
+<span class="cp">#define PCINT   (0x0340/4)   </span><span class="c1">// Performance Counter LVT</span>
+<span class="cp">#define LINT0   (0x0350/4)   </span><span class="c1">// Local Vector Table 1 (LINT0)</span>
+<span class="cp">#define LINT1   (0x0360/4)   </span><span class="c1">// Local Vector Table 2 (LINT1)</span>
+<span class="cp">#define ERROR   (0x0370/4)   </span><span class="c1">// Local Vector Table 3 (ERROR)</span>
+<span class="cp">#define TICR    (0x0380/4)   </span><span class="c1">// Timer Initial Count</span>
+<span class="cp">#define TCCR    (0x0390/4)   </span><span class="c1">// Timer Current Count</span>
+<span class="cp">#define TDCR    (0x03E0/4)   </span><span class="c1">// Timer Divide Configuration</span>
+</code></pre></div>
+<ul>
+<li>这些宏定义了LAPIC寄存器的地址偏移量和一些常用的标志位。</li>
+<li>例如，<code>ID</code> 是LAPIC的ID寄存器，<code>VER</code> 是版本寄存器，<code>TPR</code> 是任务优先级寄存器。</li>
+</ul>
+</li>
+</ul>
+<hr />
+<ul>
+<li>
+<p><mark><strong>I/O APIC寄存器</strong></mark></p>
+<div class="highlight"><pre><span></span><code><span class="cp">#define IOAPIC_ADDR  0xFEC00000   </span><span class="c1">// Default physical address of IO APIC</span>
+<span class="cp">#define REG_ID     0x00  </span><span class="c1">// Register index: ID</span>
+<span class="cp">#define REG_VER    0x01  </span><span class="c1">// Register index: version</span>
+<span class="cp">#define REG_TABLE  0x10  </span><span class="c1">// Redirection table base</span>
+</code></pre></div>
+<ul>
+<li><code>IOAPIC_ADDR</code> 是I/O APIC的默认物理地址。</li>
+<li><code>REG_ID</code>、<code>REG_VER</code> 和 <code>REG_TABLE</code> 是I/O APIC的寄存器索引。</li>
+</ul>
+</li>
+</ul>
+<hr />
+<ul>
+<li>
+<p><strong><mark>中断标志</mark></strong></p>
+<div class="highlight"><pre><span></span><code><span class="cp">#define INT_DISABLED   0x00010000  </span><span class="c1">// Interrupt disabled</span>
+<span class="cp">#define INT_LEVEL      0x00008000  </span><span class="c1">// Level-triggered (vs edge-)</span>
+<span class="cp">#define INT_ACTIVELOW  0x00002000  </span><span class="c1">// Active low (vs high)</span>
+<span class="cp">#define INT_LOGICAL    0x00000800  </span><span class="c1">// Destination is CPU id (vs APIC ID)</span>
+</code></pre></div>
+</li>
+</ul>
+<hr />
+<ul>
+<li>
+<p><strong><mark>全局变量</mark></strong></p>
+<div class="highlight"><pre><span></span><code><span class="k">volatile</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">__am_lapic</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span><span class="w">  </span><span class="c1">// Initialized in mp.c</span>
+<span class="k">struct</span><span class="w"> </span><span class="nc">IOAPIC</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">reg</span><span class="p">,</span><span class="w"> </span><span class="n">pad</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span><span class="w"> </span><span class="n">data</span><span class="p">;</span>
+<span class="p">}</span><span class="w"> </span><span class="n">__attribute__</span><span class="p">((</span><span class="n">packed</span><span class="p">));</span>
+<span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">IOAPIC</span><span class="w"> </span><span class="n">IOAPIC</span><span class="p">;</span>
+
+<span class="k">static</span><span class="w"> </span><span class="k">volatile</span><span class="w"> </span><span class="n">IOAPIC</span><span class="w"> </span><span class="o">*</span><span class="n">ioapic</span><span class="p">;</span>
+</code></pre></div>
+<ul>
+<li><code>__am_lapic</code> 是指向当前CPU的LAPIC寄存器的指针。</li>
+<li><code>ioapic</code> 是指向I/O APIC的指针。</li>
+</ul>
+</li>
+</ul>
+<hr />
+<ul>
+<li>
+<p><mark><strong>LAPIC写入函数</strong></mark></p>
+<div class="highlight"><pre><span></span><code><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">lapicw</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">index</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">__am_lapic</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">value</span><span class="p">;</span>
+<span class="w">  </span><span class="n">__am_lapic</span><span class="p">[</span><span class="n">ID</span><span class="p">];</span>
+<span class="p">}</span>
+</code></pre></div>
+<ul>
+<li>这是一个辅助函数，用于写入LAPIC寄存器。</li>
+<li><code>__am_lapic[ID]</code> 是一个内存屏障，确保写操作完成。</li>
+</ul>
+</li>
+</ul>
+<hr />
+<ul>
+<li>
+<p><mark><strong>2.6 初始化LAPIC</strong></mark></p>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="nf">__am_percpu_initlapic</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">lapicw</span><span class="p">(</span><span class="n">SVR</span><span class="p">,</span><span class="w"> </span><span class="n">ENABLE</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="p">(</span><span class="n">T_IRQ0</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">IRQ_SPURIOUS</span><span class="p">));</span>
+<span class="w">  </span><span class="n">lapicw</span><span class="p">(</span><span class="n">TDCR</span><span class="p">,</span><span class="w"> </span><span class="n">X1</span><span class="p">);</span>
+<span class="w">  </span><span class="n">lapicw</span><span class="p">(</span><span class="n">TIMER</span><span class="p">,</span><span class="w"> </span><span class="n">PERIODIC</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="p">(</span><span class="n">T_IRQ0</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">IRQ_TIMER</span><span class="p">));</span>
+<span class="w">  </span><span class="n">lapicw</span><span class="p">(</span><span class="n">TICR</span><span class="p">,</span><span class="w"> </span><span class="mi">10000000</span><span class="p">);</span>
+<span class="w">  </span><span class="n">lapicw</span><span class="p">(</span><span class="n">LINT0</span><span class="p">,</span><span class="w"> </span><span class="n">MASKED</span><span class="p">);</span>
+<span class="w">  </span><span class="n">lapicw</span><span class="p">(</span><span class="n">LINT1</span><span class="p">,</span><span class="w"> </span><span class="n">MASKED</span><span class="p">);</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(((</span><span class="n">__am_lapic</span><span class="p">[</span><span class="n">VER</span><span class="p">]</span><span class="o">&gt;&gt;</span><span class="mi">16</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="mh">0xFF</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span>
+<span class="w">    </span><span class="n">lapicw</span><span class="p">(</span><span class="n">PCINT</span><span class="p">,</span><span class="w"> </span><span class="n">MASKED</span><span class="p">);</span>
+<span class="w">  </span><span class="n">lapicw</span><span class="p">(</span><span class="n">ERROR</span><span class="p">,</span><span class="w"> </span><span class="n">T_IRQ0</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">IRQ_ERROR</span><span class="p">);</span>
+<span class="w">  </span><span class="n">lapicw</span><span class="p">(</span><span class="n">ESR</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="w">  </span><span class="n">lapicw</span><span class="p">(</span><span class="n">ESR</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="w">  </span><span class="n">lapicw</span><span class="p">(</span><span class="n">EOI</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="w">  </span><span class="n">lapicw</span><span class="p">(</span><span class="n">ICRHI</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="w">  </span><span class="n">lapicw</span><span class="p">(</span><span class="n">ICRLO</span><span class="p">,</span><span class="w"> </span><span class="n">BCAST</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">INIT</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">LEVEL</span><span class="p">);</span>
+<span class="w">  </span><span class="k">while</span><span class="p">(</span><span class="n">__am_lapic</span><span class="p">[</span><span class="n">ICRLO</span><span class="p">]</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">DELIVS</span><span class="p">)</span><span class="w"> </span><span class="p">;</span>
+<span class="w">  </span><span class="n">lapicw</span><span class="p">(</span><span class="n">TPR</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<ul>
+<li><strong>功能</strong>：初始化当前CPU的LAPIC。<ol>
+<li>启用LAPIC并设置中断向量。</li>
+<li>配置定时器为周期性模式。</li>
+<li>设置定时器初始计数值。</li>
+<li>禁用LINT0和LINT1中断。</li>
+<li>检查APIC版本并配置性能计数器。</li>
+<li>配置错误中断。</li>
+<li>清除错误状态寄存器。</li>
+<li>发送INIT IPI（初始化中断）到所有CPU。</li>
+<li>清除任务优先级寄存器。</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<hr />
+<ul>
+<li>
+<p><strong><mark>发送EOI</mark></strong></p>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="nf">__am_lapic_eoi</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">__am_lapic</span><span class="p">)</span>
+<span class="w">    </span><span class="n">lapicw</span><span class="p">(</span><span class="n">EOI</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<ul>
+<li><strong>功能</strong>：发送EOI（End of Interrupt）信号，通知APIC中断处理完成。</li>
+</ul>
+</li>
+</ul>
+<hr />
+<ul>
+<li>
+<p><strong><mark>启动辅助处理器（AP）</mark></strong></p>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="nf">__am_lapic_bootap</span><span class="p">(</span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">apicid</span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">addr</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">uint16_t</span><span class="w"> </span><span class="o">*</span><span class="n">wrv</span><span class="p">;</span>
+<span class="w">  </span><span class="n">outb</span><span class="p">(</span><span class="mh">0x70</span><span class="p">,</span><span class="w"> </span><span class="mh">0xF</span><span class="p">);</span>
+<span class="w">  </span><span class="n">outb</span><span class="p">(</span><span class="mh">0x71</span><span class="p">,</span><span class="w"> </span><span class="mh">0x0A</span><span class="p">);</span>
+<span class="w">  </span><span class="n">wrv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">short</span><span class="o">*</span><span class="p">)((</span><span class="mh">0x40</span><span class="o">&lt;&lt;</span><span class="mi">4</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mh">0x67</span><span class="p">));</span>
+<span class="w">  </span><span class="n">wrv</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">  </span><span class="n">wrv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">uintptr_t</span><span class="p">)</span><span class="n">addr</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span>
+
+<span class="w">  </span><span class="n">lapicw</span><span class="p">(</span><span class="n">ICRHI</span><span class="p">,</span><span class="w"> </span><span class="n">apicid</span><span class="o">&lt;&lt;</span><span class="mi">24</span><span class="p">);</span>
+<span class="w">  </span><span class="n">lapicw</span><span class="p">(</span><span class="n">ICRLO</span><span class="p">,</span><span class="w"> </span><span class="n">INIT</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">LEVEL</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">ASSERT</span><span class="p">);</span>
+<span class="w">  </span><span class="n">lapicw</span><span class="p">(</span><span class="n">ICRLO</span><span class="p">,</span><span class="w"> </span><span class="n">INIT</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">LEVEL</span><span class="p">);</span>
+
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+<span class="w">    </span><span class="n">lapicw</span><span class="p">(</span><span class="n">ICRHI</span><span class="p">,</span><span class="w"> </span><span class="n">apicid</span><span class="o">&lt;&lt;</span><span class="mi">24</span><span class="p">);</span>
+<span class="w">    </span><span class="n">lapicw</span><span class="p">(</span><span class="n">ICRLO</span><span class="p">,</span><span class="w"> </span><span class="n">STARTUP</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="p">((</span><span class="kt">uintptr_t</span><span class="p">)</span><span class="n">addr</span><span class="o">&gt;&gt;</span><span class="mi">12</span><span class="p">));</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<ul>
+<li><strong>功能</strong>：启动一个辅助处理器（AP）。<ol>
+<li>设置启动地址到内存中。</li>
+<li>发送INIT IPI到目标AP。</li>
+<li>发送STARTUP IPI到目标AP。</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<hr />
+<ul>
+<li>
+<p><mark><strong>I/O APIC读写函数</strong></mark></p>
+<div class="highlight"><pre><span></span><code><span class="k">static</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">ioapicread</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">reg</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">ioapic</span><span class="o">-&gt;</span><span class="n">reg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reg</span><span class="p">;</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">ioapic</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">ioapicwrite</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">reg</span><span class="p">,</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">data</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">ioapic</span><span class="o">-&gt;</span><span class="n">reg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reg</span><span class="p">;</span>
+<span class="w">  </span><span class="n">ioapic</span><span class="o">-&gt;</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><strong>功能</strong>：读写I/O APIC寄存器</p>
+</li>
+</ul>
+<hr />
+<ul>
+<li>
+<p><mark><strong>初始化I/O APIC</strong></mark></p>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="nf">__am_ioapic_init</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">maxintr</span><span class="p">;</span>
+
+<span class="w">  </span><span class="n">ioapic</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="k">volatile</span><span class="w"> </span><span class="n">IOAPIC</span><span class="o">*</span><span class="p">)</span><span class="n">IOAPIC_ADDR</span><span class="p">;</span>
+<span class="w">  </span><span class="n">maxintr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">ioapicread</span><span class="p">(</span><span class="n">REG_VER</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="mi">16</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="mh">0xFF</span><span class="p">;</span>
+
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">maxintr</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+<span class="w">    </span><span class="n">ioapicwrite</span><span class="p">(</span><span class="n">REG_TABLE</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">INT_DISABLED</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="p">(</span><span class="n">T_IRQ0</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="p">));</span>
+<span class="w">    </span><span class="n">ioapicwrite</span><span class="p">(</span><span class="n">REG_TABLE</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<ul>
+<li><strong>功能</strong>：初始化I/O APIC。<ol>
+<li>将I/O APIC的基地址映射到<code>ioapic</code>指针。</li>
+<li>读取I/O APIC的版本寄存器，获取最大中断号<code>maxintr</code>。</li>
+<li>遍历所有中断源，将每个中断源的重定向表条目初始化为禁用状态，并设置默认的中断向量。</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<hr />
+<ul>
+<li>
+<p><strong><mark>启用I/O APIC中断</mark></strong></p>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="nf">__am_ioapic_enable</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">irq</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">cpunum</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">ioapicwrite</span><span class="p">(</span><span class="n">REG_TABLE</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">irq</span><span class="p">,</span><span class="w"> </span><span class="n">T_IRQ0</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">irq</span><span class="p">);</span>
+<span class="w">  </span><span class="n">ioapicwrite</span><span class="p">(</span><span class="n">REG_TABLE</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">irq</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">cpunum</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">24</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<ul>
+<li><strong>功能</strong>：启用指定的I/O APIC中断，并将其分配给指定的CPU核心。<ol>
+<li>设置中断源的重定向表条目，启用中断并设置中断向量。</li>
+<li>设置中断的目标CPU核心编号。</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="_12">多核启动流程</h3>
+<h4 id="_13">硬件</h4>
+<p><a href="https://www.linkedin.com/posts/prisin6_osconcepts-operatingsystem-activity-7122091775938183169-fnVk?trk=public_profile_like_view">How a multi-core system boot up | Priyanka Singh 发布的此话题相关的动态 | 领英</a></p>
+<p><a href="http://www.linux-arm.org/LinuxBootLoader/SMPBoot">SMPBoot &lt; LinuxBootLoader &lt; Foswiki</a></p>
+<p><a href="https://blog.csdn.net/JiMoKuangXiangQu/article/details/129769896">Linux: 多核 CPU 启动流程简析_linux 多核启动-CSDN博客</a></p>
+<h4 id="_14">软件/固件</h4>
+<p>借着框架代码分析看看，熟悉之后再去看看一些固件怎么写的。</p>
+<ul>
+<li>
+<p><strong>一些小坑</strong></p>
+<p>刚开始的时候，一直只能启动一个核心，折腾了一下一步步探到 <code>scripts/platform/qemu.mk</code> 里发现的 <code>qemu</code> 里的配置不太对：</p>
+<p><code>-smp "$(smp),cores=$(smp),sockets=1"</code>，改成 <code>-smp "$(smp),cores=1,sockets=$(smp)"</code> 即可。</p>
+<p>之后又发现，原来讲义已经提醒，对 <code>qemu</code> 不是很熟悉。</p>
+<p><a href="https://www.cnblogs.com/zhuohq/articles/15354743.html">qemu命令行参数小结</a></p>
+<p><a href="https://www.qemu.org/docs/master/system/qemu-manpage.html">QEMU User Documentation</a></p>
+</li>
+</ul>
+<h3 id="c">C 学习</h3>
+<p>写自己的头文件的时候，把自己写的放在标准库之后。</p>
+<p>不然如果自己写的有问题，那连带着标准库中的各种报错。</p>
+<p>就比如自己头文件中的函数声明没加分号，导致之后所有头文件声明的函数全部无效，进一步体现为所有用到的函数全部未定义。</p>
 
 
 
@@ -1376,7 +2917,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2025-01-06T17:48:44+01:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2025-01-06</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2025-02-12T18:33:04+01:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2025-02-12</span>
   </span>
 
     
