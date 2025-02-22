@@ -995,6 +995,48 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      一些参考
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      测试
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="测试">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      基本功能
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      性能
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1011,7 +1053,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_11" class="md-nav__link">
+  <a href="#_15" class="md-nav__link">
     <span class="md-ellipsis">
       模块化设计
     </span>
@@ -1053,28 +1095,28 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_12" class="md-nav__link">
+  <a href="#_16" class="md-nav__link">
     <span class="md-ellipsis">
-      多核启动流程
+      多核
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="多核启动流程">
+    <nav class="md-nav" aria-label="多核">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_13" class="md-nav__link">
+  <a href="#_17" class="md-nav__link">
     <span class="md-ellipsis">
-      硬件
+      启动流程
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#_14" class="md-nav__link">
+  <a href="#todo" class="md-nav__link">
     <span class="md-ellipsis">
-      软件/固件
+      调度 TODO？
     </span>
   </a>
   
@@ -2032,6 +2074,48 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      一些参考
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      测试
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="测试">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      基本功能
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      性能
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -2048,7 +2132,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_11" class="md-nav__link">
+  <a href="#_15" class="md-nav__link">
     <span class="md-ellipsis">
       模块化设计
     </span>
@@ -2090,28 +2174,28 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_12" class="md-nav__link">
+  <a href="#_16" class="md-nav__link">
     <span class="md-ellipsis">
-      多核启动流程
+      多核
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="多核启动流程">
+    <nav class="md-nav" aria-label="多核">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_13" class="md-nav__link">
+  <a href="#_17" class="md-nav__link">
     <span class="md-ellipsis">
-      硬件
+      启动流程
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#_14" class="md-nav__link">
+  <a href="#todo" class="md-nav__link">
     <span class="md-ellipsis">
-      软件/固件
+      调度 TODO？
     </span>
   </a>
   
@@ -2191,6 +2275,21 @@
 </code></pre></div>
 </li>
 </ul>
+<p>Linux中：</p>
+<div class="highlight"><pre><span></span><code><span class="cp">#define local_irq_save(flags)               \</span>
+<span class="cp">    do {                        \</span>
+<span class="cp">        raw_local_irq_save(flags);      \</span>
+<span class="cp">        if (!raw_irqs_disabled_flags(flags))    \</span>
+<span class="cp">            trace_hardirqs_off();       \</span>
+<span class="cp">    } while (0)</span>
+
+<span class="cp">#define local_irq_restore(flags)            \</span>
+<span class="cp">    do {                        \</span>
+<span class="cp">        if (!raw_irqs_disabled_flags(flags))    \</span>
+<span class="cp">            trace_hardirqs_on();        \</span>
+<span class="cp">        raw_local_irq_restore(flags);       \</span>
+<span class="cp">    } while (0)</span>
+</code></pre></div>
 <h3 id="pmm-version1">pmm Version1</h3>
 <p>块分配：</p>
 <ul>
@@ -2571,8 +2670,50 @@ current_order:<span class="w"> </span><span class="m">3</span>
 </code></pre></div>
 <p>建议按照上述方式修改代码，以避免潜在的内存管理和链表操作错误。</p>
 </blockquote>
+<h3 id="_11">一些参考</h3>
+<p>我们在讲解 “并发数据结构” 时讲解了 kalloc/free 的算法和实现。你应该阅读：</p>
+<ul>
+<li>教科书第 29 章 (并发数据结构)，学习如何对数据结构进行并发控制；</li>
+<li>教科书第 17 章 (空闲空间管理)，学习如何管理物理内存；</li>
+<li>互联网上的其他资料。如果你希望了解现代 malloc 实现，你可以参考来自两个代码巨头的设计：Google 的 <a href="https://google.github.io/tcmalloc/">tcmalloc</a> 和 Microsoft 的 <a href="https://microsoft.github.io/mimalloc">mimalloc</a>。</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="m">4340</span><span class="w"> </span>nowxxxxxxxxxxxxfree_lists<span class="o">[</span><span class="m">7</span><span class="o">]</span>.nr_free:<span class="w"> </span><span class="m">0</span>
+<span class="m">4341</span><span class="w"> </span>head:<span class="w"> </span>0x3fa0a8
+<span class="m">4342</span><span class="w"> </span><span class="p">&amp;</span>head:<span class="w"> </span>0x3fa0a8
+<span class="m">4343</span><span class="w"> </span>head-&gt;prev:<span class="w"> </span>0x3fa0a8<span class="w">                                                                                                       </span>
+<span class="m">4344</span><span class="w"> </span>head-&gt;next:<span class="w"> </span>0x3fa0a8
+<span class="m">4345</span><span class="w"> </span>page-&gt;next<span class="w"> </span>to<span class="w"> </span>page,<span class="w"> </span>and<span class="w"> </span>order<span class="w"> </span>is<span class="w"> </span><span class="m">3145728</span>
+<span class="m">4346</span><span class="w"> </span>page-&gt;next<span class="w"> </span>to<span class="w"> </span>page,<span class="w"> </span>and<span class="w"> </span>buddy_list<span class="w"> </span>is<span class="w"> </span>0x3fa0a8
+<span class="m">4347</span><span class="w"> </span>free_lists<span class="o">[</span><span class="m">10</span><span class="o">]</span>.nr_free:<span class="w"> </span><span class="m">30</span>
+<span class="m">4348</span><span class="w"> </span>free_lists<span class="o">[</span><span class="m">9</span><span class="o">]</span>.nr_free:<span class="w"> </span><span class="m">1</span>
+<span class="m">4349</span><span class="w"> </span>free_lists<span class="o">[</span><span class="m">8</span><span class="o">]</span>.nr_free:<span class="w"> </span><span class="m">1</span>
+<span class="m">4350</span><span class="w"> </span>free_lists<span class="o">[</span><span class="m">7</span><span class="o">]</span>.nr_free:<span class="w"> </span><span class="m">0</span>
+<span class="m">4351</span><span class="w"> </span>free_lists<span class="o">[</span><span class="m">6</span><span class="o">]</span>.nr_free:<span class="w"> </span><span class="m">0</span>
+<span class="m">4352</span><span class="w"> </span>free_lists<span class="o">[</span><span class="m">5</span><span class="o">]</span>.nr_free:<span class="w"> </span><span class="m">0</span>
+<span class="m">4353</span><span class="w"> </span>free_lists<span class="o">[</span><span class="m">4</span><span class="o">]</span>.nr_free:<span class="w"> </span><span class="m">0</span>
+<span class="m">4354</span><span class="w"> </span>free_lists<span class="o">[</span><span class="m">3</span><span class="o">]</span>.nr_free:<span class="w"> </span><span class="m">0</span>
+<span class="m">4355</span><span class="w"> </span>free_lists<span class="o">[</span><span class="m">2</span><span class="o">]</span>.nr_free:<span class="w"> </span><span class="m">0</span>
+<span class="m">4356</span><span class="w"> </span>free_lists<span class="o">[</span><span class="m">1</span><span class="o">]</span>.nr_free:<span class="w"> </span><span class="m">0</span>
+<span class="m">4357</span><span class="w"> </span>free_lists<span class="o">[</span><span class="m">0</span><span class="o">]</span>.nr_free:<span class="w"> </span><span class="m">0</span>
+<span class="m">4358</span><span class="w"> </span>
+<span class="m">4359</span><span class="w"> </span>nowxxxxxxxxxxxxfree_lists<span class="o">[</span><span class="m">8</span><span class="o">]</span>.nr_free:<span class="w"> </span><span class="m">1</span>
+<span class="m">4360</span><span class="w"> </span>head:<span class="w"> </span>0x300000
+<span class="m">4361</span><span class="w"> </span><span class="p">&amp;</span>head:<span class="w"> </span>0x3fa0c0
+<span class="m">4362</span><span class="w"> </span>head-&gt;prev:<span class="w"> </span>0x300000
+<span class="m">4363</span><span class="w"> </span>head-&gt;next:<span class="w"> </span>0x300000
+<span class="m">4364</span><span class="w"> </span>page-&gt;next<span class="w"> </span>to<span class="w"> </span>page,<span class="w"> </span>and<span class="w"> </span>order<span class="w"> </span>is<span class="w"> </span><span class="m">8</span>
+<span class="m">4365</span><span class="w"> </span>page-&gt;next<span class="w"> </span>to<span class="w"> </span>page,<span class="w"> </span>and<span class="w"> </span>buddy_list<span class="w"> </span>is<span class="w"> </span>0x3fa0c0
+<span class="m">4366</span><span class="w"> </span>AM<span class="w"> </span>Panic:<span class="w"> </span>addr<span class="w"> </span>should<span class="w"> </span>not<span class="w"> </span>less<span class="w"> </span>than<span class="w"> </span>start_used<span class="w"> </span>@<span class="w"> </span>/home/jai/os-workbench/kernel/src/buddy.c:53<span class="w">  </span>
+</code></pre></div>
+<p>直接改用实际的物理内存块地址来计算了，之后再慢慢调页的版本。</p>
+<h3 id="_12">测试</h3>
+<h4 id="_13">基本功能</h4>
+<ol>
+<li>分配</li>
+</ol>
+<h4 id="_14">性能</h4>
 <h2 id="misc">misc</h2>
-<h3 id="_11">模块化设计</h3>
+<h3 id="_15">模块化设计</h3>
 <p><code>os</code> 是一个操作系统的 “模块”，可以看成是我们用 C 实现的面向对象编程，能增加代码的可读性。随着实验的进展，你会发现模块机制清晰地勾勒出了操作系统中各个部分以及它们之间的交互。</p>
 <p>其实看到了很多次这种写法了，并没有系统学习过用起来。</p>
 <div class="highlight"><pre><span></span><code><span class="cp">#define MODULE(mod) \</span>
@@ -2616,7 +2757,10 @@ current_order:<span class="w"> </span><span class="m">3</span>
 <p>Advanced Programmable Interrupt Controller</p>
 </blockquote>
 <p>其实这里学习过 RISC-V 的 PLIC 和 CLINT，类比过来也是很好理解的。</p>
-<p>直接 AI 生成好，顺便解析 <code>abstract-machine/am/src/x86/qemu/ioe.c</code> 里 APIC 部分的代码。</p>
+<p>直接 AI 生成，解析 <code>abstract-machine/am/src/x86/qemu/ioe.c</code> 里 APIC 部分的代码。</p>
+<blockquote>
+<p>注意还有个叫 ACPI 的东西</p>
+</blockquote>
 <h4 id="basic-concept">basic concept</h4>
 <ul>
 <li><strong>本地APIC（LAPIC）</strong><ul>
@@ -2874,13 +3018,117 @@ current_order:<span class="w"> </span><span class="m">3</span>
 </ul>
 </li>
 </ul>
-<h3 id="_12">多核启动流程</h3>
-<h4 id="_13">硬件</h4>
+<h3 id="_16">多核</h3>
+<h4 id="_17">启动流程</h4>
+<blockquote>
+<p>借着框架代码分析看看，熟悉之后再去看看一些固件怎么写的。</p>
+</blockquote>
 <p><a href="https://www.linkedin.com/posts/prisin6_osconcepts-operatingsystem-activity-7122091775938183169-fnVk?trk=public_profile_like_view">How a multi-core system boot up | Priyanka Singh 发布的此话题相关的动态 | 领英</a></p>
 <p><a href="http://www.linux-arm.org/LinuxBootLoader/SMPBoot">SMPBoot &lt; LinuxBootLoader &lt; Foswiki</a></p>
 <p><a href="https://blog.csdn.net/JiMoKuangXiangQu/article/details/129769896">Linux: 多核 CPU 启动流程简析_linux 多核启动-CSDN博客</a></p>
-<h4 id="_14">软件/固件</h4>
-<p>借着框架代码分析看看，熟悉之后再去看看一些固件怎么写的。</p>
+<p>参考文档：<a href="https://pdos.csail.mit.edu/6.828/2011/readings/ia32/MPspec.pdf">MultiProcessor Specification</a></p>
+<p><code>abstract-machine/am/src/x86/x86.h</code></p>
+<blockquote>
+<p>这些结构体的定义和设计是基于 <strong>MultiProcessor Specification (MP Spec)</strong> 文档（版本 1.4）。该文档由 Intel 提供，用于定义多处理器系统（Multiprocessor Systems）的硬件和软件接口标准。以下是每个结构体的设计目的和字段的作用：</p>
+<ol>
+<li>
+<p><strong><code>TSS64</code> (Task State Segment)</strong></p>
+<p><code>TSS64</code> 是 x86_64 架构下的任务状态段（Task State Segment）结构体，用于保存和恢复任务上下文。它在多任务操作系统中用于保存每个任务的寄存器状态。字段解析：</p>
+<ul>
+<li><strong><code>uint32_t rsv</code></strong>: 保留字段，通常用于对齐数据结构。</li>
+<li><strong><code>uint64_t rsp0, rsp1, rsp2</code></strong>: 分别对应不同特权级（Ring 0, Ring 1, Ring 2）下的栈指针（Stack Pointer）。这些字段允许在不同特权级之间切换时恢复正确的栈指针。</li>
+<li><strong><code>uint32_t padding[19]</code></strong>: 填充字段，用于确保结构体的大小和布局符合系统要求。</li>
+</ul>
+</li>
+<li>
+<p><strong><code>MPConf</code> (MP Configuration Table Header)</strong></p>
+<p><code>MPConf</code> 是 MP 配置表的头部结构体，用于描述多处理器系统的硬件配置信息。它提供了系统中处理器、总线、中断控制器等组件的基本信息。字段解析：</p>
+<ul>
+<li><strong><code>uint8_t signature[4]</code></strong>: 签名字段，值为 <code>"PCMP"</code>，用于标识这是一个 MP 配置表。</li>
+<li><strong><code>uint16_t length</code></strong>: 配置表的总长度（以字节为单位）。</li>
+<li><strong><code>uint8_t version</code></strong>: MP 规范的版本号（例如 14 表示版本 1.4）。</li>
+<li><strong><code>uint8_t checksum</code></strong>: 校验和，用于验证配置表的完整性。</li>
+<li><strong><code>uint8_t product[20]</code></strong>: 产品 ID 字符串，用于标识系统硬件。</li>
+<li><strong><code>uint32_t oemtable</code></strong>: OEM 表的物理地址。</li>
+<li><strong><code>uint16_t oemlength</code></strong>: OEM 表的长度。</li>
+<li><strong><code>uint16_t entry</code></strong>: 配置表中条目的数量。</li>
+<li><strong><code>uint32_t lapicaddr</code></strong>: 本地 APIC 的基地址。</li>
+<li><strong><code>uint16_t xlength</code></strong>: 扩展表的长度。</li>
+<li><strong><code>uint8_t xchecksum</code></strong>: 扩展表的校验和。</li>
+<li><strong><code>uint8_t reserved</code></strong>: 保留字段。</li>
+</ul>
+</li>
+<li>
+<p><strong><code>MPDesc</code> (MP Configuration Descriptor)</strong></p>
+<p><code>MPDesc</code> 是 MP 配置描述符结构体，用于指向 MP 配置表的物理地址，并提供一些系统配置信息。字段解析：</p>
+<ul>
+<li><strong><code>int magic</code></strong>: 魔数，用于标识结构体的有效性。</li>
+<li><strong><code>uint32_t conf</code></strong>: MP 配置表的物理地址。</li>
+<li><strong><code>uint8_t length</code></strong>: 描述符的长度。</li>
+<li><strong><code>uint8_t specrev</code></strong>: MP 规范的版本号（例如 14 表示版本 1.4）。</li>
+<li><strong><code>uint8_t checksum</code></strong>: 描述符的校验和。</li>
+<li><strong><code>uint8_t type</code></strong>: 配置类型（例如处理器表、总线表等）。</li>
+<li><strong><code>uint8_t imcrp</code></strong>: IMCR（Interrupt Mode Configuration Register）标志。</li>
+<li><strong><code>uint8_t reserved[3]</code></strong>: 保留字段。</li>
+</ul>
+</li>
+<li>
+<p><strong><code>BootRecord</code></strong></p>
+<p><code>BootRecord</code> 是引导记录结构体，用于在系统启动时存储一些关键信息，例如跳转指令和处理器状态。字段解析：</p>
+<ul>
+<li><strong><code>uint32_t jmp_code</code></strong>: 跳转指令的机器码，用于在系统启动时跳转到指定的地址。</li>
+<li><strong><code>int32_t is_ap</code></strong>: 标志字段，指示当前处理器是否是应用程序处理器（AP）。</li>
+</ul>
+</li>
+<li>
+<p>设计来源</p>
+<p>这些结构体的设计是基于 <strong>MultiProcessor Specification (MP Spec)</strong> 文档（版本 1.4）。该文档详细定义了多处理器系统的硬件和软件接口标准，包括：</p>
+<ul>
+<li><strong>硬件配置</strong>：如何配置处理器、中断控制器（APIC）、内存和 I/O 设备。</li>
+<li><strong>中断模式</strong>：如何在多处理器系统中处理中断（例如 PIC 模式、虚拟线模式、对称 I/O 模式）。</li>
+<li><strong>启动过程</strong>：如何初始化系统和启动操作系统。</li>
+<li><strong>配置表</strong>：如何通过 MP 配置表向操作系统传递硬件信息。</li>
+</ul>
+<p>这些结构体的设计目的是为了确保多处理器系统能够正确地初始化、配置和运行操作系统，同时保持与现有硬件和软件的兼容性。</p>
+</li>
+</ol>
+</blockquote>
+<p>实际上，这部分框架的内容感觉就是在写一个固件了，就是要启动一个os。</p>
+<blockquote>
+<ol>
+<li><strong>代码与硬件紧密结合</strong><ul>
+<li><strong>中断处理和内存管理</strong>：代码中大量涉及 <code>APIC</code>（高级可编程中断控制器）、中断描述符表（IDT）和内存管理单元（MMU）等硬件组件的初始化和配置。例如，<code>cte.c</code> 文件中对中断描述符表的设置和中断处理函数的定义，以及 <code>vme.c</code> 文件中对内存页表的管理，这些都直接与硬件架构紧密相关，是系统启动和运行的基础。</li>
+<li><strong>多处理器支持</strong>：<code>mpe.c</code> 文件中的多处理器初始化代码，涉及到 AP（应用处理器）的启动和同步，以及对 <code>lapic</code>（本地 APIC）的配置，这些都是为了实现多处理器系统的协同工作，属于硬件层面的初始化逻辑。</li>
+</ul>
+</li>
+<li><strong>系统启动的关键环节</strong><ul>
+<li><strong>BIOS/UEFI 功能</strong>：这些代码的功能在很多方面类似于 BIOS 或 UEFI 的某些部分。例如，BIOS 在系统启动时会初始化硬件、检测设备，并为操作系统提供一个启动环境。同样，代码中的启动逻辑（如 <code>_start_c</code> 函数）和硬件初始化代码（如 <code>__am_lapic_init</code> 和 <code>__am_ioapic_init</code>），为操作系统的运行准备了基础环境。</li>
+<li><strong>引导加载程序</strong>：代码中的一些启动函数（如 <code>_start_c</code> 和 <code>call_main</code>）与引导加载程序的功能类似。引导加载程序负责从非易失性存储器（如磁盘或闪存）加载操作系统内核到内存中并启动它，而这些代码中的启动逻辑与引导加载程序的某些功能有相似之处。</li>
+</ul>
+</li>
+<li><strong>实际项目中的应用</strong><ul>
+<li><strong>服务器和嵌入式系统</strong>：在实际的服务器和嵌入式系统项目中，类似的固件代码用于初始化硬件、配置中断和内存管理，并为操作系统提供一个稳定的运行环境。例如，在高性能服务器中，多处理器支持和中断管理是系统高效运行的关键，需要通过固件来实现。</li>
+<li><strong>嵌入式控制器</strong>：对于需要嵌入式控制器的设备（如工业控制系统、网络设备等），这些固件代码可以用于实现低功耗模式、实时任务调度和硬件资源管理等功能。</li>
+</ul>
+</li>
+<li><strong>代码结构和模块化设计</strong><ul>
+<li><strong>模块化功能</strong>：代码按照功能模块划分，如 <code>cte.c</code> 负责中断处理，<code>ioe.c</code> 负责硬件输入输出设备的初始化，<code>mpe.c</code> 负责多处理器管理等。这种模块化设计使得代码易于维护和更新，适合固件开发的迭代过程。</li>
+<li><strong>可移植性</strong>：代码中包含了一些与架构相关的代码（如 <code>#ifdef __x86_64__</code> 和 <code>#else</code>），这表明代码是为特定硬件架构设计的，具有一定的可移植性。固件通常需要针对特定的硬件平台进行定制和优化，这种设计思路符合固件开发的特点。</li>
+</ul>
+</li>
+<li><strong>代码的运行阶段和目的</strong><ul>
+<li><strong>早期初始化阶段</strong>：这些代码运行在系统的早期启动阶段，通常在操作系统内核加载之前。它们的目的是为操作系统提供一个稳定的硬件环境，包括初始化硬件设备、设置中断和内存管理机制等。</li>
+<li><strong>与操作系统的关系</strong>：代码为操作系统提供了一个抽象层，隐藏了硬件的复杂性。操作系统内核可以通过调用固件提供的接口来访问硬件资源，而无需直接处理底层硬件细节。
+</li>
+</ul>
+</li>
+</ol>
+</blockquote>
+<h4 id="todo">调度 TODO？</h4>
+<p>说到这个是因为在上面进行多处理器测试的时候发现输出了多次的 <code>xxx test passed</code>，就日常使用电脑的体验来说这应该是不对的吧？为什么输出了多次呢？是因为调度？目前没有实现多核调度，将任务分配个多核核心，导致都从同样的初始状态执行同样的任务？</p>
+<p>还有问题，如果这样子思考，那不就肯定会导致死锁？？等等，每个核都有自己的register、本地中断，还有共享的memory。也就是每个核都有对这个数据的副本？？</p>
+<p>需要学习。<a href="https://forum.ubuntu.com.cn/viewtopic.php?t=465485">从利用多核加速QEMU的CPU模拟谈起 - Ubuntu中文论坛</a></p>
+<p>要不先把带哦都那门课上了？</p>
 <ul>
 <li>
 <p><strong>一些小坑</strong></p>
@@ -2917,7 +3165,7 @@ current_order:<span class="w"> </span><span class="m">3</span>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2025-02-12T18:33:04+01:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2025-02-12</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2025-02-22T09:34:41+01:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2025-02-22</span>
   </span>
 
     

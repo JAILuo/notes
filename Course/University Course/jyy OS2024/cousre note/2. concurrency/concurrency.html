@@ -3350,7 +3350,6 @@
 
   <h1>concurrency</h1>
 
-<p>只记录部分。</p>
 <h2 id="_1">多处理器编程</h2>
 <p><img src="pic/image-20241110231300436.png" alt="image-20241110231300436" style="zoom:50%;" /></p>
 <ul>
@@ -3581,39 +3580,77 @@
 <p>正确的为：<code>disable irq</code> -&gt; <code>lock</code> -&gt; <code>sum++</code> -&gt;<code>enable irq</code></p>
 <p>但还有问题，lock前关了中断，但到最后的时候，变成了开中断。但如果在 <code>disable irq</code> 之前的 CPU 状态就是 关中断呢？所以，需要保存中断状态！</p>
 <blockquote>
-<p>这就是我在 NEMU 移植 Linux 的时候看的 Linux kernel 的 <code>arch/risc-v</code> 里看到的 <code>arch_local_save_flags</code> ？</p>
+<p>这就是我在 NEMU 移植 Linux 的时候看的 Linux kernel 的 <code>arch/risc-v</code> 里看到的 <code>arch_local_save_flags</code> 等各种名字类似的 API？关键两个：</p>
+<ul>
+<li><code>include/linux/irqflags.h</code></li>
+<li><code>`arch/riscv/include/asm/irqflags.h</code></li>
+</ul>
+<p>一些代码：</p>
 <div class="highlight"><pre><span></span><code><span class="cp">#ifdef CONFIG_TRACE_IRQFLAGS_SUPPORT</span>
 <span class="cp">#define irqs_disabled()                 \</span>
-<span class="cp">    ({                      \</span>
-<span class="cp">        unsigned long _flags;           \</span>
-<span class="cp">        raw_local_save_flags(_flags);       \</span>
-<span class="cp">        raw_irqs_disabled_flags(_flags);    \</span>
-<span class="cp">    })</span>
+<span class="cp"> ({                      \</span>
+<span class="cp">     unsigned long _flags;           \</span>
+<span class="cp">     raw_local_save_flags(_flags);       \</span>
+<span class="cp">     raw_irqs_disabled_flags(_flags);    \</span>
+<span class="cp"> })</span>
 <span class="cp">#else </span><span class="cm">/* !CONFIG_TRACE_IRQFLAGS_SUPPORT */</span>
 <span class="cp">#define irqs_disabled() raw_irqs_disabled()                                                                               </span>
 <span class="cp">#endif </span><span class="cm">/* CONFIG_TRACE_IRQFLAGS_SUPPORT */</span>
 <span class="c1">//include/linux/irqflags.h</span>
 
 <span class="cp">#define raw_local_save_flags(flags)         \                                                                             </span>
-<span class="w">    </span><span class="k">do</span><span class="w"> </span><span class="p">{</span><span class="w">                        </span>\
-<span class="w">        </span><span class="n">typecheck</span><span class="p">(</span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="p">,</span><span class="w"> </span><span class="n">flags</span><span class="p">);</span><span class="w">    </span>\
-<span class="w">        </span><span class="n">flags</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">arch_local_save_flags</span><span class="p">();</span><span class="w">    </span>\
-<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="p">{</span><span class="w">                        </span>\
+<span class="w">     </span><span class="n">typecheck</span><span class="p">(</span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="p">,</span><span class="w"> </span><span class="n">flags</span><span class="p">);</span><span class="w">    </span>\
+<span class="w">     </span><span class="n">flags</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">arch_local_save_flags</span><span class="p">();</span><span class="w">    </span>\
+<span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 <span class="c1">// include/linux/irqflags.h</span>
 
 <span class="cm">/* read interrupt enabled status */</span>
 <span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">arch_local_save_flags</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">csr_read</span><span class="p">(</span><span class="n">CSR_STATUS</span><span class="p">);</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">csr_read</span><span class="p">(</span><span class="n">CSR_STATUS</span><span class="p">);</span>
 <span class="p">}</span>
 
 <span class="cm">/* unconditionally enable interrupts */</span>
 <span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">arch_local_irq_enable</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="n">csr_set</span><span class="p">(</span><span class="n">CSR_STATUS</span><span class="p">,</span><span class="w"> </span><span class="n">SR_IE</span><span class="p">);</span>
+<span class="w">  </span><span class="n">csr_set</span><span class="p">(</span><span class="n">CSR_STATUS</span><span class="p">,</span><span class="w"> </span><span class="n">SR_IE</span><span class="p">);</span>
 <span class="p">}</span>
+
+<span class="cm">/* unconditionally disable interrupts */</span>
+<span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">arch_local_irq_disable</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="n">csr_clear</span><span class="p">(</span><span class="n">CSR_STATUS</span><span class="p">,</span><span class="w"> </span><span class="n">SR_IE</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="cm">/* get status and disable interrupts */</span>
+<span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">arch_local_irq_save</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">csr_read_clear</span><span class="p">(</span><span class="n">CSR_STATUS</span><span class="p">,</span><span class="w"> </span><span class="n">SR_IE</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="cm">/* test flags */</span>
+<span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">arch_irqs_disabled_flags</span><span class="p">(</span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">flags</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="o">!</span><span class="p">(</span><span class="n">flags</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">SR_IE</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="cm">/* test hardware interrupt enable bit */</span>
+<span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">arch_irqs_disabled</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">arch_irqs_disabled_flags</span><span class="p">(</span><span class="n">arch_local_save_flags</span><span class="p">());</span>
+<span class="p">}</span>
+
+<span class="cm">/* set interrupt enabled status */</span>
+<span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">arch_local_irq_restore</span><span class="p">(</span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">flags</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="n">csr_set</span><span class="p">(</span><span class="n">CSR_STATUS</span><span class="p">,</span><span class="w"> </span><span class="n">flags</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">SR_IE</span><span class="p">);</span>
+<span class="p">}</span>
+
 <span class="c1">// arch/riscv/include/asm/irqflags.h</span>
 </code></pre></div>
+<p>另外：<a href="https://zhuanlan.zhihu.com/p/440837507">Linux内核中的几种自旋锁的实现 - 知乎</a></p>
+<p>怎么比较锁的性能？</p>
 </blockquote>
 <p><img src="pic/image-20250109130549323.png" alt="image-20250109130549323" style="zoom:50%;" /></p>
 <blockquote>
@@ -3799,9 +3836,15 @@
 <blockquote>
 <p>对于嵌入式操作系统来说，应该提出不自旋会更加自然点，比如在单核上的 <code>FreeRTOS</code>，遇到数据竞争，某个线程遇到锁，第一反应应该是让这个线程睡眠？这样相对不影响性能？也就是上面那个应用程序的互斥锁。</p>
 </blockquote>
-<p>在多核处理器中。对于应用程序，仅仅靠原子指令即可实现互斥，因为不允许关中断。但如果是操作系统内核，那有原子指令还不够，因为中断也能影响到程序的状态迁移，（回想上面的例子，）因此还需要关中断。</p>
+<p>在多核处理器中。对于应用程序，仅仅靠原子指令即可实现各种锁（当然可能有各种不同的算法），因为不允许关中断。但如果是操作系统内核，想要实现互斥，那有原子指令还不够，因为中断也能影响到程序的状态迁移，（回想上面的例子，）因此还需要关中断。</p>
 <blockquote>
-<p>这个时候感觉会不会内容稍微多了点？可以将 OS 课分成 OS 内核和 OS 应用两门课？</p>
+<p>又想到了面试题：Linux内核中的spinlock和mutex的区别关系？</p>
+<p>简单找一篇：<a href="https://blog.csdn.net/include_IT_dog/article/details/125690736">Linux内核源码中最常见的数据结构之【mutex】_struct mutex-CSDN博客</a></p>
+<p><a href="https://docs.kernel.org/locking/mutex-design.html">Generic Mutex Subsystem — The Linux Kernel documentation</a></p>
+<p>更加合理的分类：<a href="https://docs.kernel.org/locking/locktypes.html">Lock types and their rules — The Linux Kernel documentation</a></p>
+<p>课上到这里，总感觉内容稍微多了点，可以将 OS 课分成 OS 内核和 OS 应用两门课？</p>
+<p>2025.02.19再更新：2025的OS课还真的变成这样了！！！</p>
+<p><a href="https://jyywiki.cn/OS/2025/lect1.md">操作系统原理 (2025 春季学期)：操作系统概述</a></p>
 </blockquote>
 <h2 id="_8">调试理论与实践</h2>
 <blockquote>
@@ -4927,7 +4970,7 @@ vim:
 <p>示例：OpenMP</p>
 <p>使用 OpenMP 可以轻松地将循环并行化：</p>
 <div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;omp.h&gt;</span>
-<span class="w">                                                                                </span>
+<span class="w">                                                                                                        </span>
 <span class="kt">void</span><span class="w"> </span><span class="nf">compute</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="cp">#pragma omp parallel for</span>
 <span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -4950,7 +4993,7 @@ vim:
 <p>示例：动态调度</p>
 <p>使用 OpenMP 的动态调度：</p>
 <div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;omp.h&gt;</span>
-<span class="w">                                                                                </span>
+<span class="w">                                                                                                        </span>
 <span class="kt">void</span><span class="w"> </span><span class="nf">compute</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="cp">#pragma omp parallel for schedule(dynamic)</span>
 <span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -4973,15 +5016,15 @@ vim:
 <p>示例：批量通信</p>
 <p>使用 MPI 进行批量通信：</p>
 <div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;mpi.h&gt;</span>
-<span class="w">                                                                                </span>
+<span class="w">                                                                                                        </span>
 <span class="kt">void</span><span class="w"> </span><span class="nf">communicate</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">MPI_Request</span><span class="w"> </span><span class="n">requests</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>
 <span class="w">    </span><span class="n">MPI_Status</span><span class="w"> </span><span class="n">statuses</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>
-<span class="w">                                                                                </span>
+<span class="w">                                                                                                        </span>
 <span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="n">MPI_Isend</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="w"> </span><span class="n">count</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_INT</span><span class="p">,</span><span class="w"> </span><span class="n">dest</span><span class="p">,</span><span class="w"> </span><span class="n">tag</span><span class="p">,</span><span class="w"> </span><span class="n">MPI_COMM_WORLD</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">requests</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
 <span class="w">    </span><span class="p">}</span>
-<span class="w">                                                                                </span>
+<span class="w">                                                                                                        </span>
 <span class="w">    </span><span class="n">MPI_Waitall</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="n">requests</span><span class="p">,</span><span class="w"> </span><span class="n">statuses</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre></div>
@@ -4996,7 +5039,7 @@ vim:
 <p>示例：并行归并排序</p>
 <p>使用 OpenMP 实现并行归并排序：</p>
 <div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;omp.h&gt;</span>
-<span class="w">                                                                                </span>
+<span class="w">                                                                                                        </span>
 <span class="kt">void</span><span class="w"> </span><span class="nf">merge_sort_parallel</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">array</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">left</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">right</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">left</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">right</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">mid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">left</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">right</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
@@ -5404,11 +5447,11 @@ return 0;
 <div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;event2/event.h&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span>
-<span class="w">            </span>
+<span class="w">                        </span>
 <span class="kt">void</span><span class="w"> </span><span class="nf">onEvent</span><span class="p">(</span><span class="n">evutil_socket_t</span><span class="w"> </span><span class="n">fd</span><span class="p">,</span><span class="w"> </span><span class="kt">short</span><span class="w"> </span><span class="n">what</span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">arg</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Event occurredn&quot;</span><span class="p">);</span>
 <span class="p">}</span>
-<span class="w">            </span>
+<span class="w">                        </span>
 <span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">event_base</span><span class="w"> </span><span class="o">*</span><span class="n">base</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">event_base_new</span><span class="p">();</span>
 <span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">event</span><span class="w"> </span><span class="o">*</span><span class="n">ev</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">event_new</span><span class="p">(</span><span class="n">base</span><span class="p">,</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w"> </span><span class="n">EV_TIMEOUT</span><span class="o">|</span><span class="n">EV_PERSIST</span><span class="p">,</span><span class="w"> </span><span class="n">onEvent</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
@@ -5667,26 +5710,26 @@ return 0;
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;linux/types.h&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;linux/sched.h&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;linux/wait.h&gt;</span>
-<span class="w">            </span>
+<span class="w">                        </span>
 <span class="cp">#define DEVICE_NAME &quot;my_device&quot;</span>
 <span class="cp">#define IRQ_NUMBER 1 </span><span class="c1">// 假设使用中断号1</span>
-<span class="w">            </span>
+<span class="w">                        </span>
 <span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">my_open</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">inode</span><span class="w"> </span><span class="o">*</span><span class="n">inode</span><span class="p">,</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">file</span><span class="w"> </span><span class="o">*</span><span class="n">file</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">printk</span><span class="p">(</span><span class="n">KERN_INFO</span><span class="w"> </span><span class="s">&quot;Device openedn&quot;</span><span class="p">);</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
-<span class="w">            </span>
+<span class="w">                        </span>
 <span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">my_release</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">inode</span><span class="w"> </span><span class="o">*</span><span class="n">inode</span><span class="p">,</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">file</span><span class="w"> </span><span class="o">*</span><span class="n">file</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">printk</span><span class="p">(</span><span class="n">KERN_INFO</span><span class="w"> </span><span class="s">&quot;Device closedn&quot;</span><span class="p">);</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
-<span class="w">            </span>
+<span class="w">                        </span>
 <span class="c1">// 中断处理函数</span>
 <span class="k">static</span><span class="w"> </span><span class="n">irqreturn_t</span><span class="w"> </span><span class="nf">my_interrupt_handler</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">irq</span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">dev_id</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">printk</span><span class="p">(</span><span class="n">KERN_INFO</span><span class="w"> </span><span class="s">&quot;Interrupt receivedn&quot;</span><span class="p">);</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">IRQ_HANDLED</span><span class="p">;</span>
 <span class="p">}</span>
-<span class="w">            </span>
+<span class="w">                        </span>
 <span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">__init</span><span class="w"> </span><span class="nf">my_init</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">result</span><span class="p">;</span>
 <span class="w">    </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">request_irq</span><span class="p">(</span><span class="n">IRQ_NUMBER</span><span class="p">,</span><span class="w"> </span><span class="n">my_interrupt_handler</span><span class="p">,</span><span class="w"> </span><span class="n">IRQF_SHARED</span><span class="p">,</span><span class="w"> </span><span class="n">DEVICE_NAME</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
@@ -5697,15 +5740,15 @@ return 0;
 <span class="w">    </span><span class="n">printk</span><span class="p">(</span><span class="n">KERN_INFO</span><span class="w"> </span><span class="s">&quot;Driver loadedn&quot;</span><span class="p">);</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
-<span class="w">            </span>
+<span class="w">                        </span>
 <span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">__exit</span><span class="w"> </span><span class="nf">my_exit</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="n">free_irq</span><span class="p">(</span><span class="n">IRQ_NUMBER</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
 <span class="w">    </span><span class="n">printk</span><span class="p">(</span><span class="n">KERN_INFO</span><span class="w"> </span><span class="s">&quot;Driver unloadedn&quot;</span><span class="p">);</span>
 <span class="p">}</span>
-<span class="w">            </span>
+<span class="w">                        </span>
 <span class="n">module_init</span><span class="p">(</span><span class="n">my_init</span><span class="p">);</span>
 <span class="n">module_exit</span><span class="p">(</span><span class="n">my_exit</span><span class="p">);</span>
-<span class="w">            </span>
+<span class="w">                        </span>
 <span class="n">MODULE_LICENSE</span><span class="p">(</span><span class="s">&quot;GPL&quot;</span><span class="p">);</span>
 <span class="n">MODULE_AUTHOR</span><span class="p">(</span><span class="s">&quot;Your Name&quot;</span><span class="p">);</span>
 <span class="n">MODULE_DESCRIPTION</span><span class="p">(</span><span class="s">&quot;A simple event-driven device driver&quot;</span><span class="p">);</span>
@@ -6655,7 +6698,7 @@ T2<span class="w"> </span>REL<span class="w"> </span>b
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2025-02-12T18:33:04+01:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2025-02-12</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2025-02-22T09:34:41+01:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2025-02-22</span>
   </span>
 
     
