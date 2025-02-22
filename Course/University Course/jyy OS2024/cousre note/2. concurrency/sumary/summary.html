@@ -1343,6 +1343,39 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="互斥：atomic 之下">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      原子操作
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#memory-barrier" class="md-nav__link">
+    <span class="md-ellipsis">
+      Memory barrier
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#complier-barrier" class="md-nav__link">
+    <span class="md-ellipsis">
+      Complier barrier
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
       </ul>
@@ -1371,25 +1404,18 @@
   <h1>Summary</h1>
 
 <h2 id="summary-and-expand">Summary and Expand</h2>
-<p>在听完并发部分之后再回过头来做一些总结。</p>
+<p>在听完蒋炎岩老师的OS课的并发部分后回过头做一些总结。</p>
 <p>过去人们在软件上实现互斥做了很多努力（Peterson 算法），但由于硬件存在天然的并发性，以及各种硬件因素（流水线、多发生、中断...）导致实现原子性的困难，最终还是回到硬件上解决这个问题，同时也引出了各种软件上的挺多让人困惑的实现。</p>
 <h3 id="atomic">互斥：atomic 之下</h3>
 <p>从原子操作的假设开始总结：</p>
 <ul>
 <li>
 <p>包含一个原子指令</p>
-<ul>
-<li>指令的执行不能被打断</li>
-</ul>
+<p>指令的执行不能被打断</p>
 </li>
 <li>
 <p>包含一个 compiler barrier</p>
-<ul>
-<li>无论何种优化都不可越过此函数</li>
-</ul>
-<blockquote>
-<p>这一点很重要——例如我们今天的编译器支持 Link-time Optimization (LTO)，如果缺少 compiler barrier，编译优化可以穿过 volatile 标记的汇编指令。</p>
-</blockquote>
+<p>无论何种优化都不可越过此函数</p>
 </li>
 <li>
 <p>包含一个 memory fence</p>
@@ -1400,7 +1426,6 @@
 </ul>
 </li>
 </ul>
-<blockquote>
 <div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="nf">xchg</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="k">volatile</span><span class="w"> </span><span class="o">*</span><span class="n">ptr</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">newval</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">result</span><span class="p">;</span>
 <span class="w">  </span><span class="k">asm</span><span class="w"> </span><span class="k">volatile</span><span class="p">(</span>
@@ -1414,20 +1439,16 @@
 <span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">result</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div>
-</blockquote>
 <p>通过看这三个点，一下就知道了原子操作、compiler barrier、memory barrier 是实现现代多处理器系统上的互斥的重点，但对于想探究到底的人来说就感觉心中堵塞（就这么塞了三个概念？），由此再简单了解一点硬件因素，就能知道其中的缘由。</p>
-<ul>
-<li>
-<p><strong>原子操作</strong></p>
+<hr />
+<h4 id="_1"><strong>原子操作</strong></h4>
 <p>我自己理解为原子操作是不能被各种各样的事件所分割。</p>
 <p>之前认为的观点：一条汇编指令是原子的，是不可分割的最小执行单位。</p>
 <p>但是粗略学习过计算机组成原理（并不深入）和 PA 和上完并发之后，了解到流水线、微操作、超标量、缓存等等概念。发现从 CPU 的视角来说机器指令还真不是最小的执行单位。具体从 CPU 的微架构历史学起（<strong>可能很多内容是无关的，只是用于自己理清逻辑的</strong>），同时借助 AI 总结：</p>
 <ol>
 <li>
 <p><strong>早期阶段（1960s-1980s）：低效但简单正确</strong></p>
-<ul>
-<li>
-<p><strong>技术特点</strong>：</p>
+<blockquote>
 <ul>
 <li>
 <p><strong>单周期执行</strong>：指令在一个时钟周期内完成（无流水线）。</p>
@@ -1448,11 +1469,6 @@
 <li><strong>原子性缺失</strong>：单条机器指令被转化为多个 μOps，每个 μOps 才是 CPU 调度的最小执行单位。</li>
 </ul>
 </li>
-</ul>
-</li>
-<li>
-<p><strong>原子性</strong></p>
-<ul>
 <li>
 <p><strong>对外原子性</strong>：流水线设计：<strong>对外隐藏内部阶段分割</strong>，使指令的最终结果表现为原子性（即程序员视角的“不可分割”）。</p>
 <p>但<strong>内部关键</strong>：<strong>提交阶段（Retirement）</strong></p>
@@ -1463,6 +1479,9 @@
     即使指令在流水线中被分解为多个阶段，硬件确保所有副作用（如寄存器修改、内存写入）一次性对外可见，从而维持原子性。</li>
 </ul>
 </li>
+</ul>
+</blockquote>
+<ul>
 <li>
 <p><strong>保证原子性</strong></p>
 <p>那个时代实现原子性比较简单，因为主要的原子性威胁来自<strong>中断</strong>。由此软件上<strong>关中断</strong>，就能确保指令执行的顺序。但这并不能保证硬件的并行影响 sequence呀？intel是这么做的：</p>
@@ -1483,8 +1502,6 @@
     数据冒险、控制冒险会导致流水线停顿或清空，但这是为了维护<strong>执行正确性</strong>，而非原子性。</li>
 <li><strong>原子性保障</strong>：
     即使流水线中存在冒险，硬件通过提交阶段的原子提交机制，确保指令结果对外表现为原子。</li>
-</ul>
-</li>
 </ul>
 </li>
 </ul>
@@ -1519,8 +1536,6 @@
 <p>其中比较出名的就是 MESI（Modified/Exclusive/Shared/Invalid 状态）同步缓存行，具体内容不展开，简单概述后面再说。</p>
 </li>
 </ol>
-</li>
-</ul>
 <hr />
 <p>但先停停，实际上到这里，我自己又进一步对原子指令分成了两种，借助 AI 总结：</p>
 <ol>
@@ -1550,9 +1565,7 @@
 </li>
 </ol>
 <hr />
-<ul>
-<li>
-<p>Memory barrier</p>
+<h4 id="memory-barrier">Memory barrier</h4>
 <blockquote>
 <p>保证操作执行前指令的写入，能对其他处理器之后的 load 可见</p>
 </blockquote>
@@ -1607,22 +1620,14 @@
 <ol>
 <li><strong>缓存一致性</strong>是硬件层的机制，解决多核缓存数据同步问题。</li>
 <li><strong>一致性模型</strong>是硬件/软件接口的规则，定义内存操作的可见性与顺序性。</li>
-<li>
-<p><strong>编程语言内存模型</strong>是高层抽象，屏蔽硬件差异，提供跨平台的多线程语义。（这里没讲）</p>
-</li>
-<li>
-<p>层级关系（LLM 总结）</p>
-<ul>
-<li><strong>内存模型（Memory Models）</strong>：位于上层，主要面向程序员和编译器，定义了多线程程序中内存操作的语义和规则。内存模型决定了编译器如何对内存操作进行优化和重排序，以生成高效的机器代码。</li>
-<li><strong>一致性模型（Consistency Model）</strong>：位于中间层，是内存模型和缓存一致性协议的桥梁。它定义了硬件层面如何实现内存模型的规则，包括缓存一致性协议如何与处理器的内存操作协同工作，以保证整个系统的内存一致性。</li>
-<li><strong>缓存一致性（Cache Coherence）</strong>：位于下层，主要面向硬件实现，确保多个处理器核心的缓存中共享数据的一致性。缓存一致性协议是实现一致性模型的基础，通过定义缓存行的状态和状态转换规则，来维护缓存数据的一致性。</li>
-</ul>
-</li>
+<li><strong>编程语言内存模型</strong>是高层抽象，屏蔽硬件差异，提供跨平台的多线程语义。（这里没讲）</li>
 </ol>
+<p>层级关系（LLM 总结）：
+- <strong>内存模型（Memory Models）</strong>：位于上层，主要面向程序员和编译器，定义了多线程程序中内存操作的语义和规则。内存模型决定了编译器如何对内存操作进行优化和重排序，以生成高效的机器代码。
+- <strong>一致性模型（Consistency Model）</strong>：位于中间层，是内存模型和缓存一致性协议的桥梁。它定义了硬件层面如何实现内存模型的规则，包括缓存一致性协议如何与处理器的内存操作协同工作，以保证整个系统的内存一致性。
+- <strong>缓存一致性（Cache Coherence）</strong>：位于下层，主要面向硬件实现，确保多个处理器核心的缓存中共享数据的一致性。缓存一致性协议是实现一致性模型的基础，通过定义缓存行的状态和状态转换规则，来维护缓存数据的一致性。</p>
 </blockquote>
-</li>
-<li>
-<p>Complier barrier</p>
+<h4 id="complier-barrier">Complier barrier</h4>
 <p>那这个 Compiler barrier 又是什么？别忘了，处理器会进行指令重排，编译器也会进行代码优化重排代码呀！但是二者区别？又是什么？我不清楚，让 AI 给我生成：</p>
 <table>
 <thead>
@@ -1763,8 +1768,6 @@
 </ul>
 </li>
 </ul>
-</li>
-</ul>
 <p>由上三个假设的基础，原子操作就成为了我们简化程序执行的基础机制。</p>
 <ul>
 <li>通过自旋 (spin)，可以很直观地实现 “轮询” 式的互斥。</li>
@@ -1803,7 +1806,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2025-02-22T09:34:41+01:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2025-02-22</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2025-02-22T14:49:24+01:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2025-02-22</span>
   </span>
 
     
