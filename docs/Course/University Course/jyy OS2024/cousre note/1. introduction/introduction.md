@@ -11,8 +11,6 @@ The individual learning implementation version, without Online Judge, only local
 
 ## 概述
 
-**本讲内容**：个人/课程简介、操作系统的发展历史，回答三个问题：
-
 - (Why): 为什么要学操作系统？
 - (What): 到底什么是操作系统？
 - (How): 怎么学操作系统？
@@ -31,11 +29,9 @@ The individual learning implementation version, without Online Judge, only local
 
 
 
-这学期刚开学的时候看第一节课很吃力，做了berkeley 的lab和project再看这个，瞬间理解了不少。cs61c的第一个proj是用c语言写一个贪吃蛇小游戏，包括使用gdb，valgrind等各种工具调试。第二个proj是在venus上用risc-v写汇编代码，实现一个简单的神经网络，中间调试的时候也用到了os，把值打印出来调试。第三个proj是用logisim搭一个cpu。从数字逻辑到汇编语言到稍微高级一点的c语言三层抽象都涵盖了。第四个proj是写数据级别和线程级别的并行程序，也涉及到了race condition,同步，死锁，活锁等一些在os里会出现的概念，不过这个需要他们学校的hive machine，没太深入做。
-
-
-
 <img src="pic/image-20240810195345197.png" alt="image-20240810195345197" style="zoom:67%;" />
+
+
 
 
 
@@ -357,6 +353,7 @@ int hanoi(int n, char from, char to, char via) {
 
         int n = f->n, from = f->from, to = f->to, via = f->via;
 
+        printf("f->pc:%d  n:%d\n", f->pc, n);
         switch (f->pc) {
             case 0:
                 if (n == 1) {
@@ -443,7 +440,11 @@ f->pc:6  n:3
 Hanoi(3, A, B, C) = 7
 ```
 
-上述通过栈帧模拟的函数调用，每一次函数调用模拟为：创建新栈帧，PC 刷新为 0，去到要执行下一个函数的地方(注意每次循环都会重新获取top，即本次栈帧，然后获取栈帧中的数据)。
+上述通过栈帧模拟的函数调用（从状态机的视角来理解），每一次函数调用模拟为：创建新栈帧（里面有各种局部变量，但有一个最重要的就是每一个栈帧有一个自己的PC）。
+
+而状态的迁移就是执行每个栈帧里面的 PC 处的语句（行号），
+
+去到要执行下一个函数的地方(注意每次循环都会重新获取top，即本次栈帧，然后获取栈帧中的数据)。
 
 `call` 和 `ret` 跳转到新栈帧、返回到旧栈帧。
 

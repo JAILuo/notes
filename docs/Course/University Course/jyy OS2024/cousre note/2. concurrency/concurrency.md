@@ -1,7 +1,3 @@
-只记录部分。
-
-
-
 ## 多处理器编程
 
 <img src="pic/image-20241110231300436.png" alt="image-20241110231300436" style="zoom:50%;" />
@@ -11,8 +7,6 @@
     > **==DEMO==**
     >
     > **并发线程模型**：**并发线程能够读写共享的 heap 堆区**。除此之外，每个线程持有局部变量的副本。Mosaic 不会自动在每条语句之后进行线程调度：我们需要手工插入 `sys_sched`。
-
-
 
 
 
@@ -301,41 +295,81 @@ lock() -> sum++ -> 中断来了 -> (有临界区，中断也想对sum++) -> (但
 
 但还有问题，lock前关了中断，但到最后的时候，变成了开中断。但如果在 `disable irq` 之前的 CPU 状态就是 关中断呢？所以，需要保存中断状态！
 
-> 这就是我在 NEMU 移植 Linux 的时候看的 Linux kernel 的 `arch/risc-v` 里看到的 `arch_local_save_flags` ？
+> 这就是我在 NEMU 移植 Linux 的时候看的 Linux kernel 的 `arch/risc-v` 里看到的 `arch_local_save_flags` 等各种名字类似的 API？关键两个：
+>
+> - `include/linux/irqflags.h`
+> - ``arch/riscv/include/asm/irqflags.h`
+>
+> 一些代码：
 >
 > ```C
 > #ifdef CONFIG_TRACE_IRQFLAGS_SUPPORT
 > #define irqs_disabled()                 \
->     ({                      \
->         unsigned long _flags;           \
->         raw_local_save_flags(_flags);       \
->         raw_irqs_disabled_flags(_flags);    \
->     })
+>  ({                      \
+>      unsigned long _flags;           \
+>      raw_local_save_flags(_flags);       \
+>      raw_irqs_disabled_flags(_flags);    \
+>  })
 > #else /* !CONFIG_TRACE_IRQFLAGS_SUPPORT */
 > #define irqs_disabled() raw_irqs_disabled()                                                                               
 > #endif /* CONFIG_TRACE_IRQFLAGS_SUPPORT */
 > //include/linux/irqflags.h
 > 
 > #define raw_local_save_flags(flags)         \                                                                             
->     do {                        \
->         typecheck(unsigned long, flags);    \
->         flags = arch_local_save_flags();    \
->     } while (0)
+>  do {                        \
+>      typecheck(unsigned long, flags);    \
+>      flags = arch_local_save_flags();    \
+>  } while (0)
 > // include/linux/irqflags.h
 > 
 > /* read interrupt enabled status */
 > static inline unsigned long arch_local_save_flags(void)
 > {
->     return csr_read(CSR_STATUS);
+> 	return csr_read(CSR_STATUS);
 > }
 > 
 > /* unconditionally enable interrupts */
 > static inline void arch_local_irq_enable(void)
 > {
->     csr_set(CSR_STATUS, SR_IE);
+> 	csr_set(CSR_STATUS, SR_IE);
 > }
+> 
+> /* unconditionally disable interrupts */
+> static inline void arch_local_irq_disable(void)
+> {
+> 	csr_clear(CSR_STATUS, SR_IE);
+> }
+> 
+> /* get status and disable interrupts */
+> static inline unsigned long arch_local_irq_save(void)
+> {
+> 	return csr_read_clear(CSR_STATUS, SR_IE);
+> }
+> 
+> /* test flags */
+> static inline int arch_irqs_disabled_flags(unsigned long flags)
+> {
+> 	return !(flags & SR_IE);
+> }
+> 
+> /* test hardware interrupt enable bit */
+> static inline int arch_irqs_disabled(void)
+> {
+> 	return arch_irqs_disabled_flags(arch_local_save_flags());
+> }
+> 
+> /* set interrupt enabled status */
+> static inline void arch_local_irq_restore(unsigned long flags)
+> {
+> 	csr_set(CSR_STATUS, flags & SR_IE);
+> }
+> 
 > // arch/riscv/include/asm/irqflags.h
 > ```
+>
+> 另外：[Linux内核中的几种自旋锁的实现 - 知乎](https://zhuanlan.zhihu.com/p/440837507)
+>
+> 怎么比较锁的性能？
 
 <img src="pic/image-20250109130549323.png" alt="image-20250109130549323" style="zoom:50%;" />
 
@@ -540,11 +574,25 @@ mutex_unlock()	// release
 
 > 对于嵌入式操作系统来说，应该提出不自旋会更加自然点，比如在单核上的 `FreeRTOS`，遇到数据竞争，某个线程遇到锁，第一反应应该是让这个线程睡眠？这样相对不影响性能？也就是上面那个应用程序的互斥锁。
 
-在多核处理器中。对于应用程序，仅仅靠原子指令即可实现互斥，因为不允许关中断。但如果是操作系统内核，那有原子指令还不够，因为中断也能影响到程序的状态迁移，（回想上面的例子，）因此还需要关中断。
+在多核处理器中。对于应用程序，仅仅靠原子指令即可实现各种锁（当然可能有各种不同的算法），因为不允许关中断。但如果是操作系统内核，想要实现互斥，那有原子指令还不够，因为中断也能影响到程序的状态迁移，（回想上面的例子，）因此还需要关中断。
+
+> 又想到了面试题：Linux内核中的spinlock和mutex的区别关系？
+>
+> 简单找一篇：[Linux内核源码中最常见的数据结构之【mutex】_struct mutex-CSDN博客](https://blog.csdn.net/include_IT_dog/article/details/125690736)
+>
+> [Generic Mutex Subsystem — The Linux Kernel documentation](https://docs.kernel.org/locking/mutex-design.html)
+>
+> 更加合理的分类：[Lock types and their rules — The Linux Kernel documentation](https://docs.kernel.org/locking/locktypes.html)
 
 
 
->  这个时候感觉会不会内容稍微多了点？可以将 OS 课分成 OS 内核和 OS 应用两门课？
+
+
+>  课上到这里，总感觉内容稍微多了点，可以将 OS 课分成 OS 内核和 OS 应用两门课？
+>
+>  2025.02.19再更新：2025的OS课还真的变成这样了！！！
+>
+>  [操作系统原理 (2025 春季学期)：操作系统概述](https://jyywiki.cn/OS/2025/lect1.md)
 
 
 
@@ -1732,7 +1780,7 @@ void T_scheduler() {
 >
 >         ```c
 >         #include <omp.h>
->                                                                                         
+>                                                                                                                 
 >         void compute() {
 >             #pragma omp parallel for
 >             for (int i = 0; i < N; i++) {
@@ -1755,7 +1803,7 @@ void T_scheduler() {
 >
 >         ```c
 >         #include <omp.h>
->                                                                                         
+>                                                                                                                 
 >         void compute() {
 >             #pragma omp parallel for schedule(dynamic)
 >             for (int i = 0; i < N; i++) {
@@ -1778,15 +1826,15 @@ void T_scheduler() {
 >
 >         ```c
 >         #include <mpi.h>
->                                                                                         
+>                                                                                                                 
 >         void communicate() {
 >             MPI_Request requests[10];
 >             MPI_Status statuses[10];
->                                                                                         
+>                                                                                                                 
 >             for (int i = 0; i < 10; i++) {
 >                 MPI_Isend(data[i], count, MPI_INT, dest, tag, MPI_COMM_WORLD, &requests[i]);
 >             }
->                                                                                         
+>                                                                                                                 
 >             MPI_Waitall(10, requests, statuses);
 >         }
 >         ```
@@ -1802,7 +1850,7 @@ void T_scheduler() {
 >
 >         ```c
 >         #include <omp.h>
->                                                                                         
+>                                                                                                                 
 >         void merge_sort_parallel(int *array, int left, int right) {
 >             if (left < right) {
 >                 int mid = (left + right) / 2;
@@ -1846,40 +1894,40 @@ void T_scheduler() {
 >             int n = 1024;
 >             int *a, *b, *c;
 >             int *d_a, *d_b, *d_c;
->                                                                                             
+>                                                                                                                     
 >             // 分配主机内存
 >             a = (int *)malloc(n * sizeof(int));
 >             b = (int *)malloc(n * sizeof(int));
 >             c = (int *)malloc(n * sizeof(int));
->                                                                                             
+>                                                                                                                     
 >             // 分配设备内存
 >             cudaMalloc((void **)&d_a, n * sizeof(int));
 >             cudaMalloc((void **)&d_b, n * sizeof(int));
 >             cudaMalloc((void **)&d_c, n * sizeof(int));
->                                                                                             
+>                                                                                                                     
 >             // 初始化数据
 >             for (int i = 0; i < n; i++) {
 >                 a[i] = i;
 >                 b[i] = i;
 >             }
->                                                                                             
+>                                                                                                                     
 >             // 从主机复制数据到设备
 >             cudaMemcpy(d_a, a, n * sizeof(int), cudaMemcpyHostToDevice);
 >             cudaMemcpy(d_b, b, n * sizeof(int), cudaMemcpyHostToDevice);
->                                                                                         
+>                                                                                                                 
 >             // 启动内核
 >             int threadsPerBlock = 256;
 >             int blocksPerGrid = (n + threadsPerBlock - 1) / threadsPerBlock;
 >             vector_add<<<blocksPerGrid, threadsPerBlock>>>(d_a, d_b, d_c, n);
->                                                                                             
+>                                                                                                                     
 >             // 从设备复制数据到主机
 >             cudaMemcpy(c, d_c, n * sizeof(int), cudaMemcpyDeviceToHost);
->                                                                                             
+>                                                                                                                     
 >             // 释放设备内存
 >             cudaFree(d_a);
 >             cudaFree(d_b);
 >             cudaFree(d_c);
->                                                                                             
+>                                                                                                                     
 >             // 释放主机内存
 >             free(a);
 >             free(b);
@@ -2250,11 +2298,11 @@ lock ordering
 > >         #include <event2/event.h>
 > >         #include <stdio.h>
 > >         #include <stdlib.h>
-> >                     
+> >                                 
 > >         void onEvent(evutil_socket_t fd, short what, void *arg) {
 > >             printf("Event occurredn");
 > >         }
-> >                     
+> >                                 
 > >         int main() {
 > >             struct event_base *base = event_base_new();
 > >             struct event *ev = event_new(base, -1, EV_TIMEOUT|EV_PERSIST, onEvent, NULL);
@@ -2474,26 +2522,26 @@ lock ordering
 > >     #include <linux/types.h>
 > >     #include <linux/sched.h>
 > >     #include <linux/wait.h>
-> >                 
+> >                             
 > >     #define DEVICE_NAME "my_device"
 > >     #define IRQ_NUMBER 1 // 假设使用中断号1
-> >                 
+> >                             
 > >     static int my_open(struct inode *inode, struct file *file) {
 > >         printk(KERN_INFO "Device openedn");
 > >         return 0;
 > >     }
-> >                 
+> >                             
 > >     static int my_release(struct inode *inode, struct file *file) {
 > >         printk(KERN_INFO "Device closedn");
 > >         return 0;
 > >     }
-> >                 
+> >                             
 > >     // 中断处理函数
 > >     static irqreturn_t my_interrupt_handler(int irq, void *dev_id) {
 > >         printk(KERN_INFO "Interrupt receivedn");
 > >         return IRQ_HANDLED;
 > >     }
-> >                 
+> >                             
 > >     static int __init my_init(void) {
 > >         int result;
 > >         result = request_irq(IRQ_NUMBER, my_interrupt_handler, IRQF_SHARED, DEVICE_NAME, NULL);
@@ -2504,15 +2552,15 @@ lock ordering
 > >         printk(KERN_INFO "Driver loadedn");
 > >         return 0;
 > >     }
-> >                 
+> >                             
 > >     static void __exit my_exit(void) {
 > >         free_irq(IRQ_NUMBER, NULL);
 > >         printk(KERN_INFO "Driver unloadedn");
 > >     }
-> >                 
+> >                             
 > >     module_init(my_init);
 > >     module_exit(my_exit);
-> >                 
+> >                             
 > >     MODULE_LICENSE("GPL");
 > >     MODULE_AUTHOR("Your Name");
 > >     MODULE_DESCRIPTION("A simple event-driven device driver");
@@ -3418,6 +3466,8 @@ while (xchg(&lk, ❌) == ❌) {
 ```
 
 - 配合调试器和线程 backtrace 一秒诊断死锁
+
+
 
 
 

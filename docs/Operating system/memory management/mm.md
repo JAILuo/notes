@@ -45,8 +45,9 @@
 
 - 核心文件 
     - `struct free_area`：`include/linux/mmzone.h`
-    - ``struct page`：`include/linux/mm_types.h`
+    - `struct page`：`include/linux/mm_types.h`
     - `mm/page_alloc.c`
+    - `mm/internal.h`
 
 
 
@@ -264,6 +265,82 @@ static __always_inline void __SetPageBuddy(struct page *page)
 #### 代码流程：释放
 
 ```c
+/**
+ * __free_pages - Free pages allocated with alloc_pages().
+ * @page: The page pointer returned from alloc_pages().
+ * @order: The order of the allocation.
+ *
+ * This function can free multi-page allocations that are not compound
+ * pages.  It does not check that the @order passed in matches that of
+ * the allocation, so it is easy to leak memory.  Freeing more memory
+ * than was allocated will probably emit a warning.
+ *
+ * If the last reference to this page is speculative, it will be released
+ * by put_page() which only frees the first page of a non-compound
+ * allocation.  To prevent the remaining pages from being leaked, we free
+ * the subsequent pages here.  If you want to use the page's reference
+ * count to decide when to free the allocation, you should allocate a
+ * compound page, and use put_page() instead of __free_pages().
+ *
+ * Context: May be called in interrupt context or while holding a normal
+ * spinlock, but not in NMI context or while holding a raw spinlock.
+ */
+void __free_pages(struct page *page, unsigned int order)
+{
+	/* get PageHead before we drop reference */
+	int head = PageHead(page);
+
+	if (put_page_testzero(page))
+		free_the_page(page, order);
+	else if (!head)
+		while (order-- > 0)
+			free_the_page(page + (1 << order), order);
+}
+EXPORT_SYMBOL(__free_pages);
+
+void free_pages(unsigned long addr, unsigned int order)
+{
+	if (addr != 0) {
+		VM_BUG_ON(!virt_addr_valid((void *)addr));
+		__free_pages(virt_to_page((void *)addr), order);
+	}
+}
+```
+
+```c
+static void __free_pages_ok(struct page *page, unsigned int order,
+			    fpi_t fpi_flags)
+{
+	unsigned long flags;
+	int migratetype;
+	unsigned long pfn = page_to_pfn(page);
+	struct zone *zone = page_zone(page);
+
+	if (!free_pages_prepare(page, order, fpi_flags))
+		return;
+
+	/*
+	 * Calling get_pfnblock_migratetype() without spin_lock_irqsave() here
+	 * is used to avoid calling get_pfnblock_migratetype() under the lock.
+	 * This will reduce the lock holding time.
+	 */
+	migratetype = get_pfnblock_migratetype(page, pfn);
+
+	spin_lock_irqsave(&zone->lock, flags);
+	if (unlikely(has_isolate_pageblock(zone) ||
+		is_migrate_isolate(migratetype))) {
+		migratetype = get_pfnblock_migratetype(page, pfn);
+	}
+	__free_one_page(page, pfn, zone, order, migratetype, fpi_flags);
+	spin_unlock_irqrestore(&zone->lock, flags);
+
+	__count_vm_events(PGFREE, 1 << order);
+}
+```
+
+
+
+```c
 /*
  * Freeing function for a buddy system allocator.
  *
@@ -370,6 +447,70 @@ done_merging:
 }
 ```
 
+> 重点：
+>
+> ```C
+> 		combined_pfn = buddy_pfn & pfn;
+> 		page = page + (combined_pfn - pfn);
+> 		pfn = combined_pfn;
+> 		order++;
+> ```
+>
+> 在 Buddy 系统中，合并两个相邻的空闲块需要确定合并后的起始页面和新的块大小。
+>
+> 1. 合并后的 PFN 计算
+>
+>     1. 
+>
+>     ```c
+>     combined_pfn = buddy_pfn & pfn;
+>     ```
+>
+>     - 当前页面的 PFN (`pfn`) 和其 Buddy 的 PFN (`buddy_pfn`) 都是对齐到 2order 的页面边界。
+>     - Buddy 系统的块大小为 2order 页面，合并两个相邻的块后，块大小为 2order+1 页面。
+>     - 合并的起始 PFN 必须是这两个 PFN 中较小的那个，并且对齐到 2order+1 的页面边界。
+>     - 通过逻辑与操作（`buddy_pfn & pfn`），可以清除 PFN 中的一些低有效位，从而得到合并后块的起始 PFN。
+>
+>     **示例**： 假设 `pfn` 是 5（二进制 `101`），`buddy_pfn` 是 4（二进制 `100`）：
+>
+>     ```
+>     buddy_pfn & pfn = 100 & 101 = 100 (即 PFN 4)
+>     ```
+>
+>     合并后的 PFN 是 4，合并后的块的大小是 2order+1 页面。
+>
+> 2. 更新当前页面和 order
+>
+>     ```c
+>     page = page + (combined_pfn - pfn);
+>     pfn = combined_pfn;
+>     order++;
+>     ```
+>
+>     - `combined_pfn - pfn` 是当前页面和合并后块起始 PFN 的偏移量。
+>     - 如果当前页面的 PFN 不是合并后块的起始 PFN，需要调整页面指针以指向合并后块的起始页面。
+>     - `order` 增加 1，因为合并后的块大小是原来的两倍。
+>
+>     **示例**： 假设当前页面指针 `page` 对应的 PFN 是 5，合并后起始 PFN 是 4：
+>
+>     ```
+>     page = page + (4 - 5) = page -1
+>     ```
+>
+>     这样，`page` 现在指向 PFN 4 的页面，合并后的块的大小为 2order+1 页面。
+>
+> 3. 总结
+>
+>     合并相邻的 Buddy 块需要：
+>
+>     1. 使用逻辑与操作（`&`）确定合并后块的起始 PFN。
+>     2. 调整页面指针以指向合并后块的起始页面。
+>     3. 增加 `order` 以反映新的块大小。
+
+
+
+
+
 
 
 #### 网络参考资料
@@ -387,6 +528,43 @@ done_merging:
 **TODO**
 
 
+
+发现在 `/mm/slab.c` 的实现中有很多：
+
+```c
+#if DEBUG
+static void check_irq_off(void)
+{
+	BUG_ON(!irqs_disabled());
+}
+
+static void check_irq_on(void)
+{
+	BUG_ON(irqs_disabled());
+}
+
+static void check_mutex_acquired(void)
+{
+	BUG_ON(!mutex_is_locked(&slab_mutex));
+}
+
+static void check_spinlock_acquired(struct kmem_cache *cachep)
+{
+#ifdef CONFIG_SMP
+	check_irq_off();
+	assert_raw_spin_locked(&get_node(cachep, numa_mem_id())->list_lock);
+#endif
+}
+
+static void check_spinlock_acquired_node(struct kmem_cache *cachep, int node)
+{
+#ifdef CONFIG_SMP
+	check_irq_off();
+	assert_raw_spin_locked(&get_node(cachep, node)->list_lock);
+#endif
+}
+
+```
 
 
 
