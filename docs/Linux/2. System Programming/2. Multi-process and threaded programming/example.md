@@ -802,6 +802,8 @@ man wait
 
 
 
+
+
 #### mkfifo()
 
 ![image-20240309171929445](pic/image-20240309171929445.png)![image-20240309172422660](pic/image-20240309172422660.png)
@@ -1169,7 +1171,7 @@ int main(int argc, char *argv[])
 >     ```c
 >     #include <sys/types.h>
 >     #include <sys/ipc.h>
->                     
+>                         
 >     key_t key = ftok("/tmp/myfile", 'A');
 >     if (key == -1) {
 >         perror("ftok");

@@ -737,9 +737,7 @@ gdb.execute('continue')
 
 ### Makefile 方法
 
-Makefile 看起来确实是很复杂，但是当它本质上在一行行地执行命令，进一步也就是程序，程序执行起来，它就变成了 trace。怎么处理trace ?
-
-想想自己在 `The Missing Semester of Your CS Education` 学会的数据处理。
+Makefile 看起来确实是很复杂，但是当它本质上在一行行地执行命令，进一步也就是程序，程序执行起来，它就变成了 trace。怎么处理trace ?想想自己在 `The Missing Semester of Your CS Education` 学会的数据处理。
 
 ```makefile
 log:

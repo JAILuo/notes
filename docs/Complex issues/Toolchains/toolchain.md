@@ -2,17 +2,7 @@
 
 ### Toolchain
 
-我们常说的工具链是编译所需的编译器、基本工具和库这一集合，当然还能包括构建工具、常用的开发人员库等等。
-
-[Toolchains: A horror story. Real world examples of how a seemingly… | by Ruvinda Dhambarage | Medium](https://ruvi-d.medium.com/toolchains-a-horror-story-bef1ef522292)
-
-
-
-### what is cross compiling
-
-[Toolchains: A horror story. Real world examples of how a seemingly… | by Ruvinda Dhambarage | Medium](https://ruvi-d.medium.com/toolchains-a-horror-story-bef1ef522292)
-
-
+关于工具链，什么是工具链
 
 
 
@@ -45,18 +35,22 @@ ISA常见的那几个，x86_64、arm、riscv64...
 
 在三元组后面跟着各种编译工具：`triple-gcc`、`triple-objdump`...
 
-自己遇到的例子：
 
-> - ARM:
->     - **arm-linux-gcc**：这是一个较老的命名方式，用于编译运行在ARM架构上的Linux系统应用程序。它通常链接到glibc库。
->     - **arm-linux-gnueabi-gcc**：这个编译器用于编译运行在ARM架构上的Linux系统应用程序，适用于任何CPU型号，链接到GNU EABI库。
->     - **arm-linux-gnueabihf-gcc**：与`arm-linux-gnueabi-gcc`类似，但默认使用hard浮点ABI，适用于有FPU的ARM架构。
->     - **arm-none-eabi-gcc**：用于编译不依赖操作系统的ARM架构应用程序，通常用于裸机环境，链接 newlib 等。
->     - **arm-none-linux-gnueabi-gcc**：用于编译运行在ARM架构上的Linux系统应用程序，适用于任何CPU型号，链接到GNU EABI库。
-> - RISC-V
->     - **riscv64-unknown-linux-gnu-gcc**：这是一个64位的RISC-V交叉编译工具链，用于编译运行在Linux系统上的应用程序，链接到glibc库。
->     - **riscv64-unknown-elf-gcc**：这是一个64位的RISC-V交叉编译工具链，用于编译不依赖操作系统的裸机应用程序，链接到newlib库。
->     - **riscv-none-embed-gcc**：这是为裸机（bare-metal）嵌入式系统而生成的交叉编译工具链，使用newlib或newlib-nano库，能够为嵌入式系统生成更加优化的代码体积。
+
+### Example
+
+先简单
+
+- ARM:
+    - **arm-linux-gcc**：这是一个较老的命名方式，用于编译运行在ARM架构上的Linux系统应用程序。它通常链接到glibc库。
+    - **arm-linux-gnueabi-gcc**：这个编译器用于编译运行在ARM架构上的Linux系统应用程序，适用于任何CPU型号，链接到GNU EABI库。
+    - **arm-linux-gnueabihf-gcc**：与`arm-linux-gnueabi-gcc`类似，但默认使用hard浮点ABI，适用于有FPU的ARM架构。
+    - **arm-none-eabi-gcc**：用于编译不依赖操作系统的ARM架构应用程序，通常用于裸机环境，链接 newlib 等。
+    - **arm-none-linux-gnueabi-gcc**：用于编译运行在ARM架构上的Linux系统应用程序，适用于任何CPU型号，链接到GNU EABI库。
+- RISC-V
+    - **riscv64-unknown-linux-gnu-gcc**：这是一个64位的RISC-V交叉编译工具链，用于编译运行在Linux系统上的应用程序，链接到glibc库。
+    - **riscv64-unknown-elf-gcc**：这是一个64位的RISC-V交叉编译工具链，用于编译不依赖操作系统的裸机应用程序，链接到newlib库。
+    - **riscv-none-embed-gcc**：这是为裸机（bare-metal）嵌入式系统而生成的交叉编译工具链，使用newlib或newlib-nano库，能够为嵌入式系统生成更加优化的代码体积。
 
 > 一些启发：
 >
@@ -65,6 +59,8 @@ ISA常见的那几个，x86_64、arm、riscv64...
 > arm-linux-gnueabi-gcc 和 aarch64-linux-gnu-gcc 适用于 Arm Cortex-A 系列芯片，前者针对 32 位芯片，后者针对 64 位芯片，它使用的是 glibc 库。可以用来编译 u-boot、linux kernel 以及应用程序。
 >
 > 另外需要补充一点的是，32 位的 Arm 和 64 位的 Arm，它们的指令集是不同的，所以需要使用不同的工具链。当然，Arm64 为了保证前向兼容，提供了一个 32 位的兼容模式，所以我们用 arm-linux-gnueabi-gcc 编译的应用程序也是可以直接在Arm64 的系统上运行的，但是 Linux Kernel 和 U-Boot 就不行，除非你提前把 CPU 切换到 32 位模式。曾经有个项目使用了一颗四核的 Arm64 芯片，但是内存只有64M，为了节省空间，在 CPU 运行到 U-Boot 之前，我们就把它切到了 32 位模式，后面的 U-Boot、Linux Kernel，应用全部都用 32 位编译，加上 Thumb 指令集，节省了不少空间。[一次搞定 Arm Linux 交叉编译](https://segmentfault.com/a/1190000020955640)
+
+
 
 但是 C lib 和 ABI 究竟是啥？
 
@@ -218,8 +214,6 @@ C库（也称为C语言运行时库）是一组预先编写好的代码，它们
 
 ### 交叉编译工具链的原理
 
-https://crosstool-ng.github.io/Adocs/toolchain-construction/
-
 加拿大编译。
 
 The key to cross compiling is understanding what these terms means in relation to the different types of things that you will be building.
@@ -249,10 +243,6 @@ Your key take away here should be that the build/host/target label changes depen
 
 
 ## Project example
-
-
-
-
 
 [交叉编译学习笔记（二）——交叉编译器的命名规则-腾讯云开发者社区-腾讯云 (tencent.com)](https://cloud.tencent.com/developer/article/1010138)
 
@@ -348,6 +338,8 @@ Here is a neat trick! You can cheat with an ARM QEMU virtual machine on your dev
 
 
 
+
+## 更多阅读
 
 [DevOps for Embedded C/C++. How to spot and fix the red flags in… | by Ruvinda Dhambarage | Medium](https://ruvi-d.medium.com/devops-for-embedded-c-c-29cd8e14bc81)
 

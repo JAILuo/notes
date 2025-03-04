@@ -96,3 +96,15 @@ nav:
       - Summary: ysyx/pa/summary/summary.md
       - Linux Porting: ysyx/pa/Linux_porting/porting.md
     - Digital Circuit: ysyx\digital-circuit/digital circuit.md
+  - Tools:
+    - GDB: Tools/GDB/GDB.md
+    - Vim: 
+      - usage: Tools/vim/usage/usage.md
+      - vim-plugin: Tools/vim/vim-plugin/vim.md
+    - doxygen: Tools/doxygen/doxygen.md
+    - gcc: Tools/gcc/gcc.md
+    - Git: Tools/Git/Git.md
+    - md2slider: Tools/md2slider/md2slider.md
+    - tmux: Tools/tmux/tmux.md
+  - TODO List: Todo List/todo.md
+      

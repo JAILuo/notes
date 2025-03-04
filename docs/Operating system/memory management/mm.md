@@ -158,15 +158,6 @@ static inline void del_page_from_free_list(struct page *page, struct zone *zone,
 ```
 
 ```c
-static inline struct page *get_page_from_free_area(struct free_area *area,
-					    int migratetype)
-{
-	return list_first_entry_or_null(&area->free_list[migratetype],
-					struct page, buddy_list);
-}
-```
-
-```c
 static inline void expand(struct zone *zone, struct page *page,
 	int low, int high, int migratetype)
 {
@@ -460,43 +451,41 @@ done_merging:
 >
 > 1. 合并后的 PFN 计算
 >
->     1. 
->
 >     ```c
->     combined_pfn = buddy_pfn & pfn;
+>combined_pfn = buddy_pfn & pfn;
 >     ```
->
+>     
 >     - 当前页面的 PFN (`pfn`) 和其 Buddy 的 PFN (`buddy_pfn`) 都是对齐到 2order 的页面边界。
->     - Buddy 系统的块大小为 2order 页面，合并两个相邻的块后，块大小为 2order+1 页面。
+>- Buddy 系统的块大小为 2order 页面，合并两个相邻的块后，块大小为 2order+1 页面。
 >     - 合并的起始 PFN 必须是这两个 PFN 中较小的那个，并且对齐到 2order+1 的页面边界。
 >     - 通过逻辑与操作（`buddy_pfn & pfn`），可以清除 PFN 中的一些低有效位，从而得到合并后块的起始 PFN。
->
+>     
 >     **示例**： 假设 `pfn` 是 5（二进制 `101`），`buddy_pfn` 是 4（二进制 `100`）：
 >
 >     ```
->     buddy_pfn & pfn = 100 & 101 = 100 (即 PFN 4)
+>buddy_pfn & pfn = 100 & 101 = 100 (即 PFN 4)
 >     ```
->
+>     
 >     合并后的 PFN 是 4，合并后的块的大小是 2order+1 页面。
 >
 > 2. 更新当前页面和 order
 >
 >     ```c
->     page = page + (combined_pfn - pfn);
+>    page = page + (combined_pfn - pfn);
 >     pfn = combined_pfn;
 >     order++;
 >     ```
->
+> 
 >     - `combined_pfn - pfn` 是当前页面和合并后块起始 PFN 的偏移量。
->     - 如果当前页面的 PFN 不是合并后块的起始 PFN，需要调整页面指针以指向合并后块的起始页面。
+>    - 如果当前页面的 PFN 不是合并后块的起始 PFN，需要调整页面指针以指向合并后块的起始页面。
 >     - `order` 增加 1，因为合并后的块大小是原来的两倍。
->
+> 
 >     **示例**： 假设当前页面指针 `page` 对应的 PFN 是 5，合并后起始 PFN 是 4：
 >
 >     ```
->     page = page + (4 - 5) = page -1
+>    page = page + (4 - 5) = page -1
 >     ```
->
+> 
 >     这样，`page` 现在指向 PFN 4 的页面，合并后的块的大小为 2order+1 页面。
 >
 > 3. 总结
@@ -504,16 +493,18 @@ done_merging:
 >     合并相邻的 Buddy 块需要：
 >
 >     1. 使用逻辑与操作（`&`）确定合并后块的起始 PFN。
->     2. 调整页面指针以指向合并后块的起始页面。
+>    2. 调整页面指针以指向合并后块的起始页面。
 >     3. 增加 `order` 以反映新的块大小。
 
 
 
+#### misc 
+
+迁移类型、zone、node都是怎么提出来的？提出来结局什么问题的？
 
 
 
-
-#### 网络参考资料
+#### 参考资料
 
 [【1000个Linux内存知识-004】-物理页表的PFN到底是什么？PFN与struct page有什么关系？（mem_map、page_to_pfn、pfn_to_page）_linux pfn-CSDN博客](https://blog.csdn.net/essencelite/article/details/132131634)
 
@@ -525,7 +516,267 @@ done_merging:
 
 ### slab 实现
 
-**TODO**
+- `/mm/slab.h`：`struct kmem_cache_node`
+- `/include/linux/slab_def.h`：`struct kmem_cache`、` struct kmem_cache_cpu`
+
+
+
+
+
+主要是 `kmem_cache`、`kmem_cache_cpu`、`kmem_cache_node` 这三个结构体
+
+
+
+我这里最困惑的就是初始化的部分
+
+```c
+/*
+ * Initialisation.  Called after the page allocator have been initialised and
+ * before smp_init().
+ */
+void __init kmem_cache_init(void)
+{
+	int i;
+
+	kmem_cache = &kmem_cache_boot;
+
+	if (!IS_ENABLED(CONFIG_NUMA) || num_possible_nodes() == 1)
+		use_alien_caches = 0;
+
+	for (i = 0; i < NUM_INIT_LISTS; i++)
+		kmem_cache_node_init(&init_kmem_cache_node[i]);
+
+	/*
+	 * Fragmentation resistance on low memory - only use bigger
+	 * page orders on machines with more than 32MB of memory if
+	 * not overridden on the command line.
+	 */
+	if (!slab_max_order_set && totalram_pages() > (32 << 20) >> PAGE_SHIFT)
+		slab_max_order = SLAB_MAX_ORDER_HI;
+
+	/* Bootstrap is tricky, because several objects are allocated
+	 * from caches that do not exist yet:
+	 * 1) initialize the kmem_cache cache: it contains the struct
+	 *    kmem_cache structures of all caches, except kmem_cache itself:
+	 *    kmem_cache is statically allocated.
+	 *    Initially an __init data area is used for the head array and the
+	 *    kmem_cache_node structures, it's replaced with a kmalloc allocated
+	 *    array at the end of the bootstrap.
+	 * 2) Create the first kmalloc cache.
+	 *    The struct kmem_cache for the new cache is allocated normally.
+	 *    An __init data area is used for the head array.
+	 * 3) Create the remaining kmalloc caches, with minimally sized
+	 *    head arrays.
+	 * 4) Replace the __init data head arrays for kmem_cache and the first
+	 *    kmalloc cache with kmalloc allocated arrays.
+	 * 5) Replace the __init data for kmem_cache_node for kmem_cache and
+	 *    the other cache's with kmalloc allocated memory.
+	 * 6) Resize the head arrays of the kmalloc caches to their final sizes.
+	 */
+
+	/* 1) create the kmem_cache */
+
+	/*
+	 * struct kmem_cache size depends on nr_node_ids & nr_cpu_ids
+	 */
+	create_boot_cache(kmem_cache, "kmem_cache",
+		offsetof(struct kmem_cache, node) +
+				  nr_node_ids * sizeof(struct kmem_cache_node *),
+				  SLAB_HWCACHE_ALIGN, 0, 0);
+	list_add(&kmem_cache->list, &slab_caches);
+	slab_state = PARTIAL;
+
+	/*
+	 * Initialize the caches that provide memory for the  kmem_cache_node
+	 * structures first.  Without this, further allocations will bug.
+	 */
+	new_kmalloc_cache(INDEX_NODE, KMALLOC_NORMAL, ARCH_KMALLOC_FLAGS);
+	slab_state = PARTIAL_NODE;
+	setup_kmalloc_cache_index_table();
+
+	/* 5) Replace the bootstrap kmem_cache_node */
+	{
+		int nid;
+
+		for_each_online_node(nid) {
+			init_list(kmem_cache, &init_kmem_cache_node[CACHE_CACHE + nid], nid);
+
+			init_list(kmalloc_caches[KMALLOC_NORMAL][INDEX_NODE],
+					  &init_kmem_cache_node[SIZE_NODE + nid], nid);
+		}
+	}
+
+	create_kmalloc_caches(ARCH_KMALLOC_FLAGS);
+}
+```
+
+
+
+```c
+kmem_cache_create
+	create_cache
+		kmem_cache_zalloc
+			kmem_cache_alloc
+				slab_alloc
+					slab_alloc_node
+		__kmem_cache_create
+			kmem_cache_open
+		listadd
+```
+
+```C
+static void *__slab_alloc_node(struct kmem_cache *s,
+		gfp_t gfpflags, int node, unsigned long addr, size_t orig_size)
+{
+	struct partial_context pc;
+	struct slab *slab;
+	void *object;
+
+	pc.flags = gfpflags;
+	pc.slab = &slab;
+	pc.orig_size = orig_size;
+	object = get_partial(s, node, &pc);
+
+	if (object)
+		return object;
+
+	slab = new_slab(s, gfpflags, node);
+	if (unlikely(!slab)) {
+		slab_out_of_memory(s, gfpflags, node);
+		return NULL;
+	}
+
+	object = alloc_single_from_new_slab(s, slab, orig_size);
+
+	return object;
+}
+```
+
+```C
+/*
+ * Called only for kmem_cache_debug() caches to allocate from a freshly
+ * allocated slab. Allocate a single object instead of whole freelist
+ * and put the slab to the partial (or full) list.
+ */
+static void *alloc_single_from_new_slab(struct kmem_cache *s,
+					struct slab *slab, int orig_size)
+{
+	int nid = slab_nid(slab);
+	struct kmem_cache_node *n = get_node(s, nid);
+	unsigned long flags;
+	void *object;
+
+
+	object = slab->freelist;
+	slab->freelist = get_freepointer(s, object);
+	slab->inuse = 1;
+
+	if (!alloc_debug_processing(s, slab, object, orig_size))
+		/*
+		 * It's not really expected that this would fail on a
+		 * freshly allocated slab, but a concurrent memory
+		 * corruption in theory could cause that.
+		 */
+		return NULL;
+
+	spin_lock_irqsave(&n->list_lock, flags);
+
+	if (slab->inuse == slab->objects)
+		add_full(s, n, slab);
+	else
+		add_partial(n, slab, DEACTIVATE_TO_HEAD);
+
+	inc_slabs_node(s, nid, slab->objects);
+	spin_unlock_irqrestore(&n->list_lock, flags);
+
+	return object;
+}
+```
+
+```C
+/* Reuses the bits in struct page */
+struct slab {
+	unsigned long __page_flags;
+
+#if defined(CONFIG_SLAB)
+
+	struct kmem_cache *slab_cache;
+	union {
+		struct {
+			struct list_head slab_list;
+			void *freelist;	/* array of free object indexes */
+			void *s_mem;	/* first object */
+		};
+		struct rcu_head rcu_head;
+	};
+	unsigned int active;
+
+#elif defined(CONFIG_SLUB)
+
+	struct kmem_cache *slab_cache;
+	union {
+		struct {
+			union {
+				struct list_head slab_list;
+#ifdef CONFIG_SLUB_CPU_PARTIAL
+				struct {
+					struct slab *next;
+					int slabs;	/* Nr of slabs left */
+				};
+#endif
+			};
+			/* Double-word boundary */
+			union {
+				struct {
+					void *freelist;		/* first free object */
+					union {
+						unsigned long counters;
+						struct {
+							unsigned inuse:16;
+							unsigned objects:15;
+							unsigned frozen:1;
+						};
+					};
+				};
+#ifdef system_has_freelist_aba
+				freelist_aba_t freelist_counter;
+#endif
+			};
+		};
+		struct rcu_head rcu_head;
+	};
+	unsigned int __unused;
+
+#else
+#error "Unexpected slab allocator configured"
+#endif
+
+	atomic_t __page_refcount;
+#ifdef CONFIG_MEMCG
+	unsigned long memcg_data;
+#endif
+};
+```
+
+```c
+*
+ * State of the slab allocator.
+ *
+ * This is used to describe the states of the allocator during bootup.
+ * Allocators use this to gradually bootstrap themselves. Most allocators
+ * have the problem that the structures used for managing slab caches are
+ * allocated from slab caches themselves.
+ */
+enum slab_state {
+	DOWN,			/* No slab functionality yet */
+	PARTIAL,		/* SLUB: kmem_cache_node available */
+	PARTIAL_NODE,		/* SLAB: kmalloc size for node struct available */
+	UP,			/* Slab caches usable but not all extras yet */
+	FULL			/* Everything is working */
+};
+```
+
+
 
 
 
@@ -572,3 +823,8 @@ static void check_spinlock_acquired_node(struct kmem_cache *cachep, int node)
 
 
 
+## 整体架构
+
+分为两部分：page allocator、slab allocator
+
+![img](pic/NMBvrnK.png)

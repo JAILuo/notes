@@ -418,25 +418,83 @@ lock() -> sum++ -> 中断来了 -> (有临界区，中断也想对sum++) -> (但
 >
 >     [An Analysis of Linux Scalability to Many Cores | USENIX](https://www.usenix.org/conference/osdi10/analysis-linux-scalability-many-cores)
 
-怎么办？
+怎么办？总有天才！RCU(Read-copy-update)！[RCU concepts — The Linux Kernel documentation](https://www.kernel.org/doc/html/v6.14-rc4/RCU/index.html)
 
-> - 许多操作系统内核对象具有 “**read-mostly**” 特点
->     - 路由表
->         - 每个数据包都要读
->         - 网络拓扑改变时才变更
->     - 用户和组信息
->         - 无时不刻在检查 (Permission Denied)
->         - 但几乎从不修改用户
+许多操作系统内核对象具有 “**read-mostly**” 特点。读多写少
 
-读写不对称性
+- 路由表
+    - 每个数据包都要读
+    - 网络拓扑改变时才变更
+- 用户和组信息
+    - 无时不刻在检查 (Permission Denied)
+    - 但几乎从不修改用户
 
-写时复制
+例子：
 
-多版本
+```C
+Counter *c_current;
 
-读 不上锁，写 上锁
+int get() {
+    // Read
+    Counter *c = c_current;
+    return c->sum;
+}
 
+void increment() {
+    SPIN_LOCKED {
+        // Copy
+        Counter *c = alloc_counter();
+        c->sum = c_current->sum + 1;
+        smp_wmb(); // Memory barrier
 
+        // Update
+        c_current = c;
+    }
+}
+```
+
+> 读写不对称性、写时复制、多版本、（读取的时候不上锁，写上锁）
+>
+
+- 改写 = 复制
+    - 任何对象都可以复制！
+        - (甚至可以只复制改变的部分)
+        - 例子：链表
+    - 允许某一时刻，不同 CPU “看到” 不同**版本**
+- 何时回收旧版本？
+    - 旧**版本**对象会存在一个 “graceful period”
+    - 直到某个时刻，所有 CPU read 都会访问到新版本
+        - 怎么准确地找到这个时间点？
+
+> RCU（Read-Copy-Update）是一种用于提高多核处理器系统中并发性能的同步机制，特别适用于读多写少的场景。其核心思想在于通过将读操作与写操作分开处理，从而减少读操作时的锁竞争，提高系统整体的效率。
+>
+> - **RCU 的核心思想**
+>     1. **读多写少的特性**：
+>         RCU 适用于那些读操作远远多于写操作的数据结构。例如，路由表和用户信息，这些数据在大多数情况下是读取的，而写入则相对少见。
+>
+>     2. **无锁读操作**：
+>         在 RCU 中，读操作不需要加锁。这意味着多个线程可以同时读取数据而不会互相阻塞，从而提高并发性能。
+>
+>     3. **写操作的复制**：
+>         当需要修改数据时，RCU 采用写时复制的策略。具体来说，写操作会创建数据的一个新副本，然后在完成修改后再替换掉旧版本。这种方法确保了在写操作进行时，读操作仍然可以安全地访问旧版本的数据。
+>
+>     4. **版本管理**：
+>         RCU 允许在某一时刻不同的 CPU 看到不同版本的数据。这种特性使得系统能够在进行写操作时，依然保持对读操作的高效支持。
+>
+>     5. **优雅的回收旧版本**：
+>         旧版本的数据对象会在一个“优雅期”中存在。在这个期间，系统会确保所有可能的读取操作都已经完成并且不会再访问旧版本。RCU 通过维护一种机制来追踪何时可以安全地回收旧版本的数据，以避免数据竞争和不一致性。
+>
+> - **何时回收旧版本**？
+>
+>     为了安全地回收旧版本，RCU 需要确保所有的读操作都已经完成。这通常通过以下方式实现：
+>
+>     - **Grace Period**：RCU 定义了一个“优雅期”，在这个期间，所有的读操作都必须在某个点之前完成。一旦这个时间点过去，系统就可以安全地回收旧版本。
+>
+>     - **同步机制**：RCU 通过使用特定的同步机制（如引用计数或其他形式的标记）来跟踪哪些读操作仍在进行，从而判断何时可以回收旧版本。
+>
+> - **总结**
+>
+>     RCU 的设计理念是通过将读和写操作解耦合，利用读多写少的特性，减少锁的使用，从而提高多核系统的性能。它通过复制、版本管理和优雅期的概念，确保了在高并发环境下数据的一致性和安全性。
 
 
 
@@ -574,7 +632,7 @@ mutex_unlock()	// release
 
 > 对于嵌入式操作系统来说，应该提出不自旋会更加自然点，比如在单核上的 `FreeRTOS`，遇到数据竞争，某个线程遇到锁，第一反应应该是让这个线程睡眠？这样相对不影响性能？也就是上面那个应用程序的互斥锁。
 
-在多核处理器中。对于应用程序，仅仅靠原子指令即可实现各种锁（当然可能有各种不同的算法），因为不允许关中断。但如果是操作系统内核，想要实现互斥，那有原子指令还不够，因为中断也能影响到程序的状态迁移，（回想上面的例子，）因此还需要关中断。
+在多核处理器中。对于应用程序，仅仅靠原子指令即可实现各种锁（当然可能有各种不同的算法），因为不允许关中断；但如果是操作系统内核，想要实现互斥，那有原子指令还不够，因为中断也能影响到程序的状态迁移，（回想上面的例子，）因此还需要关中断。（当然在实际内核里面的表现形式）	
 
 > 又想到了面试题：Linux内核中的spinlock和mutex的区别关系？
 >
@@ -1780,7 +1838,7 @@ void T_scheduler() {
 >
 >         ```c
 >         #include <omp.h>
->                                                                                                                 
+>                                                                                                                                 
 >         void compute() {
 >             #pragma omp parallel for
 >             for (int i = 0; i < N; i++) {
@@ -1803,7 +1861,7 @@ void T_scheduler() {
 >
 >         ```c
 >         #include <omp.h>
->                                                                                                                 
+>                                                                                                                                 
 >         void compute() {
 >             #pragma omp parallel for schedule(dynamic)
 >             for (int i = 0; i < N; i++) {
@@ -1826,15 +1884,15 @@ void T_scheduler() {
 >
 >         ```c
 >         #include <mpi.h>
->                                                                                                                 
+>                                                                                                                                 
 >         void communicate() {
 >             MPI_Request requests[10];
 >             MPI_Status statuses[10];
->                                                                                                                 
+>                                                                                                                                 
 >             for (int i = 0; i < 10; i++) {
 >                 MPI_Isend(data[i], count, MPI_INT, dest, tag, MPI_COMM_WORLD, &requests[i]);
 >             }
->                                                                                                                 
+>                                                                                                                                 
 >             MPI_Waitall(10, requests, statuses);
 >         }
 >         ```
@@ -1850,7 +1908,7 @@ void T_scheduler() {
 >
 >         ```c
 >         #include <omp.h>
->                                                                                                                 
+>                                                                                                                                 
 >         void merge_sort_parallel(int *array, int left, int right) {
 >             if (left < right) {
 >                 int mid = (left + right) / 2;
@@ -1894,40 +1952,40 @@ void T_scheduler() {
 >             int n = 1024;
 >             int *a, *b, *c;
 >             int *d_a, *d_b, *d_c;
->                                                                                                                     
+>                                                                                                                                     
 >             // 分配主机内存
 >             a = (int *)malloc(n * sizeof(int));
 >             b = (int *)malloc(n * sizeof(int));
 >             c = (int *)malloc(n * sizeof(int));
->                                                                                                                     
+>                                                                                                                                     
 >             // 分配设备内存
 >             cudaMalloc((void **)&d_a, n * sizeof(int));
 >             cudaMalloc((void **)&d_b, n * sizeof(int));
 >             cudaMalloc((void **)&d_c, n * sizeof(int));
->                                                                                                                     
+>                                                                                                                                     
 >             // 初始化数据
 >             for (int i = 0; i < n; i++) {
 >                 a[i] = i;
 >                 b[i] = i;
 >             }
->                                                                                                                     
+>                                                                                                                                     
 >             // 从主机复制数据到设备
 >             cudaMemcpy(d_a, a, n * sizeof(int), cudaMemcpyHostToDevice);
 >             cudaMemcpy(d_b, b, n * sizeof(int), cudaMemcpyHostToDevice);
->                                                                                                                 
+>                                                                                                                                 
 >             // 启动内核
 >             int threadsPerBlock = 256;
 >             int blocksPerGrid = (n + threadsPerBlock - 1) / threadsPerBlock;
 >             vector_add<<<blocksPerGrid, threadsPerBlock>>>(d_a, d_b, d_c, n);
->                                                                                                                     
+>                                                                                                                                     
 >             // 从设备复制数据到主机
 >             cudaMemcpy(c, d_c, n * sizeof(int), cudaMemcpyDeviceToHost);
->                                                                                                                     
+>                                                                                                                                     
 >             // 释放设备内存
 >             cudaFree(d_a);
 >             cudaFree(d_b);
 >             cudaFree(d_c);
->                                                                                                                     
+>                                                                                                                                     
 >             // 释放主机内存
 >             free(a);
 >             free(b);
@@ -2298,11 +2356,11 @@ lock ordering
 > >         #include <event2/event.h>
 > >         #include <stdio.h>
 > >         #include <stdlib.h>
-> >                                 
+> >                                         
 > >         void onEvent(evutil_socket_t fd, short what, void *arg) {
 > >             printf("Event occurredn");
 > >         }
-> >                                 
+> >                                         
 > >         int main() {
 > >             struct event_base *base = event_base_new();
 > >             struct event *ev = event_new(base, -1, EV_TIMEOUT|EV_PERSIST, onEvent, NULL);
@@ -2522,26 +2580,26 @@ lock ordering
 > >     #include <linux/types.h>
 > >     #include <linux/sched.h>
 > >     #include <linux/wait.h>
-> >                             
+> >                                     
 > >     #define DEVICE_NAME "my_device"
 > >     #define IRQ_NUMBER 1 // 假设使用中断号1
-> >                             
+> >                                     
 > >     static int my_open(struct inode *inode, struct file *file) {
 > >         printk(KERN_INFO "Device openedn");
 > >         return 0;
 > >     }
-> >                             
+> >                                     
 > >     static int my_release(struct inode *inode, struct file *file) {
 > >         printk(KERN_INFO "Device closedn");
 > >         return 0;
 > >     }
-> >                             
+> >                                     
 > >     // 中断处理函数
 > >     static irqreturn_t my_interrupt_handler(int irq, void *dev_id) {
 > >         printk(KERN_INFO "Interrupt receivedn");
 > >         return IRQ_HANDLED;
 > >     }
-> >                             
+> >                                     
 > >     static int __init my_init(void) {
 > >         int result;
 > >         result = request_irq(IRQ_NUMBER, my_interrupt_handler, IRQF_SHARED, DEVICE_NAME, NULL);
@@ -2552,15 +2610,15 @@ lock ordering
 > >         printk(KERN_INFO "Driver loadedn");
 > >         return 0;
 > >     }
-> >                             
+> >                                     
 > >     static void __exit my_exit(void) {
 > >         free_irq(IRQ_NUMBER, NULL);
 > >         printk(KERN_INFO "Driver unloadedn");
 > >     }
-> >                             
+> >                                     
 > >     module_init(my_init);
 > >     module_exit(my_exit);
-> >                             
+> >                                     
 > >     MODULE_LICENSE("GPL");
 > >     MODULE_AUTHOR("Your Name");
 > >     MODULE_DESCRIPTION("A simple event-driven device driver");
