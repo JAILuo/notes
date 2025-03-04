@@ -1,0 +1,2633 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://jailuo.github.io/notes/article/toolchain/toolchain.html">
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.48">
+    
+    
+      
+        <title>Toolchain - Messy Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.6f8fc17f.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/timeago.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#introduction" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../index.html" title="Messy Notes" class="md-header__button md-logo" aria-label="Messy Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Messy Notes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Toolchain
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256l137.3-137.4c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/JAILuo/notes" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../index.html" title="Messy Notes" class="md-nav__button md-logo" aria-label="Messy Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Messy Notes
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/JAILuo/notes" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    首页
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Course
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Course
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    University Course
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            University Course
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_1" id="__nav_2_1_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    jyy OS2024
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            jyy OS2024
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_1_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_1_1" id="__nav_2_1_1_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    course note
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_1_1_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            course note
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Course/University%20Course/jyy%20OS2024/cousre%20note/1.%20introduction/introduction.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    introduction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Course/University%20Course/jyy%20OS2024/cousre%20note/2.%20concurrency/concurrency.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    concurrency
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Course/University%20Course/jyy%20OS2024/cousre%20note/3.%20virtualization/virtualization.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    virtualization
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Course/University Course/jyy OS2024/cousre note/4. persistence/persistence.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    persistence
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_1_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_1_2" id="__nav_2_1_1_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Mini Labs
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_1_1_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            Mini Labs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Course/University%20Course/jyy%20OS2024/Mini%20Labs/M1/M1.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    M1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Course/University%20Course/jyy%20OS2024/Mini%20Labs/M2/M2.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    M2
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Course/University%20Course/jyy%20OS2024/Mini%20Labs/M3/M3.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    M3
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_1_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_1_3" id="__nav_2_1_1_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    OS Labs
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_1_1_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_1_3">
+            <span class="md-nav__icon md-icon"></span>
+            OS Labs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Course/University%20Course/jyy%20OS2024/OS%20Labs/L0/L0.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    L0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Course/University%20Course/jyy%20OS2024/OS%20Labs/L1/L1.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    L1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    GeekTime
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            GeekTime
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2_1" id="__nav_2_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    深入理解计算机组成原理
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            深入理解计算机组成原理
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Course/GeekTime/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E4%B8%80%E5%91%A8%E7%9B%AE/1.%20%E6%8C%87%E4%BB%A4%E4%B8%8E%E8%BF%90%E7%AE%97/%E6%8C%87%E4%BB%A4%E4%B8%8E%E8%BF%90%E7%AE%97.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1. 指令与运算
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Course/GeekTime/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E4%B8%80%E5%91%A8%E7%9B%AE/2.%20%E5%A4%84%E7%90%86%E5%99%A8/%E5%A4%84%E7%90%86%E5%99%A8.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2. 处理器
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Course/GeekTime/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E4%B8%80%E5%91%A8%E7%9B%AE/3.%20%E5%AD%98%E5%82%A8%E4%B8%8EIO%E7%B3%BB%E7%BB%9F/%E5%AD%98%E5%82%A8%E4%B8%8EIO%E7%B3%BB%E7%BB%9F.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3. 存储与IO系统
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Course/GeekTime/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E4%B8%80%E5%91%A8%E7%9B%AE/4.%20%E5%BA%94%E7%94%A8/%E5%BA%94%E7%94%A8.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4. 应用
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2_2" id="__nav_2_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    计算基础实战课
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            计算基础实战课
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/1.%20MiniCPU%E8%AE%BE%E8%AE%A1/MiniCPU%E8%AE%BE%E8%AE%A1.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1. MiniCPU设计
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/2.%20%E8%AF%AD%E8%A8%80%E5%92%8C%E6%8C%87%E4%BB%A4/%E8%AF%AD%E8%A8%80%E5%92%8C%E6%8C%87%E4%BB%A4.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2. 语言和指令
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/3.%20%E5%BA%94%E7%94%A8%E5%92%8C%E5%86%85%E5%AD%98/%E5%BA%94%E7%94%A8%E5%92%8C%E5%86%85%E5%AD%98.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3. 应用和内存
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/4.%20IO%E4%B8%8E%E6%96%87%E4%BB%B6/IO%E5%92%8C%E6%96%87%E4%BB%B6.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4. IO与文件
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/5.%20%E7%BB%BC%E5%90%88%E5%BA%94%E7%94%A8/synthesis.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    5. 综合应用
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E5%92%8C%E5%B7%A5%E5%85%B7%E9%93%BE/%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    环境配置和工具链
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    ysyx
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            ysyx
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    NJU-ICS2023-PA
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            NJU-ICS2023-PA
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ysyx/pa/pa1/pa1.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PA1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ysyx/pa/pa2/pa2.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PA2
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ysyx/pa/pa3/pa3.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PA3
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ysyx/pa/pa4/pa4.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PA4
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ysyx/pa/c_marco/macro.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    C Macro
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ysyx/pa/summary/summary.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Summary
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ysyx/pa/Linux_porting/porting.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Linux Porting
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ysyx/digital-circuit/digital%20circuit.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Digital Circuit
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Tools
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Tools
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Tools/GDB/GDB.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GDB
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Vim
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            Vim
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Tools/vim/usage/usage.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    usage
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Tools/vim/vim-plugin/vim.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    vim-plugin
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Tools/doxygen/doxygen.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    doxygen
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Tools/gcc/gcc.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    gcc
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Tools/Git/Git.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Git
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Tools/md2slider/md2slider.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    md2slider
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Tools/tmux/tmux.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    tmux
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Todo%20List/todo.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TODO List
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introduction
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#toolchain" class="md-nav__link">
+    <span class="md-ellipsis">
+      Toolchain
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cross-compiling" class="md-nav__link">
+    <span class="md-ellipsis">
+      cross compiling
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="cross compiling">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#answer-from-llm" class="md-nav__link">
+    <span class="md-ellipsis">
+      answer from LLM
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#target-triple" class="md-nav__link">
+    <span class="md-ellipsis">
+      Target Triple
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#abi" class="md-nav__link">
+    <span class="md-ellipsis">
+      ABI
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="ABI">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#generic-abi" class="md-nav__link">
+    <span class="md-ellipsis">
+      **generic ABI **
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#processor-specific-abi" class="md-nav__link">
+    <span class="md-ellipsis">
+      Processor-Specific ABI
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#programming-language-abi" class="md-nav__link">
+    <span class="md-ellipsis">
+      programming language ABI
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#libc" class="md-nav__link">
+    <span class="md-ellipsis">
+      libc
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="libc">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      计算的封装（与体系结构无关）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      系统调用与环境的抽象
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      summary
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary Example
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Summary Example">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#risc-v" class="md-nav__link">
+    <span class="md-ellipsis">
+      RISC-V
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#arm" class="md-nav__link">
+    <span class="md-ellipsis">
+      ARM
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#principle-of-cross-compilation-optional" class="md-nav__link">
+    <span class="md-ellipsis">
+      Principle of cross-compilation (optional)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#use-experience" class="md-nav__link">
+    <span class="md-ellipsis">
+      Use &amp; Experience
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+  <h1>Toolchain</h1>
+
+<h2 id="introduction">Introduction</h2>
+<p>Toolchain 工具链这个词大家应该都听过很多遍了，最常听说的就是，你现在在别的x64的平台上，你要编译别的 ISA 的程序需要交叉编译工具链......</p>
+<p>但是好像大家都对这个概念没什么特别的印象？我自己在学的时候对这个东西也是很困惑，这么多种：<code>arm-linux-gnueabi-gcc</code>、<code>riscv64-unknown-elf-gcc</code>、<code>riscv64-unknown-linux-gnu-gcc</code> 等等，选哪个？怎么选？</p>
+<p>所以，我这里简单总结一下，因为我的经验还不是很多，所以下面难免会有错误的！</p>
+<h2 id="toolchain">Toolchain</h2>
+<p>不知道是什么，那就 <a href="https://en.wikipedia.org/wiki/Toolchain">Toolchain - Wikipedia</a></p>
+<p><img alt="image-20250304154949891" src="pic/image-20250304154949891.png" /></p>
+<p>或许对这些概念，很困惑，但我们只需要知道，工具链就是一组软件开发工具集合即可。</p>
+<p>特别常见的一种工具链就是为 APP 和 OS 和 CPU 进行构建！我理解的功能<strong>是将源代码转换为目标平台的可执行程序</strong>，核心组件有：</p>
+<ul>
+<li><strong>编译器（Compiler）</strong>：如 <code>gcc</code>，将源代码翻译为目标平台的机器码。</li>
+<li><strong>链接器（Linker）</strong>：如 <code>ld</code>，将多个目标文件合并为可执行文件或库。</li>
+<li><strong>调试器（Debugger）</strong>：如 <code>gdb</code>，用于调试程序。</li>
+<li><strong>二进制工具（Binutils）</strong>：如 <code>objdump</code>、<code>strip</code>，处理目标文件和可执行文件。</li>
+<li><strong>C 标准库（C Library）</strong>：如 <code>glibc</code> 或 <code>newlib</code>，提供标准函数实现（如 <code>printf</code>）。</li>
+</ul>
+<p>这里不解释相关编译体系、ISA 的内容，但需要知道<strong>同样的 C 代码要运行在 x86、ARM、RISC-V 上，是需要不同的二进制文件的</strong>，要编译出不同的二进制文件，上面的核心组件也就不同。再回去看到 <code>arm-xxx-gcc</code> 和 <code>riscv64-xxx-gcc</code>，这个时候就应该有点印象了！</p>
+<p>所以，我总结工具链的本质为：<strong>解决代码与硬件/系统环境之间的适配问题</strong></p>
+<h2 id="cross-compiling">cross compiling</h2>
+<h3 id="answer-from-llm">answer from LLM</h3>
+<p>那交叉编译工具链呢？其实重点就在交叉（cross）上，关注的是跨平台！讲不下去？问问 LLM吧：</p>
+<p>在嵌入式开发中，交叉编译工具链是非常重要的一个工具，它主要是为了解决以下问题：</p>
+<blockquote>
+<ul>
+<li>
+<p>架构不兼容</p>
+<p><strong>许多嵌入式设备（如单片机、微控制器、专用集成电路等）使用的处理器架构与常见的主机架构（如x86架构的PC）不同。</strong>例如，嵌入式设备可能使用的是ARM、MIPS等架构的处理器。由于不同架构的处理器有不同的指令集和运行环境，因此无法直接在主机上编译出能够在这些嵌入式设备上运行的程序。例如，为ARM架构嵌入式设备开发的应用程序，需要使用针对ARM架构的编译器来生成对应的机器码。</p>
+</li>
+<li>
+<p>资源限制</p>
+<p><strong>嵌入式设备通常资源有限，不具备运行完整的编译环境的能力。</strong>例如，一个小型的微控制器可能只有几十KB的内存和有限的存储空间，无法安装庞大的操作系统和众多的开发工具。而交叉编译工具链运行在主机上，可以在主机的丰富资源环境下完成代码的编译工作，然后将生成的可执行文件传输到嵌入式设备上运行，这样就避免了在资源有限的嵌入式设备上安装复杂的开发环境。</p>
+</li>
+<li>
+<p>开发效率</p>
+<p><strong>交叉编译工具链可以在开发主机上快速地进行代码的编译、调试和测试，大大提高了开发效率。</strong>例如，开发人员可以在主机上使用集成开发环境（IDE）编写代码，然后通过交叉编译工具链生成目标代码并下载到嵌入式设备上进行测试和调试，这个过程可以快速迭代，快速发现问题并进行修复，而不需要在嵌入式设备上进行繁琐的编译和调试操作。</p>
+</li>
+<li>
+<p>实践举例</p>
+<p>例如，要为基于ARM架构的树莓派开发一个应用程序。首先需要在安装有Linux操作系统的PC主机上配置好针对ARM架构的交叉编译工具链。然后，开发人员在PC上使用C语言编写代码，通过交叉编译工具链中的arm-linux-gnueabihf-gcc（针对ARM架构的GCC编译器）将其编译成ARM架构的可执行文件。编译完成后，将生成的可执行文件传输到树莓派上运行。在开发过程中，开发人员可以在PC上使用调试器（如gdb）与嵌入式设备进行调试通信，方便地进行断点调试、查看变量值等操作，节省了大量的时间和精力。</p>
+</li>
+</ul>
+</blockquote>
+<p>AI 其实对于这种事实性的知识点，做得真的是很好的！</p>
+<h3 id="target-triple">Target Triple</h3>
+<p>知道了需要这么个概念，那我们先看看现在大家是怎么描述交叉编译工具链的：目标三元组。</p>
+<p><code>[arch]-[vendor]-[os]-[libc/abi])</code> </p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">部分</th>
+<th style="text-align: left;">含义</th>
+<th style="text-align: left;">常见值示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>arch</strong></td>
+<td style="text-align: left;">指令集架构（ISA）</td>
+<td style="text-align: left;"><code>x86_64</code>, <code>arm</code>, <code>riscv64</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>vendor</strong></td>
+<td style="text-align: left;">供应商（通常省略或标记为通用）</td>
+<td style="text-align: left;"><code>unknown</code>, <code>none</code>, <code>poky</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>os</strong></td>
+<td style="text-align: left;">操作系统及运行时环境</td>
+<td style="text-align: left;"><code>linux</code>, <code>freebsd</code>, <code>none</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>abi/libc</strong></td>
+<td style="text-align: left;">应用二进制接口或 C 库类型</td>
+<td style="text-align: left;"><code>gnu</code>, <code>musl</code>, <code>eabi</code>, <code>hf</code></td>
+</tr>
+</tbody>
+</table>
+<p>一些例子：</p>
+<div class="highlight"><pre><span></span><code><span class="o">|</span><span class="w">           </span><span class="n">Target</span><span class="w"> </span><span class="n">Triple</span><span class="w">            </span><span class="o">|</span><span class="w">    </span><span class="n">CPU</span><span class="o">/</span><span class="n">ISA</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="n">Vendor</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Kernel</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="n">C</span><span class="w"> </span><span class="n">lib</span><span class="w"> </span><span class="o">|</span><span class="w">   </span><span class="n">ABI</span><span class="w">   </span><span class="o">|</span>
+<span class="o">|------------------------------------|----------------|--------|---------|-------|---------|</span>
+<span class="o">|</span><span class="w"> </span><span class="n">x86_64</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">gnu</span><span class="w">                   </span><span class="o">|</span><span class="w"> </span><span class="n">x86_64</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="o">-</span><span class="w">      </span><span class="o">|</span><span class="w"> </span><span class="n">Linux</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="n">GNU</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="o">-</span><span class="w">       </span><span class="o">|</span>
+<span class="o">|</span><span class="w"> </span><span class="n">arm</span><span class="o">-</span><span class="n">cortex_a8</span><span class="o">-</span><span class="n">poky</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">gnueabihf</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Cortex</span><span class="w"> </span><span class="n">A8</span><span class="w">      </span><span class="o">|</span><span class="w"> </span><span class="n">Yocto</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="n">Linux</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="n">GNU</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="n">EABI</span><span class="o">-</span><span class="n">HF</span><span class="w"> </span><span class="o">|</span>
+<span class="o">|</span><span class="w"> </span><span class="n">armeb</span><span class="o">-</span><span class="n">unknown</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">musleabi</span><span class="w">       </span><span class="o">|</span><span class="w"> </span><span class="n">ARM</span><span class="w"> </span><span class="n">Big</span><span class="w"> </span><span class="n">Endian</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="o">-</span><span class="w">      </span><span class="o">|</span><span class="w"> </span><span class="n">Linux</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="n">musl</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="n">EABI</span><span class="w">    </span><span class="o">|</span>
+<span class="o">|</span><span class="w"> </span><span class="n">x86_64</span><span class="o">-</span><span class="n">freebsd</span><span class="w">                     </span><span class="o">|</span><span class="w"> </span><span class="n">x86_64</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="o">-</span><span class="w">      </span><span class="o">|</span><span class="w"> </span><span class="n">FreeBSD</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="o">-</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="o">-</span><span class="w">       </span><span class="o">|</span>
+</code></pre></div>
+<p>以为这些前缀，加上编译器/链接器以及各种<code>Binutils</code>，就是常看到的：<code>triple-gcc</code>、<code>triple-objdump</code>...</p>
+<p>但看起来还是知道这些东西区别？<code>arch</code>、<code>vendor</code> 好理解，关键在于后面的 <code>os</code> 和 <code>abi/libc</code>，下面具体来说。</p>
+<h3 id="abi">ABI</h3>
+<p>我觉得以一个 常见的例子来说就好了，不用非得搞一个定义来死磕这个东西是什么。</p>
+<blockquote>
+<p>ABI 是什么？来自 Wikipedia：</p>
+<blockquote>
+<p>In <a href="https://en.wikipedia.org/wiki/Computer_software">computer software</a>, an <strong>application binary interface</strong> (<strong>ABI</strong>) is an <a href="https://en.wikipedia.org/wiki/Interface_(computing)">interface</a> between two binary program modules. Often, one of these modules is a <a href="https://en.wikipedia.org/wiki/Library_(computing)">library</a> or <a href="https://en.wikipedia.org/wiki/Operating_system">operating system</a> facility, and the other is a program that is being run by a user.</p>
+</blockquote>
+<p>即：涉及到机器码层面，两份二进制文件怎么进行交互，而这怎么访问对方的数据内容。</p>
+<p>OSDEV Wiki System V ABI</p>
+<p>System V Application Binary Interface (System V ABI) 是一套规范，用于定义符合 X/Open Common Application Environment Specification 和 System V Interface Definition 的系统中的各种技术细节。</p>
+<p>推荐阅读：<a href="https://accu.org/conf-docs/PDFs_2015/JonathanWakely-What Is An ABI And Why Is It So Complicated.pdf">JonathanWakely-What Is An ABI And Why Is It So Complicated.pdf</a></p>
+</blockquote>
+<p>相信大家对于这么些个定义也不是第一次见了，而各个网站说了一堆又十分抽象，做个总结。自己理解的ABI包括最少包括以下内容：</p>
+<ul>
+<li><strong>Function calling conventions and symbol naming</strong></li>
+<li><strong>Representation of data types (size, alignment, floating point format)</strong> </li>
+<li><strong>Object file format e.g. ELF, PE/COFF, Mach-O</strong></li>
+<li><strong>How programs are loaded, dynamic linking, symbol relocations, thread-local storage</strong></li>
+<li><strong>Other: system call、exception</strong></li>
+</ul>
+<p>具体来说我将 ABI 分为三个（配合 System V ABI 举例子）：</p>
+<h4 id="generic-abi">**generic ABI **</h4>
+<p>（非arch相关，也理解为 OS 相关）</p>
+<p>操作系统作为运行在最底层的软件，向上层提供了各类的基础设施，由于不同操作系统提供的基础设施功能不一样，故需要做出一些规范，提升移植性。具体例子来说（暂且不考虑编程语言）：</p>
+<ul>
+<li>
+<p><strong>数据模型/数据表示</strong>：不同操作系统之间或许使用的 data model不同</p>
+<p>比如：<strong>在32位下，Linux和Windows都采用ILP32</strong>，但在<strong>64位下，Linux采用的是LP64，而Windows采用的是LLP64</strong>。</p>
+<p><img alt="image-20250127025302516" src="pic/image-20250127025302516.png" /></p>
+<p><a href="https://en.wikipedia.org/wiki/64-bit_computing#64-bit_data_models">64-bit computing - Wikipedia</a></p>
+<p><a href="https://www.cnblogs.com/lsgxeva/p/7614856.html">数据模型（LP32 ILP32 LP64 LLP64 ILP64 </a></p>
+<p><a href="https://wiki.math.ntnu.no/_media/tma4280/2017v/1997_opengroup_64bitprogrammingmodels.pdf">1997_opengroup_64bitprogrammingmodels.pdf</a></p>
+<blockquote>
+<p>欸！有点贴近平常学的时候的了，老师直接灌给你的：16/32/64bit的机器上的<code>int</code>、<code>long</code>、<code>poniter</code> 是不同的，但是为啥？咋规定的？还要详细说，肯定是说不完的，但是，之后再看到 ABI，应该就能想起这个例子了！</p>
+</blockquote>
+</li>
+<li>
+<p><strong>系统调用不一致</strong></p>
+<p>不同操作系统对系统调用的编码和接口定义不同，导致程序在不同系统上需要重新编写系统调用相关的代码。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">功能</th>
+<th style="text-align: center;">Linux x86_64 调用号</th>
+<th style="text-align: center;">Windows x86_64 调用号</th>
+<th style="text-align: center;">FreeBSD x86_64 调用号</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">写文件</td>
+<td style="text-align: center;"><code>1</code> (<code>sys_write</code>)</td>
+<td style="text-align: center;">通过<code>WriteFile</code> API</td>
+<td style="text-align: center;"><code>4</code> (<code>write</code>)</td>
+</tr>
+<tr>
+<td style="text-align: center;">创建进程</td>
+<td style="text-align: center;"><code>56</code> (<code>fork</code>)</td>
+<td style="text-align: center;">通过<code>CreateProcess</code></td>
+<td style="text-align: center;"><code>2</code> (<code>fork</code>)</td>
+</tr>
+<tr>
+<td style="text-align: center;">退出进程</td>
+<td style="text-align: center;"><code>60</code> (<code>exit</code>)</td>
+<td style="text-align: center;">通过<code>ExitProcess</code></td>
+<td style="text-align: center;"><code>1</code> (<code>exit</code>)</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Linux直接暴露系统调用号（如<code>sys_write</code>对应编号1）</li>
+<li>Windows通过封装API（如<code>kernel32.dll</code>的<code>WriteFile</code>）隐藏具体调用号</li>
+<li>FreeBSD的调用号与Linux完全不同，即使功能相同、</li>
+</ul>
+<blockquote>
+<p>能不能再具体一点？再来点例子？</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><span class="c1">// Linux直接调用write</span>
+<span class="nf">asm</span><span class="p">(</span><span class="err">&quot;</span><span class="no">mov</span><span class="w"> </span><span class="no">$1</span><span class="p">,</span><span class="w"> </span><span class="nv">%eax</span><span class="err">\</span><span class="no">n</span><span class="err">&quot;</span><span class="w">  </span><span class="c1">// 系统调用号1</span>
+<span class="w">    </span><span class="err">&quot;</span><span class="nf">mov</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="nv">%edi</span><span class="err">\</span><span class="no">n</span><span class="err">&quot;</span><span class="w">   </span><span class="c1">// 文件描述符</span>
+<span class="w">    </span><span class="err">&quot;</span><span class="nf">lea</span><span class="w"> </span><span class="no">msg</span><span class="p">,</span><span class="w"> </span><span class="nv">%rsi</span><span class="err">\</span><span class="no">n</span><span class="err">&quot;</span><span class="w"> </span><span class="c1">// 缓冲区地址</span>
+<span class="w">    </span><span class="err">&quot;</span><span class="nf">mov</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w"> </span><span class="nv">%edx</span><span class="err">\</span><span class="no">n</span><span class="err">&quot;</span><span class="w">  </span><span class="c1">// 字节数</span>
+<span class="w">    </span><span class="err">&quot;</span><span class="nf">syscall</span><span class="err">&quot;</span><span class="p">)</span><span class="c1">;</span>
+
+<span class="c1">// Windows必须通过API调用</span>
+<span class="nf">HANDLE</span><span class="w"> </span><span class="no">hFile</span><span class="w"> </span><span class="err">=</span><span class="w"> </span><span class="no">CreateFile</span><span class="p">(...)</span><span class="c1">;</span>
+<span class="nf">WriteFile</span><span class="p">(</span><span class="no">hFile</span><span class="p">,</span><span class="w"> </span><span class="no">buffer</span><span class="p">,</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w"> </span><span class="no">NULL</span><span class="p">,</span><span class="w"> </span><span class="no">NULL</span><span class="p">)</span><span class="c1">;</span>
+</code></pre></div>
+<p>哦！！这下总该感觉到了吧！</p>
+</li>
+<li>
+<p><strong>动态链接库不兼容</strong></p>
+<p>不同操作系统上的动态链接库格式和加载机制各异，程序无法直接使用其他系统上的库。</p>
+<ol>
+<li>
+<p><strong>文件格式差异</strong></p>
+<p>不同操作系统的动态库采用完全不同的二进制格式：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">特性</th>
+<th style="text-align: center;">Linux (.so)</th>
+<th style="text-align: center;">Windows (.dll)</th>
+<th style="text-align: center;">macOS (.dylib)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">文件头标识</td>
+<td style="text-align: center;">ELF (0x7F 'ELF')</td>
+<td style="text-align: center;">PE (MZ头)</td>
+<td style="text-align: center;">Mach-O (0xFEEDFACE)</td>
+</tr>
+<tr>
+<td style="text-align: center;">符号表结构</td>
+<td style="text-align: center;"><code>.dynsym</code>节</td>
+<td style="text-align: center;"><code>IMAGE_SYMBOL</code></td>
+<td style="text-align: center;"><code>LC_SYMTAB</code></td>
+</tr>
+<tr>
+<td style="text-align: center;">重定位机制</td>
+<td style="text-align: center;">RELA重定位条目</td>
+<td style="text-align: center;">基址重定位表</td>
+<td style="text-align: center;">外部重定位命令</td>
+</tr>
+<tr>
+<td style="text-align: center;">延迟绑定</td>
+<td style="text-align: center;">支持（PLT/GOT）</td>
+<td style="text-align: center;">无</td>
+<td style="text-align: center;">通过LC_LAZY_LOAD</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p><strong>符号解析机制差异</strong></p>
+<ul>
+<li>
+<p>动态链接时的符号查找规则截然不同：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">操作系统</th>
+<th style="text-align: center;">符号版本控制</th>
+<th style="text-align: center;">默认可见性</th>
+<th style="text-align: center;">动态加载API</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">Linux</td>
+<td style="text-align: center;"><code>.symver</code>指令</td>
+<td style="text-align: center;">隐藏</td>
+<td style="text-align: center;"><code>dlopen</code>/<code>dlsym</code></td>
+</tr>
+<tr>
+<td style="text-align: center;">Windows</td>
+<td style="text-align: center;">无</td>
+<td style="text-align: center;">导出需声明</td>
+<td style="text-align: center;"><code>LoadLibrary</code>/<code>GetProcAddress</code></td>
+</tr>
+<tr>
+<td style="text-align: center;">macOS</td>
+<td style="text-align: center;">弱引用</td>
+<td style="text-align: center;">全局</td>
+<td style="text-align: center;"><code>NSLookupSymbolInImage</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Linux符号版本控制示例</strong>：</p>
+<p>```c
+// 定义带版本的符号
+<strong>asm</strong>(".symver foo_v1, foo@VERS_1.0");
+void foo_v1() { /<em> 实现V1 </em>/ }</p>
+<p><strong>asm</strong>(".symver foo_v2, foo@@VERS_2.0");
+void foo_v2() { /<em> 实现V2 </em>/ }
+        ```</p>
+</li>
+</ul>
+<p><strong>Windows显式导出要求</strong>：</p>
+<div class="highlight"><pre><span></span><code><span class="w">    </span><span class="c1">// 需使用__declspec(dllexport)</span>
+<span class="w">    </span><span class="kr">__declspec</span><span class="p">(</span><span class="n">dllexport</span><span class="p">)</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">API_func</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// 导出函数实现</span>
+<span class="w">    </span><span class="p">}</span>
+</code></pre></div>
+<p>​    </p>
+</li>
+</ol>
+</li>
+<li>
+<p><strong>可执行文件格式差异</strong>：</p>
+<p>不同操作系统使用不同的可执行文件格式，如Windows使用PE格式，而Unix-like系统使用ELF格式，导致程序无法跨系统运行。</p>
+<p><strong>ELF与PE对比</strong>：</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// ELF头结构（Linux）</span>
+<span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="n">e_ident</span><span class="p">[</span><span class="mi">16</span><span class="p">];</span><span class="w"> </span><span class="c1">// 魔数7F 45 4C 46</span>
+<span class="w">    </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">e_type</span><span class="p">;</span><span class="w">           </span><span class="c1">// ET_DYN = 共享库</span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">e_entry</span><span class="p">;</span><span class="w">          </span><span class="c1">// 入口点</span>
+<span class="w">    </span><span class="c1">// ... 其他字段</span>
+<span class="p">}</span><span class="w"> </span><span class="n">Elf64_Ehdr</span><span class="p">;</span>
+
+<span class="c1">// PE头结构（Windows）</span>
+<span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">_IMAGE_DOS_HEADER</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">e_magic</span><span class="p">;</span><span class="w">          </span><span class="c1">// MZ</span>
+<span class="w">    </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">e_cblp</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">// ... </span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">e_lfanew</span><span class="p">;</span><span class="w">         </span><span class="c1">// PE头偏移</span>
+<span class="p">}</span><span class="w"> </span><span class="n">IMAGE_DOS_HEADER</span><span class="p">;</span>
+</code></pre></div>
+</li>
+</ul>
+<h4 id="processor-specific-abi"><strong>Processor-Specific ABI</strong></h4>
+<p>（arch相关）</p>
+<p>操作系统运行在不同体系结构的处理器上，不同体系结构有不同的寄存器及各自的特性。可以理解为 System V generic ABI 作为基类，而不同 ISA 和 arch 有自己的特性，那就由此扩展出更多类。具体配合例子</p>
+<ul>
+<li>
+<p><strong>函数调用约定（Calling Convention）</strong></p>
+<ol>
+<li>
+<p>x86/x64体系</p>
+<p><strong>System V ABI规范</strong>（Linux/macOS/Unix系OS采用）</p>
+<table>
+<thead>
+<tr>
+<th>参数类型</th>
+<th>寄存器分配规则</th>
+<th>典型汇编示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>整型参数</td>
+<td><code>rdi</code>、<code>rsi</code>、<code>rdx</code>、<code>rcx</code>、<code>r8</code>、<code>r9</code></td>
+<td><code>mov rdi, 5</code> 传递第一个整型参数</td>
+</tr>
+<tr>
+<td>浮点参数</td>
+<td><code>xmm0</code>-<code>xmm7</code></td>
+<td><code>movsd xmm0, [pi]</code> 传递双精度数</td>
+</tr>
+<tr>
+<td>栈空间分配</td>
+<td>调用者维护（caller-cleanup）</td>
+<td><code>sub rsp, 32</code> 分配影子空间</td>
+</tr>
+<tr>
+<td>返回值</td>
+<td><code>rax</code>/<code>rdx</code>（64位）</td>
+<td><code>mov rax, result</code> 返回计算结果</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Windows x64调用约定差异</strong>：</p>
+<div class="highlight"><pre><span></span><code><span class="c1">; 传递前4个整型参数：rcx, rdx, r8, r9</span>
+<span class="c1">; 前4个浮点参数：xmm0-xmm3</span>
+<span class="nf">mov</span><span class="w"> </span><span class="no">rcx</span><span class="p">,</span><span class="w"> </span><span class="mi">123</span><span class="w">          </span><span class="c1">; 第一个整型参数</span>
+<span class="nf">movss</span><span class="w"> </span><span class="no">xmm1</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="no">float_val</span><span class="p">]</span><span class="w"> </span><span class="c1">; 第二个浮点参数</span>
+<span class="nf">call</span><span class="w"> </span><span class="no">WinAPI_func</span>
+</code></pre></div>
+</li>
+<li>
+<p>ARM/AArch64体系</p>
+<p><strong>AAPCS标准</strong>（ARM Architecture Procedure Call Standard）</p>
+<p><a href="https://developer.arm.com/documentation/109246/0100/Toolchains-and-model-support/Calling-conventions">Calling conventions</a></p>
+<p><a href="https://learn.microsoft.com/en-us/cpp/build/arm64-windows-abi-conventions?view=msvc-170">Overview of ARM64 ABI conventions | Microsoft Learn</a></p>
+<ul>
+<li>
+<p><strong>ARMv7（32位）特性</strong>：</p>
+<p>前4个整型参数：<code>R0-R3</code></p>
+<p>浮点参数：<code>S0-S15</code>（单精度）或 <code>D0-D7</code>（双精度）</p>
+<p>栈对齐要求：8字节对齐</p>
+</li>
+<li>
+<p><strong>AArch64（64位）增强</strong>：</p>
+<div class="highlight"><pre><span></span><code><span class="c1">; 整型参数：X0-X7</span>
+<span class="c1">; 浮点参数：V0-V7</span>
+<span class="nf">mov</span><span class="w"> </span><span class="no">x0</span><span class="p">,</span><span class="w"> </span><span class="mi">#42</span><span class="w">          </span><span class="c1">; 第一个整型参数</span>
+<span class="nf">fmov</span><span class="w"> </span><span class="no">d0</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="no">.1415</span><span class="w">      </span><span class="c1">; 第一个双精度参数</span>
+<span class="nf">bl</span><span class="w">  </span><span class="no">arm64_func</span>
+</code></pre></div>
+</li>
+</ul>
+</li>
+<li>
+<p>RISC-V体系</p>
+<p><strong>动态可配置特性</strong>（通过<code>-mabi</code>选项指定）</p>
+<table>
+<thead>
+<tr>
+<th>ABI类型</th>
+<th>寄存器使用规则</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ilp32</td>
+<td>a0-a7传递参数，ra保存返回地址</td>
+<td>32位嵌入式系统</td>
+</tr>
+<tr>
+<td>lp64</td>
+<td>a0-a7传递参数，浮点使用fa0-fa7</td>
+<td>64位高性能计算</td>
+</tr>
+<tr>
+<td>ilp32d</td>
+<td>支持双精度浮点硬件加速</td>
+<td>带FPU的IoT设备</td>
+</tr>
+</tbody>
+</table>
+<p><img alt="image-20250127032957603" src="pic/image-20250127032957603.png" /></p>
+<p><strong>RV64G调用示例</strong>：</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 传递参数到a0-a5</span>
+<span class="nf">li</span><span class="w"> </span><span class="no">a0</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="w">        </span><span class="c1"># 第一个整型参数</span>
+<span class="nf">flw</span><span class="w"> </span><span class="no">fa0</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="no">sp</span><span class="err">+</span><span class="mi">8</span><span class="p">]</span><span class="w">   </span><span class="c1"># 第一个单精度浮点参数</span>
+<span class="nf">call</span><span class="w"> </span><span class="no">riscv_func</span>
+</code></pre></div>
+</li>
+</ol>
+</li>
+<li>
+<p><strong>数据模型</strong></p>
+<table>
+<thead>
+<tr>
+<th>架构</th>
+<th>默认数据模型</th>
+<th>类型长度（位）</th>
+<th>内存对齐规则</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>x86_64</td>
+<td>LP64</td>
+<td>int(32), long(64),指针(64)</td>
+<td>自然对齐（最大成员对齐）</td>
+</tr>
+<tr>
+<td>ARMv8</td>
+<td>LP64</td>
+<td>同x86_64</td>
+<td>8字节对齐</td>
+</tr>
+<tr>
+<td>RISC-V64</td>
+<td>LP64</td>
+<td>兼容LP64规范</td>
+<td>支持非对齐访问指令</td>
+</tr>
+<tr>
+<td>x86</td>
+<td>ILP32</td>
+<td>int(32), long(32),指针(32)</td>
+<td>4字节对齐</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><span class="c1">// 跨平台危险代码示例</span>
+<span class="k">struct</span><span class="w"> </span><span class="nc">Data</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">id</span><span class="p">;</span><span class="w">      </span><span class="c1">// 32位</span>
+<span class="w">    </span><span class="kt">long</span><span class="w"> </span><span class="n">value</span><span class="p">;</span><span class="w">  </span><span class="c1">// 32位（ILP32） vs 64位（LP64）</span>
+<span class="p">};</span>
+<span class="c1">// ARMv7上sizeof(struct Data)=8字节</span>
+<span class="c1">// x86_64上sizeof(struct Data)=16字节</span>
+</code></pre></div>
+</li>
+<li>
+<p><strong>内存布局</strong></p>
+<p><strong>RISC-V灵活内存访问</strong>：</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 支持非对齐加载指令</span>
+<span class="nf">lw</span><span class="w"> </span><span class="no">a0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">(</span><span class="no">a1</span><span class="p">)</span><span class="w">      </span><span class="c1"># 允许地址非4字节对齐</span>
+<span class="c1"># 需要设置MMU的mstatus.UMIE位</span>
+</code></pre></div>
+<p><strong>ARMv8严格对齐策略</strong>：</p>
+<div class="highlight"><pre><span></span><code><span class="nf">ldr</span><span class="w"> </span><span class="no">x0</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="no">x1</span><span class="p">]</span><span class="w">      </span><span class="c1"># 若x1未8字节对齐则触发Alignment Fault</span>
+</code></pre></div>
+</li>
+<li>
+<p>系统级ABI扩展：向量化</p>
+<p><strong>x86 AVX-512</strong>：</p>
+<div class="highlight"><pre><span></span><code><span class="c1">; 使用ZMM寄存器传递512位向量</span>
+<span class="nf">vmovdqa64</span><span class="w"> </span><span class="no">zmm0</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="no">input_data</span><span class="p">]</span>
+<span class="nf">vpaddd</span><span class="w"> </span><span class="no">zmm1</span><span class="p">,</span><span class="w"> </span><span class="no">zmm0</span><span class="p">,</span><span class="w"> </span><span class="no">zmm0</span>
+</code></pre></div>
+<p><strong>ARM SVE2</strong>（可伸缩向量扩展）：</p>
+<div class="highlight"><pre><span></span><code><span class="c1">; 向量长度不可知编程</span>
+<span class="nf">add</span><span class="w"> </span><span class="no">z0.s</span><span class="p">,</span><span class="w"> </span><span class="no">z1.s</span><span class="p">,</span><span class="w"> </span><span class="no">z2.s</span><span class="w">  </span><span class="c1">// 32位元素加法</span>
+</code></pre></div>
+</li>
+</ul>
+<h4 id="programming-language-abi"><strong>programming language ABI</strong></h4>
+<p>这部分就不展开说，网上自行查找资料。</p>
+<p>由此，对于 ABI 的概念，或多或少都有些印象，如果还能配合实践一些代码的话（找不到好玩的项目，不如问问神奇的 DeepSeek 吧！）印象就更深了！</p>
+<p>再配合看到的一些<code>abi</code>：<code>EABI</code>、<code>system V</code> 的文档，那就更好理解了！</p>
+<h3 id="libc">libc</h3>
+<p>还有一个概念，那啥叫 libc？</p>
+<p>这里我推荐蒋炎岩老师的 OS 课 <a href="https://jyywiki.cn/OS/2024/lect17.md">C 标准库和实现</a> 已经讲的比较清楚了。</p>
+<p>实际就是根据 OS 提供的系统调用再封一层，或者C语言本身的封装的常用的库函数。</p>
+<h4 id="_1">计算的封装（与体系结构无关）</h4>
+<blockquote>
+<p><a href="https://en.cppreference.com/w/cpp/freestanding">Freestanding 环境</a>下也可以使用的定义</p>
+</blockquote>
+<ul>
+<li><a href="https://cplusplus.com/reference/cstddef/">stddef.h</a> - <code>size_t</code><ul>
+<li>还有一个有趣的 “offsetof” (Demo; 遍历手册的乐趣)</li>
+</ul>
+</li>
+<li><a href="https://cplusplus.com/reference/cstdint/">stdint.h</a> - <code>int32_t</code>, <code>uint64_t</code></li>
+<li><a href="https://cplusplus.com/reference/cstdbool/">stdbool.h</a> - <code>bool</code>, <code>true</code>, <code>false</code></li>
+<li><a href="https://cplusplus.com/reference/cfloat/">float.h</a></li>
+<li><a href="https://cplusplus.com/reference/climits/">limits.h</a></li>
+<li><a href="https://cplusplus.com/reference/cstdarg/">stdarg.h</a></li>
+<li><a href="https://cplusplus.com/reference/cinttypes/">inttypes.h</a><ul>
+<li>打印 intptr_t 变量 printf 的格式字符串是什么？</li>
+</ul>
+</li>
+<li><a href="https://cplusplus.com/reference/cstring/">string.h</a>: 字符串/数组操作<ul>
+<li>memcpy, memmove, strcpy, ...</li>
+</ul>
+</li>
+<li><a href="https://cplusplus.com/reference/cstdlib/">stdlib.h</a>: 常用功能<ul>
+<li>rand, abort, atexit, system, atoi, ...</li>
+<li>看起来就不像是人用的</li>
+</ul>
+</li>
+</ul>
+<h4 id="_2">系统调用与环境的抽象</h4>
+<p>最重要的例子就是：<strong>Standard I/O: <a href="https://www.cplusplus.com/reference/cstdio/">stdio.h</a></strong></p>
+<ul>
+<li>
+<p><code>FILE *</code> 背后其实是一个文件描述符</p>
+</li>
+<li>
+<p>我们可以用 <code>gdb</code> 查看具体的 <code>FILE *</code></p>
+<ul>
+<li>例如 <code>stdout</code></li>
+</ul>
+</li>
+<li>
+<p>封装了文件描述符上的系统调用 (fseek, fgetpos, ftell, feof, ...)</p>
+<p>这些都是不同的 OS 向上提供的！</p>
+</li>
+</ul>
+<h4 id="summary">summary</h4>
+<p>想想看，自己是不是实现过 <code>printf</code> 这个函数？</p>
+<p>在嵌入式 bare-metal 中，我们要将字符打印到屏幕/OLED/串口助手上 是怎么做的？重定向？直接操作硬件？</p>
+<p>还有在 PA 上，<code>putchar</code> 是不是就直接操作我们的模拟器提供的硬件？</p>
+<p>那现在，有了 OS 封装硬件操作（<code>write、read、open...</code>）</p>
+<p>那是不是得用 OS 的了？为了安全！</p>
+<p>那不同的 arch 和不同 OS ，对这些操作都有不一样的限制喔，那也就有不一样的封装喔！</p>
+<p>针对这些不一样的封装，就有不同的 <code>libc</code> 实现了（这个时候，就可以问问 LLM 了！）：</p>
+<blockquote>
+<p>以下是几种常见的 C 标准库（libc）的特点、场景及对比：</p>
+<p><strong>glibc</strong></p>
+<ul>
+<li><strong>标准和兼容性</strong>：遵循 ISO C 和 POSIX 标准，确保在不同系统和平台上的兼容性和可移植性。</li>
+<li><strong>丰富的函数库</strong>：提供大量的函数，包括数学函数、字符串处理函数、时间处理函数、文件 I/O 函数等，满足各种编程需求。</li>
+<li><strong>线程安全</strong>：支持多线程环境下的并发操作。</li>
+<li>
+<p><strong>本地化支持</strong>：支持多种语言和文化习惯，能够处理不同语言的字符编码和排序规则。</p>
+</li>
+<li>
+<p><strong>场景</strong>：适用于大多数常见的 Linux 系统级开发任务，是 GNU/Linux 操作系统的重要组成部分，几乎被所有其他的运行库所依赖。</p>
+</li>
+</ul>
+<p><strong>uClibc</strong></p>
+<ul>
+<li><strong>占用空间小</strong>：相比其他标准库，uClibc 具有更小的体积，可以节省系统存储空间的消耗。</li>
+<li><strong>运行效率高</strong>：采用了优化的代码和数据结构，能够提高运行效率，降低系统负载。</li>
+<li><strong>支持多种处理器体系结构</strong>：可以支持多种不同的处理器体系结构，包括 ARM、MIPS、PowerPC 等。</li>
+<li><strong>支持多种编译器</strong>：可以支持多种不同的编译器，包括 GCC、Clang 等。</li>
+<li><strong>易于移植</strong>：提供了丰富的 API 接口和工具，可以轻松地进行移植和应用开发。</li>
+<li><strong>可定制化</strong>：提供了灵活的选项和配置，可以根据实际需求进行自定义设置，满足不同开发者的需求。</li>
+<li>
+<p><strong>开放源代码</strong>：是一款开源软件，可以免费使用和分发，也可以进行修改和调整。</p>
+</li>
+<li>
+<p><strong>场景</strong>：适用于嵌入式系统和其他有限资源的设备上。</p>
+</li>
+</ul>
+<p><strong>musl</strong></p>
+<ul>
+<li><strong>轻量级</strong>：体积小，占用空间少，适合资源受限的环境。</li>
+<li><strong>快速启动</strong>：由于库函数数量相对较少，系统的启动速度更快。</li>
+<li><strong>可移植性强</strong>：可以在多种架构上运行，包括 ARM、MIPS 和 x86 等。</li>
+<li>
+<p><strong>安全性高</strong>：提供了更好的安全特性，例如在内存分配等方面有更安全的实现。</p>
+</li>
+<li>
+<p><strong>场景</strong>：适用于嵌入式系统、移动设备和其他对性能有高要求的应用程序，也可以作为 glibc 的替代品在一些特定场景下使用。</p>
+</li>
+</ul>
+<p><strong>newlib</strong></p>
+<ul>
+<li><strong>轻量级</strong>：体积更小，适合在资源受限的环境中运行。</li>
+<li><strong>灵活性高</strong>：更新周期相对较短，能够更快地引入新的特性和修复。</li>
+<li>
+<p><strong>遵循标准</strong>：遵循 ISO C 和 POSIX 标准，并提供了一些基本的 C 标准库函数实现。</p>
+</li>
+<li>
+<p><strong>场景</strong>：适用于嵌入式系统、微控制器等资源受限的环境中。</p>
+</li>
+</ul>
+<p><strong>对比总结</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">库名称</th>
+<th style="text-align: center;">体积大小</th>
+<th style="text-align: center;">性能</th>
+<th style="text-align: center;">兼容性</th>
+<th style="text-align: center;">可配置性</th>
+<th style="text-align: center;">安全性</th>
+<th style="text-align: center;">更新周期</th>
+<th style="text-align: center;">文档支持</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">glibc</td>
+<td style="text-align: center;">较大</td>
+<td style="text-align: center;">稳定</td>
+<td style="text-align: center;">广泛</td>
+<td style="text-align: center;">较弱</td>
+<td style="text-align: center;">一般</td>
+<td style="text-align: center;">较长</td>
+<td style="text-align: center;">丰富</td>
+</tr>
+<tr>
+<td style="text-align: center;">uClibc</td>
+<td style="text-align: center;">小</td>
+<td style="text-align: center;">高</td>
+<td style="text-align: center;">较好</td>
+<td style="text-align: center;">强</td>
+<td style="text-align: center;">一般</td>
+<td style="text-align: center;">较长</td>
+<td style="text-align: center;">一般</td>
+</tr>
+<tr>
+<td style="text-align: center;">musl</td>
+<td style="text-align: center;">小</td>
+<td style="text-align: center;">高</td>
+<td style="text-align: center;">较好</td>
+<td style="text-align: center;">强</td>
+<td style="text-align: center;">高</td>
+<td style="text-align: center;">较短</td>
+<td style="text-align: center;">较少</td>
+</tr>
+<tr>
+<td style="text-align: center;">newlib</td>
+<td style="text-align: center;">小</td>
+<td style="text-align: center;">高</td>
+<td style="text-align: center;">较好</td>
+<td style="text-align: center;">强</td>
+<td style="text-align: center;">一般</td>
+<td style="text-align: center;">较短</td>
+<td style="text-align: center;">较少</td>
+</tr>
+<tr>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<p>所以，C、ABI、OS 这几个话题往往都是会放在一起说的！这个时候再回去看看那些交叉编译工具，是不是就有点理解了？</p>
+<p><code>riscv64-unknown-linux-gnu-gcc</code>、<code>riscv64-buildroot-linux-uclibc-gcc</code></p>
+<blockquote>
+<p>一些很久之前的笔记，跳过，不想删了</p>
+<p>在 计算机系统基础中，如果是有 OS 的环境，我们知道实际的 <code>printf</code> 依赖于 OS 向 lib 提供的系统调用 <code>write, brk</code> 等系统调用，而系统调用是 OS 、app/user 之间的接口，为的就是user能够操作一些硬件设备，具体到 <code>printf</code> 就是我们的终端。</p>
+<p>但我们也弄过嵌入式，那个时候也用到了<code>printf</code>，但是我们做的是串口重定向的操作。</p>
+<p>所以，并不是在有 OS 的环境下才能用 C 库，在 bare-meatal 下我们依旧能够使用，只不过是说我们需要自己做一部分的操作来直接控制硬件，就像 <code>printf</code> 和串口重定向；更有甚者，使用直接操作硬件的方式实现I/O操作，而不依赖于标准库中的文件流操作函数，当然工作量稍大，应该没人这么做？</p>
+<p>所以，在裸机环境下，同样也是有他人实现好的 C 运行库：Newlib。它旨在为没有操作系统支持的 bare-metal 环境提供基本的 C 库功能，库中的函数对运行时环境的要求极低，不依赖于操作系统运行，我们不必为了配合 C 库而在 bare-metal 上实现额外的功能。</p>
+<p>Newlib 提供了一组“stub”函数，这些函数模拟了系统调用，使得 Newlib 可以在没有操作系统的环境中工作。而 glibc 和 uClibc 都需要依赖于操作系统的底层支持。</p>
+</blockquote>
+<h2 id="summary-example">Summary Example</h2>
+<h3 id="risc-v">RISC-V</h3>
+<ul>
+<li><strong>riscv64-unknown-linux-gnu-gcc</strong>：这是一个64位的RISC-V交叉编译工具链，用于编译运行在Linux系统上的应用程序，链接到glibc库。</li>
+<li><strong>riscv64-unknown-elf-gcc</strong>：这是一个64位的RISC-V交叉编译工具链，用于编译不依赖操作系统的裸机应用程序，链接到newlib库。</li>
+<li><strong>riscv-none-embed-gcc</strong>：这是为裸机（bare-metal）嵌入式系统而生成的交叉编译工具链，使用newlib或newlib-nano库，能够为嵌入式系统生成更加优化的代码体积。</li>
+</ul>
+<h3 id="_3"></h3>
+<h3 id="arm">ARM</h3>
+<p>不管是裸机交叉编译工具链<strong>arm-none-eabi</strong>，还是Linux交叉编译工具链<strong>arm-linux-gnueabi</strong>，其实没有本质的区别，工具链都能编译成相应架构的指令、链接生成可执行代码。</p>
+<blockquote>
+<p>arm-none-eabi默认使用的是<strong>非Linux接口的C库</strong>，适合于裸机开发，无法开发基于Linux的应用程序。</p>
+<p>arm-linux-gnueabi默认使用的是<strong>Linux接口的C库</strong>，适合于Linux应用程序开发。</p>
+<p>通常情况下，我们如果用C语言开发，<strong>如果重新实现C库往往不现实</strong>，需要交叉编译工具链支持标准C库。</p>
+<p>对于arm交叉编译工具链，一般会支持三个最基本的库(静态库为例)：libgcc.a、 libc.a、 libm.a。</p>
+<p>SofTool.CN Notes:
+<strong>libgcc.a</strong> ： 在编译gcc时产生，提供平台相关的底层运行库，大多数用于目标处理器的算术运算。如对于arm9，不支持硬件除法，硬件浮点，代码中任何除法、浮点相关操作都应该去链接libgcc.a，由libgcc.a提供除法、浮点操作的软件模拟实现。但对于支持硬件除法、硬件浮点的cortex-a架构cpu，无需libgcc.a提供软实现，编译器直接生成除法或浮点指令，处理速度是软实现远远不及的。
+<strong>libc.a</strong> ： C语言标准函数库
+<strong>libm.a</strong> ： 数学处理库</p>
+</blockquote>
+<p><strong>用于裸机开发以及用于Linux应用开发的Arm交叉编译工具链实质是一样的，只不过采用库的策略差异。</strong>理论上只要用裸机开发的交叉编译工具链编译一个<strong>基于某个Linux内核头的C库(如: glibc)</strong>，那么就可以实现Linux应用程序的编程。同样，Linux应用开发的交叉编译工具链只要再编译一个<strong>基于裸机开发的C库(如: newlib)</strong>，即可实现标准的裸机编程，与windows下mdk、iar等裸机开发无异。</p>
+<ul>
+<li><strong>arm-linux-gcc</strong>：这是一个较老的命名方式，用于编译运行在ARM架构上的Linux系统应用程序。它通常链接到glibc库。</li>
+<li><strong>arm-linux-gnueabi-gcc</strong>：这个编译器用于编译运行在ARM架构上的Linux系统应用程序，适用于任何CPU型号，链接到GNU EABI库。</li>
+<li><strong>arm-linux-gnueabihf-gcc</strong>：与<code>arm-linux-gnueabi-gcc</code>类似，但默认使用hard浮点ABI，适用于有FPU的ARM架构。</li>
+<li><strong>arm-none-eabi-gcc</strong>：用于编译不依赖操作系统的ARM架构应用程序，通常用于裸机环境，链接 newlib 等。</li>
+<li><strong>arm-none-linux-gnueabi-gcc</strong>：用于编译运行在ARM架构上的Linux系统应用程序，适用于任何CPU型号，链接到GNU EABI库。</li>
+</ul>
+<p>arm-none-eabi-gcc 一般适用用于 Arm Cortex-M/Cortex-R 平台，它使用的是 newlib 库。</p>
+<p>arm-linux-gnueabi-gcc 和 aarch64-linux-gnu-gcc 适用于 Arm Cortex-A 系列芯片，前者针对 32 位芯片，后者针对 64 位芯片，它使用的是 glibc 库。可以用来编译 u-boot、linux kernel 以及应用程序。</p>
+<p>另外需要补充一点的是，32 位的 Arm 和 64 位的 Arm，它们的指令集是不同的，所以需要使用不同的工具链。当然，Arm64 为了保证前向兼容，提供了一个 32 位的兼容模式，所以我们用 arm-linux-gnueabi-gcc 编译的应用程序也是可以直接在Arm64 的系统上运行的，但是 Linux Kernel 和 U-Boot 就不行，除非你提前把 CPU 切换到 32 位模式。曾经有个项目使用了一颗四核的 Arm64 芯片，但是内存只有64M，为了节省空间，在 CPU 运行到 U-Boot 之前，我们就把它切到了 32 位模式，后面的 U-Boot、Linux Kernel，应用全部都用 32 位编译，加上 Thumb 指令集，节省了不少空间。。<a href="https://segmentfault.com/a/1190000020955640">一次搞定 Arm Linux 交叉编译</a></p>
+<h2 id="principle-of-cross-compilation-optional">Principle of cross-compilation (optional)</h2>
+<p>比较复杂，感觉我也不太想写，直接看！</p>
+<p><a href="https://ruvi-d.medium.com/a-master-guide-to-linux-cross-compiling-b894bf909386">A master guide to Linux cross compiling</a></p>
+<p><a href="https://preshing.com/20141119/how-to-build-a-gcc-cross-compiler/">How to Build a GCC Cross-Compiler</a></p>
+<p><a href="https://www.youtube.com/watch?v=Pbt330zuNPc">Anatomy of Cross-Compilation Toolchains</a></p>
+<p><a href="https://www.bilibili.com/video/BV1J14y1D7Sw/?spm_id_from=333.337.search-card.all.click&amp;vd_source=ecc99d78ae961113010161a48a475a35">【技术杂谈】C编译体系</a></p>
+<h2 id="use-experience">Use &amp; Experience</h2>
+<p><a href="https://ruvi-d.medium.com/a-master-guide-to-linux-cross-compiling-b894bf909386">A master guide to Linux cross compiling</a></p>
+<p><a href="https://ruvi-d.medium.com/toolchains-a-horror-story-bef1ef522292">工具链：一个恐怖的故事。看似... |作者 Ruvinda Dhambarage |中等 --- Toolchains: A horror story. Real world examples of how a seemingly… | by Ruvinda Dhambarage | Medium</a></p>
+
+
+
+
+
+
+
+  
+    
+  
+  
+    
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Last update">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2025-03-04T11:06:39+01:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2025-03-04</span>
+  </span>
+
+    
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Created">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2025-03-04T11:06:39+01:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2025-03-04</span>
+  </span>
+
+    
+    
+    
+  </aside>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://github.com/JAILuo" target="_blank" rel="noopener" title="JAILuo" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.footer"], "search": "../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.83f73b43.min.js"></script>
+      
+        <script src="../../js/timeago.min.js"></script>
+      
+        <script src="../../js/timeago_mkdocs_material.js"></script>
+      
+        <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+      
+    
+  </body>
+</html>

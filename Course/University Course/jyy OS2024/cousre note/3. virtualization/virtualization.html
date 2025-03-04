@@ -14,7 +14,7 @@
         <link rel="prev" href="../2.%20concurrency/concurrency.html">
       
       
-        <link rel="next" href="../4.%20persistence/persistence.html">
+        <link rel="next" href="../../Mini%20Labs/M1/M1.html">
       
       
       <link rel="icon" href="../../../../../assets/images/favicon.png">
@@ -644,7 +644,271 @@
         <li class="md-nav__item">
   <a href="#_7" class="md-nav__link">
     <span class="md-ellipsis">
+      操作系统上的进程
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="操作系统上的进程">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      第一个进程
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      创建新进程
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="创建新进程">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fork-printf" class="md-nav__link">
+    <span class="md-ellipsis">
+      fork 配合 printf
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      运行可执行文件
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      退出程序
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="退出程序">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exit" class="md-nav__link">
+    <span class="md-ellipsis">
+      exit 的几种写法 (它们是不同)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
       
+        <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      (入侵) 进程的地址空间
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="(入侵) 进程的地址空间">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      地址空间
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="地址空间">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mmap" class="md-nav__link">
+    <span class="md-ellipsis">
+      mmap
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      入侵地址空间
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gui" class="md-nav__link">
+    <span class="md-ellipsis">
+      给进程发送 GUI 事件
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      改变进程对时间的感知
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#unix-shell" class="md-nav__link">
+    <span class="md-ellipsis">
+      系统调用和 UNIX Shell
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="系统调用和 UNIX Shell">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#api" class="md-nav__link">
+    <span class="md-ellipsis">
+      更多的操作系统 API
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#shell" class="md-nav__link">
+    <span class="md-ellipsis">
+      Shell
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#c" class="md-nav__link">
+    <span class="md-ellipsis">
+      C 标准库设计与实现
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="C 标准库设计与实现">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#libc" class="md-nav__link">
+    <span class="md-ellipsis">
+      libc
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      基础编程机制的抽象
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      系统调用与环境的抽象
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      动态内存管理
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="动态内存管理">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#malloc-fast-and-slow" class="md-nav__link">
+    <span class="md-ellipsis">
+      malloc, Fast and Slow
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#slab" class="md-nav__link">
+    <span class="md-ellipsis">
+      slab
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#linux" class="md-nav__link">
+    <span class="md-ellipsis">
+      Linux操作系统
     </span>
   </a>
   
@@ -666,7 +930,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../4.%20persistence/persistence.html" class="md-nav__link">
+      <a href="../../../../University Course/jyy OS2024/cousre note/4. persistence/persistence.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1494,6 +1758,279 @@
   
 
     
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Tools
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Tools
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Tools/GDB/GDB.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GDB
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Vim
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            Vim
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Tools/vim/usage/usage.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    usage
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Tools/vim/vim-plugin/vim.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    vim-plugin
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Tools/doxygen/doxygen.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    doxygen
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Tools/gcc/gcc.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    gcc
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Tools/Git/Git.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Git
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Tools/md2slider/md2slider.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    md2slider
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Tools/tmux/tmux.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    tmux
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Todo%20List/todo.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TODO List
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -1656,7 +2193,271 @@
         <li class="md-nav__item">
   <a href="#_7" class="md-nav__link">
     <span class="md-ellipsis">
+      操作系统上的进程
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="操作系统上的进程">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      第一个进程
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      创建新进程
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="创建新进程">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fork-printf" class="md-nav__link">
+    <span class="md-ellipsis">
+      fork 配合 printf
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      运行可执行文件
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      退出程序
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="退出程序">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exit" class="md-nav__link">
+    <span class="md-ellipsis">
+      exit 的几种写法 (它们是不同)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
       
+        <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      (入侵) 进程的地址空间
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="(入侵) 进程的地址空间">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      地址空间
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="地址空间">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mmap" class="md-nav__link">
+    <span class="md-ellipsis">
+      mmap
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      入侵地址空间
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gui" class="md-nav__link">
+    <span class="md-ellipsis">
+      给进程发送 GUI 事件
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      改变进程对时间的感知
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#unix-shell" class="md-nav__link">
+    <span class="md-ellipsis">
+      系统调用和 UNIX Shell
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="系统调用和 UNIX Shell">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#api" class="md-nav__link">
+    <span class="md-ellipsis">
+      更多的操作系统 API
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#shell" class="md-nav__link">
+    <span class="md-ellipsis">
+      Shell
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#c" class="md-nav__link">
+    <span class="md-ellipsis">
+      C 标准库设计与实现
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="C 标准库设计与实现">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#libc" class="md-nav__link">
+    <span class="md-ellipsis">
+      libc
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      基础编程机制的抽象
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      系统调用与环境的抽象
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      动态内存管理
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="动态内存管理">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#malloc-fast-and-slow" class="md-nav__link">
+    <span class="md-ellipsis">
+      malloc, Fast and Slow
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#slab" class="md-nav__link">
+    <span class="md-ellipsis">
+      slab
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#linux" class="md-nav__link">
+    <span class="md-ellipsis">
+      Linux操作系统
     </span>
   </a>
   
@@ -1813,7 +2614,1155 @@
 <li><strong>调试工具</strong>：熟练使用QEMU+GDB调试内核，理解硬件与软件的交互细节  </li>
 </ol>
 <p>如果有具体技术点需要深入讨论（如页表实现细节或锁的优化），欢迎随时交流！</p>
-<h2 id="_7"></h2>
+<h2 id="_7">操作系统上的进程</h2>
+<h3 id="_8">第一个进程</h3>
+<ul>
+<li>操作系统的启动<ul>
+<li>Firmware 阶段<ul>
+<li>CPU Reset 后，Firmware 代码开始执行</li>
+<li>加载操作系统</li>
+</ul>
+</li>
+<li>操作系统初始化阶段<ul>
+<li>操作系统扫描系统中的硬件、初始化数据结构……</li>
+<li>加载第一个进程 (状态机)</li>
+</ul>
+</li>
+<li>操作系统执行阶段<ul>
+<li>状态机在 CPU 上执行</li>
+<li>允许执行 syscall 进入操作系统代码</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="_9">创建新进程</h3>
+<p><code>fork</code> 做了什么？立即复制状态机</p>
+<ul>
+<li><strong>包括==所有信息==的完整拷贝</strong><ul>
+<li>每一个字节的内存</li>
+<li>打开的文件 (共享)</li>
+<li>……</li>
+<li>复制失败返回 -1<ul>
+<li>errno 会返回错误原因 (man fork)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img alt="image-20250222225344657" src="pic/image-20250222225344657.png" /></p>
+<blockquote>
+<p>如何区分两个状态机？</p>
+<ul>
+<li>新创建进程返回 0</li>
+<li>执行 fork 的进程返回子进程的进程号</li>
+</ul>
+</blockquote>
+<p>总结：fork() 会完整复制状态机；新创建的状态机返回值为 0，执行 fork() 的进程会返回子进程的进程号。同时，操作系统中的进程是并行执行的。程序的精确行为并不显然——model checker 可以帮助我们理解它。</p>
+<h4 id="fork-printf">fork 配合 printf</h4>
+<ul>
+<li>
+<p>example1</p>
+<div class="highlight"><pre><span></span><code>pid_t x = fork(); 
+pid_t y = fork(); 
+printf(&quot;%d %d\n&quot;, x, y); 
+</code></pre></div>
+<ul>
+<li>到底创建了几个状态机？</li>
+<li>pid 分别是多少？<ul>
+<li>“状态机视角” 帮助我们严格理解</li>
+</ul>
+</li>
+</ul>
+<p>这里不解释，这里之前在简单学习Linux系统编程的时候，画过图，原来那时候已经懵懂地使用了状态机的思想。</p>
+<p>但由上面的例子，也能看出 操作系统内核就是最早的并发程序，</p>
+</li>
+<li>
+<p>example2</p>
+<div class="highlight"><pre><span></span><code><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">fork</span><span class="p">();</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Hello</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// 展开</span>
+<span class="c1">// 第一次循环</span>
+<span class="n">fork</span>
+<span class="n">printf</span>
+
+<span class="c1">// 第二次循环</span>
+<span class="n">fork</span>
+<span class="n">printf</span>
+</code></pre></div>
+<p>状态机视角帮助我们严格理解程序行为</p>
+<ul>
+<li>
+<p><code>./a.out</code></p>
+</li>
+<li>
+<p><code>./a.out | cat</code></p>
+<p><img src="pic/image-20250222230728654.png" alt="image-20250222230728654" style="zoom: 67%;" /></p>
+<p>两种结果不对？不应该都是6次？</p>
+<p>说明哪里有问题</p>
+<ul>
+<li>计算机系统里没有魔法</li>
+<li>(无情执行指令的) 机器永远是对的</li>
+</ul>
+</li>
+</ul>
+<p>既然循环展开没问题，<code>fork</code> 讲的也没问题，那问题是什么？管道？ <code>printf</code> ？。。。。究竟还有什么复制了？</p>
+<p>记得，计算机的任何内容，到计算机底层，最终都会变成非常非常小的行为，因为最终执行的是指令！还是那句话，冤有头债有主！这样会有理有据根据底层知识地“猜”</p>
+<p>还记得之前学习过的输出输入流的缓冲吗？</p>
+<p><img alt="image-20250222231225516" src="pic/image-20250222231225516.png" /></p>
+<p>为了性能，都是fully buffered，而终端是默认 line buffered。</p>
+<blockquote>
+<p>实际上也和libc的实现也是有关的，如果是自己实现的klib，那最终也是6次。</p>
+</blockquote>
+<p>具体状态迁移图。</p>
+<p>其中有一个重点就是，buffer是在每一个进程中的，记得了吗？fork复制完整的状态机，所有的信息！这你就知道了！</p>
+<p>所以理解就是，<code>printf</code> 的时候，是往这个buffer里去写，fork复制的时候，这个buffer也会被复制。</p>
+<p><img alt="image-20250222231832339" src="pic/image-20250222231832339.png" /></p>
+</li>
+</ul>
+<p>fully buffered 就是8个了喔！管道导致标准输出变为全缓冲模式，<code>printf</code> 的 <code>Hello\n</code> 不会立即刷新，而是暂存在缓冲区。</p>
+<p>真正搞明白，记住了，fork 是复制整个进程地址空间的内容，all！所以你知道的不知道的。</p>
+<p>所以，当遇到某个和你认为中不符的现象，肯定是哪个状态不对或者自己脑海中理解的模型不对。</p>
+<blockquote>
+<p>突发奇想，DeepSeek-R1能做对吗？还真可以！可能这题太简单了，只是我们不知道这个机制</p>
+<p><strong>答案分析：</strong></p>
+<hr />
+<ol>
+<li>
+<p><strong>情况1：直接运行 <code>./a.out</code></strong></p>
+<p><strong>执行流程与输出分析</strong></p>
+<ol>
+<li>
+<p><strong>初始进程 <code>P0</code></strong>：</p>
+<ul>
+<li><code>i=0</code>：调用 <code>fork()</code> 生成子进程 <code>P1</code>。</li>
+<li><code>P0</code> 和 <code>P1</code> 均执行 <code>printf("Hello\n")</code>。</li>
+<li><strong>输出</strong>：<code>Hello</code>（来自 <code>P0</code> 和 <code>P1</code>，共 2 次）。</li>
+</ul>
+</li>
+<li>
+<p><strong>进入 <code>i=1</code> 循环</strong>：</p>
+<ul>
+<li><code>P0</code> 和 <code>P1</code> 各自再次调用 <code>fork()</code>，生成子进程 <code>P2</code>、<code>P3</code>、<code>P4</code>、<code>P5</code>（实际为 4 个进程）。</li>
+<li>所有进程（<code>P0</code>、<code>P1</code>、<code>P2</code>、<code>P3</code>）执行 <code>printf("Hello\n")</code>。</li>
+<li><strong>输出</strong>：<code>Hello</code>（来自 4 个进程，共 4 次）。</li>
+</ul>
+</li>
+<li>
+<p><strong>总输出次数</strong>：</p>
+<ul>
+<li>2（第一次循环） + 4（第二次循环） = <strong>6 次</strong>。</li>
+</ul>
+</li>
+</ol>
+<p><strong>关键机制</strong></p>
+<ul>
+<li><strong>行缓冲模式</strong>：当标准输出直接连接到终端时，<code>printf</code> 默认使用行缓冲（<code>\n</code> 会触发立即刷新）。</li>
+<li><strong>无缓冲区残留</strong>：每次 <code>printf</code> 后换行符强制刷新缓冲区，<code>fork()</code> 不会复制未刷新的数据。</li>
+</ul>
+<hr />
+</li>
+<li>
+<p><strong>情况2：通过管道运行 <code>./a.out | cat</code></strong></p>
+<p><strong>执行流程与输出分析</strong></p>
+<ol>
+<li>
+<p><strong>缓冲模式变化</strong>：</p>
+<ul>
+<li>管道导致标准输出变为全缓冲模式，<code>printf</code> 的 <code>Hello\n</code> 不会立即刷新，而是暂存在缓冲区。</li>
+</ul>
+</li>
+<li>
+<p><strong>进程复制与缓冲区继承</strong>：</p>
+<ul>
+<li>每次 <code>fork()</code> 会复制父进程的未刷新缓冲区。</li>
+<li>具体流程：<ul>
+<li><strong>第一次循环 <code>i=0</code></strong>：<ul>
+<li><code>P0</code> 调用 <code>fork()</code> 生成 <code>P1</code>。</li>
+<li><code>P0</code> 和 <code>P1</code> 的缓冲区均暂存 <code>Hello\n</code>（未输出）。</li>
+</ul>
+</li>
+<li><strong>第二次循环 <code>i=1</code></strong>：<ul>
+<li><code>P0</code> 和 <code>P1</code> 再次调用 <code>fork()</code>，生成 <code>P2</code>、<code>P3</code>、<code>P4</code>、<code>P5</code>。</li>
+<li>所有进程的缓冲区继承父进程内容，此时每个进程的缓冲区包含 <code>Hello\n</code>（第一次循环）。</li>
+<li>每个进程执行第二次 <code>printf("Hello\n")</code>，缓冲区追加第二个 <code>Hello\n</code>。</li>
+</ul>
+</li>
+<li><strong>进程退出时</strong>：全缓冲区的数据被强制刷新，每个进程输出 <code>Hello\nHello\n</code>。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>总输出次数</strong>：</p>
+<ul>
+<li>每个进程输出 2 次，4 个进程 × 2 = <strong>8 次</strong>。</li>
+</ul>
+</li>
+</ol>
+<p><strong>关键机制</strong></p>
+<ul>
+<li><strong>全缓冲模式</strong>：管道导致 <code>printf</code> 使用全缓冲，数据暂存不立即输出。</li>
+<li><strong>缓冲区继承</strong>：<code>fork()</code> 复制父进程的未刷新缓冲区，子进程拥有相同内容。</li>
+<li><strong>叠加输出</strong>：每个进程的缓冲区在退出前累积两次 <code>Hello\n</code>，最终输出双倍。</li>
+</ul>
+</li>
+</ol>
+<hr />
+<p><strong>状态机对比</strong>
+| 操作             | <code>./a.out</code>（行缓冲）  | <code>./a.out | cat</code>（全缓冲） |
+| ---------------- | -------------------- | ------------------------- |
+| <strong>第一次循环后</strong> | 缓冲区已刷新，无残留 | 缓冲区残留 <code>Hello\n</code>      |
+| <strong>第二次循环后</strong> | 缓冲区已刷新，无残留 | 缓冲区残留两个 <code>Hello\n</code>  |
+| <strong>进程退出时</strong>   | 无操作               | 强制刷新缓冲区，输出两次  |</p>
+<hr />
+<p><strong>总结</strong>
+- <strong>直接运行</strong>：行缓冲确保每次 <code>printf</code> 后立即输出，总次数为 6。
+- <strong>管道运行</strong>：全缓冲导致 <code>fork()</code> 复制未刷新缓冲区，最终输出翻倍至 8。</p>
+</blockquote>
+<h3 id="_10">运行可执行文件</h3>
+<p>接着 fork 创建状态机，那状态机总得跑起来！</p>
+<p><img alt="image-20250222233022751" src="pic/image-20250222233022751.png" /></p>
+<p>关键：<strong>重置</strong>。重置到初始状态。</p>
+<p>那为什么不统一成一个？真有点奇怪。。不懂那时候的设计。</p>
+<p>Spawn = fork() + execve()。那写代码变成这样：</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">pid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fork</span><span class="p">();</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">pid</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">-1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">perror</span><span class="p">(</span><span class="s">&quot;fork&quot;</span><span class="p">);</span><span class="w"> </span><span class="k">goto</span><span class="w"> </span><span class="n">fail</span><span class="p">;</span>
+<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">pid</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Child</span>
+<span class="w">    </span><span class="n">execve</span><span class="p">(...);</span>
+<span class="w">    </span><span class="n">perror</span><span class="p">(</span><span class="s">&quot;execve&quot;</span><span class="p">);</span><span class="w"> </span><span class="k">goto</span><span class="w"> </span><span class="n">fail</span><span class="p">;</span>
+<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Parent</span>
+<span class="w">    </span><span class="p">...</span>
+<span class="p">}</span>
+</code></pre></div>
+<ul>
+<li>
+<p>环境变量</p>
+<p><img alt="image-20250222234220185" src="pic/image-20250222234220185.png" /></p>
+<blockquote>
+<p><code>export</code>: 告诉 shell 在创建子进程时设置环境变量</p>
+<p>这个做实验的时候就在用！但是实际上是这么个原理！</p>
+</blockquote>
+<p>这个设计，还真的是无处不在。究竟怎么理解？之前做 PA 的感觉：要运行某个程序，然后输入这个的所在目录的全称然后找到它，为了方便，就把这个目录添加到一个地方，然后每次OS运行程序的时候，都会区这些目录寻找这些程序。应用程序执行的环境，这名字确实挺好。</p>
+<ul>
+<li>
+<p>例子：<code>PATH</code> 环境变量</p>
+<p><img alt="image-20250223000017197" src="pic/image-20250223000017197-17402400182101.png" /></p>
+</li>
+</ul>
+<p>从上面状态机的理解：<code>execve</code> 重置，那就是要准备一些初始状态：<code>argc, argv, envp</code></p>
+<p>再问问 DeepSeek</p>
+<p><strong>说实话，现在已将养成习惯，遇到一些不懂不会的内容，先用自己的理解说一遍，然后再用 LLM，配合找一些资料，让他总结，我发现LLM做一些事实性的东西真的是不太会出错的。</strong></p>
+<p><strong>另一种想法：在做代码实验、开发的时候，我想明白这些设计，明白用哪些接口写，然后再用 LLM 帮我写，这样的效率我觉得很高！</strong></p>
+<blockquote>
+<p>环境变量是操作系统中一个非常关键的设计概念，它的本质是 <strong>动态配置数据的全局存储机制</strong>，用于在程序运行时传递参数或控制程序行为。它的设计核心可以用一句话概括：<strong>将配置与代码分离，通过外部环境动态控制程序行为</strong>。</p>
+<hr />
+<ol>
+<li><strong>从「运行程序」的场景理解环境变量</strong>
+    以 <code>PATH</code> 环境变量为例，它的设计解决了以下问题：<ol>
+<li><strong>路径依赖问题</strong><br />
+     如果每次运行程序都要输入完整路径（如 <code>/usr/bin/ls</code>），用户体验极差。</li>
+<li><strong>集中管理路径</strong><br />
+     将常用路径统一存储在 <code>PATH</code> 中，操作系统自动搜索这些路径，避免重复输入。</li>
+<li><strong>动态配置</strong><br />
+     用户可以根据需要随时修改 <code>PATH</code>，无需重新编译程序或修改系统代码。</li>
+</ol>
+</li>
+</ol>
+<p><strong>设计实现的关键点</strong>：
+- <strong>存储结构</strong>：环境变量通常以键值对（<code>KEY=value</code>）形式存储，例如 <code>PATH=/usr/bin:/usr/local/bin</code>。
+- <strong>作用范围</strong>：环境变量是进程级别的，每个进程继承自父进程的环境变量副本。
+- <strong>查找规则</strong>：当执行命令时，操作系统按 <code>PATH</code> 中定义的目录顺序搜索可执行文件。</p>
+<hr />
+<ol>
+<li>
+<p><em>环境变量的底层设计原理</em>*</p>
+<ol>
+<li>
+<p><strong>操作系统如何存储环境变量？</strong></p>
+<ul>
+<li>
+<p><strong>进程内存模型</strong>：<br />
+    在 Unix/Linux 系统中，每个进程启动时，环境变量以字符串数组形式存储在进程内存的 <strong>环境段（Environment Segment）</strong> 中。例如：</p>
+<div class="highlight"><pre><span></span><code><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">envp</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="s">&quot;PATH=/usr/bin&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;USER=alice&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">};</span>
+</code></pre></div>
+</li>
+<li>
+<p><strong>继承机制</strong>：<br />
+    通过 <code>fork()</code> 创建子进程时，子进程会复制父进程的环境变量；通过 <code>exec()</code> 执行新程序时，可以选择保留或重置环境变量。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>环境变量的操作接口</strong></p>
+<ul>
+<li><strong>读取环境变量</strong>：<br />
+    通过 C 标准库函数 <code>getenv("PATH")</code> 获取值。</li>
+<li><strong>设置环境变量</strong>：<br />
+    使用 <code>setenv("PATH", "/new/path", 1)</code>（覆盖）或 <code>putenv("PATH=/new/path")</code>。</li>
+<li><strong>命令行操作</strong>：<br />
+    在 Shell 中通过 <code>export PATH=/new/path</code>（Linux）或 <code>set PATH=C:\new\path</code>（Windows）临时修改。</li>
+</ul>
+</li>
+<li>
+<p><strong>环境变量的设计哲学</strong></p>
+<ul>
+<li><strong>解耦配置与代码</strong>：<br />
+    程序行为不再硬编码在代码中，而是通过外部环境动态调整。例如：<ul>
+<li><code>LANG=zh_CN.UTF-8</code> 控制程序语言环境。</li>
+<li><code>http_proxy=http://proxy:8080</code> 控制网络代理。</li>
+</ul>
+</li>
+<li><strong>分层作用域</strong>：  <ul>
+<li><strong>系统级环境变量</strong>：影响所有用户（如 <code>/etc/environment</code>）。</li>
+<li><strong>用户级环境变量</strong>：仅影响当前用户（如 <code>~/.bashrc</code>）。</li>
+<li><strong>进程级环境变量</strong>：仅在当前进程生效（通过代码设置）。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+<hr />
+<ol>
+<li>
+<p><strong>环境变量的实际应用场景</strong></p>
+<ol>
+<li>
+<p><strong>程序路径搜索（PATH）</strong></p>
+<ul>
+<li>
+<p><strong>问题</strong>：如何让系统找到用户安装的非标准路径程序？</p>
+</li>
+<li>
+<p><strong>解决方案</strong>：将自定义路径加入 <code>PATH</code>：</p>
+<div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$PATH</span><span class="s2">:/my/custom/bin&quot;</span>
+</code></pre></div>
+<p>此后，直接输入 <code>my_program</code> 即可运行 <code>/my/custom/bin/my_program</code>。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>开发环境配置</strong></p>
+<ul>
+<li>
+<p><strong>场景</strong>：同一台机器上需要多个版本的 Python（Python 2.7 和 Python 3.9）。</p>
+</li>
+<li>
+<p><strong>解决方案</strong>：通过环境变量切换版本：</p>
+<div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;/opt/python3.9/bin:</span><span class="nv">$PATH</span><span class="s2">&quot;</span><span class="w">  </span><span class="c1"># 优先使用 Python 3.9</span>
+</code></pre></div>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>调试与日志控制</strong></p>
+<ul>
+<li>
+<p><strong>场景</strong>：控制程序输出调试信息。</p>
+</li>
+<li>
+<p><strong>解决方案</strong>：通过环境变量开关：</p>
+<div class="highlight"><pre><span></span><code><span class="nv">DEBUG</span><span class="o">=</span><span class="m">1</span><span class="w"> </span>./my_app<span class="w">  </span><span class="c1"># 程序内部检查 DEBUG 变量决定是否打印日志</span>
+</code></pre></div>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>容器化与云原生</strong></p>
+<ul>
+<li>
+<p><strong>场景</strong>：在 Docker/Kubernetes 中传递数据库密码、API 密钥等敏感信息。</p>
+</li>
+<li>
+<p><strong>解决方案</strong>：通过环境变量注入配置：</p>
+<div class="highlight"><pre><span></span><code># Kubernetes Pod 配置
+env:
+  - name: DB_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: db-secret
+        key: password
+</code></pre></div>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+<hr />
+<ol>
+<li>
+<p><strong>环境变量与安全</strong></p>
+<ol>
+<li>
+<p><strong>敏感信息泄露风险</strong></p>
+<ul>
+<li><strong>问题</strong>：环境变量对所有子进程可见，可能导致密码泄露。</li>
+<li><strong>解决方案</strong>：避免通过环境变量传递敏感信息，改用加密文件或密钥管理服务（如 Vault）。</li>
+</ul>
+</li>
+<li>
+<p><strong>路径劫持攻击</strong></p>
+<ul>
+<li>
+<p><strong>问题</strong>：恶意用户篡改 <code>PATH</code>，将 <code>ls</code> 指向恶意程序。</p>
+</li>
+<li>
+<p><strong>解决方案</strong>：确保 <code>PATH</code> 不包含当前目录（<code>.</code>），并限制权限：</p>
+<div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;/usr/bin:/bin&quot;</span><span class="w">  </span><span class="c1"># 不包含当前目录</span>
+</code></pre></div>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+<hr />
+<ol>
+<li><strong>从设计模式看环境变量</strong>
+    环境变量的设计体现了以下模式：<ol>
+<li><strong>全局上下文（Global Context）</strong>：<br />
+     提供一个统一的配置入口，避免参数层层传递。</li>
+<li><strong>依赖注入（Dependency Injection）</strong>：<br />
+     将外部依赖（如文件路径、服务地址）动态注入程序。</li>
+<li><strong>松耦合（Loose Coupling）</strong>：<br />
+     程序行为不再硬编码，而是依赖外部环境。</li>
+</ol>
+</li>
+</ol>
+<hr />
+<ol>
+<li>
+<p><strong>总结</strong></p>
+<ol>
+<li>环境变量的设计是操作系统对 <strong>动态配置管理</strong> 的优雅解决方案。它通过键值对存储、进程继承机制和全局访问接口，实现了以下目标：</li>
+<li><strong>灵活性</strong>：允许外部动态修改程序行为。</li>
+<li><strong>解耦</strong>：分离代码逻辑与运行时配置。</li>
+<li><strong>标准化</strong>：提供统一的配置管理方式，适用于所有程序。</li>
+</ol>
+<p>理解环境变量后，可以更高效地管理系统配置、调试程序，并设计出更灵活的软件架构。
+</p>
+</li>
+</ol>
+</blockquote>
+</li>
+</ul>
+<h3 id="_11">退出程序</h3>
+<p><strong>fork + exec = 自由执行任何程序</strong></p>
+<ul>
+<li>还差一个销毁状态机的函数就完整了</li>
+<li>UNIX 的答案: <code>_exit</code><ul>
+<li>立即摧毁状态机，允许有一个返回值</li>
+</ul>
+</li>
+<li>
+<p>子进程终止会通知父进程 (后续课程解释)</p>
+</li>
+<li>
+<p>但问题来了：多线程程序怎么办？</p>
+<p>退出是推出一个进程中所有的线程，还是就退出那一个线程？</p>
+</li>
+</ul>
+<h4 id="exit">exit 的几种写法 (它们是不同)</h4>
+<ul>
+<li>
+<p>exit(0)</p>
+<ul>
+<li>会调用 atexit</li>
+</ul>
+</li>
+<li>
+<p>_exit(0)</p>
+<ul>
+<li>
+<p>执行 “exit_group” 系统调用终止整个进程 (所有线程)</p>
+<ul>
+<li>细心的同学已经在 strace 中发现了</li>
+</ul>
+</li>
+<li>
+<p>会调用 atexit 吗？</p>
+<p>atexit 是一个libc 函数，那就是依赖于系统调用咯？</p>
+<p>那如果直接用系统调用，不用libc的库，那libc就不管啦！</p>
+<div class="highlight"><pre><span></span><code><span class="nf">asm</span><span class="w"> </span><span class="no">volatile</span><span class="p">(</span><span class="err">&quot;</span><span class="no">mov</span><span class="w"> </span><span class="no">...</span><span class="p">,</span><span class="w"> </span><span class="nv">%rax</span><span class="c1">; syscall&quot;);</span>
+</code></pre></div>
+</li>
+</ul>
+</li>
+<li>
+<p>syscall(SYS_exit, 0)</p>
+<ul>
+<li>执行 “exit” 系统调用终止当前线程</li>
+<li>会调用 atexit 吗？</li>
+</ul>
+</li>
+</ul>
+<p>更进一步：</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">strcmp</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="s">&quot;_exit&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// This is an immediate operating system exit.</span>
+<span class="w">    </span><span class="c1">// This _exit() is provided by libc.</span>
+<span class="w">    </span><span class="n">_exit</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">strcmp</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="s">&quot;__exit&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// This is an even more &quot;operating system&quot; exit.</span>
+<span class="w">    </span><span class="n">syscall</span><span class="p">(</span><span class="n">SYS_exit</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span><span class="w">                                                                                               </span>
+<span class="p">}</span>
+</code></pre></div>
+<p>这两种exit的区别？在状态机上有什么区别？</p>
+<p>第一想法应该使用 <code>strace</code> 去分析整个程序的内容！（对于一个 OS 上的程序）</p>
+<p><img alt="无标题" src="pic/无标题-17402409794342.png" /></p>
+<p>但这是为什么呢？一个退整个进程，一个退一个线程？DeepSeek！</p>
+<h3 id="summary">Summary</h3>
+<p><code>fork/execve/exit</code></p>
+<p>凭着这三个系统调用，OS就能做很多事情。</p>
+<p><code>fork</code>：复制状态机</p>
+<p><code>execve</code>：重置状态机</p>
+<p><code>exit</code>： 销毁状态机</p>
+<p>我就能构建很多个状态机！很多个进程！构建了进程树！pstree的缘由！</p>
+<p>那由此回答什么是 OS：很多个状态机的管理者！但同时它也是一个状态，他也有部分状态，而 OS 要做的内容就是凭借着自己的部分状态，把各个进程树在 OS 中建立起来！pstree（M1）/实际中内核的 <code>struct proc</code>，建立起来之后，凭着自己掌控的大量内存，借助内存管理算法（L1），每当进程需要内存的时候，那就从内存分配器拿一部分给进程！</p>
+<p>所以！OS 理解就是一个大的树结构。</p>
+<p>老师举了一个例子：人：进程，物理世界就是 OS ，OS 做的就是把我们大家都剪碎打乱了，放到一个放库（内存，当OS 要一个进程需要的时候，再把这个人拼起来！因为存在系统调用，进程请求某些内容，然后执行权交给 OS，OS 把进程丢回仓库，最终 OS 执行完相关代码后，再把人拼起来（当然得知道从哪里拼）！</p>
+<h2 id="_12">(入侵) 进程的地址空间</h2>
+<p>(mmap; 实现金山游侠、按键精灵、变速齿轮)</p>
+<h3 id="_13">地址空间</h3>
+<p><img alt="image-20250223111844095" src="pic/image-20250223111844095.png" /></p>
+<p>什么时候读取的p是合法？Linux进程的地址分布？那些读取不会segmentation fault？</p>
+<p>进一步，进程地址空间是什么？0到2<sup>64</sup> -1 的平坦序列。</p>
+<p>进一步，就是Linux的进程地址空间内容，怎么查看？<code>DeepSeek</code></p>
+<ul>
+<li>
+<p><code>/proc/[pid]/maps</code></p>
+<p>回想一下第一个 M1 的内容，这里面的内容不经意间就看到了。</p>
+</li>
+<li>
+<p><code>pmap</code> 命令</p>
+<p>工具更常用。</p>
+<p><img alt="image-20250223112711744" src="pic/image-20250223112711744.png" /></p>
+<p>也能看出一些内容，比如第二行的那个 <code>r-x</code>的bash，这实际就是我们的bash的源码；</p>
+<p>那些</p>
+<blockquote>
+<p>但是怎么实现的？</p>
+<p><code>cat /proc/[pid]/maps | xxx(解析这个文件)</code></p>
+</blockquote>
+</li>
+<li>
+<p><code>gdb</code></p>
+<p><code>info proc mappings</code> 基本和 <code>pmap</code> 一样。</p>
+<p>看看自己写的程序</p>
+</li>
+</ul>
+<blockquote>
+<p>接着？把maps文件的内容都玩个遍？！验证老师说的是不是对的！交给 AI 总结吧！</p>
+</blockquote>
+<p>加大一个10M的数组，看看大小</p>
+<p><img alt="image-20250223113321057" src="pic/image-20250223113321057.png" /></p>
+<p>再来看个简单的：minimal的地址空间的内容。</p>
+<p><img alt="image-20250223121656180" src="pic/image-20250223121656180.png" /></p>
+<blockquote>
+<p>探索一下 <code>vvar</code>、<code>vdso</code>。。。</p>
+<p>那就是拓展。</p>
+<p><img alt="image-20250223133427481" src="pic/image-20250223133427481.png" /></p>
+<p><strong>vdso</strong>: 进程的地址空间中有一些 “神秘” 的映射——当然，如果你阅读文档或询问 AI，它们的秘密也会被解开：“只读” 的系统调用可以通过与操作系统共享页面实现。vdso 就是实现这一点的机制。</p>
+</blockquote>
+<h4 id="mmap">mmap</h4>
+<p>继续主线的探索，进程的地址空间：连续的内存，梅一段内存都有读写执行...</p>
+<p>但是从 系统调用 <code>execve</code> 重置得到的初始进程状态：寄存器、大段内存...</p>
+<p>有一个问题？这些初始状态能不能改？怎么改？</p>
+<p><img alt="image-20250223134323505" src="pic/image-20250223134323505.png" /></p>
+<p>肯定有一条指令改变这个进程地址空间，应该有一个系统调用，帮助我们增删改地址空间。<code>mmap</code></p>
+<p>理解：<strong>在状态机状态上增加/删除/修改一段可访问的内存</strong></p>
+<ul>
+<li><code>MAP_ANONYMOUS</code>: 匿名 (申请) 内存</li>
+<li><strong><code>fd</code>: 把文件 “搬到” 进程地址空间中 (例子：加载器)</strong></li>
+<li>更多的行为请参考手册 (复杂性暴增)</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1">// 映射</span>
+<span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="nf">mmap</span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">addr</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">length</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">prot</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">flags</span><span class="p">,</span>
+<span class="w">           </span><span class="kt">int</span><span class="w"> </span><span class="n">fd</span><span class="p">,</span><span class="w"> </span><span class="kt">off_t</span><span class="w"> </span><span class="n">offset</span><span class="p">);</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">munmap</span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">addr</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">length</span><span class="p">);</span>
+
+<span class="c1">// 修改映射权限</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">mprotect</span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">addr</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">length</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">prot</span><span class="p">);</span>
+</code></pre></div>
+<p>再次交给 DeepSeek 看看？</p>
+<blockquote>
+<ol>
+<li>
+<p><strong>匿名映射（<code>MAP_ANONYMOUS</code>）</strong></p>
+<ul>
+<li>
+<p><strong>用途</strong>：动态分配堆内存（替代 <code>malloc</code> 的大块分配）。</p>
+</li>
+<li>
+<p><strong>特点</strong>：</p>
+<ul>
+<li>无文件关联，内存内容初始化为零。</li>
+<li>物理内存按需分配，通过 <code>munmap</code> 释放后立即归还系统</li>
+</ul>
+</li>
+<li>
+<p><strong>示例</strong>：</p>
+<p><code>C
+       // 分配 1GiB 匿名内存（仅虚拟地址，物理内存按需分配）
+ void *mem = mmap(NULL, 1 &lt;&lt; 30, PROT_READ | PROT_WRITE, 
+                MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);</code></p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>文件映射（指定 <code>fd</code>）</strong>（感觉这个是常用的？）</p>
+<ul>
+<li>将文件内容映射到内存，实现高效文件 I/O。</li>
+<li>动态链接库加载（如 <code>.so</code> 文件）。</li>
+</ul>
+<p><strong>特点</strong>：</p>
+<ul>
+<li>文件内容按需加载（访问时触发缺页中断，从磁盘读取）。<ul>
+<li>修改可同步回文件（<code>MAP_SHARED</code> 模式）。</li>
+</ul>
+</li>
+</ul>
+<p>示例：</p>
+<div class="highlight"><pre><span></span><code>  <span class="c1"># Python 示例：映射磁盘文件并读取前 512 字节</span>
+  <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;/dev/sda&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
+    <span class="n">mm</span> <span class="o">=</span> <span class="n">mmap</span><span class="o">.</span><span class="n">mmap</span><span class="p">(</span><span class="n">fp</span><span class="o">.</span><span class="n">fileno</span><span class="p">(),</span> <span class="n">length</span><span class="o">=</span><span class="mi">128</span><span class="o">&lt;&lt;</span><span class="mi">30</span><span class="p">,</span> <span class="n">prot</span><span class="o">=</span><span class="n">mmap</span><span class="o">.</span><span class="n">PROT_READ</span><span class="p">)</span>
+     <span class="nb">print</span><span class="p">(</span><span class="n">hexdump</span><span class="p">(</span><span class="n">mm</span><span class="p">[:</span><span class="mi">512</span><span class="p">]))</span>  <span class="c1"># 仅实际读取 512 字节到物理内存</span>
+</code></pre></div>
+</li>
+</ol>
+<p>以下是使用 <code>mmap</code> 将文件映射到进程地址空间的详细示例和解析。我们通过一个具体的 C 代码示例，展示如何将文件内容映射到内存中，并直接通过指针操作文件内容。</p>
+<hr />
+<p><strong>C 代码示例：文件映射与内存操作</strong></p>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;sys/mman.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;sys/stat.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;fcntl.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;unistd.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string.h&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">file_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;example.txt&quot;</span><span class="p">;</span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">file_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4096</span><span class="p">;</span><span class="w"> </span><span class="c1">// 映射 4KB 文件内容</span>
+<span class="w">  </span>
+<span class="w">  </span><span class="c1">// 1. 打开文件（若不存在则创建，权限为可读写）</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">fd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span><span class="w"> </span><span class="n">O_RDWR</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">O_CREAT</span><span class="p">,</span><span class="w"> </span><span class="mo">0666</span><span class="p">);</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">fd</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">-1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">perror</span><span class="p">(</span><span class="s">&quot;open&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span>
+<span class="w">  </span><span class="c1">// 2. 调整文件大小（确保文件足够大）</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ftruncate</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span><span class="w"> </span><span class="n">file_size</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">-1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">perror</span><span class="p">(</span><span class="s">&quot;ftruncate&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">close</span><span class="p">(</span><span class="n">fd</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span>
+<span class="w">  </span><span class="c1">// 3. 将文件映射到内存（PROT_READ | PROT_WRITE 可读写，MAP_SHARED 修改同步到文件）</span>
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">addr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mmap</span><span class="p">(</span>
+<span class="w">    </span><span class="nb">NULL</span><span class="p">,</span><span class="w">           </span><span class="c1">// 由内核选择映射地址</span>
+<span class="w">    </span><span class="n">file_size</span><span class="p">,</span><span class="w">      </span><span class="c1">// 映射长度</span>
+<span class="w">    </span><span class="n">PROT_READ</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">PROT_WRITE</span><span class="p">,</span><span class="w"> </span><span class="c1">// 内存可读可写</span>
+<span class="w">    </span><span class="n">MAP_SHARED</span><span class="p">,</span><span class="w">     </span><span class="c1">// 修改会同步到文件</span>
+<span class="w">    </span><span class="n">fd</span><span class="p">,</span><span class="w">             </span><span class="c1">// 文件描述符</span>
+<span class="w">    </span><span class="mi">0</span><span class="w">               </span><span class="c1">// 文件偏移量（从文件头部开始映射）</span>
+<span class="w">  </span><span class="p">);</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">addr</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">MAP_FAILED</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">perror</span><span class="p">(</span><span class="s">&quot;mmap&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">close</span><span class="p">(</span><span class="n">fd</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span>
+<span class="w">  </span><span class="c1">// 4. 通过内存指针直接操作文件内容</span>
+<span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;文件已映射到内存地址: %p</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">addr</span><span class="p">);</span>
+<span class="w">  </span>
+<span class="w">  </span><span class="c1">// 写入数据到内存（自动同步到文件）</span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Hello, mmap!&quot;</span><span class="p">;</span>
+<span class="w">  </span><span class="n">strncpy</span><span class="p">((</span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="n">addr</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="p">,</span><span class="w"> </span><span class="n">strlen</span><span class="p">(</span><span class="n">message</span><span class="p">));</span>
+<span class="w">  </span>
+<span class="w">  </span><span class="c1">// 读取并打印内存中的数据</span>
+<span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;文件内容: %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="n">addr</span><span class="p">);</span>
+<span class="w">  </span>
+<span class="w">  </span><span class="c1">// 5. 解除映射并关闭文件</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">munmap</span><span class="p">(</span><span class="n">addr</span><span class="p">,</span><span class="w"> </span><span class="n">file_size</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">-1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">perror</span><span class="p">(</span><span class="s">&quot;munmap&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="n">close</span><span class="p">(</span><span class="n">fd</span><span class="p">);</span>
+<span class="w">  </span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<ol>
+<li>
+<p><strong>打开文件</strong></p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">fd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">open</span><span class="p">(</span><span class="s">&quot;example.txt&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">O_RDWR</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">O_CREAT</span><span class="p">,</span><span class="w"> </span><span class="mo">0666</span><span class="p">);</span>
+</code></pre></div>
+<ul>
+<li><strong>作用</strong>：以读写模式打开文件（若文件不存在则创建）。</li>
+<li><strong>权限</strong>：<code>0666</code> 表示文件对所有用户可读写。</li>
+</ul>
+</li>
+<li>
+<p><strong>调整文件大小</strong></p>
+<div class="highlight"><pre><span></span><code><span class="n">ftruncate</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span><span class="w"> </span><span class="mi">4096</span><span class="p">);</span><span class="w"> </span><span class="c1">// 将文件大小设为 4KB</span>
+</code></pre></div>
+<ul>
+<li><strong>必要性</strong>：<code>mmap</code> 要求文件大小至少等于映射长度。若文件较小，需先扩展。</li>
+</ul>
+</li>
+<li>
+<p><strong>映射文件到内存</strong></p>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">addr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mmap</span><span class="p">(</span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="mi">4096</span><span class="p">,</span><span class="w"> </span><span class="n">PROT_READ</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">PROT_WRITE</span><span class="p">,</span><span class="w"> </span><span class="n">MAP_SHARED</span><span class="p">,</span><span class="w"> </span><span class="n">fd</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+</code></pre></div>
+<p><strong>参数解析</strong>：</p>
+<ul>
+<li><code>NULL</code>：由内核自动选择映射的起始地址。</li>
+<li><code>4096</code>：映射长度（必须 ≤ 文件大小）。</li>
+<li><code>PROT_READ | PROT_WRITE</code>：内存可读可写。</li>
+<li><code>MAP_SHARED</code>：修改会同步到文件（若需私有副本，使用 <code>MAP_PRIVATE</code>）。</li>
+<li><code>fd</code>：已打开的文件描述符。</li>
+<li><code>0</code>：从文件头部开始映射。</li>
+</ul>
+</li>
+<li>
+<p><strong>通过指针操作文件内容</strong></p>
+<div class="highlight"><pre><span></span><code><span class="n">strncpy</span><span class="p">((</span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="n">addr</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Hello, mmap!&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">strlen</span><span class="p">(</span><span class="s">&quot;Hello, mmap!&quot;</span><span class="p">));</span>
+<span class="n">printf</span><span class="p">(</span><span class="s">&quot;文件内容: %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="n">addr</span><span class="p">);</span>
+</code></pre></div>
+<ul>
+<li><strong>直接访问</strong>：通过指针 <code>addr</code> 读写内存，等同于操作文件内容。</li>
+<li><strong>同步机制</strong>：使用 <code>MAP_SHARED</code> 时，修改会由内核自动同步到文件（无需手动调用 <code>write</code>）。</li>
+</ul>
+</li>
+<li>
+<p><strong>解除映射</strong></p>
+<div class="highlight"><pre><span></span><code><span class="n">munmap</span><span class="p">(</span><span class="n">addr</span><span class="p">,</span><span class="w"> </span><span class="mi">4096</span><span class="p">);</span><span class="w"> </span><span class="c1">// 释放映射</span>
+<span class="n">close</span><span class="p">(</span><span class="n">fd</span><span class="p">);</span><span class="w">          </span><span class="c1">// 关闭文件</span>
+</code></pre></div>
+<p><strong>必要性</strong>：<code>munmap</code> 释放虚拟内存资源，<code>close</code> 关闭文件描述符。</p>
+</li>
+</ol>
+<hr />
+<p><strong>文件映射的核心机制</strong></p>
+<ol>
+<li>
+<p><strong>虚拟内存与物理内存的分离</strong></p>
+<ul>
+<li><strong>虚拟地址空间</strong>：进程通过 <code>addr</code> 访问的是一段连续的虚拟内存。</li>
+<li><strong>物理内存按需加载</strong>：首次访问某内存页时，内核触发缺页中断，将文件对应部分加载到物理内存。</li>
+</ul>
+</li>
+<li>
+<p><strong>文件同步</strong></p>
+<p><strong>写回策略</strong>：</p>
+<ul>
+<li><code>MAP_SHARED</code>：修改会通过内核的页缓存（Page Cache）同步到文件。</li>
+<li><code>MAP_PRIVATE</code>：修改仅影响进程内的私有副本，不改变原文件。</li>
+</ul>
+</li>
+<li>
+<p><strong>性能优势</strong></p>
+<ul>
+<li><strong>零拷贝</strong>：文件内容直接映射到用户空间，避免 <code>read</code>/<code>write</code> 的多次数据拷贝。</li>
+<li><strong>高效随机访问</strong>：无需 <code>lseek</code>，直接通过指针跳转到任意位置。</li>
+</ul>
+</li>
+</ol>
+<hr />
+<p><strong>实际应用场景</strong></p>
+<ul>
+<li>
+<p><strong>高效处理大文件</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1">// 映射 1GB 文件（仅需虚拟地址空间，物理内存按需加载）</span>
+<span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">addr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mmap</span><span class="p">(</span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="mi">30</span><span class="p">,</span><span class="w"> </span><span class="n">PROT_READ</span><span class="p">,</span><span class="w"> </span><span class="n">MAP_PRIVATE</span><span class="p">,</span><span class="w"> </span><span class="n">fd</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+</code></pre></div>
+<ul>
+<li><strong>优势</strong>：即使物理内存不足，程序仍可正常运行（依赖交换空间）。</li>
+</ul>
+</li>
+<li>
+<p><strong>动态链接库加载</strong></p>
+<ul>
+<li><strong>加载器行为</strong>：当运行 <code>./a.out</code> 时，Linux 动态链接器（ld.so）通过 <code>mmap</code> 将 <code>.so</code> 文件的代码段映射到进程地址空间。</li>
+<li><strong>权限控制</strong>：代码段映射为 <code>r-xp</code>（可读、可执行、私有），数据段为 <code>rw-p</code>（可读写、私有）。</li>
+</ul>
+</li>
+<li>
+<p><strong>进程间共享内存</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1">// 共享内存示例（不同进程映射同一文件）</span>
+<span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">addr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mmap</span><span class="p">(</span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="p">,</span><span class="w"> </span><span class="n">PROT_READ</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">PROT_WRITE</span><span class="p">,</span><span class="w"> </span><span class="n">MAP_SHARED</span><span class="p">,</span><span class="w"> </span><span class="n">fd</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+</code></pre></div>
+<p><strong>用途</strong>：多个进程通过映射同一文件实现数据共享。</p>
+</li>
+</ul>
+<hr />
+<p><strong>对比传统文件 I/O</strong></p>
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th><code>mmap</code> 文件映射</th>
+<th><code>read</code>/<code>write</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>数据拷贝</strong></td>
+<td>零拷贝（直接访问内存）</td>
+<td>需从内核缓冲区拷贝到用户空间</td>
+</tr>
+<tr>
+<td><strong>随机访问</strong></td>
+<td>直接指针跳转</td>
+<td>需 <code>lseek</code> 调整文件指针</td>
+</tr>
+<tr>
+<td><strong>适用场景</strong></td>
+<td>大文件、频繁随机访问</td>
+<td>小文件、顺序读写</td>
+</tr>
+<tr>
+<td><strong>同步控制</strong></td>
+<td>自动同步（MAP_SHARED）</td>
+<td>需手动调用 <code>fsync</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><strong>总结</strong>：通过 <code>mmap</code> 将文件映射到进程地址空间，本质是 <strong>将文件内容与虚拟内存建立映射关系</strong>。这一机制的核心优势在于：</p>
+<ol>
+<li><strong>性能高效</strong>：减少数据拷贝和系统调用次数。</li>
+<li><strong>编程简化</strong>：直接通过指针操作文件内容。</li>
+<li><strong>内存管理灵活</strong>：支持按需加载和透明换页。</li>
+</ol>
+<p>理解 <code>mmap</code> 后，可以更高效地处理文件 I/O、实现共享内存，甚至优化程序启动速度（如动态库加载）。</p>
+</blockquote>
+<p>有一篇学习：<a href="https://zhuanlan.zhihu.com/p/147988056#:~:text=mmap 非常强大，可以实现很多功能。我们这里只关注其分配虚拟地址空间的特性。mmap">如何判定一段内存地址是不可访问的？ - 知乎</a></p>
+<h3 id="_14">入侵地址空间</h3>
+<p>怎么知道哪个是”金钱“？</p>
+<p>一切都是状态机，改变一下游戏里钱的数目，相当于改变状态了，再去地址空间找找？？谁变了？自己想出来的！！</p>
+<p>其实有点像并发里面的动态分析工具。</p>
+<p>老师怎么做的？遍历虚拟机的进程地址空间（怎么遍历？）</p>
+<p>实际上实现了一个调试器，gdb也能做到！</p>
+<p><img alt="image-20250223173422847" src="pic/image-20250223173422847.png" /></p>
+<p>实现：</p>
+<h3 id="gui">给进程发送 GUI 事件</h3>
+<p>这个好像那种 AI 识别做什么，然后弄一些比较好玩的东西。配合嵌入式？</p>
+<p><img alt="image-20250223182123307" src="pic/image-20250223182123307.png" /></p>
+<p>好像微软最近就推出开源了这个？</p>
+<p><a href="https://github.com/microsoft/OmniParser">microsoft/OmniParser: A simple screen parsing tool towards pure vision based GUI agent</a></p>
+<p>智能 agent 或许挺好玩？</p>
+<h3 id="_15">改变进程对时间的感知</h3>
+<p>既然某些游戏很恶心，什么要花10s到下一关，速度不匹配。</p>
+<p>那给游戏变速？</p>
+<p>速度怎么来的？</p>
+<p>又是时间的概念，进程是不能感知时间的？</p>
+<p>还是要靠 syscall</p>
+<p>有哪些？</p>
+<p><code>gettimeofday</code>、<code>sleep</code>、</p>
+<p><img alt="image-20250223175203788" src="pic/image-20250223175203788.png" /></p>
+<p>由此给出 hook：钩子（钩子函数，或者理解为钩住函数，比如的 <code>gettimeofday</code> 的实现换成自己的）</p>
+<p>不单单是游戏，还能做很多别的：软件动态更新。</p>
+<p>我们可以通过 patch 函数的头部为一个跳转实现对一个函数的 “<a href="https://zhuanlan.zhihu.com/p/425845057">运行时热更新</a>”。</p>
+<p>具体怎么做的，看看源码。</p>
+<blockquote>
+<p>比如一个服务器不想停机，但是这个程序有安全楼等，更新又很重要，那怎么做？patch，软件动态更新，Linux kernel 也有 <a href="https://github.com/dynup/kpatch">kpatch - live kernel patching</a></p>
+</blockquote>
+<p><img alt="image-20250223181211746" src="pic/image-20250223181211746.png" /></p>
+<h2 id="unix-shell">系统调用和 UNIX Shell</h2>
+<p>(pipe; xv6 shell) </p>
+<h3 id="api">更多的操作系统 API</h3>
+<p>管道的实验，多画个图就能理解。</p>
+<h3 id="shell">Shell</h3>
+<h2 id="c">C 标准库设计与实现</h2>
+<p>(_start; offsetof; printf; environ; malloc/free) </p>
+<h3 id="libc">libc</h3>
+<blockquote>
+<p>构建 musl-gcc 的调试环境：问问 AI 一目了然！</p>
+<p>Musl 是一个轻量级的 C 标准库，用于替代传统的 glibc。它通常用于嵌入式系统和需要较小依赖的环境。</p>
+<ol>
+<li>
+<p>下载源代码 <a href="https://musl.libc.org/">musl libc</a></p>
+<div class="highlight"><pre><span></span><code>tar<span class="w"> </span>-xzvf<span class="w"> </span>musl-1.2.5.tar.gz
+</code></pre></div>
+</li>
+<li>
+<p>编译和安装 musl</p>
+<div class="highlight"><pre><span></span><code><span class="c1">#配置安装路径</span>
+./configure<span class="w"> </span>--prefix<span class="o">=</span>/usr/local/musl
+
+<span class="c1"># 编译 musl</span>
+make<span class="w"> </span>-j4
+
+<span class="c1"># 安装 musl</span>
+sudo<span class="w"> </span>make<span class="w"> </span>install
+</code></pre></div>
+</li>
+<li>
+<p>环境变量</p>
+<p><code>bash
+   export PATH=$PATH:/usr/local/musl/bin</code></p>
+</li>
+<li>
+<p>安装验证</p>
+<div class="highlight"><pre><span></span><code>musl-gcc<span class="w"> </span>--version
+</code></pre></div>
+</li>
+</ol>
+<p>接着，运行老师的相关示例，就好啦！</p>
+<p>一些小疑问：像这种 <code>./configure --prefix=xxxxx</code>、<code>make -j4</code> 等等，这种构建内容好像经常看见？</p>
+<p>这些编译安装过程的本质是<strong>自动化构建系统</strong>，用于将源代码转换为可执行程序并安装到指定位置。其核心目的是解决跨平台兼容性、依赖管理、编译配置等问题。以下是详细总结：</p>
+<hr />
+<ol>
+<li>
+<p><strong>本质与原理</strong></p>
+<ol>
+<li>
+<p><strong>配置阶段 (<code>./configure</code>)</strong>  </p>
+<ul>
+<li>检查系统环境（如编译器版本、依赖库是否存在）。</li>
+<li>生成定制化的 <code>Makefile</code>，包含编译选项、安装路径等。</li>
+<li><code>--prefix</code> 参数指定安装根目录（如 <code>/usr/local/musl</code>），所有文件会按子目录（<code>bin</code>, <code>lib</code>, <code>include</code>）归类。</li>
+</ul>
+</li>
+<li>
+<p><strong>编译阶段 (<code>make</code>)</strong>  </p>
+<ul>
+<li>根据 <code>Makefile</code> 中的规则调用编译器（如 <code>gcc</code>）。</li>
+<li>处理源代码的依赖关系，按需编译文件，支持并行编译（<code>-j4</code> 表示4线程）。</li>
+</ul>
+</li>
+<li>
+<p><strong>安装阶段 (<code>make install</code>)</strong>  </p>
+<ul>
+<li>将编译好的文件（可执行程序、库、头文件）复制到 <code>--prefix</code> 指定的目录。</li>
+<li>可能需要权限（<code>sudo</code>）写入系统路径。</li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+<hr />
+<ol>
+<li><strong>主要用途</strong><ol>
+<li><strong>跨平台兼容</strong><br />
+    通过动态检测环境差异（如操作系统、CPU架构），适配不同系统。</li>
+<li><strong>依赖管理</strong><br />
+    确保所需的库和工具已安装，避免运行时缺失依赖。</li>
+<li><strong>定制化安装</strong><br />
+    允许用户指定安装路径、启用/禁用功能（如 <code>--enable-feature</code>）。</li>
+<li><strong>自动化流程</strong><br />
+    替代手动执行大量 <code>gcc</code> 命令，简化复杂项目的构建。</li>
+</ol>
+</li>
+</ol>
+<hr />
+<ol>
+<li><strong>三、常见工具与示例</strong>
+除了经典的 <code>Autotools</code>（生成 <code>configure</code> 脚本），还有以下工具：</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>工具</th>
+<th>特点</th>
+<th>示例命令</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>CMake</strong></td>
+<td>跨平台，生成多种构建文件</td>
+<td><code>cmake -B build -DCMAKE_INSTALL_PREFIX=/path</code><br><code>cmake --build build -j4</code></td>
+</tr>
+<tr>
+<td><strong>Meson</strong></td>
+<td>更快的配置，依赖 Ninja</td>
+<td><code>meson setup builddir --prefix=/path</code><br><code>ninja -C builddir</code></td>
+</tr>
+<tr>
+<td><strong>Bazel</strong></td>
+<td>Google 出品，强调可重复构建</td>
+<td><code>bazel build //target:app</code></td>
+</tr>
+<tr>
+<td><strong>Autotools</strong></td>
+<td>传统 Unix 风格（configure + Makefile）</td>
+<td><code>./configure &amp;&amp; make</code></td>
+</tr>
+<tr>
+<td><strong>Cargo</strong></td>
+<td>Rust 专用，集成依赖管理</td>
+<td><code>cargo build --release</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<ol>
+<li>
+<p><strong>延伸知识点</strong></p>
+<ol>
+<li>
+<p><strong>静态库 vs 动态库</strong>  </p>
+<ul>
+<li>静态库（<code>.a</code>）会编译进可执行文件，动态库（<code>.so</code>）运行时加载。</li>
+<li>通过 <code>--enable-static</code> 或 <code>--enable-shared</code> 配置。</li>
+</ul>
+</li>
+<li>
+<p><strong>环境变量</strong>  </p>
+<p>如 <code>CFLAGS</code>（编译选项）、<code>LDFLAGS</code>（链接选项）可覆盖默认配置：</p>
+<div class="highlight"><pre><span></span><code>./configure<span class="w"> </span><span class="nv">CFLAGS</span><span class="o">=</span><span class="s2">&quot;-O2 -Wall&quot;</span><span class="w"> </span><span class="nv">LDFLAGS</span><span class="o">=</span><span class="s2">&quot;-L/usr/local/lib&quot;</span>
+</code></pre></div>
+</li>
+<li>
+<p><strong>卸载软件</strong> 
+    通过 <code>make uninstall</code> 删除安装的文件（需保留构建目录的 <code>Makefile</code>）。</p>
+</li>
+</ol>
+</li>
+</ol>
+<hr />
+<ol>
+<li><strong>为什么需要这类工具？</strong><ul>
+<li><strong>复杂性管理</strong>：大型项目可能有成百上千个源文件，手动编译不现实。</li>
+<li><strong>一致性</strong>：确保开发者与用户的环境配置一致。</li>
+<li><strong>可移植性</strong>：同一份代码在 Linux/macOS/Windows 等系统均可构建。</li>
+</ul>
+</li>
+</ol>
+<hr />
+<ol>
+<li><strong>总结</strong>
+这些工具是软件开发的“粘合剂”，解决了源码到二进制文件的最后一公里问题。现代工具（如 CMake、Meson）更强调简洁性和性能，而传统工具（如 Autotools）因历史原因仍在广泛使用。理解它们有助于排查安装失败、优化编译选项或为项目设计构建系统。</li>
+</ol>
+</blockquote>
+<h3 id="_16">基础编程机制的抽象</h3>
+<h3 id="_17">系统调用与环境的抽象</h3>
+<h3 id="_18">动态内存管理</h3>
+<p>关键在于 <code>mmap</code>（还有一个 <code>sbrk</code>）</p>
+<p>回想自己做的 L1</p>
+<p><img alt="image-20250224145254904" src="pic/image-20250224145254904.png" /></p>
+<p>关键在于后面：</p>
+<ul>
+<li>
+<p><strong><mark>脱离 workload 做优化就是耍流氓</mark></strong></p>
+<p>在开始考虑性能之前：理解你需要考虑什么样的性能。</p>
+<p>你要为什么样的实际系统提供什么样的性能。</p>
+<p>先看清自己的 workload。</p>
+<blockquote>
+<p>然后，去哪里找 workload?</p>
+<ul>
+<li>当然是 paper 了 (顺便白得一个方案)<ul>
+<li><a href="https://www.microsoft.com/en-us/research/uploads/prod/2019/06/mimalloc-tr-v1.pdf">Mimalloc: free list sharding in action</a> (APLAS'19)</li>
+<li><a href="https://dl.acm.org/doi/10.1145/3620666.3651350">卷到今天</a>大家做的事情也没变：看 workload 调性能</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+<p>重点：<strong>在实际系统中，我们通常不考虑 adversarial worst case</strong></p>
+<ul>
+<li>
+<p>现实中的应用是 “正常” 的，不是 “恶意” 的</p>
+<blockquote>
+<p>但这给了很多 Denial of Service 的机会：<a href="https://dl.acm.org/doi/abs/10.5555/3620237.3620571">Cross container attack</a></p>
+</blockquote>
+</li>
+</ul>
+<p>回想自己的内存分配是什么：malloc() 的观察</p>
+<ul>
+<li>
+<p>大对象分配后应，读写数量应当远大于它的大小</p>
+<blockquote>
+<p>要是申请了一个很大的容器，hash table，一下就free掉了？不现实，但有小部分会有</p>
+</blockquote>
+<ul>
+<li>否则就是 performance bug</li>
+<li>申请 16MB 内存，扫了一遍就释放了<ul>
+<li>这不是 bug，难道还是 feature 吗？</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>推论：<strong>越小的对象创建/分配越频繁</strong></p>
+</li>
+</ul>
+<p><img alt="image-20250224150522489" src="pic/image-20250224150522489.png" /></p>
+<blockquote>
+<p>因此，我的 L1 应该关注小对象。。。（自己只实现了一个buddy system，应该考虑 slab/slub？）</p>
+</blockquote>
+<h4 id="malloc-fast-and-slow"><code>malloc</code>, Fast and Slow</h4>
+<p><img alt="image-20250226205127624" src="pic/image-20250226205127624.png" /></p>
+<p>对于这部分内容，我觉得配合一下源码看看，或者借助一些书籍和 AI 总结？</p>
+<blockquote>
+<p>刚好身边有一本：《计算机系统开发与优化实战》第三章。</p>
+</blockquote>
+<ul>
+<li>
+<p><strong>malloc：Fast Path 设计</strong></p>
+<ul>
+<li>
+<p>浪费一点空间，但<strong>使所有 CPU 都能并行地申请内存</strong></p>
+<ul>
+<li>
+<p>线程都事先瓜分一些 “领地” (thread-local allocation buffer)</p>
+</li>
+<li>
+<p>默认从自己的领地里分配</p>
+<p>除了在另一个 CPU 释放，acquire lock 几乎总是成功</p>
+</li>
+<li>
+<p>如果自己的领地不足，就从全局的池子里借一点</p>
+</li>
+</ul>
+</li>
+<li>
+<p>System 人的智慧：不要在乎浪费</p>
+<p>这就是为什么要对齐到 2<sup>k</sup> 字节。</p>
+<p><strong>先浪费，做好之后再回过头来看着 workload 去调整优化！</strong></p>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>额外粗略扫一眼：Linux 内核中的(分区)页帧分配器，先不管什么 node、zone等概念，就只看最简单的分配页面（<strong>当然页帧分配器的核心还是伙伴算法：<code>rmqueue</code></strong>），就是对于页分配器的 Fast Path 和 Slow Path。</p>
+<ul>
+<li>
+<p><code>get_page_from_freelist</code> 正常分配（或称 Fast Path）：从空闲页面链表中尝试分配内存。</p>
+<p><a href="https://elixir.bootlin.com/linux/v6.6-rc7/source/mm/page_alloc.c#L3048">get_page_from_freelist</a></p>
+</li>
+<li>
+<p><code>__alloc_pages_slowpath</code> 慢速（允许等待和页面回收）分配</p>
+<p><a href="https://elixir.bootlin.com/linux/v6.6-rc7/source/mm/page_alloc.c#L3899">__alloc_pages_slowpath</a></p>
+</li>
+</ul>
+<p>看个大概，留有印象。</p>
+<p>推荐一些书籍：</p>
+<ul>
+<li>《奔跑吧Linux内核 入门篇》</li>
+<li>《计算机系统开发与优化实战》第三章（这个看起来有点费力，只是一些总结的内容，需要有基础知识背景（比如zone、node、水位等），有了基础后，正好可以看这部分的总结。）</li>
+</ul>
+</blockquote>
+<h4 id="slab">slab</h4>
+<p>实验应该关注的。因为小内存分配非常频繁。具体是什么网上有很多资料</p>
+<p>同样，slab分配器和页帧分配器一样，也应该有 Fast Path 和 Slow Path</p>
+<ul>
+<li>fast path → 立即在线程本地分配完成</li>
+<li>slow path → pgalloc()</li>
+</ul>
+<h2 id="linux">Linux操作系统</h2>
 
 
 
@@ -1836,7 +3785,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2025-02-22T09:34:41+01:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2025-02-22</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2025-03-04T11:06:39+01:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2025-03-04</span>
   </span>
 
     
@@ -1892,13 +3841,13 @@
         
         
           
-          <a href="../4.%20persistence/persistence.html" class="md-footer__link md-footer__link--next" aria-label="Next: persistence">
+          <a href="../../Mini%20Labs/M1/M1.html" class="md-footer__link md-footer__link--next" aria-label="Next: M1">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                persistence
+                M1
               </div>
             </div>
             <div class="md-footer__button md-icon">
