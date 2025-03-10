@@ -478,7 +478,28 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Course/University Course/jyy OS2024/cousre note/4. persistence/persistence.md" class="md-nav__link">
+      <a href="../../Course/University%20Course/jyy%20OS2024/cousre%20note/4.%20kernel/kernel.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    kernel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Course/University%20Course/jyy%20OS2024/cousre%20note/5.%20persistence/persistence.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1726,6 +1747,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#stash-pop" class="md-nav__link">
+    <span class="md-ellipsis">
+      stash 和 pop
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -2015,6 +2045,15 @@
   <a href="#git-reabse-i-headn" class="md-nav__link">
     <span class="md-ellipsis">
       清理提交历史：git reabse -i HEAD~n
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stash-pop" class="md-nav__link">
+    <span class="md-ellipsis">
+      stash 和 pop
     </span>
   </a>
   
@@ -2992,6 +3031,41 @@ fixup g345678 Commit message for G
 </ol>
 <p>通过这些操作，你可以灵活地优化和清理提交历史，使项目的历史更加清晰和易于维护。</p>
 </blockquote>
+<h4 id="stash-pop">stash 和 pop</h4>
+<p>在 Git 中，如果你在当前分支上进行了一些开发但还没有提交，这时有另一个任务需要处理，你可以按照以下步骤来保存当前的工作并创建一个新的分支来处理新任务：</p>
+<p>步骤 1：保存当前未提交的更改</p>
+<p>使用 <code>git stash</code> 命令将当前未提交的更改暂存起来。这会将你的工作现场保存到一个堆栈中，使你可以切换到其他分支而不必提交当前的更改。</p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>stash
+</code></pre></div>
+<p>步骤 2：创建并切换到新分支</p>
+<p>使用 <code>git checkout -b</code> 命令创建一个新的分支并切换到该分支。</p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>checkout<span class="w"> </span>-b<span class="w"> </span>new-feature-branch
+</code></pre></div>
+<p>步骤 3：在新分支上进行开发</p>
+<p>现在你可以在新分支上进行新任务的开发工作。</p>
+<p>步骤 4：提交新分支的更改</p>
+<p>完成新任务的开发后，将更改提交到新分支。</p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>add<span class="w"> </span>.
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;完成新任务的开发&quot;</span>
+</code></pre></div>
+<p>步骤 5：切换回原来的分支</p>
+<p>完成新任务后，你可以切换回原来的分支，继续之前的工作。</p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>checkout<span class="w"> </span>original-branch
+</code></pre></div>
+<p>步骤 6：恢复暂存的更改</p>
+<p>切换回原来的分支后，使用 <code>git stash pop</code> 命令将之前暂存的更改恢复出来，继续进行开发。</p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>stash<span class="w"> </span>pop
+</code></pre></div>
+<p>总结</p>
+<p>通过以上步骤，你可以有效地在 Git 中处理多个任务，而不会互相干扰。以下是完整的流程：</p>
+<ol>
+<li><strong>保存当前工作</strong>：<code>git stash</code></li>
+<li><strong>创建并切换到新分支</strong>：<code>git checkout -b new-feature-branch</code></li>
+<li><strong>在新分支上开发并提交</strong></li>
+<li><strong>切换回原来分支</strong>：<code>git checkout original-branch</code></li>
+<li><strong>恢复暂存的工作</strong>：<code>git stash pop</code></li>
+</ol>
+<p>这样，你就可以在不同的任务之间灵活切换，同时保持代码的整洁和有序。</p>
 
 
 
@@ -3014,7 +3088,7 @@ fixup g345678 Commit message for G
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2025-01-14T16:43:18+01:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2025-01-14</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2025-03-10T16:40:39+01:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2025-03-10</span>
   </span>
 
     
