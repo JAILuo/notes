@@ -330,12 +330,6 @@ test list [56 item(s)]: amoadd_w amoand_w amomaxu_w amomax_w amominu_w
 > > - An Alarm is attached to a Counter and provides a mechanism for generating single-shot or periodic events based on the counter's value. 
 > > - A Timer is simply an Alarm that is attached to a Clock.
 
-​	
-
-#### 串口
-
-
-
 
 
 

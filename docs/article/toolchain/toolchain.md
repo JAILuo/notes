@@ -6,13 +6,17 @@ Toolchain 工具链这个词大家应该都听过很多遍了，最常听说的�
 
 所以，我这里简单总结一下，因为我的经验还不是很多，所以下面难免会有错误的！
 
+> 更多内容见自己的 [archive](https://jailuo.github.io/notes/)
+
+<div style="page-break-after:always"></div>
+
 
 
 ## Toolchain
 
 不知道是什么，那就 [Toolchain - Wikipedia](https://en.wikipedia.org/wiki/Toolchain)
 
-![image-20250304154949891](pic/image-20250304154949891.png)
+<img src="pic/image-20250304154949891.png" alt="image-20250304154949891"  />
 
 或许对这些概念，很困惑，但我们只需要知道，工具链就是一组软件开发工具集合即可。
 
@@ -29,6 +33,10 @@ Toolchain 工具链这个词大家应该都听过很多遍了，最常听说的�
 
 
 所以，我总结工具链的本质为：**解决代码与硬件/系统环境之间的适配问题**
+
+
+
+<div style="page-break-after:always"></div>
 
 
 
@@ -75,14 +83,12 @@ AI 其实对于这种事实性的知识点，做得真的是很好的！
 
 一些例子：
 
-```c
-|           Target Triple            |    CPU/ISA     | Vendor | Kernel  | C lib |   ABI   |
-|------------------------------------|----------------|--------|---------|-------|---------|
+| Target Triple                      | CPU/ISA        | Vendor | Kernel  | C lib | ABI     |
+| ---------------------------------- | -------------- | ------ | ------- | ----- | ------- |
 | x86_64-linux-gnu                   | x86_64         | -      | Linux   | GNU   | -       |
 | arm-cortex_a8-poky-linux-gnueabihf | Cortex A8      | Yocto  | Linux   | GNU   | EABI-HF |
 | armeb-unknown-linux-musleabi       | ARM Big Endian | -      | Linux   | musl  | EABI    |
 | x86_64-freebsd                     | x86_64         | -      | FreeBSD | -     | -       |
-```
 
 以为这些前缀，加上编译器/链接器以及各种`Binutils`，就是常看到的：`triple-gcc`、`triple-objdump`...
 
@@ -100,7 +106,7 @@ AI 其实对于这种事实性的知识点，做得真的是很好的！
 >
 > 即：涉及到机器码层面，两份二进制文件怎么进行交互，而这怎么访问对方的数据内容。
 
-> OSDEV Wiki System V ABI
+> **OSDEV Wiki System V ABI**
 >
 > System V Application Binary Interface (System V ABI) 是一套规范，用于定义符合 X/Open Common Application Environment Specification 和 System V Interface Definition 的系统中的各种技术细节。
 
@@ -189,15 +195,15 @@ AI 其实对于这种事实性的知识点，做得真的是很好的！
     2. **符号解析机制差异**
 
         - 动态链接时的符号查找规则截然不同：
-    
+
             | 操作系统 | 符号版本控制  | 默认可见性 |          动态加载API           |
             | :------: | :-----------: | :--------: | :----------------------------: |
             |  Linux   | `.symver`指令 |    隐藏    |        `dlopen`/`dlsym`        |
             | Windows  |      无       | 导出需声明 | `LoadLibrary`/`GetProcAddress` |
             |  macOS   |    弱引用     |    全局    |    `NSLookupSymbolInImage`     |
-    
+
             **Linux符号版本控制示例**：
-    
+
             ```c
             // 定义带版本的符号
             __asm__(".symver foo_v1, foo@VERS_1.0");
@@ -205,18 +211,15 @@ AI 其实对于这种事实性的知识点，做得真的是很好的！
             
             __asm__(".symver foo_v2, foo@@VERS_2.0");
             void foo_v2() { /* 实现V2 */ }
-        ```
-        
-        **Windows显式导出要求**：
-        
-        ```c
+            ```
+            
+            **Windows显式导出要求**：
+            
+            ```c
             // 需使用__declspec(dllexport)
             __declspec(dllexport) void API_func() {
                 // 导出函数实现
             }
-        ```
-    
-        ​    
 
 - **可执行文件格式差异**：
 
@@ -372,7 +375,7 @@ AI 其实对于这种事实性的知识点，做得真的是很好的！
 
 
 
-- 系统级ABI扩展：向量化
+- **系统级ABI扩展：向量化**
 
     **x86 AVX-512**：
 
@@ -541,6 +544,10 @@ AI 其实对于这种事实性的知识点，做得真的是很好的！
 
 
 
+<div style="page-break-after:always"></div>
+
+
+
 ## Summary Example
 
 ### RISC-V
@@ -549,7 +556,7 @@ AI 其实对于这种事实性的知识点，做得真的是很好的！
 - **riscv64-unknown-elf-gcc**：这是一个64位的RISC-V交叉编译工具链，用于编译不依赖操作系统的裸机应用程序，链接到newlib库。
 - **riscv-none-embed-gcc**：这是为裸机（bare-metal）嵌入式系统而生成的交叉编译工具链，使用newlib或newlib-nano库，能够为嵌入式系统生成更加优化的代码体积。
 
-###  
+
 
 
 
@@ -596,27 +603,267 @@ arm-linux-gnueabi-gcc 和 aarch64-linux-gnu-gcc 适用于 Arm Cortex-A 系列芯
 
 
 
-
-
 ## Principle of cross-compilation (optional)
 
 比较复杂，感觉我也不太想写，直接看！
 
-[A master guide to Linux cross compiling](https://ruvi-d.medium.com/a-master-guide-to-linux-cross-compiling-b894bf909386)
+[Why is the Canadian Cross used for cross-compilation in Linux From Scratch? ](https://unix.stackexchange.com/questions/668844/why-is-the-canadian-cross-used-for-cross-compilation-in-linux-from-scratch)
 
 [How to Build a GCC Cross-Compiler](https://preshing.com/20141119/how-to-build-a-gcc-cross-compiler/)
 
 [Anatomy of Cross-Compilation Toolchains](https://www.youtube.com/watch?v=Pbt330zuNPc)
 
+[GCC/clang Canadian Compilation - YouTube](https://www.youtube.com/playlist?list=PLS9wY_7LgW_-TJLF_rsTN4yt9iIXemNJh)
+
 [【技术杂谈】C编译体系](https://www.bilibili.com/video/BV1J14y1D7Sw/?spm_id_from=333.337.search-card.all.click&vd_source=ecc99d78ae961113010161a48a475a35)
 
 
+
+<div style="page-break-after:always"></div>
 
 
 
 ## Use & Experience
 
+对于一般开发人员，我们往往想要的是一个快速、无脑输入后，就等着能用的方案，example：
+
+```bash
+./configure
+make
+make install
+```
+
+事实上，谁都想要一个点击即运行的玩意，没那么多心智负担，但 C 也不是那么简单。。。
+
+所以，对于这些构建系统，不得不了解一下。。。
+
+
+
+### `./configure` & autotools
+
+参考manual：[Autotools Introduction (automake)](https://www.gnu.org/software/automake/manual/html_node/Autotools-Introduction.html)
+
+或许不用看这么长的，不一定要用，简单了解下就可以啦：
+
+- [The magic behind configure, make, and make install](https://thoughtbot.com/blog/the-magic-behind-configure-make-make-install)
+
+- [Linux configure命令精通：一个完整的初学者教程-CSDN博客](https://blog.csdn.net/Long_xu/article/details/135445569)
+
+从而得出此构建系统的note，更多看 `./configure --help` 
+
+```bash
+# Make
+export CROSS_COMPILE=arm-cortex_a8-linux-gnueabihf-
+make
+make DESTDIR=$(arm-cortex_a8-linux-gnueabihf-gcc -print-sysroot) install
+
+# Autoconfig
+export CC=arm-cortex_a8-linux-gnueabihf-gcc \
+		CXX=arm-cortex_a8-linux-gnueabihf-g++
+./configure --host=arm-cortex_a8-linux-gnueabihf
+make
+make DESTDIR=$(arm-cortex_a8-linux-gnueabihf-gcc -print-sysroot) install
+```
+
+
+
+### CMAKE 
+
+**==TODO==**
+
+
+
+
+
+### instance
+
+还是那个问题，这么多，但没例子呀？怎么办？手上也没有相关实例呀？为什么不问问神奇的 DeepSeek，伴随强大的 prompt 呢？
+
+> 我希望用一个项目生产实例来学习这个内容，具体总结出来。其次，怎么做才能做得更好，做得更专业、更高质量？
+
+> ---
+>
+> ### **项目实例：交叉编译 ARM 版 HTTPS 客户端**
+> #### **项目需求**  
+> 在 x86_64 开发机上交叉编译一个 ARM 架构的 HTTPS 客户端程序，部署到 ARM 设备（如树莓派）上运行。程序依赖 OpenSSL 库进行 HTTPS 通信。
+>
+> ---
+>
+> ### **1. 构建机器（Build Machine）的任务**
+> #### **步骤 1：安装交叉编译工具链**
+> ```bash
+> # 在 x86_64 机器上安装 ARM 工具链（以 Debian 为例）
+> sudo apt update
+> sudo apt install gcc-arm-linux-gnueabihf g++-arm-linux-gnueabihf
+> ```
+>
+> #### **步骤 2：获取目标架构的 OpenSSL 开发包**
+> 构建机器需要 **ARM 架构的 OpenSSL 头文件和静态库/动态库符号链接**，用于编译和链接阶段：
+> ```bash
+> # 安装 ARM 版 OpenSSL 开发包（注意 `:armhf` 后缀）
+> sudo apt install libssl-dev:armhf
+> ```
+>
+> #### **步骤 3：编写 HTTPS 客户端代码**
+> ```c
+> // https_client.c
+> #include <stdio.h>
+> #include <openssl/ssl.h>
+> #include <openssl/err.h>
+> 
+> int main() {
+>     SSL_library_init();
+>     SSL_CTX *ctx = SSL_CTX_new(TLS_client_method());
+>     if (!ctx) {
+>         ERR_print_errors_fp(stderr);
+>         return 1;
+>     }
+>     printf("HTTPS client initialized successfully!\n");
+>     SSL_CTX_free(ctx);
+>     return 0;
+> }
+> ```
+>
+> #### **步骤 4：交叉编译程序**
+> 使用 ARM 工具链编译，并指定目标架构的头文件和库路径：
+> ```bash
+> # 使用 ARM 编译器，并链接 OpenSSL
+> arm-linux-gnueabihf-gcc https_client.c -o https_client \
+>   -I/usr/arm-linux-gnueabihf/include \
+>   -L/usr/arm-linux-gnueabihf/lib \
+>   -lssl -lcrypto
+> ```
+>
+> **关键验证**：
+> ```bash
+> # 检查生成的可执行文件架构
+> file https_client
+> # 输出应为：ELF 32-bit LSB executable, ARM, EABI5 version 1 (SYSV), dynamically linked, ...
+> ```
+>
+> ---
+>
+> ### **2. 目标机器（Target Machine）的部署**
+> #### **步骤 1：传输可执行文件**
+> 将编译好的 `https_client` 复制到 ARM 设备（如通过 `scp`）：
+> ```bash
+> scp https_client pi@raspberrypi.local:/home/pi
+> ```
+>
+> #### **步骤 2：安装运行时依赖**
+> 目标机器需要 **ARM 架构的 OpenSSL 共享库**：
+> ```bash
+> # 在 ARM 设备上安装 OpenSSL 运行时库
+> sudo apt install libssl1.1:armhf
+> ```
+>
+> #### **步骤 3：运行程序**
+> ```bash
+> # 在 ARM 设备上执行
+> ./https_client
+> # 期望输出：HTTPS client initialized successfully!
+> ```
+>
+> **常见问题排查**：
+> - 若报错 `error while loading shared libraries: libssl.so.1.1`：  
+>   运行 `ldd https_client` 检查缺失的库，确保目标机器安装了正确架构的 OpenSSL 运行时库。
+>
+> ---
+>
+> ### **3. 如何做得更专业、更高质量？**
+> #### **(1) 严格隔离构建环境**
+> - **使用 Docker 容器**：  
+>   创建包含交叉编译工具链和依赖的 Docker 镜像，避免污染宿主环境。
+>   ```dockerfile
+>   FROM ubuntu:22.04
+>   RUN apt update && apt install -y gcc-arm-linux-gnueabihf libssl-dev:armhf
+>   ```
+> - **利用 Sysroot**：  
+>   将目标系统的根文件系统（如通过 `rsync` 从设备复制）放入 `sysroot` 目录，供编译器使用。
+>   ```bash
+>   arm-linux-gnueabihf-gcc --sysroot=/path/to/arm-sysroot ...
+>   ```
+>
+> #### **(2) 自动化构建流程**
+> - **CMake 跨平台配置**：  
+>   使用 `CMake` 和 `Toolchain File` 定义交叉编译参数。
+>   ```cmake
+>   # arm-toolchain.cmake
+>   set(CMAKE_SYSTEM_NAME Linux)
+>   set(CMAKE_C_COMPILER arm-linux-gnueabihf-gcc)
+>   set(CMAKE_FIND_ROOT_PATH /usr/arm-linux-gnueabihf)
+>   ```
+>   ```bash
+>   cmake -DCMAKE_TOOLCHAIN_FILE=arm-toolchain.cmake ..
+>   ```
+>
+> #### **(3) 精确管理依赖版本**
+> - **锁定库版本**：  
+>   使用 `apt-pinning` 或 `conan` 包管理器确保构建机器和目标机器的库版本一致。
+>   ```bash
+>   # 在构建机器上指定 OpenSSL 1.1.1 的 ARM 开发包
+>   sudo apt install libssl-dev:armhf=1.1.1-1ubuntu2.1~18.04.20
+>   ```
+>
+> #### **(4) 验证与测试**
+> - **QEMU 模拟测试**：  
+>   在构建机器上通过 QEMU 模拟 ARM 环境运行程序，提前发现依赖问题。
+>   ```bash
+>   sudo apt install qemu-user-static
+>   qemu-arm-static ./https_client
+>   ```
+> - **静态分析工具**：  
+>   使用 `readelf` 检查二进制文件的动态链接库和架构兼容性。
+>   ```bash
+>   readelf -d https_client | grep NEEDED
+>   ```
+>
+> #### **(5) 文档与协作**
+> - **记录构建矩阵**：  
+>   明确列出支持的架构、工具链版本、依赖库版本（如表格形式）。
+>   | **组件** | **构建机器版本**             | **目标机器版本**     |
+>   | -------- | ---------------------------- | -------------------- |
+>   | 工具链   | gcc-arm-linux-gnueabihf 10.3 | -                    |
+>   | OpenSSL  | 1.1.1 (armhf 开发包)         | 1.1.1 (armhf 运行时) |
+>
+> ---
+>
+> ### **4. 高级技巧**
+> - **静态链接减少运行时依赖**：  
+>   编译时添加 `-static` 参数，将依赖库静态链接到二进制文件。
+>   ```bash
+>   arm-linux-gnueabihf-gcc -static https_client.c -lssl -lcrypto -o https_client_static
+>   ```
+> - **最小化根文件系统**：  
+>   使用 Buildroot 或 Yocto 生成仅包含必要依赖的目标系统镜像。
+>
+> ---
+>
+> ### **总结**
+> 通过实际项目可以清晰看出：
+> - **构建机器**需要：交叉工具链、目标架构的头文件和开发版库。
+> - **目标机器**需要：动态链接器、共享库和运行时资源。
+>
+> **专业化提升的核心**：  
+> **环境隔离**（Docker/Sysroot） + **自动化工具**（CMake/CI） + **严格版本控制** + **模拟测试**（QEMU）。
+
+
+
+
+
+### Reference
+
 [A master guide to Linux cross compiling](https://ruvi-d.medium.com/a-master-guide-to-linux-cross-compiling-b894bf909386)
 
-[工具链：一个恐怖的故事。看似... |作者 Ruvinda Dhambarage |中等 --- Toolchains: A horror story. Real world examples of how a seemingly… | by Ruvinda Dhambarage | Medium](https://ruvi-d.medium.com/toolchains-a-horror-story-bef1ef522292)
+[Toolchains: A horror story. Real world examples of how a seemingly](https://ruvi-d.medium.com/toolchains-a-horror-story-bef1ef522292)
+
+
+
+
+
+
+
+
+
+
 
