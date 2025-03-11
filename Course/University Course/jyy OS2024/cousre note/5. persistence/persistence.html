@@ -924,10 +924,67 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="文件系统 API 与实现">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      文件系统
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="文件系统">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mount" class="md-nav__link">
+    <span class="md-ellipsis">
+      mount
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filesystemimg" class="md-nav__link">
+    <span class="md-ellipsis">
+      如何挂载一个 filesystem.img?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      链接
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      文件系统：实现
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
-  <a href="#_16" class="md-nav__link">
+  <a href="#_19" class="md-nav__link">
     <span class="md-ellipsis">
       持久数据的可靠性
     </span>
@@ -2431,10 +2488,67 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="文件系统 API 与实现">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      文件系统
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="文件系统">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mount" class="md-nav__link">
+    <span class="md-ellipsis">
+      mount
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filesystemimg" class="md-nav__link">
+    <span class="md-ellipsis">
+      如何挂载一个 filesystem.img?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      链接
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      文件系统：实现
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
-  <a href="#_16" class="md-nav__link">
+  <a href="#_19" class="md-nav__link">
     <span class="md-ellipsis">
       持久数据的可靠性
     </span>
@@ -3014,7 +3128,111 @@
 <p>dev/null 的read、null</p>
 <p>核心：<code>ioctl</code></p>
 <h2 id="api">文件系统 API 与实现</h2>
-<h2 id="_16">持久数据的可靠性</h2>
+<p>直观印象就是这么个树？</p>
+<p><img alt="image-20250311141340676" src="pic/image-20250311141340676.png" /></p>
+<h3 id="_16">文件系统</h3>
+<p>任何实现了 struct file_operations 的操作系统对象可以都是 “文件”：有驱动程序的设备；<code>procfs</code> 中的虚拟文件、管道……（文件 = struct file_operations）</p>
+<ul>
+<li>数据文件：<code>hello.c</code>, <code>a.out</code>, ...<ul>
+<li>虚拟的磁盘</li>
+<li><code>vector&lt;char&gt;</code></li>
+</ul>
+</li>
+<li>设备驱动<ul>
+<li>null, nuke0, ...</li>
+</ul>
+</li>
+<li>虚拟文件<ul>
+<li>进程的地址空间, ...</li>
+</ul>
+</li>
+</ul>
+<p>everything is file，但是，新需求：怎么<strong>管理</strong>系统中众多的文件？</p>
+<ul>
+<li>
+<p>find_file_by_name?</p>
+<p>实际上，操作系统将这些文件组织起来的方式：文件系统。</p>
+</li>
+</ul>
+<blockquote>
+<p>实际上这是很合理很自然的需求，就像图书馆，还记得学校上的信息检索课吗？图书馆里的分类方法，什么中图法，有什么分类编号。</p>
+</blockquote>
+<p>文件那么多，怎么找到想要的？文件系统思路：</p>
+<ul>
+<li><strong>信息的局部性</strong>：将虚拟磁盘 (文件) 组织成层次结构</li>
+</ul>
+<p>很自然，将类似的东西放在一起，比如设备：<code>/dev</code>，设备里面继续分：<code>net</code>、<code>tty</code>，就像在图书馆里一样。</p>
+<p>但是上面这些内容都是逻辑相关的数据，我们确实会把它放在相近的目录。</p>
+<p>但是麻烦的是 “非数据” 的文件，看看现在的设计</p>
+<ul>
+<li>
+<p>UNIX/Linux: Everything is a File</p>
+<p>一切都在 “/” 中 (例子：中文语言包, fstab)</p>
+</li>
+<li>
+<p>Windows 的设计</p>
+<p>一个驱动器一棵树：A:, B:, C:, ...</p>
+<p>这其实也很自然。</p>
+</li>
+<li>
+<p>其他命名空间：<a href="https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/introduction-to-wdm">Windows Driver Model</a>, <a href="https://learn.microsoft.com/en-us/windows/win32/sysinfo/registry">Registry</a></p>
+<ul>
+<li>(也可以 “everything is a file”)</li>
+</ul>
+</li>
+</ul>
+<h4 id="mount">mount</h4>
+<div class="highlight"><pre><span></span><code><span class="n">mount</span><span class="p">(</span><span class="n">source</span><span class="p">,</span><span class="w"> </span><span class="n">target</span><span class="p">,</span><span class="w"> </span><span class="n">filesystemtype</span><span class="p">,</span><span class="w"> </span><span class="n">mountflags</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="p">);</span><span class="w"> </span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>mount<span class="w"> </span>-t<span class="w"> </span>&lt;文件系统类型&gt;<span class="w"> </span>&lt;设备路径&gt;<span class="w"> </span>&lt;挂载点&gt;<span class="w"> </span><span class="o">[</span>选项<span class="o">]</span>
+</code></pre></div>
+<ul>
+<li>
+<p><strong>再看 “最小 Linux”</strong></p>
+<ul>
+<li>
+<p>初始时只有 <code>/dev/console</code> 和几个文件</p>
+</li>
+<li>
+<p><code>/proc</code>, <code>/sys</code>, 甚至 <code>/tmp</code> 都没有</p>
+<p><strong>实际上这些就是 普通的 <code>mkdir</code> 创建出来的，只不过多了一步：<code>mount</code> 系统调用！</strong></p>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code>mkdir<span class="w"> </span>-p<span class="w"> </span>/proc<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>mount<span class="w"> </span>-t<span class="w"> </span>proc<span class="w">  </span>none<span class="w"> </span>/proc
+mkdir<span class="w"> </span>-p<span class="w"> </span>/sys<span class="w">  </span><span class="o">&amp;&amp;</span><span class="w"> </span>mount<span class="w"> </span>-t<span class="w"> </span>sysfs<span class="w"> </span>none<span class="w"> </span>/sys
+mkdir<span class="w"> </span>-p<span class="w"> </span>/tmp<span class="w">  </span><span class="o">&amp;&amp;</span><span class="w"> </span>mount<span class="w"> </span>-t<span class="w"> </span>tmpfs<span class="w"> </span>none<span class="w"> </span>/tmp
+</code></pre></div>
+</li>
+<li>
+<p>UNIX 一贯的设计哲学：灵活</p>
+<ul>
+<li>Linux 安装时的 “mount point”<ul>
+<li><code>/</code>, <code>/home</code>, <code>/var</code> 可以是独立的磁盘设备</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="filesystemimg">如何挂载一个 <code>filesystem.img</code>?</h4>
+<blockquote>
+<ul>
+<li>一个微妙的循环<ul>
+<li>文件 = 磁盘上的虚拟磁盘</li>
+<li>挂载文件 = 在虚拟磁盘上虚拟出的虚拟磁盘 </li>
+</ul>
+</li>
+<li>试试<a href="https://box.nju.edu.cn/f/0764665b70a34599813c/?dl=1">镜像</a></li>
+</ul>
+</blockquote>
+<h4 id="_17">链接</h4>
+<h3 id="_18">文件系统：实现</h3>
+<h2 id="_19">持久数据的可靠性</h2>
+<p><code>sudo mount -t tmpfs -o size=512M tmpfs /mnt/ramdisk</code> 具体行为：</p>
+<ul>
+<li>创建了一个 <strong>内存虚拟存储层</strong>（不是物理存储）</li>
+<li>建立了一个容量上限为 512MB 的临时文件系统</li>
+<li>将该虚拟文件系统挂载到目录 <code>/mnt/ramdisk</code>（目录本质是访问入口）</li>
+</ul>
 
 
 
@@ -3037,7 +3255,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2025-03-10T16:40:39+01:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2025-03-10</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2025-03-11T13:50:30+01:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2025-03-11</span>
   </span>
 
     
