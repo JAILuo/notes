@@ -716,8 +716,6 @@ struct file_operations {
 
 dev/null 的read、null
 
-
-
 核心：`ioctl`
 
 
@@ -725,6 +723,120 @@ dev/null 的read、null
 
 
 ## 文件系统 API 与实现
+
+直观印象就是这么个树？
+
+![image-20250311141340676](pic/image-20250311141340676.png)
+
+### 文件系统
+
+任何实现了 struct file_operations 的操作系统对象可以都是 “文件”：有驱动程序的设备；`procfs` 中的虚拟文件、管道……（文件 = struct file_operations）
+
+- 数据文件：`hello.c`, `a.out`, ...
+    - 虚拟的磁盘
+    - `vector<char>`
+- 设备驱动
+    - null, nuke0, ...
+- 虚拟文件
+    - 进程的地址空间, ...
+
+everything is file，但是，新需求：怎么**管理**系统中众多的文件？
+
+- find_file_by_name?
+
+    实际上，操作系统将这些文件组织起来的方式：文件系统。
+
+> 实际上这是很合理很自然的需求，就像图书馆，还记得学校上的信息检索课吗？图书馆里的分类方法，什么中图法，有什么分类编号。
+
+
+
+
+
+文件那么多，怎么找到想要的？文件系统思路：
+
+- **信息的局部性**：将虚拟磁盘 (文件) 组织成层次结构
+
+很自然，将类似的东西放在一起，比如设备：`/dev`，设备里面继续分：`net`、`tty`，就像在图书馆里一样。
+
+但是上面这些内容都是逻辑相关的数据，我们确实会把它放在相近的目录。
+
+
+
+但是麻烦的是 “非数据” 的文件，看看现在的设计
+
+- UNIX/Linux: Everything is a File
+
+    一切都在 “/” 中 (例子：中文语言包, fstab)
+
+- Windows 的设计
+
+    一个驱动器一棵树：A:, B:, C:, ...
+
+    这其实也很自然。
+
+- 其他命名空间：[Windows Driver Model](https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/introduction-to-wdm), [Registry](https://learn.microsoft.com/en-us/windows/win32/sysinfo/registry)
+
+    - (也可以 “everything is a file”)
+
+
+
+#### mount
+
+```c
+mount(source, target, filesystemtype, mountflags, data); 
+```
+
+```bash
+mount -t <文件系统类型> <设备路径> <挂载点> [选项]
+```
+
+- **再看 “最小 Linux”**
+
+    - 初始时只有 `/dev/console` 和几个文件
+
+    - `/proc`, `/sys`, 甚至 `/tmp` 都没有
+
+        **实际上这些就是 普通的 `mkdir` 创建出来的，只不过多了一步：`mount` 系统调用！**
+
+    ```shell
+    mkdir -p /proc && mount -t proc  none /proc
+    mkdir -p /sys  && mount -t sysfs none /sys
+    mkdir -p /tmp  && mount -t tmpfs none /tmp
+    ```
+
+- UNIX 一贯的设计哲学：灵活
+    - Linux 安装时的 “mount point”
+        - `/`, `/home`, `/var` 可以是独立的磁盘设备
+
+
+
+
+
+#### 如何挂载一个 `filesystem.img`?
+
+> - 一个微妙的循环
+>     - 文件 = 磁盘上的虚拟磁盘
+>     - 挂载文件 = 在虚拟磁盘上虚拟出的虚拟磁盘 
+> - 试试[镜像](https://box.nju.edu.cn/f/0764665b70a34599813c/?dl=1)
+
+
+
+
+
+#### 链接
+
+
+
+
+
+
+
+### 文件系统：实现
+
+
+
+
+
 
 
 
@@ -735,6 +847,14 @@ dev/null 的read、null
 
 
 
+
+
+
+`sudo mount -t tmpfs -o size=512M tmpfs /mnt/ramdisk` 具体行为：
+
+- 创建了一个 **内存虚拟存储层**（不是物理存储）
+- 建立了一个容量上限为 512MB 的临时文件系统
+- 将该虚拟文件系统挂载到目录 `/mnt/ramdisk`（目录本质是访问入口）
 
 
 
