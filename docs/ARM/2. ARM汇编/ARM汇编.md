@@ -1,8 +1,6 @@
 ## ARM硬件系统组成和运行原理
 
-> 详见计算机组成原理
-
-![image-20231129205940142](pic/image-20231129205940142.png)
+<img src="pic/image-20231129205940142.png" alt="image-20231129205940142" style="zoom: 50%;" />
 
 > **大概对内存/flash的位置有个大概印象, 知道指令取自哪里, 谁执行...**
 >
@@ -12,19 +10,117 @@
 
 
 
-## 工作模式及寄存器框图
+## 工作模式及寄存器
 
-#### 框图
+这里讨论的还是 以32位ARMv7 为例。
+
+### 框图
 
 ![image-20231127204124878](pic/image-20231127204124878.png)
 
-小三角: 表示该模式下独有的寄存器
+小三角: 表示该模式下独有的寄存器，其余的寄存器都是共享的, 共享的值...
 
-其余的寄存器都是共享的, 共享的值...
+总结一张表格：
+
+ARM架构（以32位ARMv7为例）包含**16个通用寄存器（R0-R15）**和**状态寄存器（CPSR）**。根据AAPCS规范，寄存器分为以下两类：
+
+| **寄存器** | **别名** | **类型**         | **用途与保存责任**                                           |
+| ---------- | -------- | ---------------- | ------------------------------------------------------------ |
+| **R0-R3**  | a0-a3    | **Caller-Saved** | 传递函数参数和返回值，调用者需保存（若调用后仍需使用）。     |
+| **R4-R8**  | v1-v5    | **Callee-Saved** | 被调用者必须保存和恢复（若使用）。                           |
+| **R9**     | SB/TR    | **平台相关**     | 通常为Callee-Saved，但可能用作静态基址（Static Base）或线程寄存器（平台特定）。 |
+| **R10**    | SL       | **Callee-Saved** | 栈限制寄存器（Stack Limit），若使用需保存。                  |
+| **R11**    | FP       | **Callee-Saved** | 帧指针（Frame Pointer），若使用需保存以维护栈帧。            |
+| **R12**    | IP       | **Caller-Saved** | 临时中间寄存器（Intra-Procedure Call），常用于跳转前暂存地址。 |
+| **R13**    | SP       | **Callee-Saved** | 堆栈指针（Stack Pointer），被调用者必须维护其一致性。        |
+| **R14**    | LR       | **混合责任**     | 链接寄存器（Link Register），保存返回地址。非叶子函数需自行保存（如压栈）。 |
+| **R15**    | PC       | **特殊寄存器**   | 程序计数器（Program Counter），由跳转指令（如`BX LR`）自动更新，不可直接修改。 |
+| **CPSR**   | -        | **特殊寄存器**   | 当前程序状态寄存器（标志位、模式位），硬件自动管理，函数通常不显式操作。 |
+
+下面写一些重要的点。
 
 
 
-#### CPSR寄存器
+### 二、关键寄存器详解
+
+#### 1. LR（R14）：链接寄存器（Link Register）
+- **用途**：保存函数返回地址。执行`BL`指令时，硬件自动将返回地址写入LR。
+- **保存责任**：
+  - **叶子函数**（不调用其他函数）：无需保存，直接通过`BX LR`返回。
+  - **非叶子函数**（需调用其他函数）：必须将LR压入栈中（如`PUSH {LR}`），退出前弹出（如`POP {PC}`）。
+
+#### 2. SP（R13）：堆栈指针（Stack Pointer）
+- **用途**：指向当前栈顶，用于分配局部变量、保存寄存器上下文。
+- **保存责任**：被调用函数必须确保进入和退出时SP平衡（如通过`PUSH/POP`或`SUB/ADD`调整）。
+
+#### 3. FP（R11）：帧指针（Frame Pointer）
+- **用途**：指向当前栈帧基址，便于调试和栈回溯（需编译器支持）。
+- **保存责任**：若启用帧指针（如`-fno-omit-frame-pointer`），需在函数入口保存旧FP并更新。
+
+
+
+
+
+### 三、函数调用中的寄存器
+#### Caller（调用者）的责任
+- 传递参数：将前4个参数存入**R0-R3**，其余参数通过栈传递。
+- 保存易失寄存器：若需在调用后使用**R0-R3**或**R12**，需提前保存（如压栈）。
+- 调用函数：使用`BL func`，硬件自动更新LR为返回地址。
+
+#### **Callee（被调用者）的责任**
+- **保存非易失寄存器**：若使用**R4-R11**，需在入口压栈保存，退出前弹出。
+  
+  ```asm
+  PUSH {R4-R6, FP, LR}   @ 保存Callee-Saved寄存器和LR
+  ADD FP, SP, #12        @ 设置帧指针（假设保存了R4-R6、FP、LR）
+  SUB SP, SP, #16        @ 分配局部变量空间
+  ```
+- **恢复上下文与返回**：
+  
+  ```asm
+  ADD SP, SP, #16        @ 释放局部变量空间
+  POP {R4-R6, FP, PC}    @ 恢复寄存器并直接返回到调用者（POP到PC）
+  ```
+
+
+
+
+
+### 四、实际操作系统中的差异
+
+#### 1. **Linux内核（ARM32）**
+- **上下文切换**：内核态中断处理需保存全部寄存器（包括Callee-Saved），通过`pt_regs`结构体存储。
+- **快速中断（FIQ）**：使用专用寄存器（R8-R14_fiq），减少保存开销。
+
+#### 2. **RTOS（如FreeRTOS）**
+- **轻量级上下文保存**：任务切换时仅保存Callee-Saved寄存器（R4-R11, LR），提升实时性。
+- **中断嵌套**：通过优先级控制允许中断嵌套，需手动保存LR和关键寄存器。
+
+
+
+
+
+### 五、总结与最佳实践
+
+1. **Caller-Saved（易失寄存器）**：  
+   - **R0-R3, R12**：调用后可能被覆盖，调用者负责保存。
+   - **LR**：非叶子函数由被调用者保存，但多次嵌套调用时调用者需注意。
+2. **Callee-Saved（非易失寄存器）**：  
+   - **R4-R11**：被调用者必须保存和恢复。
+   - **SP/FP**：严格维护堆栈和帧指针一致性。
+3. **调试与优化**：  
+   - 使用`-mapcs-frame`编译选项强制生成标准栈帧，便于调试。
+   - 避免在热路径中频繁使用Callee-Saved寄存器，减少压栈开销。
+
+通过结合AAPCS规范与实际代码分析（如Linux内核源码或RTOS任务切换逻辑），可深入掌握ARM寄存器的使用精髓。
+
+
+
+
+
+
+
+### CPSR寄存器
 
 > 目前程序状态寄存器: 表示处理器的各个状态/模式
 
@@ -49,6 +145,8 @@
     （**比较少用**）Thumb指令集是ARM处理器的一种压缩指令集，每条指令只有16位长，可以减小程序的存储空间和提高程序的执行速度。Thumb指令集的特点是指令集简单，执行速度快，适合处理简单的计算任务。
     
 7. 0到4位
+
+
 
 
 
@@ -132,25 +230,21 @@ bne  addr     不等时，跳转到地址addr
 - 用 汇编 实现C语言功能
 
 ```C
-void main(void)
-{
+void main(void) {
     int ret=0;
     ret=func1(2);   
     while(1){}	
 }	
-int  func1(int a)
-{
+int  func1(int a) {
     if(a==2)
         return func2(a);
     else
         return func3(a);  
 }
-int  func2(int a) 
-{    
+int  func2(int a)  {    
     return a+3;
 } 
-int func3(int a)
-{    
+int func3(int a) {    
     return a-1;
 } 
 ```
@@ -345,14 +439,13 @@ delay_1s_end:
 ```C
 int GCD(int a,int b)
 {	 	  
-	while(1)
-	{
-		if(a==b)
+	while(1) {
+		if(a == b)
 			break; 	
-		if(a>b){
-			a=a-b;
-		}else{
-		  b=b-a;  	
+		if(a > b) {
+			a = a - b;
+		} else {
+		  b = b - a;  	
 		}	
 	} 		
 	return a;	 	   
@@ -424,18 +517,16 @@ gcd_end:
 
     ```C
     //用汇编实现C内容
-    main()
-    {
-        int i=0;
-        const  char buf[]={1,2,3};
+    void main() {
+        int i = 0;
+        const  char buf[] = {1, 2, 3};
         char destBuf[8];
-        for(i=0,i<3,i++)
-        {
+        for(i = 0; i < 3; i++) {
             destBuf[i] = buf[i];
         }
     }
     ```
-
+    
     ```assembly
         .text
         b   main  
@@ -732,27 +823,11 @@ stack_buf:
 
 
 
-## ARM汇编的源头
 
-> 上面简单介绍 
->
-> 更多深入的、别的指令...详见ARM官方文档
->
-> ```C
-> ARM Cortex-A 系列 ARMv7-A 程序员指南 
-> // https://developer.arm.com/documentation/den0013/d	
-> Armv7 和更早的 Arm 架构参考指南的指令集汇编指南 //https://developer.arm.com/documentation/100076/0200/a32-t32-instruction-set-reference/a32-and-t32-instructions	
-> 基本汇编语言程序设计 
-> //https://developer.arm.com/documentation/dui0040/d/Basic-Assembly-Language-Programming	 
-> ```
 
-**目的: 构建知识地图 知道哪里能找各种资料** 
 
-1. 官网
 
-2. B站/YouTube
-
-    ......
+## Reference manual
 
 
 

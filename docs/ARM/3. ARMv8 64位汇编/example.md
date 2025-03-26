@@ -6,31 +6,32 @@
 
 1. **应对大内存** 
 
-    > 大内存(Large Memory): 突破32位机的4G空间限制  -> 硬件越来越强，软件越来越复杂 
+    大内存(Large Memory): 突破32位机的4G空间限制  -> 硬件越来越强，软件越来越复杂 
 
 2. **虚拟化**
 
-    > 虚拟化(Virtualization): 隔离 高效  -> 虚拟机  
+    虚拟化(Virtualization): 隔离 高效  -> 虚拟机  
 
 3. **安全**
 
-    > 安全(Security):  物理隔离/硬件隔离  -> 交易支付，隐私数据安全
+    安全(Security):  物理隔离/硬件隔离  -> 交易支付，隐私数据安全
 
 #### ARM64位的创新
 
 1. **执行状态**
 
-    > - AArch64 和 AArch32 两种可切换
-    >     - AArch64: 新增A64(ARM 64bit)指令集 -> 大内存(突破4G限制)
-    >     - AArch32: 可用以前A32(ARM 32bit)指令集和 T32(Thumb 32bit)指令集 -> 向前兼容
+    AArch64 和 AArch32 两种可切换
+
+    - AArch64: 新增A64(ARM 64bit)指令集 -> 大内存(突破4G限制)
+    - AArch32: 可用以前A32(ARM 32bit)指令集和 T32(Thumb 32bit)指令集 -> 向前兼容
 
 2. **异常级别**
 
-    > EL0(应用) < EL1(OS) < EL2(虚拟化) < EL3(安全固件) -> **替代啰嗦的工作模式**(User、SVC...)
+    EL0(应用) < EL1(OS) < EL2(虚拟化) < EL3(安全固件) -> **替代啰嗦的工作模式**(User、SVC...)
 
 3. **安全模式**
 
-    > 分为正常世界 和 安全世界  -> 真正的安全(物理隔离,如支付场景)  
+    分为正常世界 和 安全世界  -> 真正的安全(物理隔离,如支付场景)  
 
  
 
@@ -39,8 +40,6 @@
 ## 多核处理器
 
 ![image-20231130204430048](pic/image-20231130204430048.png)
-
-
 
 通用的CPU+特定领域的芯片（GPU/NPU/TPU/DSP...）
 
@@ -102,8 +101,9 @@
 
     ![image-20231202110042446](pic/image-20231202110042446.png)
 
+    寄存器手册 [Arm Armv8-A Architecture Registers](https://developer.arm.com/documentation/ddi0595/2021-09?lang=en)
+
     ```C
-    寄存器手册 // https://developer.arm.com/documentation/ddi0595/2021-09?lang=en
     SCTLR  //系统控制机器： 如MMU、缓存和对齐检查	
     TTBR0_EL1 //转换表基址寄存器0  -> 物理空间 映射 应用空间 
     TTBR1_EL1 //转换表基址寄存器1  -> 物理空间 映射 内核空间
@@ -182,7 +182,7 @@ myAdd  x0,x2
 
 > 指令集手册 ISA_A64_xml_v88A-2021-09.pdf   **注:指令操作码仍然是 32 位长** 
 >
-> 网页版**https://developer.arm.com/documentation/ddi0596/2021-09/Base-Instructions**
+> [Arm A64 Instruction Set Architecture](https://developer.arm.com/documentation/ddi0596/2021-09/Base-Instructions)
 
 
 

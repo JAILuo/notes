@@ -748,18 +748,6 @@ devicetree-specification-v0.4
 
 ### 一些启动上的问题
 
-
-
-
-
-
-
-
-
-#### 参考资料
-
-
-
 TODO: 添加自己微信聊天的相关笔记
 
 [Linux下1号进程的前世(kernel_init)今生(init进程)----Linux进程的管理与调度（六） - yooooooo - 博客园](https://www.cnblogs.com/linhaostudy/p/9641439.html)

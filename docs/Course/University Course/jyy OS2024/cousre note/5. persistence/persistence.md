@@ -329,7 +329,7 @@ move(....);
 
 所有外部设备都直接或间接地连接到 PCIe 总线上，插上之后，总线给它分配地址。
 
-> 就像，你装计算机的时候，把 显卡插入主板的时候。
+> 就像，你装计算机的时候，把显卡插入主板的时候。
 
 另外，PCIe 总线会连一个桥到 USB 总线。设备一层层一级级的，连接虚拟化各层设备。不过，看着简单，但实际很复杂！没做好就容易翻车！（win98的名场面）
 
@@ -413,19 +413,7 @@ for (int i = 0; i < 1 GB / 4; i++) {
 
 如果是多处理器系统？那就把 write_disk 线程扔到另一个 CPU 吧？
 
-但是加一个通用处理器太浪费，不如加一个简单的
-
-- DMA: **只能执行 memcpy(ATA0, buf, length); 的处理器**
-- 支持的几种类型的 memcpy
-    - memory → memory
-    - memory → device (register)
-    - device (register) → memory
-        - 实际实现：直接把 DMA 控制器连接在总线和内存上
-        - [Intel 8237A](https://jyywiki.cn/OS/manuals/i8237a.pdf)
-
-今天：PCI 总线支持 DMA
-
-- `sudo cat /proc/iomem`
+![image-20250325231131998](pic/image-20250325231131998.png)
 
 
 
@@ -714,7 +702,7 @@ struct file_operations {
 
 ![image-20250306003533224](pic/image-20250306003533224.png)
 
-dev/null 的read、null
+上面这个作为核心的模型，脑子里要有这么个简单的图。
 
 核心：`ioctl`
 
@@ -782,6 +770,10 @@ everything is file，但是，新需求：怎么**管理**系统中众多的文�
 
 #### mount
 
+> **这里直接看我写的一篇总结！[mount](https://github.com/JAILuo/notes/blob/main/docs/article/mount/mount.md)**
+
+**UNIX 的设计：目录树的拼接**
+
 ```c
 mount(source, target, filesystemtype, mountflags, data); 
 ```
@@ -807,8 +799,8 @@ mount -t <文件系统类型> <设备路径> <挂载点> [选项]
 - UNIX 一贯的设计哲学：灵活
     - Linux 安装时的 “mount point”
         - `/`, `/home`, `/var` 可以是独立的磁盘设备
-
-
+        
+            变成不同的盘，一个速度快点的，一个存储量大但是稍微慢点。
 
 
 
@@ -819,13 +811,119 @@ mount -t <文件系统类型> <设备路径> <挂载点> [选项]
 >     - 挂载文件 = 在虚拟磁盘上虚拟出的虚拟磁盘 
 > - 试试[镜像](https://box.nju.edu.cn/f/0764665b70a34599813c/?dl=1)
 
+欸，先想想，做这个的东西的意义何在？场景何在？
+
+正常我们说挂载，那就是要内核支持，能够以文件系统接口呈现的，才能挂载，那现在先不想那么多，提前知道内核支持了，但是做这个东西的场景在哪？意义在哪？
+
+
+
+
+
+- **关键组件**：
+
+    ```mermaid
+    graph LR
+      A[filesystem.img] -->|losetup| B(/dev/loopX)
+      B -->|mount -t ext4| C(/mnt/img)
+    ```
+
+
+
+> **创建一个 loopback (回环) 设备**
+>
+> - 设备驱动把设备的 read/write 翻译成文件的 read/write
+> - [drivers/block/loop.c](https://elixir.bootlin.com/linux/v6.9.3/source/drivers/block/loop.c)
+>     - **实现了 loop_mq_ops (不是 file_operations)**
+>
+> **观察挂载文件的 `strace`**
+>
+> - `lsblk` 查看系统中的 block devices (`strace`)
+> - `strace` 观察挂载的流程
+>     - `ioctl(3, LOOP_CTL_GET_FREE)`
+>     - `ioctl(4, LOOP_SET_FD, 3)`
+
+`loop` 设备驱动将文件模拟为块设备，实现镜像内容的透明访问。
+
+
+
+直接 mount 一个文件
+
+
+
+
+
+OS 管理整个对象的时候，我的 loop 设备还挂在别的地方的时候，不能够直接`umonut` 这个文件系统？
+
+
+
+#### 文件系统 API: 目录管理
+
+- `mkdir`
+
+    创建目录
+
+- `rmdir`
+
+    - 删除一个空目录
+
+    - 没有 “递归删除” 的系统调用
+
+        - rm -rf 会遍历目录，逐个删除 (试试 `strace`)
+
+            用的实际就是 `rmdir`
+
+- `getdents`
+
+    - 返回 count 个目录项 (ls, find, tree 都使用这个)
+        - 更友好的方式：`globbing`
+
+    好像我的 第一个 lab 没有用到这两个？是不是我的实现有些问题？
+
+    **==TODO==**
+
 
 
 
 
 #### 链接
 
+- 硬 (hard) 链接
 
+    **需求：系统中可能有同一个运行库的多个版本**
+
+    - `libc-2.27.so`, `libc-2.26.so`, ...
+    - 还需要一个 “当前版本的 libc”
+        - 程序需要链接 “`libc.so.6`”，能否避免文件的一份拷贝？
+
+    理解：(硬) 链接：允许一个文件被多个目录引用
+
+    - 文件系统实现的特性 (ls -i 查看)
+        - 不能链接目录、不能跨文件系统
+        - 所以！删除文件的系统调用称为 “`unlink`” (`refcount--`)！
+
+    理解为 指向同一个地方的多个指针！
+
+    但是有个问题，这个东西是文件系统支持的（系统调用），所以不能链接目录、不能跨文件系统。怎么办？软链接。
+
+
+
+- 软链接：在文件里存储一个 “跳转提示”
+
+    - 软链接也是一个文件
+        - 当引用这个文件时，去找另一个文件
+        - 另一个文件的绝对/相对路径以文本形式存储在文件里
+        - **可以跨文件系统、可以链接目录、……**
+
+    - 几乎没有任何限制
+        - 类似 “快捷方式”
+            - 链接指向的位置不存在也没关系
+            - (也许下次就存在了)
+
+
+
+![image-20250311212833188](pic/image-20250311212833188.png)
+
+牛啊！你想要过关，就得创建多少多少层的目录/符号理解，有点像目录树。
 
 
 
@@ -833,7 +931,56 @@ mount -t <文件系统类型> <设备路径> <挂载点> [选项]
 
 ### 文件系统：实现
 
+#### 引入
 
+直接想：
+
+![image-20250311214101045](pic/image-20250311214101045.png)
+
+要支持随机写？一次读写4KB。用树？b-tree？
+
+- 我们只有 **block device**
+- 两个 API
+    - `bread(int bid, struct block *b);`
+    - `bwrite(int bid, struct block *b);`
+
+实现：
+
+- read, write, ftruncate, ...
+
+- mkdir, rmdir, readdir, link, unlink, ...
+
+    - 用 bread/bwrite 模拟 RAM → 严重的读/写放大
+
+        记得在刚开始看过的 那篇文章吗 [Coding for SSDs](https://codecapsule.com/2014/02/12/coding-for-ssds-part-1-introduction-and-table-of-contents/)
+
+    - 我们需要更适合磁盘的数据结构
+
+
+
+![image-20250311214215058](pic/image-20250311214215058.png)
+
+
+
+#### FAT 和 UNIX 文件系统
+
+RTFM！
+
+
+
+UNIX 文件系统：
+
+`inode` 一个 `inode` 代表一个文件或者一个目录（怎么感觉有点像 写的 buddy system？元数据的思想？）
+
+fast path、slow path 又是这个？
+
+![image-20250311221406276](pic/image-20250311221406276.png)
+
+还是根据自己的 workload！（为嵌入式系统做一个文件系统？）
+
+
+
+把文件系统理解成一个 struct fs_object
 
 
 
@@ -843,18 +990,6 @@ mount -t <文件系统类型> <设备路径> <挂载点> [选项]
 
 
 ## 持久数据的可靠性
-
-
-
-
-
-
-
-`sudo mount -t tmpfs -o size=512M tmpfs /mnt/ramdisk` 具体行为：
-
-- 创建了一个 **内存虚拟存储层**（不是物理存储）
-- 建立了一个容量上限为 512MB 的临时文件系统
-- 将该虚拟文件系统挂载到目录 `/mnt/ramdisk`（目录本质是访问入口）
 
 
 

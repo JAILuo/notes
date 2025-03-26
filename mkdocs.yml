@@ -58,6 +58,10 @@ extra_javascript:
 
 nav:
   - 首页: 'index.md'
+  - Article:
+    - concurrency-summary: /article/concurrency sumary/summary.md
+    - toolchain: /article/toolchain/toolchain.mc
+    - mount: /article/mount/mount.md
   - Course:
     - University Course: 
       - jyy OS2024:
