@@ -1,0 +1,3461 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://jailuo.github.io/notes/interview/notes/Language/language.html">
+      
+      
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.48">
+    
+    
+      
+        <title>Language - Messy Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.6f8fc17f.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../css/timeago.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../index.html" title="Messy Notes" class="md-header__button md-logo" aria-label="Messy Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Messy Notes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Language
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256l137.3-137.4c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/JAILuo/notes" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../index.html" title="Messy Notes" class="md-nav__button md-logo" aria-label="Messy Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Messy Notes
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/JAILuo/notes" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    首页
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Article
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Article
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/article/concurrency sumary/summary.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    concurrency-summary
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/article/toolchain/toolchain.mc" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    toolchain
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/article/mount/mount.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    mount
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Course
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Course
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    University Course
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            University Course
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1_1" id="__nav_3_1_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    jyy OS2024
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_1_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            jyy OS2024
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_1_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1_1_1" id="__nav_3_1_1_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    course note
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_1_1_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            course note
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/University%20Course/jyy%20OS2024/cousre%20note/1.%20introduction/introduction.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    introduction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/University%20Course/jyy%20OS2024/cousre%20note/2.%20concurrency/concurrency.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    concurrency
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/University%20Course/jyy%20OS2024/cousre%20note/3.%20virtualization/virtualization.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    virtualization
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/University%20Course/jyy%20OS2024/cousre%20note/4.%20kernel/kernel.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    kernel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/University%20Course/jyy%20OS2024/cousre%20note/5.%20persistence/persistence.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    persistence
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_1_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1_1_2" id="__nav_3_1_1_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Mini Labs
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_1_1_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            Mini Labs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/University%20Course/jyy%20OS2024/Mini%20Labs/M1/M1.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    M1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/University%20Course/jyy%20OS2024/Mini%20Labs/M2/M2.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    M2
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/University%20Course/jyy%20OS2024/Mini%20Labs/M3/M3.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    M3
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_1_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1_1_3" id="__nav_3_1_1_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    OS Labs
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_1_1_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1_1_3">
+            <span class="md-nav__icon md-icon"></span>
+            OS Labs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/University%20Course/jyy%20OS2024/OS%20Labs/L0/L0.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    L0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/University%20Course/jyy%20OS2024/OS%20Labs/L1/L1.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    L1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    GeekTime
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            GeekTime
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2_1" id="__nav_3_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    深入理解计算机组成原理
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            深入理解计算机组成原理
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/GeekTime/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E4%B8%80%E5%91%A8%E7%9B%AE/1.%20%E6%8C%87%E4%BB%A4%E4%B8%8E%E8%BF%90%E7%AE%97/%E6%8C%87%E4%BB%A4%E4%B8%8E%E8%BF%90%E7%AE%97.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1. 指令与运算
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/GeekTime/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E4%B8%80%E5%91%A8%E7%9B%AE/2.%20%E5%A4%84%E7%90%86%E5%99%A8/%E5%A4%84%E7%90%86%E5%99%A8.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2. 处理器
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/GeekTime/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E4%B8%80%E5%91%A8%E7%9B%AE/3.%20%E5%AD%98%E5%82%A8%E4%B8%8EIO%E7%B3%BB%E7%BB%9F/%E5%AD%98%E5%82%A8%E4%B8%8EIO%E7%B3%BB%E7%BB%9F.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3. 存储与IO系统
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/GeekTime/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E4%B8%80%E5%91%A8%E7%9B%AE/4.%20%E5%BA%94%E7%94%A8/%E5%BA%94%E7%94%A8.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4. 应用
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2_2" id="__nav_3_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    计算基础实战课
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            计算基础实战课
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/1.%20MiniCPU%E8%AE%BE%E8%AE%A1/MiniCPU%E8%AE%BE%E8%AE%A1.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1. MiniCPU设计
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/2.%20%E8%AF%AD%E8%A8%80%E5%92%8C%E6%8C%87%E4%BB%A4/%E8%AF%AD%E8%A8%80%E5%92%8C%E6%8C%87%E4%BB%A4.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2. 语言和指令
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/3.%20%E5%BA%94%E7%94%A8%E5%92%8C%E5%86%85%E5%AD%98/%E5%BA%94%E7%94%A8%E5%92%8C%E5%86%85%E5%AD%98.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3. 应用和内存
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/4.%20IO%E4%B8%8E%E6%96%87%E4%BB%B6/IO%E5%92%8C%E6%96%87%E4%BB%B6.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4. IO与文件
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/5.%20%E7%BB%BC%E5%90%88%E5%BA%94%E7%94%A8/synthesis.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    5. 综合应用
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E5%92%8C%E5%B7%A5%E5%85%B7%E9%93%BE/%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    环境配置和工具链
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    ysyx
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            ysyx
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    NJU-ICS2023-PA
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            NJU-ICS2023-PA
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../ysyx/pa/pa1/pa1.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PA1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../ysyx/pa/pa2/pa2.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PA2
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../ysyx/pa/pa3/pa3.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PA3
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../ysyx/pa/pa4/pa4.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PA4
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../ysyx/pa/c_marco/macro.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    C Macro
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../ysyx/pa/summary/summary.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Summary
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../ysyx/pa/Linux_porting/porting.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Linux Porting
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../ysyx/digital-circuit/digital%20circuit.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Digital Circuit
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Tools
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Tools
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Tools/GDB/GDB.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GDB
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Vim
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            Vim
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Tools/vim/usage/usage.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    usage
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Tools/vim/vim-plugin/vim.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    vim-plugin
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Tools/doxygen/doxygen.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    doxygen
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Tools/gcc/gcc.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    gcc
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Tools/Git/Git.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Git
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Tools/md2slider/md2slider.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    md2slider
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Tools/tmux/tmux.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    tmux
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Todo%20List/todo.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TODO List
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      野指针和内存泄露
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="野指针和内存泄露">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 核心概念对比
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 产生原因与典型场景
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 产生原因与典型场景">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1 野指针成因
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2 内存泄漏成因
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. 危害性对比
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. 代码示例与调试分析
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. 代码示例与调试分析">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.1 野指针崩溃案例
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.2 内存泄漏增长示例
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. 检测与预防方案
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. 检测与预防方案">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.1 野指针防护
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.2 内存泄漏治理
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-c" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. 现代C++最佳实践
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. 总结：关键区别与选择
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      指针和引用
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="指针和引用">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 本质定义
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 核心差异
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. 底层实现对比
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. 典型使用场景
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. 关键代码示例
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. 高级注意事项
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. 设计哲学
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      智能指针概述
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="智能指针概述">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 智能指针的核心目的
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-c" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. C++标准库中的智能指针类型
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. C++标准库中的智能指针类型">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-stdunique_ptr" class="md-nav__link">
+    <span class="md-ellipsis">
+      (1) std::unique_ptr
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-stdshared_ptr" class="md-nav__link">
+    <span class="md-ellipsis">
+      (2) std::shared_ptr
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-stdweak_ptr" class="md-nav__link">
+    <span class="md-ellipsis">
+      (3) std::weak_ptr
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-stdauto_ptr" class="md-nav__link">
+    <span class="md-ellipsis">
+      (4) std::auto_ptr（已弃用）
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. 最佳实践与注意事项
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. 示例：循环引用与解决方案
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      智能指针原理
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="智能指针原理">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 核心思想：自动管家
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-unique_ptr" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 最简单的智能指针：unique_ptr
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 最简单的智能指针：unique_ptr">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      实现原理
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      使用示例
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-shared_ptr" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. 共享型智能指针：shared_ptr
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 共享型智能指针：shared_ptr">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      实现原理
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      使用示例
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-weak_ptr" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. 辅助型智能指针：weak_ptr
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. 辅助型智能指针：weak_ptr">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      为什么需要它？
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      实现原理
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. 智能指针的“高效秘诀”
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      总结：智能指针如何帮你省心？
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#malloc-new" class="md-nav__link">
+    <span class="md-ellipsis">
+      malloc 和 new
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="malloc 和 new">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 语言归属与底层机制
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 核心差异
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 核心差异">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1 初始化与对象构造
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2 失败处理
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.3 内存大小计算
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. 类型安全性
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. 构造/析构函数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. 重载机制
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. 内存来源
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. 多态支持
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. 使用场景对比
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9" class="md-nav__link">
+    <span class="md-ellipsis">
+      9. 关键代码示例
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-c" class="md-nav__link">
+    <span class="md-ellipsis">
+      10. 现代C++演进
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      总结选择原则
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+  <h1>Language</h1>
+
+<h2 id="_1">野指针和内存泄露</h2>
+<h3 id="1"><strong>1. 核心概念对比</strong></h3>
+<table>
+<thead>
+<tr>
+<th><strong>特性</strong></th>
+<th>野指针 (Dangling Pointer)</th>
+<th>内存泄漏 (Memory Leak)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>本质</strong></td>
+<td>指向无效内存地址的指针</td>
+<td>已分配的内存无法被释放或回收</td>
+</tr>
+<tr>
+<td><strong>直接危害</strong></td>
+<td>程序崩溃、数据损坏、安全漏洞</td>
+<td>程序内存占用持续增长，最终导致OOM</td>
+</tr>
+<tr>
+<td><strong>触发时机</strong></td>
+<td>访问已释放内存时</td>
+<td>程序运行期间逐渐积累</td>
+</tr>
+<tr>
+<td><strong>检测难度</strong></td>
+<td>高（随机崩溃，难以复现）</td>
+<td>中（可通过工具监控内存增长）</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="2"><strong>2. 产生原因与典型场景</strong></h3>
+<h4 id="21"><strong>2.1 野指针成因</strong></h4>
+<ol>
+<li>
+<p><strong>释放后未置空</strong>  </p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="o">*</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">int</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+<span class="k">delete</span><span class="w"> </span><span class="n">p</span><span class="p">;</span><span class="w">     </span><span class="c1">// 内存释放</span>
+<span class="o">*</span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">20</span><span class="p">;</span><span class="w">      </span><span class="c1">// 野指针访问！行为未定义</span>
+</code></pre></div>
+</li>
+<li>
+<p><strong>返回局部变量地址</strong>  </p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="o">*</span><span class="w"> </span><span class="nf">createInt</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">&amp;</span><span class="n">x</span><span class="p">;</span><span class="w">  </span><span class="c1">// 返回栈内存指针，函数返回后x被销毁</span>
+<span class="p">}</span>
+</code></pre></div>
+</li>
+<li>
+<p><strong>多指针共享资源</strong>  </p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="o">*</span><span class="w"> </span><span class="n">p1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">int</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+<span class="kt">int</span><span class="o">*</span><span class="w"> </span><span class="n">p2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p1</span><span class="p">;</span>
+<span class="k">delete</span><span class="w"> </span><span class="n">p1</span><span class="p">;</span><span class="w">     </span><span class="c1">// p2现在成为野指针</span>
+</code></pre></div>
+</li>
+<li>
+<p><strong>迭代器失效后使用</strong>  </p>
+<div class="highlight"><pre><span></span><code><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">vec</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">};</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vec</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span>
+<span class="n">vec</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span><span class="w">  </span><span class="c1">// 可能导致迭代器失效</span>
+<span class="o">*</span><span class="n">it</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span><span class="w">           </span><span class="c1">// 野指针行为</span>
+</code></pre></div>
+</li>
+</ol>
+<h4 id="22"><strong>2.2 内存泄漏成因</strong></h4>
+<ol>
+<li>
+<p><strong>直接未释放动态内存</strong>  </p>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="nf">leak</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="o">*</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">int</span><span class="p">[</span><span class="mi">100</span><span class="p">];</span><span class="w">  </span><span class="c1">// 未调用delete[]</span>
+<span class="p">}</span>
+</code></pre></div>
+</li>
+<li>
+<p><strong>异常导致释放代码未执行</strong>  </p>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="nf">unsafe</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="o">*</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">int</span><span class="p">;</span>
+<span class="w">    </span><span class="k">throw</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">exception</span><span class="p">();</span><span class="w">  </span><span class="c1">// 异常跳过delete</span>
+<span class="w">    </span><span class="k">delete</span><span class="w"> </span><span class="n">p</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+</li>
+<li>
+<p><strong>循环引用（使用智能指针时）</strong>  </p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Node</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">Node</span><span class="o">&gt;</span><span class="w"> </span><span class="n">next</span><span class="p">;</span>
+<span class="p">};</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">n1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">Node</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">n2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">Node</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="n">n1</span><span class="o">-&gt;</span><span class="n">next</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n2</span><span class="p">;</span>
+<span class="n">n2</span><span class="o">-&gt;</span><span class="n">next</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n1</span><span class="p">;</span><span class="w">  </span><span class="c1">// 循环引用导致无法释放</span>
+</code></pre></div>
+</li>
+<li>
+<p><strong>静态对象持有动态资源</strong>  </p>
+<div class="highlight"><pre><span></span><code><span class="k">static</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;*</span><span class="w"> </span><span class="n">globalVec</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">();</span><span class="w">  </span><span class="c1">// 程序结束前未释放</span>
+</code></pre></div>
+</li>
+</ol>
+<hr />
+<h3 id="3"><strong>3. 危害性对比</strong></h3>
+<table>
+<thead>
+<tr>
+<th><strong>危害类型</strong></th>
+<th>野指针</th>
+<th>内存泄漏</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>短期影响</strong></td>
+<td>随机崩溃、数据覆盖</td>
+<td>无明显症状</td>
+</tr>
+<tr>
+<td><strong>长期影响</strong></td>
+<td>安全漏洞（如缓冲区溢出攻击）</td>
+<td>内存耗尽、程序被系统终止</td>
+</tr>
+<tr>
+<td><strong>调试难度</strong></td>
+<td>难以定位（崩溃点非真实错误位置）</td>
+<td>可通过内存分析工具定位</td>
+</tr>
+<tr>
+<td><strong>平台相关性</strong></td>
+<td>所有支持指针的语言</td>
+<td>所有手动内存管理的语言</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="4"><strong>4. 代码示例与调试分析</strong></h3>
+<h4 id="41"><strong>4.1 野指针崩溃案例</strong></h4>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="o">*</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">int</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+<span class="w">    </span><span class="k">delete</span><span class="w"> </span><span class="n">p</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">// 未置空指针</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="o">*</span><span class="n">p</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span><span class="w">  </span><span class="c1">// 访问已释放内存（可能输出乱码或崩溃）</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><strong>调试现象</strong>：在Release模式下可能“正常”输出10（内存未被覆盖），Debug模式下触发访问冲突。</p>
+<h4 id="42"><strong>4.2 内存泄漏增长示例</strong></h4>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="nf">leaky_func</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="o">*</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">int</span><span class="p">[</span><span class="mi">1024</span><span class="p">];</span><span class="w">  </span><span class="c1">// 每次调用泄漏4KB</span>
+<span class="w">    </span><span class="o">++</span><span class="n">count</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">while</span><span class="p">(</span><span class="nb">true</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">leaky_func</span><span class="p">();</span><span class="w">  </span><span class="c1">// 内存持续增长</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><strong>监控数据</strong>：任务管理器可见进程内存占用持续上升，直至崩溃。</p>
+<hr />
+<h3 id="5"><strong>5. 检测与预防方案</strong></h3>
+<h4 id="51"><strong>5.1 野指针防护</strong></h4>
+<ol>
+<li>
+<p><strong>立即置空策略</strong>  </p>
+<div class="highlight"><pre><span></span><code><span class="k">delete</span><span class="w"> </span><span class="n">p</span><span class="p">;</span>
+<span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">nullptr</span><span class="p">;</span><span class="w">  </span><span class="c1">// 后续访问会触发段错误而非UB</span>
+</code></pre></div>
+</li>
+<li>
+<p><strong>使用智能指针</strong>  </p>
+<div class="highlight"><pre><span></span><code><span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">p</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="kt">int</span><span class="p">(</span><span class="mi">10</span><span class="p">));</span><span class="w">  </span><span class="c1">// 自动管理生命周期</span>
+</code></pre></div>
+</li>
+<li>
+<p><strong>限制指针作用域</strong>  </p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+<span class="p">}</span><span class="w">  </span><span class="c1">// 离开作用域自动释放</span>
+</code></pre></div>
+</li>
+<li>
+<p><strong>静态代码分析工具</strong>  </p>
+<ul>
+<li>Clang-Tidy (<code>bugprone-use-after-move</code>)</li>
+<li>PVS-Studio (<code>V774</code>检测规则)</li>
+</ul>
+</li>
+</ol>
+<h4 id="52"><strong>5.2 内存泄漏治理</strong></h4>
+<ol>
+<li>
+<p><strong>RAII原则</strong>  </p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">ResourceHolder</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="o">*</span><span class="w"> </span><span class="n">data</span><span class="p">;</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w">    </span><span class="n">ResourceHolder</span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">size</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">data</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="kt">int</span><span class="p">[</span><span class="n">size</span><span class="p">])</span><span class="w"> </span><span class="p">{}</span>
+<span class="w">    </span><span class="o">~</span><span class="n">ResourceHolder</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">delete</span><span class="p">[]</span><span class="w"> </span><span class="n">data</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div>
+</li>
+<li>
+<p><strong>智能指针全覆盖</strong>  </p>
+<div class="highlight"><pre><span></span><code><span class="k">auto</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">MyObject</span><span class="o">&gt;</span><span class="p">();</span><span class="w">  </span><span class="c1">// 引用计数自动释放</span>
+</code></pre></div>
+</li>
+<li>
+<p><strong>异常安全设计</strong>  </p>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="nf">safe_func</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="n">Resource</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">// 可能抛出异常的操作</span>
+<span class="w">    </span><span class="n">res</span><span class="o">-&gt;</span><span class="n">do_something</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">// 无需手动释放，unique_ptr保证异常安全</span>
+<span class="p">}</span>
+</code></pre></div>
+</li>
+<li>
+<p><strong>检测工具链</strong>  </p>
+<ul>
+<li>Valgrind Memcheck：<br />
+<code>valgrind --leak-check=full ./your_program</code></li>
+<li>AddressSanitizer（ASan）：<br />
+<code>g++ -fsanitize=address -g your_code.cpp</code></li>
+</ul>
+</li>
+</ol>
+<hr />
+<h3 id="6-c"><strong>6. 现代C++最佳实践</strong></h3>
+<ol>
+<li>
+<p><strong>禁用裸指针</strong>（项目级规范）</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// 代码审查禁止出现new/delete</span>
+<span class="cp">#define new DELIBERATELY_DISABLED</span>
+</code></pre></div>
+</li>
+<li>
+<p><strong>使用容器替代动态数组</strong>  </p>
+<div class="highlight"><pre><span></span><code><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">data</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span><span class="w">  </span><span class="c1">// 自动管理内存</span>
+</code></pre></div>
+</li>
+<li>
+<p><strong>循环引用解决方案</strong>  </p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Node</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">weak_ptr</span><span class="o">&lt;</span><span class="n">Node</span><span class="o">&gt;</span><span class="w"> </span><span class="n">next</span><span class="p">;</span><span class="w">  </span><span class="c1">// 打破循环引用</span>
+<span class="p">};</span>
+</code></pre></div>
+</li>
+<li>
+<p><strong>内存池定制</strong>  </p>
+<div class="highlight"><pre><span></span><code><span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ObjectPool</span><span class="w"> </span><span class="p">{</span><span class="w">  </span><span class="c1">// 统一管理对象生命周期</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">pool</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div>
+</li>
+</ol>
+<hr />
+<h3 id="7"><strong>7. 总结：关键区别与选择</strong></h3>
+<table>
+<thead>
+<tr>
+<th><strong>决策点</strong></th>
+<th>野指针</th>
+<th>内存泄漏</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>防御核心</strong></td>
+<td>生命周期管理 + 指针置空</td>
+<td>资源所有权清晰化 + RAII</td>
+</tr>
+<tr>
+<td><strong>调试优先级</strong></td>
+<td>高（可能导致即时崩溃）</td>
+<td>中（需长期运行暴露问题）</td>
+</tr>
+<tr>
+<td><strong>现代C++方案</strong></td>
+<td><code>unique_ptr</code>/<code>scope guard</code></td>
+<td><code>make_shared</code>/容器类</td>
+</tr>
+<tr>
+<td><strong>架构级防御</strong></td>
+<td>静态分析 + 代码规范</td>
+<td>智能指针全覆盖 + 泄漏检测工具链</td>
+</tr>
+</tbody>
+</table>
+<p><strong>终极原则</strong>：  </p>
+<ul>
+<li>通过类型系统（如智能指针）将内存管理问题转化为编译期错误  </li>
+<li>使用ASan/Valgrind在CI/CD流水线中强制检测  </li>
+<li>遵循C++ Core Guidelines的R规则（资源管理）</li>
+</ul>
+<h2 id="_2">指针和引用</h2>
+<p>指针（Pointer）和引用（Reference）都是用于间接访问内存对象的机制，但它们在语法、语义和使用场景上有本质区别。</p>
+<hr />
+<h3 id="1_1"><strong>1. 本质定义</strong></h3>
+<ul>
+<li><strong>指针</strong>：存储内存地址的变量类型（32位系统占4字节，64位占8字节）</li>
+<li><strong>引用</strong>：已存在对象的别名（编译器符号表实现，无独立内存空间）</li>
+</ul>
+<hr />
+<h3 id="2_1"><strong>2. 核心差异</strong></h3>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>指针</th>
+<th>引用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>空值</strong></td>
+<td>可以赋值为<code>nullptr</code></td>
+<td>必须绑定有效对象（不可为空）</td>
+</tr>
+<tr>
+<td><strong>重新绑定</strong></td>
+<td>可修改指向不同对象</td>
+<td>初始化后终身绑定固定对象</td>
+</tr>
+<tr>
+<td><strong>内存占用</strong></td>
+<td>独立存储地址的变量</td>
+<td>编译器实现的语法别名（零开销）</td>
+</tr>
+<tr>
+<td><strong>多级间接访问</strong></td>
+<td>支持多级指针（<code>int** p</code>）</td>
+<td>仅一级引用</td>
+</tr>
+<tr>
+<td><strong>操作方式</strong></td>
+<td><code>-&gt;</code>和<code>*</code>操作符访问对象</td>
+<td>直接使用原对象语法</td>
+</tr>
+<tr>
+<td><strong>参数传递语义</strong></td>
+<td>值传递（需解引用修改原对象）</td>
+<td>直接传递原对象别名</td>
+</tr>
+<tr>
+<td><strong>数组支持</strong></td>
+<td>支持指针算术运算</td>
+<td>不可直接表示引用数组</td>
+</tr>
+<tr>
+<td><strong>sizeof结果</strong></td>
+<td>返回指针大小</td>
+<td>返回被引用对象大小</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="3_1"><strong>3. 底层实现对比</strong></h3>
+<ul>
+<li>
+<p><strong>指针</strong>：显式存储目标地址，访问需要显式解引用</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+<span class="kt">int</span><span class="o">*</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">x</span><span class="p">;</span><span class="w">  </span><span class="c1">// 内存中存储0x7ffd34a2bc1c之类的地址</span>
+</code></pre></div>
+</li>
+<li>
+<p><strong>引用</strong>：编译器维护的符号映射（汇编级与指针相似，但语法层不同）</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">;</span><span class="w">   </span><span class="c1">// r直接映射到x的内存位置</span>
+</code></pre></div>
+</li>
+</ul>
+<hr />
+<h3 id="4_1"><strong>4. 典型使用场景</strong></h3>
+<ul>
+<li>
+<p><strong>指针适用场景</strong>：</p>
+<ul>
+<li>动态内存管理（new/delete）</li>
+<li>需要重新指向不同对象</li>
+<li>处理多态对象（基类指针指向派生类）</li>
+<li>需要表示"无对象"的特殊状态（nullptr）</li>
+</ul>
+</li>
+<li>
+<p><strong>引用适用场景</strong>：</p>
+<ul>
+<li>函数参数传递（避免拷贝，强制非空）</li>
+<li>运算符重载（如<code>operator=</code>）</li>
+<li>函数返回值（返回左值）</li>
+<li>实现完美转发（forwarding reference）</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h3 id="5_1"><strong>5. 关键代码示例</strong></h3>
+<div class="highlight"><pre><span></span><code><span class="c1">// 指针特性演示</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">20</span><span class="p">;</span>
+<span class="kt">int</span><span class="o">*</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">a</span><span class="p">;</span><span class="w">  </span><span class="c1">// 指向a</span>
+<span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">b</span><span class="p">;</span><span class="w">       </span><span class="c1">// 合法：改变指向</span>
+<span class="o">*</span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">30</span><span class="p">;</span><span class="w">      </span><span class="c1">// 修改b的值</span>
+
+<span class="c1">// 引用特性演示</span>
+<span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">;</span><span class="w">   </span><span class="c1">// r是a的别名</span>
+<span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">40</span><span class="p">;</span><span class="w">       </span><span class="c1">// 直接修改a的值</span>
+<span class="c1">// int&amp; null_ref;  // 编译错误：必须初始化</span>
+<span class="c1">// r = b;         // 不是改变引用目标，而是将b的值赋给a</span>
+</code></pre></div>
+<hr />
+<h3 id="6"><strong>6. 高级注意事项</strong></h3>
+<ol>
+<li>
+<p><strong>常量限定</strong>：</p>
+<ul>
+<li><code>const int*</code> vs <code>int* const</code></li>
+<li><code>const int&amp;</code>可绑定字面量（<code>const int&amp; r = 5;</code>合法）</li>
+</ul>
+</li>
+<li>
+<p><strong>类型转换</strong>：</p>
+<ul>
+<li>指针支持显式类型转换（<code>reinterpret_cast</code>等）</li>
+<li>引用转换需要<code>static_cast</code>显式处理</li>
+</ul>
+</li>
+<li>
+<p><strong>模板元编程</strong>：</p>
+<ul>
+<li>引用类型会保留类型信息（引用折叠规则）</li>
+<li>指针类型在模板推导中视为普通指针类型</li>
+</ul>
+</li>
+<li>
+<p><strong>内存安全</strong>：</p>
+<ul>
+<li>野指针（dangling pointer）是常见错误类型</li>
+<li>悬空引用（dangling reference）同样危险但更难检测</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h3 id="7_1"><strong>7. 设计哲学</strong></h3>
+<ul>
+<li><strong>指针</strong>：提供对内存的直接操作能力，体现C++的底层控制特性</li>
+<li><strong>引用</strong>：作为更安全的别名机制，支持函数式编程范式</li>
+</ul>
+<p>选择原则：优先使用引用保证安全性，必须需要指针特性时再使用指针。现代C++中，引用在参数传递、返回值等场景已取代大部分指针的传统用法。</p>
+<h2 id="_3">智能指针概述</h2>
+<p>在C++中，智能指针是用于自动化资源管理（特别是动态内存）的工具，基于<strong>RAII（Resource Acquisition Is Initialization）</strong>原则，确保资源在离开作用域时自动释放，从而避免内存泄漏和资源泄露。</p>
+<hr />
+<h3 id="1_2"><strong>1. 智能指针的核心目的</strong></h3>
+<p>• <strong>自动化生命周期管理</strong>：通过对象的析构函数自动释放资源，减少手动<code>delete</code>导致的泄漏风险。
+• <strong>所有权语义明确化</strong>：清晰表达资源的所有权归属（独占、共享、无所有权等），增强代码可读性和安全性。
+• <strong>异常安全</strong>：即使在异常抛出时，智能指针仍能正确释放资源，避免传统指针的资源泄漏问题。</p>
+<hr />
+<h3 id="2-c"><strong>2. C++标准库中的智能指针类型</strong></h3>
+<h4 id="1-stdunique_ptr"><strong>(1) <code>std::unique_ptr</code></strong></h4>
+<p>• <strong>所有权模型</strong>：独占所有权，同一时间只能有一个<code>unique_ptr</code>指向资源，禁止拷贝（允许移动语义转移所有权）。
+• <strong>使用场景</strong>：
+  • 管理局部动态对象（替代<code>auto_ptr</code>，C++11起更安全）。
+  • 作为工厂函数的返回值，明确传递所有权。
+• <strong>示例与特性</strong>：</p>
+<p><code>cpp
+auto ptr = std::make_unique&lt;int&gt;(42); // 优先使用make_unique（C++14起）
+std::unique_ptr&lt;int&gt; ptr2 = std::move(ptr); // 所有权转移</code></p>
+<p>• <strong>性能</strong>：几乎无额外开销，与裸指针相当。</p>
+<h4 id="2-stdshared_ptr"><strong>(2) <code>std::shared_ptr</code></strong></h4>
+<p>• <strong>所有权模型</strong>：共享所有权，通过引用计数管理资源，当最后一个<code>shared_ptr</code>离开作用域时释放资源。
+• <strong>使用场景</strong>：
+  • 多个对象需共享同一资源的所有权。
+  • 需要将指针存入容器且无法确定生命周期时。
+• <strong>潜在问题</strong>：
+  • <strong>循环引用</strong>：若两个<code>shared_ptr</code>互相引用，引用计数无法归零，导致内存泄漏（需结合<code>weak_ptr</code>解决）。
+• <strong>示例与优化</strong>：</p>
+<p><code>cpp
+auto ptr = std::make_shared&lt;int&gt;(42); // 一次分配对象和引用计数块（更高效）
+auto ptr2 = ptr; // 引用计数+1</code></p>
+<h4 id="3-stdweak_ptr"><strong>(3) <code>std::weak_ptr</code></strong></h4>
+<p>• <strong>所有权模型</strong>：无所有权，作为<code>shared_ptr</code>的观察者，不增加引用计数。
+• <strong>使用场景</strong>：
+  • 打破<code>shared_ptr</code>的循环引用（如双向链表、观察者模式）。
+  • 临时检查资源是否存在（通过<code>lock()</code>获取临时<code>shared_ptr</code>）。
+• <strong>示例</strong>：</p>
+<p><code>cpp
+std::weak_ptr&lt;int&gt; w_ptr = shared_ptr;
+if (auto s_ptr = w_ptr.lock()) { // 安全访问资源
+    // 使用s_ptr
+}</code></p>
+<h4 id="4-stdauto_ptr"><strong>(4) <code>std::auto_ptr</code>（已弃用）</strong></h4>
+<p>• <strong>历史背景</strong>：C++98引入，尝试实现独占所有权，但存在拷贝语义不明确（隐式所有权转移）等问题，C++11起被<code>unique_ptr</code>替代。</p>
+<hr />
+<h3 id="3_2"><strong>3. 最佳实践与注意事项</strong></h3>
+<p>• <strong>优先选择<code>unique_ptr</code></strong>：默认使用独占所有权，减少引用计数开销和逻辑复杂度。
+• <strong>慎用<code>shared_ptr</code></strong>：仅在明确需要共享所有权时使用，避免无谓的性能损耗。
+• <strong>结合<code>weak_ptr</code>解决循环引用</strong>：在设计双向依赖或缓存等场景时预先规避问题。
+• <strong>使用<code>make_shared</code>和<code>make_unique</code></strong>：
+  • 提升性能（减少内存分配次数）。
+  • 保证异常安全（例如，避免因构造函数异常导致泄漏）。
+• <strong>避免裸指针和<code>delete</code></strong>：仅在与遗留代码交互时使用<code>.get()</code>或<code>.release()</code>，并确保立即传递所有权。</p>
+<hr />
+<h3 id="4_2"><strong>4. 示例：循环引用与解决方案</strong></h3>
+<div class="highlight"><pre><span></span><code><span class="k">struct</span><span class="w"> </span><span class="nc">Node</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">Node</span><span class="o">&gt;</span><span class="w"> </span><span class="n">next</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">weak_ptr</span><span class="o">&lt;</span><span class="n">Node</span><span class="o">&gt;</span><span class="w"> </span><span class="n">prev</span><span class="p">;</span><span class="w"> </span><span class="c1">// 使用weak_ptr打破循环</span>
+<span class="p">};</span>
+
+<span class="k">auto</span><span class="w"> </span><span class="n">node1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">Node</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">node2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">Node</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="n">node1</span><span class="o">-&gt;</span><span class="n">next</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">node2</span><span class="p">;</span>
+<span class="n">node2</span><span class="o">-&gt;</span><span class="n">prev</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">node1</span><span class="p">;</span><span class="w"> </span><span class="c1">// 不会增加node1的引用计数</span>
+</code></pre></div>
+<hr />
+<h2 id="_4">智能指针原理</h2>
+<blockquote>
+<p>智能指针的实现基于RAII原则，通过构造函数和析构函数自动管理资源。以下是C++标准库中主要智能指针的实现原理：</p>
+<ol>
+<li><code>std::unique_ptr</code> 的实现原理<ul>
+<li><strong>数据结构</strong>：内部维护一个指向资源的裸指针。</li>
+<li><strong>构造与析构</strong>：<ul>
+<li>构造函数初始化裸指针，指向动态分配的资源。</li>
+<li>析构函数调用<code>delete</code>释放资源，避免内存泄漏。</li>
+</ul>
+</li>
+<li><strong>移动语义</strong>：通过移动构造函数和移动赋值运算符转移所有权，允许资源在不同<code>unique_ptr</code>间转移，但源指针不再拥有资源。</li>
+<li><strong>禁止拷贝</strong>：无拷贝构造函数和拷贝赋值运算符，确保独占所有权。</li>
+</ul>
+</li>
+<li><code>std::shared_ptr</code> 的实现原理<ul>
+<li><strong>数据结构</strong>：除维护资源指针外，还维护一个控制块，存储引用计数（共享和弱引用计数）及资源删除函数等信息。</li>
+<li><strong>构造与析构</strong>：<ul>
+<li>构造函数初始化资源指针和控制块，引用计数置为1。</li>
+<li>析构函数减少引用计数，计数归零时释放资源。</li>
+</ul>
+</li>
+<li><strong>引用计数</strong>：拷贝构造和赋值运算符增加计数，析构和重置减少计数，实现共享所有权。</li>
+<li><strong>自定义删除器</strong>：支持绑定自定义函数或 Lambda 表达式作为删除器，灵活管理资源（如文件句柄、网络连接等）。</li>
+</ul>
+</li>
+<li><code>std::weak_ptr</code> 的实现原理<ul>
+<li><strong>数据结构</strong>：内部维护一个指向<code>shared_ptr</code>控制块的指针，不增加引用计数。</li>
+<li><strong>构造与析构</strong>：<ul>
+<li>构造函数关联<code>shared_ptr</code>的控制块。</li>
+<li>析构函数无特殊操作，仅释放内部指针。</li>
+</ul>
+</li>
+<li><strong><code>lock()</code> 方法</strong>：生成临时<code>shared_ptr</code>，增加引用计数，安全访问资源；若资源已释放，返回空<code>shared_ptr</code>。</li>
+<li><strong>作用</strong>：作为观察者，避免循环引用，延迟资源访问，管理缓存数据等。</li>
+</ul>
+</li>
+</ol>
+</blockquote>
+<h3 id="1_3"><strong>1. 核心思想：自动管家</strong></h3>
+<p>想象你养了一只宠物狗，每次带它出门都要牵绳，回家后要记得关门，否则它会跑丢。传统指针就像你每次都要手动关门，一旦忘记（忘记<code>delete</code>），狗就会跑丢（内存泄漏）。而智能指针就像一个自动管家，只要狗狗进了家门（创建对象），管家就会记住，并在你不需要它时（离开作用域）<strong>自动关门</strong>（释放内存）。</p>
+<hr />
+<h3 id="2-unique_ptr"><strong>2. 最简单的智能指针：<code>unique_ptr</code></strong></h3>
+<h4 id="_5"><strong>实现原理</strong></h4>
+<ul>
+<li><strong>结构</strong>：它内部有一个“小盒子”（成员变量）保存原始指针。</li>
+<li><strong>独占性</strong>：这个盒子只能有一个主人，不允许复制（拷贝构造函数被删除）。</li>
+<li><strong>移动</strong>：但你可以把盒子整个“搬”给另一个主人（移动语义）。</li>
+<li><strong>自动清理</strong>：当主人消失（作用域结束）时，管家自动打开盒子，清理里面的指针（调用<code>delete</code>）。</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">SimpleUniquePtr</span><span class="w"> </span><span class="p">{</span>
+<span class="k">private</span><span class="o">:</span>
+<span class="w">    </span><span class="n">T</span><span class="o">*</span><span class="w"> </span><span class="n">raw_ptr</span><span class="p">;</span><span class="w"> </span><span class="c1">// 小盒子里存着原始指针</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w">    </span><span class="n">SimpleUniquePtr</span><span class="p">(</span><span class="n">T</span><span class="o">*</span><span class="w"> </span><span class="n">ptr</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">raw_ptr</span><span class="p">(</span><span class="n">ptr</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span><span class="w"> </span><span class="c1">// 创建时接管指针</span>
+<span class="w">    </span><span class="o">~</span><span class="n">SimpleUniquePtr</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">delete</span><span class="w"> </span><span class="n">raw_ptr</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w">     </span><span class="c1">// 析构时自动释放</span>
+
+<span class="w">    </span><span class="c1">// 禁止拷贝（关键！）</span>
+<span class="w">    </span><span class="n">SimpleUniquePtr</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">SimpleUniquePtr</span><span class="o">&amp;</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">delete</span><span class="p">;</span>
+<span class="w">    </span><span class="n">SimpleUniquePtr</span><span class="o">&amp;</span><span class="w"> </span><span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">SimpleUniquePtr</span><span class="o">&amp;</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">delete</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// 允许移动（搬动盒子）</span>
+<span class="w">    </span><span class="n">SimpleUniquePtr</span><span class="p">(</span><span class="n">SimpleUniquePtr</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">other</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">raw_ptr</span><span class="p">(</span><span class="n">other</span><span class="p">.</span><span class="n">raw_ptr</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">other</span><span class="p">.</span><span class="n">raw_ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">nullptr</span><span class="p">;</span><span class="w"> </span><span class="c1">// 原主人不再拥有指针</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div>
+<h4 id="_6"><strong>使用示例</strong></h4>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="n">SimpleUniquePtr</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">ptr</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="kt">int</span><span class="p">(</span><span class="mi">42</span><span class="p">));</span><span class="w"> </span><span class="c1">// 创建，管家记住指针</span>
+<span class="w">    </span><span class="c1">// 离开作用域时，自动调用析构函数，delete释放内存</span>
+<span class="p">}</span>
+</code></pre></div>
+<hr />
+<h3 id="3-shared_ptr"><strong>3. 共享型智能指针：<code>shared_ptr</code></strong></h3>
+<h4 id="_7"><strong>实现原理</strong></h4>
+<ul>
+<li><strong>引用计数</strong>：管家准备了一个“计数器”（引用计数），记录有多少人在使用这个指针。</li>
+<li><strong>共享所有权</strong>：每次复制<code>shared_ptr</code>时，计数器+1；每次销毁时，计数器-1。</li>
+<li><strong>自动释放</strong>：当计数器归零时，管家清理指针。</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">SimpleSharedPtr</span><span class="w"> </span><span class="p">{</span>
+<span class="k">private</span><span class="o">:</span>
+<span class="w">    </span><span class="n">T</span><span class="o">*</span><span class="w"> </span><span class="n">raw_ptr</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="o">*</span><span class="w"> </span><span class="n">ref_count</span><span class="p">;</span><span class="w"> </span><span class="c1">// 引用计数器（指针形式，多个shared_ptr共享）</span>
+
+<span class="k">public</span><span class="o">:</span>
+<span class="w">    </span><span class="n">SimpleSharedPtr</span><span class="p">(</span><span class="n">T</span><span class="o">*</span><span class="w"> </span><span class="n">ptr</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">raw_ptr</span><span class="p">(</span><span class="n">ptr</span><span class="p">),</span><span class="w"> </span><span class="n">ref_count</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="kt">int</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span><span class="w"> </span><span class="p">{}</span>
+
+<span class="w">    </span><span class="c1">// 拷贝构造函数：计数器+1</span>
+<span class="w">    </span><span class="n">SimpleSharedPtr</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">SimpleSharedPtr</span><span class="o">&amp;</span><span class="w"> </span><span class="n">other</span><span class="p">)</span><span class="w"> </span>
+<span class="w">        </span><span class="o">:</span><span class="w"> </span><span class="n">raw_ptr</span><span class="p">(</span><span class="n">other</span><span class="p">.</span><span class="n">raw_ptr</span><span class="p">),</span><span class="w"> </span><span class="n">ref_count</span><span class="p">(</span><span class="n">other</span><span class="p">.</span><span class="n">ref_count</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="p">(</span><span class="o">*</span><span class="n">ref_count</span><span class="p">)</span><span class="o">++</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// 析构函数：计数器-1，归零时释放</span>
+<span class="w">    </span><span class="o">~</span><span class="n">SimpleSharedPtr</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="p">(</span><span class="o">*</span><span class="n">ref_count</span><span class="p">)</span><span class="o">--</span><span class="p">;</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">ref_count</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">delete</span><span class="w"> </span><span class="n">raw_ptr</span><span class="p">;</span>
+<span class="w">            </span><span class="k">delete</span><span class="w"> </span><span class="n">ref_count</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div>
+<h4 id="_8"><strong>使用示例</strong></h4>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="n">SimpleSharedPtr</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">ptr1</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="kt">int</span><span class="p">(</span><span class="mi">42</span><span class="p">));</span><span class="w"> </span><span class="c1">// 计数器=1</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">SimpleSharedPtr</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">ptr2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ptr1</span><span class="p">;</span><span class="w"> </span><span class="c1">// 计数器=2</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="c1">// ptr2析构，计数器=1</span>
+<span class="p">}</span><span class="w"> </span><span class="c1">// ptr1析构，计数器=0，自动释放内存</span>
+</code></pre></div>
+<hr />
+<h3 id="4-weak_ptr"><strong>4. 辅助型智能指针：<code>weak_ptr</code></strong></h3>
+<h4 id="_9"><strong>为什么需要它？</strong></h4>
+<ul>
+<li><strong>循环引用问题</strong>：比如两人互相说“你先挂电话，我再挂”，结果永远挂不断。</li>
+<li><strong>解决方案</strong>：<code>weak_ptr</code>像是一个“观察员”，不参与计数，只观察资源是否存在。</li>
+</ul>
+<h4 id="_10"><strong>实现原理</strong></h4>
+<ul>
+<li><strong>不持有计数器</strong>：<code>weak_ptr</code>内部保存指针，但不增加引用计数。</li>
+<li><strong>检查有效性</strong>：通过<code>lock()</code>方法，可以临时获取一个<code>shared_ptr</code>来使用资源（如果资源还存在）。</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">SimpleWeakPtr</span><span class="w"> </span><span class="p">{</span>
+<span class="k">private</span><span class="o">:</span>
+<span class="w">    </span><span class="n">T</span><span class="o">*</span><span class="w"> </span><span class="n">raw_ptr</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="o">*</span><span class="w"> </span><span class="n">ref_count</span><span class="p">;</span><span class="w"> </span><span class="c1">// 指向shared_ptr的计数器</span>
+
+<span class="k">public</span><span class="o">:</span>
+<span class="w">    </span><span class="n">SimpleWeakPtr</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">SimpleSharedPtr</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">shared</span><span class="p">)</span><span class="w"> </span>
+<span class="w">        </span><span class="o">:</span><span class="w"> </span><span class="n">raw_ptr</span><span class="p">(</span><span class="n">shared</span><span class="p">.</span><span class="n">raw_ptr</span><span class="p">),</span><span class="w"> </span><span class="n">ref_count</span><span class="p">(</span><span class="n">shared</span><span class="p">.</span><span class="n">ref_count</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
+
+<span class="w">    </span><span class="c1">// 尝试获取临时shared_ptr</span>
+<span class="w">    </span><span class="n">SimpleSharedPtr</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">lock</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">ref_count</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">SimpleSharedPtr</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">raw_ptr</span><span class="p">);</span><span class="w"> </span><span class="c1">// 这里需要更复杂的实现</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="k">nullptr</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div>
+<hr />
+<h3 id="5_2"><strong>5. 智能指针的“高效秘诀”</strong></h3>
+<ul>
+<li><strong><code>make_shared</code>和<code>make_unique</code></strong>：直接申请一块大内存，同时存放对象和引用计数，减少内存碎片，提高速度。</li>
+<li><strong>异常安全</strong>：如果使用<code>new</code>后再传给智能指针，中间如果发生异常，可能导致内存泄漏。而<code>make_</code>系列函数一步到位，杜绝这个问题。</li>
+</ul>
+<hr />
+<h3 id="_11"><strong>总结：智能指针如何帮你省心？</strong></h3>
+<ul>
+<li><strong><code>unique_ptr</code></strong>：独居管家，只服务一个主人，搬家时彻底交接。</li>
+<li><strong><code>shared_ptr</code></strong>：合租管家，记录所有租客数量，最后一个离开时打扫房间。</li>
+<li><strong><code>weak_ptr</code></strong>：不租房只敲门，确认有人住才临时访问。</li>
+</ul>
+<p>理解了这些，你就掌握了智能指针的核心！实际使用中，99%的情况只需记住：</p>
+<ul>
+<li>默认用<code>unique_ptr</code>，简单高效。</li>
+<li>需要共享时用<code>shared_ptr</code>，但要小心循环引用。</li>
+<li>遇到循环引用时，用<code>weak_ptr</code>破局。</li>
+</ul>
+<h2 id="malloc-new">malloc 和 new</h2>
+<h3 id="1_4"><strong>1. 语言归属与底层机制</strong></h3>
+<table>
+<thead>
+<tr>
+<th><strong>特性</strong></th>
+<th><code>malloc</code> / <code>free</code></th>
+<th><code>new</code> / <code>delete</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>语言标准</strong></td>
+<td>C标准库函数</td>
+<td>C++运算符（语言核心特性）</td>
+</tr>
+<tr>
+<td><strong>内存分配方式</strong></td>
+<td>显式分配原始内存块</td>
+<td>分配内存并调用构造函数</td>
+</tr>
+<tr>
+<td><strong>内存释放方式</strong></td>
+<td>直接释放内存</td>
+<td>调用析构函数后释放内存</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="2_2"><strong>2. 核心差异</strong></h3>
+<h4 id="21_1"><strong>2.1 初始化与对象构造</strong></h4>
+<ul>
+<li>
+<p><strong><code>malloc</code></strong>：</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="o">*</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">));</span><span class="w">  </span><span class="c1">// 分配未初始化的内存</span>
+<span class="o">*</span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w">  </span><span class="c1">// 需要手动初始化</span>
+</code></pre></div>
+<ul>
+<li>仅分配原始内存，不执行对象构造</li>
+<li>对非POD（Plain Old Data）类型可能引发未定义行为</li>
+</ul>
+</li>
+<li>
+<p><strong><code>new</code></strong>：</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="o">*</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">int</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span><span class="w">        </span><span class="c1">// 分配内存并初始化</span>
+<span class="n">MyClass</span><span class="o">*</span><span class="w"> </span><span class="n">obj</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MyClass</span><span class="p">;</span><span class="w">  </span><span class="c1">// 调用构造函数</span>
+</code></pre></div>
+<ul>
+<li>分配内存后自动调用构造函数</li>
+<li>保证类型安全的对象初始化</li>
+</ul>
+</li>
+</ul>
+<h4 id="22_1"><strong>2.2 失败处理</strong></h4>
+<ul>
+<li>
+<p><strong><code>malloc</code></strong>：返回<code>NULL</code>（需手动检查）</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">p</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* 处理错误 */</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+</li>
+<li>
+<p><strong><code>new</code></strong>：抛出<code>std::bad_alloc</code>异常（默认）</p>
+<div class="highlight"><pre><span></span><code><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="o">*</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">int</span><span class="p">[</span><span class="mi">10000000000</span><span class="p">];</span>
+<span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">bad_alloc</span><span class="o">&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 处理内存不足</span>
+<span class="p">}</span>
+</code></pre></div>
+<ul>
+<li>
+<p>可通过<code>nothrow</code>版本返回<code>nullptr</code>：</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="o">*</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">nothrow</span><span class="p">)</span><span class="w"> </span><span class="kt">int</span><span class="p">[</span><span class="mi">100</span><span class="p">];</span>
+</code></pre></div>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="23"><strong>2.3 内存大小计算</strong></h4>
+<ul>
+<li>
+<p><strong><code>malloc</code></strong>：需手动计算字节数</p>
+<div class="highlight"><pre><span></span><code><span class="k">struct</span><span class="w"> </span><span class="nc">Data</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">;</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">b</span><span class="p">;</span><span class="w"> </span><span class="p">};</span>
+<span class="n">Data</span><span class="o">*</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">Data</span><span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">Data</span><span class="p">));</span>
+</code></pre></div>
+</li>
+<li>
+<p><strong><code>new</code></strong>：自动计算类型大小</p>
+<div class="highlight"><pre><span></span><code><span class="n">Data</span><span class="o">*</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Data</span><span class="p">;</span><span class="w">  </span><span class="c1">// 编译器自动计算sizeof(Data)</span>
+</code></pre></div>
+</li>
+</ul>
+<hr />
+<h3 id="3_3"><strong>3. 类型安全性</strong></h3>
+<table>
+<thead>
+<tr>
+<th><strong>特性</strong></th>
+<th><code>malloc</code></th>
+<th><code>new</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>类型转换</strong></td>
+<td>需要显式强制类型转换</td>
+<td>自动类型推导</td>
+</tr>
+<tr>
+<td><strong>类型检查</strong></td>
+<td>无（可能因类型不匹配导致UB）</td>
+<td>编译时类型检查</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><span class="c1">// malloc需要显式转换</span>
+<span class="kt">float</span><span class="o">*</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">float</span><span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">));</span>
+
+<span class="c1">// new自动匹配类型</span>
+<span class="kt">float</span><span class="o">*</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">float</span><span class="p">;</span>
+</code></pre></div>
+<hr />
+<h3 id="4_3"><strong>4. 构造/析构函数</strong></h3>
+<table>
+<thead>
+<tr>
+<th><strong>操作</strong></th>
+<th><code>malloc</code>/<code>free</code></th>
+<th><code>new</code>/<code>delete</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>构造函数调用</strong></td>
+<td>❌ 不调用</td>
+<td>✅ 调用</td>
+</tr>
+<tr>
+<td><strong>析构函数调用</strong></td>
+<td>❌ 不调用</td>
+<td>✅ 调用</td>
+</tr>
+</tbody>
+</table>
+<p><strong>示例：</strong></p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">MyClass</span><span class="w"> </span><span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w">    </span><span class="n">MyClass</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Constructor</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="o">~</span><span class="n">MyClass</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Destructor</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="p">};</span>
+
+<span class="c1">// malloc + free</span>
+<span class="n">MyClass</span><span class="o">*</span><span class="w"> </span><span class="n">p1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">MyClass</span><span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">MyClass</span><span class="p">));</span><span class="w">  </span><span class="c1">// 无构造</span>
+<span class="n">free</span><span class="p">(</span><span class="n">p1</span><span class="p">);</span><span class="w">  </span><span class="c1">// 无析构</span>
+
+<span class="c1">// new + delete</span>
+<span class="n">MyClass</span><span class="o">*</span><span class="w"> </span><span class="n">p2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MyClass</span><span class="p">;</span><span class="w">  </span><span class="c1">// 调用构造函数</span>
+<span class="k">delete</span><span class="w"> </span><span class="n">p2</span><span class="p">;</span><span class="w">                  </span><span class="c1">// 调用析构函数</span>
+</code></pre></div>
+<hr />
+<h3 id="5_3"><strong>5. 重载机制</strong></h3>
+<ul>
+<li>
+<p><strong><code>malloc</code></strong>：不可重载</p>
+</li>
+<li>
+<p><strong><code>new</code></strong>：支持全局或类特定的运算符重载</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// 全局operator new重载</span>
+<span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="k">operator</span><span class="w"> </span><span class="k">new</span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">size</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Allocating &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; bytes</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">malloc</span><span class="p">(</span><span class="n">size</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+</li>
+</ul>
+<hr />
+<h3 id="6_1"><strong>6. 内存来源</strong></h3>
+<table>
+<thead>
+<tr>
+<th><strong>分配方式</strong></th>
+<th><code>malloc</code></th>
+<th><code>new</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>内存池</strong></td>
+<td>从C运行时库的堆分配</td>
+<td>默认通过<code>operator new</code>分配</td>
+</tr>
+<tr>
+<td><strong>可扩展性</strong></td>
+<td>固定实现</td>
+<td>可通过重载改变分配策略</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="7_2"><strong>7. 多态支持</strong></h3>
+<ul>
+<li>
+<p><strong><code>malloc</code></strong>：无法直接创建多态对象</p>
+</li>
+<li>
+<p><strong><code>new</code></strong>：支持多态对象创建</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Base</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">virtual</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">func</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span><span class="w"> </span><span class="p">};</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Derived</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">Base</span><span class="w"> </span><span class="p">{};</span>
+
+<span class="n">Base</span><span class="o">*</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Derived</span><span class="p">;</span><span class="w">  </span><span class="c1">// 正确创建派生类对象</span>
+</code></pre></div>
+</li>
+</ul>
+<hr />
+<h3 id="8"><strong>8. 使用场景对比</strong></h3>
+<table>
+<thead>
+<tr>
+<th><strong>场景</strong></th>
+<th><code>malloc</code>/<code>free</code></th>
+<th><code>new</code>/<code>delete</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>C兼容代码</strong></td>
+<td>✅ 必须使用</td>
+<td>❌ 无法混合使用</td>
+</tr>
+<tr>
+<td><strong>POD数据类型</strong></td>
+<td>✅ 适用</td>
+<td>✅ 更安全</td>
+</tr>
+<tr>
+<td><strong>非POD对象</strong></td>
+<td>❌ 危险（不调用构造/析构）</td>
+<td>✅ 必须使用</td>
+</tr>
+<tr>
+<td><strong>内存池定制</strong></td>
+<td>❌ 不可控</td>
+<td>✅ 可通过重载定制</td>
+</tr>
+<tr>
+<td><strong>低层内存操作</strong></td>
+<td>✅ 直接控制字节</td>
+<td>❌ 抽象层次高</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="9"><strong>9. 关键代码示例</strong></h3>
+<div class="highlight"><pre><span></span><code><span class="c1">// malloc/free示例</span>
+<span class="kt">int</span><span class="o">*</span><span class="w"> </span><span class="n">arr1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="mi">5</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">));</span>
+<span class="n">free</span><span class="p">(</span><span class="n">arr1</span><span class="p">);</span>
+
+<span class="c1">// new/delete示例</span>
+<span class="kt">int</span><span class="o">*</span><span class="w"> </span><span class="n">arr2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">int</span><span class="p">[</span><span class="mi">5</span><span class="p">]{</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">};</span><span class="w">  </span><span class="c1">// 初始化列表</span>
+<span class="k">delete</span><span class="p">[]</span><span class="w"> </span><span class="n">arr2</span><span class="p">;</span>
+
+<span class="c1">// 对象示例</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Student</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w">    </span><span class="n">Student</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">name</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
+<span class="p">};</span>
+
+<span class="n">Student</span><span class="o">*</span><span class="w"> </span><span class="n">s1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">Student</span><span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">Student</span><span class="p">));</span><span class="w">  </span><span class="c1">// 危险！未构造对象</span>
+<span class="c1">// s1-&gt;name = &quot;Alice&quot;;  // 可能崩溃</span>
+
+<span class="n">Student</span><span class="o">*</span><span class="w"> </span><span class="n">s2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Student</span><span class="p">(</span><span class="s">&quot;Bob&quot;</span><span class="p">);</span><span class="w">  </span><span class="c1">// 正确构造</span>
+<span class="k">delete</span><span class="w"> </span><span class="n">s2</span><span class="p">;</span>
+</code></pre></div>
+<hr />
+<h3 id="10-c"><strong>10. 现代C++演进</strong></h3>
+<ul>
+<li><strong><code>new</code>的替代方案</strong>：<ul>
+<li><code>std::make_unique</code> / <code>std::make_shared</code>（智能指针）</li>
+<li>容器类（<code>std::vector</code>等）</li>
+</ul>
+</li>
+<li><strong><code>malloc</code>的现代用法</strong>：<ul>
+<li>仅在与C库交互时使用（如：<code>FILE*</code>操作）</li>
+<li>实现自定义内存管理器时作为底层分配器</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h3 id="_12"><strong>总结选择原则</strong></h3>
+<table>
+<thead>
+<tr>
+<th><strong>情况</strong></th>
+<th><strong>推荐方式</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C++对象（尤其非POD）</td>
+<td><code>new</code>/<code>delete</code></td>
+</tr>
+<tr>
+<td>需要构造/析构的类</td>
+<td>必须用<code>new</code></td>
+</tr>
+<tr>
+<td>原始字节操作（如网络缓冲区）</td>
+<td><code>malloc</code>+<code>free</code></td>
+</tr>
+<tr>
+<td>兼容C代码的接口</td>
+<td><code>malloc</code>+<code>free</code></td>
+</tr>
+<tr>
+<td>现代C++开发</td>
+<td>优先使用智能指针</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+  
+    
+  
+  
+    
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Last update">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2025-03-26T07:48:07+01:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2025-03-26</span>
+  </span>
+
+    
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Created">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2025-03-26T07:48:07+01:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2025-03-26</span>
+  </span>
+
+    
+    
+    
+  </aside>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://github.com/JAILuo" target="_blank" rel="noopener" title="JAILuo" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.footer"], "search": "../../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.83f73b43.min.js"></script>
+      
+        <script src="../../../js/timeago.min.js"></script>
+      
+        <script src="../../../js/timeago_mkdocs_material.js"></script>
+      
+        <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+      
+    
+  </body>
+</html>
