@@ -1608,6 +1608,105 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#elf-loader" class="md-nav__link">
+    <span class="md-ellipsis">
+      ELF loader
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="ELF loader">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#elf" class="md-nav__link">
+    <span class="md-ellipsis">
+      一、代码结构与ELF标准流程对照
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一、代码结构与ELF标准流程对照">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      关键步骤分解：
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      二、关键实现细节分析
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、关键实现细节分析">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 虚拟地址到物理页的精确映射
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 权限控制问题
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. 动态链接缺失
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      三、流程图示与代码对应
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      四、潜在改进点
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#reference" class="md-nav__link">
     <span class="md-ellipsis">
       Reference
@@ -2177,6 +2276,105 @@
       C 库的实现
     </span>
   </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#elf-loader" class="md-nav__link">
+    <span class="md-ellipsis">
+      ELF loader
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="ELF loader">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#elf" class="md-nav__link">
+    <span class="md-ellipsis">
+      一、代码结构与ELF标准流程对照
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一、代码结构与ELF标准流程对照">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      关键步骤分解：
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      二、关键实现细节分析
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、关键实现细节分析">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 虚拟地址到物理页的精确映射
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 权限控制问题
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. 动态链接缺失
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      三、流程图示与代码对应
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      四、潜在改进点
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -2905,6 +3103,194 @@ After<span class="w"> </span>this<span class="w"> </span>operation,<span class="
 <p><code>SimpleReadNumberInt</code> 函数可能是一个自定义函数，用于将字符串转换为整数，并可能提供默认值。如果 <code>argv[i]</code> 是一个有效的参数，那么 <code>SimpleReadNumberInt</code> 会读取 <code>argv[i]</code> 的值；否则，它会使用提供的默认值。</p>
 </blockquote>
 <h2 id="c">C 库的实现</h2>
+<h2 id="elf-loader">ELF loader</h2>
+<p>以下是对该ELF加载器代码的解析流程的详细分析，结合理论实现与实际代码：</p>
+<hr />
+<h3 id="elf">一、代码结构与ELF标准流程对照</h3>
+<p>该Loader实现了ELF静态可执行文件的核心装载逻辑，流程严格遵循ELF规范，但省略动态链接处理（假设为静态链接环境）。</p>
+<h4 id="_5">关键步骤分解：</h4>
+<ol>
+<li>
+<p><strong>文件打开与ELF头验证</strong></p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">fd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fs_open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span><span class="w">       </span><span class="c1">// 打开ELF文件</span>
+<span class="n">fs_read</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">eh</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">Elf_Ehdr</span><span class="p">));</span><span class="w">     </span><span class="c1">// 读取ELF头</span>
+<span class="n">assert</span><span class="p">(</span><span class="n">magic检查</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">e_machine检查</span><span class="p">);</span><span class="w">      </span><span class="c1">// 验证魔数及架构</span>
+</code></pre></div>
+<ul>
+<li><strong>理论对应</strong>：验证ELF魔数（<code>e_ident</code>）、文件类型（<code>e_type</code>）、目标架构（<code>e_machine</code>）的合法性。</li>
+<li><strong>代码实现</strong>：通过<code>assert</code>确保ELF头关键字段正确，防止加载错误格式文件。</li>
+</ul>
+</li>
+<li>
+<p><strong>程序头表加载</strong></p>
+<div class="highlight"><pre><span></span><code><span class="n">Elf_Phdr</span><span class="w"> </span><span class="n">ph</span><span class="p">[</span><span class="n">eh</span><span class="p">.</span><span class="n">e_phnum</span><span class="p">];</span><span class="w">                </span><span class="c1">// 根据ELF头声明程序头数组</span>
+<span class="n">fs_lseek</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span><span class="w"> </span><span class="n">eh</span><span class="p">.</span><span class="n">e_phoff</span><span class="p">,</span><span class="w"> </span><span class="n">SEEK_SET</span><span class="p">);</span><span class="w">     </span><span class="c1">// 定位到程序头表</span>
+<span class="n">fs_read</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span><span class="w"> </span><span class="n">ph</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">Elf_Phdr</span><span class="p">)</span><span class="o">*</span><span class="n">eh</span><span class="p">.</span><span class="n">e_phnum</span><span class="p">);</span><span class="w"> </span><span class="c1">// 读取所有程序头项</span>
+</code></pre></div>
+<ul>
+<li><strong>理论对应</strong>：解析ELF头的<code>e_phoff</code>和<code>e_phnum</code>字段，获取程序头表位置及条目数。</li>
+<li><strong>代码实现</strong>：直接读取整个程序头表到内存数组，为后续遍历做准备。</li>
+</ul>
+</li>
+<li>
+<p><strong>PT_LOAD段处理</strong></p>
+<div class="highlight"><pre><span></span><code><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">遍历所有程序头项</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ph</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">p_type</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">PT_LOAD</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">      </span><span class="c1">// 仅处理可装载段</span>
+<span class="w">        </span><span class="c1">// 计算虚拟地址对齐与所需页数</span>
+<span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="kt">uintptr_t</span><span class="w"> </span><span class="n">start_addr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">calc_aligned_page</span><span class="p">(...);</span>
+<span class="w">        </span><span class="kt">size_t</span><span class="w"> </span><span class="n">nr_page</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">...;</span>
+<span class="w">        </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">p_page</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">new_page</span><span class="p">(</span><span class="n">nr_page</span><span class="p">);</span><span class="w"> </span><span class="c1">// 分配物理页</span>
+
+<span class="w">        </span><span class="c1">// 将段内容读入内存</span>
+<span class="w">        </span><span class="n">fs_lseek</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span><span class="w"> </span><span class="n">ph</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">p_offset</span><span class="p">,</span><span class="w"> </span><span class="n">SEEK_SET</span><span class="p">);</span>
+<span class="w">        </span><span class="n">fs_read</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span><span class="w"> </span><span class="n">pages_start</span><span class="p">,</span><span class="w"> </span><span class="n">ph</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">p_filesz</span><span class="p">);</span>
+<span class="w">        </span><span class="n">memset</span><span class="p">(</span><span class="n">pages_start</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">p_filesz</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">p_memsz</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">p_filesz</span><span class="p">);</span><span class="w"> </span><span class="c1">// 清零.bss</span>
+
+<span class="w">        </span><span class="c1">// 建立页表映射</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">每页</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">map</span><span class="p">(</span><span class="n">虚拟地址</span><span class="p">,</span><span class="w"> </span><span class="n">物理页</span><span class="p">,</span><span class="w"> </span><span class="n">权限</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<ul>
+<li><strong>理论对应</strong>：对每个PT_LOAD段执行内存映射，包括文件内容加载和.bss段初始化。</li>
+<li><strong>代码实现</strong>：<ul>
+<li><strong>地址对齐</strong>：通过<code>calc_aligned_page</code>计算段起始地址的页对齐（如<code>ph[i].p_vaddr &amp; ~(PAGE_SIZE-1)</code>），确保虚拟地址按页对齐。</li>
+<li><strong>物理内存分配</strong>：<code>new_page(nr_page)</code>分配连续的物理页帧。</li>
+<li><strong>文件内容加载</strong>：精确读取段在文件中的内容（<code>p_offset</code>到<code>p_filesz</code>）到虚拟地址对应的物理页。</li>
+<li><strong>.bss处理</strong>：<code>memset</code>填充内存中超出文件大小的部分（<code>p_memsz - p_filesz</code>）为零。</li>
+<li><strong>页表映射</strong>：通过<code>map</code>函数逐页建立虚拟地址到物理页的映射，设置权限（当前代码中权限为RWX，需优化）。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>入口地址与堆初始化</strong></p>
+<div class="highlight"><pre><span></span><code><span class="n">pcb</span><span class="o">-&gt;</span><span class="n">max_brk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">...;</span><span class="w">            </span><span class="c1">// 计算堆顶地址</span>
+<span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="kt">uintptr_t</span><span class="p">)</span><span class="n">eh</span><span class="p">.</span><span class="n">e_entry</span><span class="p">;</span><span class="w">  </span><span class="c1">// 返回程序入口点</span>
+</code></pre></div>
+<ul>
+<li><strong>理论对应</strong>：设置用户态堆的初始顶（<code>brk</code>），并返回ELF头中的入口地址<code>e_entry</code>供CPU跳转执行。</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h3 id="_6">二、关键实现细节分析</h3>
+<h4 id="1">1. 虚拟地址到物理页的精确映射</h4>
+<ul>
+<li>
+<p><strong>代码逻辑</strong>：</p>
+<ul>
+<li><strong><code>calc_aligned_page</code></strong>：计算段起始地址的页对齐起始（如<code>ph[i].p_vaddr</code>向下对齐到页边界）。</li>
+<li><strong><code>nr_page</code></strong>：根据段的总大小（<code>p_memsz</code>）计算所需页数（考虑跨页情况）。</li>
+<li><strong><code>pages_start</code></strong>：确定段内容在物理页中的起始位置（<code>p_vaddr - start_addr</code>为段在页内的偏移）。</li>
+</ul>
+</li>
+<li>
+<p><strong>示例</strong>：</p>
+<ul>
+<li>假设<code>p_vaddr = 0x8048123</code>, <code>p_memsz = 0x2000</code>，页大小<code>0x1000</code>：<ul>
+<li><code>start_addr = 0x8048000</code>（对齐到页边界）。</li>
+<li><code>nr_page = 3</code>（覆盖0x8048000~0x804b000）。</li>
+<li>段内容从物理页的<code>0x123</code>偏移处开始存放。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="2">2. 权限控制问题</h4>
+<ul>
+<li>
+<p><strong>当前代码</strong>：所有PT_LOAD段映射为<code>PTE_R | PTE_W | PTE_X</code>（RWX），存在安全风险。</p>
+</li>
+<li>
+<p><strong>改进建议</strong>：</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// 根据程序头标志p_flags设置权限</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">perm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ph</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">p_flags</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">PF_R</span><span class="p">)</span><span class="w"> </span><span class="n">perm</span><span class="w"> </span><span class="o">|=</span><span class="w"> </span><span class="n">PTE_R</span><span class="p">;</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ph</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">p_flags</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">PF_W</span><span class="p">)</span><span class="w"> </span><span class="n">perm</span><span class="w"> </span><span class="o">|=</span><span class="w"> </span><span class="n">PTE_W</span><span class="p">;</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ph</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">p_flags</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">PF_X</span><span class="p">)</span><span class="w"> </span><span class="n">perm</span><span class="w"> </span><span class="o">|=</span><span class="w"> </span><span class="n">PTE_X</span><span class="p">;</span>
+<span class="n">map</span><span class="p">(...,</span><span class="w"> </span><span class="n">perm</span><span class="p">);</span>
+</code></pre></div>
+<ul>
+<li>需从程序头的<code>p_flags</code>提取实际权限（如代码段设为R-X，数据段设为RW-）。</li>
+</ul>
+</li>
+</ul>
+<h4 id="3">3. 动态链接缺失</h4>
+<ul>
+<li><strong>现状</strong>：代码未处理<code>PT_INTERP</code>（解释器路径）和<code>PT_DYNAMIC</code>（动态链接信息）。</li>
+<li><strong>影响</strong>：仅支持静态链接可执行文件，无法加载依赖共享库的程序。</li>
+<li><strong>扩展思路</strong>：若需支持动态链接，需加载指定的动态链接器（如<code>ld-linux.so</code>），并由其处理符号重定位。</li>
+</ul>
+<hr />
+<h3 id="_7">三、流程图示与代码对应</h3>
+<div class="highlight"><pre><span></span><code>        +---------------------+
+        | 打开ELF文件 (fs_open) |
+        +---------------------+
+                   |
+                   v
+        +---------------------+
+        | 读取ELF头 (fs_read)  |
+        +---------------------+
+                   | 检查e_ident/e_machine
+                   v
+        +---------------------+
+        | 读取程序头表         |
+        | (fs_lseek + fs_read)|
+        +---------------------+
+                   |
+                   v
+        +---------------------+
+        | 遍历程序头项         |
+        +---------------------+
+                   |
+                   +---&gt; PT_LOAD? —No—&gt; 跳过
+                   | Yes
+                   v
+        +---------------------+
+        | 计算对齐页与页数     |
+        | (calc_aligned_page) |
+        +---------------------+
+                   |
+                   v
+        +---------------------+
+        | 分配物理页 (new_page)|
+        +---------------------+
+                   |
+                   v
+        +---------------------+
+        | 读取段内容到物理页   |
+        | (fs_lseek + fs_read)|
+        +---------------------+
+                   |
+                   v
+        +---------------------+
+        | 清零.bss区域 (memset)|
+        +---------------------+
+                   |
+                   v
+        +---------------------+
+        | 建立页表映射 (map)   |
+        +---------------------+
+                   |
+                   v
+        +---------------------+
+        | 设置max_brk与返回入口|
+        +---------------------+
+</code></pre></div>
+<hr />
+<h3 id="_8">四、潜在改进点</h3>
+<ol>
+<li><strong>权限精细化</strong>：根据程序头<code>p_flags</code>设置页表权限，避免RWX同时存在。</li>
+<li><strong>段合并优化</strong>：合并相邻且权限相同的PT_LOAD段，减少页表项数量。</li>
+<li><strong>支持动态链接</strong>：增加对<code>PT_INTERP</code>和<code>PT_DYNAMIC</code>的处理，实现动态库加载。</li>
+<li><strong>错误处理增强</strong>：替换<code>assert</code>为更健壮的错误返回机制（如返回错误码而非直接终止）。</li>
+<li><strong>ASLR支持</strong>：为PIE（Position-Independent Executable）实现随机化基址加载。</li>
+</ol>
+<hr />
+<p>该Loader完整实现了ELF静态可执行文件的装载核心逻辑，涵盖文件解析、内存映射、入口跳转等关键步骤，可作为教学或轻量级系统的加载器原型。进一步扩展需结合实际应用场景补充动态链接、权限控制等高级功能。</p>
 <h2 id="reference">Reference</h2>
 <p><a href="https://s4plus.ustc.edu.cn/_upload/article/files/05/ff/cce7c4694b97a01489dea9daa1a9/bbff49ab-19fe-4bc5-b105-8ac63232a75d.pdf">从mov指令到仙剑：通过NEMU 构建简单完整的计算机系统</a></p>
 <p><a href="https://www.bilibili.com/video/BV1Zb4y1k7RJ/">【余子濠】NEMU：一个效率接近QEMU的高性能解释器 - 第一届 RISC-V 中国峰会</a></p>
@@ -2930,7 +3316,7 @@ After<span class="w"> </span>this<span class="w"> </span>operation,<span class="
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2025-01-05T17:02:30+01:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2025-01-05</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2025-03-28T09:36:27+01:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2025-03-28</span>
   </span>
 
     

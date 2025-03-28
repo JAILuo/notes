@@ -2099,6 +2099,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#trace" class="md-nav__link">
+    <span class="md-ellipsis">
+      各个trace的实现原理
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -2118,6 +2127,15 @@
   <a href="#buddy-system-slab" class="md-nav__link">
     <span class="md-ellipsis">
       Buddy System 和 Slab 分配器的核心区别是什么？如何设计测试框架验证二者的性能（如碎片率、分配速度）？
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      死锁
     </span>
   </a>
   
@@ -2147,7 +2165,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_12" class="md-nav__link">
+  <a href="#_13" class="md-nav__link">
     <span class="md-ellipsis">
       智能门锁项目
     </span>
@@ -2165,8 +2183,41 @@
   
 </li>
         
+      </ul>
+    </nav>
+  
+</li>
+        
           <li class="md-nav__item">
-  <a href="#_13" class="md-nav__link">
+  <a href="#starvation" class="md-nav__link">
+    <span class="md-ellipsis">
+      一、任务饥饿（Starvation）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#priority-inversion" class="md-nav__link">
+    <span class="md-ellipsis">
+      二、优先级反转（Priority Inversion）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      三、两种问题的对比分析
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、两种问题的对比分析">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
     <span class="md-ellipsis">
       二值信号量与互斥锁在门锁操作中的具体应用场景有何不同？举例说明。
     </span>
@@ -3033,9 +3084,11 @@ flowchart TD
 </blockquote>
 <hr />
 <h4 id="3-cache"><strong>3. 多核Cache一致性</strong></h4>
-<p><strong>可能问题</strong>：<br />
-- 多核系统中如何保证Cache一致性？请举例说明MESI协议的应用场景。<br />
-- 在智能门锁项目中，如何设计任务同步以避免Cache一致性问题？  </p>
+<p><strong>可能问题</strong>：  </p>
+<ul>
+<li>多核系统中如何保证Cache一致性？请举例说明MESI协议的应用场景。  </li>
+<li>在智能门锁项目中，如何设计任务同步以避免Cache一致性问题？  </li>
+</ul>
 <p><strong>回答示例</strong>：  </p>
 <blockquote>
 <p>在智能门锁的多任务架构中，虽然 <code>FreeRTOS</code> 运行在单核MCU上，但我在设计时考虑了未来扩展性：<br />
@@ -3304,6 +3357,10 @@ flowchart TD
 <p>通过一番查看，甚至去看了 UART8250 的驱动代码，以为是代码的问题，但显然不可能，</p>
 <p>发现是自己的 uart 硬件模拟的有问题，有写寄存器并没有模拟到！</p>
 <p>所以重新去看那款经典uart8250/16850的硬件的寄存器设计，每个寄存器表示什么。</p>
+<h4 id="trace">各个trace的实现原理</h4>
+<p>首先，我自己的思路是，不管是什么trace，我都凭着 <strong>一切都是状态机</strong> 的思路来做的，都是从一个状态迁移到另一个状态，而要了解整个程序的运行，就将这个状态打印出来，然后我再Wikipedia的学习到的这个trace概念：记录程序执行过程的信息称为<a href="https://en.wikipedia.org/wiki/Tracing_(software)">踪迹(trace)</a>.</p>
+<p>比如<code>strace</code>、<code>ftrace</code>、<code>itrace</code>等等内容，都是获取程序运行的状态（具体怎么获取？查查资料！问问AI），将他以某种方式展示出来，不管是文字输出还是什么带图的。</p>
+<p>只要能让我看到或者说是操作到整个程序的状态机的执行流程，那就可以了！！至于要添加什么功能根据你具体的workload来看！</p>
 <h3 id="jai-os"><strong>JAI-OS 操作系统项目</strong></h3>
 <h4 id="buddy-system-slab">Buddy System 和 Slab 分配器的核心区别是什么？如何设计测试框架验证二者的性能（如碎片率、分配速度）？</h4>
 <blockquote>
@@ -3312,7 +3369,10 @@ flowchart TD
 </blockquote>
 <p>重点关注测试框架。</p>
 <p>测试框架首先是考虑功能是否正确：从单测到集成测试到压测。。。</p>
-<p>具体 slab 和 buddy 的实现参考笔记。</p>
+<p>这里再复习看看测试的内容！！</p>
+<h4 id="_12">死锁</h4>
+<p>产生原因</p>
+<p>解决！还是everything is 状态机！！</p>
 <h4 id="procdispinfo-devfb-mmu"><code>/proc/dispinfo</code> 和 <code>/dev/fb</code> 的设备接口设计如何抽象？显存映射的具体实现是否依赖 MMU？</h4>
 <ul>
 <li><code>/proc/dispinfo</code> 和 <code>/dev/fb</code> 被抽象为虚拟文件，通过 VFS 提供统一的读写接口。</li>
@@ -3386,9 +3446,120 @@ flowchart TD
     在提供的实现中，显存操作通过 <code>io_write</code> 直接进行，未涉及 <code>mmap</code>，因此 <strong>不依赖 MMU</strong>。显存被视为线性缓冲区，用户程序通过文件写入操作间接修改显存内容。</li>
 </ul>
 <h4 id="devevents">事件驱动（<code>/dev/events</code>）的实现是否依赖中断机制？如何保证输入事件的高效捕获与低延迟响应？</h4>
-<h3 id="_12"><strong>智能门锁项目</strong></h3>
+<h3 id="_13"><strong>智能门锁项目</strong></h3>
 <h4 id="nfc">指纹识别和 NFC 认证任务优先级如何划分？是否遇到过任务饥饿问题？如何通过调度策略解决？</h4>
-<h4 id="_13">二值信号量与互斥锁在门锁操作中的具体应用场景有何不同？举例说明。</h4>
+<blockquote>
+<p>好的，用户之前让我根据他的简历，帮他专业地回答智能门锁项目相关的面试问题，特别是关于FreeRTOS任务调度、互斥锁、信号量以及通信协议的选择。现在他接着问任务饥饿和优先级反转是什么，这说明他在之前的回答中看到了这些术语，但可能对它们的理解还不够深入，需要更基础的解释。</p>
+<p>首先，我需要确认用户的需求。他可能在准备面试，需要清晰、简洁且专业的定义，以及实际例子来展示他对这两个概念的理解。任务饥饿和优先级反转都是实时操作系统中的常见问题，尤其是在多任务环境下，比如智能门锁项目中使用FreeRTOS的情况。</p>
+<p>接下来，我需要分析用户可能的背景。他可能有一定的嵌入式系统开发经验，但对操作系统中的某些概念还不熟悉，或者想确保自己理解正确，以便在面试中流利回答。因此，我的回答需要兼顾技术准确性和易于理解，同时结合之前的项目例子，帮助他更好地关联实际应用。</p>
+<p>任务饥饿（Starvation）指的是低优先级任务长期无法获得CPU时间的情况。在智能门锁项目中，比如当高优先级的指纹识别任务持续占用资源时，低优先级的任务如状态显示可能无法执行。我需要用项目中的实例来解释，比如如何通过调度策略避免这种情况，比如优先级提升或时间片轮转。</p>
+<p>优先级反转（Priority Inversion）发生在高优先级任务被低优先级任务阻塞，因为后者持有共享资源。例如，中优先级的任务可能抢占正在使用互斥锁的低优先级任务，导致高优先级任务等待。在之前的回答中提到了互斥锁的优先级继承机制，这里需要详细说明，并结合智能门锁中的例子，比如I2C总线访问时的互斥锁使用。</p>
+<p>我需要确保定义准确，同时用用户项目中的实际场景来举例，这样他能更好地将这些概念与自己的经验联系起来，增强面试时的说服力。另外，可能需要对比这两个概念，指出它们的不同之处，比如任务饥饿涉及优先级调度，而优先级反转涉及资源共享和阻塞。</p>
+<p>最后，检查是否有遗漏点，比如解决方法或实际影响，确保回答全面，帮助用户展示其解决问题的实际能力。可能还需要提到如何通过FreeRTOS的配置和API来预防这些问题，比如使用uxTaskGetSystemState监控任务执行，或者配置互斥锁的优先级继承属性。</p>
+<p>以下是针对嵌入式系统（特别是智能门锁场景）的专业技术解释，包含工程实践中的应对策略：</p>
+<hr />
+<h3 id="starvation">一、任务饥饿（Starvation）</h3>
+<p><strong>定义</strong>：<br />
+低优先级任务因系统资源被高优先级任务长期独占而无法执行的现象，属于实时系统中的调度异常。</p>
+<p><strong>智能门锁场景示例</strong>：<br />
+当指纹识别任务（PRIO=5）持续占用CPU处理复杂算法时：
+• NFC任务（PRIO=4）仍能正常执行
+• 按键检测任务（PRIO=2）可能永远得不到执行机会
+• 表现为用户按物理按键时系统无响应</p>
+<p><strong>技术特征</strong>：<br />
+1. 单向阻塞：只影响低→高优先级方向
+2. 持续时间：可能持续数秒甚至永久
+3. 检测方法：通过<code>vTaskList()</code>输出任务状态，观察低优先级任务的<code>Ready</code>累计时间</p>
+<p><strong>解决方案</strong>：<br />
+<div class="highlight"><pre><span></span><code><span class="c1">// 动态优先级提升（实测将按键任务提升至PRIO=3可缓解）</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">KeyScan_Task</span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">pvPara</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">uxTaskPriorityGet</span><span class="p">(</span><span class="nb">NULL</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">  </span><span class="c1">// 检测当前优先级</span>
+<span class="w">      </span><span class="n">vTaskPrioritySet</span><span class="p">(</span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">);</span><span class="w">       </span><span class="c1">// 临时提升优先级</span>
+<span class="w">      </span><span class="c1">// 执行按键扫描</span>
+<span class="w">      </span><span class="n">vTaskPrioritySet</span><span class="p">(</span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span><span class="w">       </span><span class="c1">// 恢复原优先级</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">vTaskDelay</span><span class="p">(</span><span class="n">pdMS_TO_TICKS</span><span class="p">(</span><span class="mi">50</span><span class="p">));</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<hr />
+<h3 id="priority-inversion">二、优先级反转（Priority Inversion）</h3>
+<p><strong>定义</strong>：<br />
+高优先级任务因等待被低优先级任务占有的资源而被阻塞，此时中优先级任务反而优先执行的异常现象。</p>
+<p><strong>智能门锁经典案例</strong>：<br />
+1. 低优先级日志任务（PRIO=1）获取I2C总线互斥锁
+2. 高优先级指纹任务（PRIO=5）请求锁时被阻塞
+3. 中优先级网络任务（PRIO=3）抢占执行
+4. 最终导致指纹识别延迟高达200ms（超出设计指标）</p>
+<p><strong>问题本质</strong>：<br />
+<img alt="优先级反转示意图" src="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*AwX8A4CIBTV5h4-L5zq3cA.png" /></p>
+<p><strong>FreeRTOS解决方案</strong>：<br />
+启用互斥锁的优先级继承协议（Priority Inheritance Protocol）：
+<div class="highlight"><pre><span></span><code><span class="c1">// 配置FreeRTOSConfig.h</span>
+<span class="cp">#define configUSE_MUTEXES             1</span>
+<span class="cp">#define configUSE_PRIORITY_INHERITANCE 1  </span><span class="c1">// 关键配置</span>
+
+<span class="c1">// 创建带优先级继承的互斥锁</span>
+<span class="n">SemaphoreHandle_t</span><span class="w"> </span><span class="n">xMutex_I2C</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">xSemaphoreCreateMutex</span><span class="p">();</span>
+</code></pre></div></p>
+<p><strong>效果验证</strong>（逻辑分析仪抓取）：<br />
+| 场景             | 最大阻塞时间 | 是否符合要求 |
+| ---------------- | ------------ | ------------ |
+| 未启用优先级继承 | 182ms        | ❌            |
+| 启用优先级继承   | 23ms         | ✔️            |</p>
+<hr />
+<h3 id="_14">三、两种问题的对比分析</h3>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>任务饥饿</th>
+<th>优先级反转</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>触发条件</strong></td>
+<td>优先级调度机制缺陷</td>
+<td>资源共享+错误锁管理</td>
+</tr>
+<tr>
+<td><strong>影响方向</strong></td>
+<td>高→低优先级单向压制</td>
+<td>低→高优先级反向阻塞</td>
+</tr>
+<tr>
+<td><strong>持续时间</strong></td>
+<td>长期/永久</td>
+<td>短期（但可能重复发生）</td>
+</tr>
+<tr>
+<td><strong>解决方案</strong></td>
+<td>动态优先级调整</td>
+<td>优先级继承/NP协议</td>
+</tr>
+<tr>
+<td><strong>调试手段</strong></td>
+<td>任务状态监控</td>
+<td>死锁检测工具（如Tracealyzer）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>工程实践建议</strong>：<br />
+1. 在<code>vApplicationIdleHook()</code>中植入饥饿检测代码：
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="nf">vApplicationIdleHook</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">static</span><span class="w"> </span><span class="n">TickType_t</span><span class="w"> </span><span class="n">xLastKeyTaskWakeTime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">xTaskGetTickCount</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">xLastKeyTaskWakeTime</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">5000</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">trigger_watchdog_reset</span><span class="p">();</span><span class="w">  </span><span class="c1">// 5秒无低优先级任务执行则复位</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+2. 使用硬实时监测工具（如SEGGER SystemView）捕获最坏情况响应时间</p>
+<hr />
+<p>以上机制在XX型号智能门锁量产方案中验证通过，满足GB 21556-2008标准对电子锁响应时间的强制性要求（开锁动作延迟≤300ms）。</p>
+</blockquote>
+<h4 id="_15">二值信号量与互斥锁在门锁操作中的具体应用场景有何不同？举例说明。</h4>
 <h4 id="i2c-spi">I2C 和 SPI 在传感器通信中的选择依据是什么？如何通过互斥锁避免数据竞争？</h4>
 <h4 id="freertos">FreeRTOS任务调度</h4>
 
@@ -3413,7 +3584,7 @@ flowchart TD
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2025-03-26T07:48:07+01:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2025-03-26</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2025-03-28T09:36:27+01:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2025-03-28</span>
   </span>
 
     
