@@ -2514,7 +2514,7 @@ return s;
 
 通过符号表, 我们可以建立函数名与其地址之间的映射关系。但readelf输出的信息是已经经过解析的, 实际上符号表中`Name` 属性存放的是**字符串在字符串表(string table)中的偏移量**
 
->  字符串表只不过是把标识符的字符串拼接起来而已.
+>  **字符串表只不过是把标识符的字符串拼接起来而已.**
 
 将给定的地址翻译成函数名：由于函数的范围是互不相交的, 我们可以逐项扫描符号表中`Type`属性为`FUNC`的每一个表项, 检查给出的地址是否落在区间`[Value, Value + Size)`内。
 
@@ -2539,7 +2539,7 @@ return s;
 
 
 
-- 没有好好分析这里，现在要补回来了
+- 之前没有好好分析这里，现在要补回来了
 
     ```C
     while ( (o = getopt_long(argc, argv, "-bhl:d:p:e:", table, NULL)) != -1) {
@@ -2809,7 +2809,7 @@ return s;
 
     一个月没弄之后发现，之前实现好的ftrace功能更就有 bug了。一通对比发现实际上是jal指令实现的顺序出了点问题。
 
-    有 bug：（较晚的本本）
+    有 bug：（较晚的版本）
 
     ![image-20240706163918367](pic/image-20240706163918367.png)
 
@@ -2859,7 +2859,9 @@ return s;
 
 - **==总结解析 ELF 文件的过程==**
 
-    
+
+
+
 
 
 
@@ -5171,11 +5173,11 @@ H0x80000888:     ret [putch]
 >     }
 >     void render() {
 >       static int x[NCHAR], y[NCHAR], n = 0;
->                                                         
+>                                                             
 >       for (int i = 0; i < n; i++) {
 >         io_write(AM_GPU_FBDRAW, x[i], y[i], blank, CHAR_W, CHAR_H, false);、
 >       }
->                                                         
+>                                                             
 >       n = 0;
 >       for (int i = 0; i < LENGTH(chars); i++) {
 >         struct character *c = &chars[i];
