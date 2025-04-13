@@ -152,6 +152,14 @@ Git 中关于分支（branch）的操作是非常重要的，以下是一些常�
 
 
 
+## 相关工作流
+
+[Git 协作模式 | Notev](https://nyakku.moe/posts/2019/10/26/git-collaboration.html#如何提交-pr)
+
+[A successful Git branching model » nvie.com](https://nvie.com/posts/a-successful-git-branching-model/)
+
+
+
 
 
 ## 相关问题
@@ -172,7 +180,7 @@ Run
 to set your account's default identity.
 Omit --global to set the identity only in this repository.
 
-fatal: unable to auto-detect email address (got '16707@▒▒ֻ▒▒С▒▒.(none)')
+fatal: unable to auto-detect email address (got 'x(none)')
 ```
 
 这个错误提示表明 Git 在提交时无法确定你的身份信息（用户名和邮箱地址），因此需要你配置这些信息。你可以按照提示中的指引，通过以下命令来设置你的用户名和邮箱地址：
