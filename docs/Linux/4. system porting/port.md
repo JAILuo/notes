@@ -1,5 +1,0 @@
-## NVidia reference manual
-
-
-
-## oot
