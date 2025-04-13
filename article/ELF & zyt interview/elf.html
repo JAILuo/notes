@@ -1,0 +1,3636 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://jailuo.github.io/notes/article/ELF%20%26%20zyt%20interview/elf.html">
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.48">
+    
+    
+      
+        <title>Elf - Messy Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.6f8fc17f.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/timeago.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#introduction-elf" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../index.html" title="Messy Notes" class="md-header__button md-logo" aria-label="Messy Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Messy Notes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Elf
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256l137.3-137.4c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/JAILuo/notes" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../index.html" title="Messy Notes" class="md-nav__button md-logo" aria-label="Messy Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Messy Notes
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/JAILuo/notes" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    首页
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Article
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Article
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/article/concurrency sumary/summary.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    concurrency-summary
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/article/toolchain/toolchain.mc" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    toolchain
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/article/mount/mount.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    mount
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Course
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Course
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    University Course
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            University Course
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1_1" id="__nav_3_1_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    jyy OS2024
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_1_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            jyy OS2024
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_1_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1_1_1" id="__nav_3_1_1_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    course note
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_1_1_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            course note
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Course/University%20Course/jyy%20OS2024/cousre%20note/1.%20introduction/introduction.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    introduction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Course/University%20Course/jyy%20OS2024/cousre%20note/2.%20concurrency/concurrency.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    concurrency
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Course/University%20Course/jyy%20OS2024/cousre%20note/3.%20virtualization/virtualization.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    virtualization
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Course/University%20Course/jyy%20OS2024/cousre%20note/4.%20kernel/kernel.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    kernel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Course/University%20Course/jyy%20OS2024/cousre%20note/5.%20persistence/persistence.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    persistence
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_1_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1_1_2" id="__nav_3_1_1_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Mini Labs
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_1_1_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            Mini Labs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Course/University%20Course/jyy%20OS2024/Mini%20Labs/M1/M1.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    M1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Course/University%20Course/jyy%20OS2024/Mini%20Labs/M2/M2.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    M2
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Course/University%20Course/jyy%20OS2024/Mini%20Labs/M3/M3.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    M3
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_1_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1_1_3" id="__nav_3_1_1_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    OS Labs
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_1_1_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1_1_3">
+            <span class="md-nav__icon md-icon"></span>
+            OS Labs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Course/University%20Course/jyy%20OS2024/OS%20Labs/L0/L0.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    L0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Course/University%20Course/jyy%20OS2024/OS%20Labs/L1/L1.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    L1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    GeekTime
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            GeekTime
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2_1" id="__nav_3_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    深入理解计算机组成原理
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            深入理解计算机组成原理
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Course/GeekTime/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E4%B8%80%E5%91%A8%E7%9B%AE/1.%20%E6%8C%87%E4%BB%A4%E4%B8%8E%E8%BF%90%E7%AE%97/%E6%8C%87%E4%BB%A4%E4%B8%8E%E8%BF%90%E7%AE%97.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1. 指令与运算
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Course/GeekTime/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E4%B8%80%E5%91%A8%E7%9B%AE/2.%20%E5%A4%84%E7%90%86%E5%99%A8/%E5%A4%84%E7%90%86%E5%99%A8.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2. 处理器
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Course/GeekTime/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E4%B8%80%E5%91%A8%E7%9B%AE/3.%20%E5%AD%98%E5%82%A8%E4%B8%8EIO%E7%B3%BB%E7%BB%9F/%E5%AD%98%E5%82%A8%E4%B8%8EIO%E7%B3%BB%E7%BB%9F.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3. 存储与IO系统
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Course/GeekTime/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E4%B8%80%E5%91%A8%E7%9B%AE/4.%20%E5%BA%94%E7%94%A8/%E5%BA%94%E7%94%A8.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4. 应用
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2_2" id="__nav_3_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    计算基础实战课
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            计算基础实战课
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/1.%20MiniCPU%E8%AE%BE%E8%AE%A1/MiniCPU%E8%AE%BE%E8%AE%A1.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1. MiniCPU设计
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/2.%20%E8%AF%AD%E8%A8%80%E5%92%8C%E6%8C%87%E4%BB%A4/%E8%AF%AD%E8%A8%80%E5%92%8C%E6%8C%87%E4%BB%A4.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2. 语言和指令
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/3.%20%E5%BA%94%E7%94%A8%E5%92%8C%E5%86%85%E5%AD%98/%E5%BA%94%E7%94%A8%E5%92%8C%E5%86%85%E5%AD%98.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3. 应用和内存
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/4.%20IO%E4%B8%8E%E6%96%87%E4%BB%B6/IO%E5%92%8C%E6%96%87%E4%BB%B6.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4. IO与文件
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/5.%20%E7%BB%BC%E5%90%88%E5%BA%94%E7%94%A8/synthesis.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    5. 综合应用
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E5%92%8C%E5%B7%A5%E5%85%B7%E9%93%BE/%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    环境配置和工具链
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    ysyx
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            ysyx
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    NJU-ICS2023-PA
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            NJU-ICS2023-PA
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ysyx/pa/pa1/pa1.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PA1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ysyx/pa/pa2/pa2.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PA2
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ysyx/pa/pa3/pa3.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PA3
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ysyx/pa/pa4/pa4.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PA4
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ysyx/pa/c_marco/macro.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    C Macro
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ysyx/pa/summary/summary.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Summary
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ysyx/pa/Linux_porting/porting.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Linux Porting
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ysyx/digital-circuit/digital%20circuit.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Digital Circuit
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Tools
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Tools
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Tools/GDB/GDB.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GDB
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Vim
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            Vim
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Tools/vim/usage/usage.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    usage
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Tools/vim/vim-plugin/vim.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    vim-plugin
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Tools/doxygen/doxygen.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    doxygen
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Tools/gcc/gcc.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    gcc
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Tools/Git/Git.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Git
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Tools/md2slider/md2slider.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    md2slider
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Tools/tmux/tmux.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    tmux
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Todo%20List/todo.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TODO List
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction-elf" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introduction ELF
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#elf-format-load-version" class="md-nav__link">
+    <span class="md-ellipsis">
+      ELF format (load version)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="ELF format (load version)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#elf" class="md-nav__link">
+    <span class="md-ellipsis">
+      一、ELF文件结构分层
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#elfelf-header" class="md-nav__link">
+    <span class="md-ellipsis">
+      二、ELF头（ELF Header）深度解析
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#program-header-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      三、程序头表（Program Header Table）与装载
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#elf_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      四、简易ELF装载流程
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      五、想实践？
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#elf_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      六、想学习点 ELF 的知识？
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      六、想再深入？
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      指针、双重指针
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="指针、双重指针">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      一、双重指针的底层解析（从硬件到语言）
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一、双重指针的底层解析（从硬件到语言）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 内存地址的本质
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 双重指针的二进制表示
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. 函数参数传递的机械级实现
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#malloc" class="md-nav__link">
+    <span class="md-ellipsis">
+      二、malloc内存分配的专业实践
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、malloc内存分配的专业实践">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-malloc" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. malloc的字节级精确控制
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 类型安全的防御性编程技巧
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-32" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. 内存布局可视化（假设32位系统）
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      三、指针运算的深度解析
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、指针运算的深度解析">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 指针加减的指令级实现
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 数组访问的本质
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. 越界访问的硬件级后果
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      四、专业开发实践准则
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      五、终极理解测试
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      第一条指令
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      函数指针
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="函数指针">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      一、函数指针的机械级认知（硬件视角）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      二、类型系统的深度约束
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      三、函数指针的六大经典应用模式
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      四、专家级陷阱防范指南
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      五、性能优化与底层调优
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c" class="md-nav__link">
+    <span class="md-ellipsis">
+      六、C++进阶：成员函数指针的深渊
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      面试深度问题准备
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#uart" class="md-nav__link">
+    <span class="md-ellipsis">
+      UART
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#simple-debugger" class="md-nav__link">
+    <span class="md-ellipsis">
+      simple debugger
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="simple debugger">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      之前的笔记
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gdb" class="md-nav__link">
+    <span class="md-ellipsis">
+      GDB断点实现机制深度解析（含插桩原理）
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="GDB断点实现机制深度解析（含插桩原理）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      一、断点实现的三大层级架构
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#instrumentation-in-depth" class="md-nav__link">
+    <span class="md-ellipsis">
+      二、插桩技术深度剖析（Instrumentation in Depth）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gdblinux" class="md-nav__link">
+    <span class="md-ellipsis">
+      三、GDB断点实现的Linux内核视角
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      四、进阶学习路线（专家级成长路径）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      五、面试深度问题准备
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+  <h1>Elf</h1>
+
+<p>最近一次卓驭（大疆车载）面试，简单记录一下面试内容，挑一部分展开说。</p>
+<h2 id="introduction-elf">Introduction ELF</h2>
+<p>由于简历项目上写了 ELF 的 loader，直接问了 ELF 格式的内容。这里简单复习一下。</p>
+<p>直接看文档描述即可，看概述已经很清楚地知道ELF包含了什么。<code>man 5 elf</code>、<code>ELF</code> manual：<code>Executable and Linkable Format (ELF)</code></p>
+<blockquote>
+<p>An executable file using the ELF file format consists of an ELF header, followed by a program header table or a section header table, or both.
+<strong>The ELF header is always at offset zero of the file. The program header table and the section header table's offset in the file are defined in the ELF header.</strong></p>
+<p>The two tables describe the rest of the particularities of the file.</p>
+</blockquote>
+<p>由 DeepSeek 总结：</p>
+<blockquote>
+<p>ELF（Executable and Linkable Format）文件的装载是一个涉及操作系统、编译器和链接器的精密过程。作为UNIX/Linux系统的核心二进制格式，其设计实现了可执行文件、共享库和目标文件的统一管理。</p>
+</blockquote>
+<p>但这里还是简单介绍。</p>
+<p>首先，什么究竟什么是可执行文件？啥是 Executable and Linkable Format (ELF)  </p>
+<p>大家以前的思想：那个 “<strong>双击可以弹出窗口的东西</strong>”。</p>
+<p><img alt="image-20250328112656704" src="pic/image-20250328112656704.png" /></p>
+<p>但是如果稍微深入一点理解，可执行文件可以是这样：</p>
+<ul>
+<li>一个操作系统中的对象 (文件)</li>
+<li>一个字节序列 (我们可以把它当字符串编辑)</li>
+<li>一个描述了状态机初始状态的<strong>数据结构</strong> (打扰了)</li>
+</ul>
+<p>这里可以类比一个例子：想象一本书需要正确阅读，需要：</p>
+<ul>
+<li><strong>正文内容</strong>（故事/知识）</li>
+<li><strong>目录/索引</strong>（章节页码、标题）</li>
+<li><strong>出版信息</strong>（作者、出版社、排版格式）</li>
+</ul>
+<p>那让计算机能够看懂你想说的，让它执行你想让它执行的，同理可得：</p>
+<ul>
+<li><strong>代码正文</strong>：CPU执行的二进制指令</li>
+<li><strong>数据部分</strong>：全局变量、字符串常量等</li>
+<li><strong>元数据</strong>：告诉操作系统如何正确加载这些内容</li>
+</ul>
+<p>或许大家对这个元数据有些困惑，但请记住这个概念！元数据在 OS 等领域非常有用。</p>
+<p>举个例子，要想让一个只有短期记忆的人记住他自己是谁，最好的办法当然是把他自己的信息写下来，让他本人知道原来这个描述的就是自己！</p>
+<p>计算机也是同理的：</p>
+<p>怎么让计算机知道他要执行的这个可执行文件的内容是是什么？在哪里？我要执行这个程序，我对入口在哪里？我在程序中生成的各种数据放在哪里？那自然就发明出了一个结构：ELF header：</p>
+<ul>
+<li><strong>定位器</strong>：提供文件结构的"地图"</li>
+<li><strong>校验器</strong>：确保文件合法性和兼容性</li>
+<li><strong>导航仪</strong>：引导操作系统找到关键数据</li>
+</ul>
+<p>但还有个问题，怎么让计算机执行这个程序？</p>
+<p>要想让计算机执行代码正文，执行这个二进制指令，大家的第一想法肯定是直接从头执行！</p>
+<div class="highlight"><pre><span></span><code><span class="n">假设文件开头是</span><span class="err">：</span><span class="mi">48</span><span class="w"> </span><span class="mi">89</span><span class="w"> </span><span class="n">E5</span><span class="err">（</span><span class="n">x86指令</span><span class="w"> </span><span class="n">push</span><span class="w"> </span><span class="n">rbp</span><span class="err">）</span><span class="n">或者是一条加法指令</span>
+<span class="n">但如果是纯数据段</span><span class="err">：</span><span class="mo">00</span><span class="w"> </span><span class="mo">00</span><span class="w"> </span><span class="mo">00</span><span class="w"> </span><span class="mo">01</span><span class="err">（</span><span class="n">可能代表int数值1</span><span class="err">）</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="n">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">data</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mh">0x48</span><span class="p">,</span><span class="w"> </span><span class="mh">0x89</span><span class="p">,</span><span class="w"> </span><span class="mh">0xE5</span><span class="p">};</span><span class="w"> </span><span class="c1">// 数据段中的x86指令</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">func</span><span class="p">)()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="p">)())</span><span class="n">data</span><span class="p">;</span>
+<span class="w">    </span><span class="n">func</span><span class="p">();</span><span class="w"> </span><span class="c1">// 尝试执行数据段内容 → 触发段错误（Segmentation Fault）</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>怎么区分执行的内容究竟是代码还是数据？没法区分！不区分就会导致计算机崩溃或错误执行！聪明的人类会有办法的：</p>
+<p><strong>ELF的解决方案：元数据指导分离</strong></p>
+<p>根据之前引入的元数据，让这个元数据来指导整个可执行文件的内容分隔（或许这叫 <strong>设计哲学</strong>？）：</p>
+<ul>
+<li><strong>声明式编程</strong>：文件明确声明出不同的节（section）： 哪些是代码（<code>.text</code>），哪些是数据（<code>.data</code>, <code>.bss</code>）</li>
+<li><strong>权限标记</strong>：通过程序头表（Program Header）为内存区域设置读写执行权限</li>
+</ul>
+<blockquote>
+<p>可以先简单看看下面，看不懂也没关系，说到这个东西的时候，能够想起来一些类似的名词就好啦！</p>
+<p><strong>关键结构</strong>：</p>
+<ol>
+<li>
+<p><strong>节（Section）</strong> —— 链接视角的代码/数据划分（通过<code>readelf -S</code>查看）</p>
+<ul>
+<li><code>.text</code>：代码段（存放机器指令）</li>
+<li><code>.rodata</code>：只读数据（字符串常量等）</li>
+<li><code>.data</code>：已初始化的全局变量</li>
+<li><code>.bss</code>：未初始化的全局变量（Block Started by Symbol）</li>
+</ul>
+</li>
+<li>
+<p><strong>段（Segment）</strong> —— 执行视角的内存映射单元</p>
+<ul>
+<li>
+<p><strong>PT_LOAD段</strong>：将多个 <code>section</code> 合并为具有相同权限的内存区域 <code>segment</code></p>
+<blockquote>
+<p>注意，是可以多个 <code>text/data section</code> 的喔（<code>.text</code>, <code>.init</code>, <code>.fini</code>等等）</p>
+</blockquote>
+<p>这个时候或许能猜到段错误的内容吧？访问这个段的权限不够！</p>
+</li>
+</ul>
+</li>
+</ol>
+</blockquote>
+<p>由此简单介绍完成，这个时候计算机总能够认得应该他要执行什么了吧！（以简单为主，具体里面更多复杂的细节自己看哈）</p>
+<p>下面就有 DeepSeek 再解析ELF文件格式及其装载机制。由于我只和面试官说了 loader 的部分，所以我只关注执行的视角，也就是 program header table 的内容，动态链接那些先不管，后面再给出学习的相关更多 ELF 的资料。</p>
+<div style="page-break-after:always"></div>
+
+<h2 id="elf-format-load-version">ELF format (load version)</h2>
+<h3 id="elf">一、ELF文件结构分层</h3>
+<p>ELF文件采用 <strong>双重视角结构</strong>，同时支持链接视角（Section-based）和执行视角（Segment-based）：
+- <strong>链接视角</strong>：由节（Section）构成，通过节头表（Section Header Table）索引<strong>，用于编译/链接阶段（如<code>.text</code>, <code>.data</code>, <code>.symtab</code>）</strong>
+- <strong>执行视角</strong>：由段（Segment）构成，通过程序头表（Program Header Table）索引，<strong>用于装载阶段（如<code>LOAD</code>, <code>DYNAMIC</code>）</strong></p>
+<h3 id="elfelf-header">二、ELF头（ELF Header）深度解析</h3>
+<p>当然，无论怎么样，</p>
+<p>ELF头位于文件起始位置（偏移0），通过<code>readelf -h &lt;file&gt;</code>可查看，其结构定义如下（以64位为例）：</p>
+<div class="highlight"><pre><span></span><code><span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="n">e_ident</span><span class="p">[</span><span class="mi">16</span><span class="p">];</span><span class="w">    </span><span class="c1">// 魔数和元信息</span>
+<span class="w">    </span><span class="n">Elf64_Half</span><span class="w">    </span><span class="n">e_type</span><span class="p">;</span><span class="w">         </span><span class="c1">// 文件类型（ET_EXEC/ET_DYN等）</span>
+<span class="w">    </span><span class="n">Elf64_Half</span><span class="w">    </span><span class="n">e_machine</span><span class="p">;</span><span class="w">      </span><span class="c1">// 目标架构（EM_X86_64/EM_AARCH64等）</span>
+<span class="w">    </span><span class="n">Elf64_Word</span><span class="w">    </span><span class="n">e_version</span><span class="p">;</span><span class="w">      </span><span class="c1">// ELF版本（EV_CURRENT）</span>
+<span class="w">    </span><span class="n">Elf64_Addr</span><span class="w">    </span><span class="n">e_entry</span><span class="p">;</span><span class="w">        </span><span class="c1">// 程序入口点虚拟地址</span>
+<span class="w">    </span><span class="n">Elf64_Off</span><span class="w">     </span><span class="n">e_phoff</span><span class="p">;</span><span class="w">        </span><span class="c1">// 程序头表偏移</span>
+<span class="w">    </span><span class="n">Elf64_Off</span><span class="w">     </span><span class="n">e_shoff</span><span class="p">;</span><span class="w">        </span><span class="c1">// 节头表偏移</span>
+<span class="w">    </span><span class="n">Elf64_Word</span><span class="w">    </span><span class="n">e_flags</span><span class="p">;</span><span class="w">        </span><span class="c1">// 处理器特定标志</span>
+<span class="w">    </span><span class="n">Elf64_Half</span><span class="w">    </span><span class="n">e_ehsize</span><span class="p">;</span><span class="w">       </span><span class="c1">// ELF头大小（64字节）</span>
+<span class="w">    </span><span class="n">Elf64_Half</span><span class="w">    </span><span class="n">e_phentsize</span><span class="p">;</span><span class="w">    </span><span class="c1">// 程序头表项大小（56字节）</span>
+<span class="w">    </span><span class="n">Elf64_Half</span><span class="w">    </span><span class="n">e_phnum</span><span class="p">;</span><span class="w">        </span><span class="c1">// 程序头表项数量</span>
+<span class="w">    </span><span class="n">Elf64_Half</span><span class="w">    </span><span class="n">e_shentsize</span><span class="p">;</span><span class="w">    </span><span class="c1">// 节头表项大小（64字节）</span>
+<span class="w">    </span><span class="n">Elf64_Half</span><span class="w">    </span><span class="n">e_shnum</span><span class="p">;</span><span class="w">        </span><span class="c1">// 节头表项数量</span>
+<span class="w">    </span><span class="n">Elf64_Half</span><span class="w">    </span><span class="n">e_shstrndx</span><span class="p">;</span><span class="w">     </span><span class="c1">// 节名称字符串表索引</span>
+<span class="p">}</span><span class="w"> </span><span class="n">Elf64_Ehdr</span><span class="p">;</span>
+</code></pre></div>
+<p><strong>关键字段详解</strong>：
+1. <strong>e_ident[16]</strong>：
+   - <code>0-3</code>: 魔数 <code>7F 45 4C 46</code>（0x7F 'E' 'L' 'F'）
+   - <code>EI_CLASS</code>: 文件类别（1=32位，2=64位）
+   - <code>EI_DATA</code>: 字节序（1=小端，2=大端）
+   - <code>EI_VERSION</code>: ELF版本
+   - <code>EI_OSABI</code>: 操作系统ABI（0=System V，3=Linux）
+   - <code>EI_ABIVERSION</code>: ABI版本</p>
+<ol>
+<li><strong>e_type</strong>：</li>
+<li><code>ET_REL</code> (1): 可重定位文件（.o）</li>
+<li><code>ET_EXEC</code> (2): 可执行文件</li>
+<li>
+<p><code>ET_DYN</code> (3): 共享对象（.so）或PIE可执行文件</p>
+</li>
+<li>
+<p><strong>e_phoff/e_phnum</strong>：
+   程序头表的位置和项数，决定了操作系统如何映射段到内存</p>
+</li>
+</ol>
+<h3 id="program-header-table">三、程序头表（Program Header Table）与装载</h3>
+<p>程序头表项结构（Elf64_Phdr）定义装载所需的元数据：</p>
+<div class="highlight"><pre><span></span><code><span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">Elf64_Word</span><span class="w">  </span><span class="n">p_type</span><span class="p">;</span><span class="w">    </span><span class="c1">// 段类型（PT_LOAD等）</span>
+<span class="w">    </span><span class="n">Elf64_Word</span><span class="w">  </span><span class="n">p_flags</span><span class="p">;</span><span class="w">   </span><span class="c1">// 权限标志（PF_R/W/X）</span>
+<span class="w">    </span><span class="n">Elf64_Off</span><span class="w">   </span><span class="n">p_offset</span><span class="p">;</span><span class="w">  </span><span class="c1">// 段在文件中的偏移</span>
+<span class="w">    </span><span class="n">Elf64_Addr</span><span class="w">  </span><span class="n">p_vaddr</span><span class="p">;</span><span class="w">   </span><span class="c1">// 段的虚拟地址</span>
+<span class="w">    </span><span class="n">Elf64_Addr</span><span class="w">  </span><span class="n">p_paddr</span><span class="p">;</span><span class="w">   </span><span class="c1">// 物理地址（通常忽略）</span>
+<span class="w">    </span><span class="n">Elf64_Xword</span><span class="w"> </span><span class="n">p_filesz</span><span class="p">;</span><span class="w">  </span><span class="c1">// 文件映像大小</span>
+<span class="w">    </span><span class="n">Elf64_Xword</span><span class="w"> </span><span class="n">p_memsz</span><span class="p">;</span><span class="w">   </span><span class="c1">// 内存映像大小</span>
+<span class="w">    </span><span class="n">Elf64_Xword</span><span class="w"> </span><span class="n">p_align</span><span class="p">;</span><span class="w">   </span><span class="c1">// 对齐要求（页对齐为0x1000）</span>
+<span class="p">}</span><span class="w"> </span><span class="n">Elf64_Phdr</span><span class="p">;</span>
+</code></pre></div>
+<p><strong>关键段类型</strong>：
+- <strong>PT_LOAD</strong> (1): 可装载段（代码/数据），每个LOAD段对应一个内存页映射
+- <strong>PT_DYNAMIC</strong> (2): 动态链接信息（.dynamic节）
+- <strong>PT_INTERP</strong> (3): 动态链接器路径（如<code>/lib64/ld-linux-x86-64.so.2</code>）
+- <strong>PT_GNU_STACK</strong>：控制栈执行权限（现代系统的NX位实现）</p>
+<h3 id="elf_1">四、简易ELF装载流程</h3>
+<div class="highlight"><pre><span></span><code><span class="k">static</span><span class="w"> </span><span class="kt">uintptr_t</span><span class="w"> </span><span class="nf">loader</span><span class="p">(</span><span class="n">PCB</span><span class="w"> </span><span class="o">*</span><span class="n">pcb</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">filename</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">fd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fs_open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">Elf_Ehdr</span><span class="w"> </span><span class="n">eh</span><span class="p">;</span>
+<span class="w">    </span><span class="n">fs_read</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">eh</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">Elf_Ehdr</span><span class="p">));</span>
+
+<span class="w">    </span><span class="c1">// check magic number</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">16</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="n">assert</span><span class="p">(</span><span class="n">magic</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">eh</span><span class="p">.</span><span class="n">e_ident</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+
+<span class="w">    </span><span class="c1">// check machine  </span>
+<span class="w">    </span><span class="n">assert</span><span class="p">(</span><span class="n">eh</span><span class="p">.</span><span class="n">e_machine</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">ELF_MACHINE_TYPE</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">Elf_Phdr</span><span class="w"> </span><span class="n">ph</span><span class="p">[</span><span class="n">eh</span><span class="p">.</span><span class="n">e_phnum</span><span class="p">];</span><span class="w"> </span>
+<span class="w">    </span><span class="n">fs_lseek</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span><span class="w"> </span><span class="n">eh</span><span class="p">.</span><span class="n">e_phoff</span><span class="p">,</span><span class="w"> </span><span class="n">SEEK_SET</span><span class="p">);</span>
+<span class="w">    </span><span class="n">fs_read</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span><span class="w"> </span><span class="n">ph</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">Elf_Phdr</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">eh</span><span class="p">.</span><span class="n">e_phnum</span><span class="p">);</span>
+
+<span class="w">    </span><span class="kt">uintptr_t</span><span class="w"> </span><span class="n">max_end</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">eh</span><span class="p">.</span><span class="n">e_phnum</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ph</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">p_type</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">PT_LOAD</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ph</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">p_vaddr</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">ph</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">p_memsz</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">max_end</span><span class="p">)</span><span class="w"> </span><span class="n">max_end</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ph</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">p_vaddr</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">ph</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">p_memsz</span><span class="p">;</span>
+
+<span class="w">            </span><span class="kt">size_t</span><span class="w"> </span><span class="n">nr_page</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">            </span><span class="k">const</span><span class="w"> </span><span class="kt">uintptr_t</span><span class="w"> </span><span class="n">start_addr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">calc_aligned_page</span><span class="p">(</span><span class="n">ph</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">p_vaddr</span><span class="p">,</span><span class="w"> </span><span class="n">ph</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">p_memsz</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">nr_page</span><span class="p">);</span>
+<span class="w">            </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">p_page</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">new_page</span><span class="p">(</span><span class="n">nr_page</span><span class="p">);</span>
+<span class="w">            </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="k">const</span><span class="w"> </span><span class="n">pages_start</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p_page</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">ph</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">p_vaddr</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">start_addr</span><span class="p">);</span>
+<span class="w">            </span><span class="n">assert</span><span class="p">(</span><span class="n">nr_page</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">PGSIZE</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">ph</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">p_memsz</span><span class="p">);</span>
+
+<span class="w">            </span><span class="n">fs_lseek</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span><span class="w"> </span><span class="n">ph</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">p_offset</span><span class="p">,</span><span class="w"> </span><span class="n">SEEK_SET</span><span class="p">);</span>
+<span class="w">            </span><span class="n">fs_read</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span><span class="w"> </span><span class="n">pages_start</span><span class="p">,</span><span class="w"> </span><span class="n">ph</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">p_filesz</span><span class="p">);</span>
+<span class="w">            </span><span class="n">memset</span><span class="p">(</span><span class="n">pages_start</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">ph</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">p_filesz</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">ph</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">p_memsz</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">ph</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">p_filesz</span><span class="p">);</span>
+
+<span class="w">            </span><span class="p">...</span>
+
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">fs_close</span><span class="p">(</span><span class="n">fd</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">pcb</span><span class="o">-&gt;</span><span class="n">max_brk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">max_end</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">PGSIZE</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="o">?</span>
+<span class="w">                    </span><span class="nl">max_end</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">(</span><span class="n">max_end</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">PGSIZE</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">PGSIZE</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="kt">uintptr_t</span><span class="p">)</span><span class="n">eh</span><span class="p">.</span><span class="n">e_entry</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>下面配合这么一个非常小的 loader 来学习，关键步骤分解：</p>
+<ol>
+<li>
+<p><strong>文件打开与ELF头验证</strong></p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">fd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fs_open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span><span class="w">       </span><span class="c1">// 打开ELF文件</span>
+<span class="n">fs_read</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">eh</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">Elf_Ehdr</span><span class="p">));</span><span class="w">     </span><span class="c1">// 读取ELF头</span>
+<span class="n">assert</span><span class="p">(</span><span class="n">magic检查</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">e_machine检查</span><span class="p">);</span><span class="w">      </span><span class="c1">// 验证魔数及架构</span>
+</code></pre></div>
+<ul>
+<li><strong>理论对应</strong>：验证ELF魔数（<code>e_ident</code>）、文件类型（<code>e_type</code>）、目标架构（<code>e_machine</code>）的合法性。</li>
+<li><strong>代码实现</strong>：通过<code>assert</code>确保ELF头关键字段正确，防止加载错误格式文件。</li>
+</ul>
+</li>
+<li>
+<p><strong>程序头表加载</strong></p>
+<div class="highlight"><pre><span></span><code><span class="n">Elf_Phdr</span><span class="w"> </span><span class="n">ph</span><span class="p">[</span><span class="n">eh</span><span class="p">.</span><span class="n">e_phnum</span><span class="p">];</span><span class="w">                </span><span class="c1">// 根据ELF头声明程序头数组</span>
+<span class="n">fs_lseek</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span><span class="w"> </span><span class="n">eh</span><span class="p">.</span><span class="n">e_phoff</span><span class="p">,</span><span class="w"> </span><span class="n">SEEK_SET</span><span class="p">);</span><span class="w">     </span><span class="c1">// 定位到程序头表</span>
+<span class="n">fs_read</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span><span class="w"> </span><span class="n">ph</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">Elf_Phdr</span><span class="p">)</span><span class="o">*</span><span class="n">eh</span><span class="p">.</span><span class="n">e_phnum</span><span class="p">);</span><span class="w"> </span><span class="c1">// 读取所有程序头项</span>
+</code></pre></div>
+<ul>
+<li><strong>理论对应</strong>：解析ELF头的<code>e_phoff</code>和<code>e_phnum</code>字段，获取程序头表位置及条目数。</li>
+<li><strong>代码实现</strong>：直接读取整个程序头表到内存数组，为后续遍历做准备。</li>
+</ul>
+</li>
+<li>
+<p><strong>PT_LOAD段处理</strong></p>
+<div class="highlight"><pre><span></span><code><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">遍历所有程序头项</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ph</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">p_type</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">PT_LOAD</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">      </span><span class="c1">// 仅处理可装载段</span>
+<span class="w">        </span><span class="c1">// 计算虚拟地址对齐与所需页数</span>
+<span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="kt">uintptr_t</span><span class="w"> </span><span class="n">start_addr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">calc_aligned_page</span><span class="p">(...);</span>
+<span class="w">        </span><span class="kt">size_t</span><span class="w"> </span><span class="n">nr_page</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">...;</span>
+<span class="w">        </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">p_page</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">new_page</span><span class="p">(</span><span class="n">nr_page</span><span class="p">);</span><span class="w"> </span><span class="c1">// 分配物理页  简单理解就是分配物理内存好啦</span>
+
+<span class="w">        </span><span class="c1">// 将段内容读入内存</span>
+<span class="w">        </span><span class="n">fs_lseek</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span><span class="w"> </span><span class="n">ph</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">p_offset</span><span class="p">,</span><span class="w"> </span><span class="n">SEEK_SET</span><span class="p">);</span>
+<span class="w">        </span><span class="n">fs_read</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span><span class="w"> </span><span class="n">pages_start</span><span class="p">,</span><span class="w"> </span><span class="n">ph</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">p_filesz</span><span class="p">);</span>
+<span class="w">        </span><span class="n">memset</span><span class="p">(</span><span class="n">pages_start</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">p_filesz</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">p_memsz</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">p_filesz</span><span class="p">);</span><span class="w"> </span><span class="c1">// 清零.bss</span>
+
+<span class="w">        </span><span class="c1">// 建立页表映射</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">每页</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">map</span><span class="p">(</span><span class="n">虚拟地址</span><span class="p">,</span><span class="w"> </span><span class="n">物理页</span><span class="p">,</span><span class="w"> </span><span class="n">权限</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<ul>
+<li><strong>理论对应</strong>：对每个PT_LOAD段执行内存映射，包括文件内容加载和.bss段初始化。</li>
+<li><strong>代码实现</strong>：<ul>
+<li><strong>地址对齐</strong>：通过<code>calc_aligned_page</code>计算段起始地址的页对齐（如<code>ph[i].p_vaddr &amp; ~(PAGE_SIZE-1)</code>），确保虚拟地址按页对齐。</li>
+<li><strong>物理内存分配</strong>：<code>new_page(nr_page)</code>分配连续的物理页帧。</li>
+<li><strong>文件内容加载</strong>：精确读取段在文件中的内容（<code>p_offset</code>到<code>p_filesz</code>）到虚拟地址对应的物理页。</li>
+<li><strong>.bss处理</strong>：<code>memset</code>填充内存中超出文件大小的部分（<code>p_memsz - p_filesz</code>）为零。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>入口地址与堆初始化</strong></p>
+<div class="highlight"><pre><span></span><code><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="kt">uintptr_t</span><span class="p">)</span><span class="n">eh</span><span class="p">.</span><span class="n">e_entry</span><span class="p">;</span><span class="w">  </span><span class="c1">// 返回程序入口点</span>
+</code></pre></div>
+<ul>
+<li><strong>理论对应</strong>：返回ELF头中的入口地址<code>e_entry</code>供CPU跳转执行。</li>
+</ul>
+</li>
+</ol>
+<p>具体画个图：</p>
+<div class="highlight"><pre><span></span><code>%%{init: {&#39;theme&#39;: &#39;neutral&#39;, &#39;flowchart&#39;: {&#39;curve&#39;: &#39;linear&#39;}}}%%
+graph TD
+    A[(&quot;开始&quot;)] --&gt; B[打开ELF文件 fs_open]
+    B --&gt; C[读取ELF头 fs_read]
+    C --&gt; D{检查魔数 和架构}
+    D --&gt;|通过| E[读取程序头表 fs_lseek + fs_read]
+    D --&gt;|失败| Z[终止进程]
+    E --&gt; F[遍历程序头项]
+    F --&gt; G{当前项类型 是 PT_LOAD?}
+    G --&gt;|是| H[计算对齐页与页数 calc_aligned_page]
+    G --&gt;|否| F
+    H --&gt; I[分配物理页 new_page]
+    I --&gt; J[读取段内容到物理页 fs_lseek + fs_read]
+    J --&gt; K[清零 .bss 区域 memset]
+    K --&gt; L[建立页表映射 map 逐页映射]
+    L --&gt; F
+    F --&gt;|遍历完成| M[设置 max_brk 计算堆顶]
+    M --&gt; N[返回入口地址 eh.e_entry]
+    N --&gt; O[(&quot;结束&quot;)]
+
+    style A fill:#4CAF50,stroke:#388E3C
+    style Z fill:#FF5722,stroke:#E64A19
+    style O fill:#4CAF50,stroke:#388E3C
+    classDef process fill:#BBDEFB,stroke:#2196F3;
+    class B,C,E,F,G process;
+</code></pre></div>
+<h3 id="_1">五、想实践？</h3>
+<p>具体写一个小的简单程序，配合工具看看！<strong>示例程序</strong>（<code>demo.c</code>）：</p>
+<div class="highlight"><pre><span></span><code><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">msg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Hello World&quot;</span><span class="p">;</span><span class="w"> </span><span class="c1">// → .rodata</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">global_data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">42</span><span class="p">;</span><span class="w">            </span><span class="c1">// → .data</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">global_bss</span><span class="p">;</span><span class="w">                  </span><span class="c1">// → .bss</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">                     </span><span class="c1">// → .text</span>
+<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">local_bss</span><span class="p">;</span><span class="w">        </span><span class="c1">// → .bss</span>
+<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">local_data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">7</span><span class="p">;</span><span class="w">   </span><span class="c1">// → .data</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><strong>编译后分析</strong>（<code>gcc -o demo demo.c</code>）：</p>
+<ol>
+<li>
+<p><strong>查看节信息</strong>（<code>readelf -S demo</code>）：</p>
+<div class="highlight"><pre><span></span><code>Section Headers:
+  [Nr] Name   Type      Address          Offset    Size
+  [13] .text  PROGBITS  0000000000401040 00001040 00000165
+  [15] .rodata PROGBITS 0000000000402000 00002000 0000000d
+  [23] .data  PROGBITS  0000000000404040 00003040 0000000c
+  [24] .bss   NOBITS    0000000000404050 0000304c 0000000c
+</code></pre></div>
+<ul>
+<li><code>.text</code>：代码段（地址<code>0x401040</code>，大小<code>0x165</code>字节）</li>
+<li><code>.rodata</code>：只读数据（地址<code>0x402000</code>，包含<code>"Hello World"</code>）</li>
+<li><code>.data</code>：已初始化的全局/静态变量（地址<code>0x404040</code>）</li>
+<li><code>.bss</code>：未初始化数据（地址<code>0x404050</code>，不占用文件空间）</li>
+</ul>
+</li>
+<li>
+<p><strong>查看程序头表</strong>（<code>readelf -l demo</code>）：</p>
+<div class="highlight"><pre><span></span><code>Program Headers:
+  Type   Offset   VirtAddr           PhysAddr           FileSiz  MemSiz   Flg Align
+  LOAD   0x000000 0x0000000000400000 0x0000000000400000 0x0002e0 0x0002e0 R E 0x1000
+  LOAD   0x002000 0x0000000000402000 0x0000000000402000 0x0001f8 0x0001f8 R   0x1000
+  LOAD   0x003000 0x0000000000403000 0x0000000000403000 0x00004c 0x000058 RW  0x1000
+</code></pre></div>
+<ul>
+<li><strong>第一个LOAD段</strong>：合并<code>.text</code>和部分只读数据 → <strong>R-X权限</strong>（可读可执行）</li>
+<li><strong>第二个LOAD段</strong>：合并<code>.rodata</code> → <strong>R--权限</strong>（只读）</li>
+<li><strong>第三个LOAD段</strong>：合并<code>.data</code>和<code>.bss</code> → <strong>RW-权限</strong>（可读写）</li>
+</ul>
+</li>
+</ol>
+<h3 id="elf_2">六、想学习点 ELF 的知识？</h3>
+<p>推荐资料：</p>
+<ul>
+<li>
+<p>Executable and Linkable Format (ELF)  manual</p>
+</li>
+<li>
+<p>jyy 老师：<a href="https://jyywiki.cn/OS/2025/lect10.md">可执行文件</a>、<a href="https://jyywiki.cn/OS/2025/lect11.md">动态链接和加载</a></p>
+<p>视频：<a href="https://www.bilibili.com/video/BV1V3XKYLE7d">10 - 可执行文件；静态链接和加载</a></p>
+</li>
+<li>
+<p>《程序员的自我修养——链接、装载与库》愈甲子、石凡、潘爱民</p>
+</li>
+<li>
+<p>《Linkers &amp; Loaders》John R. Levine  </p>
+</li>
+</ul>
+<h3 id="_2">六、想再深入？</h3>
+<p><img alt="image-20250328122817843" src="pic/image-20250328122817843.png" /></p>
+<p>问问 DeepSeek，我想做得更专业、更高质量该怎么做？</p>
+<ol>
+<li><strong>地址空间布局随机化（ASLR）</strong>：<ul>
+<li>PIE（Position-Independent Executable）文件通过ET_DYN类型实现，所有PT_LOAD段使用相对地址</li>
+</ul>
+</li>
+<li><strong>延迟加载（Lazy Binding）</strong>：<ul>
+<li>通过PLT（Procedure Linkage Table）和GOT（Global Offset Table）实现函数符号的按需解析</li>
+</ul>
+</li>
+<li><strong>Segment Padding优化</strong>：<ul>
+<li>现代链接器（如Gold, LLD）通过合并相同权限的节（如.rodata和.text）减少PT_LOAD段数量，优化TLB效率</li>
+</ul>
+</li>
+</ol>
+<p>再配合之前说的手册，螺旋上升地学。</p>
+<div style="page-break-after:always"></div>
+
+<h2 id="_3">指针、双重指针</h2>
+<p>其实面试问的主要是上面那部分，但实际上那个内容也只是写在项目中的几个字而已，没想到问得还挺深入的。</p>
+<p>之后就是一些比较常规的，问了一些指针怎么理解，指针的指针，然后简单出了个题，边改边出（大概长这样）：</p>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">func1</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">p</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">malloc</span><span class="p">(</span><span class="mi">8</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">NULL</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">p</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">perror</span><span class="p">(</span><span class="s">&quot;malloc allocation error&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">func1</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="mi">-1</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">ret</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">-1</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">p</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">[</span><span class="mi">7</span><span class="p">]);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>问怎么改，具体原理？这里不做解释了，如果真正对指针比较熟悉的，真正在项目中用过的话，还是挺好懂的。</p>
+<p>之后又根据经历问使用这个二重指针的经验，在构建进程地址空间的时候，传递 <code>argc</code>、<code>argv</code>、<code>envp</code> 的时候，分享怎么解决的。</p>
+<p>还是问问 DeepSeek：从内存模型、指针操作、类型系统三个维度彻底剖析双重指针和内存分配的核心机制。</p>
+<hr />
+<h3 id="_4">一、双重指针的底层解析（从硬件到语言）</h3>
+<h4 id="1">1. 内存地址的本质</h4>
+<ul>
+<li><strong>物理层面</strong>：每个内存单元有唯一的物理地址（如0x7ffeeb39a520），对应DRAM芯片上的行列坐标</li>
+<li><strong>虚拟内存</strong>：程序看到的是虚拟地址，由MMU（Memory Management Unit）转换为物理地址</li>
+<li><strong>指针变量</strong>：本质是存储虚拟地址的变量，<code>int* p</code>表示p变量中存放着一个地址，该地址处存储的是int类型数据</li>
+</ul>
+<h4 id="2">2. 双重指针的二进制表示</h4>
+<p><div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="o">**</span><span class="n">pp</span><span class="p">;</span><span class="w">  </span><span class="c1">// pp变量本身占用内存（假设64位系统）</span>
+</code></pre></div>
+- <code>pp</code>变量存储的值是另一个指针的地址（即<code>int*</code>类型的地址）
+- 内存布局示例：
+  <div class="highlight"><pre><span></span><code>| pp变量地址 | 存储的值（假设为0x7ffd1234） | → 指向某个int*变量
+| 0x7ffd1234 | 存储的值（假设为0x1000）     | → 指向int数据
+| 0x1000     | 实际的int数据              |
+</code></pre></div></p>
+<h4 id="3">3. 函数参数传递的机械级实现</h4>
+<p>当调用<code>func1(int **pp)</code>时：
+1. 编译器将<code>&amp;p</code>（main函数中指针变量的地址）压入栈/寄存器
+2. <code>func1</code>的栈帧中，参数<code>pp</code>获得该地址的副本
+3. 对<code>*pp</code>的操作相当于通过地址直接修改main函数中的指针变量</p>
+<p>关键汇编指令演示（x86-64）：
+<div class="highlight"><pre><span></span><code><span class="c1">; main函数传递&amp;p</span>
+<span class="nf">lea</span><span class="w">    </span><span class="no">rdi</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="no">rbp-0x8</span><span class="p">]</span><span class="w">   </span><span class="c1">; 获取p变量的地址存入rdi（第一个参数寄存器）</span>
+
+<span class="c1">; func1内部操作</span>
+<span class="nf">mov</span><span class="w">    </span><span class="no">rax</span><span class="p">,</span><span class="w"> </span><span class="no">qword</span><span class="w"> </span><span class="p">[</span><span class="no">rdi</span><span class="p">]</span><span class="w"> </span><span class="c1">; 获取pp指向的值（即main中的p变量）</span>
+<span class="nf">mov</span><span class="w">    </span><span class="no">qword</span><span class="w"> </span><span class="p">[</span><span class="no">rax</span><span class="p">],</span><span class="w"> </span><span class="mi">0x1000</span><span class="w"> </span><span class="c1">; 将malloc返回的地址写入p变量</span>
+</code></pre></div></p>
+<hr />
+<h3 id="malloc">二、malloc内存分配的专业实践</h3>
+<h4 id="1-malloc">1. malloc的字节级精确控制</h4>
+<p><div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">malloc</span><span class="p">(</span><span class="mi">8</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">));</span><span class="w"> </span>
+</code></pre></div>
+- <strong>数学本质</strong>：<code>sizeof(int)</code>在编译时求值，返回类型占用的字节数
+- <strong>硬件关联</strong>：
+  - x86-64架构下通常为4字节（ILP32LL模型）
+  - 内存对齐要求：malloc返回的地址保证对齐到<code>alignof(max_align_t)</code>
+- <strong>指针运算的二进制真相</strong>：
+  - <code>p[7]</code>会被编译器转换为：<code>*(p + 7)</code>
+  - 地址计算：<code>p_addr + 7 * sizeof(int)</code>
+  - 对于4字节int，实际地址偏移是<code>28字节（7*4）</code></p>
+<h4 id="2_1">2. 类型安全的防御性编程技巧</h4>
+<p><div class="highlight"><pre><span></span><code><span class="c1">// 推荐写法：类型与变量绑定</span>
+<span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">malloc</span><span class="p">(</span><span class="n">N</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="o">*</span><span class="n">p</span><span class="p">));</span><span class="w"> </span>
+
+<span class="c1">// 错误示例：类型与变量分离</span>
+<span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">malloc</span><span class="p">(</span><span class="n">N</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">));</span><span class="w"> </span><span class="c1">// 若修改类型时易出错</span>
+</code></pre></div>
+- <strong>编译器视角</strong>：<code>sizeof(*p)</code>在编译时解析为<code>sizeof(int)</code>
+- <strong>维护优势</strong>：当变量类型改变时（如改为<code>long *p</code>），自动保持正确</p>
+<h4 id="3-32">3. 内存布局可视化（假设32位系统）</h4>
+<div class="highlight"><pre><span></span><code>malloc(8 * sizeof(int)) → 分配32字节连续内存
+地址布局：
+0x1000: [int0]  // p[0]
+0x1004: [int1]  // p[1]
+...
+0x101c: [int7]  // p[7] → 合法访问
+0x1020: [未分配内存] → 越界访问将触发UB
+</code></pre></div>
+<hr />
+<h3 id="_5">三、指针运算的深度解析</h3>
+<h4 id="1_1">1. 指针加减的指令级实现</h4>
+<p><div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">...;</span>
+<span class="n">p</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span><span class="w"> </span>
+</code></pre></div>
+- <strong>编译结果</strong>：
+  <div class="highlight"><pre><span></span><code><span class="c1">; 假设p在rax寄存器</span>
+<span class="nf">add</span><span class="w"> </span><span class="no">rax</span><span class="p">,</span><span class="w"> </span><span class="mi">12</span><span class="w">  </span><span class="c1">; 3 * sizeof(int) = 3*4=12</span>
+</code></pre></div>
+- <strong>类型系统强制约束</strong>：编译器根据指针类型自动计算步长</p>
+<h4 id="2_2">2. 数组访问的本质</h4>
+<p><div class="highlight"><pre><span></span><code><span class="n">p</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+</code></pre></div>
+编译器将其转换为：
+<div class="highlight"><pre><span></span><code><span class="c1">; 假设p在rax，计算目标地址</span>
+<span class="nf">mov</span><span class="w"> </span><span class="no">edx</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span>
+<span class="nf">mov</span><span class="w"> </span><span class="p">[</span><span class="no">rax</span><span class="w"> </span><span class="err">+</span><span class="w"> </span><span class="mi">7</span><span class="p">*</span><span class="mi">4</span><span class="p">],</span><span class="w"> </span><span class="no">edx</span><span class="w">  </span><span class="c1">; 4=sizeof(int)</span>
+</code></pre></div></p>
+<h4 id="3_1">3. 越界访问的硬件级后果</h4>
+<ul>
+<li><strong>缓存行污染</strong>：跨缓存行写入可能破坏相邻数据</li>
+<li><strong>内存保护错误</strong>：访问未映射页面触发页错误（Page Fault）</li>
+<li><strong>安全漏洞</strong>：缓冲区溢出可能被利用进行代码注入</li>
+</ul>
+<hr />
+<h3 id="_6">四、专业开发实践准则</h3>
+<ol>
+<li>
+<p><strong>类型-内存绑定原则</strong>：
+   <div class="highlight"><pre><span></span><code><span class="c1">// 正确做法：变量与类型关联</span>
+<span class="n">T</span><span class="w"> </span><span class="o">*</span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">malloc</span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="o">*</span><span class="n">p</span><span class="p">));</span>
+
+<span class="c1">// 错误做法：分离类型与变量</span>
+<span class="n">T</span><span class="w"> </span><span class="o">*</span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">malloc</span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">T</span><span class="p">));</span>
+</code></pre></div></p>
+</li>
+<li>
+<p><strong>防御性长度校验</strong>：
+   <div class="highlight"><pre><span></span><code><span class="kt">size_t</span><span class="w"> </span><span class="n">byte_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="o">*</span><span class="n">p</span><span class="p">);</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">byte_size</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="o">*</span><span class="n">p</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// 检测乘法溢出</span>
+<span class="w">    </span><span class="c1">// 处理错误</span>
+<span class="p">}</span>
+</code></pre></div></p>
+</li>
+<li>
+<p><strong>指针操作铁律</strong>：
+   <div class="highlight"><pre><span></span><code><span class="c1">// 任何指针运算前必须验证：</span>
+<span class="n">assert</span><span class="p">(</span><span class="n">p</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
+<span class="n">assert</span><span class="p">((</span><span class="kt">uintptr_t</span><span class="p">)</span><span class="n">p</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="k">alignof</span><span class="p">(</span><span class="o">*</span><span class="n">p</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span><span class="w"> </span><span class="c1">// 对齐检查</span>
+</code></pre></div></p>
+</li>
+<li>
+<p><strong>内存诊断模式</strong>：
+   <div class="highlight"><pre><span></span><code><span class="cp">#ifdef DEBUG</span>
+<span class="cp">#define malloc(size) debug_malloc(size, __FILE__, __LINE__)</span>
+<span class="c1">// 记录每次内存分配，检测越界访问</span>
+<span class="cp">#endif</span>
+</code></pre></div></p>
+</li>
+</ol>
+<hr />
+<h3 id="_7">五、终极理解测试</h3>
+<p>假设系统为64位，<code>sizeof(int)=4</code>，分析以下代码：
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="o">***</span><span class="n">ppp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">malloc</span><span class="p">(</span><span class="mi">3</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="o">*</span><span class="n">ppp</span><span class="p">));</span>
+<span class="n">ppp</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">malloc</span><span class="p">(</span><span class="mi">5</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="o">**</span><span class="n">ppp</span><span class="p">));</span><span class="w"> </span>
+<span class="n">ppp</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">3</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">malloc</span><span class="p">(</span><span class="mi">7</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="o">***</span><span class="n">ppp</span><span class="p">));</span>
+</code></pre></div>
+1. 画出完整的内存结构图
+2. 计算每个malloc分配的具体字节数
+3. 分析<code>ppp[2][3][5]</code>的地址计算过程</p>
+<p>（答案见下方折叠区）</p>
+<details>
+<summary>【点击查看解析】</summary>
+
+1. **内存结构**：
+   <div class="highlight"><pre><span></span><code>ppp → [ptr0, ptr1, ptr2]（每个ptr占8字节）
+ptr2 → [ptr20, ptr21, ptr22, ptr23, ptr24]（每个ptr占8字节）
+ptr23 → [int0, int1, ..., int6]（每个int占4字节）
+</code></pre></div>
+
+2. **字节计算**：
+   - `malloc(3 * sizeof(*ppp))` → 3*8=24字节
+   - `malloc(5 * sizeof(**ppp))` → 5*8=40字节
+   - `malloc(7 * sizeof(***ppp))` → 7*4=28字节
+
+3. **地址计算**：
+   <div class="highlight"><pre><span></span><code>ppp[2][3][5] = *(*(*(ppp + 2) + 3) + 5)
+地址 = 
+  ppp_addr + 2*8 → 获取ptr2地址
+  ptr2_addr + 3*8 → 获取ptr23地址 
+  ptr23_addr + 5*4 → 最终int数据地址
+</code></pre></div>
+   </details>
+
+<p>掌握这些底层细节，你将在内存管理和指针操作领域达到专家水平。务必通过实践验证每个结论！</p>
+<div style="page-break-after:always"></div>
+
+<h2 id="_8">第一条指令</h2>
+<p>因为自己构建 OS，所以，他问到main之前的第一条指令都做了什么，这个问题非常庞大，所以我一直在说，不断地添加细节。</p>
+<p>具体就是之前之前做的上下文处理流程的，我这里直接复制之前的笔记了，主要不想写。</p>
+<blockquote>
+<p>理解的核心思想：来中断/异常的时候，我需要保存上下文的状态/寄存器现场，那就需要开辟空间来保存一些内容： OS 或者 am 框架 把一段内存空间初始化成程序（线程/进程）能够运行的上下文，并在中断/异常返回时切换到事先准备的上下文。这就赋予了我们实现 “切换” 的根本机制。下面讨论更多一些细节。  </p>
+<p>首先，最简单从一个程序到多道程序的发展，就是直接将不同的程序放到编好的地址的各个部分，比如：<code>0x100~0x100</code> 第一个程序。、、以此类推。</p>
+<hr />
+<p>在之后，比较简单的的是，最简单的，在只有内核空间的的时候，或者说刚开始写的时候，只有内核线程，很自然的，只保存了通用寄存器和一些用到的的系统特殊寄存器。 </p>
+<p>到这里，实际上就是有点类似于 <code>thread-os</code>，就是以 thread 为单位，进行任务处理，保存的这些内容是每一个线程自己的状态（register、PC、shared memory）。当然，这个时候的理解是 程序都是运行在内核态的。历史上的这个阶段，其实是没有进程这一概念的。</p>
+<p>到这里就有点像一个嵌入式操作系统了？还是说要有用户线程（任务）的才是？</p>
+<hr />
+<p>然后，添加扩展实现：</p>
+<ul>
+<li>
+<p>处理器：添加内核态和用户态</p>
+</li>
+<li>
+<p>OS</p>
+<ul>
+<li>
+<p>添加 特权级区分，当然，只是简单做个标志，并没有限制各种指令执行的特权级；</p>
+</li>
+<li>
+<p>然后添加用户线程的概念，这个时候也只是简单的通过地址来划分内核线程和用户线程（比如 <code>0x80000000</code> 以上为内核线程，<code>0x40000000~0x80000000</code> 为用户线程的。）</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>有一些具体的细节和改变：</p>
+<p>保存上下文的的时候，那内核应该也和用户线程一样有自己的栈？而不是和用户共用一个栈，因为切换到内核的时候还是会需要保存</p>
+<p>所以，我加入了关于内核栈和用户栈的切换（总结内核栈和用户栈切换的逻辑），也只是用简单的寄存器表示处于哪一个特权级，<strong>实现方式</strong>：</p>
+<ul>
+<li><strong>特权指令</strong>：仅在内核态可执行（如修改页表、I/O操作）。</li>
+<li><strong>中断/异常处理</strong>：用户态程序触发异常时切换到内核态。</li>
+</ul>
+<blockquote>
+<p>这个时候还没有引入MMU与分页机制。</p>
+<p>而这个时候用的表述还是 线程，没有用进程，因为没有通过虚拟内存的机制来保证程序的隔离，只用了 特权级来保护。</p>
+</blockquote>
+<hr />
+<p>但之后进一步深入，我还引入了 MMU 和页表机制，支持虚拟地址和物理地址的转换。这个时候又带来了很多问题：</p>
+<ul>
+<li>要为用户进程实现地址空间的内容</li>
+<li>内核栈和用户栈的进一步区分，尤其是在上下文切换的时候对于内核栈、用户栈切换。</li>
+<li>在开启 MMU 的情况下，每个用户进程有自己的页表基地址，内核访问的都是同一片代码，但也需要有页表，这就带来了问题，是在每一次上下</li>
+</ul>
+<p>去看了实际系统的实现：</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// arch/riscv/include/asm/pgalloc.h</span>
+<span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">sync_kernel_mappings</span><span class="p">(</span><span class="n">pgd_t</span><span class="w"> </span><span class="o">*</span><span class="n">pgd</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">memcpy</span><span class="p">(</span><span class="n">pgd</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">USER_PTRS_PER_PGD</span><span class="p">,</span>
+<span class="w">           </span><span class="n">init_mm</span><span class="p">.</span><span class="n">pgd</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">USER_PTRS_PER_PGD</span><span class="p">,</span>
+<span class="w">           </span><span class="p">(</span><span class="n">PTRS_PER_PGD</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">USER_PTRS_PER_PGD</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">pgd_t</span><span class="p">));</span>
+<span class="p">}</span>
+
+<span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="n">pgd_t</span><span class="w"> </span><span class="o">*</span><span class="nf">pgd_alloc</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">mm_struct</span><span class="w"> </span><span class="o">*</span><span class="n">mm</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">pgd_t</span><span class="w"> </span><span class="o">*</span><span class="n">pgd</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">pgd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">pgd_t</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="n">__get_free_page</span><span class="p">(</span><span class="n">GFP_KERNEL</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">likely</span><span class="p">(</span><span class="n">pgd</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">memset</span><span class="p">(</span><span class="n">pgd</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">USER_PTRS_PER_PGD</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">pgd_t</span><span class="p">));</span>
+<span class="w">        </span><span class="cm">/* Copy kernel mappings */</span>
+<span class="w">        </span><span class="n">sync_kernel_mappings</span><span class="p">(</span><span class="n">pgd</span><span class="p">);</span><span class="w">                                                                                        </span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">pgd</span><span class="p">;</span>
+<span class="p">}</span>
+
+
+<span class="c1">// arch/riscv/include/asm/pgtable.h</span>
+
+<span class="cm">/* Number of entries in the page global directory */</span>
+<span class="cp">#define PTRS_PER_PGD    (PAGE_SIZE / sizeof(pgd_t))</span>
+<span class="cm">/* Number of entries in the page table */</span>
+<span class="cp">#define PTRS_PER_PTE    (PAGE_SIZE / sizeof(pte_t))</span>
+
+<span class="cm">/* Number of PGD entries that a user-mode program can use */</span>
+<span class="cp">#define USER_PTRS_PER_PGD   (TASK_SIZE / PGDIR_SIZE)  </span>
+
+
+<span class="c1">// arch/riscv/include/asm/pgtable-32.h</span>
+<span class="cm">/* Size of region mapped by a page global directory */</span>
+<span class="cp">#define PGDIR_SHIFT     22</span>
+<span class="cp">#define PGDIR_SIZE      (_AC(1, UL) &lt;&lt; PGDIR_SHIFT)                                                                       </span>
+<span class="cp">#define PGDIR_MASK      (~(PGDIR_SIZE - 1))</span>
+
+<span class="c1">// arch/riscv/include/asm/pgtable-64.h</span>
+<span class="cp">#define PGDIR_SHIFT_L3  30</span>
+<span class="cp">#define PGDIR_SHIFT_L4  39</span>
+<span class="cp">#define PGDIR_SHIFT_L5  48</span>
+<span class="cp">#define PGDIR_SIZE_L3   (_AC(1, UL) &lt;&lt; PGDIR_SHIFT_L3)</span>
+
+<span class="cp">#define PGDIR_SHIFT     (pgtable_l5_enabled ? PGDIR_SHIFT_L5 : \</span>
+<span class="cp">        (pgtable_l4_enabled ? PGDIR_SHIFT_L4 : PGDIR_SHIFT_L3))</span>
+<span class="cm">/* Size of region mapped by a page global directory */</span>
+<span class="cp">#define PGDIR_SIZE      (_AC(1, UL) &lt;&lt; PGDIR_SHIFT)                                                                       </span>
+<span class="cp">#define PGDIR_MASK      (~(PGDIR_SIZE - 1))</span>
+</code></pre></div>
+<p>页目录一级一共有多少个页表项。管理整个系统虚拟内存，按当前的页表大小，需要多少个页目录项。</p>
+<blockquote>
+<p><strong>步骤解析</strong>：</p>
+<ol>
+<li>
+<p><strong>虚拟地址划分</strong>：</p>
+<ul>
+<li>RISC-V Sv39 使用 39 位虚拟地址，分为三级页表索引：<ul>
+<li><strong>VPN2</strong>（9 位）：索引页全局目录（PGD）。</li>
+<li><strong>VPN1</strong>（9 位）：索引页中间目录（PMD）。</li>
+<li><strong>VPN0</strong>（9 位）：索引页表项（PTE）。</li>
+</ul>
+</li>
+<li>剩余 12 位为页内偏移。</li>
+</ul>
+</li>
+<li>
+<p><strong>内核空间地址范围</strong>：</p>
+<ul>
+<li>
+<p>内核虚拟地址通常从 <code>0x80000000</code> 开始，例如 <code>0x80000000~0xFFFFFFFFFFFFFFFF</code>。</p>
+</li>
+<li>
+<p>对于地址 <code>0x80000000</code>，其 VPN2 值为：</p>
+<p>复制</p>
+<div class="highlight"><pre><span></span><code>VPN2 = (0x80000000 &gt;&gt; 30) &amp; 0x1FF = 256
+</code></pre></div>
+<p>因此，内核空间的 PGD 条目索引范围为 <strong>256~511</strong>。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>内核页表初始化</strong>：</p>
+<ul>
+<li>内核启动时，通过 <code>paging_init()</code> 初始化内核页表（<code>swapper_pg_dir</code>），将内核代码、设备内存等映射到高半部分虚拟地址。</li>
+<li>用户进程创建时，复制内核 PGD 的高半部分条目到用户页表，确保内核映射共享。</li>
+</ul>
+</li>
+</ol>
+</blockquote>
+<p>具体可以看看 kernel memory layout 的文档：<a href="https://www.kernel.org/doc/html/latest/arch/riscv/vm-layout.html">Virtual Memory Layout on RISC-V Linux — The Linux Kernel documentation</a></p>
+<blockquote>
+<p>了解到的一些相对前沿资料：</p>
+<p><a href="https://unix.stackexchange.com/questions/598171/how-are-the-kernel-page-tables-shared-among-all-processes">memory - How are the kernel page tables shared among all processes? - Unix &amp; Linux Stack Exchange</a></p>
+</blockquote>
+<p>综上：</p>
+<p>根据之前的多次回答，我现在总结出我自己实现的RISC-V 的OS的关于页表的目前的机制。我理解的如下：</p>
+<p>首先，在只有一个页表寄存器的时候（不像ARM的双页表），在系统刚刚启动的时候，做的是 <code>vme_init</code> 的工作，为描述内核页表的结构分配使用空间：<code>kas.ptr = pgalloc_f(PGSIZE);</code> 所以这个 <code>ptr</code> 指的是内核空间下的页表基地址，是所有程序共享的！</p>
+<p>然后，接着为程序内存划分好的的每一部分内存区（zone、或者理解为池？）进行MMU映射；最后将内核的页表基址放到 <code>satp</code> 寄存器中：<code>set_satp(kas.ptr);</code>。</p>
+<p>接着，就是用户进程的内容，既然现在有了MMU的支持，那就要创建、规划进程地址空间了。</p>
+<ul>
+<li>
+<p>首先做的就是建立用户进程地址空间 <code>protect(&amp;pcb-&gt;as);</code></p>
+<p>这个时候做的就是，为该进程分配描述用户页表的结构的空间： <code>PTE *updir = (PTE*)(pgalloc_usr(PGSIZE));  as-&gt;ptr = updir;</code></p>
+</li>
+<li>
+<p>另外，告诉用户进程可以用的范围：<code>#define USER_SPACE RANGE(0x40000000, 0x80000000)</code>、然后目前 OS 配置的页表大小：4KB。</p>
+</li>
+<li>
+<p><strong>然后最重要的是，进行内核页表的拷贝！<code>memcpy(updir, kas.ptr, PGSIZE);</code></strong></p>
+<blockquote>
+<p>这里为什么是这么映射，还真有点意思！！！</p>
+<p>还留了一些疑惑！</p>
+</blockquote>
+</li>
+<li>
+<p>然后就到了实际 load一个程序：计算这个 <code>elf</code> 程序要占用多少的 <code>page</code>，然后分配，然后就是为这个 <code>elf</code> 程序建立 <code>mmu</code> 映射：</p>
+<div class="highlight"><pre><span></span><code><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">nr_page</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">map</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pcb</span><span class="o">-&gt;</span><span class="n">as</span><span class="p">,</span>
+<span class="w">        </span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="n">start_addr</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">PGSIZE</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">j</span><span class="p">,</span>
+<span class="w">        </span><span class="n">p_page</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">PGSIZE</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">j</span><span class="p">,</span>
+<span class="w">        </span><span class="n">PTE_R</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">PTE_W</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">PTE_X</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<blockquote>
+<p>这里比较有意思的是这个映射：</p>
+<p>具体来说就是在该进程的地址空间，然后为elf程序的地址建立映射？（这里为什么是这两个地址建立映射？我这里做的都是恒等映射）。</p>
+</blockquote>
+</li>
+</ul>
+<p>之后就是要为这个用户进程创建用户栈！</p>
+<div class="highlight"><pre><span></span><code><span class="n">ucontext</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pcb</span><span class="o">-&gt;</span><span class="n">as</span><span class="p">,</span><span class="w"> </span><span class="n">kstack</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="kt">void</span><span class="p">(</span><span class="o">*</span><span class="p">)())</span><span class="n">entry</span><span class="p">);</span>
+
+<span class="n">Context</span><span class="w"> </span><span class="o">*</span><span class="nf">ucontext</span><span class="p">(</span><span class="n">AddrSpace</span><span class="w"> </span><span class="o">*</span><span class="n">as</span><span class="p">,</span><span class="w"> </span><span class="n">Area</span><span class="w"> </span><span class="n">kstack</span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">entry</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">stack_end</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">kstack</span><span class="p">.</span><span class="n">end</span><span class="p">;</span>
+<span class="w">    </span><span class="n">Context</span><span class="w"> </span><span class="o">*</span><span class="n">base</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">Context</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="p">((</span><span class="kt">uint8_t</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="n">stack_end</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">Context</span><span class="p">));</span>
+<span class="w">    </span><span class="c1">// just pass the difftest</span>
+<span class="w">    </span><span class="c1">//base-&gt;mstatus = 0x1800; // MPP bit[12:11] 0b11 = 3</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">mstatus_t</span><span class="w"> </span><span class="n">mstatus_tmp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="p">.</span><span class="n">mpie</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">mie</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">sum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="c1">// read note and manual</span>
+<span class="w">        </span><span class="p">.</span><span class="n">mxr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="c1">// about S-mode, OS will do this, design processor core don&#39;t care?</span>
+<span class="w">        </span><span class="p">.</span><span class="n">mpp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PRIV_MODE_U</span><span class="p">,</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="w">    </span><span class="n">base</span><span class="o">-&gt;</span><span class="n">mstatus</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mstatus_tmp</span><span class="p">.</span><span class="n">value</span><span class="p">;</span>
+<span class="w">    </span><span class="n">base</span><span class="o">-&gt;</span><span class="n">pdir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">as</span><span class="o">-&gt;</span><span class="n">ptr</span><span class="p">;</span>
+<span class="w">    </span><span class="n">base</span><span class="o">-&gt;</span><span class="n">np</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PRIV_MODE_U</span><span class="p">;</span>
+<span class="w">    </span><span class="n">base</span><span class="o">-&gt;</span><span class="n">gpr</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">uintptr_t</span><span class="p">)</span><span class="n">kstack</span><span class="p">.</span><span class="n">end</span><span class="p">;</span>
+<span class="w">    </span><span class="n">base</span><span class="o">-&gt;</span><span class="n">mepc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">uintptr_t</span><span class="p">)</span><span class="n">entry</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">base</span><span class="p">;</span>
+<span class="p">}</span><span class="w">                </span>
+</code></pre></div>
+<p>这里主要到是<code>pdir</code>（page directory），这是用户进程地址空间的页表基地址赋值！（这和前面 <code>protect(&amp;pcb-&gt;as);</code> 那里联系起来了！</p>
+<blockquote>
+<p>一开始的困惑：<code>memcpy kernel map space</code>，将 <code>kas.ptr</code> 拷贝给 <code>updir</code>，那不是覆盖 <code>pdir</code>？是不是内核和用户共用一部分？</p>
+</blockquote>
+<p>接着，主要是指定函数参数，这里用栈存好了 <code>argc</code>、<code>argv</code>、<code>envp</code> 的内容，之后传递给 <code>crt</code> 调用 <code>main</code> 函数的地方，再解析，这里可以不用过于关注。</p>
+<div class="highlight"><pre><span></span><code><span class="cp">#define GPRx gpr[10] </span><span class="c1">// a0</span>
+<span class="n">pcb</span><span class="o">-&gt;</span><span class="n">cp</span><span class="o">-&gt;</span><span class="n">GPRx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">uintptr_t</span><span class="p">)</span><span class="n">base_2_app</span><span class="p">;</span>
+</code></pre></div>
+<p>然后：指定该用户进程的栈指针（<code>sp/gpr[2]</code>），为每一个进程不同的用户栈的物理映射到同一物理地址。</p>
+<div class="highlight"><pre><span></span><code><span class="n">pcb</span><span class="o">-&gt;</span><span class="n">cp</span><span class="o">-&gt;</span><span class="n">gpr</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">uintptr_t</span><span class="p">)(</span><span class="n">pcb</span><span class="o">-&gt;</span><span class="n">as</span><span class="p">.</span><span class="n">area</span><span class="p">.</span><span class="n">end</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="p">(</span><span class="n">new_user_stack_bottom</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">space_count</span><span class="p">));</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">ustack_top_vaddr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pcb</span><span class="o">-&gt;</span><span class="n">as</span><span class="p">.</span><span class="n">area</span><span class="p">.</span><span class="n">end</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">8</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">PGSIZE</span><span class="p">;</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">8</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">map</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pcb</span><span class="o">-&gt;</span><span class="n">as</span><span class="p">,</span>
+<span class="w">        </span><span class="n">ustack_top_vaddr</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">PGSIZE</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">i</span><span class="p">),</span>
+<span class="w">        </span><span class="n">new_user_stack_top</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">PGSIZE</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">i</span><span class="p">),</span><span class="w"> </span>
+<span class="w">        </span><span class="n">PTE_R</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">PTE_W</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>这个end是用户地址空间结尾：0x80000000，然后减去本进程的用户地址空间栈底（高地址）和已经占用了一部分栈的内容（space_count）。</p>
+<blockquote>
+<p>这里也有一个有意思的地方，也是那个时候有困惑的：映射到同一地址？</p>
+<blockquote>
+<p>用户栈映射到 <code>as.area.end - 8 * PGSIZE</code> 这里。我的问题不是他映射到哪里的问题，而是好像每创建一个进程的用户栈空间都指向这里？？？这很明显不对呀！ <code>new_user_stack_top</code> 这个是有 <code>page_alloc</code> 实际分配了8页的起始地址的，但是按照上面的说法，那不是所有的用户进程的用户栈的实际物理地址都映射到这里？</p>
+<p>不对！是给每个进程一种错觉，感觉这一块地方都是它的！但这是虚拟地址，实际访问的物理地址（就是那个new_user_stack_top，分配的8个PAGE）是不一样的！！我这理解对不对？因为这是在我自己写的 OS 的，那我想在 Linux中验证，怎么做？有什么test程序吗？</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><span class="c1">// test.c</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;unistd.h&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">stack_var</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">42</span><span class="p">;</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;PID=%d, &amp;stack_var=%p, stack_var=%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">getpid</span><span class="p">(),</span><span class="w"> </span><span class="o">&amp;</span><span class="n">stack_var</span><span class="p">,</span><span class="w"> </span><span class="n">stack_var</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sleep</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>gcc<span class="w"> </span>test.c<span class="w"> </span>-o<span class="w"> </span><span class="nb">test</span>
+$<span class="w"> </span>./test<span class="w"> </span><span class="p">&amp;</span><span class="w"> </span>./test
+<span class="nv">PID</span><span class="o">=</span><span class="m">100</span>,<span class="w"> </span><span class="p">&amp;</span><span class="nv">stack_var</span><span class="o">=</span>0x7ffeeb6d9a5c,<span class="w"> </span><span class="nv">stack_var</span><span class="o">=</span><span class="m">42</span>
+<span class="nv">PID</span><span class="o">=</span><span class="m">101</span>,<span class="w"> </span><span class="p">&amp;</span><span class="nv">stack_var</span><span class="o">=</span>0x7ffeeb6d9a5c,<span class="w"> </span><span class="nv">stack_var</span><span class="o">=</span><span class="m">42</span>
+</code></pre></div>
+<p>理论猜测是这样：虚拟地址相同，但两个进程的<code>stack_var</code>位于不同的物理页，验证了映射隔离性。</p>
+<p>但是实际上由于前几年 meltdown 漏洞，现代的 Linux 会有 ASLR，为了安全！</p>
+</blockquote>
+</blockquote>
+<h2 id="_9">函数指针</h2>
+<h3 id="_10">一、函数指针的机械级认知（硬件视角）</h3>
+<p><strong>1. 函数调用的本质</strong>
+每个函数在内存中占据连续地址空间，函数指针存储的是函数第一条指令的地址。  </p>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="nf">foo</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Hello&quot;</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+<span class="c1">// 假设foo()的机器码起始地址为0x4005a0</span>
+<span class="kt">void</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">pfunc</span><span class="p">)()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">foo</span><span class="p">;</span><span class="w">  </span><span class="c1">// pfunc = 0x4005a0</span>
+</code></pre></div>
+<p><strong>2. 函数指针的汇编实现</strong>
+x86-64调用示例：</p>
+<div class="highlight"><pre><span></span><code><span class="nf">mov</span><span class="w">   </span><span class="no">rax</span><span class="p">,</span><span class="w"> </span><span class="mi">0x4005a0</span><span class="w">   </span><span class="c1">; 将函数地址加载到寄存器</span>
+<span class="nf">call</span><span class="w">  </span><span class="no">rax</span><span class="w">             </span><span class="c1">; 等价于 (*pfunc)()</span>
+</code></pre></div>
+<p><strong>3. 内存布局验证</strong>  </p>
+<div class="highlight"><pre><span></span><code><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Function address: %p</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="kt">void</span><span class="o">*</span><span class="p">)</span><span class="n">foo</span><span class="p">);</span>
+<span class="n">printf</span><span class="p">(</span><span class="s">&quot;Pointer value:    %p</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="kt">void</span><span class="o">*</span><span class="p">)</span><span class="n">pfunc</span><span class="p">);</span>
+<span class="c1">// 输出相同地址：0x4005a0</span>
+</code></pre></div>
+<hr />
+<h3 id="_11">二、类型系统的深度约束</h3>
+<p><strong>1. 严格类型匹配原则</strong><br />
+函数指针类型包含完整调用特征：<br />
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="p">)(</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w">        </span><span class="c1">// 接受两个int，返回int</span>
+<span class="kt">void</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="p">)(</span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="p">)</span><span class="w">    </span><span class="c1">// 接受字符串指针，无返回值</span>
+<span class="kt">double</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="p">)(</span><span class="kt">void</span><span class="p">)</span><span class="w">         </span><span class="c1">// 无参数，返回double</span>
+</code></pre></div></p>
+<p><strong>2. 类型不匹配的灾难性后果</strong><br />
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="kt">void</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">wrong_func</span><span class="p">)()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">void</span><span class="p">(</span><span class="o">*</span><span class="p">)())</span><span class="n">add</span><span class="p">;</span><span class="w">  </span><span class="c1">// 强制类型转换</span>
+<span class="n">wrong_func</span><span class="p">();</span><span class="w">  </span><span class="c1">// 调用时栈帧破坏，导致UB</span>
+</code></pre></div></p>
+<p><strong>3. 使用typedef增强可读性</strong><br />
+<div class="highlight"><pre><span></span><code><span class="k">typedef</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">MathFunc</span><span class="p">)(</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="p">);</span>
+<span class="n">MathFunc</span><span class="w"> </span><span class="n">func_table</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="n">add</span><span class="p">,</span><span class="w"> </span><span class="n">sub</span><span class="p">,</span><span class="w"> </span><span class="n">mul</span><span class="p">};</span><span class="w">  </span><span class="c1">// 函数指针数组</span>
+</code></pre></div></p>
+<hr />
+<h3 id="_12">三、函数指针的六大经典应用模式</h3>
+<p><strong>1. 回调机制（标准库典范）</strong><br />
+<div class="highlight"><pre><span></span><code><span class="c1">// qsort函数原型</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">qsort</span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">base</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">nmemb</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">size</span><span class="p">,</span>
+<span class="w">           </span><span class="kt">int</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">compar</span><span class="p">)(</span><span class="k">const</span><span class="w"> </span><span class="kt">void</span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">void</span><span class="o">*</span><span class="p">));</span>
+
+<span class="c1">// 使用示例：排序字符串数组</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">str_compare</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">strcmp</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="o">**</span><span class="p">)</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="o">**</span><span class="p">)</span><span class="n">b</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="n">qsort</span><span class="p">(</span><span class="n">strings</span><span class="p">,</span><span class="w"> </span><span class="n">count</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="kt">char</span><span class="o">*</span><span class="p">),</span><span class="w"> </span><span class="n">str_compare</span><span class="p">);</span>
+</code></pre></div></p>
+<p><strong>2. 状态机实现（工业级实践）</strong><br />
+<div class="highlight"><pre><span></span><code><span class="k">typedef</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">StateHandler</span><span class="p">)(</span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">context</span><span class="p">);</span>
+
+<span class="n">StateHandler</span><span class="w"> </span><span class="n">handlers</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">init_state</span><span class="p">,</span>
+<span class="w">    </span><span class="n">running_state</span><span class="p">,</span>
+<span class="w">    </span><span class="n">error_state</span>
+<span class="p">};</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">run_state_machine</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">ctx</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="n">handlers</span><span class="p">[</span><span class="n">state</span><span class="p">](</span><span class="n">ctx</span><span class="p">);</span>
+<span class="w">    </span><span class="n">state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">state</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<p><strong>3. 动态插件系统</strong><br />
+<div class="highlight"><pre><span></span><code><span class="c1">// 主程序加载动态库</span>
+<span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">lib</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dlopen</span><span class="p">(</span><span class="s">&quot;plugin.so&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">RTLD_LAZY</span><span class="p">);</span>
+<span class="k">typedef</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">PluginFunc</span><span class="p">)(</span><span class="kt">int</span><span class="p">);</span>
+<span class="n">PluginFunc</span><span class="w"> </span><span class="n">func</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">PluginFunc</span><span class="p">)</span><span class="n">dlsym</span><span class="p">(</span><span class="n">lib</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;plugin_entry&quot;</span><span class="p">);</span>
+<span class="n">func</span><span class="p">(</span><span class="mi">42</span><span class="p">);</span><span class="w">  </span><span class="c1">// 调用插件功能</span>
+</code></pre></div></p>
+<p><strong>4. 面向对象模拟（C语言实现多态）</strong><br />
+<div class="highlight"><pre><span></span><code><span class="k">struct</span><span class="w"> </span><span class="nc">Animal</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">speak</span><span class="p">)(</span><span class="kt">void</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">dog_speak</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Woof!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">cat_speak</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Meow!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+
+<span class="k">struct</span><span class="w"> </span><span class="nc">Animal</span><span class="w"> </span><span class="n">dog</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">.</span><span class="n">speak</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dog_speak</span><span class="w"> </span><span class="p">};</span>
+<span class="k">struct</span><span class="w"> </span><span class="nc">Animal</span><span class="w"> </span><span class="n">cat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">.</span><span class="n">speak</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cat_speak</span><span class="w"> </span><span class="p">};</span>
+</code></pre></div></p>
+<p><strong>5. 中断向量表（嵌入式系统）</strong><br />
+<div class="highlight"><pre><span></span><code><span class="c1">// 定义中断处理函数指针类型</span>
+<span class="k">typedef</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">ISR_Handler</span><span class="p">)(</span><span class="kt">void</span><span class="p">);</span>
+
+<span class="c1">// 中断向量表（假设地址0x00000000开始）</span>
+<span class="k">volatile</span><span class="w"> </span><span class="n">ISR_Handler</span><span class="o">*</span><span class="w"> </span><span class="n">isr_table</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">ISR_Handler</span><span class="o">*</span><span class="p">)</span><span class="mh">0x00000000</span><span class="p">;</span>
+
+<span class="c1">// 注册定时器中断处理</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">timer_isr</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* ... */</span><span class="w"> </span><span class="p">}</span>
+<span class="n">isr_table</span><span class="p">[</span><span class="n">TIMER_IRQ</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">timer_isr</span><span class="p">;</span>
+</code></pre></div></p>
+<p><strong>6. 高阶函数（函数工厂模式）</strong><br />
+<div class="highlight"><pre><span></span><code><span class="k">typedef</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">MathOp</span><span class="p">)(</span><span class="kt">double</span><span class="p">);</span>
+
+<span class="n">MathOp</span><span class="w"> </span><span class="nf">create_operation</span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="n">op</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">switch</span><span class="p">(</span><span class="n">op</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="sc">&#39;+&#39;</span><span class="p">:</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="o">&amp;</span><span class="n">add</span><span class="p">;</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="sc">&#39;-&#39;</span><span class="p">:</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="o">&amp;</span><span class="n">sub</span><span class="p">;</span>
+<span class="w">        </span><span class="k">default</span><span class="o">:</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">double</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">5.0</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="kt">double</span><span class="w"> </span><span class="nf">sub</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">3.0</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div></p>
+<hr />
+<h3 id="_13">四、专家级陷阱防范指南</h3>
+<p><strong>1. 调用约定灾难</strong><br />
+<div class="highlight"><pre><span></span><code><span class="c1">// Windows API常见问题</span>
+<span class="k">typedef</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="p">(</span><span class="kr">__stdcall</span><span class="w"> </span><span class="o">*</span><span class="n">Callback</span><span class="p">)(</span><span class="kt">int</span><span class="p">);</span><span class="w">  </span><span class="c1">// 显式声明调用约定</span>
+<span class="c1">// 错误使用__cdecl调用将导致栈崩溃</span>
+</code></pre></div></p>
+<p><strong>2. 虚函数表安全验证</strong><br />
+<div class="highlight"><pre><span></span><code><span class="k">struct</span><span class="w"> </span><span class="nc">Object</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="p">(</span><span class="o">**</span><span class="n">vtable</span><span class="p">)(</span><span class="kt">void</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="c1">// 必须验证vtable有效性</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">obj</span><span class="o">-&gt;</span><span class="n">vtable</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">obj</span><span class="o">-&gt;</span><span class="n">vtable</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">obj</span><span class="o">-&gt;</span><span class="n">vtable</span><span class="p">[</span><span class="mi">0</span><span class="p">]();</span><span class="w">  </span><span class="c1">// 安全调用</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<p><strong>3. 函数指针的const正确性</strong><br />
+<div class="highlight"><pre><span></span><code><span class="c1">// 只读存储器中的函数指针（嵌入式场景）</span>
+<span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">fp</span><span class="p">)(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">read_sensor</span><span class="p">;</span>
+<span class="c1">// 尝试修改fp将触发硬件异常</span>
+</code></pre></div></p>
+<p><strong>4. 动态代码生成安全</strong><br />
+<div class="highlight"><pre><span></span><code><span class="c1">// JIT编译场景需要特殊处理</span>
+<span class="kt">void</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">generated_code</span><span class="p">)()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mmap</span><span class="p">(</span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="p">,</span>
+<span class="w">                               </span><span class="n">PROT_READ</span><span class="o">|</span><span class="n">PROT_WRITE</span><span class="o">|</span><span class="n">PROT_EXEC</span><span class="p">,</span>
+<span class="w">                               </span><span class="n">MAP_PRIVATE</span><span class="o">|</span><span class="n">MAP_ANONYMOUS</span><span class="p">,</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="c1">// 必须确保生成代码的边界安全</span>
+</code></pre></div></p>
+<hr />
+<h3 id="_14">五、性能优化与底层调优</h3>
+<p><strong>1. 分支预测优化</strong><br />
+<div class="highlight"><pre><span></span><code><span class="c1">// 高频调用场景使用函数指针包装</span>
+<span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">fast_path</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">cached_func</span><span class="p">(</span><span class="n">x</span><span class="p">);</span><span class="w">  </span><span class="c1">// 热点函数被预测执行</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<p><strong>2. 缓存局部性优化</strong><br />
+<div class="highlight"><pre><span></span><code><span class="c1">// 将常用函数指针集中存储</span>
+<span class="k">struct</span><span class="w"> </span><span class="nc">HotFunctions</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">render</span><span class="p">)(</span><span class="kt">void</span><span class="p">);</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">update</span><span class="p">)(</span><span class="kt">float</span><span class="p">);</span>
+<span class="p">}</span><span class="w"> </span><span class="n">__attribute__</span><span class="p">((</span><span class="n">aligned</span><span class="p">(</span><span class="mi">64</span><span class="p">)));</span><span class="w">  </span><span class="c1">// 确保缓存行对齐</span>
+</code></pre></div></p>
+<p><strong>3. 指令预取提示</strong><br />
+<div class="highlight"><pre><span></span><code><span class="c1">; 提前预取函数代码到缓存</span>
+<span class="nf">prefetchnta</span><span class="w"> </span><span class="p">[</span><span class="no">rax</span><span class="p">]</span><span class="w">  </span><span class="c1">; rax存储函数指针地址</span>
+<span class="nf">call</span><span class="w"> </span><span class="no">rax</span>
+</code></pre></div></p>
+<hr />
+<h3 id="c">六、C++进阶：成员函数指针的深渊</h3>
+<p><strong>1. 成员函数指针本质</strong><br />
+存储的信息包括：<br />
+- 函数地址<br />
+- 虚函数表偏移（如果是虚函数）<br />
+- 调整this指针的偏移量（多继承场景）  </p>
+<p><strong>2. 危险的类型转换</strong><br />
+<div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Base</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">virtual</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">foo</span><span class="p">();</span><span class="w"> </span><span class="p">};</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Derived</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">Base</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">bar</span><span class="p">();</span><span class="w"> </span><span class="p">};</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="p">(</span><span class="n">Base</span><span class="o">::*</span><span class="n">pfunc</span><span class="p">)()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">Base</span><span class="o">::</span><span class="n">foo</span><span class="p">;</span>
+<span class="n">pfunc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">void</span><span class="w"> </span><span class="p">(</span><span class="n">Base</span><span class="o">::*</span><span class="p">)()</span><span class="o">&gt;</span><span class="p">(</span><span class="o">&amp;</span><span class="n">Derived</span><span class="o">::</span><span class="n">bar</span><span class="p">);</span><span class="w">  </span><span class="c1">// 未定义行为！</span>
+</code></pre></div></p>
+<p><strong>3. 高性能委托实现</strong><br />
+<div class="highlight"><pre><span></span><code><span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span>
+<span class="k">struct</span><span class="w"> </span><span class="nc">Delegate</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">T</span><span class="o">*</span><span class="w"> </span><span class="n">object</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="p">(</span><span class="n">T</span><span class="o">::*</span><span class="n">method</span><span class="p">)(</span><span class="kt">int</span><span class="p">);</span>
+
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">operator</span><span class="p">()(</span><span class="kt">int</span><span class="w"> </span><span class="n">arg</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="p">(</span><span class="n">object</span><span class="o">-&gt;*</span><span class="n">method</span><span class="p">)(</span><span class="n">arg</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></p>
+<hr />
+<h3 id="_15">面试深度问题准备</h3>
+<p><strong>问题1：如何实现函数指针的序列化？</strong><br />
+- 解析：函数地址与进程内存布局相关，跨进程传输无效<br />
+- 正确做法：传递函数符号名称，在目标进程动态查找  </p>
+<p><strong>问题2：函数指针与lambda表达式的互操作？</strong><br />
+- C++11解决方案：通过无状态lambda捕获<br />
+  <div class="highlight"><pre><span></span><code><span class="k">auto</span><span class="w"> </span><span class="n">lambda</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[](){</span><span class="w"> </span><span class="cm">/* ... */</span><span class="w"> </span><span class="p">};</span>
+<span class="kt">void</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">fp</span><span class="p">)()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lambda</span><span class="p">;</span><span class="w">  </span><span class="c1">// 仅限无捕获lambda</span>
+</code></pre></div></p>
+<p><strong>问题3：如何检测函数指针是否合法？</strong><br />
+- 专业级方案：<br />
+  1. 遍历导出符号表验证地址范围<br />
+  2. 使用mprotect检测可执行权限<br />
+  3. 插入哨兵指令进行完整性校验  </p>
+<hr />
+<p>掌握这些内容后，您将能够：<br />
+1. 在系统级编程中安全使用函数指针<br />
+2. 设计基于函数指针的扩展架构<br />
+3. 诊断复杂的内存相关BUG<br />
+4. 在面试中展现深度硬件和软件协同认知  </p>
+<p>建议通过以下方式强化：<br />
+- 阅读glibc的<code>dlfcn</code>实现（动态链接机制）<br />
+- 分析Linux内核的<code>module.c</code>（模块加载实现）<br />
+- 使用GDB反汇编观察函数指针调用过程</p>
+<h2 id="uart">UART</h2>
+<p>这里问的并不多，本来我以为问 UART 协议的，但是看到我写的模拟器自己模拟了 UART，还移植了 Linux，所以问了问具体怎么移植的，MMIO、FIFO、中断那些。</p>
+<div style="page-break-after:always"></div>
+
+<h2 id="simple-debugger">simple debugger</h2>
+<p>问了这个东西具体实现，怎么实现断点、监视点的；之后还拓展问了 GDB <code>beark</code> 的实现、插桩的内容。</p>
+<h3 id="_16">之前的笔记</h3>
+<p><strong>1. 单步执行（si 命令）</strong></p>
+<ul>
+<li>
+<p><strong>核心机制</strong>：</p>
+<ul>
+<li><strong>步数控制</strong>：用户输入 <code>si N</code> 后，通过 <code>cmd_si</code> 函数解析步数 <code>N</code>，调用 <code>cpu_exec(N)</code> 执行 <code>N</code> 条指令。</li>
+<li><strong>逐指令执行</strong>：在 <code>cpu_exec</code> 函数中，通过循环调用 <code>exec_once</code> 逐条执行指令。每条指令执行后更新程序计数器 <code>cpu.pc</code>，并触发跟踪和状态检查（如监视点、差分测试）。</li>
+<li><strong>调试信息输出</strong>：若步数 <code>N</code> 小于 <code>MAX_INST_TO_PRINT</code>（默认为 10），开启 <code>g_print_step</code> 标志，输出每条指令的汇编信息（通过 <code>trace_and_difftest</code> 中的 <code>ITRACE</code> 逻辑）。</li>
+</ul>
+</li>
+<li>
+<p><strong>代码关键点</strong>：</p>
+<div class="highlight"><pre><span></span><code><span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">cmd_si</span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">step</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="n">sscanf</span><span class="p">(</span><span class="n">args</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;%d&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">step</span><span class="p">);</span>
+<span class="w">    </span><span class="n">cpu_exec</span><span class="p">((</span><span class="kt">uint64_t</span><span class="p">)</span><span class="n">step</span><span class="p">);</span><span class="w">  </span><span class="c1">// 执行指定步数</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">cpu_exec</span><span class="p">(</span><span class="kt">uint64_t</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">g_print_step</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">MAX_INST_TO_PRINT</span><span class="p">);</span><span class="w">  </span><span class="c1">// 控制调试信息输出</span>
+<span class="w">    </span><span class="n">execute</span><span class="p">(</span><span class="n">n</span><span class="p">);</span><span class="w">  </span><span class="c1">// 实际执行指令</span>
+<span class="p">}</span>
+</code></pre></div>
+</li>
+</ul>
+<p><strong>2. 监视点 （watchpoint）</strong></p>
+<ul>
+<li>
+<p><strong>实现原理</strong>：</p>
+<ul>
+<li><strong>表达式监控</strong>：用户通过 <code>w expr</code> 设置监视点（如 <code>w *0x80000000</code>），调试器解析表达式并记录其当前值。</li>
+<li><strong>动态检查</strong>：在每条指令执行后（<code>cpu_exec</code> 循环末尾），调用 <code>diff_wp()</code> 检查所有监视点的值。若值发生变化，触发暂停并提示用户。</li>
+<li><strong>数据结构</strong>：通过 <code>init_wp_pool</code> 初始化监视点池，使用链表或数组管理多个监视点，支持动态添加（<code>watch_wp</code>）和删除（<code>delete_wp</code>）。</li>
+</ul>
+</li>
+<li>
+<p><strong>代码关键点</strong>：</p>
+<div class="highlight"><pre><span></span><code><span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">cmd_w</span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">bool</span><span class="w"> </span><span class="n">success</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">expr</span><span class="p">(</span><span class="n">args</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">success</span><span class="p">);</span><span class="w">  </span><span class="c1">// 解析表达式</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">success</span><span class="p">)</span><span class="w"> </span><span class="n">watch_wp</span><span class="p">(</span><span class="n">args</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="p">);</span><span class="w">  </span><span class="c1">// 添加监视点</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">execute</span><span class="p">(</span><span class="kt">uint64_t</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// ...</span>
+<span class="w">    </span><span class="n">trace_and_difftest</span><span class="p">(</span><span class="o">&amp;</span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="n">cpu</span><span class="p">.</span><span class="n">pc</span><span class="p">);</span><span class="w">  </span><span class="c1">// 每次执行后触发检查</span>
+<span class="w">    </span><span class="n">IFDEF</span><span class="p">(</span><span class="n">CONFIG_WATCHPOINT</span><span class="p">,</span><span class="w"> </span><span class="n">diff_wp</span><span class="p">());</span><span class="w">  </span><span class="c1">// 检查监视点</span>
+<span class="p">}</span>
+</code></pre></div>
+</li>
+</ul>
+<p><strong>3. 断点条件设置</strong></p>
+<ul>
+<li><strong>当前支持</strong>：<ul>
+<li><strong>隐式条件断点</strong>：通过监视点模拟断点。例如，<code>w pc == 0x80000000</code> 监视程序计数器（PC）到达目标地址时暂停。</li>
+<li><strong>直接条件断点</strong>：<strong>暂不支持</strong>。需扩展解析逻辑以处理形如 <code>break 0x80000000 if ax==1</code> 的复杂条件，需在断点触发时额外检查寄存器或内存值。</li>
+</ul>
+</li>
+<li><strong>扩展建议</strong>：<ul>
+<li>添加 <code>break</code> 命令，支持地址断点（通过 PC 值匹配）。</li>
+<li>结合表达式求值引擎，在断点触发时验证条件表达式（如 <code>ax == 1</code>），再决定是否暂停。</li>
+</ul>
+</li>
+</ul>
+<p><strong>4. 断点原理</strong></p>
+<ul>
+<li>
+<p><strong>硬件断点</strong>：</p>
+<ul>
+<li><strong>指令替换</strong>：在目标地址插入特殊指令（如 <code>ebreak</code>）。当 CPU 执行到该地址时触发异常，调试器捕获异常并暂停执行。</li>
+<li><strong>恢复机制</strong>：断点命中后，替换回原指令，单步执行后再重新插入断点（需维护断点列表）。</li>
+</ul>
+</li>
+<li>
+<p><strong>软件断点（模拟器实现）</strong>：</p>
+<ul>
+<li>
+<p><strong>PC 匹配</strong>：在 <code>cpu_exec</code> 循环中检查当前 <code>pc</code> 是否命中预设的断点地址列表。若命中，暂停执行。</p>
+</li>
+<li>
+<p><strong>代码示例（伪逻辑）</strong>：</p>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="nf">cpu_exec</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(;</span><span class="n">n</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">n</span><span class="o">--</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">is_breakpoint</span><span class="p">(</span><span class="n">cpu</span><span class="p">.</span><span class="n">pc</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w">  </span><span class="c1">// 检查断点列表</span>
+<span class="w">            </span><span class="n">pause_execution</span><span class="p">();</span>
+<span class="w">            </span><span class="k">break</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">exec_once</span><span class="p">(</span><span class="o">&amp;</span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="n">cpu</span><span class="p">.</span><span class="n">pc</span><span class="p">);</span><span class="w">  </span><span class="c1">// 执行指令</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>功能对比</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;"><strong>功能</strong></th>
+<th style="text-align: left;"><strong>单步执行（si）</strong></th>
+<th style="text-align: left;"><strong>监视点（w）</strong></th>
+<th style="text-align: left;"><strong>断点（需扩展）</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>触发条件</strong></td>
+<td style="text-align: left;">用户指定步数</td>
+<td style="text-align: left;">表达式值变化</td>
+<td style="text-align: left;">PC 到达指定地址</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>实现复杂度</strong></td>
+<td style="text-align: left;">低（步数控制）</td>
+<td style="text-align: left;">中（表达式求值+动态检查）</td>
+<td style="text-align: left;">高（地址管理+条件解析）</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>性能开销</strong></td>
+<td style="text-align: left;">低</td>
+<td style="text-align: left;">高（每条指令后遍历监视点）</td>
+<td style="text-align: left;">低（仅检查 PC）</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>灵活性</strong></td>
+<td style="text-align: left;">逐指令调试</td>
+<td style="text-align: left;">支持任意内存/寄存器监控</td>
+<td style="text-align: left;">依赖地址或条件表达式</td>
+</tr>
+</tbody>
+</table>
+<p>接下来再看看，DeepSeek 的深入！</p>
+<h3 id="gdb">GDB断点实现机制深度解析（含插桩原理）</h3>
+<h4 id="_17">一、断点实现的三大层级架构</h4>
+<ol>
+<li>
+<p><strong>硬件断点 (Hardware Breakpoint)</strong>  </p>
+</li>
+<li>
+<p><strong>实现原理</strong>：利用处理器的调试寄存器（如x86的DR0-DR3）</p>
+</li>
+<li><strong>特点</strong>：<ul>
+<li>支持精确的访问类型监控（执行/读/写）</li>
+<li>数量有限（x86只有4个硬件断点）</li>
+<li>零性能开销（由硬件直接检测）</li>
+</ul>
+</li>
+<li>
+<p><strong>典型应用</strong>：<code>watch</code>命令监控内存写操作</p>
+</li>
+<li>
+<p><strong>软件断点 (Software Breakpoint)</strong>  </p>
+</li>
+<li><strong>核心机制</strong>：指令替换插桩（Instrumentation）
+     <div class="highlight"><pre><span></span><code><span class="c1">// 原始指令流</span>
+<span class="mh">0x4005f6</span><span class="o">:</span><span class="w"> </span><span class="mi">48</span><span class="w"> </span><span class="mi">89</span><span class="w"> </span><span class="n">c7</span><span class="w">      </span><span class="n">mov</span><span class="w"> </span><span class="o">%</span><span class="n">rax</span><span class="p">,</span><span class="o">%</span><span class="n">rdi</span><span class="w"> </span>
+
+<span class="c1">// 插入断点后</span>
+<span class="mh">0x4005f6</span><span class="o">:</span><span class="w"> </span><span class="n">cc</span><span class="w">            </span><span class="n">int3</span><span class="w">  </span><span class="c1">// 替换第一个字节为0xcc</span>
+</code></pre></div></li>
+<li>
+<p><strong>关键流程</strong>：</p>
+<ol>
+<li><strong>GDB通过<code>ptrace</code>系统调用修改目标进程内存</strong></li>
+<li>将目标地址的指令首字节替换为<code>int3</code>（x86）或<code>brk</code>（ARM）</li>
+<li>命中断点时触发<code>SIGTRAP</code>信号，被GDB捕获</li>
+<li>恢复原指令并单步执行后重新插入断点</li>
+</ol>
+</li>
+<li>
+<p><strong>条件断点 (Conditional Breakpoint)</strong>  </p>
+</li>
+<li><strong>实现层级</strong>：在软件断点基础上叠加条件判断</li>
+<li><strong>执行流程</strong>：<ol>
+<li>断点触发后暂停目标进程</li>
+<li>读取寄存器/内存状态（通过<code>ptrace</code>）</li>
+<li>执行用户定义的条件表达式（如<code>i &gt; 100</code>）</li>
+<li>条件满足则保持暂停，否则透明恢复执行</li>
+</ol>
+</li>
+</ol>
+<h4 id="instrumentation-in-depth">二、插桩技术深度剖析（Instrumentation in Depth）</h4>
+<ol>
+<li><strong>动态二进制插桩 (DBI)</strong>  </li>
+<li><strong>代表工具</strong>：DynamoRIO、Pin</li>
+<li>
+<p><strong>技术原理</strong>：
+     <div class="highlight"><pre><span></span><code><span class="nf">Original</span><span class="w"> </span><span class="no">Code</span><span class="w">          </span><span class="no">Instrumented</span><span class="w"> </span><span class="no">Code</span>
+<span class="nf">mov</span><span class="w"> </span><span class="no">eax</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="no">ebx</span><span class="p">]</span><span class="w">         </span><span class="no">jmp</span><span class="w"> </span><span class="no">trampoline</span>
+<span class="nf">add</span><span class="w"> </span><span class="no">ecx</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="w">             </span><span class="c1">; 原指令被转移</span>
+<span class="w">                       </span><span class="nl">trampoline:</span>
+<span class="w">                       </span><span class="nf">push</span><span class="w"> </span><span class="no">registers</span>
+<span class="w">                       </span><span class="nf">call</span><span class="w"> </span><span class="no">analysis_func</span><span class="w">  </span><span class="c1">; 注入分析代码</span>
+<span class="w">                       </span><span class="nf">pop</span><span class="w"> </span><span class="no">registers</span>
+<span class="w">                       </span><span class="nf">mov</span><span class="w"> </span><span class="no">eax</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="no">ebx</span><span class="p">]</span><span class="w">     </span><span class="c1">; 执行原指令</span>
+<span class="w">                       </span><span class="nf">jmp</span><span class="w"> </span><span class="no">back_to_main</span>
+</code></pre></div></p>
+</li>
+<li>
+<p><strong>静态重写插桩</strong>  </p>
+</li>
+<li>
+<p><strong>ELF文件重写</strong>：通过<code>objcopy</code>修改二进制段
+     <div class="highlight"><pre><span></span><code><span class="c1"># 插入探针函数示例</span>
+objcopy<span class="w"> </span>--add-section<span class="w"> </span>.instrument<span class="o">=</span>probes.o<span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>--set-section-flags<span class="w"> </span>.instrument<span class="o">=</span>alloc,load,readonly,code<span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>target_binary
+</code></pre></div></p>
+</li>
+<li>
+<p><strong>即时编译插桩 (JIT Instrumentation)</strong>  </p>
+</li>
+<li><strong>LLDB实现</strong>：对JIT生成代码插入调试指令
+     <div class="highlight"><pre><span></span><code><span class="k">define</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="vg">@foo</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="nl">entry:</span>
+<span class="w">    </span><span class="k">call</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="vg">@debug_probe</span><span class="p">()</span><span class="w">  </span><span class="c">; 插入的调试探针</span>
+<span class="w">    </span><span class="nv nv-Anonymous">%1</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">add</span><span class="w"> </span><span class="kt">i32</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">1</span>
+<span class="w">    </span><span class="k">ret</span><span class="w"> </span><span class="k">void</span>
+<span class="p">}</span>
+</code></pre></div></li>
+</ol>
+<h4 id="gdblinux">三、GDB断点实现的Linux内核视角</h4>
+<ol>
+<li><strong>ptrace系统调用交互</strong>  </li>
+<li>
+<p><strong>关键操作</strong>：
+     <div class="highlight"><pre><span></span><code><span class="c1">// 附加到目标进程</span>
+<span class="n">ptrace</span><span class="p">(</span><span class="n">PTRACE_ATTACH</span><span class="p">,</span><span class="w"> </span><span class="n">pid</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
+
+<span class="c1">// 读取目标内存</span>
+<span class="kt">long</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ptrace</span><span class="p">(</span><span class="n">PTRACE_PEEKTEXT</span><span class="p">,</span><span class="w"> </span><span class="n">pid</span><span class="p">,</span><span class="w"> </span><span class="n">addr</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
+
+<span class="c1">// 修改目标内存（插入int3）</span>
+<span class="n">ptrace</span><span class="p">(</span><span class="n">PTRACE_POKETEXT</span><span class="p">,</span><span class="w"> </span><span class="n">pid</span><span class="p">,</span><span class="w"> </span><span class="n">addr</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">orig_data</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="o">~</span><span class="mh">0xff</span><span class="p">)</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mh">0xcc</span><span class="p">);</span>
+
+<span class="c1">// 单步执行并捕获信号</span>
+<span class="n">ptrace</span><span class="p">(</span><span class="n">PTRACE_SINGLESTEP</span><span class="p">,</span><span class="w"> </span><span class="n">pid</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
+</code></pre></div></p>
+</li>
+<li>
+<p><strong>信号处理机制</strong>  </p>
+</li>
+<li><code>int3</code>触发<code>SIGTRAP</code>信号</li>
+<li>
+<p>GDB通过<code>waitpid</code>捕获信号并解析事件：
+     <div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">status</span><span class="p">;</span>
+<span class="n">waitpid</span><span class="p">(</span><span class="n">pid</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">status</span><span class="p">,</span><span class="w"> </span><span class="n">WUNTRACED</span><span class="p">);</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">WIFSTOPPED</span><span class="p">(</span><span class="n">status</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">WSTOPSIG</span><span class="p">(</span><span class="n">status</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">SIGTRAP</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 断点命中处理</span>
+<span class="p">}</span>
+</code></pre></div></p>
+</li>
+<li>
+<p><strong>调试寄存器操作</strong>  </p>
+</li>
+<li>通过<code>PTRACE_SET_DEBUGREG</code>设置硬件断点：
+     <div class="highlight"><pre><span></span><code><span class="k">struct</span><span class="w"> </span><span class="nc">user_hwdebug_state</span><span class="w"> </span><span class="n">regs</span><span class="p">;</span>
+<span class="n">regs</span><span class="p">.</span><span class="n">dr7</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">16</span><span class="p">);</span><span class="w">  </span><span class="c1">// 启用DR0，执行类型</span>
+<span class="n">regs</span><span class="p">.</span><span class="n">dr0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">target_address</span><span class="p">;</span>
+<span class="n">ptrace</span><span class="p">(</span><span class="n">PTRACE_SETREGSET</span><span class="p">,</span><span class="w"> </span><span class="n">pid</span><span class="p">,</span><span class="w"> </span><span class="n">NT_X86_DEBUG</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">regs</span><span class="p">);</span>
+</code></pre></div></li>
+</ol>
+<h4 id="_18">四、进阶学习路线（专家级成长路径）</h4>
+<ol>
+<li><strong>理论基石</strong>：</li>
+<li>《Computer Systems: A Programmer's Perspective》第8章（异常控制流）</li>
+<li>Intel® 64 and IA-32 Architectures Software Developer’s Manual Vol3（第17章调试功能）</li>
+<li>
+<p>ELF文件格式标准（理解调试段结构）</p>
+</li>
+<li>
+<p><strong>实践突破</strong>：</p>
+</li>
+<li><strong>GDB源码精读</strong>：<code>gdb/breakpoint.c</code>和<code>gdb/infrun.c</code></li>
+<li><strong>自制调试器</strong>：基于<code>ptrace</code>实现断点功能（约300行C代码）</li>
+<li>
+<p><strong>动态插桩实验</strong>：使用DynamoRIO API注入分析代码</p>
+</li>
+<li>
+<p><strong>高级调试技术</strong>：</p>
+</li>
+<li><strong>热补丁技术</strong>：运行时替换函数（参考Linux kprobes）</li>
+<li><strong>逆向调试</strong>：记录执行历史并反向执行（参考Mozilla rr）</li>
+<li>
+<p><strong>多线程非侵入调试</strong>：使用perf事件采样</p>
+</li>
+<li>
+<p><strong>性能分析工具链</strong>：
+   <div class="highlight"><pre><span></span><code><span class="c1"># 使用perf观察断点开销</span>
+perf<span class="w"> </span>stat<span class="w"> </span>-e<span class="w"> </span>instructions,cpu-cycles<span class="w"> </span>./target_program
+
+<span class="c1"># 使用eBPF进行动态追踪</span>
+bpftrace<span class="w"> </span>-e<span class="w"> </span><span class="s1">&#39;uprobe:/path/to/bin:func { @[ustack] = count(); }&#39;</span>
+</code></pre></div></p>
+</li>
+</ol>
+<h4 id="_19">五、面试深度问题准备</h4>
+<ol>
+<li><strong>断点与单步执行的原子性问题</strong>  </li>
+<li>问题：如何在单步执行时不丢失断点？</li>
+<li>
+<p>答案：使用临时断点（temporary breakpoint），单步前禁用其他断点</p>
+</li>
+<li>
+<p><strong>多线程调试的断点同步</strong>  </p>
+</li>
+<li>问题：如何确保所有线程命中同一断点？</li>
+<li>
+<p>答案：通过<code>PTRACE_INTERRUPT</code>暂停所有线程后统一设置断点</p>
+</li>
+<li>
+<p><strong>JIT代码的调试支持</strong>  </p>
+</li>
+<li>问题：如何调试动态生成的代码？</li>
+<li>答案：使用<code>JIT_CODE_UNREGISTER</code>事件通知调试器（参考GDB JIT接口）</li>
+</ol>
+<p>掌握这些内容后，您将在系统级调试领域建立深刻的认知优势。关键是通过代码阅读（推荐GDB的<code>handle_sigtrap</code>函数）和动手实践（如用<code>ptrace</code>实现断点）深化理解。</p>
+<div style="page-break-after:always"></div>
+
+<h2 id="summary">Summary</h2>
+<p>大概这些，还有一些题目不太记得了。</p>
+<p>面下来感受确实很爽。</p>
+<p>面试官随机挑你简历上写的一句话，随机开问，然后以”<strong>树结构</strong>“不断深入地问，只能说如果项目不是自己做的，或者说对项目不是特别熟悉的，八成翻车！</p>
+
+
+
+
+
+
+
+  
+    
+  
+  
+    
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Last update">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2025-03-28T09:36:27+01:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2025-03-28</span>
+  </span>
+
+    
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Created">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2025-03-28T09:36:27+01:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2025-03-28</span>
+  </span>
+
+    
+    
+    
+  </aside>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://github.com/JAILuo" target="_blank" rel="noopener" title="JAILuo" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.footer"], "search": "../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.83f73b43.min.js"></script>
+      
+        <script src="../../js/timeago.min.js"></script>
+      
+        <script src="../../js/timeago_mkdocs_material.js"></script>
+      
+        <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+      
+    
+  </body>
+</html>
