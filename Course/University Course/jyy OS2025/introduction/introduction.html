@@ -1812,6 +1812,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      存储
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1880,7 +1889,7 @@
 <p>创建出了文件系统的结构。现在 <code>ps</code> / <code>ls /proc[pid]/xxx</code> 就可以了！</p>
 <p>再测试一些基本工具，都是OK的！</p>
 <p><img alt="image-20250405203323197" src="pic/image-20250405203323197.png" /></p>
-<p>但是，还有一个问题，我们还没有文件系统，这个怎么来？</p>
+<p>但是，还有一个问题，我们还没有文件系统，文件系统怎么来？</p>
 <p>从磁盘上来！<code>/dev/sda</code>。借助一个系统调用：<code>mknod</code></p>
 <div class="highlight"><pre><span></span><code>mknod<span class="w"> </span>/dev/sda<span class="w">     </span>b<span class="w"> </span><span class="m">8</span><span class="w"> </span><span class="m">0</span>
 </code></pre></div>
@@ -2189,6 +2198,15 @@ systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> 
     Kernel-&gt;&gt;RootFS: 执行 /sbin/init (systemd)
     RootFS-&gt;&gt;RootFS: 启动用户空间服务
 </code></pre></div>
+<h2 id="_5">存储</h2>
+<p>具体怎么启动起来的？</p>
+<blockquote>
+<p>但先别急，计算机怎么知道 <code>rootfs</code> 究竟在哪个地方？对于这种早期初始化级别的内容，肯定需要我们给出位置呀？还真是！也就是常看到的这个 <code>/proc/cmdline</code> ！</p>
+<p><code>/proc/cmdline</code> 显示各种信息：初始磁盘镜像位置、<code>rootfs</code>是哪个分区</p>
+</blockquote>
+<p>之前的这个内容，想详细了解怎么做？？？具体怎么启动分区的？</p>
+<p>分区这个概念是什么？</p>
+<p>boot、efi？</p>
 
 
 
@@ -2211,7 +2229,7 @@ systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> 
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2025-04-13T04:00:47+02:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2025-04-13</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2025-05-04T12:12:33+02:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2025-05-04</span>
   </span>
 
     

@@ -1754,9 +1754,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#git-push1" class="md-nav__link">
+  <a href="#git-push" class="md-nav__link">
     <span class="md-ellipsis">
-      关于Git push问题1
+      关于Git push问题
     </span>
   </a>
   
@@ -1862,9 +1862,45 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#ssh-key_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      ssh-key后仍要输密码的情况
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#stash-pop" class="md-nav__link">
     <span class="md-ellipsis">
       stash 和 pop
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reset-hard-clean" class="md-nav__link">
+    <span class="md-ellipsis">
+      reset --hard 和 clean
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reporepo" class="md-nav__link">
+    <span class="md-ellipsis">
+      关于核心区域、工作区、暂存区、本地repo、远程repo的概念
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#git-patch" class="md-nav__link">
+    <span class="md-ellipsis">
+      Git 打 patch
     </span>
   </a>
   
@@ -2066,9 +2102,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#git-push1" class="md-nav__link">
+  <a href="#git-push" class="md-nav__link">
     <span class="md-ellipsis">
-      关于Git push问题1
+      关于Git push问题
     </span>
   </a>
   
@@ -2174,9 +2210,45 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#ssh-key_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      ssh-key后仍要输密码的情况
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#stash-pop" class="md-nav__link">
     <span class="md-ellipsis">
       stash 和 pop
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reset-hard-clean" class="md-nav__link">
+    <span class="md-ellipsis">
+      reset --hard 和 clean
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reporepo" class="md-nav__link">
+    <span class="md-ellipsis">
+      关于核心区域、工作区、暂存区、本地repo、远程repo的概念
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#git-patch" class="md-nav__link">
+    <span class="md-ellipsis">
+      Git 打 patch
     </span>
   </a>
   
@@ -2452,7 +2524,7 @@ git config --global --unset https.proxy
 </li>
 </ol>
 <p>请注意，镜像站点的可靠性和稳定性对于Git操作非常重要，建议您选择经过验证和可靠的镜像站点。希望这些信息对您有帮助。如果您有任何其他问题，请随时告诉我。</p>
-<h4 id="git-push1">关于Git push问题1</h4>
+<h4 id="git-push">关于Git push问题</h4>
 <div class="highlight"><pre><span></span><code>$<span class="w"> </span>git<span class="w"> </span>push<span class="w"> </span>-u<span class="w"> </span>orign<span class="w"> </span>main
 fatal:<span class="w"> </span><span class="s1">&#39;orign&#39;</span><span class="w"> </span>does<span class="w"> </span>not<span class="w"> </span>appear<span class="w"> </span>to<span class="w"> </span>be<span class="w"> </span>a<span class="w"> </span>git<span class="w"> </span>repository
 fatal:<span class="w"> </span>Could<span class="w"> </span>not<span class="w"> </span><span class="nb">read</span><span class="w"> </span>from<span class="w"> </span>remote<span class="w"> </span>repository.
@@ -2660,46 +2732,42 @@ unset  HTTP_PROXY
 <h4 id="_7">想要切换到别的分支，但是不想要这次的修改</h4>
 <p>如果你在分支上进行了一些改动并进行了测试，但并不想提交这些改动，你可以采取以下几种方法来处理这些未提交的更改：</p>
 <ol>
-<li>
-<p><strong>放弃工作目录中的所有更改</strong>：
-   如果你确定不想保留这些更改，可以使用 <code>git checkout</code> 或 <code>git reset</code> 命令来放弃自上次提交以来的所有更改。
-   <div class="highlight"><pre><span></span><code>git<span class="w"> </span>reset<span class="w"> </span>--hard
+<li><strong>放弃工作目录中的所有更改</strong>：
+   如果你确定不想保留这些更改，可以使用 <code>git checkout</code> 或 <code>git reset</code> 命令来放弃自上次提交以来的所有更改。</li>
+</ol>
+<p><div class="highlight"><pre><span></span><code>git<span class="w"> </span>reset<span class="w"> </span>--hard
 git<span class="w"> </span>checkout<span class="w"> </span>.
 </code></pre></div>
    这将重置你的工作目录和索引（暂存区）到最后一次提交的状态。</p>
-</li>
-<li>
-<p><strong>暂存改动</strong>：
-   如果你想要保留这些改动，但目前不想提交，你可以使用 <code>git stash</code> 命令来暂存这些改动。
-   <div class="highlight"><pre><span></span><code>git<span class="w"> </span>stash
+<ol>
+<li><strong>暂存改动</strong>：
+   如果你想要保留这些改动，但目前不想提交，你可以使用 <code>git stash</code> 命令来暂存这些改动。</li>
+</ol>
+<p><div class="highlight"><pre><span></span><code>git<span class="w"> </span>stash
 </code></pre></div>
    这会将你的改动存储在一个“暂存栈”中，你的工作目录将会被清理干净。</p>
-</li>
-<li>
-<p><strong>创建一个新的分支</strong>：
-   如果你想要保留这些改动并且将来可能会用到，可以创建一个新的分支来保存这些改动。</p>
-</li>
+<ol>
+<li><strong>创建一个新的分支</strong>：
+   如果你想要保留这些改动并且将来可能会用到，可以创建一个新的分支来保存这些改动。</li>
 </ol>
 <p><div class="highlight"><pre><span></span><code>git<span class="w"> </span>checkout<span class="w"> </span>-b<span class="w"> </span>new-branch-name
 </code></pre></div>
    这样，你的改动将会保存在新的分支上，你可以在任何时候回到这个分支继续工作。</p>
 <ol>
-<li>
-<p><strong>使用 <code>git restore</code> 命令</strong>：
-   在 Git 2.23 版本及以后，你可以使用 <code>git restore</code> 命令来放弃工作目录中的特定文件或所有文件的更改。
-   <div class="highlight"><pre><span></span><code>git<span class="w"> </span>restore<span class="w"> </span>.
+<li><strong>使用 <code>git restore</code> 命令</strong>：
+   在 Git 2.23 版本及以后，你可以使用 <code>git restore</code> 命令来放弃工作目录中的特定文件或所有文件的更改。</li>
+</ol>
+<p><div class="highlight"><pre><span></span><code>git<span class="w"> </span>restore<span class="w"> </span>.
 </code></pre></div>
    或者放弃特定文件的更改：
    <div class="highlight"><pre><span></span><code>git<span class="w"> </span>restore<span class="w"> </span>&lt;file-path&gt;
 </code></pre></div></p>
-</li>
-<li>
-<p><strong>使用 <code>git clean</code> 命令</strong>：
+<ol>
+<li><strong>使用 <code>git clean</code> 命令</strong>：
    如果你想要删除未跟踪的文件（例如，那些没有加入到 Git 仓库中的新文件），可以使用 <code>git clean</code> 命令。
    <div class="highlight"><pre><span></span><code>git<span class="w"> </span>clean<span class="w"> </span>-f
 </code></pre></div>
-   这个命令会删除所有未跟踪的文件和目录，但不会删除已跟踪的文件。</p>
-</li>
+   这个命令会删除所有未跟踪的文件和目录，但不会删除已跟踪的文件。</li>
 </ol>
 <p>选择适合你情况的方法来处理你的改动。如果你只是想要回到上次提交的状态并且不保留任何未提交的更改，那么使用 <code>git reset --hard</code> 和 <code>git checkout .</code> 是最快的方法。如果你想要保留这些更改以备将来使用，那么 <code>git stash</code> 或创建一个新的分支会是更好的选择。</p>
 <p>​   </p>
@@ -2974,22 +3042,18 @@ Plug<span class="w"> </span><span class="s1">&#39;git://github.com/kristijanhusa
 <blockquote>
 <p>比如，删除本地仓库中 M2 分支的某个特定提交，可以使用 <code>git rebase -i</code> 命令进行交互式变基操作。以下是具体步骤：</p>
 <ol>
-<li>
-<p><strong>切换到 M2 分支</strong>（如果尚未切换）：
-   <div class="highlight"><pre><span></span><code>git<span class="w"> </span>checkout<span class="w"> </span>M2
-</code></pre></div></p>
-</li>
-<li>
-<p><strong>启动交互式变基</strong>：
-   <div class="highlight"><pre><span></span><code>git<span class="w"> </span>rebase<span class="w"> </span>-i<span class="w"> </span>HEAD~N
-</code></pre></div></p>
-</li>
-<li>
-<p><code>N</code> 是你想要回溯的提交数量。例如，如果你想要回溯到包含垃圾日志的提交，可以将 <code>N</code> 设置为包含这些提交的数量。假设你知道垃圾日志是在最近的 5 个提交中，那么可以使用 <code>HEAD~5</code>。</p>
-</li>
-<li>
-<p><strong>编辑提交历史</strong>：</p>
-</li>
+<li><strong>切换到 M2 分支</strong>（如果尚未切换）：</li>
+</ol>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>checkout<span class="w"> </span>M2
+</code></pre></div>
+<ol>
+<li><strong>启动交互式变基</strong>：</li>
+</ol>
+<p><div class="highlight"><pre><span></span><code>git<span class="w"> </span>rebase<span class="w"> </span>-i<span class="w"> </span>HEAD~N
+</code></pre></div>
+   - <code>N</code> 是你想要回溯的提交数量。例如，如果你想要回溯到包含垃圾日志的提交，可以将 <code>N</code> 设置为包含这些提交的数量。假设你知道垃圾日志是在最近的 5 个提交中，那么可以使用 <code>HEAD~5</code>。</p>
+<ol>
+<li><strong>编辑提交历史</strong>：</li>
 <li>执行上述命令后，Git 会打开一个文本编辑器（通常是 Vim 或 Nano），列出最近的 <code>N</code> 个提交。</li>
 <li>在编辑器中，你会看到类似以下的内容：
      <div class="highlight"><pre><span></span><code>pick 1234567 Commit message 1
@@ -3157,6 +3221,10 @@ fixup g345678 Commit message for G
 </ol>
 <p>通过这些操作，你可以灵活地优化和清理提交历史，使项目的历史更加清晰和易于维护。</p>
 </blockquote>
+<h4 id="ssh-key_1">ssh-key后仍要输密码的情况</h4>
+<p><a href="https://blog.csdn.net/baidu_35085676/article/details/53456884">解决github上传ssh-key后仍须输入密码的问题_github添加了ssh还要密码-CSDN博客</a></p>
+<p><a href="https://blog.csdn.net/u012219045/article/details/99942337">git 系列之三： 设置了ssh key，但git pull还是要输入账号密码_sshkey 输入了为什么 git 还要输入密码-CSDN博客</a></p>
+<p>就是仓库需要用 ssh的，不支持https的</p>
 <h4 id="stash-pop">stash 和 pop</h4>
 <p>在 Git 中，如果你在当前分支上进行了一些开发但还没有提交，这时有另一个任务需要处理，你可以按照以下步骤来保存当前的工作并创建一个新的分支来处理新任务：</p>
 <p>步骤 1：保存当前未提交的更改</p>
@@ -3192,6 +3260,226 @@ git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </sp
 <li><strong>恢复暂存的工作</strong>：<code>git stash pop</code></li>
 </ol>
 <p>这样，你就可以在不同的任务之间灵活切换，同时保持代码的整洁和有序。</p>
+<h4 id="reset-hard-clean">reset --hard 和 clean</h4>
+<ul>
+<li>
+<p>1️⃣ <code>git reset --hard [commit]</code></p>
+<p>🌟 <strong>核心作用</strong>：强制回退代码到指定版本（不保留任何修改痕迹）</p>
+<ul>
+<li>
+<p>✅ 重置三棵树：移动 <code>HEAD 指针</code> → 更新 <code>暂存区</code> → 覆盖 <code>工作目录</code></p>
+</li>
+<li>
+<p>✅ 清除内容：丢弃所有未提交的修改（包括暂存区和工作区的改动）</p>
+</li>
+<li>
+<p>⚠️ 危险操作：已修改但未提交/备份的代码将永久丢失</p>
+</li>
+<li>
+<p>🔥 典型场景：彻底放弃本地所有修改，强制回滚到某个历史版本</p>
+</li>
+<li>
+<p>📝 示例用法：</p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>reset<span class="w"> </span>--hard<span class="w"> </span>HEAD^<span class="w">     </span><span class="c1"># 回退到上一个提交（丢弃最后一次提交）</span>
+git<span class="w"> </span>reset<span class="w"> </span>--hard<span class="w"> </span>origin/main<span class="w"> </span><span class="c1"># 强制对齐远程仓库最新状态</span>
+</code></pre></div>
+</li>
+</ul>
+</li>
+<li>
+<p>2️⃣ <code>git clean -df</code></p>
+<p>🌟 <strong>核心作用</strong>：清理未跟踪的文件/目录（untracked files）</p>
+<ul>
+<li>
+<p>✅ <code>-d</code> 同时删除未跟踪的目录</p>
+</li>
+<li>
+<p>✅ <code>-f</code> 强制删除（默认会拒绝删除.gitignore忽略的文件）</p>
+</li>
+<li>
+<p>⚠️ 危险操作：未跟踪的重要文件（如临时配置文件）将永久丢失</p>
+</li>
+<li>
+<p>🔥 典型场景：清除编译产物、临时文件等垃圾文件</p>
+</li>
+<li>
+<p>📝 示例用法：</p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>clean<span class="w"> </span>-df<span class="w">            </span><span class="c1"># 删除所有未跟踪的文件和目录</span>
+git<span class="w"> </span>clean<span class="w"> </span>-dfx<span class="w">           </span><span class="c1"># 额外删除被.gitignore忽略的文件</span>
+</code></pre></div>
+</li>
+</ul>
+</li>
+<li>
+<p>💡 组合使用场景</p>
+<p>当需要让工作目录完全回到「如同刚克隆仓库」的状态：</p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>reset<span class="w"> </span>--hard<span class="w"> </span>HEAD<span class="w">  </span><span class="c1"># 清除所有已跟踪文件的修改</span>
+git<span class="w"> </span>clean<span class="w"> </span>-df<span class="w">          </span><span class="c1"># 清除所有未跟踪文件/目录</span>
+</code></pre></div>
+<p>⚠️ 终极警告
+这两个命令都是 <strong>不可逆操作</strong>，执行前请务必：</p>
+<ol>
+<li>确认已提交重要修改</li>
+<li>用 <code>git status</code> 检查将要删除的内容</li>
+<li>先执行 <code>git stash</code> 或手动备份不确定的文件</li>
+</ol>
+</li>
+<li>
+<p>📌 补充技巧</p>
+<p>想预览操作影响（安全模式）：</p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>clean<span class="w"> </span>-ndf<span class="w">        </span><span class="c1"># -n 参数模拟删除操作（dry-run）</span>
+git<span class="w"> </span>reset<span class="w"> </span>--hard<span class="w"> </span>HEAD<span class="w">  </span><span class="c1"># 先执行 git diff 查看改动差异</span>
+</code></pre></div>
+</li>
+</ul>
+<blockquote>
+<p>TODO：关于deepseek的记录。</p>
+</blockquote>
+<h4 id="reporepo">关于核心区域、工作区、暂存区、本地repo、远程repo的概念</h4>
+<blockquote>
+<p>好的！我会从<strong>核心区域</strong>和<strong>本地/远程仓库</strong>的区别切入，用 <strong>Mermaid 流程图 + 实际案例</strong>帮你彻底理解 Git 的设计哲学。以下是深度解析：</p>
+<hr />
+<p>一、Git 核心区域的本质（3大区域）
+核心逻辑图（Mermaid）
+<div class="highlight"><pre><span></span><code>flowchart LR
+    A[工作区\nWorking Directory] --&gt;|git add| B[暂存区\nStaging Area]
+    B --&gt;|git commit| C[本地版本库\nRepository]
+    C --&gt;|git push| D[远程仓库\nRemote]
+    D --&gt;|git fetch/clone| C
+    D --&gt;|git pull| A
+</code></pre></div></p>
+<p>三大区域详解
+| <strong>区域</strong>       | <strong>存储内容</strong>                         | <strong>操作命令</strong>              | <strong>类比现实场景</strong>           |
+| -------------- | ------------------------------------ | ------------------------- | -------------------------- |
+| <strong>工作区</strong>     | 你直接编辑的代码文件（未跟踪的修改） | <code>git add</code>, <code>git checkout</code> | 你的办公桌（草稿纸）       |
+| <strong>暂存区</strong>     | 已标记为“待提交”的修改快照           | <code>git commit</code>              | 快递打包前的暂存箱         |
+| <strong>本地版本库</strong> | 所有已提交的历史记录（Commit对象）   | <code>git push</code>, <code>git reset</code>   | 公司内部档案室（本地存档） |
+| <strong>远程仓库</strong>   | 团队共享的云端代码库                 | <code>git pull</code>, <code>git clone</code>   | 云存储服务器（团队共享）   |</p>
+<hr />
+<p>二、核心区域 VS 本地/远程仓库
+1. <strong>核心区域（工作区、暂存区、本地版本库）</strong>
+- <strong>完全本地化</strong>：所有操作不依赖网络。
+- <strong>开发者直接控制</strong>：通过命令修改文件状态。
+- <strong>关键特性</strong>：
+  - <strong>工作区</strong>：你看到的就是实际文件（可随意修改）。
+  - <strong>暂存区</strong>：隐藏的中间层（<code>.git/index</code> 文件存储状态）。
+  - <strong>本地版本库</strong>：存储所有提交历史（<code>.git/objects</code>）。</p>
+<ol>
+<li><strong>远程仓库（GitHub/GitLab等）</strong></li>
+<li><strong>团队协作桥梁</strong>：只是一个“镜像”的版本库。</li>
+<li><strong>必须显式同步</strong>：通过 <code>git push</code> 或 <code>git pull</code> 交互。</li>
+<li><strong>本质区别</strong>：远程仓库没有“工作区”和“暂存区”！</li>
+</ol>
+<hr />
+<p>三、深入流程：从修改到协作的完整路径
+ 全流程 Mermaid 图（含命令）</p>
+<p><code>mermaid
+flowchart TB
+    subgraph 本地
+        A[工作区] --&gt;|1. 修改文件| A
+        A --&gt;|2. git add| B[暂存区]
+        B --&gt;|3. git commit| C[本地版本库]
+        C --&gt;|4. git push| D[远程仓库]
+    end
+    D --&gt;|5. 其他成员git pull| E[其他人的本地版本库]
+    E --&gt;|6. 合并到工作区| F[其他人的工作区]</code></p>
+<p>关键节点解释
+1. <strong>工作区修改</strong>：直接编辑文件（如 <code>vim app.js</code>）。
+2. <strong>暂存区缓存</strong>：<code>git add</code> 将修改标记为“待提交”。
+3. <strong>本地提交</strong>：<code>git commit</code> 生成永久快照（仅本地）。
+4. <strong>推送远程</strong>：<code>git push</code> 同步本地提交到远程仓库。
+5. <strong>他人拉取</strong>：<code>git pull</code> = <code>git fetch</code>（下载） + <code>git merge</code>（合并到本地）。
+6. <strong>协作循环</strong>：他人修改后重复此流程。</p>
+<hr />
+<p>四、企业级场景案例：理解区域隔离性
+场景：修复线上 Bug（多人协作）</p>
+<div class="highlight"><pre><span></span><code>flowchart LR
+    A[工作区] --&gt;|修改bug并测试| B[git add]
+    B --&gt;|暂存修复文件| C[git commit -m &#39;修复#123&#39;]
+    C --&gt;|本地提交| D[git push origin hotfix]
+    D --&gt;|推送到远程hotfix分支| E[远程仓库]
+    E --&gt;|CI/CD自动部署| F[生产环境]
+   E --&gt;|团队成员git pull| G[其他人本地仓库]
+</code></pre></div>
+<p>核心逻辑：
+1. <strong>隔离性</strong>：你的工作区和暂存区修改不会影响他人，直到 <code>git push</code>。
+2. <strong>本地版本库</strong>：保存所有历史，允许回退（<code>git reset</code>）或分支操作。
+3. <strong>远程仓库</strong>：仅作为“可信源”，不存储中间状态（无暂存区）。</p>
+<hr />
+<p>五、高级技巧：直接操作三大区域
+1. <strong>跳过暂存区</strong>（快速提交）
+<code>bash
+git commit -a -m "跳过git add直接提交"  # 自动添加已跟踪文件</code></p>
+<ol>
+<li>
+<p><strong>对比区域差异</strong>
+<code>bash
+git diff              # 工作区 vs 暂存区
+git diff --staged     # 暂存区 vs 本地版本库
+git diff HEAD         # 工作区 vs 本地版本库</code></p>
+</li>
+<li>
+<p><strong>从版本库恢复文件</strong>
+<code>bash
+git checkout HEAD -- file.txt  # 用版本库覆盖工作区和暂存区</code>
+</p>
+</li>
+</ol>
+</blockquote>
+<p>配合着 git reset 几个参数可以理解。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;"><strong>命令</strong></th>
+<th style="text-align: left;">Commit 历史</th>
+<th style="text-align: left;">暂存区</th>
+<th style="text-align: left;">工作区</th>
+<th style="text-align: left;">风险等级</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>git reset --soft</code></td>
+<td style="text-align: left;">回退</td>
+<td style="text-align: left;"><strong>保留</strong></td>
+<td style="text-align: left;"><strong>保留</strong></td>
+<td style="text-align: left;">低</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>git reset --mixed</code></td>
+<td style="text-align: left;">回退</td>
+<td style="text-align: left;">重置为目标提交</td>
+<td style="text-align: left;"><strong>保留</strong></td>
+<td style="text-align: left;">中</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>git reset --hard</code></td>
+<td style="text-align: left;">回退</td>
+<td style="text-align: left;">重置为目标提交</td>
+<td style="text-align: left;">重置为目标提交</td>
+<td style="text-align: left;">高</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code># 输出示例：
+On branch main
+Changes to be committed:          # 暂存区中的文件（已add）
+  (use &quot;git restore --staged &lt;file&gt;...&quot; to unstage)
+        modified:   tracked_file.txt
+
+Changes not staged for commit:    # 已跟踪但未暂存（已修改但未add）
+  (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)
+  (use &quot;git restore &lt;file&gt;...&quot; to discard changes in working directory)
+        modified:   tracked_file.txt
+
+Untracked files:                  # 未跟踪文件（从未add过）
+  (use &quot;git add &lt;file&gt;...&quot; to include in what will be committed)
+        new_file.txt
+</code></pre></div>
+<h4 id="git-patch">Git 打 patch</h4>
+<p><a href="https://zhuanlan.zhihu.com/p/476557218">手把手教你用 git 打 patch - 知乎</a></p>
+<p><a href="http://saaientist.blogspot.com/">Saaien Tist</a></p>
+<p><a href="https://stackoverflow.com/questions/8279602/what-is-a-patch-in-git-version-control">什么是 Git 版本控制中的补丁？- 堆栈溢出 --- What is a patch in Git version control? - Stack Overflow</a></p>
 
 
 
@@ -3214,7 +3502,7 @@ git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </sp
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2025-04-13T04:32:16+02:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2025-04-13</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2025-05-04T12:12:33+02:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2025-05-04</span>
   </span>
 
     
