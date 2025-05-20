@@ -1875,13 +1875,16 @@
 <blockquote>
 <p><strong>notice：如果要实践老师的例子，记得开 KVM</strong></p>
 </blockquote>
-<p><code>initramfs</code> 给应用生态建设者提供了这么一个机制，</p>
-<p>可以做一个目录，在目录里放你想要的任何文件（一个目录树），启动的时候就会出现这些内容，这就是 Linux 的初始状态！这个初始状态是由你构建的！</p>
-<p>在这个基础上，就能构建一切！</p>
-<p>最开始的状态/内容就这么点：</p>
+<p>先不去看 <code>initramfs</code> 是什么，先想想：Linux系统，是怎么一步步构建起今天这么庞大的世界的？他在初始化完成后，肯定会有一个初始状态，由人为/手动的指定的！计算机是一个只会执行指令的机器，肯定是经过了什么指令/操作，让运行在计算机上的简单程序变成今天这样的。</p>
+<p>我想到的是 <code>bootloader</code>！计算机上电复位后，内部的ROM/RAM太小，不足以执行大程序，需要外部存储和bootloader，但这个时候应该也是有一些文件的，我需要管理！所以在bootloader阶段应该会有一个类似于根文件系统的东西来管理的？就是这个 <code>initramfs</code>！</p>
+<p><code>initramfs</code> 给应用生态建设者提供了这么一个机制</p>
+<p>可以做一个目录，在目录里放你想要的任何文件（一个目录树），启动的时候就会出现这些内容，这就是 Linux 的初始状态！这个初始状态是由你构建的！在这个基础上，就能构建一切！</p>
+<blockquote>
+<p>简略的os启动/最开始的状态/内容就这么点，很像我们控制的裸机程序（裸机上，结构上？），</p>
+</blockquote>
 <p><img alt="image-20250405202303881" src="pic/image-20250405202303881.png" /></p>
-<p>甚至连 <code>/proc</code>、<code>/dev</code> 都没有？<code>ps</code> 都不行。</p>
-<p>但是在这个基础上，就能构造出一个像今天一样的Linux的世界（通过很多的 <code>syscalls</code>、初始状态 <code>initramfs</code>再添加一些多一些内容），各种各样的工具、图形（可能稍微困难点）。。。</p>
+<p>连 <code>/proc</code>、<code>/dev</code> 这种划分进程、管理输入输出设备的文件系统都没有，<code>ps</code> 都不行。</p>
+<p>但在这个基础上，就能构造出一个像今天一样的Linux的世界（通过很多的 <code>syscalls</code>、初始状态 <code>initramfs</code>再添加一些多一些内容），各种各样的工具、图形（可能稍微困难点）。。。</p>
 <p>具体怎么进一步？<code>exit</code>就好了，接着执行下面的！</p>
 <p><img alt="" src="pic/image-20250405202719360.png" /></p>
 <p>有意思的是那个 <code>busybox</code> 的符号链接，比如：<code>busybox ln -s /bin/busybox /bin/vi</code></p>
@@ -2229,7 +2232,7 @@ systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> 
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2025-05-04T12:12:33+02:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2025-05-04</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2025-05-20T18:26:14+02:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2025-05-20</span>
   </span>
 
     

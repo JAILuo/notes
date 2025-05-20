@@ -2178,6 +2178,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      中断的一些基础
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -2332,30 +2341,42 @@
 ]</p>
 <h4 id="_8"><strong>示例验证：</strong></h4>
 <ul>
-<li><strong>短ISR场景</strong>：</li>
-<li>ISR执行周期：100 cycles</li>
-<li>主循环处理周期：1000 cycles</li>
-<li>中断频率：1kHz（每秒1000次）</li>
+<li>
+<p><strong>短ISR场景</strong>：</p>
+</li>
+<li>
+<p>ISR执行周期：100 cycles</p>
+</li>
+<li>
+<p>主循环处理周期：1000 cycles</p>
+</li>
+<li>
+<p>中断频率：1kHz（每秒1000次）</p>
+</li>
 <li>
 <p>CPU主频：100MHz（1e8 cycles/sec）
-  [
-  \text{总周期/秒} = (100 + 1000) \times 1000 = 1,100,000 \, \text{cycles}
-  ]
-  [
-  \text{CPU占用率} = \frac{1,100,000}{1e8} \times 100\% = 1.1\%
-  ]</p>
+    $$
+    \text{总周期/秒} = (100 + 1000) \times 1000 = 1,100,000 \, \text{cycles}
+    $$</p>
+<p>$$
+\text{CPU占用率} = \frac{1,100,000}{1e8} \times 100\% = 1.1\%
+$$</p>
 </li>
 <li>
 <p><strong>长ISR场景</strong>：</p>
 </li>
-<li>ISR直接处理所有逻辑：1100 cycles</li>
-<li>主循环无法执行（被中断阻塞）
-  [
-  \text{总周期/秒} = 1100 \times 1000 = 1,100,000 \, \text{cycles}
-  ]
-  [
-  \text{CPU占用率} = \frac{1,100,000}{1e8} \times 100\% = 1.1\% \, (\text{但主循环完全停滞！})
-  ]</li>
+<li>
+<p>ISR直接处理所有逻辑：1100 cycles</p>
+</li>
+<li>
+<p>主循环无法执行（被中断阻塞）
+    $$
+    \text{总周期/秒} = 1100 \times 1000 = 1,100,000 \, \text{cycles}
+    $$</p>
+<p>$$
+\text{CPU占用率} = \frac{1,100,000}{1e8} \times 100\% = 1.1\% \, (\text{但主循环完全停滞！})
+$$</p>
+</li>
 </ul>
 <h4 id="_9"><strong>核心矛盾：</strong></h4>
 <ul>
@@ -2367,37 +2388,56 @@
 <h4 id="_10"><strong>高频中断的定义与判断依据</strong></h4>
 <p>高频中断的判断需综合考虑 <strong>中断频率</strong> 和 <strong>单次中断处理时间</strong>，目标是避免CPU被中断占用过多周期。具体阈值可通过以下步骤确定：</p>
 <h5 id="1cpu"><strong>步骤1：计算单次中断的CPU占用时间</strong></h5>
-<p>[
+<p>$$
 \text{单次中断占用时间} = \frac{\text{ISR周期数}}{\text{CPU主频}}
-]
-例如：
+$$</p>
+<p>例如：
 - ISR周期数 = 100 cycles
 - CPU主频 = 100MHz → 1 cycle = 10ns
 - 单次中断时间 = 100 × 10ns = 1μs</p>
 <h5 id="2_1"><strong>步骤2：计算每秒中断占用的总时间</strong></h5>
-<p>[
+<p>$$
 \text{总占用时间} = \text{单次中断时间} \times \text{中断频率}
-]
-- 若中断频率为1MHz（每秒1e6次）：
-  [
+$$</p>
+<ul>
+<li>若中断频率为1MHz（每秒1e6次）：
+  $$
   \text{总占用时间} = 1μs \times 1e6 = 1秒
-  ]
-  → CPU占用率 = 100%（完全不可行，必须使用DMA）。</p>
+  $$
+  → CPU占用率 = 100%（完全不可行，必须使用DMA）。</li>
+</ul>
 <h5 id="3dma"><strong>步骤3：确定DMA的使用阈值</strong></h5>
 <ul>
-<li><strong>经验法则</strong>：若中断占用的CPU时间超过总时间的10%~20%，需考虑DMA。</li>
-<li><strong>数学推导</strong>：假设允许的CPU占用率为 ( C_{\text{max}} )：
-  [
+<li>
+<p><strong>经验法则</strong>：若中断占用的CPU时间超过总时间的10%~20%，需考虑DMA。</p>
+</li>
+<li>
+<p><strong>数学推导</strong>：
+  $$
+  假设允许的CPU占用率为 C_{\text{max}}
+  $$</p>
+</li>
+</ul>
+<p>$$
   \text{最大允许中断频率} = \frac{C_{\text{max}} \times \text{CPU主频}}{\text{ISR周期数}}
-  ]
-  例如：</li>
-<li>( C_{\text{max}} = 10\% )</li>
-<li>CPU主频 = 100MHz</li>
-<li>ISR周期数 = 100 cycles
-  [
-  \text{最大中断频率} = \frac{0.1 \times 1e8}{100} = 100,000 \, \text{Hz} = 100\text{kHz}
-  ]
-  若实际中断频率超过100kHz，必须使用DMA。</li>
+  $$</p>
+<p>例如：</p>
+<ul>
+<li>
+<p>$$
+      C_{\text{max}} = 10\%
+      $$</p>
+</li>
+<li>
+<p>CPU主频 = 100MHz</p>
+</li>
+<li>
+<p>ISR周期数 = 100 cycles
+    $$
+    \text{最大中断频率} = \frac{0.1 \times 1e8}{100} = 100,000 \, \text{Hz} = 100\text{kHz}
+    $$
+    若实际中断频率超过100kHz，必须使用DMA。</p>
+</li>
 </ul>
 <h4 id="dma"><strong>DMA的典型应用场景</strong></h4>
 <ul>
@@ -2411,14 +2451,18 @@
 <h3 id="4_1"><strong>4. 中断处理时间与中断频率的权衡</strong></h3>
 <h4 id="vs"><strong>高频低耗时 vs 低频高耗时</strong></h4>
 <ul>
-<li><strong>高频低耗时</strong>（如1MHz中断，每次1 cycle）：
-  [
+<li>
+<p><strong>高频低耗时</strong>（如1MHz中断，每次1 cycle）：
+  $$
   \text{CPU占用率} = \frac{1 \times 1e6}{1e8} = 1\% \, (\text{可接受})
-  ]</li>
-<li><strong>低频高耗时</strong>（如1kHz中断，每次1000 cycles）：
-  [
+  $$</p>
+</li>
+<li>
+<p><strong>低频高耗时</strong>（如1kHz中断，每次1000 cycles）：
+  $$
   \text{CPU占用率} = \frac{1000 \times 1e3}{1e8} = 1\% \, (\text{可接受，但主循环可能被阻塞})
-  ]</li>
+  $$</p>
+</li>
 </ul>
 <h4 id="_11"><strong>设计建议</strong></h4>
 <ul>
@@ -2445,39 +2489,51 @@
 <p>中断频率<strong>主要由硬件配置或外部事件触发条件决定</strong>，而非通过数学计算得出。以下是常见中断源的频率确定方式：</p>
 <h4 id="a"><strong>a. 定时器中断</strong></h4>
 <ul>
-<li><strong>配置寄存器决定频率</strong>：<br />
+<li>
+<p><strong>配置寄存器决定频率</strong>：<br />
   例如，STM32的定时器通过预分频器（Prescaler）和自动重载值（Auto-Reload Register）计算中断频率：
-  [
-  \text{中断频率} = \frac{\text{定时器时钟源}}{\text{(Prescaler + 1) \times (AutoReload + 1)}}
-  ]</li>
-<li>假设时钟源为80MHz，Prescaler=79，AutoReload=999：
-    [
+  $$
+  \text{中断频率} = \frac{\text{定时器时钟源}}{\text{(Prescaler + 1)*(AutoReload + 1)}}
+  $$</p>
+</li>
+<li>
+<p>假设时钟源为80MHz，Prescaler=79，AutoReload=999：
+    $$
     \text{中断频率} = \frac{80\text{MHz}}{(79+1) \times (999+1)} = \frac{80,000,000}{80 \times 1000} = 1\text{kHz}
-    ]</li>
+    $$</p>
+</li>
 </ul>
 <h4 id="b"><strong>b. 外部事件中断</strong></h4>
 <ul>
-<li><strong>由物理信号触发</strong>：<br />
+<li>
+<p><strong>由物理信号触发</strong>：<br />
   如UART接收数据时，每收到一个字节触发一次中断，中断频率取决于<strong>波特率</strong>：
-  [
+  $$
   \text{中断频率} = \frac{\text{波特率}}{\text{每帧位数}}
-  ]</li>
-<li>波特率115200，8N1格式（每帧10位）：
-    [
+  $$</p>
+</li>
+<li>
+<p>波特率115200，8N1格式（每帧10位）：
+    $$
     \text{中断频率} = \frac{115200}{10} = 11,520 \, \text{Hz} = 11.52\text{kHz}
-    ]</li>
+    $$</p>
+</li>
 </ul>
 <h4 id="c"><strong>c. 传感器中断</strong></h4>
 <ul>
-<li><strong>由传感器输出信号决定</strong>：<br />
+<li>
+<p><strong>由传感器输出信号决定</strong>：<br />
   如旋转编码器每转一圈产生N个脉冲，中断频率为：
-  [
+  $$
   \text{中断频率} = \frac{\text{转速（RPM）} \times N}{60}
-  ]</li>
-<li>转速3000 RPM，每转100脉冲：
-    [
+  $$</p>
+</li>
+<li>
+<p>转速3000 RPM，每转100脉冲：
+    $$
     \text{中断频率} = \frac{3000 \times 100}{60} = 5,000 \, \text{Hz} = 5\text{kHz}
-    ]</li>
+    $$</p>
+</li>
 </ul>
 <hr />
 <h3 id="2_3"><strong>2. 多中断处理策略</strong></h3>
@@ -2511,9 +2567,9 @@
 </ul>
 <h4 id="c_1"><strong>c. 高频中断的硬件卸载</strong></h4>
 <ul>
-<li><strong>专用外设</strong>：<br />
+<li><strong>专用外设</strong>：
   使用PWM模块生成波形，避免通过中断模拟PWM信号。</li>
-<li><strong>硬件加速器</strong>：<br />
+<li><strong>硬件加速器</strong>：
   如加密、CRC计算等任务交由硬件加速器完成，减少CPU中断负担。</li>
 </ul>
 <hr />
@@ -2521,10 +2577,10 @@
 <p>在OS环境下，中断处理需与内核调度机制协同，引入了新的设计模式和挑战。</p>
 <h4 id="a-top-halfbottom-half"><strong>a. 上半部（Top Half）与下半部（Bottom Half）</strong></h4>
 <ul>
-<li>
-<p><strong>上半部</strong>：<br />
-  在中断上下文中执行，要求快速完成<strong>关键操作</strong>（如读取寄存器、应答硬件），通常<strong>关闭中断</strong>。
-  <div class="highlight"><pre><span></span><code><span class="c1">// Linux驱动示例：上半部</span>
+<li><strong>上半部</strong>
+  在中断上下文中执行，要求快速完成<strong>关键操作</strong>（如读取寄存器、应答硬件），通常<strong>关闭中断</strong>。</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1">// Linux驱动示例：上半部</span>
 <span class="n">irqreturn_t</span><span class="w"> </span><span class="nf">irq_handler</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">irq</span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">dev_id</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">my_device</span><span class="w"> </span><span class="o">*</span><span class="n">dev</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dev_id</span><span class="p">;</span>
 <span class="w">    </span><span class="c1">// 1. 读取硬件状态</span>
@@ -2533,10 +2589,9 @@
 <span class="w">    </span><span class="n">tasklet_schedule</span><span class="p">(</span><span class="o">&amp;</span><span class="n">dev</span><span class="o">-&gt;</span><span class="n">bottom_half</span><span class="p">);</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">IRQ_HANDLED</span><span class="p">;</span>
 <span class="p">}</span>
-</code></pre></div></p>
-</li>
-<li>
-<p><strong>下半部</strong>：<br />
+</code></pre></div>
+<ul>
+<li><strong>下半部</strong>：<br />
   通过<strong>软中断、Tasklet或工作队列</strong>延后处理非实时任务，可休眠和调度。
   <div class="highlight"><pre><span></span><code><span class="c1">// Tasklet示例：下半部</span>
 <span class="kt">void</span><span class="w"> </span><span class="nf">bottom_half_tasklet</span><span class="p">(</span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">data</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -2544,37 +2599,40 @@
 <span class="w">    </span><span class="c1">// 处理数据（可休眠）</span>
 <span class="w">    </span><span class="n">process_data</span><span class="p">(</span><span class="n">dev</span><span class="o">-&gt;</span><span class="n">buffer</span><span class="p">);</span>
 <span class="p">}</span>
-</code></pre></div></p>
-</li>
+</code></pre></div></li>
 </ul>
 <h4 id="b-threaded-irqs"><strong>b. 中断线程化（Threaded IRQs）</strong></h4>
 <p>Linux支持将中断处理线程化，减少对实时任务的影响：
-- <strong>配置方式</strong>：<br />
-  使用 <code>request_threaded_irq</code> 注册中断处理函数，分为快速响应和线程化处理两部分。
-  <div class="highlight"><pre><span></span><code><span class="n">request_threaded_irq</span><span class="p">(</span><span class="n">irq</span><span class="p">,</span><span class="w"> </span><span class="n">quick_handler</span><span class="p">,</span><span class="w"> </span><span class="n">threaded_handler</span><span class="p">,</span><span class="w"> </span><span class="n">flags</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">dev</span><span class="p">);</span>
-</code></pre></div></p>
+- <strong>配置方式</strong>：
+  使用 <code>request_threaded_irq</code> 注册中断处理函数，分为快速响应和线程化处理两部分。</p>
+<div class="highlight"><pre><span></span><code><span class="n">request_threaded_irq</span><span class="p">(</span><span class="n">irq</span><span class="p">,</span><span class="w"> </span><span class="n">quick_handler</span><span class="p">,</span><span class="w"> </span><span class="n">threaded_handler</span><span class="p">,</span><span class="w"> </span><span class="n">flags</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">dev</span><span class="p">);</span>
+</code></pre></div>
 <ul>
-<li><strong>优势</strong>：  </li>
-<li>线程化部分可调度，避免阻塞其他中断。</li>
+<li>
+<p><strong>优势</strong>：  </p>
+</li>
+<li>
+<p>线程化部分可调度，避免阻塞其他中断。</p>
+</li>
 <li>支持优先级设置（如实时线程）。</li>
 </ul>
 <h4 id="c_2"><strong>c. 操作系统中的并发问题</strong></h4>
 <ul>
-<li><strong>用户态与内核态数据共享</strong>：<br />
+<li><strong>用户态与内核态数据共享</strong>：
   需通过 <code>copy_to_user</code>/<code>copy_from_user</code> 安全传递数据，避免内存越界。</li>
-<li><strong>内核锁机制</strong>：<br />
+<li><strong>内核锁机制</strong>：
   使用自旋锁（<code>spin_lock</code>）或互斥锁（<code>mutex</code>）保护共享资源，但需注意：</li>
 <li><strong>上半部中不能休眠</strong>，只能使用自旋锁。</li>
 <li><strong>下半部可休眠</strong>，可使用互斥锁。</li>
 </ul>
 <h4 id="d"><strong>d. 实时性挑战</strong></h4>
 <ul>
-<li><strong>调度延迟</strong>：<br />
-  若中断线程优先级低于实时任务，可能导致响应延迟。需设置中断线程为最高实时优先级。
-  <div class="highlight"><pre><span></span><code><span class="c1"># 设置中断线程优先级（Linux实时策略）</span>
-chrt<span class="w"> </span>-f<span class="w"> </span>-p<span class="w"> </span><span class="m">99</span><span class="w"> </span>&lt;IRQ_thread_PID&gt;
-</code></pre></div></li>
+<li><strong>调度延迟</strong>：
+  若中断线程优先级低于实时任务，可能导致响应延迟。需设置中断线程为最高实时优先级。</li>
 </ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># 设置中断线程优先级（Linux实时策略）</span>
+chrt<span class="w"> </span>-f<span class="w"> </span>-p<span class="w"> </span><span class="m">99</span><span class="w"> </span>&lt;IRQ_thread_PID&gt;
+</code></pre></div>
 <hr />
 <h3 id="_14"><strong>总结</strong></h3>
 <ol>
@@ -2582,6 +2640,25 @@ chrt<span class="w"> </span>-f<span class="w"> </span>-p<span class="w"> </span>
 <li><strong>多中断处理</strong>依赖优先级、硬件优化和任务拆分，高频中断需卸载至DMA或专用外设。</li>
 <li><strong>OS中的中断</strong>通过上半部/下半部机制平衡实时性与功能性，但需注意锁和调度策略。</li>
 </ol>
+<h2 id="_15">中断的一些基础</h2>
+<ul>
+<li>
+<p>中断嵌套</p>
+</li>
+<li>
+<p>中断延时</p>
+</li>
+<li>
+<p>丢中断</p>
+</li>
+<li>
+<p>缓冲</p>
+<blockquote>
+<p>以HID键盘为例：中断线程化+流缓冲来实现高速IO的响应与IO数据完整性</p>
+</blockquote>
+</li>
+</ul>
+<p>一些例子，这个 <code>uint8_t</code> 变量有必要关中断进入临界区来保证互斥吗？这是在STM32的，能不能保证这个单字节变量是原子的？</p>
 
 
 
@@ -2604,7 +2681,7 @@ chrt<span class="w"> </span>-f<span class="w"> </span>-p<span class="w"> </span>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2025-05-04T12:12:33+02:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2025-05-04</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2025-05-20T18:26:14+02:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2025-05-20</span>
   </span>
 
     
