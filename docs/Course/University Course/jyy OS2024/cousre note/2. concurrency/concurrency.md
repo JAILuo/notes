@@ -900,7 +900,11 @@ everything is state machine。
 
 ![image-20250110185657629](pic/image-20250110185657629.png)
 
-通过报错信息知道，这是代码打印出来的报错信息，那能不能找到这条报错信息在哪里？因为这是一个 Ubuntu 的安装镜像，所以能不能解开，然后直接搜索或者 `grep`？最后找到了一处地方（shell脚本），通读/调试上下文代码，知道这部分代码是用来扫描系统所有的磁盘，找到一个安装磁盘就安装。肯定有原因为什么没找到磁盘。怎么解决？进一步看手册，强行指定一个设备安装/别的方法
+通过报错信息知道，这是代码打印出来的报错信息，那能不能找到这条报错信息在哪里？因为这是一个 Ubuntu 的安装镜像，所以能不能解开，然后直接搜索或者 `grep`？
+
+> 更新：在公司定位自己接受的第一个defect单也是这样，看信息，然后grep找到有问题的地方（所以需要一个速度快的多的多的grep工具！）
+
+最后找到了一处地方（shell脚本），通读/调试上下文代码，知道这部分代码是用来扫描系统所有的磁盘，找到一个安装磁盘就安装。肯定有原因为什么没找到磁盘。怎么解决？进一步看手册，强行指定一个设备安装/别的方法
 
 
 
@@ -1838,7 +1842,7 @@ void T_scheduler() {
 >
 >         ```c
 >         #include <omp.h>
->                                                                                                                                 
+>                                                                                                                                         
 >         void compute() {
 >             #pragma omp parallel for
 >             for (int i = 0; i < N; i++) {
@@ -1861,7 +1865,7 @@ void T_scheduler() {
 >
 >         ```c
 >         #include <omp.h>
->                                                                                                                                 
+>                                                                                                                                         
 >         void compute() {
 >             #pragma omp parallel for schedule(dynamic)
 >             for (int i = 0; i < N; i++) {
@@ -1884,15 +1888,15 @@ void T_scheduler() {
 >
 >         ```c
 >         #include <mpi.h>
->                                                                                                                                 
+>                                                                                                                                         
 >         void communicate() {
 >             MPI_Request requests[10];
 >             MPI_Status statuses[10];
->                                                                                                                                 
+>                                                                                                                                         
 >             for (int i = 0; i < 10; i++) {
 >                 MPI_Isend(data[i], count, MPI_INT, dest, tag, MPI_COMM_WORLD, &requests[i]);
 >             }
->                                                                                                                                 
+>                                                                                                                                         
 >             MPI_Waitall(10, requests, statuses);
 >         }
 >         ```
@@ -1908,7 +1912,7 @@ void T_scheduler() {
 >
 >         ```c
 >         #include <omp.h>
->                                                                                                                                 
+>                                                                                                                                         
 >         void merge_sort_parallel(int *array, int left, int right) {
 >             if (left < right) {
 >                 int mid = (left + right) / 2;
@@ -1952,40 +1956,40 @@ void T_scheduler() {
 >             int n = 1024;
 >             int *a, *b, *c;
 >             int *d_a, *d_b, *d_c;
->                                                                                                                                     
+>                                                                                                                                             
 >             // 分配主机内存
 >             a = (int *)malloc(n * sizeof(int));
 >             b = (int *)malloc(n * sizeof(int));
 >             c = (int *)malloc(n * sizeof(int));
->                                                                                                                                     
+>                                                                                                                                             
 >             // 分配设备内存
 >             cudaMalloc((void **)&d_a, n * sizeof(int));
 >             cudaMalloc((void **)&d_b, n * sizeof(int));
 >             cudaMalloc((void **)&d_c, n * sizeof(int));
->                                                                                                                                     
+>                                                                                                                                             
 >             // 初始化数据
 >             for (int i = 0; i < n; i++) {
 >                 a[i] = i;
 >                 b[i] = i;
 >             }
->                                                                                                                                     
+>                                                                                                                                             
 >             // 从主机复制数据到设备
 >             cudaMemcpy(d_a, a, n * sizeof(int), cudaMemcpyHostToDevice);
 >             cudaMemcpy(d_b, b, n * sizeof(int), cudaMemcpyHostToDevice);
->                                                                                                                                 
+>                                                                                                                                         
 >             // 启动内核
 >             int threadsPerBlock = 256;
 >             int blocksPerGrid = (n + threadsPerBlock - 1) / threadsPerBlock;
 >             vector_add<<<blocksPerGrid, threadsPerBlock>>>(d_a, d_b, d_c, n);
->                                                                                                                                     
+>                                                                                                                                             
 >             // 从设备复制数据到主机
 >             cudaMemcpy(c, d_c, n * sizeof(int), cudaMemcpyDeviceToHost);
->                                                                                                                                     
+>                                                                                                                                             
 >             // 释放设备内存
 >             cudaFree(d_a);
 >             cudaFree(d_b);
 >             cudaFree(d_c);
->                                                                                                                                     
+>                                                                                                                                             
 >             // 释放主机内存
 >             free(a);
 >             free(b);
@@ -2356,11 +2360,11 @@ lock ordering
 > >         #include <event2/event.h>
 > >         #include <stdio.h>
 > >         #include <stdlib.h>
-> >                                         
+> >                                             
 > >         void onEvent(evutil_socket_t fd, short what, void *arg) {
 > >             printf("Event occurredn");
 > >         }
-> >                                         
+> >                                             
 > >         int main() {
 > >             struct event_base *base = event_base_new();
 > >             struct event *ev = event_new(base, -1, EV_TIMEOUT|EV_PERSIST, onEvent, NULL);
@@ -2580,26 +2584,26 @@ lock ordering
 > >     #include <linux/types.h>
 > >     #include <linux/sched.h>
 > >     #include <linux/wait.h>
-> >                                     
+> >                                         
 > >     #define DEVICE_NAME "my_device"
 > >     #define IRQ_NUMBER 1 // 假设使用中断号1
-> >                                     
+> >                                         
 > >     static int my_open(struct inode *inode, struct file *file) {
 > >         printk(KERN_INFO "Device openedn");
 > >         return 0;
 > >     }
-> >                                     
+> >                                         
 > >     static int my_release(struct inode *inode, struct file *file) {
 > >         printk(KERN_INFO "Device closedn");
 > >         return 0;
 > >     }
-> >                                     
+> >                                         
 > >     // 中断处理函数
 > >     static irqreturn_t my_interrupt_handler(int irq, void *dev_id) {
 > >         printk(KERN_INFO "Interrupt receivedn");
 > >         return IRQ_HANDLED;
 > >     }
-> >                                     
+> >                                         
 > >     static int __init my_init(void) {
 > >         int result;
 > >         result = request_irq(IRQ_NUMBER, my_interrupt_handler, IRQF_SHARED, DEVICE_NAME, NULL);
@@ -2610,15 +2614,15 @@ lock ordering
 > >         printk(KERN_INFO "Driver loadedn");
 > >         return 0;
 > >     }
-> >                                     
+> >                                         
 > >     static void __exit my_exit(void) {
 > >         free_irq(IRQ_NUMBER, NULL);
 > >         printk(KERN_INFO "Driver unloadedn");
 > >     }
-> >                                     
+> >                                         
 > >     module_init(my_init);
 > >     module_exit(my_exit);
-> >                                     
+> >                                         
 > >     MODULE_LICENSE("GPL");
 > >     MODULE_AUTHOR("Your Name");
 > >     MODULE_DESCRIPTION("A simple event-driven device driver");

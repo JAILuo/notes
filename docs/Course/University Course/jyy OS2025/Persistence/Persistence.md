@@ -1,0 +1,374 @@
+## device
+
+插个优盘试试发生什么……
+
+- 优盘的文件系统会自动 “出现”
+- 但你是专业人士
+    - 看看 /dev/ 是不是发生了一些什么变化
+
+- 水面下的冰山：
+
+- /dev/ 下的对象不会凭空创建
+    - [udev](https://www.freedesktop.org/software/systemd/man/latest/systemd-udevd.html) - /lib/udev/rules.d 
+    - udisks2 - 这才是真正执行 mount 的程序
+
+看到这些内容，就会想想，实际公司会怎么做的？
+
+
+
+
+
+什么是 IO设备？
+
+- I/O 设备 = **一个能与 CPU 交换数据的接口/控制**
+
+    - 就是 “几组约定好功能的线” (寄存器)
+        - 通过握手信号从线上读出/写入数据
+    - 给寄存器 “赋予” 一个内存地址 (Address Decoder)
+        - CPU 可以直接使用指令 (in/out/MMIO) 和设备交换数据
+        - 是的，就这么简单
+
+    ![image-20250508220352230](pic/image-20250508220352230.png)
+
+
+
+
+
+学 PCIe 总线之前，来回一下总线是个啥。
+
+为了接更多的 I/O 设备，所以有了一个非常特殊的设备：总线。
+
+进一步作用：总线：提供设备的 “虚拟化”：**注册**和**转发**
+
+- 把收到的地址 (总线地址) 和数据转发到相应的设备上
+- 例子: port I/O 的端口就是总线上的地址
+    - IBM PC 的 CPU 其实只看到这一个 I/O 设备
+
+
+
+总线这一个 I/O 设备预留了很多 I/O 设备（寄存器），等待设备插入。
+
+设备和和总线之间是有协议的，设备插入之后，就会告诉总线（控制器），它的厂商、设备号等等信息。当所有设备初始化完毕后，CPU就能看到这些设备。（现在的USB天生支持热插拔）
+
+
+
+> 今天获得 “CPU 直连” 的标准设备：总线
+>
+> - 接口
+>     - 75W 供电
+>         - 所以我们需要 6-pin, 8-pin 的额外供电
+> - 数据传输
+>     - PCIe 6.0 x16 带宽达到 128GB/s
+>         - 于是我们有了 800Gbps 的网卡
+>     - 总线自带 DMA (专门执行 memcpy 的处理器)
+> - 中断管理
+>     - 将设备中断转发到操作系统MSI (Message-signaled Interrupts)
+
+> PCIe 总线：支撑了现代 I/O 设备的体系
+>
+> - 高速设备都是直插 PCIe 的
+>     - FPGA
+>     - 显卡
+>     - 网卡
+>     - ……
+> - USB Bridge
+
+
+
+> **Prompt: NVMe 是如何接入 PCIe 总线的？**
+>
+> NVMe（Non-Volatile Memory Express）是一种为高速存储器（如SSD）设计的主机控制器接口协议。它直接通过PCIe（Peripheral Component Interconnect Express）总线与主板相连，绕过传统的SATA或SAS通道，大幅提升数据传输速率和并发处理能力。
+>
+> 详细描述如下：
+>
+> 1. **物理层面**：NVMe设备通常为M.2、U.2或PCIe扩展卡形态，插入主板相应的PCIe插槽。这样，存储器与CPU之间建立起物理连接，使用PCIe通道（如x2、x4、x8）。
+> 2. **链路层与传输层**：NVMe利用PCIe的高速点对点通道，支持多条并行通路，实现大带宽、低延迟的数据传输。NVMe协议使SSD能充分利用PCIe 3.0、4.0或更高版本的带宽。
+> 3. **协议层面**：主机操作系统通过NVMe驱动，与SSD上的NVMe控制器通信。PCIe作为物理和数据链路的载体, NVMe作为协议负责命令、队列管理和数据传输。
+> 4. **并发处理**：NVMe支持多队列（主机和控制器可各自支持多至64K队列，每队列64K命令），显著提升并发和效率，这是基于PCIe总线的多通道特性实现的。
+>
+> 总结：NVMe设备直接插接在PCIe总线上，利用PCIe的高速通道和NVMe协议实现高效的数据交互，显著提升SSD的性能。
+
+
+
+
+
+## storage
+
+### 1-Bit 到 1TB
+
+知道了这个1 bit的 NAND flash：
+
+<img src="pic/image-20250508222846944.png" alt="image-20250508222846944" style="zoom: 80%;" />
+
+> 1-Bit NAND Flash是一种非易失性存储器，每个存储单元只能存储1位二进制数据（0或1），属于SLC（Single-Level Cell）存储。其核心结构为浮栅晶体管（Floating Gate Transistor），存储单元通过是否存有电子来表示数据状态。
+>
+> 其工作原理如下：
+>
+> 1. 存储结构：NAND Flash由许多浮栅晶体管串联组成“字线”和“位线”；每个晶体管对应一个存储单元，仅存储1 bit。
+> 2. 编程（写入）：通过在控制门和源漏极施加一定电压，实现电子通过隧穿效应注入浮栅。当浮栅内有电子时，单元状态为“0”；无电子为“1”。
+> 3. 擦除：通过反向电压，使浮栅电子释放。擦除操作以“块”为单位进行。
+> 4. 读取：给控制门施加适当电压，根据浮栅是否有电子，当前存储单元的导通情况（阈值电压高为“0”，低为“1”）即可判断数据。
+> 5. 特点：SLC NAND Flash速度快、寿命长、可靠性高，适用高端存储领域。
+>
+> 总结，1-Bit NAND Flash通过控制浮栅晶体管中电子的有无，实现数据的写入、读取与擦除。
+
+但是为什么会有这个块设备？成本！
+
+思想：资源紧凑的解决方案，把数据紧凑地压缩在一起，用节约的电路！
+
+>  从 1-Bit 到 1TB
+>
+> - 实现 “寻址能力” 的代价
+>
+>     - 磁盘：位置划分 + 扇区头
+>
+>     - 电路：行 (字线) 和列 (位线) 选通信号
+>
+>         这些都会消耗额外的资源 (面积)
+>
+> - 解决方法：**按块访问**
+>
+>     “一块” 可以共享 metadata
+>
+>     - 物理分割、Erase 信号、纠错码……
+>         - 磁盘是 `struct block disk[NUM_BLOCKS]`
+>         - Block 是读/写的最小单位
+>         - “Block devices” (ls -l /dev/sd*)
+
+
+
+### Block Devices
+
+首先，block devices 也可以是普通的文件：
+
+- “字节序列” 抽象
+- 可以直接 mmap 到进程的地址空间
+
+但有了上面的硬件经验，这应该不是一个好的抽象，但这也是直白/透明抽象的代价：
+
+- **不经意间的读/写放大 (read/write amplifications)**
+
+    读写数据时，在更底层的系统上，产生的数据量会超过上层的。
+
+- 存储设备在实际执行读写操作时，处理的数据量超过用户实际请求的数据量
+
+    - 随机读/写一个 byte，都会导致大量数据传输
+    - 文件系统的实现应该能够**感知** “块” 的概念
+
+
+
+### Linux Bio
+
+**Request/response 接口**
+
+- 上层 (进程、文件系统……) 可以任意提交请求
+- 下层 (Bio + Driver) 负责调度
+    - “[Multi-queue block I/O queuing](https://www.kernel.org/doc/html/latest/block/blk-mq.html)”
+    - 核心数据结构
+        - I/O 请求：[struct request](https://elixir.bootlin.com/linux/v6.14.5/source/include/linux/blk-mq.h#L102)
+        - [struct bio](https://elixir.bootlin.com/linux/v6.14.5/source/include/linux/blk_types.h#L214)
+        - struct bvec_iter
+            - 真正起作用的：真正的 I/O vector: sector_t 的 “扇区号”
+            - 每次请求一个 request，不单单能读一个块，实际可以一个vector，很多块
+- (现在 vibe coding 真的好简单)
+
+
+
+依旧阅读： [Coding for SSDs](https://codecapsule.com/2014/02/12/coding-for-ssds-part-1-introduction-and-table-of-contents/)
+
+
+
+
+
+## 目录树管理 API
+
+### 目录树
+
+比如要删掉一个目录，但是 os 究竟做了什么，提供了什么机制？
+
+```bash
+mkdir hello
+strace rm hello 2>&1 | vim -
+```
+
+```c
+execve("/usr/bin/rm", ["rm", "hello"], 0x7ffec21c2708 /* 67 vars */) = 0
+brk(NULL)                               = 0x5d4d64d55000
+arch_prctl(0x3001 /* ARCH_??? */, 0x7fff90f58a90) = -1 EINVAL (Invalid argument)
+mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7b15993fc000
+access("/etc/ld.so.preload", R_OK)      = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3
+newfstatat(3, "", {st_mode=S_IFREG|0644, st_size=73171, ...}, AT_EMPTY_PATH) = 0
+mmap(NULL, 73171, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7b15993ea000
+close(3)                                = 0
+openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libc.so.6", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0P\237\2\0\0\0\0\0"..., 832) = 832
+pread64(3, "\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0"..., 784, 64) = 784
+pread64(3, "\4\0\0\0 \0\0\0\5\0\0\0GNU\0\2\0\0\300\4\0\0\0\3\0\0\0\0\0\0\0"..., 48, 848) = 48
+pread64(3, "\4\0\0\0\24\0\0\0\3\0\0\0GNU\0\315A\vq\17\17\tLh2\355\331Y1\0m"..., 68, 896) = 68
+newfstatat(3, "", {st_mode=S_IFREG|0755, st_size=2220400, ...}, AT_EMPTY_PATH) = 0
+pread64(3, "\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0"..., 784, 64) = 784
+mmap(NULL, 2264656, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7b1599000000
+mprotect(0x7b1599028000, 2023424, PROT_NONE) = 0
+mmap(0x7b1599028000, 1658880, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x28000) = 0x7b1599028000
+mmap(0x7b15991bd000, 360448, PROT_READ, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1bd000) = 0x7b15991bd000
+mmap(0x7b1599216000, 24576, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x215000) = 0x7b1599216000
+mmap(0x7b159921c000, 52816, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7b159921c000
+close(3)                                = 0
+mmap(NULL, 12288, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7b15993e7000
+arch_prctl(ARCH_SET_FS, 0x7b15993e7740) = 0
+set_tid_address(0x7b15993e7a10)         = 3145
+set_robust_list(0x7b15993e7a20, 24)     = 0
+rseq(0x7b15993e80e0, 0x20, 0, 0x53053053) = 0
+mprotect(0x7b1599216000, 16384, PROT_READ) = 0
+mprotect(0x5d4d3b630000, 4096, PROT_READ) = 0
+mprotect(0x7b1599436000, 8192, PROT_READ) = 0
+prlimit64(0, RLIMIT_STACK, NULL, {rlim_cur=8192*1024, rlim_max=RLIM64_INFINITY}) = 0
+munmap(0x7b15993ea000, 73171)           = 0
+getrandom("\x03\xe2\x17\x8b\x1f\x3f\x00\x5c", 8, GRND_NONBLOCK) = 8
+brk(NULL)                               = 0x5d4d64d55000
+brk(0x5d4d64d76000)                     = 0x5d4d64d76000
+openat(AT_FDCWD, "/usr/lib/locale/locale-archive", O_RDONLY|O_CLOEXEC) = 3
+newfstatat(3, "", {st_mode=S_IFREG|0644, st_size=8876560, ...}, AT_EMPTY_PATH) = 0
+mmap(NULL, 8876560, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7b1598600000
+close(3)                                = 0
+ioctl(0, TCGETS, {B38400 opost isig icanon echo ...}) = 0
+newfstatat(AT_FDCWD, "hello", {st_mode=S_IFDIR|0775, st_size=4096, ...}, AT_SYMLINK_NOFOLLOW) = 0
+openat(AT_FDCWD, "/usr/share/locale/locale.alias", O_RDONLY|O_CLOEXEC) = 3
+newfstatat(3, "", {st_mode=S_IFREG|0644, st_size=2996, ...}, AT_EMPTY_PATH) = 0
+read(3, "# Locale name alias data base.\n#"..., 4096) = 2996
+read(3, "", 4096)                       = 0
+close(3)                                = 0
+openat(AT_FDCWD, "/usr/share/locale/en_US/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/usr/share/locale/en/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/usr/share/locale-langpack/en_US/LC_MESSAGES/coreutils.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/usr/share/locale-langpack/en/LC_MESSAGES/coreutils.mo", O_RDONLY) = 3
+newfstatat(3, "", {st_mode=S_IFREG|0644, st_size=613, ...}, AT_EMPTY_PATH) = 0
+mmap(NULL, 613, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7b1599435000
+close(3)                                = 0
+write(2, "rm: ", 4rm: )                     = 4
+write(2, "cannot remove 'hello'", 21cannot remove 'hello')   = 21
+openat(AT_FDCWD, "/usr/share/locale/en_US/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/usr/share/locale/en/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/usr/share/locale-langpack/en_US/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/usr/share/locale-langpack/en/LC_MESSAGES/libc.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
+write(2, ": Is a directory", 16: Is a directory)        = 16
+write(2, "\n", 1
+)                       = 1
+lseek(0, 0, SEEK_CUR)                   = -1 ESPIPE (Illegal seek)
+close(0)                                = 0
+close(1)                                = 0
+close(2)                                = 0
+exit_group(1)                           = ?
++++ exited with 1 +++
+
+```
+
+`rm` 命令不单单是一个系统调用的文件，而会做更多的事情：
+
+检查要删除的每一个文件，是不是有权限（`fstat`）等等。
+
+最后我们都知道是删不掉的，要打印出一句话：
+
+`rm: cannot remove 'hello/': Is a directory`
+
+但输出之前还做了很多事情：
+
+错误信息的本地化（找到系统设置的语言：`LC`）等等，都可以问问 LLM。
+
+
+
+实际上 API 本身很简单，但系统提供了很多机制，比如：`globbing pattern` [glob (programming) - Wikipedia](https://en.wikipedia.org/wiki/Glob_(programming))
+
+```bash
+bash -c 'echo /etc/**/*'
+```
+
+用 `strace` 看看。
+
+但是这玩意是怎么实现的？回想起 `pstree` 中实现的遍历的这么些个目录。
+
+所以，globbing 实际上也就是自己在 `pstree` 中做的那样，打开目录，`getdents64`...
+
+```c
+openat(AT_FDCWD, "/etc/", O_RDONLY|O_NONBLOCK|O_CLOEXEC|O_DIRECTORY) = 3
+newfstatat(3, "", {st_mode=S_IFDIR|0755, st_size=12288, ...}, AT_EMPTY_PATH) = 0
+getdents64(3, 0x6074b7cbf270 /* 235 entries */, 32768) = 7552
+getdents64(3, 0x6074b7cbf270 /* 0 entries */, 32768) = 0
+close(3)                                = 0
+openat(AT_FDCWD, "/etc/udev", O_RDONLY|O_NONBLOCK|O_CLOEXEC|O_DIRECTORY) = 3
+newfstatat(3, "", {st_mode=S_IFDIR|0755, st_size=4096, ...}, AT_EMPTY_PATH) = 0
+brk(0x6074b7cf1000)                     = 0x6074b7cf1000
+getdents64(3, 0x6074b7cc8fa0 /* 5 entries */, 32768) = 144
+getdents64(3, 0x6074b7cc8fa0 /* 0 entries */, 32768) = 0                                                          
+brk(0x6074b7ce9000)                     = 0x6074b7ce9000
+close(3)                                = 0
+```
+
+
+
+### 目录树的索引也是个妥协？
+
+![image-20250515223602578](pic/image-20250515223602578.png)
+
+手机的 `photo search`？按内容搜索？
+
+就像你 `grep xxx` 那样
+
+
+
+
+
+## 文件系统的实现
+
+### 文件的元数据
+
+#### 基础
+
+![image-20250518234337088](pic/image-20250518234337088.png)
+
+link的数量，每创建一个目录，当前目录下的link就会加1（每个目录都会有一个对上一级目录的引用）！挺有意思的，之前都发现过！
+
+
+
+#### 更多元数据
+
+- Extended Attributes (xattr)
+
+    [setxattr(2) - Linux manual page](https://www.man7.org/linux/man-pages/man2/fsetxattr.2.html)
+
+    [getxattr(2) - Linux manual page](https://www.man7.org/linux/man-pages/man2/getxattr.2.html)
+
+```c
+ssize_t fgetxattr(int fd, const char *name,
+                  void value[.size], size_t size);
+int fsetxattr(int fd, const char *name,
+              const void value[.size], size_t size,
+              int flags);
+```
+
+- 每个文件可以维护一个任意的 key-value dictionary
+    - 例子：macOS 的 com.apple.metadata 会保存每个互联网下载文件的 url
+
+> 有意思，可以等实现完一个fs后可仔细分析看看。
+
+
+
+
+
+### overlayfs
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
