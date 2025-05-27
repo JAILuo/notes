@@ -1779,11 +1779,11 @@
         <li class="md-nav__item">
   <a href="#api" class="md-nav__link">
     <span class="md-ellipsis">
-      目录树管理 API
+      文件系统 API
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="目录树管理 API">
+    <nav class="md-nav" aria-label="文件系统 API">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1798,29 +1798,23 @@
           <li class="md-nav__item">
   <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
-      目录树的索引也是个妥协？
+      目录树的索引是个妥协
     </span>
   </a>
   
 </li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
-    <span class="md-ellipsis">
-      文件系统的实现
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="文件系统的实现">
-      <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
+  <a href="#nix" class="md-nav__link">
+    <span class="md-ellipsis">
+      Nix：软连接：还可以用来 “伪造” 文件系统
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       文件的元数据
     </span>
@@ -1830,7 +1824,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
+  <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       基础
     </span>
@@ -1839,9 +1833,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
+  <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
-      更多元数据
+      ⭐更多元数据
     </span>
   </a>
   
@@ -1853,9 +1847,27 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#loop" class="md-nav__link">
+    <span class="md-ellipsis">
+      loop设备
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#overlayfs" class="md-nav__link">
     <span class="md-ellipsis">
       overlayfs
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#api_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      更多的 “文件系统级” API
     </span>
   </a>
   
@@ -2071,8 +2083,9 @@
 <li>(现在 vibe coding 真的好简单)</li>
 </ul>
 <p>依旧阅读： <a href="https://codecapsule.com/2014/02/12/coding-for-ssds-part-1-introduction-and-table-of-contents/">Coding for SSDs</a></p>
-<h2 id="api">目录树管理 API</h2>
+<h2 id="api">文件系统 API</h2>
 <h3 id="_1">目录树</h3>
+<p><img alt="image-20250525195906273" src="pic/image-20250525195906273.png" /></p>
 <p>比如要删掉一个目录，但是 os 究竟做了什么，提供了什么机制？</p>
 <div class="highlight"><pre><span></span><code>mkdir<span class="w"> </span>hello
 strace<span class="w"> </span>rm<span class="w"> </span>hello<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>vim<span class="w"> </span>-
@@ -2172,39 +2185,163 @@ strace<span class="w"> </span>rm<span class="w"> </span>hello<span class="w"> </
 <span class="n">brk</span><span class="p">(</span><span class="mh">0x6074b7ce9000</span><span class="p">)</span><span class="w">                     </span><span class="o">=</span><span class="w"> </span><span class="mh">0x6074b7ce9000</span>
 <span class="n">close</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="w">                                </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
 </code></pre></div>
-<h3 id="_2">目录树的索引也是个妥协？</h3>
+<h3 id="_2">目录树的索引是个妥协</h3>
 <p><img alt="image-20250515223602578" src="pic/image-20250515223602578.png" /></p>
 <p>手机的 <code>photo search</code>？按内容搜索？</p>
 <p>就像你 <code>grep xxx</code> 那样</p>
-<h2 id="_3">文件系统的实现</h2>
-<h3 id="_4">文件的元数据</h3>
-<h4 id="_5">基础</h4>
-<p><img alt="image-20250518234337088" src="pic/image-20250518234337088.png" /></p>
+<h3 id="nix"><a href="https://nixos.org/">Nix</a>：软连接：还可以用来 “伪造” 文件系统</h3>
+<ul>
+<li><strong>把所有软件包的所有版本都集中存储</strong></li>
+<li>/nix/store/b6gvzjyb2pg0kjfwrjmg1vfhh54ad73z-firefox-33.1<ul>
+<li>然后用符号链接构建一个完全虚拟的环境<ul>
+<li>完全的 deterministic: 由软件包的 hash 决定</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>可以随时随地构建 “任意” 环境<ul>
+<li>nix-shell -p python3 nodejs</li>
+</ul>
+</li>
+</ul>
+<h3 id="_3">文件的元数据</h3>
+<h4 id="_4">基础</h4>
+<p><img src="pic/image-20250518234337088.png" alt="image-20250518234337088" style="zoom:67%;" /></p>
 <p>link的数量，每创建一个目录，当前目录下的link就会加1（每个目录都会有一个对上一级目录的引用）！挺有意思的，之前都发现过！</p>
-<h4 id="_6">更多元数据</h4>
+<h4 id="_5">⭐更多元数据</h4>
 <ul>
 <li>
 <p>Extended Attributes (xattr)</p>
 <p><a href="https://www.man7.org/linux/man-pages/man2/fsetxattr.2.html">setxattr(2) - Linux manual page</a></p>
 <p><a href="https://www.man7.org/linux/man-pages/man2/getxattr.2.html">getxattr(2) - Linux manual page</a></p>
-</li>
-</ul>
 <div class="highlight"><pre><span></span><code><span class="kt">ssize_t</span><span class="w"> </span><span class="nf">fgetxattr</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">fd</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">name</span><span class="p">,</span>
 <span class="w">                  </span><span class="kt">void</span><span class="w"> </span><span class="n">value</span><span class="p">[.</span><span class="n">size</span><span class="p">],</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">size</span><span class="p">);</span>
 <span class="kt">int</span><span class="w"> </span><span class="nf">fsetxattr</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">fd</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">name</span><span class="p">,</span>
 <span class="w">              </span><span class="k">const</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">value</span><span class="p">[.</span><span class="n">size</span><span class="p">],</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">size</span><span class="p">,</span>
 <span class="w">              </span><span class="kt">int</span><span class="w"> </span><span class="n">flags</span><span class="p">);</span>
 </code></pre></div>
+</li>
+<li>
+<p>每个文件可以维护一个任意的 key-value dictionary</p>
 <ul>
-<li>每个文件可以维护一个任意的 key-value dictionary<ul>
 <li>例子：macOS 的 com.apple.metadata 会保存每个互联网下载文件的 url</li>
+</ul>
+<p>所以在拷贝文件的时候</p>
+</li>
+</ul>
+<blockquote>
+<p>有意思，可以等实现完一个fs，做了元数据相关的内容后，再仔细分析这个 attributes</p>
+</blockquote>
+<p>同时还能做：</p>
+<ul>
+<li>文件系统的向量索引：<a href="https://vectorvfs.readthedocs.io/en/latest/">VectorVFS: Your Filesystem as a Vector Database</a><ul>
+<li><code>vfs search cat ~/Photos/ | ag --summary</code></li>
+<li>这不比 iPhone 的 Photo Search 好用多了？</li>
 </ul>
 </li>
 </ul>
 <blockquote>
-<p>有意思，可以等实现完一个fs后可仔细分析看看。</p>
+<p>缺陷：</p>
+<ul>
+<li>这是后加的特性<ul>
+<li>不是所有的文件系统都支持</li>
+</ul>
+</li>
+<li>兼容性奇差<ul>
+<li>cp 文件时，xattrs 就会丢失，需要 cp --preserve=xattr</li>
+<li>期待革命时刻</li>
+</ul>
+</li>
+</ul>
 </blockquote>
+<p>很有意思，未来应该肯定会有的，这种每个文件带一个vector的，直接通过搜就能找到文件，甚至不需要名字，内容！</p>
+<p>颠覆图书馆的事情？就上面这个？挺有意思的！为什么不能呢？用在嵌入式、手机上？一共已经用上了？</p>
+<h3 id="loop">loop设备</h3>
+<p>从无到有的目录树 -&gt; mount</p>
+<blockquote>
+<p>把一个<strong>块设备</strong>上的目录树 “放到” 已有的目录中</p>
+<ul>
+<li><code>mount -o [iso9660](https://wiki.osdev.org/ISO_9660) /dev/cdrom /mnt/cdrom</code></li>
+<li>实际的 / 是 pivot_root 时的 mount point</li>
+</ul>
+</blockquote>
+<p>但是，我要是想挂载一个 <code>filesystem.img</code> 呢？</p>
+<ul>
+<li>一个微妙的循环<ul>
+<li>文件 = 磁盘上的虚拟磁盘</li>
+<li>挂载文件 = 在虚拟磁盘上虚拟出的虚拟磁盘</li>
+</ul>
+</li>
+<li>试试<a href="https://box.nju.edu.cn/f/0764665b70a34599813c/?dl=1">镜像</a></li>
+</ul>
+<p><strong>Linux 的做法：创建一个 loopback (回环) 设备</strong></p>
+<ul>
+<li>设备驱动把设备的 read/write 翻译成文件的 read/write</li>
+<li><a href="https://elixir.bootlin.com/linux/v6.14.6/source/drivers/block/loop.c">drivers/block/loop.c</a><ul>
+<li>实现了 loop_mq_ops (不是 file_operations)</li>
+</ul>
+</li>
+</ul>
+<p>想要看看怎么做的，观察挂载文件的 strace</p>
+<ul>
+<li><code>lsblk</code> 查看系统中的 block devices (strace)</li>
+<li><code>strace</code> 观察挂载的流程<ul>
+<li><code>ioctl(3, LOOP_CTL_GET_FREE)</code></li>
+<li><code>ioctl(4, LOOP_SET_FD, 3)</code></li>
+</ul>
+</li>
+</ul>
 <h3 id="overlayfs">overlayfs</h3>
+<blockquote>
+<p>一种联合文件系统，允许将多个目录 “层叠” 在一起，形成单一的虚拟目录。OverlayFS 是容器 (如 docker) 的重要底层机制。它也可以用于实现文件系统的快照、原子的系统更新等。</p>
+</blockquote>
+<p>既然我们可以虚拟化磁盘，那为什么不能虚拟化OS上构建出来的内容，变成俄罗斯套娃？比如，目录？还真可以？思想可行，那就看看有没有价值做这个？或者说闲不闲，做个这个玩玩？</p>
+<ul>
+<li>你看到的每个目录，都可能是<strong>假的</strong></li>
+<li>OverlayFS<ul>
+<li>lowerdir: 只读层 (修改会被丢弃)</li>
+<li>upperdir: 可写层 (修改会被保留)</li>
+<li>workdir: 操作系统用的临时目录</li>
+</ul>
+</li>
+</ul>
+<p>这应该是一种比较优秀的虚拟方式？？感觉做起来应该是挺难的，如果让我现在想，我只能想到的是在文件系统上再创造一个文件系统，就盖房子复制一层，我想不到这种思想。</p>
+<p>最开始这个叫 <code>UnionFS</code> </p>
+<p><img alt="image-20250525202413755" src="pic/image-20250525202413755.png" /></p>
+<p>从一个Ubuntu22.04开始，只需要把该版本的os放到一个镜像里，直接overlay空目录，那是不是就实现了一个虚拟机？再overlay到lower，再把一个空的挂到upper上，所有的修改都会反映到upper上，但lower完全不变？</p>
+<p>所以可以创建好多个目录：1、2、3...分别都挂载为overlayfs，都是Ubuntu22.04+n(n =1,2,3,4...)，这就是docker的原理？（另外还有ACL的cgroup？）</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Mount the overlay filesystem</span>
+mount<span class="w"> </span>-t<span class="w"> </span>overlay<span class="w"> </span>overlay<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-o<span class="w"> </span><span class="nv">lowerdir</span><span class="o">=</span>lower,upperdir<span class="o">=</span>upper,workdir<span class="o">=</span>work<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>overlay/
+</code></pre></div>
+<h3 id="api_1">更多的 “文件系统级” API</h3>
+<ul>
+<li>
+<p>基于 Copy-on-Write 的文件系统级快照？（还真不懂）</p>
+<ul>
+<li>
+<p>LVM (lvcreate --snapshot) 或文件系统支持 (btrfs, zfs)</p>
+<blockquote>
+<p>所有数据结构都是用b-tree来写的btrfs，性能应该很好。所有的操作都是 <code>append only</code></p>
+</blockquote>
+<p>LVM？有意思？现代发行版应该都是这个？</p>
+</li>
+<li>
+<p>实现系统备份与回滚、测试隔离、快速恢复</p>
+<p>原子更新：apt 更新时突然断电？先做一个快照？</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>太多内容了，感觉记不下来？但实际上，要记住的是思想方法？</p>
+<p>比如：文件系统是个图？边是名字、也可以是符号链接、可以解析，随便创建各种结构，可以集中把所有文件放到另一个地方，然后用符号链接动态地构建当前文件系统的快照？</p>
+<p>具体怎么做，问AI，符号链接怎么做的，他会告诉我的。</p>
+<p>只要知道基本概念、什么能做、什么不能做。</p>
+<p>又比如 <code>xattr</code>，能够添加任何东西进去。。</p>
+<p>我只要有实际的需求，要做很多别的内容，想到各种基础知识、能够做什么，但做起来有困难？没关系AI辅助你！只要有需求！只要有想法！只要有基础知识</p>
+<p>需要有人去教授他们正确的思想和方法。</p>
+<p>尽管AI辅助的代码质量可能并不高，但总能够做一些好玩的？</p>
 
 
 
@@ -2227,7 +2364,7 @@ strace<span class="w"> </span>rm<span class="w"> </span>hello<span class="w"> </
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2025-05-20T18:26:14+02:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2025-05-20</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2025-05-27T15:55:48+02:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2025-05-27</span>
   </span>
 
     
