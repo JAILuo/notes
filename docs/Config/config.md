@@ -303,6 +303,18 @@ nnoremap <space>f :FZF<cr>
 
 
 
+### coc配置——语法补全
+
+vim中输入的 `:CocInstall coc-clangd`
+
+C/C++用这个就ok，如果还要写别的，网上搜
+
+coc还要再补充一点！
+
+记得：`sudo apt install clangd`
+
+
+
 ## Common software
 
 

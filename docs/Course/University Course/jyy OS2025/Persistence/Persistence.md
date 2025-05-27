@@ -180,9 +180,11 @@
 
 
 
-## 目录树管理 API
+## 文件系统 API
 
 ### 目录树
+
+![image-20250525195906273](pic/image-20250525195906273.png)
 
 比如要删掉一个目录，但是 os 究竟做了什么，提供了什么机制？
 
@@ -307,7 +309,7 @@ close(3)                                = 0
 
 
 
-### 目录树的索引也是个妥协？
+### 目录树的索引是个妥协
 
 ![image-20250515223602578](pic/image-20250515223602578.png)
 
@@ -317,46 +319,173 @@ close(3)                                = 0
 
 
 
+### [Nix](https://nixos.org/)：软连接：还可以用来 “伪造” 文件系统
+
+- **把所有软件包的所有版本都集中存储**
+- /nix/store/b6gvzjyb2pg0kjfwrjmg1vfhh54ad73z-firefox-33.1
+    - 然后用符号链接构建一个完全虚拟的环境
+        - 完全的 deterministic: 由软件包的 hash 决定
+- 可以随时随地构建 “任意” 环境
+    - nix-shell -p python3 nodejs
 
 
-## 文件系统的实现
 
 ### 文件的元数据
 
 #### 基础
 
-![image-20250518234337088](pic/image-20250518234337088.png)
+<img src="pic/image-20250518234337088.png" alt="image-20250518234337088" style="zoom:67%;" />
 
 link的数量，每创建一个目录，当前目录下的link就会加1（每个目录都会有一个对上一级目录的引用）！挺有意思的，之前都发现过！
 
 
 
-#### 更多元数据
+#### ⭐更多元数据
 
 - Extended Attributes (xattr)
 
     [setxattr(2) - Linux manual page](https://www.man7.org/linux/man-pages/man2/fsetxattr.2.html)
 
     [getxattr(2) - Linux manual page](https://www.man7.org/linux/man-pages/man2/getxattr.2.html)
-
-```c
-ssize_t fgetxattr(int fd, const char *name,
-                  void value[.size], size_t size);
-int fsetxattr(int fd, const char *name,
-              const void value[.size], size_t size,
-              int flags);
-```
+    
+    ```C
+    ssize_t fgetxattr(int fd, const char *name,
+                      void value[.size], size_t size);
+    int fsetxattr(int fd, const char *name,
+                  const void value[.size], size_t size,
+                  int flags);
+    ```
 
 - 每个文件可以维护一个任意的 key-value dictionary
     - 例子：macOS 的 com.apple.metadata 会保存每个互联网下载文件的 url
+    
+    所以在拷贝文件的时候
 
-> 有意思，可以等实现完一个fs后可仔细分析看看。
+> 有意思，可以等实现完一个fs，做了元数据相关的内容后，再仔细分析这个 attributes
 
 
+
+同时还能做：
+
+- 文件系统的向量索引：[VectorVFS: Your Filesystem as a Vector Database](https://vectorvfs.readthedocs.io/en/latest/)
+    - `vfs search cat ~/Photos/ | ag --summary`
+    - 这不比 iPhone 的 Photo Search 好用多了？
+
+> 缺陷：
+>
+> - 这是后加的特性
+>     - 不是所有的文件系统都支持
+> - 兼容性奇差
+>     - cp 文件时，xattrs 就会丢失，需要 cp --preserve=xattr
+>     - 期待革命时刻
+
+很有意思，未来应该肯定会有的，这种每个文件带一个vector的，直接通过搜就能找到文件，甚至不需要名字，内容！
+
+颠覆图书馆的事情？就上面这个？挺有意思的！为什么不能呢？用在嵌入式、手机上？一共已经用上了？
+
+
+
+### loop设备
+
+从无到有的目录树 -> mount
+
+> 把一个**块设备**上的目录树 “放到” 已有的目录中
+>
+> - `mount -o [iso9660](https://wiki.osdev.org/ISO_9660) /dev/cdrom /mnt/cdrom`
+> - 实际的 / 是 pivot_root 时的 mount point
+
+但是，我要是想挂载一个 `filesystem.img` 呢？
+
+- 一个微妙的循环
+    - 文件 = 磁盘上的虚拟磁盘
+    - 挂载文件 = 在虚拟磁盘上虚拟出的虚拟磁盘
+- 试试[镜像](https://box.nju.edu.cn/f/0764665b70a34599813c/?dl=1)
+
+**Linux 的做法：创建一个 loopback (回环) 设备**
+
+- 设备驱动把设备的 read/write 翻译成文件的 read/write
+- [drivers/block/loop.c](https://elixir.bootlin.com/linux/v6.14.6/source/drivers/block/loop.c)
+    - 实现了 loop_mq_ops (不是 file_operations)
+
+想要看看怎么做的，观察挂载文件的 strace
+
+- `lsblk` 查看系统中的 block devices (strace)
+- `strace` 观察挂载的流程
+    - `ioctl(3, LOOP_CTL_GET_FREE)`
+    - `ioctl(4, LOOP_SET_FD, 3)`
 
 
 
 ### overlayfs
+
+> 一种联合文件系统，允许将多个目录 “层叠” 在一起，形成单一的虚拟目录。OverlayFS 是容器 (如 docker) 的重要底层机制。它也可以用于实现文件系统的快照、原子的系统更新等。
+
+既然我们可以虚拟化磁盘，那为什么不能虚拟化OS上构建出来的内容，变成俄罗斯套娃？比如，目录？还真可以？思想可行，那就看看有没有价值做这个？或者说闲不闲，做个这个玩玩？
+
+- 你看到的每个目录，都可能是**假的**
+- OverlayFS
+    - lowerdir: 只读层 (修改会被丢弃)
+    - upperdir: 可写层 (修改会被保留)
+    - workdir: 操作系统用的临时目录
+
+这应该是一种比较优秀的虚拟方式？？感觉做起来应该是挺难的，如果让我现在想，我只能想到的是在文件系统上再创造一个文件系统，就盖房子复制一层，我想不到这种思想。
+
+最开始这个叫 `UnionFS` 
+
+![image-20250525202413755](pic/image-20250525202413755.png)
+
+
+
+从一个Ubuntu22.04开始，只需要把该版本的os放到一个镜像里，直接overlay空目录，那是不是就实现了一个虚拟机？再overlay到lower，再把一个空的挂到upper上，所有的修改都会反映到upper上，但lower完全不变？
+
+所以可以创建好多个目录：1、2、3...分别都挂载为overlayfs，都是Ubuntu22.04+n(n =1,2,3,4...)，这就是docker的原理？（另外还有ACL的cgroup？）
+
+```bash
+# Mount the overlay filesystem
+mount -t overlay overlay \
+    -o lowerdir=lower,upperdir=upper,workdir=work \
+    overlay/
+```
+
+
+
+
+
+### 更多的 “文件系统级” API
+
+- 基于 Copy-on-Write 的文件系统级快照？（还真不懂）
+
+    - LVM (lvcreate --snapshot) 或文件系统支持 (btrfs, zfs)
+
+        > 所有数据结构都是用b-tree来写的btrfs，性能应该很好。所有的操作都是 `append only`
+
+        LVM？有意思？现代发行版应该都是这个？
+
+    - 实现系统备份与回滚、测试隔离、快速恢复
+
+        原子更新：apt 更新时突然断电？先做一个快照？
+
+
+
+太多内容了，感觉记不下来？但实际上，要记住的是思想方法？
+
+比如：文件系统是个图？边是名字、也可以是符号链接、可以解析，随便创建各种结构，可以集中把所有文件放到另一个地方，然后用符号链接动态地构建当前文件系统的快照？
+
+具体怎么做，问AI，符号链接怎么做的，他会告诉我的。
+
+只要知道基本概念、什么能做、什么不能做。
+
+又比如 `xattr`，能够添加任何东西进去。。
+
+我只要有实际的需求，要做很多别的内容，想到各种基础知识、能够做什么，但做起来有困难？没关系AI辅助你！只要有需求！只要有想法！只要有基础知识
+
+需要有人去教授他们正确的思想和方法。
+
+尽管AI辅助的代码质量可能并不高，但总能够做一些好玩的？
+
+
+
+
 
 
 
