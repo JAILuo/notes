@@ -2153,7 +2153,7 @@
 <p><strong>programming language ABI</strong></p>
 </li>
 </ul>
-<p>TODO：改图</p>
+<p><strong>TODO：改图</strong></p>
 <p>配合下图（比较常见的层次结构）简单理解即可，ABI 可谓是在各方面都有，但是对于非 low-level programming 的我觉得不用太了解，使用别人提供好的 API 即可。</p>
 <p><img src="pic/image-20250107191558282.png" alt="image-20250107191558282" style="zoom: 50%;" /></p>
 <h2 id="implement">implement</h2>
@@ -2241,7 +2241,7 @@
 <span class="nf">retq</span><span class="w">    </span>
 </code></pre></div>
 <p>那么，调用 <code>co_yield</code> 瞬间的协程 “状态” 是什么呢？是当前协程栈中的所有数据，外加处理器上所有的寄存器——有它们，我们就可以解释执行任意函数了。</p>
-<p>即：把寄存器 (包括 Stack Pointer) 都保存下来，然后恢复另一个协程保存的寄存器 (和 Stack Pointer)，就实现了随意切换执行流。想起来了：上下文切换。</p>
+<p>即：把寄存器 (包括 Stack Pointer) 都保存下来，然后恢复另一个协程保存的寄存器 (和 Stack Pointer)，就实现了随意切换执行流：上下文切换。</p>
 <h3 id="setjmp-longjmp">setjmp &amp; longjmp</h3>
 <p>AI 给的例子。基本了解。</p>
 <p>非局部跳转。</p>
@@ -2947,7 +2947,7 @@ Low<span class="w"> </span>Address
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2025-02-12T18:33:04+01:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2025-02-12</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2025-07-14T04:01:56+02:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2025-07-14</span>
   </span>
 
     

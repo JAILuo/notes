@@ -72,7 +72,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#device" class="md-skip">
+        <a href="#summary" class="md-skip">
           Skip to content
         </a>
       
@@ -1726,9 +1726,18 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#device" class="md-nav__link">
     <span class="md-ellipsis">
-      device
+      Device
     </span>
   </a>
   
@@ -1856,11 +1865,53 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#overlayfs" class="md-nav__link">
+  <a href="#overlayfs-unionfs" class="md-nav__link">
     <span class="md-ellipsis">
-      overlayfs
+      OverlayFS (“UnionFS”, 联合挂载)
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="OverlayFS (“UnionFS”, 联合挂载)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example1" class="md-nav__link">
+    <span class="md-ellipsis">
+      example1
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-from-deepseek" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example From DeepSeek
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usage-from-deepseek" class="md-nav__link">
+    <span class="md-ellipsis">
+      Usage from DeepSeek
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#other" class="md-nav__link">
+    <span class="md-ellipsis">
+      Other
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -1898,14 +1949,16 @@
 
   <h1>Persistence</h1>
 
-<h2 id="device">device</h2>
+<h2 id="summary">Summary</h2>
+<p><img alt="image-20250605145005197" src="pic/image-20250605145005197.png" /></p>
+<h2 id="device">Device</h2>
 <p>插个优盘试试发生什么……</p>
 <ul>
 <li>优盘的文件系统会自动 “出现”</li>
 <li>
 <p>但你是专业人士</p>
 <ul>
-<li>看看 /dev/ 是不是发生了一些什么变化</li>
+<li>看看 /dev/ 是不是发生了一些什么变化？（怎么做到的）</li>
 </ul>
 </li>
 <li>
@@ -2291,30 +2344,246 @@ strace<span class="w"> </span>rm<span class="w"> </span>hello<span class="w"> </
 </ul>
 </li>
 </ul>
-<h3 id="overlayfs">overlayfs</h3>
+<h3 id="overlayfs-unionfs">OverlayFS (“UnionFS”, 联合挂载)</h3>
 <blockquote>
 <p>一种联合文件系统，允许将多个目录 “层叠” 在一起，形成单一的虚拟目录。OverlayFS 是容器 (如 docker) 的重要底层机制。它也可以用于实现文件系统的快照、原子的系统更新等。</p>
 </blockquote>
 <p>既然我们可以虚拟化磁盘，那为什么不能虚拟化OS上构建出来的内容，变成俄罗斯套娃？比如，目录？还真可以？思想可行，那就看看有没有价值做这个？或者说闲不闲，做个这个玩玩？</p>
 <ul>
-<li>你看到的每个目录，都可能是<strong>假的</strong></li>
-<li>OverlayFS<ul>
-<li>lowerdir: 只读层 (修改会被丢弃)</li>
-<li>upperdir: 可写层 (修改会被保留)</li>
-<li>workdir: 操作系统用的临时目录</li>
+<li>
+<p>你看到的每个目录，都可能是<strong>假的</strong></p>
+</li>
+<li>
+<p>OverlayFS</p>
+<ul>
+<li><strong>Lowerdir（底层目录）</strong>：只读的基础文件系统层，修改被丢弃，通常是系统原始文件或驱动模块的存储位置。</li>
+<li><strong>Upperdir（上层目录）</strong>：可写层，用于记录对 Lowerdir 的修改（增/删/改操作）。</li>
+<li><strong>Workdir（工作目录）</strong>：OverlayFS 内部用于原子化文件操作的临时目录（必须与 Upperdir 同一文件系统）。</li>
+<li><strong>Merged（合并视图）</strong>：最终呈现给用户的统一文件系统视图，透明整合 Lowerdir 和 Upperdir 的内容。</li>
+</ul>
+<p>还有写时复制（Copy-on-Write, CoW）：</p>
+<ul>
+<li><strong>读取</strong>：优先从 Upperdir 查找文件，若不存在则从 Lowerdir 读取。</li>
+<li><strong>写入</strong>：修改 Lowerdir 文件时，先复制到 Upperdir 再进行写入（保持 Lowerdir 只读性）。</li>
+<li><strong>删除</strong>：在 Upperdir 创建 <code>whiteout</code> 文件标记删除，隐藏 Lowerdir 中的对应文件。</li>
 </ul>
 </li>
 </ul>
-<p>这应该是一种比较优秀的虚拟方式？？感觉做起来应该是挺难的，如果让我现在想，我只能想到的是在文件系统上再创造一个文件系统，就盖房子复制一层，我想不到这种思想。</p>
-<p>最开始这个叫 <code>UnionFS</code> </p>
+<blockquote>
+<p>优秀的虚拟化方式？感觉做起来应该是挺难的，如果让我现在想，我只能想到那种直白的在原有的文件系统上再创造一个文件系统，就盖房子复制一层，我想不到这种思想。</p>
+<p>最开始这个叫 <code>UnionFS</code>？</p>
+</blockquote>
 <p><img alt="image-20250525202413755" src="pic/image-20250525202413755.png" /></p>
-<p>从一个Ubuntu22.04开始，只需要把该版本的os放到一个镜像里，直接overlay空目录，那是不是就实现了一个虚拟机？再overlay到lower，再把一个空的挂到upper上，所有的修改都会反映到upper上，但lower完全不变？</p>
-<p>所以可以创建好多个目录：1、2、3...分别都挂载为overlayfs，都是Ubuntu22.04+n(n =1,2,3,4...)，这就是docker的原理？（另外还有ACL的cgroup？）</p>
+<h4 id="example1">example1</h4>
+<p>从一个Ubuntu22.04开始，只需要把该版本的 os 放到一个镜像里，直接overlay空目录，那是不是就实现了一个虚拟机？再 overlay 到 lower，再把一个空的挂到 upper 上，所有的修改都会反映到upper上，但lower完全不变？</p>
+<p>所以可以创建好多个目录：1、2、3...分别都挂载为overlayfs，都是Ubuntu22.04+n(n =1,2,3,4...)，这就是docker的原理？（另外还有ACL的cgroup、Linux namespace）</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Mount the overlay filesystem</span>
 mount<span class="w"> </span>-t<span class="w"> </span>overlay<span class="w"> </span>overlay<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>-o<span class="w"> </span><span class="nv">lowerdir</span><span class="o">=</span>lower,upperdir<span class="o">=</span>upper,workdir<span class="o">=</span>work<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>overlay/
 </code></pre></div>
+<p>这样子怎么造自己的机器都好啦！</p>
+<h4 id="example-from-deepseek">Example From DeepSeek</h4>
+<p>在驱动开发中：</p>
+<ul>
+<li>
+<p><strong>动态驱动调试</strong></p>
+<ul>
+<li>
+<p><strong>场景</strong>：调试内核模块时，频繁修改和加载驱动。</p>
+</li>
+<li>
+<p><strong>优势</strong>：通过 OverlayFS 将调试版本的驱动（Upperdir）叠加到系统默认驱动（Lowerdir）上，无需直接修改系统目录，避免污染原始环境。</p>
+</li>
+<li>
+<p><strong>操作示例：</strong></p>
+<div class="highlight"><pre><span></span><code>mount<span class="w"> </span>-t<span class="w"> </span>overlay<span class="w"> </span>overlay<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-o<span class="w"> </span><span class="nv">lowerdir</span><span class="o">=</span>/lib/modules/<span class="k">$(</span>uname<span class="w"> </span>-r<span class="k">)</span>/kernel,upperdir<span class="o">=</span>/my_debug_drivers,workdir<span class="o">=</span>/workdir<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>/merged_drivers
+</code></pre></div>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>固件热更新</strong></p>
+<ul>
+<li><strong>场景</strong>：更新设备固件或驱动配置文件。</li>
+<li><strong>优势</strong>：将新固件置于 Upperdir，通过 Merged 视图提供新版本，回滚时只需卸载 OverlayFS 或删除 Upperdir 内容。</li>
+</ul>
+</li>
+<li>
+<p><strong>安全沙箱</strong></p>
+<ul>
+<li><strong>场景</strong>：测试未经验证的第三方驱动。</li>
+<li><strong>优势</strong>：所有修改被隔离在 Upperdir 中，测试结束后清除 Upperdir 即可恢复纯净环境。</li>
+</ul>
+</li>
+<li>
+<p><strong>实战示例：构建驱动开发沙箱</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 创建目录结构</span>
+mkdir<span class="w"> </span>-p<span class="w"> </span>/overlay/<span class="o">{</span>lower,upper,work,merged<span class="o">}</span>
+
+<span class="c1"># 挂载 OverlayFS</span>
+mount<span class="w"> </span>-t<span class="w"> </span>overlay<span class="w"> </span>overlay<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-o<span class="w"> </span><span class="nv">lowerdir</span><span class="o">=</span>/overlay/lower,upperdir<span class="o">=</span>/overlay/upper,workdir<span class="o">=</span>/overlay/work<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>/overlay/merged
+
+<span class="c1"># 插入测试驱动</span>
+insmod<span class="w"> </span>/overlay/merged/my_driver.ko
+
+<span class="c1"># 卸载时自动清理 Upperdir 修改</span>
+umount<span class="w"> </span>/overlay/merged
+rm<span class="w"> </span>-rf<span class="w"> </span>/overlay/upper/*
+</code></pre></div>
+</li>
+</ul>
+<h4 id="usage-from-deepseek">Usage from DeepSeek</h4>
+<blockquote>
+<p><a href="https://docs.kernel.org/filesystems/overlayfs.html">Overlay Filesystem — The Linux Kernel documentation</a></p>
+<p><a href="https://linuxkernel.org.cn/doc/html/latest/filesystems/overlayfs.html">Overlay 文件系统 — Linux 内核文档 - Linux 内核</a></p>
+</blockquote>
+<ol>
+<li>
+<p><strong>内核配置</strong></p>
+<p>确保内核启用 OverlayFS：</p>
+<div class="highlight"><pre><span></span><code><span class="nv">CONFIG_OVERLAY_FS</span><span class="o">=</span>y
+</code></pre></div>
+<p>通过 <code>grep OVERLAY /boot/config-$(uname -r)</code> 验证配置状态。</p>
+</li>
+<li>
+<p><strong>挂载 OverlayFS</strong></p>
+<p>编程式挂载（适用于驱动模块）：</p>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;sys/mount.h&gt;</span>
+
+<span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">options</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;lowerdir=/lower,upperdir=/upper,workdir=/work&quot;</span><span class="p">;</span>
+<span class="n">mount</span><span class="p">(</span><span class="s">&quot;overlay&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;/merged&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;overlay&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">MS_MGC_VAL</span><span class="p">,</span><span class="w"> </span><span class="n">options</span><span class="p">);</span>
+</code></pre></div>
+</li>
+<li>
+<p><strong>性能优化要点</strong></p>
+<ul>
+<li><strong>避免频繁元数据操作</strong>：OverlayFS 的 inode 合并可能引入开销，对高频小文件操作场景需谨慎。</li>
+<li><strong>选择合适的下层文件系统</strong>：Lowerdir 建议使用 XFS/ext4 等高性能文件系统，避免使用 FUSE 等用户态文件系统。</li>
+</ul>
+<blockquote>
+<ol>
+<li><strong>文件系统兼容性</strong>：OverlayFS 对某些特殊文件系统（如 NFS）的 Lowerdir 支持有限。</li>
+<li><strong>原子性风险</strong>：Workdir 必须与 Upperdir 同属一个文件系统，否则可能导致数据损坏。</li>
+<li><strong>内核版本差异</strong>：早期内核（&lt;4.0）对 OverlayFS 的特性支持不完整，需确认目标内核版本。</li>
+</ol>
+</blockquote>
+</li>
+</ol>
+<h4 id="other"><strong>Other</strong></h4>
+<ol>
+<li>
+<p><strong>查看层间差异</strong></p>
+<div class="highlight"><pre><span></span><code>diff<span class="w"> </span>-r<span class="w"> </span>/lower<span class="w"> </span>/upper
+</code></pre></div>
+</li>
+<li>
+<p><strong>追踪文件访问</strong></p>
+<p>使用 <code>inotifywait</code> 监控 Merged 目录事件：</p>
+<div class="highlight"><pre><span></span><code>inotifywait<span class="w"> </span>-m<span class="w"> </span>/merged<span class="w"> </span>-r
+</code></pre></div>
+</li>
+</ol>
+<blockquote>
+<ol>
+<li>
+<p><code>-t</code> 后的第一个 <code>overlay</code>：文件系统类型</p>
+<ul>
+<li><strong>作用</strong>：指定挂载的文件系统类型为 <code>overlay</code>（联合文件系统）。</li>
+<li><strong>是否可替换</strong>：<strong>不可替换</strong>，必须是 <code>overlay</code>。这是内核识别的固定名称。</li>
+<li>示例：<code>-t overlay</code> 表示使用 OverlayFS 文件系统。</li>
+</ul>
+</li>
+<li>
+<p><code>-t</code> 后的第二个 <code>overlay</code>：伪设备名</p>
+<ul>
+<li><strong>作用</strong>：传统 <code>mount</code> 命令要求指定一个“设备名”，但 OverlayFS 无需真实设备。此处仅为占位符，<strong>无实际意义</strong>。</li>
+<li><strong>是否可替换</strong>：<strong>可替换为任意字符串</strong>（如 <code>dummy</code>、<code>anyname</code>），但习惯用 <code>overlay</code>。</li>
+<li>示例：</li>
+</ul>
+<p><code>bash
+ mount -t overlay dummy ...  # 有效
+ mount -t overlay anyname ...  # 有效</code></p>
+</li>
+<li>
+<p>最后的 <code>overlay/</code>：挂载点目录</p>
+<ul>
+<li><strong>作用</strong>：指定文件系统的<strong>挂载目标目录</strong>（必须已存在）。</li>
+<li><strong>是否可替换</strong>：<strong>可替换为任何有效目录路径</strong>。</li>
+<li>示例：</li>
+</ul>
+<p><code>bash
+ mount -t overlay overlay ... /mnt/my_mount  # 挂载到 /mnt/my_mount
+ mount -t overlay overlay ... /path/to/target  # 挂载到自定义目录</code></p>
+</li>
+</ol>
+<p>示例 1：标准用法</p>
+<p><div class="highlight"><pre><span></span><code><span class="c1"># 挂载到目录 ./merged/</span>
+mount<span class="w"> </span>-t<span class="w"> </span>overlay<span class="w"> </span>overlay<span class="w"> </span><span class="se">\</span>
+<span class="w"> </span>-o<span class="w"> </span><span class="nv">lowerdir</span><span class="o">=</span>layer1:layer2,upperdir<span class="o">=</span>upper,workdir<span class="o">=</span>work<span class="w"> </span><span class="se">\</span>
+<span class="w"> </span>merged/
+</code></pre></div>
+ - <strong>伪设备名</strong>：<code>overlay</code>（可替换）。
+ - <strong>挂载点</strong>：<code>merged/</code>（需提前创建）。</p>
+<p>示例 2：自定义伪设备名和挂载点
+ <div class="highlight"><pre><span></span><code><span class="c1"># 使用伪设备名 &quot;myoverlay&quot;，挂载到 /mnt/custom</span>
+mount<span class="w"> </span>-t<span class="w"> </span>overlay<span class="w"> </span>myoverlay<span class="w"> </span><span class="se">\</span>
+<span class="w"> </span>-o<span class="w"> </span><span class="nv">lowerdir</span><span class="o">=</span>/data/base,upperdir<span class="o">=</span>/data/upper,workdir<span class="o">=</span>/data/work<span class="w"> </span><span class="se">\</span>
+<span class="w"> </span>/mnt/custom
+</code></pre></div>
+ - <strong>伪设备名</strong>：<code>myoverlay</code>（任意字符串）。
+ - <strong>挂载点</strong>：<code>/mnt/custom</code>（需提前创建）。</p>
+<hr />
+<p>注意事项
+ 1. <strong>目录必须存在</strong>：</p>
+<ul>
+<li><code>lowerdir</code>、<code>upperdir</code>、<code>workdir</code> 指向的目录需提前创建。</li>
+<li>挂载点目录（如 <code>overlay/</code> 或 <code>/mnt/custom</code>）需提前创建。</li>
+<li><strong><code>workdir</code> 要求</strong>：</li>
+<li>必须与 <code>upperdir</code> 位于同一文件系统。</li>
+<li>必须为空目录。</li>
+<li><strong>伪设备名作用</strong>：</li>
+<li>仅在 <code>/proc/mounts</code> 中显示，不影响功能。替换为其他名称后，查看挂载信息时会显示自定义名称：
+     <div class="highlight"><pre><span></span><code>cat<span class="w"> </span>/proc/mounts<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>myoverlay
+<span class="c1"># 输出示例：myoverlay /mnt/custom overlay ... </span>
+</code></pre></div></li>
+</ul>
+<hr />
+<table>
+<thead>
+<tr>
+<th>参数位置</th>
+<th>含义</th>
+<th>是否必需</th>
+<th>是否可替换</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-t</code> 后的第一个 <code>overlay</code></td>
+<td>文件系统类型</td>
+<td>是</td>
+<td>否（必须是 <code>overlay</code>）</td>
+</tr>
+<tr>
+<td><code>-t</code> 后的第二个 <code>overlay</code></td>
+<td>伪设备名（占位符）</td>
+<td>是</td>
+<td>是（任意字符串）</td>
+</tr>
+<tr>
+<td>命令末尾的 <code>overlay/</code></td>
+<td>挂载点目录</td>
+<td>是</td>
+<td>是（任意有效路径）</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
 <h3 id="api_1">更多的 “文件系统级” API</h3>
 <ul>
 <li>
@@ -2334,6 +2603,7 @@ mount<span class="w"> </span>-t<span class="w"> </span>overlay<span class="w"> <
 </ul>
 </li>
 </ul>
+<blockquote>
 <p>太多内容了，感觉记不下来？但实际上，要记住的是思想方法？</p>
 <p>比如：文件系统是个图？边是名字、也可以是符号链接、可以解析，随便创建各种结构，可以集中把所有文件放到另一个地方，然后用符号链接动态地构建当前文件系统的快照？</p>
 <p>具体怎么做，问AI，符号链接怎么做的，他会告诉我的。</p>
@@ -2342,6 +2612,7 @@ mount<span class="w"> </span>-t<span class="w"> </span>overlay<span class="w"> <
 <p>我只要有实际的需求，要做很多别的内容，想到各种基础知识、能够做什么，但做起来有困难？没关系AI辅助你！只要有需求！只要有想法！只要有基础知识</p>
 <p>需要有人去教授他们正确的思想和方法。</p>
 <p>尽管AI辅助的代码质量可能并不高，但总能够做一些好玩的？</p>
+</blockquote>
 
 
 
@@ -2364,7 +2635,7 @@ mount<span class="w"> </span>-t<span class="w"> </span>overlay<span class="w"> <
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2025-05-27T15:55:48+02:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2025-05-27</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2025-07-14T04:01:56+02:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2025-07-14</span>
   </span>
 
     

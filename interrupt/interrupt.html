@@ -2187,6 +2187,108 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#basic1" class="md-nav__link">
+    <span class="md-ellipsis">
+      basic1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stm32-hal" class="md-nav__link">
+    <span class="md-ellipsis">
+      STM32 HAL库中断例子
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="STM32 HAL库中断例子">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 核心概念：非阻塞与中断驱动
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 函数详解
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 函数详解">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hal_uart_receive_ituart_handletypedef-huart-uint8_t-pdata-uint16_t-size" class="md-nav__link">
+    <span class="md-ellipsis">
+      HAL_UART_Receive_IT(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hal_uart_transmit_ituart_handletypedef-huart-uint8_t-pdata-uint16_t-size" class="md-nav__link">
+    <span class="md-ellipsis">
+      HAL_UART_Transmit_IT(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. 中断触发时机总结
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. 何时使用它们？
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. 注意事项
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#receive_it" class="md-nav__link">
+    <span class="md-ellipsis">
+      流程图示意 (以 Receive_IT 为例)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -2658,6 +2760,292 @@ chrt<span class="w"> </span>-f<span class="w"> </span>-p<span class="w"> </span>
 </blockquote>
 </li>
 </ul>
+<h2 id="basic1">basic1</h2>
+<p>在计算机领域，“中断”这个概念本身<strong>没有参数和返回值</strong>。中断是一种<strong>机制</strong>，是 CPU 响应外部事件（硬件中断）或内部异常/指令（软件中断）而暂停当前执行流，转而执行特定处理程序的过程。</p>
+<p>但是，<strong>中断服务程序</strong>（ISR, Interrupt Service Routine）或者说<strong>中断处理函数</strong>，是<strong>可以有参数和返回值</strong>的，但这取决于具体的中断类型、操作系统和编程环境，并且其使用方式与普通函数有显著区别：</p>
+<ol>
+<li>
+<p><strong>硬件中断处理程序 (ISR):</strong></p>
+<ul>
+<li><strong>参数：</strong> <strong>通常没有显式的参数传递机制。</strong> CPU 在响应中断时，硬件会自动将关键状态（如程序计数器、标志寄存器等）压入栈中，但这不被视为传递给 ISR 的参数。ISR 需要的信息（如哪个设备引发的中断、中断状态寄存器值）通常通过：<ul>
+<li><strong>查询共享数据结构：</strong> 操作系统内核维护的数据结构（如中断向量表、设备状态寄存器）。</li>
+<li><strong>隐式约定：</strong> 某些架构或驱动程序框架可能有约定，将特定寄存器或内存位置用于传递中断源信息。</li>
+</ul>
+</li>
+<li><strong>返回值：</strong> <strong>通常没有显式的返回值给调用者（即中断机制本身）。</strong> ISR 的主要职责是快速处理事件、清除中断标志、进行必要的数据操作（如将接收到的数据放入缓冲区、更新状态），然后返回。它的“结果”体现在它对系统状态（共享内存、队列、标志位）的修改上。ISR 执行完毕后，CPU 恢复之前被中断的上下文继续执行。</li>
+<li><strong>关键点：</strong> ISR 需要<strong>极其高效</strong>和<strong>可重入</strong>（可能被更高优先级中断打断）。显式的参数传递和返回通常开销过大且复杂，不符合这些要求。</li>
+</ul>
+</li>
+<li>
+<p><strong>软件中断 / 系统调用 (通过 <code>int</code> 指令或类似机制):</strong></p>
+<ul>
+<li><strong>参数：</strong> <strong>有明确的参数传递机制。</strong> 用户程序在触发软件中断（如 Linux 的 <code>int 0x80</code> 或 <code>syscall</code> 指令）之前，会按照操作系统规定的<strong>调用约定</strong>（Calling Convention）将系统调用号（标识要执行哪个服务）和所需的参数放入特定的<strong>寄存器</strong>或<strong>栈</strong>中。</li>
+<li><strong>返回值：</strong> <strong>有明确的返回值机制。</strong> 操作系统内核处理完系统调用后，会按照调用约定将结果（成功/失败、数据、错误码）放入特定的<strong>寄存器</strong>（通常是 EAX/RAX）或<strong>栈</strong>中，供用户程序在中断返回后读取。</li>
+<li><strong>关键点：</strong> 这里的软件中断是<strong>用户态程序主动请求内核服务</strong>的一种方式。参数和返回值的传递遵循清晰定义的 ABI（应用二进制接口），类似于普通函数调用，但跨越了用户态/内核态的边界。</li>
+</ul>
+</li>
+<li>
+<p><strong>信号处理程序 (类 Unix 系统中的异步事件通知):</strong></p>
+<ul>
+<li><strong>参数：</strong> <strong>有一个标准化的参数（信号编号 <code>signum</code>）。</strong> 当信号被递送给进程时，操作系统在调用用户注册的信号处理函数时，会传递一个整数参数，表示<strong>是哪个信号</strong>（如 <code>SIGINT</code>, <code>SIGSEGV</code>）。某些信号（如 <code>SIGSEGV</code>, <code>SIGILL</code>）可能有额外的上下文信息（通过 <code>siginfo_t</code> 结构体和第三个 <code>ucontext_t</code> 参数），但这需要特定的设置 (<code>SA_SIGINFO</code> 标志)。</li>
+<li><strong>返回值：</strong> <strong>没有显式返回值 (<code>void</code>)。</strong> 信号处理函数通过修改全局状态、设置标志位或调用如 <code>_exit()</code>、 <code>longjmp()</code> 等函数来影响进程行为。</li>
+<li><strong>关键点：</strong> 信号处理函数类似于异步的 ISR，执行时机不确定，需要遵守特定的限制（异步信号安全函数）。</li>
+</ul>
+</li>
+</ol>
+<p><strong>总结对比：</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">中断类型/处理程序</th>
+<th style="text-align: left;">是否有参数？</th>
+<th style="text-align: left;">是否有返回值？</th>
+<th style="text-align: left;">主要目的</th>
+<th style="text-align: left;">参数/返回值传递方式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>中断机制本身</strong></td>
+<td style="text-align: left;"><strong>❌ 无</strong></td>
+<td style="text-align: left;"><strong>❌ 无</strong></td>
+<td style="text-align: left;">事件通知，强制切换执行流</td>
+<td style="text-align: left;">N/A</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>硬件 ISR</strong></td>
+<td style="text-align: left;"><strong>❌ 无显式参数</strong></td>
+<td style="text-align: left;"><strong>❌ 无显式返回值</strong></td>
+<td style="text-align: left;">快速响应硬件事件</td>
+<td style="text-align: left;">通过查询寄存器/共享内存获取信息</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>软件中断 (系统调用)</strong></td>
+<td style="text-align: left;"><strong>✅ 有 (系统调用号 + 参数)</strong></td>
+<td style="text-align: left;"><strong>✅ 有 (结果/错误码)</strong></td>
+<td style="text-align: left;">用户程序请求内核服务</td>
+<td style="text-align: left;">遵循调用约定 (寄存器/栈)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>信号处理程序</strong></td>
+<td style="text-align: left;"><strong>✅ 有 (信号编号 <code>signum</code>)</strong></td>
+<td style="text-align: left;"><strong>❌ 无显式返回值 (<code>void</code>)</strong></td>
+<td style="text-align: left;">处理进程收到的异步事件通知 (如 Ctrl+C)</td>
+<td style="text-align: left;">操作系统传递信号编号 (可能还有上下文)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>简单来说：</strong></p>
+<ul>
+<li>“中断”这个<strong>事件</strong>本身没有参数和返回值。</li>
+<li>响应中断而执行的<strong>处理代码（ISR、系统调用处理函数、信号处理函数）</strong> 可以有参数和返回值，但其传递和使用方式<strong>与普通函数调用截然不同</strong>，并且受到严格限制（尤其是硬件 ISR 和信号处理函数）。</li>
+</ul>
+<p>如果你在具体的编程或操作系统环境中遇到了“中断”的概念，需要明确是哪种类型的中断，才能确定其处理程序是否有以及如何使用参数和返回值。</p>
+<h2 id="stm32-hal">STM32 HAL库中断例子</h2>
+<p>理解 <code>HAL_UART_Receive_IT()</code> 和 <code>HAL_UART_Transmit_IT()</code> 的关键在于 <strong>非阻塞操作</strong> 和 <strong>中断驱动</strong>。它们不是直接收发数据的函数，而是启动一个由中断驱动的收发过程。让我一步步拆解：</p>
+<h3 id="1_3">1. 核心概念：非阻塞与中断驱动</h3>
+<ul>
+<li><strong>非阻塞：</strong> 当你调用这些函数时，它们<strong>不会等待</strong>数据传输完成才返回。它们只是告诉UART硬件：“准备好后，开始接收/发送这些数据，完成后用中断通知我”。函数本身会立即返回到你的主程序（或其他代码），让你可以同时做其他事情。</li>
+<li><strong>中断驱动：</strong> 数据传输的实际过程（每个字节的发送或接收）是由 <strong>硬件中断</strong> 来管理和推进的。UART硬件在特定事件发生时（比如发送寄存器空了可以放新数据了，或者接收寄存器收到新数据了）会触发中断。中断服务程序会处理这些事件。</li>
+</ul>
+<h3 id="2_4">2. 函数详解</h3>
+<h4 id="hal_uart_receive_ituart_handletypedef-huart-uint8_t-pdata-uint16_t-size"><code>HAL_UART_Receive_IT(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size)</code></h4>
+<ul>
+<li><strong>作用：</strong> 启动一个 <strong>非阻塞的接收过程</strong>。</li>
+<li><strong>参数：</strong><ul>
+<li><code>huart</code>: 指向UART外设句柄的指针（包含配置信息）。</li>
+<li><code>pData</code>: 指向 <strong>用户提供的缓冲区</strong> 的指针。接收到的数据将被存放到这里。</li>
+<li><code>Size</code>: 你想要接收的 <strong>字节总数</strong>。</li>
+</ul>
+</li>
+<li><strong>内部操作：</strong><ol>
+<li>函数内部会记录你提供的缓冲区地址 (<code>pData</code>) 和要接收的总字节数 (<code>Size</code>)。</li>
+<li>设置一个内部计数器（通常叫 <code>RxXferCount</code>）为 <code>Size</code>。</li>
+<li><strong>关键一步：</strong> 使能UART的 <strong>RXNE (Receive register Not Empty) 中断</strong>。这意味着当UART接收寄存器收到一个字节（不再是空的）时，就会触发中断。</li>
+<li>函数<strong>立即返回</strong> <code>HAL_OK</code>（如果参数有效），表示接收过程已启动。此时你的主程序可以继续执行其他任务。</li>
+</ol>
+</li>
+<li><strong>中断触发时机与处理：</strong><ul>
+<li><strong>触发条件：</strong> UART硬件接收到<strong>一个字节</strong>的数据，将其放入接收数据寄存器 (RDR)，并设置 RXNE 标志。</li>
+<li><strong>中断服务程序执行：</strong><ol>
+<li>硬件检测到 RXNE 标志且 RXNE 中断使能，触发 UART 全局中断。</li>
+<li>CPU 跳转到 UART 的 <strong>中断服务程序 (ISR)</strong>，通常是 <code>USARTx_IRQHandler()</code>。</li>
+<li>ISR 内部会调用 HAL 库的 <code>HAL_UART_IRQHandler(&amp;huartX)</code>。</li>
+<li><code>HAL_UART_IRQHandler</code> 检查中断源。发现是 RXNE 中断，于是：<ul>
+<li>从 UART 的 RDR 寄存器读取<strong>一个字节</strong>。</li>
+<li>将这个字节放入你之前通过 <code>HAL_UART_Receive_IT</code> 提供的缓冲区 (<code>pData</code>) 的<strong>当前位置</strong>。</li>
+<li>递增缓冲区指针 (<code>pData++</code>)。</li>
+<li>递减内部接收计数器 (<code>RxXferCount--</code>)。</li>
+<li>检查计数器：如果 <code>RxXferCount &gt; 0</code>：<ul>
+<li>等待下一个字节的到来（RXNE 中断保持使能，过程会重复）。</li>
+</ul>
+</li>
+<li>如果 <code>RxXferCount == 0</code>：<ul>
+<li><strong>关键一步：</strong> <strong>关闭 RXNE 中断</strong>（因为目标字节数已收到）。</li>
+<li>调用 <strong>接收完成回调函数</strong> <code>HAL_UART_RxCpltCallback(huart)</code>。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><strong>用户需要做什么：</strong><ul>
+<li>提供足够大的缓冲区 (<code>pData</code>) 来存放 <code>Size</code> 个字节。</li>
+<li>在代码中 <strong>实现接收完成回调函数</strong> <code>void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)</code>。这是你知道接收完成并处理数据的地方！在这个函数里，你可以解析收到的数据、置标志位通知主程序、或者启动下一次接收等。</li>
+<li>确保全局中断和UART接收中断是使能的（通常在CubeMX生成的初始化代码里已经做了）。</li>
+</ul>
+</li>
+</ul>
+<h4 id="hal_uart_transmit_ituart_handletypedef-huart-uint8_t-pdata-uint16_t-size"><code>HAL_UART_Transmit_IT(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size)</code></h4>
+<ul>
+<li><strong>作用：</strong> 启动一个 <strong>非阻塞的发送过程</strong>。</li>
+<li><strong>参数：</strong><ul>
+<li><code>huart</code>: 指向UART外设句柄的指针。</li>
+<li><code>pData</code>: 指向 <strong>包含待发送数据</strong> 的用户缓冲区的指针。</li>
+<li><code>Size</code>: 你想要发送的 <strong>字节总数</strong>。</li>
+</ul>
+</li>
+<li><strong>内部操作：</strong><ol>
+<li>函数内部记录缓冲区地址 (<code>pData</code>) 和要发送的总字节数 (<code>Size</code>)。</li>
+<li>设置内部发送计数器 (<code>TxXferCount</code>) 为 <code>Size</code>。</li>
+<li><strong>关键一步：</strong> 使能UART的 <strong>TXE (Transmit register Empty) 中断</strong>。这意味着当UART发送数据寄存器 (TDR) <strong>空了</strong>（可以放入下一个字节）时，就会触发中断。<em>(注意：有些UART也可能使用 TC (Transmission Complete) 中断来处理最后一个字节的完成事件，但TXE中断是驱动发送过程的核心)</em></li>
+<li>函数<strong>立即返回</strong> <code>HAL_OK</code>（如果参数有效），表示发送过程已启动。</li>
+</ol>
+</li>
+<li><strong>中断触发时机与处理：</strong><ul>
+<li><strong>触发条件：</strong> UART硬件将TDR寄存器里的一个字节移入发送移位寄存器，此时TDR<strong>变空</strong>，并设置 TXE 标志。</li>
+<li><strong>中断服务程序执行：</strong><ol>
+<li>硬件检测到 TXE 标志且 TXE 中断使能，触发 UART 全局中断。</li>
+<li>CPU 跳转到 UART 的 ISR (<code>USARTx_IRQHandler</code>)。</li>
+<li>ISR 调用 <code>HAL_UART_IRQHandler(&amp;huartX)</code>。</li>
+<li><code>HAL_UART_IRQHandler</code> 检查中断源。发现是 TXE 中断，于是：<ul>
+<li>检查内部发送计数器 (<code>TxXferCount &gt; 0</code>？)</li>
+<li>如果 <code>TxXferCount &gt; 0</code>：<ul>
+<li>从你之前通过 <code>HAL_UART_Transmit_IT</code> 提供的缓冲区 (<code>pData</code>) 的<strong>当前位置</strong>取出<strong>一个字节</strong>。</li>
+<li>将这个字节写入 UART 的 TDR 寄存器（硬件会自动将其发送出去）。</li>
+<li>递增缓冲区指针 (<code>pData++</code>)。</li>
+<li>递减内部发送计数器 (<code>TxXferCount--</code>)。</li>
+<li><em>(TXE 中断保持使能，当下一个字节导致TDR再次变空时，中断会再次触发，重复此过程)</em></li>
+</ul>
+</li>
+<li>如果 <code>TxXferCount == 0</code> (所有字节都已放入TDR)：<ul>
+<li><strong>关键一步：</strong> <strong>关闭 TXE 中断</strong>（因为没数据要发了）。</li>
+<li><strong>可选但常见：</strong> 使能 <strong>TC (Transmission Complete) 中断</strong>。TC 中断在<strong>最后一个字节</strong>从移位寄存器<strong>完全移出</strong>（包括停止位）时触发。当 TC 中断发生时：<ul>
+<li><code>HAL_UART_IRQHandler</code> 检测到 TC 中断。</li>
+<li>关闭 TC 中断。</li>
+<li>调用 <strong>发送完成回调函数</strong> <code>HAL_UART_TxCpltCallback(huart)</code>。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><strong>用户需要做什么：</strong><ul>
+<li>提供包含有效数据的缓冲区 (<code>pData</code>)，长度至少为 <code>Size</code>。</li>
+<li>在代码中 <strong>实现发送完成回调函数</strong> <code>void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart)</code>。这是你知道整个数据块已<strong>物理发送完成</strong>的地方（如果启用了TC中断）。你可以在这里释放缓冲区、启动下一次发送、通知其他任务等。</li>
+<li>确保全局中断和UART发送中断(TXE/TC)是使能的。</li>
+</ul>
+</li>
+</ul>
+<h3 id="3_1">3. 中断触发时机总结</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">函数</th>
+<th style="text-align: left;">启动时使能的中断</th>
+<th style="text-align: left;">触发该中断的硬件条件</th>
+<th style="text-align: left;">中断服务程序中的关键动作</th>
+<th style="text-align: left;">完成时调用的回调函数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>HAL_UART_Receive_IT</code></td>
+<td style="text-align: left;"><strong>RXNE</strong></td>
+<td style="text-align: left;"><strong>接收寄存器非空</strong> (收到一个字节)</td>
+<td style="text-align: left;">从RDR读1字节 -&gt; 存入用户缓冲区 -&gt; 计数器减1 -&gt; 若收完则关中断回调</td>
+<td style="text-align: left;"><code>HAL_UART_RxCpltCallback</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>HAL_UART_Transmit_IT</code></td>
+<td style="text-align: left;"><strong>TXE</strong></td>
+<td style="text-align: left;"><strong>发送寄存器变空</strong> (可以放下一个字节了)</td>
+<td style="text-align: left;">从用户缓冲区取1字节 -&gt; 写入TDR -&gt; 计数器减1 -&gt; 若发完则关TXE开TC</td>
+<td style="text-align: left;"><code>HAL_UART_TxCpltCallback</code> (由TC中断触发)</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">(后续) <strong>TC</strong></td>
+<td style="text-align: left;"><strong>发送移位寄存器变空</strong> (最后一个字节发完)</td>
+<td style="text-align: left;">关TC中断 -&gt; 调用发送完成回调</td>
+<td style="text-align: left;"><code>HAL_UART_TxCpltCallback</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="4_2">4. 何时使用它们？</h3>
+<ul>
+<li>当你需要 <strong>异步操作</strong>，不想让CPU死等UART传输完成时（避免阻塞主循环）。</li>
+<li>当数据传输需要一定时间（尤其是低速波特率或大数据量），你想让CPU在这段时间处理其他任务时。</li>
+<li>当你需要 <strong>及时响应</strong> 接收到的数据时（通过RXNE中断和回调）。</li>
+</ul>
+<h3 id="5">5. 注意事项</h3>
+<ul>
+<li><strong>回调函数：</strong> 这是你处理完成事件的核心！<strong>必须在你的用户代码中实现它们</strong>。HAL库提供了弱定义的空函数 <code>__weak void HAL_UART_xxxCpltCallback(...)</code>，你需要重写它们。</li>
+<li><strong>缓冲区生命周期：</strong> 传递给 <code>xxx_IT</code> 函数的缓冲区 (<code>pData</code>) 必须在该次传输完成（回调被调用）之前保持有效（通常是全局变量、静态变量或动态分配的内存）。不能在传输过程中释放或覆盖。</li>
+<li><strong>中断使能：</strong> 确保在初始化UART时，相应的中断（USART全局中断、RXNE/TXE/TC中断）已经在NVIC（嵌套向量中断控制器）中使能。CubeMX通常会帮你配置好。</li>
+<li><strong>重入问题：</strong> 不要在传输/接收尚未完成时（即回调被调用之前）再次调用同一个UART的 <code>HAL_UART_xxx_IT</code> 函数来启动新的传输/接收。否则会破坏内部状态（缓冲区指针、计数器）。等待回调完成后再启动下一次。</li>
+<li><strong>错误处理：</strong> 同样存在错误回调函数 <code>HAL_UART_ErrorCallback</code>，用于处理帧错误、噪声错误、溢出错误等。建议实现它。</li>
+</ul>
+<h3 id="receive_it">流程图示意 (以 Receive_IT 为例)</h3>
+<div class="highlight"><pre><span></span><code>+---------------------+      +-----------------------+      +-----------------------+
+| Your Main Program   |      | UART Hardware         |      | Interrupt Service    |
+|                     |      |                       |      | Routine (ISR) &amp; HAL  |
++----------+----------+      +-----------+-----------+      +-----------+-----------+
+           |                             |                            ^ |
+           | Call                        |                            | |
+           | HAL_UART_Receive_IT(...)    |                            | |
+           |---------------------------&gt; |                            | |
+           |                             |                            | |
+           | (Returns immediately)       | Enable RXNE Interrupt      | |
+           | &lt;---------------------------|                            | |
+           |                             |                            | |
+           | Do other work...            |                            | |
+           |                             |                            | |
+           |                             | Receive 1 byte -&gt; Set RXNE | |
+           |                             |---------------------------&gt; |
+           |                             |                            | |
+           |                             |                            | Check RXNE Int
+           |                             |                            | Read byte from RDR
+           |                             |                            | Store byte in *pData
+           |                             |                            | pData++, RxXferCount--
+           |                             |                            | Is RxXferCount == 0?
+           |                             |                            |    | No: Keep RXNE Int on
+           |                             |                            |    |     (wait next byte)
+           |                             |                            |    |
+           |                             |                            |    | Yes: Disable RXNE Int
+           |                             |                            |    | Call HAL_UART_RxCpltCallback
+           |                             |                            |    |----------------------&gt; (Your Code!)
+           |                             |                            | &lt;-------------------------+
+           | &lt; - - - - - - - - - - - - - - - - - - - - - - - - - - - - (Callback runs)
+           | (Your program is notified)  |                            | |
+           |                             |                            | |
+</code></pre></div>
+<p><strong>简单来说：</strong></p>
+<ol>
+<li>你调用 <code>Receive_IT</code> / <code>Transmit_IT</code> <strong>启动</strong>过程并<strong>使能中断</strong>。</li>
+<li><strong>硬件</strong>在数据到来(TX空/RX有数据)时<strong>触发中断</strong>。</li>
+<li><strong>中断服务程序</strong> 处理单个字节（存/取），更新指针和计数器。</li>
+<li>当<strong>所有字节完成</strong>，中断服务程序<strong>关闭中断</strong>并<strong>调用你的回调函数</strong>通知你。</li>
+<li>你的<strong>回调函数</strong>处理完成事件（如处理收到的数据、准备下次发送）。</li>
+</ol>
+<p>理解了中断使能、中断触发条件、中断服务程序的动作以及回调函数的角色，就能清晰掌握这两个函数的工作机制了。</p>
+<p><img alt="img" src="pic/mermaid-202568%20172451.png" /></p>
 
 
 
@@ -2680,7 +3068,7 @@ chrt<span class="w"> </span>-f<span class="w"> </span>-p<span class="w"> </span>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2025-05-27T15:55:48+02:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2025-05-27</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2025-07-14T04:01:56+02:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2025-07-14</span>
   </span>
 
     
