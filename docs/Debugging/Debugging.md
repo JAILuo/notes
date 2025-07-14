@@ -33,7 +33,7 @@
     ```assembly
     lhx@ubuntu:~/test/qemu$ ls
     a.out  hello.c
-    lhx@ubuntu:~/test/qemu$ gdb-multiarch -q a.out 
+    @ubuntu:~/test/qemu$ gdb-multiarch -q a.out 
     Reading symbols from a.out...
     (gdb) target remote localhost:1234
     Remote debugging using localhost:1234

@@ -8,7 +8,7 @@ https://blog.csdn.net/ldl617/article/details/120307412
 
 ## 移植Linux 到 GD32/STM32 上
 
-主要是想为协会的 GD32 开发板做一些比较好玩的东西，还有是因为看了阅马场的Linux驱动第一期的内容，发现可以直接将Linux 跑在自己的 MCU 上！！
+主要是想为协会的 GD32 开发板做一些比较好玩的东西，还有是因为看了阅马场的Linux驱动第一期的内容，可以直接将 Linux 跑在自己的 MCU 上！！
 
 留个坑。
 
@@ -109,9 +109,6 @@ https://blog.csdn.net/ldl617/article/details/120307412
     尽量补充知识面
 
     - jyy os
-    - 阅码场课程
-        - 专栏_8小时学透ARM体系架构
-        - 
 
 
 

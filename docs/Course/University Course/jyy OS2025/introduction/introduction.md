@@ -435,6 +435,56 @@ boot、efi？
 
 
 
+## 计算机系统安全
+
+
+
+
+
+## 现代应用程序架构
+
+
+
+
+
+## Android
+
+### Android Apps
+
+- 首先，是一个 Java 程序 (Kotlin)
+
+- 其次，有运行模型
+    - Android Platform APIs
+        - [android.view.View](https://developer.android.google.cn/reference/android/view/View): “the basic building block for user interface components”
+        - [android.webkit.WebView](https://developer.android.google.cn/reference/android/webkit/WebView) - 嵌入应用的网页
+        - [android.hardware.camera2](https://developer.android.google.cn/reference/android/hardware/camera2/package-summary) - 相机
+        - [android.database.database](https://developer.android.google.cn/reference/android/database/sqlite/package-summary) - 数据库
+    - 四大组件：`Activity`（界面）, `Service`, `ContentProvider`, `BroadcastReceiver`
+
+
+
+### arch
+
+![android-stack](pic/android-stack.png)
+
+
+
+
+
+
+
+## final
+
+记住各种system call，不是靠的是手册，而是各种各样的应用场景？
+
+比如system call
+
+
+
+
+
+
+
 
 
 

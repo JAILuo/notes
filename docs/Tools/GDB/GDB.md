@@ -3,9 +3,7 @@
 - [Quick Guide to gdb](https://www-users.cse.umn.edu/~kauffman/tutorials/gdb)
 - [GDB Documentation](https://sourceware.org/gdb/documentation/)
 
-不过现在有 AI 了，首先借助一个例子学会基本使用，再配合 AI 进阶使用，还需要去啃那些乏味枯燥的文档吗？值得思考，但我觉得仍需要，但配合AI能极大地提高效率！
-
-
+现在有 AI 了，首先借助一个例子学会基本使用，再配合 AI 进阶使用，还需要去啃那些乏味枯燥的文档吗？值得思考，但我觉得仍需要，但配合AI能极大地提高效率！
 
 
 
@@ -69,8 +67,9 @@ int main (int argc,char *argv[]) {
 
 ##### GDB基本操作
 
+常用的GDB调试命令
+
 ```text
-/*    常用的GDB调试命令
 run 或 r：启动程序的执行。
 break 或 b：设置断点。通过指定行号或函数名来设置断点，如 break main 或 break 10。
 continue 或 c：继续执行程序，直到下一个断点或程序结束。
@@ -87,7 +86,6 @@ info breakpoints：显示当前设置的所有断点。
 delete：删除指定的断点。例如 delete 1。
 watch：设置观察点/监视d，当变量的值发生改变时，程序会停下来。
 quit 或 q：退出GDB调试。
-*/
 ```
 
 
@@ -185,7 +183,7 @@ End of assembler dump.
   0x7fffffffdf90:	0x00000000 //main函数的栈低
 (gdb) x/28 $rsp //查看栈顶 (进出栈时它会变化 ) 
       //28：查看从栈顶地址开始 连续28个int 内存单元
-       eg.(gdb) x/20xw $rsp  (x:16进制，w:word) 这里的word时4g
+       eg.(gdb) x/20xw $rsp  (x:16进制，w:word) 这里的word 4z
       //入栈:   argv =0x7fffffffe158           字节对齐补0       argc=1
 0x7fffffffdff0:	0x00000d30	0x00000000	0x00000004	0x00000003//这一行注意
 0x7fffffffe000:	0xf7fc1000	0x00007fff	0x01000000	0x00000101
