@@ -2121,7 +2121,7 @@
         <li class="md-nav__item">
   <a href="#risc-v" class="md-nav__link">
     <span class="md-ellipsis">
-      RISC-V 上下文切换
+      RISC-V 上下文切换（⭐）
     </span>
   </a>
   
@@ -2133,6 +2133,264 @@
       关于 MMU 和 cache
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="关于 MMU 和 cache">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-cachecache-coherency" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Cache一致性问题（Cache Coherency）
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Cache一致性问题（Cache Coherency）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      问题场景：
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      典型案例：
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_20" class="md-nav__link">
+    <span class="md-ellipsis">
+      解决方案：
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 内存属性配置错误
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 内存属性配置错误">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_21" class="md-nav__link">
+    <span class="md-ellipsis">
+      问题场景：
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_22" class="md-nav__link">
+    <span class="md-ellipsis">
+      错误配置示例：
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_23" class="md-nav__link">
+    <span class="md-ellipsis">
+      解决方案：
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-tlb" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. TLB未刷新问题
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. TLB未刷新问题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_24" class="md-nav__link">
+    <span class="md-ellipsis">
+      问题场景：
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_25" class="md-nav__link">
+    <span class="md-ellipsis">
+      典型案例：
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_26" class="md-nav__link">
+    <span class="md-ellipsis">
+      解决方案：
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-memory-barriers" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. 内存屏障（Memory Barriers）缺失
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. 内存屏障（Memory Barriers）缺失">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_27" class="md-nav__link">
+    <span class="md-ellipsis">
+      问题场景：
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_28" class="md-nav__link">
+    <span class="md-ellipsis">
+      错误示例：
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_29" class="md-nav__link">
+    <span class="md-ellipsis">
+      解决方案：
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. 地址对齐与边界问题
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. 地址对齐与边界问题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_30" class="md-nav__link">
+    <span class="md-ellipsis">
+      问题场景：
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_31" class="md-nav__link">
+    <span class="md-ellipsis">
+      问题示例：
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_32" class="md-nav__link">
+    <span class="md-ellipsis">
+      解决方案：
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. 性能优化陷阱
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. 性能优化陷阱">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_33" class="md-nav__link">
+    <span class="md-ellipsis">
+      问题场景：
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_34" class="md-nav__link">
+    <span class="md-ellipsis">
+      优化方案：
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_35" class="md-nav__link">
+    <span class="md-ellipsis">
+      总结：最佳实践
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -2155,7 +2413,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_18" class="md-nav__link">
+  <a href="#_36" class="md-nav__link">
     <span class="md-ellipsis">
       内存管理：页面回收
     </span>
@@ -2164,7 +2422,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_19" class="md-nav__link">
+  <a href="#_37" class="md-nav__link">
     <span class="md-ellipsis">
       页面迁移/压缩机制
     </span>
@@ -2173,7 +2431,34 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_20" class="md-nav__link">
+  <a href="#mmap" class="md-nav__link">
+    <span class="md-ellipsis">
+      mmap的原理
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_38" class="md-nav__link">
+    <span class="md-ellipsis">
+      硬中断和软中断的区别？
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_39" class="md-nav__link">
+    <span class="md-ellipsis">
+      系统调用的理解
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_40" class="md-nav__link">
     <span class="md-ellipsis">
       从存储介质看启动流程
     </span>
@@ -2183,7 +2468,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_21" class="md-nav__link">
+  <a href="#_41" class="md-nav__link">
     <span class="md-ellipsis">
       一、启动流程阶段分解
     </span>
@@ -2243,7 +2528,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_22" class="md-nav__link">
+  <a href="#_42" class="md-nav__link">
     <span class="md-ellipsis">
       二、提升专业性的方法论
     </span>
@@ -2262,7 +2547,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#2_3" class="md-nav__link">
+  <a href="#2_4" class="md-nav__link">
     <span class="md-ellipsis">
       2. 理解行业标准设计模式
     </span>
@@ -2294,7 +2579,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_23" class="md-nav__link">
+  <a href="#_43" class="md-nav__link">
     <span class="md-ellipsis">
       三、终极目标：构建完整知识体系
     </span>
@@ -2435,7 +2720,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#5_2" class="md-nav__link">
+  <a href="#5_3" class="md-nav__link">
     <span class="md-ellipsis">
       5. 关键问题解答
     </span>
@@ -2477,7 +2762,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#6" class="md-nav__link">
+  <a href="#6_1" class="md-nav__link">
     <span class="md-ellipsis">
       6. 设计建议
     </span>
@@ -2600,7 +2885,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#5_3" class="md-nav__link">
+  <a href="#5_4" class="md-nav__link">
     <span class="md-ellipsis">
       5. 验证启动流程
     </span>
@@ -2609,7 +2894,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#6_1" class="md-nav__link">
+  <a href="#6_2" class="md-nav__link">
     <span class="md-ellipsis">
       6. 常见问题排查
     </span>
@@ -2618,7 +2903,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_24" class="md-nav__link">
+  <a href="#_44" class="md-nav__link">
     <span class="md-ellipsis">
       总结步骤
     </span>
@@ -2632,7 +2917,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_25" class="md-nav__link">
+  <a href="#_45" class="md-nav__link">
     <span class="md-ellipsis">
       文件系统镜像
     </span>
@@ -2651,7 +2936,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_26" class="md-nav__link">
+  <a href="#_46" class="md-nav__link">
     <span class="md-ellipsis">
       一、核心目标对比
     </span>
@@ -2660,7 +2945,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_27" class="md-nav__link">
+  <a href="#_47" class="md-nav__link">
     <span class="md-ellipsis">
       二、技术流程关联
     </span>
@@ -2679,7 +2964,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#2_4" class="md-nav__link">
+  <a href="#2_5" class="md-nav__link">
     <span class="md-ellipsis">
       2. 企业级镜像构建示例
     </span>
@@ -2693,7 +2978,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_28" class="md-nav__link">
+  <a href="#_48" class="md-nav__link">
     <span class="md-ellipsis">
       三、设计决策与工程实践
     </span>
@@ -2712,7 +2997,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#2_5" class="md-nav__link">
+  <a href="#2_6" class="md-nav__link">
     <span class="md-ellipsis">
       2. 企业级可靠性设计
     </span>
@@ -2726,7 +3011,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_29" class="md-nav__link">
+  <a href="#_49" class="md-nav__link">
     <span class="md-ellipsis">
       四、高级调试技巧
     </span>
@@ -2759,7 +3044,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_30" class="md-nav__link">
+  <a href="#_50" class="md-nav__link">
     <span class="md-ellipsis">
       五、行业演进与未来趋势
     </span>
@@ -2768,7 +3053,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_31" class="md-nav__link">
+  <a href="#_51" class="md-nav__link">
     <span class="md-ellipsis">
       总结
     </span>
@@ -3522,7 +3807,7 @@ perf<span class="w"> </span>script
 - 通常<strong>无虚拟内存机制</strong>，Page Fault不存在。
 - 内存管理为静态分配或简单分区，确保确定性响应。
 - 若需类似功能（如加载外部数据），需手动实现分页逻辑。</p>
-<h2 id="risc-v">RISC-V 上下文切换</h2>
+<h2 id="risc-v">RISC-V 上下文切换（⭐）</h2>
 <blockquote>
 <p>主要配合我自己实现的处理器和 OS 实现一步步讲解。</p>
 </blockquote>
@@ -3566,7 +3851,7 @@ perf<span class="w"> </span>script
 <ul>
 <li>要为用户进程实现地址空间的内容</li>
 <li>内核栈和用户栈的进一步区分，尤其是在上下文切换的时候对于内核栈、用户栈切换。</li>
-<li>在开启 MMU 的情况下，每个用户进程有自己的页表基地址，内核访问的都是同一片代码，但也需要有页表，这就带来了问题，是在每一次上下</li>
+<li>在开启 MMU 的情况下，每个用户进程有自己的页表基地址，内核访问的都是同一片代码，但也需要有页表，这就带来了问题，是在每一次上下文切换都要换到对应进程的页表基地址寄存器吗？</li>
 </ul>
 <p>去看了实际系统的实现：</p>
 <div class="highlight"><pre><span></span><code><span class="c1">// arch/riscv/include/asm/pgalloc.h</span>
@@ -3644,9 +3929,7 @@ perf<span class="w"> </span>script
 </li>
 <li>
 <p>对于地址 <code>0x80000000</code>，其 VPN2 值为：</p>
-<p>复制</p>
-<div class="highlight"><pre><span></span><code>VPN2 = (0x80000000 &gt;&gt; 30) &amp; 0x1FF = 256
-</code></pre></div>
+<p><code>VPN2 = (0x80000000 &gt;&gt; 30) &amp; 0x1FF = 256</code></p>
 <p>因此，内核空间的 PGD 条目索引范围为 <strong>256~511</strong>。</p>
 </li>
 </ul>
@@ -3660,15 +3943,18 @@ perf<span class="w"> </span>script
 </li>
 </ol>
 </blockquote>
-<p>具体可以看看 kernel memory layout 的文档：<a href="https://www.kernel.org/doc/html/latest/arch/riscv/vm-layout.html">Virtual Memory Layout on RISC-V Linux — The Linux Kernel documentation</a></p>
+<p>推荐阅读：</p>
+<ul>
+<li><a href="https://blog.csdn.net/m0_51717456/article/details/124256870">内存之页表-CSDN博客</a></li>
+<li><a href="https://unix.stackexchange.com/questions/598171/how-are-the-kernel-page-tables-shared-among-all-processes">memory - How are the kernel page tables shared among all processes? - Unix &amp; Linux Stack Exchange</a></li>
+</ul>
 <blockquote>
-<p>了解到的一些相对前沿资料：</p>
-<p><a href="https://unix.stackexchange.com/questions/598171/how-are-the-kernel-page-tables-shared-among-all-processes">memory - How are the kernel page tables shared among all processes? - Unix &amp; Linux Stack Exchange</a></p>
+<p>另外还可以看看 kernel memory layout 的文档：<a href="https://www.kernel.org/doc/html/latest/arch/riscv/vm-layout.html">Virtual Memory Layout on RISC-V Linux — The Linux Kernel documentation</a></p>
 </blockquote>
 <p>综上：</p>
 <p>根据之前的多次回答，我现在总结出我自己实现的RISC-V 的OS的关于页表的目前的机制。我理解的如下：</p>
 <p>首先，在只有一个页表寄存器的时候（不像ARM的双页表），在系统刚刚启动的时候，做的是 <code>vme_init</code> 的工作，为描述内核页表的结构分配使用空间：<code>kas.ptr = pgalloc_f(PGSIZE);</code> 所以这个 <code>ptr</code> 指的是内核空间下的页表基地址，是所有程序共享的！</p>
-<p>然后，接着为程序内存划分好的的每一部分内存区（zone、或者理解为池？）进行MMU映射；最后将内核的页表基址放到 <code>satp</code> 寄存器中：<code>set_satp(kas.ptr);</code>。</p>
+<p>然后，接着为程序内存划分好的每一部分内存区（zone、或者理解为池？）进行MMU映射；最后将内核的页表基址放到 <code>satp</code> 寄存器中：<code>set_satp(kas.ptr);</code>。</p>
 <p>接着，就是用户进程的内容，既然现在有了MMU的支持，那就要创建、规划进程地址空间了。</p>
 <ul>
 <li>
@@ -3723,7 +4009,7 @@ perf<span class="w"> </span>script
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">base</span><span class="p">;</span>
 <span class="p">}</span><span class="w">                </span>
 </code></pre></div>
-<p>这里主要到是<code>pdir</code>（page directory），这是用户进程地址空间的页表基地址赋值！（这和前面 <code>protect(&amp;pcb-&gt;as);</code> 那里联系起来了！</p>
+<p>这里主要到是<code>pdir</code>（page directory），这是用户进程地址空间的页表基地址赋值！这和前面 <code>protect(&amp;pcb-&gt;as);</code> 那里联系起来了！</p>
 <blockquote>
 <p>一开始的困惑：<code>memcpy kernel map space</code>，将 <code>kas.ptr</code> 拷贝给 <code>updir</code>，那不是覆盖 <code>pdir</code>？是不是内核和用户共用一部分？</p>
 </blockquote>
@@ -3747,8 +4033,10 @@ perf<span class="w"> </span>script
 <p>这里也有一个有意思的地方，也是那个时候有困惑的：映射到同一地址？</p>
 <blockquote>
 <p>用户栈映射到 <code>as.area.end - 8 * PGSIZE</code> 这里。我的问题不是他映射到哪里的问题，而是好像每创建一个进程的用户栈空间都指向这里？？？这很明显不对呀！ <code>new_user_stack_top</code> 这个是有 <code>page_alloc</code> 实际分配了8页的起始地址的，但是按照上面的说法，那不是所有的用户进程的用户栈的实际物理地址都映射到这里？</p>
-<p>不对！是给每个进程一种错觉，感觉这一块地方都是它的！但这是虚拟地址，实际访问的物理地址（就是那个new_user_stack_top，分配的8个PAGE）是不一样的！！我这理解对不对？因为这是在我自己写的 OS 的，那我想在 Linux中验证，怎么做？有什么test程序吗？</p>
+<p>不对！就是给每个进程一种错觉，整块地址空间都是它的！</p>
+<p>对！但这个地址是虚拟地址喔，实际访问的物理地址（就是那个new_user_stack_top，分配的8个PAGE）肯定是不一样的！</p>
 </blockquote>
+<p>我这理解对不对？因为这是在我自己写的 OS 的，那我想在 Linux中验证，怎么做？有什么test程序：</p>
 <div class="highlight"><pre><span></span><code><span class="c1">// test.c</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;unistd.h&gt;</span>
@@ -3776,19 +4064,242 @@ $<span class="w"> </span>./test<span class="w"> </span><span class="p">&amp;</sp
 </code></pre></div>
 <p>尝试注释这处代码, 重新编译并运行, 你会看到发生了错误. 请解释为什么会发生这个错误.</p>
 </blockquote>
+<p>......</p>
 <p>为此, 我们需要思考内核线程的调度会对分页机制造成什么样的影响. 内核线程和用户进程最大的不同, 就是它没有用户态的地址空间: 内核线程的代码, 数据和栈都是位于内核的地址空间. 那在启动分页机制之后, 如果<code>__am_irq_handle()</code>要返回一个内核线程的现场, 我们是否需要考虑通过<code>__am_switch()</code>切换到内核线程的虚拟地址空间呢?</p>
 <p>答案是, 不需要. 这是因为AM创建的所有虚拟地址空间都会包含内核映射, 无论在切换之前是位于哪一个虚拟地址空间, 内核线程都可以在这个虚拟地址空间上正确运行. 因此我们只要在<code>kcontext()</code>中将上下文的地址空间描述符指针设置为<code>NULL</code>, 来进行特殊的标记, 等到将来在<code>__am_irq_handle()</code>中调用<code>__am_switch()</code>时, 如果发现地址空间描述符指针为<code>NULL</code>, 就不进行虚拟地址空间的切换.
 </p>
 </blockquote>
+<p>对！因为不是完全的32位地址空间，所以可以让内核页表寄存器覆盖掉用户的那部分？也就是这里：<code>memcpy(updir, kas.ptr, PGSIZE);</code> 内核地址的空间的大小，也就是之前说的：</p>
+<blockquote>
+<p><strong>内核页表初始化</strong>：</p>
+<ul>
+<li>内核启动时，通过 <code>paging_init()</code> 初始化内核页表（<code>swapper_pg_dir</code>），将内核代码、设备内存等映射到高半部分虚拟地址。</li>
+<li>用户进程创建时，复制内核 PGD 的高半部分条目到用户页表，确保内核映射共享。</li>
+</ul>
+</blockquote>
+<p>也就是内核页表映射减少context切换开销？</p>
+<blockquote>
+<ol>
+<li>
+<p><strong>内核映射共享</strong>：</p>
+<ul>
+<li><code>sync_kernel_mappings()</code> 将内核页表（<code>init_mm.pgd</code>）的高半部分（索引 <code>USER_PTRS_PER_PGD</code> 到 <code>PTRS_PER_PGD-1</code>）拷贝到用户 PGD</li>
+<li>确保所有进程共享内核空间映射（如设备内存、内核代码）</li>
+</ul>
+</li>
+<li>
+<p><strong>地址空间划分示例</strong>（64 位 Sv39）：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">区域</th>
+<th style="text-align: left;">PGD 索引范围</th>
+<th style="text-align: left;">地址范围</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">用户空间</td>
+<td style="text-align: left;">0 ~ 255</td>
+<td style="text-align: left;">0x0 ~ 0x3FFFFFFF</td>
+</tr>
+<tr>
+<td style="text-align: left;">内核空间</td>
+<td style="text-align: left;">256 ~ 511</td>
+<td style="text-align: left;">0x80000000 ~ 0xFFFFFFFF</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p><strong>优势</strong>：</p>
+<ul>
+<li><strong>减少切换开销</strong>：进程切换时无需刷新内核映射的 TLB</li>
+<li><strong>内存节约</strong>：所有进程共享同一份内核页表映射</li>
+<li><strong>安全性</strong>：用户空间无法修改内核映射（<code>SUM</code> 位控制访问权限）</li>
+</ul>
+</li>
+</ol>
+</blockquote>
 <h2 id="mmu-cache">关于 MMU 和 cache</h2>
+<h3 id="1-cachecache-coherency">1. <strong>Cache一致性问题（Cache Coherency）</strong></h3>
+<h4 id="_18">问题场景：</h4>
+<ul>
+<li><strong>DMA操作</strong>：当设备通过DMA直接读写内存时，若数据在CPU Cache中未同步，会导致：</li>
+<li><strong>数据丢失</strong>：CPU修改数据后未写回内存，设备读取到旧值</li>
+<li><strong>数据覆盖</strong>：设备写入新数据后，CPU从Cache读取旧值</li>
+<li><strong>多核共享数据</strong>：不同核心的Cache持有同一内存地址的不同副本</li>
+</ul>
+<h4 id="_19">典型案例：</h4>
+<div class="highlight"><pre><span></span><code><span class="c1">// 驱动代码示例</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">dma_transfer</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">device</span><span class="w"> </span><span class="o">*</span><span class="n">dev</span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">size</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">dma_addr_t</span><span class="w"> </span><span class="n">dma_addr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dma_map_single</span><span class="p">(</span><span class="n">dev</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="p">,</span><span class="w"> </span><span class="n">DMA_TO_DEVICE</span><span class="p">);</span>
+<span class="w">    </span><span class="n">start_dma</span><span class="p">(</span><span class="n">dev</span><span class="p">,</span><span class="w"> </span><span class="n">dma_addr</span><span class="p">);</span><span class="w"> </span><span class="c1">// DMA读取数据</span>
+<span class="w">    </span><span class="c1">// 若此时CPU修改data，Cache未刷新，设备将获取旧数据</span>
+<span class="p">}</span>
+</code></pre></div>
+<h4 id="_20">解决方案：</h4>
+<ul>
+<li><strong>手动Cache维护</strong>：
+  <div class="highlight"><pre><span></span><code><span class="n">dma_sync_single_for_device</span><span class="p">(</span><span class="n">dev</span><span class="p">,</span><span class="w"> </span><span class="n">dma_addr</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="p">,</span><span class="w"> </span><span class="n">DMA_TO_DEVICE</span><span class="p">);</span><span class="w"> </span><span class="c1">// DMA前刷Cache</span>
+<span class="n">dma_sync_single_for_cpu</span><span class="p">(</span><span class="n">dev</span><span class="p">,</span><span class="w"> </span><span class="n">dma_addr</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="p">,</span><span class="w"> </span><span class="n">DMA_FROM_DEVICE</span><span class="p">);</span><span class="w">  </span><span class="c1">// DMA后失效Cache</span>
+</code></pre></div></li>
+<li><strong>一致性内存（Coherent Memory）</strong>：</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">coherent_buf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dma_alloc_coherent</span><span class="p">(</span><span class="n">dev</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">dma_addr</span><span class="p">,</span><span class="w"> </span><span class="n">GFP_KERNEL</span><span class="p">);</span>
+<span class="c1">// 该内存区域硬件自动维护Cache一致性</span>
+</code></pre></div>
+<hr />
+<h3 id="2_3">2. <strong>内存属性配置错误</strong></h3>
+<h4 id="_21">问题场景：</h4>
+<ul>
+<li><strong>设备寄存器映射</strong>：将MMIO（内存映射I/O）区域错误配置为Cacheable</li>
+<li>导致CPU对寄存器的多次访问被Cache合并或重排序</li>
+<li>设备状态读取错误或控制命令丢失</li>
+<li><strong>DMA缓冲区属性错误</strong>：未正确设置Non-Cacheable/Write-Combining</li>
+</ul>
+<h4 id="_22">错误配置示例：</h4>
+<div class="highlight"><pre><span></span><code><span class="c1">// 错误：对设备寄存器使用Cacheable映射</span>
+<span class="kt">void</span><span class="w"> </span><span class="n">__iomem</span><span class="w"> </span><span class="o">*</span><span class="n">regs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ioremap</span><span class="p">(</span><span class="n">DEVICE_BASE</span><span class="p">,</span><span class="w"> </span><span class="n">SIZE</span><span class="p">);</span>
+<span class="n">writel</span><span class="p">(</span><span class="n">CMD_START</span><span class="p">,</span><span class="w"> </span><span class="n">regs</span><span class="p">);</span><span class="w"> </span><span class="c1">// 写入可能被Cache延迟，未立即到达设备</span>
+</code></pre></div>
+<h4 id="_23">解决方案：</h4>
+<ul>
+<li><strong>正确设置MMIO属性</strong>：
+  <div class="highlight"><pre><span></span><code><span class="c1">// 使用Non-Cacheable映射</span>
+<span class="kt">void</span><span class="w"> </span><span class="n">__iomem</span><span class="w"> </span><span class="o">*</span><span class="n">regs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ioremap_nocache</span><span class="p">(</span><span class="n">DEVICE_BASE</span><span class="p">,</span><span class="w"> </span><span class="n">SIZE</span><span class="p">);</span>
+
+<span class="c1">// 或显式声明</span>
+<span class="cp">#define DEVICE_REG_ATTR (DEVICE_nGnRnE | MT_DEVICE)</span>
+<span class="kt">void</span><span class="w"> </span><span class="n">__iomem</span><span class="w"> </span><span class="o">*</span><span class="n">regs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ioremap_prot</span><span class="p">(</span><span class="n">DEVICE_BASE</span><span class="p">,</span><span class="w"> </span><span class="n">SIZE</span><span class="p">,</span><span class="w"> </span><span class="n">pgprot_device</span><span class="p">(</span><span class="n">PROT_DEVICE_nGnRnE</span><span class="p">));</span>
+</code></pre></div></li>
+</ul>
+<hr />
+<h3 id="3-tlb">3. <strong>TLB未刷新问题</strong></h3>
+<h4 id="_24">问题场景：</h4>
+<ul>
+<li><strong>动态重映射</strong>：驱动修改页表后未刷新TLB</li>
+<li>导致MMU使用旧的地址转换结果</li>
+<li>访问无效地址或错误物理页</li>
+<li><strong>ASID（Address Space ID）冲突</strong>：进程切换时ASID重用导致TLB污染</li>
+</ul>
+<h4 id="_25">典型案例：</h4>
+<div class="highlight"><pre><span></span><code><span class="c1">// 修改页表后忘记刷新TLB</span>
+<span class="n">remap_pfn_range</span><span class="p">(</span><span class="n">vma</span><span class="p">,</span><span class="w"> </span><span class="n">vaddr</span><span class="p">,</span><span class="w"> </span><span class="n">pfn</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="p">,</span><span class="w"> </span><span class="n">prot</span><span class="p">);</span>
+<span class="c1">// 缺少: flush_tlb_kernel_range(vaddr, vaddr + size);</span>
+</code></pre></div>
+<h4 id="_26">解决方案：</h4>
+<ul>
+<li><strong>显式TLB刷新</strong>：
+  <div class="highlight"><pre><span></span><code><span class="n">flush_tlb_range</span><span class="p">(</span><span class="n">vma</span><span class="p">,</span><span class="w"> </span><span class="n">start</span><span class="p">,</span><span class="w"> </span><span class="n">end</span><span class="p">);</span><span class="w">   </span><span class="c1">// 用户空间</span>
+<span class="n">flush_tlb_kernel_range</span><span class="p">(</span><span class="n">start</span><span class="p">,</span><span class="w"> </span><span class="n">end</span><span class="p">);</span><span class="w"> </span><span class="c1">// 内核空间</span>
+</code></pre></div></li>
+<li><strong>ASID管理</strong>：确保进程切换时刷新TLB或使用不同ASID</li>
+</ul>
+<hr />
+<h3 id="4-memory-barriers">4. <strong>内存屏障（Memory Barriers）缺失</strong></h3>
+<h4 id="_27">问题场景：</h4>
+<ul>
+<li><strong>指令重排序</strong>：CPU/编译器优化导致内存操作顺序改变</li>
+<li><strong>设备操作顺序敏感</strong>：如先写命令寄存器再写数据寄存器</li>
+</ul>
+<h4 id="_28">错误示例：</h4>
+<div class="highlight"><pre><span></span><code><span class="n">writel</span><span class="p">(</span><span class="n">DATA_REG</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="p">);</span><span class="w">  </span><span class="c1">// 写数据寄存器</span>
+<span class="n">writel</span><span class="p">(</span><span class="n">CMD_REG</span><span class="p">,</span><span class="w"> </span><span class="n">CMD_SEND</span><span class="p">);</span><span class="c1">// 写命令寄存器</span>
+<span class="c1">// 编译器/CPU可能重排序，导致CMD先于DATA发送</span>
+</code></pre></div>
+<h4 id="_29">解决方案：</h4>
+<ul>
+<li><strong>插入内存屏障</strong>：
+  <div class="highlight"><pre><span></span><code><span class="n">writel</span><span class="p">(</span><span class="n">DATA_REG</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="p">);</span>
+<span class="n">wmb</span><span class="p">();</span><span class="w"> </span><span class="c1">// 写屏障，确保DATA先于CMD</span>
+<span class="n">writel</span><span class="p">(</span><span class="n">CMD_REG</span><span class="p">,</span><span class="w"> </span><span class="n">CMD_SEND</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+<hr />
+<h3 id="5_2">5. <strong>地址对齐与边界问题</strong></h3>
+<h4 id="_30">问题场景：</h4>
+<ul>
+<li><strong>Cache行对齐</strong>：DMA缓冲区未按Cache行对齐</li>
+<li>导致Cache刷新时污染相邻数据</li>
+<li><strong>页表边界跨越</strong>：映射区域跨越页表项边界</li>
+</ul>
+<h4 id="_31">问题示例：</h4>
+<div class="highlight"><pre><span></span><code><span class="c1">// 缓冲区未对齐，刷新时影响相邻数据</span>
+<span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">buf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">kmalloc</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span><span class="w"> </span><span class="n">GFP_KERNEL</span><span class="p">);</span><span class="w"> </span><span class="c1">// 可能不按64字节对齐</span>
+<span class="n">dma_sync_single_for_device</span><span class="p">(</span><span class="n">dev</span><span class="p">,</span><span class="w"> </span><span class="n">dma_addr</span><span class="p">,</span><span class="w"> </span><span class="mi">128</span><span class="p">,</span><span class="w"> </span><span class="n">DMA_TO_DEVICE</span><span class="p">);</span>
+</code></pre></div>
+<h4 id="_32">解决方案：</h4>
+<ul>
+<li><strong>对齐分配</strong>：
+  <div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">buf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">kmem_cache_alloc</span><span class="p">(</span><span class="n">aligned_cache</span><span class="p">,</span><span class="w"> </span><span class="n">GFP_KERNEL</span><span class="p">);</span>
+<span class="c1">// 或</span>
+<span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">buf</span><span class="p">;</span>
+<span class="n">posix_memalign</span><span class="p">(</span><span class="o">&amp;</span><span class="n">buf</span><span class="p">,</span><span class="w"> </span><span class="n">CACHELINE_SIZE</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="p">);</span>
+</code></pre></div></li>
+<li><strong>页表映射检查</strong>：
+  <div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">vaddr</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="o">~</span><span class="n">PAGE_MASK</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="p">((</span><span class="n">vaddr</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="o">~</span><span class="n">PAGE_MASK</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 处理跨页表项映射</span>
+<span class="p">}</span>
+</code></pre></div></li>
+</ul>
+<hr />
+<h3 id="6">6. <strong>性能优化陷阱</strong></h3>
+<h4 id="_33">问题场景：</h4>
+<ul>
+<li><strong>False Sharing</strong>：多核访问同一Cache行的不同变量</li>
+<li>导致Cache行频繁失效，性能骤降</li>
+<li><strong>过度刷新Cache</strong>：频繁调用<code>dma_sync_*</code>造成性能损失</li>
+</ul>
+<h4 id="_34">优化方案：</h4>
+<ul>
+<li><strong>避免False Sharing</strong>：
+  <div class="highlight"><pre><span></span><code><span class="k">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">core1_data</span><span class="w"> </span><span class="nf">__attribute__</span><span class="p">((</span><span class="n">aligned</span><span class="p">(</span><span class="n">CACHELINE_SIZE</span><span class="p">)));</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">core2_data</span><span class="w"> </span><span class="nf">__attribute__</span><span class="p">((</span><span class="n">aligned</span><span class="p">(</span><span class="n">CACHELINE_SIZE</span><span class="p">)));</span>
+<span class="p">};</span>
+</code></pre></div></li>
+<li><strong>批量操作</strong>：合并多次DMA同步操作</li>
+<li><strong>预分配内存池</strong>：减少动态分配开销</li>
+</ul>
+<hr />
+<h3 id="_35">总结：最佳实践</h3>
+<ol>
+<li><strong>DMA操作</strong>：</li>
+<li>使用<code>dma_alloc_coherent()</code>获取一致性内存</li>
+<li>非一致性内存必须用<code>dma_map_*/dma_unmap_*</code>API</li>
+<li><strong>MMIO访问</strong>：</li>
+<li>始终使用<code>ioremap_nocache()</code>或<code>memremap()</code></li>
+<li>配合<code>readl()/writel()</code>等原子操作</li>
+<li><strong>TLB管理</strong>：</li>
+<li>页表修改后立即刷新TLB</li>
+<li><strong>内存屏障</strong>：</li>
+<li>设备寄存器操作按需插入<code>rmb()/wmb()</code></li>
+<li><strong>调试工具</strong>：</li>
+<li>使用<code>CONFIG_DEBUG_DMA_API</code>检测DMA错误</li>
+<li>利用<code>ftrace</code>跟踪Cache/TLB事件</li>
+</ol>
+<blockquote>
+<p>通过以下命令可检查Cache一致性：<br />
+<code>perf stat -e cache-misses,cache-references,dTLB-load-misses,dTLB-store-misses</code></p>
+</blockquote>
+<p>正确理解MMU/Cache的交互机制，严格遵循硬件约束，是开发稳定高效驱动的关键。</p>
 <h2 id="1_2">内存管理1：伙伴系统的原理</h2>
 <h2 id="2slab">内存管理2：slab的原理</h2>
-<h2 id="_18">内存管理：页面回收</h2>
-<h2 id="_19">页面迁移/压缩机制</h2>
-<h2 id="_20">从存储介质看启动流程</h2>
+<h2 id="_36">内存管理：页面回收</h2>
+<h2 id="_37">页面迁移/压缩机制</h2>
+<h2 id="mmap">mmap的原理</h2>
+<h2 id="_38">硬中断和软中断的区别？</h2>
+<p>我理解的都是为了打断当前的状态机运行的一种机制</p>
+<ul>
+<li>硬中断：通过给CPU物理引脚施加电压变化实现的来通知CPU处理某件对应事件</li>
+<li>软中断：通过给内存中的⼀个变量赋予二进制值以标记有软中断发发生</li>
+</ul>
+<h2 id="_39">系统调用的理解</h2>
+<h2 id="_40">从存储介质看启动流程</h2>
 <p>本文内容对标ARM架构嵌入式系统（如树莓派、i.MX系列）的标准流程。</p>
 <hr />
-<h3 id="_21"><strong>一、启动流程阶段分解</strong></h3>
+<h3 id="_41"><strong>一、启动流程阶段分解</strong></h3>
 <h4 id="1bootromsoc"><strong>阶段1：BootROM（固化在SoC内部）</strong></h4>
 <ul>
 <li>
@@ -3900,7 +4411,7 @@ $<span class="w"> </span>./test<span class="w"> </span><span class="p">&amp;</sp
 </li>
 </ul>
 <hr />
-<h3 id="_22"><strong>二、提升专业性的方法论</strong></h3>
+<h3 id="_42"><strong>二、提升专业性的方法论</strong></h3>
 <h4 id="1_3"><strong>1. 深度掌握工具链</strong></h4>
 <ul>
 <li>
@@ -3933,7 +4444,7 @@ $<span class="w"> </span>./test<span class="w"> </span><span class="p">&amp;</sp
 </li>
 </ul>
 <hr />
-<h4 id="2_3"><strong>2. 理解行业标准设计模式</strong></h4>
+<h4 id="2_4"><strong>2. 理解行业标准设计模式</strong></h4>
 <ul>
 <li>
 <p><strong>XIP（Execute In Place）</strong>：<br />
@@ -4018,7 +4529,7 @@ dmesg<span class="w"> </span><span class="p">|</span><span class="w"> </span>gre
 </li>
 </ol>
 <hr />
-<h3 id="_23"><strong>三、终极目标：构建完整知识体系</strong></h3>
+<h3 id="_43"><strong>三、终极目标：构建完整知识体系</strong></h3>
 <ul>
 <li>
 <p><strong>核心能力矩阵</strong>：  </p>
@@ -4247,7 +4758,7 @@ dmesg<span class="w"> </span><span class="p">|</span><span class="w"> </span>gre
 </li>
 </ol>
 <hr />
-<h3 id="5_2"><strong>5. 关键问题解答</strong></h3>
+<h3 id="5_3"><strong>5. 关键问题解答</strong></h3>
 <h4 id="q1-socflash"><strong>Q1: SoC外接的Flash通常是什么类型？</strong></h4>
 <ul>
 <li><strong>答</strong>：根据需求选择：<ul>
@@ -4268,7 +4779,7 @@ dmesg<span class="w"> </span><span class="p">|</span><span class="w"> </span>gre
 <li><strong>DDR</strong>：作为主内存运行操作系统和应用程序。</li>
 </ul>
 <hr />
-<h3 id="6"><strong>6. 设计建议</strong></h3>
+<h3 id="6_1"><strong>6. 设计建议</strong></h3>
 <ol>
 <li>
 <p><strong>启动介质选型</strong>：</p>
@@ -4373,7 +4884,7 @@ bootz<span class="w"> </span><span class="si">${</span><span class="nv">kernel_a
 </li>
 </ul>
 <hr />
-<h3 id="5_3"><strong>5. 验证启动流程</strong></h3>
+<h3 id="5_4"><strong>5. 验证启动流程</strong></h3>
 <ul>
 <li>
 <p><strong>检查U-Boot加载的地址</strong>：</p>
@@ -4390,14 +4901,14 @@ bootz<span class="w"> </span><span class="si">${</span><span class="nv">kernel_a
 </li>
 </ul>
 <hr />
-<h3 id="6_1"><strong>6. 常见问题排查</strong></h3>
+<h3 id="6_2"><strong>6. 常见问题排查</strong></h3>
 <ul>
 <li><strong>地址冲突</strong>：确保dtb加载地址不与内核或initrd重叠。</li>
 <li><strong>路径错误</strong>：检查U-Boot中文件路径与实际存储位置是否一致。</li>
 <li><strong>dtb版本不匹配</strong>：确保dtb与内核版本兼容。</li>
 </ul>
 <hr />
-<h3 id="_24"><strong>总结步骤</strong></h3>
+<h3 id="_44"><strong>总结步骤</strong></h3>
 <ol>
 <li><strong>编译dtb</strong>：<code>dtc -I dts -O dtb -o my_board.dtb my_board.dts</code></li>
 <li><strong>复制到启动介质</strong>：如<code>/boot/dtb/</code>或SD卡分区。</li>
@@ -4405,11 +4916,11 @@ bootz<span class="w"> </span><span class="si">${</span><span class="nv">kernel_a
 <li><strong>启动验证</strong>：通过日志确认dtb生效。</li>
 </ol>
 <p>根据具体平台调整细节，参考硬件文档确保兼容性。</p>
-<h2 id="_25">文件系统镜像</h2>
+<h2 id="_45">文件系统镜像</h2>
 <h2 id="dtb_2">DTB 配合 文件系统镜像</h2>
 <p>在嵌入式Linux系统开发中，文件系统打包和设备树二进制文件（DTB）绑定是两个<strong>独立但紧密协作的关键步骤</strong>，它们共同确保系统从硬件初始化到用户空间服务的完整启动流程。以下是两者的技术关联和差异的深度解析：</p>
 <hr />
-<h3 id="_26"><strong>一、核心目标对比</strong></h3>
+<h3 id="_46"><strong>一、核心目标对比</strong></h3>
 <table>
 <thead>
 <tr>
@@ -4442,7 +4953,7 @@ bootz<span class="w"> </span><span class="si">${</span><span class="nv">kernel_a
 </tbody>
 </table>
 <hr />
-<h3 id="_27"><strong>二、技术流程关联</strong></h3>
+<h3 id="_47"><strong>二、技术流程关联</strong></h3>
 <h4 id="1_6"><strong>1. 系统启动依赖链</strong></h4>
 <div class="highlight"><pre><span></span><code>graph LR
     Bootloader --&gt;|加载DTB| DTB[设备树二进制]
@@ -4458,7 +4969,7 @@ bootz<span class="w"> </span><span class="si">${</span><span class="nv">kernel_a
 </ul>
 </li>
 </ul>
-<h4 id="2_4"><strong>2. 企业级镜像构建示例</strong></h4>
+<h4 id="2_5"><strong>2. 企业级镜像构建示例</strong></h4>
 <div class="highlight"><pre><span></span><code><span class="c1"># 构建完整烧录镜像（SD卡布局示例）</span>
 <span class="c1">#!/bin/bash</span>
 <span class="c1"># 1. 创建分区表</span>
@@ -4482,7 +4993,7 @@ sudo<span class="w"> </span>umount<span class="w"> </span>/mnt/rootfs
 sudo<span class="w"> </span>losetup<span class="w"> </span>-d<span class="w"> </span>/dev/loop0
 </code></pre></div>
 <hr />
-<h3 id="_28"><strong>三、设计决策与工程实践</strong></h3>
+<h3 id="_48"><strong>三、设计决策与工程实践</strong></h3>
 <h4 id="1-vs"><strong>1. 分离部署 vs 内嵌整合</strong></h4>
 <table>
 <thead>
@@ -4514,7 +5025,7 @@ sudo<span class="w"> </span>losetup<span class="w"> </span>-d<span class="w"> </
 </tr>
 </tbody>
 </table>
-<h4 id="2_5"><strong>2. 企业级可靠性设计</strong></h4>
+<h4 id="2_6"><strong>2. 企业级可靠性设计</strong></h4>
 <ul>
 <li>
 <p><strong>双备份策略</strong>：  </p>
@@ -4553,7 +5064,7 @@ sudo<span class="w"> </span>cp<span class="w"> </span>my_board.dtb<span class="w
 </li>
 </ul>
 <hr />
-<h3 id="_29"><strong>四、高级调试技巧</strong></h3>
+<h3 id="_49"><strong>四、高级调试技巧</strong></h3>
 <h4 id="1_7"><strong>1. 动态切换测试</strong></h4>
 <div class="highlight"><pre><span></span><code><span class="c1"># 在U-Boot中临时更换DTB测试（无需重新烧录）</span>
 tftp<span class="w"> </span><span class="si">${</span><span class="nv">fdt_addr</span><span class="si">}</span><span class="w"> </span><span class="m">192</span>.168.1.100:new_board.dtb
@@ -4566,7 +5077,7 @@ diff<span class="w"> </span>/mnt/boot/my_board.dtb<span class="w"> </span>/mnt/r
 sha1sum<span class="w"> </span>/mnt/boot/my_board.dtb
 </code></pre></div>
 <hr />
-<h3 id="_30"><strong>五、行业演进与未来趋势</strong></h3>
+<h3 id="_50"><strong>五、行业演进与未来趋势</strong></h3>
 <ul>
 <li>
 <p><strong>设备树与ACPI融合</strong>： 
@@ -4582,7 +5093,7 @@ sha1sum<span class="w"> </span>/mnt/boot/my_board.dtb
 </li>
 </ul>
 <hr />
-<h3 id="_31"><strong>总结</strong></h3>
+<h3 id="_51"><strong>总结</strong></h3>
 <p>文件系统打包与DTB绑定是嵌入式Linux系统的<strong>“血肉”与“骨架”</strong>关系：</p>
 <ul>
 <li><strong>文件系统</strong>提供用户态服务运行所需的“器官”（应用程序、配置）。</li>
@@ -4621,7 +5132,7 @@ sha1sum<span class="w"> </span>/mnt/boot/my_board.dtb
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2025-03-28T09:36:27+01:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2025-03-28</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2025-10-08T18:45:41+02:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2025-10-08</span>
   </span>
 
     

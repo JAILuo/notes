@@ -2847,10 +2847,10 @@
 <p>硬件 --&gt; <code>low-level</code> I/O 操作、操作硬件的指令 --&gt; OS API </p>
 </blockquote>
 <p>但是前辈们觉得这样子太危险了，没有一点隐私，所以他们想了一个方法，存在两种模式(级别)：</p>
-<p>一种模式下，应用程序智能做一些相对安全的操作，尤其不允许直接访问硬件，不会一条指令干爆机器的一些操作；</p>
+<p>一种模式下，应用程序只能做一些相对安全的操作，尤其不允许直接访问硬件，不会做那种一条指令干爆机器的一些操作；</p>
 <p>另一个模式，这个时候可以做任何事情，可以完全访问系统的硬件，因此可以执行诸如发起 I/O 请求或为程序提供更多内存等功能。  </p>
 <p>这就是所谓的用户态和内核态，（现代的OS更加复杂）</p>
-<p>那我们要怎么从用户态切换到内核态呢？（这里说的学术一点就是切换执行流）</p>
+<p>那我们要怎么从用户态切换到内核态呢？</p>
 <p>通过一个叫系统调用的东西（这里前人的想法是在指令集里添加一些特殊的硬件指令和硬件状态，通常通过一个称为陷阱（trap）的特殊硬件指令）</p>
 <blockquote>
 <ul>
@@ -2882,7 +2882,6 @@
 </li>
 </ul>
 </blockquote>
-<p><img alt="image-20240623215056645" src="file://C:/Users/16707/Desktop/Typora/ysyx/pa3/pic/image-20240623215056645.png?lastModify=1719150623" /></p>
 </li>
 <li>
 <p>异常</p>
@@ -2890,7 +2889,7 @@
 <p><strong><mark>不同的 ISA 对异常/中断/trap有着不同的解释，有些 ISA 会区分，有些则不会。</mark></strong></p>
 <p>所以，我们先从比较常用的指令集一个个分析：x86 -&gt; ARM -&gt; RISC-V，并说说内核态和用户态之间由异常、中断中的哪个来切换。（最后都是通过一条硬件指令trap来切换的，但是往上层一点，是中断还是异常引起的？）</p>
 <blockquote>
-<p>注意，这里只区分不同 ISA 下的异常和中断，不详细讲解各个 ISA 如何处理异常和中断。</p>
+<p>这里只区分不同 ISA 下的异常和中断，不详细讲解各个 ISA 如何处理异常和中断。</p>
 </blockquote>
 <ol>
 <li>
@@ -2901,7 +2900,7 @@
 <ul>
 <li>
 <p>中断</p>
-<p>intel 规定的是中断用于处理处理器外部的事件</p>
+<p>用于处理处理器外部的事件，其实理解就是一条线，高低电平触发。</p>
 </li>
 <li>
 <p>异常</p>
@@ -3814,7 +3813,7 @@ _start:
 <span class="w">  </span><span class="p">}</span><span class="w">    </span>
 <span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">c</span><span class="p">;</span>
 <span class="p">}</span>
-<span class="w">                                </span>
+<span class="w">                                    </span>
 <span class="c1">// 改动后：</span>
 <span class="n">Context</span><span class="o">*</span><span class="w"> </span><span class="nf">__am_irq_handle</span><span class="p">(</span><span class="n">Context</span><span class="w"> </span><span class="o">*</span><span class="n">c</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">user_handler</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -3831,11 +3830,11 @@ _start:
 <span class="w">            </span><span class="k">break</span><span class="p">;</span>
 <span class="w">        </span><span class="k">default</span><span class="o">:</span><span class="w"> </span><span class="n">ev</span><span class="p">.</span><span class="n">event</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EVENT_ERROR</span><span class="p">;</span><span class="w"> </span><span class="k">break</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
-<span class="w">                                </span>
+<span class="w">                                    </span>
 <span class="w">    </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">user_handler</span><span class="p">(</span><span class="n">ev</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="p">);</span>
 <span class="w">    </span><span class="n">assert</span><span class="p">(</span><span class="n">c</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
 <span class="w">  </span><span class="p">}</span>
-<span class="w">                                </span>
+<span class="w">                                    </span>
 <span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">c</span><span class="p">;</span>
 <span class="p">}</span>
 
@@ -3871,7 +3870,7 @@ _start:
 <span class="w">  </span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">c</span><span class="o">-&gt;</span><span class="n">GPR2</span><span class="p">;</span><span class="w"> </span><span class="c1">// a0</span>
 <span class="w">  </span><span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">c</span><span class="o">-&gt;</span><span class="n">GPR3</span><span class="p">;</span><span class="w"> </span><span class="c1">// a1</span>
 <span class="w">  </span><span class="n">a</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">c</span><span class="o">-&gt;</span><span class="n">GPR4</span><span class="p">;</span><span class="w"> </span><span class="c1">// a2</span>
-<span class="w">                                </span>
+<span class="w">                                    </span>
 <span class="w">  </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="no">SYS_exit</span><span class="p">:</span><span class="w"> </span><span class="n">sys_exit</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span><span class="w"> </span><span class="k">break</span><span class="p">;</span>
 <span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="no">SYS_yield</span><span class="p">:</span><span class="w"> </span><span class="n">c</span><span class="o">-&gt;</span><span class="n">GPRx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sys_yield</span><span class="p">();</span><span class="w"> </span><span class="k">break</span><span class="p">;</span>
@@ -3880,15 +3879,15 @@ _start:
 <span class="p">}</span><span class="w">   </span>
 <span class="p">...</span>
 <span class="c1">//nanos-lite/src/syscall.c</span>
-<span class="w">                                </span>
+<span class="w">                                    </span>
 <span class="cp">#ifndef __SYSCALL_H__</span>
 <span class="cp">#define __SYSCALL_H__</span>
-<span class="w">                                </span>
+<span class="w">                                    </span>
 <span class="k">enum</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="n">SYS_exit</span><span class="p">,</span><span class="w">     </span>
 <span class="p">...</span>
 <span class="p">};</span><span class="w">  </span>
-<span class="w">                                </span>
+<span class="w">                                    </span>
 <span class="cp">#endif</span>
 <span class="c1">// nanos-lite/src/syscall.h</span>
 </code></pre></div>
@@ -3907,17 +3906,17 @@ _start:
 <span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
 <span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">_syscall_</span><span class="p">(</span><span class="n">SYS_yield</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
 <span class="p">}</span>
-<span class="w">                                </span>
+<span class="w">                                    </span>
 <span class="c1">// navy-apps/tests/dummy/dummy.c</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="nf">halt</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">code</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="n">nemu_trap</span><span class="p">(</span><span class="n">code</span><span class="p">);</span><span class="w">   </span>
-<span class="w">                                    </span>
+<span class="w">                                        </span>
 <span class="w">  </span><span class="c1">// should not reach here</span>
 <span class="w">  </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
 <span class="p">}</span>
 <span class="c1">//abstract-machine/am/src/platform/nemu/trm.c</span>
-<span class="w">                                </span>
+<span class="w">                                    </span>
 <span class="cp">#if defined(__ISA_X86__)</span>
 <span class="cp"># define EXPECT_TYPE EM_386</span>
 <span class="cp"># define nemu_trap(code) asm volatile (&quot;int3&quot; : :&quot;a&quot;(code))</span>
@@ -3933,7 +3932,7 @@ _start:
 <span class="cp">#elif</span>
 <span class="cp"># error unsupported ISA __ISA__</span>
 <span class="cp">#endif</span>
-<span class="w">                                </span>
+<span class="w">                                    </span>
 <span class="c1">//abstract-machine/am/src/platform/nemu/include/nemu.h</span>
 </code></pre></div>
 <p>实际上触发的是 0 号系统调用：SYS_exit。</p>
@@ -6161,7 +6160,7 @@ _sbrk_r -&gt; _sbrk
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2025-01-05T17:02:30+01:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2025-01-05</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2025-10-08T18:45:41+02:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2025-10-08</span>
   </span>
 
     

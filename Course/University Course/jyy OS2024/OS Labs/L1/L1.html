@@ -1334,6 +1334,57 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#todo" class="md-nav__link">
+    <span class="md-ellipsis">
+      TODO
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#todo2" class="md-nav__link">
+    <span class="md-ellipsis">
+      TODO2
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#struct-page-pfn" class="md-nav__link">
+    <span class="md-ellipsis">
+      页（struct page *）与页帧（PFN）的转换 &amp; 不同内存模型
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="页（struct page *）与页帧（PFN）的转换 & 不同内存模型">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      转换宏分析
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#risc-v-arm-config_sparsemem" class="md-nav__link">
+    <span class="md-ellipsis">
+      不同架构（RISC-V, ARM）和 CONFIG_SPARSEMEM
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1350,7 +1401,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_19" class="md-nav__link">
+  <a href="#_20" class="md-nav__link">
     <span class="md-ellipsis">
       模块化设计
     </span>
@@ -1392,7 +1443,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_20" class="md-nav__link">
+  <a href="#_21" class="md-nav__link">
     <span class="md-ellipsis">
       多核
     </span>
@@ -1402,7 +1453,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_21" class="md-nav__link">
+  <a href="#_22" class="md-nav__link">
     <span class="md-ellipsis">
       启动流程
     </span>
@@ -1411,7 +1462,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#todo" class="md-nav__link">
+  <a href="#todo_1" class="md-nav__link">
     <span class="md-ellipsis">
       调度 TODO？
     </span>
@@ -2857,6 +2908,57 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#todo" class="md-nav__link">
+    <span class="md-ellipsis">
+      TODO
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#todo2" class="md-nav__link">
+    <span class="md-ellipsis">
+      TODO2
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#struct-page-pfn" class="md-nav__link">
+    <span class="md-ellipsis">
+      页（struct page *）与页帧（PFN）的转换 &amp; 不同内存模型
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="页（struct page *）与页帧（PFN）的转换 & 不同内存模型">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      转换宏分析
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#risc-v-arm-config_sparsemem" class="md-nav__link">
+    <span class="md-ellipsis">
+      不同架构（RISC-V, ARM）和 CONFIG_SPARSEMEM
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -2873,7 +2975,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_19" class="md-nav__link">
+  <a href="#_20" class="md-nav__link">
     <span class="md-ellipsis">
       模块化设计
     </span>
@@ -2915,7 +3017,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_20" class="md-nav__link">
+  <a href="#_21" class="md-nav__link">
     <span class="md-ellipsis">
       多核
     </span>
@@ -2925,7 +3027,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_21" class="md-nav__link">
+  <a href="#_22" class="md-nav__link">
     <span class="md-ellipsis">
       启动流程
     </span>
@@ -2934,7 +3036,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#todo" class="md-nav__link">
+  <a href="#todo_1" class="md-nav__link">
     <span class="md-ellipsis">
       调度 TODO？
     </span>
@@ -3077,22 +3179,21 @@
 <ul>
 <li>
 <p><strong>哨兵节点的初始化</strong>：在 <code>free_area</code> 的初始化过程中，每个 <code>free_list</code> 都会被初始化为一个空的哨兵节点：</p>
-<p>c复制</p>
-<div class="highlight"><pre><span></span><code><span class="k">struct</span><span class="w"> </span><span class="nc">free_area</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">list_head</span><span class="w"> </span><span class="n">free_list</span><span class="p">[</span><span class="n">MIGRATE_TYPES</span><span class="p">];</span>
-<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">nr_free</span><span class="p">;</span>
-<span class="p">};</span>
-<span class="n">INIT_LIST_HEAD</span><span class="p">(</span><span class="n">free_area</span><span class="o">-&gt;</span><span class="n">free_list</span><span class="p">[</span><span class="n">migratetype</span><span class="p">]);</span>
-</code></pre></div>
+<p><code>c
+struct free_area {
+    struct list_head free_list[MIGRATE_TYPES];
+    unsigned long nr_free;
+};
+INIT_LIST_HEAD(free_area-&gt;free_list[migratetype]);</code></p>
 <p>这确保了链表在初始化时是一个空链表。</p>
 </li>
 <li>
 <p><strong>链表操作的示例</strong>：在内存分配过程中，从链表中移除一个页块并将其添加到另一个链表中：</p>
 <p>c复制</p>
-<div class="highlight"><pre><span></span><code><span class="n">page</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">get_page_from_free_area</span><span class="p">(</span><span class="n">area</span><span class="p">,</span><span class="w"> </span><span class="n">migratetype</span><span class="p">);</span>
-<span class="n">del_page_from_free_list</span><span class="p">(</span><span class="n">page</span><span class="p">,</span><span class="w"> </span><span class="n">zone</span><span class="p">,</span><span class="w"> </span><span class="n">order</span><span class="p">);</span>
-<span class="n">add_to_free_list</span><span class="p">(</span><span class="n">page</span><span class="p">,</span><span class="w"> </span><span class="n">zone</span><span class="p">,</span><span class="w"> </span><span class="n">order</span><span class="p">,</span><span class="w"> </span><span class="n">migratetype</span><span class="p">);</span>
-</code></pre></div>
+<p><code>c
+   page = get_page_from_free_area(area, migratetype);
+del_page_from_free_list(page, zone, order);
+add_to_free_list(page, zone, order, migratetype);</code></p>
 <p>这里的 <code>get_page_from_free_area</code>、<code>del_page_from_free_list</code> 和 <code>add_to_free_list</code> 都是基于哨兵节点进行操作的。</p>
 </li>
 </ul>
@@ -3103,7 +3204,7 @@
 <p>无论链表是否为空，都直接将新的页块节点添加到哨兵节点之后。这样，链表的操作就变得一致了。所以，这个地方的条件判断其实可以去掉，直接使用 <code>list_add_tail</code> 或 <code>list_add</code> 将页块节点添加到哨兵节点的链表中。</p>
 <h3 id="1_1">问题1</h3>
 <p><img alt="image-20250211135032339" src="pic/image-20250211135032339.png" /></p>
-<p>block_page传进来是0，导致<code>block_pfn</code>、<code>buddy_pfn</code>、<code>buddy_page</code> 计算错误。</p>
+<p>block_page传进来是0，导致<code>block_pfn</code>、<code>buddy_pfn</code>、<code>buddy_page</code> 计算错误</p>
 <h3 id="_3">进一步学习使用哨兵节点</h3>
 <div class="highlight"><pre><span></span><code>inssssssssssssssssssssssssss<span class="w"> </span>nr_free:<span class="w"> </span><span class="m">0</span>
 head:<span class="w"> </span>0x3fa030
@@ -3137,8 +3238,8 @@ current_order:<span class="w"> </span><span class="m">3</span>
 <h4 id="1_2"><strong>1. 指针成员需要手动分配内存</strong></h4>
 <p><strong>定义示例：</strong>
 <div class="highlight"><pre><span></span><code><span class="k">struct</span><span class="w"> </span><span class="nc">free_area</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">list_head</span><span class="w"> </span><span class="o">*</span><span class="n">head</span><span class="p">;</span><span class="w">  </span><span class="c1">// 指针成员</span>
-<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">nr_free</span><span class="p">;</span>
+<span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">list_head</span><span class="w"> </span><span class="o">*</span><span class="n">head</span><span class="p">;</span><span class="w">  </span><span class="c1">// 指针成员</span>
+<span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">nr_free</span><span class="p">;</span>
 <span class="p">};</span>
 </code></pre></div>
 <strong>问题</strong>：<br />
@@ -3157,15 +3258,15 @@ current_order:<span class="w"> </span><span class="m">3</span>
 <h4 id="2_1"><strong>2. 结构体实例成员无需额外分配内存</strong></h4>
 <p><strong>定义示例：</strong>
 <div class="highlight"><pre><span></span><code><span class="k">struct</span><span class="w"> </span><span class="nc">free_area</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">list_head</span><span class="w"> </span><span class="n">head</span><span class="p">;</span><span class="w">  </span><span class="c1">// 结构体实例成员</span>
-<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">nr_free</span><span class="p">;</span>
+<span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">list_head</span><span class="w"> </span><span class="n">head</span><span class="p">;</span><span class="w">  </span><span class="c1">// 结构体实例成员</span>
+<span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">nr_free</span><span class="p">;</span>
 <span class="p">};</span>
 </code></pre></div>
 <strong>优势</strong>：<br />
-结构体 <code>head</code> 的内存会随着 <code>free_area</code> 的分配自动分配，无需手动管理。例如：
+结构体 <code>head</code> 的内存会随着 <code>free_area</code> 的分配自动分配，无需手动管理。例如：</p>
 <div class="highlight"><pre><span></span><code><span class="k">struct</span><span class="w"> </span><span class="nc">free_area</span><span class="w"> </span><span class="n">area</span><span class="p">;</span><span class="w">  </span><span class="c1">// head 的内存已随 area 分配</span>
 <span class="n">INIT_LIST_HEAD</span><span class="p">(</span><span class="o">&amp;</span><span class="n">area</span><span class="p">.</span><span class="n">head</span><span class="p">);</span><span class="w">  </span><span class="c1">// 直接使用地址，无需额外分配</span>
-</code></pre></div></p>
+</code></pre></div>
 <hr />
 <h3 id="_4"><strong>操作系统内核中的内存分配</strong></h3>
 <h4 id="1_3"><strong>1. 内核中的内存分配责任</strong></h4>
@@ -3855,8 +3956,184 @@ flowchart LR
 <p>但是！在2025.03.04 老师又发布了一个自己实现的测试框架！仅仅两百多行，质量写得比我的好得多！</p>
 <p>为什么不直接用起来呢！</p>
 <p><img alt="image-20250304105541682" src="pic/image-20250304105541682.png" /></p>
+<h3 id="todo">TODO</h3>
+<p><img src="pic/image-20250803164619891.png" alt="image-20250803164619891" style="zoom: 50%;" /></p>
+<p>可以加入实现？</p>
+<h3 id="todo2">TODO2</h3>
+<p>关于不同内存模型的 <code>struct  page</code> </p>
+<p>实际上L1实现的是：<code>FLATMEM</code> (<code>!CONFIG_SPARSEMEM</code>)：</p>
+<p>假设物理内存从0开始连续且没有大空洞。<code>struct page mem_map[MAX_NR_PAGES]</code> 是一个全局的、连续的数组。转换极其简单：</p>
+<ol>
+<li>
+<p>物理内存是连续的（没有大的空洞）。</p>
+<div class="highlight"><pre><span></span><code><span class="cp">#define pages_base ((struct page *)(heap.start))</span>
+</code></pre></div>
+<p>所有物理页帧的元数据 (<code>struct page</code>) 存储在<strong>连续的内存区域</strong>（从 <code>heap.start</code> 开始），这是 FLATMEM 最核心的特征。</p>
+</li>
+<li>
+<p>使用一个全局的 <code>struct page</code> 数组（<code>mem_map</code>）来管理所有物理页帧，数组的每个元素对应一个物理页。</p>
+</li>
+<li>
+<p>页帧号（PFN）和<code>struct page</code>之间的转换是线性的：<code>page = &amp;mem_map[pfn]</code>，<code>pfn = page - mem_map</code>。</p>
+<p>PFN 和 <code>struct page*</code> 的转换是简单的<strong>指针算术运算</strong>：</p>
+<div class="highlight"><pre><span></span><code><span class="cp">#define page_to_pfn(page) ((unsigned long)((page) - pages_base))</span>
+<span class="cp">#define pfn_to_page(pfn) (&amp;pages_base[(pfn)])</span>
+</code></pre></div>
+<ul>
+<li><code>page_to_pfn</code>: 直接用 <code>page</code> 指针减去数组基地址得到索引 (PFN)</li>
+<li><code>pfn_to_page</code>: 直接用 PFN 作为下标访问数组元素
+    这正是 FLATMEM 的典型实现方式（对比 <code>SPARSEMEM</code> 需要复杂的内存节查询）。</li>
+</ul>
+</li>
+<li>
+<p>FLATMEM 的优缺点在我的实现中（LLM总结）</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;"><strong>优点</strong></th>
+<th style="text-align: left;"><strong>你的实现体现</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">✅ 转换速度快</td>
+<td style="text-align: left;">宏展开后就是单条加减指令</td>
+</tr>
+<tr>
+<td style="text-align: left;">✅ 实现简单</td>
+<td style="text-align: left;">核心逻辑仅需 ~200 行代码</td>
+</tr>
+<tr>
+<td style="text-align: left;">✅ 低开销</td>
+<td style="text-align: left;">无额外节管理结构</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;"><strong>缺点</strong></th>
+<th style="text-align: left;"><strong>你的实现体现</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">❌ 内存必须连续</td>
+<td style="text-align: left;">依赖 <code>heap.start</code> 到 <code>heap.end</code> 的连续空间</td>
+</tr>
+<tr>
+<td style="text-align: left;">❌ 不支持空洞</td>
+<td style="text-align: left;">所有 PFN 0~TOTAL_PAGES-1 必须有效</td>
+</tr>
+<tr>
+<td style="text-align: left;">❌ 大内存浪费</td>
+<td style="text-align: left;">元数据区 (<code>struct page</code> 数组) 需预占连续空间</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ol>
+<p>这在小型嵌入式系统（物理内存小且连续）上很高效，但不适合大内存或有空洞的系统。</p>
+<p>但作为一个学习内容是非常不错的！</p>
+<p>这里找到了一篇博客：<a href="https://blog.csdn.net/m0_51717456/article/details/126712555">MM之伙伴系统的初始化</a></p>
+<p>尝试让LLM给出另一种内存模型的分析，见下方（TODO学学习）</p>
+<h3 id="struct-page-pfn">页（<code>struct page *</code>）与页帧（PFN）的转换 &amp; 不同内存模型</h3>
+<blockquote>
+<p>代码见上面博客</p>
+</blockquote>
+<p>你提供的Linux内核代码片段完美展示了在<code>CONFIG_SPARSEMEM</code>（稀疏内存）模型下如何实现 <code>struct page *</code> 和 PFN 之间的转换。这种转换方式确实依赖于内存模型。</p>
+<p>核心思想是：<strong><code>struct page</code> 数组（<code>mem_map</code>）在物理内存中不一定是连续的！</strong> 尤其是在具有大量物理内存或物理内存存在较大空洞（NUMA、热插拔）的系统上。</p>
+<ul>
+<li>
+<p><strong><code>struct mem_section</code>：</strong> 这是<code>SPARSEMEM</code>模型的核心数据结构。它将物理内存划分为多个<strong>内存节（Memory Section）</strong>。每个节管理一段连续的物理地址范围（大小为 <code>1UL &lt;&lt; PFN_SECTION_SHIFT</code> 个页帧）。</p>
+</li>
+<li>
+<p><strong><code>mem_section</code> 数组：</strong> 一个全局的（可能是多级）数组，索引是节号（<code>section_nr</code>），值是 <code>struct mem_section</code> 结构。</p>
+</li>
+<li>
+<p><strong><code>section_mem_map</code>：</strong> <code>struct mem_section</code> 中的一个关键成员。它有两个作用：</p>
+<ol>
+<li><strong>指向该节对应的 <code>struct page</code> 数组的起始位置。</strong> 这是它的主要功能。</li>
+<li>
+<p><strong>存储标志位：</strong> 利用指针的低位（因为地址对齐，低位通常为0）存储该节的状态标志（如 <code>SECTION_MARKED_PRESENT</code>）。<code>SECTION_MAP_MASK</code> 就是用来屏蔽掉这些标志位，获取真正的 <code>struct page*</code> 地址的掩码。</p>
+</li>
+<li>
+<p>注释 <code>section[i].section_mem_map == mem_map's address - start_pfn;</code> 是早期实现的一种表述，强调了 <code>section_mem_map</code> 存储的值是相对于该节起始PFN的偏移编码（包含指针和标志）。现代实现如你提供的代码，<code>__section_mem_map_addr</code> 通过 <code>map &amp;= SECTION_MAP_MASK;</code> 提取出纯粹的 <code>struct page*</code> 起始地址。</p>
+</li>
+</ol>
+</li>
+</ul>
+<h4 id="_19">转换宏分析</h4>
+<ul>
+<li>
+<p><strong><code>__page_to_pfn(pg)</code>：</strong></p>
+<ol>
+<li><code>const struct page *__pg = (pg);</code> - 获取目标 <code>struct page</code> 指针。</li>
+<li><code>int __sec = page_to_section(__pg);</code> - 找出这个 <code>page</code> 属于哪个内存节（<code>section_nr</code>）。这通常通过 <code>__pg</code> 指针本身计算得出（因为 <code>mem_map</code> 是按节组织的数组），或者 <code>struct page</code> 结构里直接存储了节号（较新内核）。</li>
+<li><code>__nr_to_section(__sec)</code> - 根据节号 <code>__sec</code> 在全局 <code>mem_section</code> 数组中找到对应的 <code>struct mem_section *__sec_struct</code>。</li>
+<li><code>__section_mem_map_addr(__sec_struct)</code> - 从 <code>__sec_struct-&gt;section_mem_map</code> 中提取出指向该节 <code>struct page</code> 数组起始位置的指针 <code>struct page *section_mem_map</code>。</li>
+<li><code>(__pg - section_mem_map)</code> - 计算目标 <code>struct page *__pg</code> <strong>相对于它所在节的 <code>struct page</code> 数组起始位置</strong> 的偏移量（以 <code>struct page</code> 个数为单位）。</li>
+<li><code>(unsigned long)(...)</code> - 这个偏移量本质上就是<strong>该页帧在其所属内存节内部的局部页帧索引（Local PFN within the section）</strong>。</li>
+<li><strong>最终PFN = <code>(section_nr &lt;&lt; PFN_SECTION_SHIFT) + local_pfn_offset</code></strong>。这个宏直接返回的是 <code>local_pfn_offset</code>，而 <code>section_nr</code> 是通过 <code>__sec</code> 隐含知道的。完整的PFN需要结合 <code>__sec</code> 和这个偏移计算（通常在调用这个宏的上下文或相关函数里完成）。</li>
+</ol>
+</li>
+<li>
+<p><strong><code>__pfn_to_page(pfn)</code>：</strong></p>
+<ol>
+<li><code>unsigned long __pfn = (pfn);</code> - 获取目标物理页帧号。</li>
+<li><code>struct mem_section *__sec = __pfn_to_section(__pfn);</code> - 根据PFN计算出它属于哪个节（<code>section_nr = pfn &gt;&gt; PFN_SECTION_SHIFT</code>），然后通过 <code>__nr_to_section(section_nr)</code> 找到对应的 <code>struct mem_section *__sec</code>。</li>
+<li><code>__section_mem_map_addr(__sec)</code> - 从 <code>__sec-&gt;section_mem_map</code> 中提取出指向该节 <code>struct page</code> 数组起始位置的指针 <code>struct page *section_mem_map</code>。</li>
+<li>
+<p><code>section_mem_map + __pfn</code> - <strong>这里的关键是 <code>__pfn</code> 是全局PFN。</strong> 但是 <code>section_mem_map</code> 指向的是<strong>该节起始PFN</strong>对应的 <code>struct page</code>。因此 <code>section_mem_map + __pfn</code> 计算出来的地址是错的！</p>
+</li>
+<li>
+<p><strong>修正（代码中的精妙之处）：</strong> 仔细看 <code>__pfn_to_section(pfn)</code> 内部调用 <code>__nr_to_section(pfn_to_section_nr(pfn))</code>。<code>pfn_to_section_nr(pfn)</code> 计算 <code>section_nr = pfn &gt;&gt; PFN_SECTION_SHIFT</code>。<strong><code>__pfn</code> 作为参数传递给 <code>__pfn_to_section</code> 时，它的值就是原始的全局PFN。</strong> 在 <code>__pfn_to_page</code> 的最后一步 <code>section_mem_map + __pfn</code>，<code>__pfn</code> 仍然是全局PFN。</p>
+</li>
+<li><strong>为什么是对的？</strong> 因为 <code>__section_mem_map_addr(__sec)</code> 返回的 <code>section_mem_map</code> <strong>已经被特殊编码过！</strong> 回顾 <code>section_mem_map</code> 的设定：<code>section[i].section_mem_map = base_mem_map - section_start_pfn;</code>（注释思想）或现代实现中的等效逻辑。这意味着 <code>section_mem_map</code> 指针的值<strong>已经预先减去了该节的起始PFN (<code>section_start_pfn = section_nr &lt;&lt; PFN_SECTION_SHIFT</code>)</strong>。</li>
+<li><strong>因此：</strong> <code>section_mem_map + __pfn = (base_mem_map - section_start_pfn) + __pfn = base_mem_map + (__pfn - section_start_pfn)</code>。而 <code>(__pfn - section_start_pfn)</code> 正好是该页帧在节内的局部偏移。<code>base_mem_map + local_offset</code> 就精确地指向了管理该物理页帧的 <code>struct page</code>。</li>
+</ol>
+</li>
+</ul>
+<h4 id="risc-v-arm-config_sparsemem">不同架构（RISC-V, ARM）和 <code>CONFIG_SPARSEMEM</code></h4>
+<ul>
+<li><strong><code>CONFIG_SPARSEMEM</code>：</strong> 这就是你提供的代码所处理的内存模型。它的设计目标就是高效地处理物理内存存在空洞的大型系统。<ul>
+<li><strong>核心机制：</strong> 通过 <code>mem_section</code> 数组将物理内存划分为节。只有实际存在的物理内存区域对应的节才会被分配 <code>struct page</code> 数组（<code>mem_map</code>）。空洞区域对应的节可以是NULL或标记为不存在。</li>
+<li><strong>转换方式：</strong> 如上所述，依赖 <code>mem_section</code> 结构和 <code>section_mem_map</code> 的编码。转换需要先找到PFN或<code>struct page</code>对应的节，然后在节内进行偏移计算。<code>CONFIG_SPARSEMEM_EXTREME</code> 是为了节省 <code>mem_section</code> 数组本身的内存消耗，将其变为动态分配的两级数组。</li>
+<li><strong>PFN_SECTION_SHIFT：</strong> 定义节的大小（每个节包含 <code>2^PFN_SECTION_SHIFT</code> 个页帧）。例如值为26（<code>2^26 = 64MB</code> per section）或27（<code>128MB</code>）。这个值的选择是空间（<code>mem_section</code>数组大小）和时间（查找节的速度）的权衡。</li>
+</ul>
+</li>
+<li><strong>RISC-V：</strong> RISC-V Linux 内核同样使用 <code>CONFIG_SPARSEMEM</code> 作为默认或主要支持的内存模型，尤其是对于支持大量内存的RV64系统。转换逻辑与你展示的代码<strong>完全相同</strong>。架构相关的部分主要体现在：<ul>
+<li><strong><code>PAGE_SHIFT</code>：</strong> 定义页大小（如12表示4KB）。</li>
+<li><strong>页表格式：</strong> Sv39, Sv48等，定义虚拟/物理地址位数和页表遍历方式（影响虚拟地址到物理地址/PFN的转换，由硬件MMU完成）。</li>
+<li><strong><code>MAX_PHYSMEM_BITS</code>：</strong> 定义系统支持的最大物理地址位数（如56），这会影响到 <code>mem_section</code> 数组需要覆盖的地址范围大小，从而影响 <code>PFN_SECTION_SHIFT</code> 的选择和 <code>SECTION_NR_ROOT</code> 的计算。</li>
+<li><strong>物理内存布局探测：</strong> 通过设备树（DT）或ACPI获取物理内存的起始地址和大小，以及存在的空洞。这决定了哪些 <code>mem_section</code> 需要初始化。</li>
+</ul>
+</li>
+<li><strong>ARM (ARM64 / AArch64)：</strong> ARM64 Linux 内核也广泛使用 <code>CONFIG_SPARSEMEM</code>，特别是对于服务器或具有复杂内存拓扑（NUMA，热插拔）的设备。转换逻辑<strong>同样基于</strong>你展示的 <code>__page_to_pfn</code> 和 <code>__pfn_to_page</code> 宏。架构相关的差异点与RISC-V类似：<ul>
+<li><strong><code>PAGE_SHIFT</code>：</strong> 通常为12（4KB），也支持16（64KB）、14（16KB）配置以及使用Contiguous/Translation Table (CONT/TT) 位支持的大页。</li>
+<li><strong>页表格式：</strong> LPAE（Long-descriptor format），定义4级页表遍历。</li>
+<li><strong><code>MAX_PHYSMEM_BITS</code>：</strong> 常见配置如48。影响 <code>SPARSEMEM</code> 的具体参数。</li>
+<li><strong>物理内存探测：</strong> 通过设备树（DT）或ACPI获取。ARM架构历史上内存布局差异较大（板级差异），<code>SPARSEMEM</code> 的灵活性非常适合。</li>
+</ul>
+</li>
+<li><strong>其他模型 (对比)：</strong><ul>
+<li><strong><code>FLATMEM</code> (<code>!CONFIG_SPARSEMEM</code>)：</strong> 假设物理内存从0开始连续且没有大空洞。<code>struct page mem_map[MAX_NR_PAGES]</code> 是一个全局的、连续的数组。转换极其简单：<ul>
+<li><code>pfn = page - mem_map</code></li>
+<li><code>page = &amp;mem_map[pfn]</code>
+    这在小型嵌入式系统（物理内存小且连续）上很高效，但不适合大内存或有空洞的系统。</li>
+</ul>
+</li>
+<li><strong><code>SPARSEMEM_VMEMMAP</code>：</strong> <code>SPARSEMEM</code> 的一种优化变体。它建立一个<strong>虚拟映射的连续空间（vmemmap）</strong>，使得所有物理页帧对应的 <code>struct page</code> 结构在这个虚拟地址空间内是连续的。这样 <code>struct page *</code> 和 PFN 的转换就退化为类似 <code>FLATMEM</code> 的简单线性计算：<ul>
+<li><code>page = vmemmap + pfn * sizeof(struct page)</code></li>
+<li><code>pfn = (page - vmemmap) / sizeof(struct page)</code>
+    这大大提升了转换效率（通常只需一条指令），但需要硬件MMU支持足够大的虚拟地址空间来映射整个 <code>vmemmap</code> 区域。这是现代大型系统（x86_64, ARM64, RISC-V）首选的优化模式。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <h2 id="misc">misc</h2>
-<h3 id="_19">模块化设计</h3>
+<h3 id="_20">模块化设计</h3>
 <p><code>os</code> 是一个操作系统的 “模块”，可以看成是我们用 C 实现的面向对象编程，能增加代码的可读性。随着实验的进展，你会发现模块机制清晰地勾勒出了操作系统中各个部分以及它们之间的交互。</p>
 <p>其实看到了很多次这种写法了，并没有系统学习过用起来。</p>
 <div class="highlight"><pre><span></span><code><span class="cp">#define MODULE(mod) \</span>
@@ -4161,8 +4438,8 @@ flowchart LR
 </ul>
 </li>
 </ul>
-<h3 id="_20">多核</h3>
-<h4 id="_21">启动流程</h4>
+<h3 id="_21">多核</h3>
+<h4 id="_22">启动流程</h4>
 <blockquote>
 <p>借着框架代码分析看看，熟悉之后再去看看一些固件怎么写的。</p>
 </blockquote>
@@ -4267,7 +4544,7 @@ flowchart LR
 </li>
 </ol>
 </blockquote>
-<h4 id="todo">调度 TODO？</h4>
+<h4 id="todo_1">调度 TODO？</h4>
 <p>说到这个是因为在上面进行多处理器测试的时候发现输出了多次的 <code>xxx test passed</code>，就日常使用电脑的体验来说这应该是不对的吧？为什么输出了多次呢？是因为调度？目前没有实现多核调度，将任务分配个多核核心，导致都从同样的初始状态执行同样的任务？</p>
 <p>还有问题，如果这样子思考，那不就肯定会导致死锁？？等等，每个核都有自己的register、本地中断，还有共享的memory。也就是每个核都有对这个数据的副本？？</p>
 <p>需要学习。<a href="https://forum.ubuntu.com.cn/viewtopic.php?t=465485">从利用多核加速QEMU的CPU模拟谈起 - Ubuntu中文论坛</a></p>
@@ -4308,7 +4585,7 @@ flowchart LR
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2025-03-26T07:48:07+01:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2025-03-26</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2025-10-08T18:45:41+02:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2025-10-08</span>
   </span>
 
     
