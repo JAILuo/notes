@@ -266,7 +266,7 @@
 >     #define immI() do { *imm = SEXT(BITS(i, 31, 20), 12); } while(0)
 >     #define immU() do { *imm = SEXT(BITS(i, 31, 12), 20) << 12; } while(0)
 >     #define immS() do { *imm = (SEXT(BITS(i, 31, 25), 7) << 5) | BITS(i, 11, 7); } while(0)
->                                 
+>                                     
 >     static void decode_operand(Decode *s, int *rd, word_t *src1, word_t *src2, word_t *imm, int type) {
 >       uint32_t i = s->isa.inst.val;
 >       int rs1 = BITS(i, 19, 15);
@@ -278,7 +278,7 @@
 >         case TYPE_S: src1R(); src2R(); immS(); break;
 >       }
 >     }
->                                 
+>                                     
 >     ```
 >
 >     首先，通过 `BITS` 提取到指令中的15到19位，也就是 `rs1`。 
@@ -720,6 +720,8 @@
 
 #### 中断优先级仲裁机制的设计逻辑是什么？如何确保定时器中断的高优先级？
 
+这里直接用了一个数组，先去查高特权级别的中断、异常（外部>软中断>定时器中断）
+
 
 
 
@@ -877,7 +879,7 @@
 
         但如果关掉太多日志就不知道怎么显示？？
 
-        这个时候想到了 `frace` ！只要能获取到 Linux elf 的 image，那就能够能够使用 `menuconfig` 来进行开关控制！尤其是在启动阶段，除了调用函数的日志应该是不会太多的！
+        这个时候想到了 `ftrace` ！只要能获取到 Linux elf 的 image，那就能够能够使用 `menuconfig` 来进行开关控制！尤其是在启动阶段，除了调用函数的日志应该是不会太多的！
 
     - 寄存器
 

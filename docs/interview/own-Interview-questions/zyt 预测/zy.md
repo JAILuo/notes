@@ -99,7 +99,6 @@
 
 lxx什么什么概念听过吗
 
-
 分工?
 中断知道吗
 iic怎么读取的？
@@ -108,7 +107,7 @@ iic怎么读取的？
 
 
 
-## 自己猜测
+## 自己总结的一些问题
 
 - 对嵌入式的了解
 - 死锁
@@ -138,6 +137,7 @@ iic怎么读取的？
 > ### **Q1: 请简述伙伴系统（Buddy System）的核心思想，以及它的优缺点。**
 > **回答：**  
 > 伙伴系统的核心思想是将物理内存划分为大小相等的块（通常为2的幂次方），通过递归分割与合并来管理内存分配与释放。  
+>
 > - **分配流程**：当请求内存时，系统从能满足需求的最小块开始查找，若无合适块，则分裂更大的块，直到得到所需大小的块。  
 > - **释放流程**：释放内存后，若相邻块（“伙伴”）也是空闲的，则合并为更大的块，减少碎片。  
 >
@@ -209,6 +209,7 @@ iic怎么读取的？
 > ### **Q5: 如何验证伙伴系统的正确性？你在项目中使用了哪些测试方法？**
 > **回答：**  
 > **测试策略**：  
+>
 > 1. **单元测试**：  
 >    - 验证单次分配与释放的正确性（如分配后标记为已用，释放后合并）。  
 >    - 边界测试：分配最大/最小块、跨页请求等场景。  
@@ -239,6 +240,219 @@ iic怎么读取的？
 >   → 取决于物理内存大小，例如4GB内存的MAX_ORDER通常为10（对应4MB块）。  
 >
 > 通过以上回答，展示你对伙伴系统的深刻理解、代码实现细节的掌握以及实际调试经验，让面试官认可你的技术能力与项目价值！
+
+
+
+### 面试buddy system和slab的问题
+
+1. 对指针的应用
+
+    ```C
+    struct free_area {
+     struct list_head head;  // 直接作为哨兵节点（结构体实例，非指针）
+     unsigned long nr_free;
+    };
+    ```
+
+    原代码中 `struct free_area` 的 `head` 是 `struct list_head*` 类型（指针），这需要手动分配内存给哨兵节点，容易导致错误。
+    **修正后的结构体应为：**
+
+    ```
+    struct free_area {
+     struct list_head head;  // 直接作为哨兵节点（结构体实例，非指针）
+     unsigned long nr_free;
+    };
+    ```
+
+    - 这样，每个 `free_area` 的 `head` 自身就是一个独立的哨兵节点，无需额外分配内存。
+
+    实际上还是对内存分配理解的并不深刻。里面定义一个 `struct list_head*` 指针？还要分配内存给他？为什么？这和直接用一个变量的区别在哪？实际上就直接理解用一个变量即可。
+
+    指针存的是一个地址啊！
+
+    无论链表是否为空，都直接将新的页块节点添加到哨兵节点之后。这样，链表的操作就变得一致了。所以，这个地方的条件判断其实可以去掉，直接使用 `list_add_tail` 或 `list_add` 将页块节点添加到哨兵节点的链表中。
+
+2. 死锁的工具的使用
+
+    <img src="pic/image-20250803164536528.png" alt="image-20250803164536528" style="zoom:50%;" />
+
+3. pfn的转换
+
+    实际上严格意义上应该是拿页来计算，直接改用实际的物理内存块地址来计算的。实际上这是有问题的，包括在Linux中也是页来计算，而不是像我那样直接用
+
+4. 第一个slab内存系统的初始化，一个比较trival的
+
+    也就是需要分配 slab 的空间！
+
+    ```c
+    // 创建管理 kmem_cache 的专用缓存
+    create_boot_cache(&kmem_cache, "kmem_cache",
+                      sizeof(struct kmem_cache),
+                      __alignof__(struct kmem_cache));
+    slab_state = PARTIAL;
+    ```
+
+    ```C
+    static struct kmem_cache boot_kmem_cache = {
+        .name = "kmem_cache",
+        .obj_size = sizeof(struct kmem_cache),
+        .align = 0,
+        //.align = __alignof__(struct kmem_cache),
+        .slabs_full = LIST_HEAD_INIT(boot_kmem_cache.slabs_full),
+        .slabs_partial = LIST_HEAD_INIT(boot_kmem_cache.slabs_partial),
+        .slabs_free = LIST_HEAD_INIT(boot_kmem_cache.slabs_free),
+    };
+    
+    /* The slab cache that manages slab cache information */
+    struct kmem_cache *kmem_cache;
+    /* The list of all slab caches on the system */
+    struct list_head slab_caches;
+    
+    /******************** 缓存创建核心函数 ********************/
+    static char boot_store[sizeof(struct kmem_cache)]__attribute__((aligned(8)));
+    static struct kmem_cache *__kmem_cache_create(const char *name,
+                                                  size_t size,
+                                                  size_t align,
+                                                  unsigned long flags) {
+        struct kmem_cache *cache;
+        if (align == 0) {
+            align = DEFAULT_ALIGN; // 例如8字节
+        }
+        
+        if (slab_state == DOWN) {
+            cache = (struct kmem_cache *)boot_store;
+            kdebug("sizeof(struct kmem_cache): %d\n", sizeof(struct kmem_cache));
+        } else {
+            // 正常阶段通过已有缓存分配
+            cache = kmem_cache_alloc(kmem_cache);
+        }
+    
+        cache->name = name;
+        cache->align = align;
+        cache->obj_size = ALIGN_UP(size, align);
+        kdebug("name: %s, obj_size: %d\n", cache->name, cache->obj_size);
+        
+        INIT_LIST_HEAD(&cache->slabs_full);
+        INIT_LIST_HEAD(&cache->slabs_partial);
+        INIT_LIST_HEAD(&cache->slabs_free);
+        INIT_LIST_HEAD(&cache->list);
+        
+        return cache;
+    }
+    ```
+
+
+
+### kmalloc、vmalloc、malloc、mmap的实现
+
+`kmalloc` 的实现就是基于 slab分配器的，系统启动时候通过 `create_kmalloc_caches` 创建不同大小的 `kmem_cache`，将这些 `kmem_caches` 存储在 `kmalloc_caches`  全局变量中，然后给后面的 `kmalloc` 调用，比如有：8，16，32，64，128，92，65536等比较大的。
+
+当然 `kmalloc` 会先通过 `kmalloc_index` 来擦轰炸哦满足分配请求的最小 `kmem_cache` ，然后以获取的 index 在 `kmalloc_caches` 数组中找到符合条件的 `kmem_cache`，从已经分配好的 `slab` 中 获取 `object`。
+
+
+
+前面这些都是分配到的空间都是物理上连续的，但是随着碎片化的积累，连续物理内存分配比较困难，所以对于那些不一定要连续的（非设备的）内存访问，完全是可以像用户空间那样的malloc，将不连续的物理内存页帧映射到连续的虚拟地址空间中，这就是 vmap了。而vmalloc的实现就是基于vmap。有一张图可以学习下：
+
+<img src="pic/image-20250803135143941.png" alt="image-20250803135143941" style="zoom: 33%;" />
+
+所以需要学习下面的 `vm_struct`/`vmap_area` 结构体：
+
+```C
+struct vm_struct {
+	struct vm_struct	*next;
+	void			*addr;
+	unsigned long		size;
+	unsigned long		flags;
+	struct page		**pages;
+#ifdef CONFIG_HAVE_ARCH_HUGE_VMALLOC
+	unsigned int		page_order;
+#endif
+	unsigned int		nr_pages;
+	phys_addr_t		phys_addr;
+	const void		*caller;
+};
+```
+
+- `next`：指向下一个 `vm_struct` 结构体
+- `addr`：当前 `vmalloc` 分配的虚拟地址的起始地址
+- `size`：当前 `vmalloc` 分配的虚拟地址的大小
+- `pages`：当前 `vmalloc` 分配、获取到的各个物理页面是不连续的，每个物理页都是用另一个结构体 `page`（就是实现buddy system那个）来描述的，而 `vm_struct` 用到的所有的物理页面的 `page` 构成一个数组，而 `pages` 就是指向这个数组的指针。
+- `nr_pages`：`vmalloc` 映射的页面数目
+- `phys_addr`：用来映射硬件设备的 I/O 共享内存，其他情况下为0
+- `caller`：调用 `vmalloc` 的地址
+
+```C
+struct vmap_area {
+	unsigned long va_start;
+	unsigned long va_end;
+
+	struct rb_node rb_node;         /* address sorted rbtree */
+	struct list_head list;          /* address sorted list */
+
+	/*
+	 * The following two variables can be packed, because
+	 * a vmap_area object can be either:
+	 *    1) in "free" tree (root is free_vmap_area_root)
+	 *    2) or "busy" tree (root is vmap_area_root)
+	 */
+	union {
+		unsigned long subtree_max_size; /* in "free" tree */
+		struct vm_struct *vm;           /* in "busy" tree */
+	};
+	unsigned long flags; /* mark type of vm_map_ram area */
+};
+
+```
+
+- `va_start`：使用 `vmalloc` 申请虚拟地址返回的起始地址
+- `va_end`：使用 `vmalloc` 申请虚拟地址返回的结束地址
+- `rb_node`：插入红黑树 `vmap_area_root` 的节点
+- `list`：用于加入链表 `vmap_aera_list` 的节点
+- `vm`：用于管理虚拟地址和物理页之间的映射关系
+
+下面是虚拟地址中区域和页的关系：
+
+![image-20250803141221810](pic/image-20250803141221810.png)
+
+下面对于 `vmalloc` 的实现探究一下：
+
+首先在 `vmalloc` 对应的虚拟地址空间中找到一个空闲区与，然后将页面数组对应的物理内存映射到该区域，最终返回映射到虚拟起始地址，主要分三步再结合图：
+
+1. 从 `va_start` 到 `va_end` 查找空闲的虚拟地址空间，申请并填充 `vm_struct` 结构体
+2. 根据 `size` 调用 `alloc_page` 依次分配单个页面
+3. 把分配到单个页面映射到第一部找到的连续的虚拟地址
+
+![image-20250803141801633](pic/image-20250803141801633.png)
+
+
+
+
+
+malloc内部实际两个：一个brk，一个mmap。
+
+1. brk的实现
+
+    对地址由低地址向高地址增长，在分配内存的时候，将指向堆的最高地址的指针`mm->brk`往高地址扩展，释放反之。
+
+    申请堆后只是开辟了一个区域，内核还不会真正分配的物理内存，之后只有在访问这个内存地址，出现了缺页异常的时候才会进一步去建立映射（虚拟地址/物理地址建立）
+
+2. mmap
+
+    
+
+sys_brk的大致流程
+
+首先看看是否有该start_addr的VMA（`find_vma`）
+
+
+
+
+
+mmap的实现
+
+
+
+### slab 的学习
 
 
 
@@ -760,7 +974,7 @@ iic怎么读取的？
 >   ```bash
 >   # 启用DMA调试追踪
 >   echo 1 > /sys/kernel/debug/dma_debug/state
->       
+>           
 >   # 查看DMA映射错误
 >     dmesg | grep -i dma
 >   ```
@@ -820,21 +1034,23 @@ iic怎么读取的？
 
 ### I2C/SPI 
 
-看 `hardware` 笔记
+看 `interview/hardware` 笔记
 
 
 
 
 
-\1.  计算机、软件工程、通信工程、自动化等相关专业大三或研一、研二在校学生； 2. 熟练掌握C/C++编程语言，具有良好的代码编写习惯； 3. 了解ARM、X86、MIPS中至少一种CPU的架构及运行原理，对Cache、MPU、MMU有理解； 4. 了解Linux/RTOS的启动，内存管理、任务调度、网络通信、文件系统等工作原理； 5. 了解Linux/RTOS下常用外设驱动开发，如DMA、CAN、USB、PCIE、MIPI等，有良好的硬件基础； 6. 具备操作系统调试和性能调优经验者优先。
+### spinlock的实现
+
+
+
+
+
+
 
 
 
 ### **缓存一致性（Cache Coherence）深度解析**  
-结合你的项目经验（如智能门锁中的DMA与多核调度），缓存一致性是嵌入式系统和高性能计算的核心问题。以下是全面解析：
-
----
-
 #### **1. 缓存一致性问题根源**  
 当多个处理器核心（或DMA外设）共享内存时，若某一核心修改了缓存中的数据，其他核心可能仍持有旧副本，导致数据不一致。典型场景包括：  
 - **多核CPU**：核心A修改数据后，核心B未感知。  
@@ -1077,6 +1293,8 @@ DMA允许外设直接读写内存，而CPU可能通过缓存（Cache）访问同
 > - **选择依据**：根据硬件能力（是否支持CCI）、性能需求（延迟/吞吐量）、内存类型（Cacheable/Non-Cacheable）综合决策。  
 >
 > 通过上述方法，在**智能门锁项目**中成功实现了温湿度传感器数据的可靠采集与实时响应，系统运行稳定无数据错误。
+
+
 
 
 

@@ -555,7 +555,7 @@ clone(CLONE_VM | CLONE_FS | CLONE_FILES, stack_ptr, ...);
 
 
 
-## RISC-V 上下文切换
+## RISC-V 上下文切换（⭐）
 
 > 主要配合我自己实现的处理器和 OS 实现一步步讲解。
 
@@ -602,7 +602,7 @@ clone(CLONE_VM | CLONE_FS | CLONE_FILES, stack_ptr, ...);
 
 - 要为用户进程实现地址空间的内容
 - 内核栈和用户栈的进一步区分，尤其是在上下文切换的时候对于内核栈、用户栈切换。
-- 在开启 MMU 的情况下，每个用户进程有自己的页表基地址，内核访问的都是同一片代码，但也需要有页表，这就带来了问题，是在每一次上下
+- 在开启 MMU 的情况下，每个用户进程有自己的页表基地址，内核访问的都是同一片代码，但也需要有页表，这就带来了问题，是在每一次上下文切换都要换到对应进程的页表基地址寄存器吗？
 
 
 
@@ -680,24 +680,29 @@ static inline pgd_t *pgd_alloc(struct mm_struct *mm)
 >
 >     - 对于地址 `0x80000000`，其 VPN2 值为：
 >
->         复制
->
 >         ```
->         VPN2 = (0x80000000 >> 30) & 0x1FF = 256
->         ```
->
+>        VPN2 = (0x80000000 >> 30) & 0x1FF = 256
+>        ```
+>         
 >         因此，内核空间的 PGD 条目索引范围为 **256~511**。
 >
 > 3. **内核页表初始化**：
 >
 >     - 内核启动时，通过 `paging_init()` 初始化内核页表（`swapper_pg_dir`），将内核代码、设备内存等映射到高半部分虚拟地址。
->     - 用户进程创建时，复制内核 PGD 的高半部分条目到用户页表，确保内核映射共享。
+>    - 用户进程创建时，复制内核 PGD 的高半部分条目到用户页表，确保内核映射共享。
 
-具体可以看看 kernel memory layout 的文档：[Virtual Memory Layout on RISC-V Linux — The Linux Kernel documentation](https://www.kernel.org/doc/html/latest/arch/riscv/vm-layout.html)
+推荐阅读：
 
->了解到的一些相对前沿资料：
->
->[memory - How are the kernel page tables shared among all processes? - Unix & Linux Stack Exchange](https://unix.stackexchange.com/questions/598171/how-are-the-kernel-page-tables-shared-among-all-processes)
+- [内存之页表-CSDN博客](https://blog.csdn.net/m0_51717456/article/details/124256870)
+- [memory - How are the kernel page tables shared among all processes? - Unix & Linux Stack Exchange](https://unix.stackexchange.com/questions/598171/how-are-the-kernel-page-tables-shared-among-all-processes)
+
+>另外还可以看看 kernel memory layout 的文档：[Virtual Memory Layout on RISC-V Linux — The Linux Kernel documentation](https://www.kernel.org/doc/html/latest/arch/riscv/vm-layout.html)
+
+
+
+
+
+
 
 
 
@@ -707,7 +712,7 @@ static inline pgd_t *pgd_alloc(struct mm_struct *mm)
 
 首先，在只有一个页表寄存器的时候（不像ARM的双页表），在系统刚刚启动的时候，做的是 `vme_init` 的工作，为描述内核页表的结构分配使用空间：`kas.ptr = pgalloc_f(PGSIZE);` 所以这个 `ptr` 指的是内核空间下的页表基地址，是所有程序共享的！
 
-然后，接着为程序内存划分好的的每一部分内存区（zone、或者理解为池？）进行MMU映射；最后将内核的页表基址放到 `satp` 寄存器中：`set_satp(kas.ptr);`。
+然后，接着为程序内存划分好的每一部分内存区（zone、或者理解为池？）进行MMU映射；最后将内核的页表基址放到 `satp` 寄存器中：`set_satp(kas.ptr);`。
 
 接着，就是用户进程的内容，既然现在有了MMU的支持，那就要创建、规划进程地址空间了。
 
@@ -765,7 +770,7 @@ Context *ucontext(AddrSpace *as, Area kstack, void *entry) {
 }                
 ```
 
-这里主要到是`pdir`（page directory），这是用户进程地址空间的页表基地址赋值！（这和前面 `protect(&pcb->as);` 那里联系起来了！
+这里主要到是`pdir`（page directory），这是用户进程地址空间的页表基地址赋值！这和前面 `protect(&pcb->as);` 那里联系起来了！
 
 > 一开始的困惑：`memcpy kernel map space`，将 `kas.ptr` 拷贝给 `updir`，那不是覆盖 `pdir`？是不是内核和用户共用一部分？
 
@@ -798,7 +803,11 @@ for (int i = 0; i < 8; i++) {
 >
 > > 用户栈映射到 `as.area.end - 8 * PGSIZE` 这里。我的问题不是他映射到哪里的问题，而是好像每创建一个进程的用户栈空间都指向这里？？？这很明显不对呀！ `new_user_stack_top` 这个是有 `page_alloc` 实际分配了8页的起始地址的，但是按照上面的说法，那不是所有的用户进程的用户栈的实际物理地址都映射到这里？
 > >
-> > 不对！是给每个进程一种错觉，感觉这一块地方都是它的！但这是虚拟地址，实际访问的物理地址（就是那个new_user_stack_top，分配的8个PAGE）是不一样的！！我这理解对不对？因为这是在我自己写的 OS 的，那我想在 Linux中验证，怎么做？有什么test程序吗？
+> > 不对！就是给每个进程一种错觉，整块地址空间都是它的！
+> >
+> > 对！但这个地址是虚拟地址喔，实际访问的物理地址（就是那个new_user_stack_top，分配的8个PAGE）肯定是不一样的！
+>
+> 我这理解对不对？因为这是在我自己写的 OS 的，那我想在 Linux中验证，怎么做？有什么test程序：
 >
 > ```c
 > // test.c
@@ -843,18 +852,221 @@ for (int i = 0; i < 8; i++) {
 > >
 > > 尝试注释这处代码, 重新编译并运行, 你会看到发生了错误. 请解释为什么会发生这个错误.
 >
-> 
+> ......
 >
 > 为此, 我们需要思考内核线程的调度会对分页机制造成什么样的影响. 内核线程和用户进程最大的不同, 就是它没有用户态的地址空间: 内核线程的代码, 数据和栈都是位于内核的地址空间. 那在启动分页机制之后, 如果`__am_irq_handle()`要返回一个内核线程的现场, 我们是否需要考虑通过`__am_switch()`切换到内核线程的虚拟地址空间呢?
 >
 > 答案是, 不需要. 这是因为AM创建的所有虚拟地址空间都会包含内核映射, 无论在切换之前是位于哪一个虚拟地址空间, 内核线程都可以在这个虚拟地址空间上正确运行. 因此我们只要在`kcontext()`中将上下文的地址空间描述符指针设置为`NULL`, 来进行特殊的标记, 等到将来在`__am_irq_handle()`中调用`__am_switch()`时, 如果发现地址空间描述符指针为`NULL`, 就不进行虚拟地址空间的切换.
 >
 
+对！因为不是完全的32位地址空间，所以可以让内核页表寄存器覆盖掉用户的那部分？也就是这里：`memcpy(updir, kas.ptr, PGSIZE);` 内核地址的空间的大小，也就是之前说的：
+
+> **内核页表初始化**：
+>
+> - 内核启动时，通过 `paging_init()` 初始化内核页表（`swapper_pg_dir`），将内核代码、设备内存等映射到高半部分虚拟地址。
+> - 用户进程创建时，复制内核 PGD 的高半部分条目到用户页表，确保内核映射共享。
+
+也就是内核页表映射减少context切换开销？
+
+> 1. **内核映射共享**：
+>
+>     - `sync_kernel_mappings()` 将内核页表（`init_mm.pgd`）的高半部分（索引 `USER_PTRS_PER_PGD` 到 `PTRS_PER_PGD-1`）拷贝到用户 PGD
+>     - 确保所有进程共享内核空间映射（如设备内存、内核代码）
+>
+> 2. **地址空间划分示例**（64 位 Sv39）：
+>
+>     | 区域     | PGD 索引范围 | 地址范围                |
+>     | :------- | :----------- | :---------------------- |
+>     | 用户空间 | 0 ~ 255      | 0x0 ~ 0x3FFFFFFF        |
+>     | 内核空间 | 256 ~ 511    | 0x80000000 ~ 0xFFFFFFFF |
+>
+> 3. **优势**：
+>
+>     - **减少切换开销**：进程切换时无需刷新内核映射的 TLB
+>     - **内存节约**：所有进程共享同一份内核页表映射
+>     - **安全性**：用户空间无法修改内核映射（`SUM` 位控制访问权限）
+
+
+
 
 
 
 
 ## 关于 MMU 和 cache
+
+### 1. **Cache一致性问题（Cache Coherency）**
+#### 问题场景：
+- **DMA操作**：当设备通过DMA直接读写内存时，若数据在CPU Cache中未同步，会导致：
+  - **数据丢失**：CPU修改数据后未写回内存，设备读取到旧值
+  - **数据覆盖**：设备写入新数据后，CPU从Cache读取旧值
+- **多核共享数据**：不同核心的Cache持有同一内存地址的不同副本
+
+#### 典型案例：
+```c
+// 驱动代码示例
+void dma_transfer(struct device *dev, void *data, size_t size) {
+    dma_addr_t dma_addr = dma_map_single(dev, data, size, DMA_TO_DEVICE);
+    start_dma(dev, dma_addr); // DMA读取数据
+    // 若此时CPU修改data，Cache未刷新，设备将获取旧数据
+}
+```
+
+#### 解决方案：
+- **手动Cache维护**：
+  ```c
+  dma_sync_single_for_device(dev, dma_addr, size, DMA_TO_DEVICE); // DMA前刷Cache
+  dma_sync_single_for_cpu(dev, dma_addr, size, DMA_FROM_DEVICE);  // DMA后失效Cache
+  ```
+- **一致性内存（Coherent Memory）**：
+  
+  ```c
+  void *coherent_buf = dma_alloc_coherent(dev, size, &dma_addr, GFP_KERNEL);
+  // 该内存区域硬件自动维护Cache一致性
+  ```
+
+---
+
+### 2. **内存属性配置错误**
+#### 问题场景：
+- **设备寄存器映射**：将MMIO（内存映射I/O）区域错误配置为Cacheable
+  - 导致CPU对寄存器的多次访问被Cache合并或重排序
+  - 设备状态读取错误或控制命令丢失
+- **DMA缓冲区属性错误**：未正确设置Non-Cacheable/Write-Combining
+
+#### 错误配置示例：
+```c
+// 错误：对设备寄存器使用Cacheable映射
+void __iomem *regs = ioremap(DEVICE_BASE, SIZE);
+writel(CMD_START, regs); // 写入可能被Cache延迟，未立即到达设备
+```
+
+#### 解决方案：
+- **正确设置MMIO属性**：
+  ```c
+  // 使用Non-Cacheable映射
+  void __iomem *regs = ioremap_nocache(DEVICE_BASE, SIZE);
+  
+  // 或显式声明
+  #define DEVICE_REG_ATTR (DEVICE_nGnRnE | MT_DEVICE)
+  void __iomem *regs = ioremap_prot(DEVICE_BASE, SIZE, pgprot_device(PROT_DEVICE_nGnRnE));
+  ```
+
+---
+
+### 3. **TLB未刷新问题**
+#### 问题场景：
+- **动态重映射**：驱动修改页表后未刷新TLB
+  - 导致MMU使用旧的地址转换结果
+  - 访问无效地址或错误物理页
+- **ASID（Address Space ID）冲突**：进程切换时ASID重用导致TLB污染
+
+#### 典型案例：
+```c
+// 修改页表后忘记刷新TLB
+remap_pfn_range(vma, vaddr, pfn, size, prot);
+// 缺少: flush_tlb_kernel_range(vaddr, vaddr + size);
+```
+
+#### 解决方案：
+- **显式TLB刷新**：
+  ```c
+  flush_tlb_range(vma, start, end);   // 用户空间
+  flush_tlb_kernel_range(start, end); // 内核空间
+  ```
+- **ASID管理**：确保进程切换时刷新TLB或使用不同ASID
+
+---
+
+### 4. **内存屏障（Memory Barriers）缺失**
+#### 问题场景：
+- **指令重排序**：CPU/编译器优化导致内存操作顺序改变
+- **设备操作顺序敏感**：如先写命令寄存器再写数据寄存器
+
+#### 错误示例：
+```c
+writel(DATA_REG, value);  // 写数据寄存器
+writel(CMD_REG, CMD_SEND);// 写命令寄存器
+// 编译器/CPU可能重排序，导致CMD先于DATA发送
+```
+
+#### 解决方案：
+- **插入内存屏障**：
+  ```c
+  writel(DATA_REG, value);
+  wmb(); // 写屏障，确保DATA先于CMD
+  writel(CMD_REG, CMD_SEND);
+  ```
+
+---
+
+### 5. **地址对齐与边界问题**
+#### 问题场景：
+- **Cache行对齐**：DMA缓冲区未按Cache行对齐
+  - 导致Cache刷新时污染相邻数据
+- **页表边界跨越**：映射区域跨越页表项边界
+
+#### 问题示例：
+```c
+// 缓冲区未对齐，刷新时影响相邻数据
+char *buf = kmalloc(128, GFP_KERNEL); // 可能不按64字节对齐
+dma_sync_single_for_device(dev, dma_addr, 128, DMA_TO_DEVICE);
+```
+
+#### 解决方案：
+- **对齐分配**：
+  ```c
+  void *buf = kmem_cache_alloc(aligned_cache, GFP_KERNEL);
+  // 或
+  void *buf;
+  posix_memalign(&buf, CACHELINE_SIZE, size);
+  ```
+- **页表映射检查**：
+  ```c
+  if (vaddr & ~PAGE_MASK) != ((vaddr + size - 1) & ~PAGE_MASK)) {
+      // 处理跨页表项映射
+  }
+  ```
+
+---
+
+### 6. **性能优化陷阱**
+#### 问题场景：
+- **False Sharing**：多核访问同一Cache行的不同变量
+  - 导致Cache行频繁失效，性能骤降
+- **过度刷新Cache**：频繁调用`dma_sync_*`造成性能损失
+
+#### 优化方案：
+- **避免False Sharing**：
+  ```c
+  struct {
+      int core1_data __attribute__((aligned(CACHELINE_SIZE)));
+      int core2_data __attribute__((aligned(CACHELINE_SIZE)));
+  };
+  ```
+- **批量操作**：合并多次DMA同步操作
+- **预分配内存池**：减少动态分配开销
+
+---
+
+### 总结：最佳实践
+1. **DMA操作**：
+   - 使用`dma_alloc_coherent()`获取一致性内存
+   - 非一致性内存必须用`dma_map_*/dma_unmap_*`API
+2. **MMIO访问**：
+   - 始终使用`ioremap_nocache()`或`memremap()`
+   - 配合`readl()/writel()`等原子操作
+3. **TLB管理**：
+   - 页表修改后立即刷新TLB
+4. **内存屏障**：
+   - 设备寄存器操作按需插入`rmb()/wmb()`
+5. **调试工具**：
+   - 使用`CONFIG_DEBUG_DMA_API`检测DMA错误
+   - 利用`ftrace`跟踪Cache/TLB事件
+
+> 通过以下命令可检查Cache一致性：  
+> `perf stat -e cache-misses,cache-references,dTLB-load-misses,dTLB-store-misses`
+
+正确理解MMU/Cache的交互机制，严格遵循硬件约束，是开发稳定高效驱动的关键。
 
 
 
@@ -878,9 +1090,32 @@ for (int i = 0; i < 8; i++) {
 
 
 
-
-
 ## 页面迁移/压缩机制
+
+
+
+## mmap的原理
+
+
+
+
+
+## 硬中断和软中断的区别？
+
+我理解的都是为了打断当前的状态机运行的一种机制
+
+- 硬中断：通过给CPU物理引脚施加电压变化实现的来通知CPU处理某件对应事件
+- 软中断：通过给内存中的⼀个变量赋予二进制值以标记有软中断发发生
+
+
+
+
+
+## 系统调用的理解
+
+
+
+
 
 
 
