@@ -13,3 +13,10 @@
 
 当然还有中文版：[Doxygen: 概述 - Doxygen 文档生成工具](https://doxygen.cpp.org.cn/manual/index.html)
 
+
+
+
+
+## plantuml
+
+对于 ASPICE 流程的 SWE3，可能会画相对应的uml图，也可以用，也是嵌入到注释里的。

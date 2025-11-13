@@ -3391,6 +3391,315 @@ int main() {
 
 ## 17_myfile
 
+### 代码
+
+```C
+#include <elf.h>
+#include <fcntl.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+
+void print_elf_type(uint16_t e_type) {
+    const char *type_str;
+    switch (e_type) {
+    case ET_NONE:
+      type_str = "Unknown (ET_NONE)";
+      break;
+    case ET_REL:
+      type_str = "Relocatable (ET_REL)";
+      break;
+    case ET_EXEC:
+      type_str = "Executable (ET_EXEC)";
+      break;
+    case ET_DYN:
+      type_str = "Shared Object/PIE (ET_DYN)";
+      break;
+    case ET_CORE:
+      type_str = "Core Dump (ET_CORE)";
+      break;
+    default:
+      if (e_type >= ET_LOOS && e_type <= ET_HIOS)
+        type_str = "OS-Specific";
+      else if (e_type >= ET_LOPROC && e_type <= ET_HIPROC)
+        type_str = "Processor-Specific";
+      else
+        type_str = "Invalid";
+    }
+    printf("ELF Type: %s (0x%x)\n", type_str, e_type);
+}
+
+// void print_elf_header_info(Elf64_Ehdr *ehdr) {
+//     printf("\n=== ELF Header Information ===\n");
+    
+//     // 打印魔数
+//     printf("Magic: %02x %02x %02x %02x", 
+//            ehdr->e_ident[EI_MAG0], ehdr->e_ident[EI_MAG1],
+//            ehdr->e_ident[EI_MAG2], ehdr->e_ident[EI_MAG3]);
+//     printf(" (");
+//     for (int i = 0; i < 4; i++) {
+//         printf("%c", ehdr->e_ident[i]);
+//     }
+//     printf(")\n");
+    
+//     // 打印类别
+//     printf("Class: ");
+//     switch (ehdr->e_ident[EI_CLASS]) {
+//         case ELFCLASSNONE: printf("ELFCLASSNONE\n"); break;
+//         case ELFCLASS32: printf("ELF32\n"); break;
+//         case ELFCLASS64: printf("ELF64\n"); break;
+//         default: printf("Unknown\n"); break;
+//     }
+    
+//     // 打印数据编码
+//     printf("Data Encoding: ");
+//     switch (ehdr->e_ident[EI_DATA]) {
+//         case ELFDATANONE: printf("ELFDATANONE\n"); break;
+//         case ELFDATA2LSB: printf("2's complement, little endian\n"); break;
+//         case ELFDATA2MSB: printf("2's complement, big endian\n"); break;
+//         default: printf("Unknown\n"); break;
+//     }
+    
+//     // 打印文件类型
+//     print_elf_type(ehdr->e_type);
+    
+//     // 打印机器架构
+//     printf("Machine: 0x%x\n", ehdr->e_machine);
+    
+//     // 打印入口地址
+//     printf("Entry point address: 0x%lx\n", ehdr->e_entry);
+    
+//     // 打印程序头表信息
+//     printf("Program header offset: %ld\n", ehdr->e_phoff);
+//     printf("Program header entry size: %d\n", ehdr->e_phentsize);
+//     printf("Program header entry count: %d\n", ehdr->e_phnum);
+    
+//     // 打印节头表信息
+//     printf("Section header offset: %ld\n", ehdr->e_shoff);
+//     printf("Section header entry size: %d\n", ehdr->e_shentsize);
+//     printf("Section header entry count: %d\n", ehdr->e_shnum);
+//     printf("Section header string table index: %d\n", ehdr->e_shstrndx);
+// }
+
+int main(int argc, char *argv[]) {
+    char filepath[2][256] = {
+        "./17_myfile.o",
+        "./17_myfile",
+    };
+    
+    int fd;
+    Elf64_Ehdr ehdr;
+
+    for (int i = 0; i < 2; i++) {
+        printf("\nProcessing file: %s\n", filepath[i]);
+        fd = open(filepath[i], O_RDONLY);
+        if (fd < 0) {
+            perror("Failed to open file");
+            continue;
+        }
+        
+        if (read(fd, &ehdr, sizeof(Elf64_Ehdr)) != sizeof(Elf64_Ehdr)) {
+            perror("Failed to read ELF header");
+            close(fd);
+            continue;
+        }
+        
+        if (ehdr.e_ident[EI_MAG0] != ELFMAG0 ||
+            ehdr.e_ident[EI_MAG1] != ELFMAG1 ||
+            ehdr.e_ident[EI_MAG2] != ELFMAG2 ||
+            ehdr.e_ident[EI_MAG3] != ELFMAG3) {
+            printf("Not a valid ELF file\n");
+            close(fd);
+            continue;
+        }
+        
+        // 打印ELF头信息
+        //print_elf_header_info(&ehdr);
+        print_elf_type(ehdr.e_type);
+
+        close(fd);
+    }
+    
+    return 0;
+}
+```
+
+这个解析没什么好说的，自己做的问题主要是CI的测试没过，在本地测试的都能过，但是一到CI上就出问题了，本应该打印这个：
+
+```
+Shared Object/PIE (ET_DYN)
+```
+
+但是在CI上打印了这个：
+
+```
+Executable (ET_EXEC)
+```
+
+自然能够想到应该是Makefile时出了点问题，同时也对上面的几个类型不够了解，进一步学习。
+
+
+
+### ELF_TYPE学习
+
+1. **ET_NONE - 未知类型**
+
+    ```C
+    case ET_NONE:
+      type_str = "Unknown (ET_NONE)";
+    ```
+
+    - **含义**：无效或未知的 ELF 文件
+    - **编译对应**：损坏的、不完整的或非标准编译产生的文件
+
+2. **ET_REL - 可重定位文件**
+
+    ```C
+    case ET_REL:
+      type_str = "Relocatable (ET_REL)";
+    ```
+
+    - **含义**：包含可重定位代码和数据，需要进一步链接
+
+    - **编译对应**：
+
+        ```makefile
+        # 产生 ET_REL
+        gcc -c file.c -o file.o
+        file file.o  # ELF 64-bit LSB relocatable, ...
+        ```
+
+    - **特点**：有未解析的符号引用，不能直接执行
+
+3. **ET_EXEC - 可执行文件**
+
+    ```c
+    case ET_EXEC:
+      type_str = "Executable (ET_EXEC)";
+    ```
+
+    - **含义**：完全链接的可执行文件，有固定的加载地址
+
+    - **编译对应**：
+
+        ```makefile
+        # 传统非PIE可执行文件
+        gcc main.o lib.o -o program
+        
+        # 或者明确禁用PIE，产生 ET_EXEC
+        gcc -no-pie main.c -o traditional_exec
+        file traditional_exec  # ELF 64-bit LSB executable, ...
+        ```
+
+    - **特点**：有固定的虚拟地址，不支持 ASLR
+
+4. **ET_DYN - 共享对象/PIE**
+
+    ```C
+    case ET_DYN:
+      type_str = "Shared Object/PIE (ET_DYN)";
+    ```
+
+    - **含义**：位置无关的可执行文件或共享库
+
+    - **编译对应**：
+
+        **PIE 可执行文件**：
+
+        ```makefile
+        # 现代Linux默认（gcc > 6.x）
+        # 或者现代gcc默认：
+        gcc main.c -o modern_exec
+        file modern_exec  # 也是 ET_DYN (PIE)
+        
+        # 或者
+        # 显式启用产生 ET_DYN (PIE)
+        gcc -fPIE -pie main.c -o pie_exec
+        file pie_exec  # ELF 64-bit LSB shared object, ...
+        
+        ```
+
+        **共享库 (.so)**：
+
+        ```makefile
+        # 产生 ET_DYN (共享库)
+        gcc -shared -fPIC library.c -o libmylib.so
+        file libmylib.so  # ELF 64-bit LSB shared object, ...
+        ```
+
+    > 问题也就是在这里，在自己的电脑上/CNB本地测试都是正常的，但是一到CI就有问题
+
+    
+
+5. **ET_CORE - 核心转储**
+
+    ```C
+    case ET_CORE:
+      type_str = "Core Dump (ET_CORE)";
+    ```
+
+    - **含义**：程序崩溃时的内存转储
+
+    - **编译对应**：不是编译产生的，而是运行时系统生成的
+
+    - **产生方式**：
+
+        ```bash
+        # 程序崩溃时自动生成
+        ./program  # 发生段错误等
+        
+        # 手动生成
+        gcore -o core.pid program_pid
+        ```
+
+
+#### 检查工具
+
+```bash
+# 使用 file 命令
+file program
+
+# 使用 readelf
+readelf -h program | grep Type
+
+# 使用 objdump
+objdump -f program
+```
+
+- **传统**：过去默认生成 `ET_EXEC`
+- **现代**：大多数 Linux 发行版现在默认生成 `ET_DYN` (PIE) 以增强安全性（ASLR）
+- **检查默认**：
+  ```bash
+  gcc -dumpspecs | grep -A10 pie
+  ```
+
+现代编译环境默认倾向于生成 `ET_DYN` 类型的 PIE 可执行文件，这要求所有链接的代码都是位置无关的。
+
+
+
+### 总结
+
+- PIE 可执行文件在 ELF 格式中被标记为 `ET_DYN`（共享对象类型）
+- 传统非 PIE 可执行文件被标记为 `ET_EXEC`
+- 虽然类型显示为 "shared object"，但它们确实是可以正常执行的程序
+
+```C
+# 检查 GCC 是否默认启用 PIE
+gcc -v  # 在输出中查找 -pie 选项
+
+# 或者检查编译规格
+gcc -dumpspecs | grep -A10 pie
+```
+
+
+
+### 相关资料
+
+[c - Why does GCC create a shared object instead of an executable binary according to file? - Stack Overflow](https://stackoverflow.com/questions/34519521/why-does-gcc-create-a-shared-object-instead-of-an-executable-binary-according-to/55704865#55704865)
+
+
+
 
 
 ## 18_mywc
@@ -3399,20 +3708,487 @@ int main() {
 
 ## 19_mytrans
 
+### 代码
+
+```C
+// myhash.c
+#include "myhash.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+// djb2 哈希函数（经典字符串哈希，分布均匀）
+unsigned long hash_function(const char *str) {
+  unsigned long hash = 5381;
+  int c;
+  while ((c = *str++))
+    hash = ((hash << 5) + hash) + c; // hash * 33 + c
+  return hash;
+}
+
+// 创建哈希表
+HashTable *create_hash_table() {
+  HashTable *table = malloc(sizeof(HashTable));
+  if (!table)
+    return NULL;
+  for (int i = 0; i < HASH_TABLE_SIZE; i++) {
+    table->buckets[i] = NULL;
+  }
+  return table;
+}
+
+// 释放单个节点
+void free_node(HashNode *node) {
+  if (node) {
+    free(node->key);
+    free(node->value);
+    free(node);
+  }
+}
+
+// 释放整个哈希表
+void free_hash_table(HashTable *table) {
+  if (!table)
+    return;
+    
+  int freed_count = 0;
+  for (int i = 0; i < HASH_TABLE_SIZE; i++) {
+    //printf("free.....:%d\n", idx--);
+    HashNode *curr = table->buckets[i];
+    while (curr) {
+      HashNode *tmp = curr;
+      curr = curr->next;
+      free_node(tmp);
+      freed_count++;
+      //printf("%d 节点\n", freed_count);
+    }
+  }
+  //printf("总共释放了 %d 个节点\n", freed_count);
+  free(table);
+}
+
+// static int idx = 0;
+// 插入键值对
+int hash_table_insert(HashTable *table, const char *key, const char *value) {
+  if (!table || !key || !value)
+    return 0;
+
+  unsigned long hash = hash_function(key) % HASH_TABLE_SIZE;
+  HashNode *node = table->buckets[hash];
+
+  // 键是否存在
+  while (node != NULL) {
+    if (strcmp(node->key, key) == 0) {
+      // 键已存在，更新值，并返回1
+      free(node->value);  // 释放旧值
+      node->value = strdup(value);  // 复制新值
+      if (node->value == NULL) return 0;  // 内存分配失败
+      return 1;
+    }
+    node = node->next;
+  }
+
+  // 键不存在，创建新节点
+  HashNode *new_node = malloc(sizeof(HashNode));
+  if (!new_node) return 0;
+
+  // 复制键和值
+  // 尝试使用strdup来做看看
+  //printf("malloc...: %d\n", idx++);
+  new_node->key = strdup(key);
+  new_node->value = strdup(value);
+  // 问题在于这里，没有初始化，导致在free的时候飘了
+  new_node->next = NULL;
+    
+    
+  if (!new_node->key || !new_node->value) {
+    free(new_node->key);
+    free(new_node->value);
+    free(new_node);
+    return 0;
+  }
+
+  // 头插
+  // 注意不要错了，要用new_node
+  if (table->buckets[hash] == NULL) {
+    table->buckets[hash] = new_node;
+  } else {
+    new_node->next = table->buckets[hash];
+    table->buckets[hash] = new_node;
+  }
+
+  return 1;
+}
+
+// 查找键
+const char *hash_table_lookup(HashTable *table, const char *key) {
+  if (!table || !key)
+    return NULL;
+
+  unsigned long hash = hash_function(key) % HASH_TABLE_SIZE;
+  HashNode *node = table->buckets[hash];
+
+  while (node != NULL) {
+    if (strcmp(node->key, key) == 0) {
+      return node->value;
+    }
+    node = node->next;  
+  }
+
+  return NULL; // 未找到
+}
+
+```
+
+```C
+// mytrans.c
+#include "myhash.h"
+#include <ctype.h>
+#include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+typedef enum {
+  STATE_EXPECT_WORD,      // 期待单词行（以#开头）
+  STATE_EXPECT_TRANSLATION, // 期待翻译行（以Trans:开头）
+  STATE_ERROR             // 错误状态
+} ParserState;
+
+void trim(char *str) {
+  if (str == NULL) return;
+  
+  char *start = str;
+  char *end = str + strlen(str) - 1;
+  
+  // 去除前后的非单词字符: 
+  // ' ', '\t', '\r', '\n'
+  while (isspace((unsigned char)*start)) start++;
+  while (end > start && isspace((unsigned char)*end)) end--;
+  
+  // 移动字符串到开头
+  size_t len = end - start + 1;
+  if (start != str) {
+      memmove(str, start, len);
+  }
+
+  str[len] = '\0';
+}
+
+int load_dictionary(const char *filename, HashTable *table,
+                    uint64_t *dict_count) {
+  if (!table || !filename || !dict_count) return -1;
+
+  *dict_count = 0;
+
+  FILE *file = fopen(filename, "r");
+  if (!file) {
+    perror("无法打开词典文件");
+    return -1;
+  }
+
+  char line[1024];
+  char current_word[100] = {0};
+  char current_translation[1024] = {0};
+  //int in_entry = 0;
+
+  ParserState state = STATE_EXPECT_WORD;
+
+  while (fgets(line, sizeof(line), file)) {
+    line[strcspn(line, "\n")] = '\0';
+    trim(line);
+
+    if (strlen(line) == 0) continue;
+    
+    switch(state) {
+    case STATE_EXPECT_WORD:
+      if (line[0] == '#') {
+        // 只有100byte的大小
+        strncpy(current_word, line + 1, sizeof(current_word) - 1);
+        current_word[sizeof(current_word) - 1] = '\0';
+        trim(current_word);
+
+        if (strlen(current_word) > 0) {
+          state = STATE_EXPECT_TRANSLATION;
+          //进入翻译状态，先清空
+          current_translation[0] = '\0';
+        } else {
+          state = STATE_ERROR;
+          fprintf(stderr, "错误：空单词\n");
+          break;
+        }
+      }
+      break;
+
+    case STATE_EXPECT_TRANSLATION:
+      // 犯了个错：if (strcmp(line, "Trans:") == 0) {
+      // 应该是判断前6个字符的。
+      if (strncmp(line, "Trans:", 6) == 0) {
+        strncpy(current_translation, line + 6, sizeof(current_translation) - 1);
+        current_translation[sizeof(current_translation) - 1] = '\0';
+        trim(current_translation);
+    
+        if (strlen(current_translation) > 0) { 
+          if (hash_table_insert(table, current_word, current_translation)) {
+            (*dict_count)++;
+            // printf("加载: %s -> %s\n", current_word, current_translation);
+          } else {
+            fprintf(stderr, "错误：插入哈希表失败: %s\n", current_word);
+          }
+
+          state = STATE_EXPECT_WORD;  // 成功处理，回到期待单词状态
+        } else {
+          fprintf(stderr, "警告：单词 '%s' 的翻译为空\n", current_word);
+          state = STATE_EXPECT_WORD;  // 即使翻译为空，也继续处理下一个
+        }
+
+      } else {
+        fprintf(stderr, "错误：期待翻译行(以Trans:开头)，但得到: %s\n", line);
+        fprintf(stderr, "      单词 '%s' 将不会被加载\n", current_word);
+        state = STATE_EXPECT_WORD;  // 错误恢复：回到初始状态
+      }
+      break;
+    case STATE_ERROR:
+      fprintf(stderr, "错误行：%s\n", line);
+      return 1;
+    default:
+      fprintf(stderr, "错误：未知状态\n");
+      return 1;
+    }
+  }
+
+  fclose(file);
+  return 0;
+}
+
+```
+
+主要是梳理整个load流程，用状态机思路做即可。
+
+
+
+### 未初始化指针的问题
+
+```
+// myhash.c
+
+// 插入键值对
+int hash_table_insert(HashTable *table, const char *key, const char *value) {
+  if (!table || !key || !value)
+    return 0;
+	...
+  // 键不存在，创建新节点
+  HashNode *new_node = malloc(sizeof(HashNode));
+  if (!new_node) return 0;
+  ...
+  new_node->key = strdup(key);
+  new_node->value = strdup(value);
+  // 问题在于这里，没有初始化，导致在free的时候飘了
+  new_node->next = NULL;
+    
+   ....
+
+  return 1;
+}
+
+```
+
+#### 进一步学习
+
+1. 环境差异
+
+    在自己的电脑上复现不出来，但是在CNB本地就会出现，环境差异：
+
+    ```bash
+    // CNB
+    ➜  /workspace git:(main) gcc -v
+    Using built-in specs.
+    COLLECT_GCC=gcc
+    COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-linux-gnu/12/lto-wrapper
+    OFFLOAD_TARGET_NAMES=nvptx-none:amdgcn-amdhsa
+    OFFLOAD_TARGET_DEFAULT=1
+    Target: x86_64-linux-gnu
+    Configured with: ../src/configure -v --with-pkgversion='Debian 12.2.0-14+deb12u1' --with-bugurl=file:///usr/share/doc/gcc-12/README.Bugs --enable-languages=c,ada,c++,go,d,fortran,objc,obj-c++,m2 --prefix=/usr --with-gcc-major-version-only --program-suffix=-12 --program-prefix=x86_64-linux-gnu- --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-gnu-unique-object --disable-vtable-verify --enable-plugin --enable-default-pie --with-system-zlib --enable-libphobos-checking=release --with-target-system-zlib=auto --enable-objc-gc=auto --enable-multiarch --disable-werror --enable-cet --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32,m64,mx32 --enable-multilib --with-tune=generic --enable-offload-targets=nvptx-none=/build/reproducible-path/gcc-12-12.2.0/debian/tmp-nvptx/usr,amdgcn-amdhsa=/build/reproducible-path/gcc-12-12.2.0/debian/tmp-gcn/usr --enable-offload-defaulted --without-cuda-driver --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu
+    Thread model: posix
+    Supported LTO compression algorithms: zlib zstd
+    gcc version 12.2.0 (Debian 12.2.0-14+deb12u1) 
+    ```
+
+    ```bash
+    // 自己Ubuntu虚拟机
+    gcc -v
+    Using built-in specs.
+    COLLECT_GCC=gcc
+    COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-linux-gnu/11/lto-wrapper
+    OFFLOAD_TARGET_NAMES=nvptx-none:amdgcn-amdhsa
+    OFFLOAD_TARGET_DEFAULT=1
+    Target: x86_64-linux-gnu
+    Configured with: ../src/configure -v --with-pkgversion='Ubuntu 11.4.0-1ubuntu1~22.04.2' --with-bugurl=file:///usr/share/doc/gcc-11/README.Bugs --enable-languages=c,ada,c++,go,brig,d,fortran,objc,obj-c++,m2 --prefix=/usr --with-gcc-major-version-only --program-suffix=-11 --program-prefix=x86_64-linux-gnu- --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --enable-bootstrap --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-gnu-unique-object --disable-vtable-verify --enable-plugin --enable-default-pie --with-system-zlib --enable-libphobos-checking=release --with-target-system-zlib=auto --enable-objc-gc=auto --enable-multiarch --disable-werror --enable-cet --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32,m64,mx32 --enable-multilib --with-tune=generic --enable-offload-targets=nvptx-none=/build/gcc-11-2Y5pKs/gcc-11-11.4.0/debian/tmp-nvptx/usr,amdgcn-amdhsa=/build/gcc-11-2Y5pKs/gcc-11-11.4.0/debian/tmp-gcn/usr --without-cuda-driver --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu --with-build-config=bootstrap-lto-lean --enable-link-serialization=2
+    Thread model: posix
+    Supported LTO compression algorithms: zlib zstd
+    gcc version 11.4.0 (Ubuntu 11.4.0-1ubuntu1~22.04.2) 
+    
+    ```
+
+2. 学习原理
+
+    先明确自己的需求：使用链表来解决哈希冲突，梳理原理：
+
+    1. 计算键的哈希值，找到对应的桶索引。
+    2. 遍历该桶对应的链表，检查键是否已经存在。如果存在，更新值并返回。
+    3. 如果不存在，创建新节点，并采用头插法插入到链表中。
+
+    这里就会涉及到分配/释放内存、和插入链表节点了。
+
+    但是我这里使用的 `malloc`，而**C标准明确规定：`malloc`分配的内存内容是不确定的（indeterminate）**。这意味着标准不要求清零，内存中可能包含任何随机数据。
+
+    这样子会在之后的头插、free用到这个next的地方就会出现问题？进一步看代码
+
+3. ：未初始化 `next` 指针
+
+    1. 场景1：头插（不过在我这里应该不会有，词典数据应该已经去过重了）
+
+       ```c
+       // 创建新节点（没有初始化 next）
+       HashNode *new_node = malloc(sizeof(HashNode));
+       new_node->key = strdup("hello");
+       new_node->value = strdup("你好");
+       // new_node->next 现在是随机值，比如 0x7f8a3b2c1d00
+       
+       // 假如是空桶
+       if (table->buckets[hash] == NULL) {
+           table->buckets[hash] = new_node;
+           // 现在链表：new_node -> ??? (随机地址)
+       } else {
+           new_node->next = table->buckets[hash];
+           table->buckets[hash] = new_node;
+       }
+       ```
+
+       **此时链表结构**：
+
+       ```c
+       table->buckets[hash] → [key:"hello", value:"你好", next:0x7f8a3b2c1d00(random)]
+       ```
+
+    2. 场景2：遍历这个链表
+
+        ```c
+        // 查找操作
+        HashNode *curr = table->buckets[hash];
+        while (curr != NULL) {  // curr 不为空，进入循环
+            if (strcmp(curr->key, "hello") == 0) {
+                return curr->value;  // 找到单词
+            }
+            curr = curr->next;  // 问题在这里！curr->next 是随机值
+            // 现在 curr 可能指向无效内存地址
+        }
+        ```
+
+    3. 场景3：释放这个链表
+
+        ```c
+        // 释放操作
+        HashNode *curr = table->buckets[hash];
+        while (curr) {
+            HashNode *tmp = curr;
+            curr = curr->next;  // curr->next 是随机值，可能指向非法地址
+            free_node(tmp);     // 当尝试访问 curr->key 时崩溃
+        }
+        ```
+
+4. 链表进一步学习
+
+    链表就像一列火车：
+
+    - 每个车厢（节点）连接着下一个车厢
+    - **最后一节车厢**必须明确表示"后面没有了"
+    - `NULL` 就是那个"终点标志"
+
+    没有 `NULL` 的链表：
+
+    ```C
+    [车厢1] → [随机地址] → ??? (可能是悬崖)
+    ```
+
+    有 `NULL` 的链表：
+
+    ```c
+    [车厢1] → NULL (明确终点)
+    ```
+
+
+
+### 经验
+
+在C语言中，**永远不要假设新分配的内存是干净的**，总是显式初始化所有字段！！
+
+要么用calloc！
+
+
+
+
+
+
+
+
+
 
 
 ## 20_mybash
 
+主要是学习构建一个相对复杂的Makefile目录结构的。
+
+顶层Makefile：
+
+```makefile
+# =============================================
+# 主 Makefile
+# 功能：
+#   - mybash：生成二进制，放到 bin/
+#   - 其他模块（mysed, myfile, mywc, mytrans）：生成静态库 .a，放到 obj/xxx/，.o 放到 obj/xxx/（或 out/，但建议统一）
+#   - 所有子模块 Makefile 应支持 OBJDIR 和 BINDIR 参数
+#   - OBJDIR 和 BINDIR 参数应由主 Makefile 传入，子模块 Makefile 不应修改
+# =============================================
 
 
+PWD := $(shell pwd)
+
+# 所有子模块目录（静态库：生成 .a）
+SUBDIRS := \
+	mysed \
+	myfile \
+	mywc \
+	mytrans
+
+OBJDIR := $(PWD)/obj
+BINDIR := $(PWD)/bin
+
+# 默认目标：构建 mybash（依赖其他库）
+all: mybash
+
+$(SUBDIRS):
+	@echo "Building $@..."
+	@mkdir -p $(OBJDIR)/$@
+	$(MAKE) -C src/$@ OBJDIR=$(OBJDIR)/$@ BINDIR=$(BINDIR)
+
+mybash: $(SUBDIRS)
+	@echo "Building mybash..."
+	@mkdir -p $(BINDIR)
+	$(MAKE) -C src/mybash OBJDIR=$(OBJDIR)/mybash BINDIR=$(BINDIR)
+
+clean:
+	@echo "Cleaning all..."
+	# @for dir in $(SUBDIRS) mybash; do \
+	# 	echo "Cleaning $$dir..."; \
+	# 	$(MAKE) -C $$dir clean OBJDIR=$(OBJDIR)/$$dir BINDIR=$(BINDIR); \
+	# done
+	rm -rf $(OBJDIR) $(BINDIR)
+
+.PHONY: all $(SUBDIRS) mybash clean
+```
 
 
-
-## TODO
-
-
-
-## TODO
 
 
 
