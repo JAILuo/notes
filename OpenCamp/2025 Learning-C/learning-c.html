@@ -3246,6 +3246,63 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="17_myfile">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_74" class="md-nav__link">
+    <span class="md-ellipsis">
+      代码
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#elf_type" class="md-nav__link">
+    <span class="md-ellipsis">
+      ELF_TYPE学习
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="ELF_TYPE学习">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_75" class="md-nav__link">
+    <span class="md-ellipsis">
+      检查工具
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_76" class="md-nav__link">
+    <span class="md-ellipsis">
+      总结
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_77" class="md-nav__link">
+    <span class="md-ellipsis">
+      相关资料
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -3264,30 +3321,60 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="19_mytrans">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_78" class="md-nav__link">
+    <span class="md-ellipsis">
+      代码
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_79" class="md-nav__link">
+    <span class="md-ellipsis">
+      未初始化指针的问题
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="未初始化指针的问题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_80" class="md-nav__link">
+    <span class="md-ellipsis">
+      进一步学习
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_81" class="md-nav__link">
+    <span class="md-ellipsis">
+      经验
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
   <a href="#20_mybash" class="md-nav__link">
     <span class="md-ellipsis">
       20_mybash
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#todo" class="md-nav__link">
-    <span class="md-ellipsis">
-      TODO
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#todo_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      TODO
     </span>
   </a>
   
@@ -6339,11 +6426,724 @@ argc = 2
 </code></pre></div>
 <h2 id="16_mysed">16_mysed</h2>
 <h2 id="17_myfile">17_myfile</h2>
+<h3 id="_74">代码</h3>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;elf.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;fcntl.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;unistd.h&gt;</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">print_elf_type</span><span class="p">(</span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">e_type</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">type_str</span><span class="p">;</span>
+<span class="w">    </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">e_type</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="no">ET_NONE</span><span class="p">:</span>
+<span class="w">      </span><span class="n">type_str</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Unknown (ET_NONE)&quot;</span><span class="p">;</span>
+<span class="w">      </span><span class="k">break</span><span class="p">;</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="no">ET_REL</span><span class="p">:</span>
+<span class="w">      </span><span class="n">type_str</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Relocatable (ET_REL)&quot;</span><span class="p">;</span>
+<span class="w">      </span><span class="k">break</span><span class="p">;</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="no">ET_EXEC</span><span class="p">:</span>
+<span class="w">      </span><span class="n">type_str</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Executable (ET_EXEC)&quot;</span><span class="p">;</span>
+<span class="w">      </span><span class="k">break</span><span class="p">;</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="no">ET_DYN</span><span class="p">:</span>
+<span class="w">      </span><span class="n">type_str</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Shared Object/PIE (ET_DYN)&quot;</span><span class="p">;</span>
+<span class="w">      </span><span class="k">break</span><span class="p">;</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="no">ET_CORE</span><span class="p">:</span>
+<span class="w">      </span><span class="n">type_str</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Core Dump (ET_CORE)&quot;</span><span class="p">;</span>
+<span class="w">      </span><span class="k">break</span><span class="p">;</span>
+<span class="w">    </span><span class="k">default</span><span class="o">:</span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">e_type</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">ET_LOOS</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">e_type</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">ET_HIOS</span><span class="p">)</span>
+<span class="w">        </span><span class="n">type_str</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;OS-Specific&quot;</span><span class="p">;</span>
+<span class="w">      </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">e_type</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">ET_LOPROC</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">e_type</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">ET_HIPROC</span><span class="p">)</span>
+<span class="w">        </span><span class="n">type_str</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Processor-Specific&quot;</span><span class="p">;</span>
+<span class="w">      </span><span class="k">else</span>
+<span class="w">        </span><span class="n">type_str</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Invalid&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;ELF Type: %s (0x%x)</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">type_str</span><span class="p">,</span><span class="w"> </span><span class="n">e_type</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// void print_elf_header_info(Elf64_Ehdr *ehdr) {</span>
+<span class="c1">//     printf(&quot;\n=== ELF Header Information ===\n&quot;);</span>
+
+<span class="c1">//     // 打印魔数</span>
+<span class="c1">//     printf(&quot;Magic: %02x %02x %02x %02x&quot;, </span>
+<span class="c1">//            ehdr-&gt;e_ident[EI_MAG0], ehdr-&gt;e_ident[EI_MAG1],</span>
+<span class="c1">//            ehdr-&gt;e_ident[EI_MAG2], ehdr-&gt;e_ident[EI_MAG3]);</span>
+<span class="c1">//     printf(&quot; (&quot;);</span>
+<span class="c1">//     for (int i = 0; i &lt; 4; i++) {</span>
+<span class="c1">//         printf(&quot;%c&quot;, ehdr-&gt;e_ident[i]);</span>
+<span class="c1">//     }</span>
+<span class="c1">//     printf(&quot;)\n&quot;);</span>
+
+<span class="c1">//     // 打印类别</span>
+<span class="c1">//     printf(&quot;Class: &quot;);</span>
+<span class="c1">//     switch (ehdr-&gt;e_ident[EI_CLASS]) {</span>
+<span class="c1">//         case ELFCLASSNONE: printf(&quot;ELFCLASSNONE\n&quot;); break;</span>
+<span class="c1">//         case ELFCLASS32: printf(&quot;ELF32\n&quot;); break;</span>
+<span class="c1">//         case ELFCLASS64: printf(&quot;ELF64\n&quot;); break;</span>
+<span class="c1">//         default: printf(&quot;Unknown\n&quot;); break;</span>
+<span class="c1">//     }</span>
+
+<span class="c1">//     // 打印数据编码</span>
+<span class="c1">//     printf(&quot;Data Encoding: &quot;);</span>
+<span class="c1">//     switch (ehdr-&gt;e_ident[EI_DATA]) {</span>
+<span class="c1">//         case ELFDATANONE: printf(&quot;ELFDATANONE\n&quot;); break;</span>
+<span class="c1">//         case ELFDATA2LSB: printf(&quot;2&#39;s complement, little endian\n&quot;); break;</span>
+<span class="c1">//         case ELFDATA2MSB: printf(&quot;2&#39;s complement, big endian\n&quot;); break;</span>
+<span class="c1">//         default: printf(&quot;Unknown\n&quot;); break;</span>
+<span class="c1">//     }</span>
+
+<span class="c1">//     // 打印文件类型</span>
+<span class="c1">//     print_elf_type(ehdr-&gt;e_type);</span>
+
+<span class="c1">//     // 打印机器架构</span>
+<span class="c1">//     printf(&quot;Machine: 0x%x\n&quot;, ehdr-&gt;e_machine);</span>
+
+<span class="c1">//     // 打印入口地址</span>
+<span class="c1">//     printf(&quot;Entry point address: 0x%lx\n&quot;, ehdr-&gt;e_entry);</span>
+
+<span class="c1">//     // 打印程序头表信息</span>
+<span class="c1">//     printf(&quot;Program header offset: %ld\n&quot;, ehdr-&gt;e_phoff);</span>
+<span class="c1">//     printf(&quot;Program header entry size: %d\n&quot;, ehdr-&gt;e_phentsize);</span>
+<span class="c1">//     printf(&quot;Program header entry count: %d\n&quot;, ehdr-&gt;e_phnum);</span>
+
+<span class="c1">//     // 打印节头表信息</span>
+<span class="c1">//     printf(&quot;Section header offset: %ld\n&quot;, ehdr-&gt;e_shoff);</span>
+<span class="c1">//     printf(&quot;Section header entry size: %d\n&quot;, ehdr-&gt;e_shentsize);</span>
+<span class="c1">//     printf(&quot;Section header entry count: %d\n&quot;, ehdr-&gt;e_shnum);</span>
+<span class="c1">//     printf(&quot;Section header string table index: %d\n&quot;, ehdr-&gt;e_shstrndx);</span>
+<span class="c1">// }</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">argv</span><span class="p">[])</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">char</span><span class="w"> </span><span class="n">filepath</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">256</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="s">&quot;./17_myfile.o&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s">&quot;./17_myfile&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="p">};</span>
+
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">fd</span><span class="p">;</span>
+<span class="w">    </span><span class="n">Elf64_Ehdr</span><span class="w"> </span><span class="n">ehdr</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">Processing file: %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">filepath</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+<span class="w">        </span><span class="n">fd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">open</span><span class="p">(</span><span class="n">filepath</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="w"> </span><span class="n">O_RDONLY</span><span class="p">);</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">fd</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">perror</span><span class="p">(</span><span class="s">&quot;Failed to open file&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="k">continue</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">read</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">ehdr</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">Elf64_Ehdr</span><span class="p">))</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">Elf64_Ehdr</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">perror</span><span class="p">(</span><span class="s">&quot;Failed to read ELF header&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="n">close</span><span class="p">(</span><span class="n">fd</span><span class="p">);</span>
+<span class="w">            </span><span class="k">continue</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ehdr</span><span class="p">.</span><span class="n">e_ident</span><span class="p">[</span><span class="n">EI_MAG0</span><span class="p">]</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">ELFMAG0</span><span class="w"> </span><span class="o">||</span>
+<span class="w">            </span><span class="n">ehdr</span><span class="p">.</span><span class="n">e_ident</span><span class="p">[</span><span class="n">EI_MAG1</span><span class="p">]</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">ELFMAG1</span><span class="w"> </span><span class="o">||</span>
+<span class="w">            </span><span class="n">ehdr</span><span class="p">.</span><span class="n">e_ident</span><span class="p">[</span><span class="n">EI_MAG2</span><span class="p">]</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">ELFMAG2</span><span class="w"> </span><span class="o">||</span>
+<span class="w">            </span><span class="n">ehdr</span><span class="p">.</span><span class="n">e_ident</span><span class="p">[</span><span class="n">EI_MAG3</span><span class="p">]</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">ELFMAG3</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Not a valid ELF file</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="n">close</span><span class="p">(</span><span class="n">fd</span><span class="p">);</span>
+<span class="w">            </span><span class="k">continue</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="c1">// 打印ELF头信息</span>
+<span class="w">        </span><span class="c1">//print_elf_header_info(&amp;ehdr);</span>
+<span class="w">        </span><span class="n">print_elf_type</span><span class="p">(</span><span class="n">ehdr</span><span class="p">.</span><span class="n">e_type</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">close</span><span class="p">(</span><span class="n">fd</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>这个解析没什么好说的，自己做的问题主要是CI的测试没过，在本地测试的都能过，但是一到CI上就出问题了，本应该打印这个：</p>
+<div class="highlight"><pre><span></span><code>Shared Object/PIE (ET_DYN)
+</code></pre></div>
+<p>但是在CI上打印了这个：</p>
+<div class="highlight"><pre><span></span><code>Executable (ET_EXEC)
+</code></pre></div>
+<p>自然能够想到应该是Makefile时出了点问题，同时也对上面的几个类型不够了解，进一步学习。</p>
+<h3 id="elf_type">ELF_TYPE学习</h3>
+<ol>
+<li>
+<p><strong>ET_NONE - 未知类型</strong></p>
+<div class="highlight"><pre><span></span><code><span class="k">case</span><span class="w"> </span><span class="no">ET_NONE</span><span class="p">:</span>
+<span class="w">  </span><span class="n">type_str</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Unknown (ET_NONE)&quot;</span><span class="p">;</span>
+</code></pre></div>
+<ul>
+<li><strong>含义</strong>：无效或未知的 ELF 文件</li>
+<li><strong>编译对应</strong>：损坏的、不完整的或非标准编译产生的文件</li>
+</ul>
+</li>
+<li>
+<p><strong>ET_REL - 可重定位文件</strong></p>
+<div class="highlight"><pre><span></span><code><span class="k">case</span><span class="w"> </span><span class="no">ET_REL</span><span class="p">:</span>
+<span class="w">  </span><span class="n">type_str</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Relocatable (ET_REL)&quot;</span><span class="p">;</span>
+</code></pre></div>
+<ul>
+<li>
+<p><strong>含义</strong>：包含可重定位代码和数据，需要进一步链接</p>
+</li>
+<li>
+<p><strong>编译对应</strong>：</p>
+<div class="highlight"><pre><span></span><code><span class="c"># 产生 ET_REL</span>
+<span class="err">gcc</span><span class="w"> </span><span class="err">-c</span><span class="w"> </span><span class="err">file.c</span><span class="w"> </span><span class="err">-o</span><span class="w"> </span><span class="err">file.o</span>
+<span class="err">file</span><span class="w"> </span><span class="err">file.o</span><span class="w">  </span><span class="c"># ELF 64-bit LSB relocatable, ...</span>
+</code></pre></div>
+</li>
+<li>
+<p><strong>特点</strong>：有未解析的符号引用，不能直接执行</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>ET_EXEC - 可执行文件</strong></p>
+<div class="highlight"><pre><span></span><code><span class="k">case</span><span class="w"> </span><span class="no">ET_EXEC</span><span class="p">:</span>
+<span class="w">  </span><span class="n">type_str</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Executable (ET_EXEC)&quot;</span><span class="p">;</span>
+</code></pre></div>
+<ul>
+<li>
+<p><strong>含义</strong>：完全链接的可执行文件，有固定的加载地址</p>
+</li>
+<li>
+<p><strong>编译对应</strong>：</p>
+<div class="highlight"><pre><span></span><code><span class="c"># 传统非PIE可执行文件</span>
+<span class="err">gcc</span><span class="w"> </span><span class="err">main.o</span><span class="w"> </span><span class="err">lib.o</span><span class="w"> </span><span class="err">-o</span><span class="w"> </span><span class="err">program</span>
+
+<span class="c"># 或者明确禁用PIE，产生 ET_EXEC</span>
+<span class="err">gcc</span><span class="w"> </span><span class="err">-no-pie</span><span class="w"> </span><span class="err">main.c</span><span class="w"> </span><span class="err">-o</span><span class="w"> </span><span class="err">traditional_exec</span>
+<span class="err">file</span><span class="w"> </span><span class="err">traditional_exec</span><span class="w">  </span><span class="c"># ELF 64-bit LSB executable, ...</span>
+</code></pre></div>
+</li>
+<li>
+<p><strong>特点</strong>：有固定的虚拟地址，不支持 ASLR</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>ET_DYN - 共享对象/PIE</strong></p>
+<div class="highlight"><pre><span></span><code><span class="k">case</span><span class="w"> </span><span class="no">ET_DYN</span><span class="p">:</span>
+<span class="w">  </span><span class="n">type_str</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Shared Object/PIE (ET_DYN)&quot;</span><span class="p">;</span>
+</code></pre></div>
+<ul>
+<li>
+<p><strong>含义</strong>：位置无关的可执行文件或共享库</p>
+</li>
+<li>
+<p><strong>编译对应</strong>：</p>
+<p><strong>PIE 可执行文件</strong>：</p>
+<div class="highlight"><pre><span></span><code><span class="c"># 现代Linux默认（gcc &gt; 6.x）</span>
+<span class="c"># 或者现代gcc默认：</span>
+<span class="err">gcc</span><span class="w"> </span><span class="err">main.c</span><span class="w"> </span><span class="err">-o</span><span class="w"> </span><span class="err">modern_exec</span>
+<span class="err">file</span><span class="w"> </span><span class="err">modern_exec</span><span class="w">  </span><span class="c"># 也是 ET_DYN (PIE)</span>
+
+<span class="c"># 或者</span>
+<span class="c"># 显式启用产生 ET_DYN (PIE)</span>
+<span class="err">gcc</span><span class="w"> </span><span class="err">-fPIE</span><span class="w"> </span><span class="err">-pie</span><span class="w"> </span><span class="err">main.c</span><span class="w"> </span><span class="err">-o</span><span class="w"> </span><span class="err">pie_exec</span>
+<span class="err">file</span><span class="w"> </span><span class="err">pie_exec</span><span class="w">  </span><span class="c"># ELF 64-bit LSB shared object, ...</span>
+</code></pre></div>
+<p><strong>共享库 (.so)</strong>：</p>
+<div class="highlight"><pre><span></span><code><span class="c"># 产生 ET_DYN (共享库)</span>
+<span class="err">gcc</span><span class="w"> </span><span class="err">-shared</span><span class="w"> </span><span class="err">-fPIC</span><span class="w"> </span><span class="err">library.c</span><span class="w"> </span><span class="err">-o</span><span class="w"> </span><span class="err">libmylib.so</span>
+<span class="err">file</span><span class="w"> </span><span class="err">libmylib.so</span><span class="w">  </span><span class="c"># ELF 64-bit LSB shared object, ...</span>
+</code></pre></div>
+</li>
+</ul>
+<blockquote>
+<p>问题也就是在这里，在自己的电脑上/CNB本地测试都是正常的，但是一到CI就有问题</p>
+</blockquote>
+</li>
+<li>
+<p><strong>ET_CORE - 核心转储</strong></p>
+<div class="highlight"><pre><span></span><code><span class="k">case</span><span class="w"> </span><span class="no">ET_CORE</span><span class="p">:</span>
+<span class="w">  </span><span class="n">type_str</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Core Dump (ET_CORE)&quot;</span><span class="p">;</span>
+</code></pre></div>
+<ul>
+<li>
+<p><strong>含义</strong>：程序崩溃时的内存转储</p>
+</li>
+<li>
+<p><strong>编译对应</strong>：不是编译产生的，而是运行时系统生成的</p>
+</li>
+<li>
+<p><strong>产生方式</strong>：</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 程序崩溃时自动生成</span>
+./program<span class="w">  </span><span class="c1"># 发生段错误等</span>
+
+<span class="c1"># 手动生成</span>
+gcore<span class="w"> </span>-o<span class="w"> </span>core.pid<span class="w"> </span>program_pid
+</code></pre></div>
+</li>
+</ul>
+</li>
+</ol>
+<h4 id="_75">检查工具</h4>
+<div class="highlight"><pre><span></span><code><span class="c1"># 使用 file 命令</span>
+file<span class="w"> </span>program
+
+<span class="c1"># 使用 readelf</span>
+readelf<span class="w"> </span>-h<span class="w"> </span>program<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>Type
+
+<span class="c1"># 使用 objdump</span>
+objdump<span class="w"> </span>-f<span class="w"> </span>program
+</code></pre></div>
+<ul>
+<li><strong>传统</strong>：过去默认生成 <code>ET_EXEC</code></li>
+<li><strong>现代</strong>：大多数 Linux 发行版现在默认生成 <code>ET_DYN</code> (PIE) 以增强安全性（ASLR）</li>
+<li><strong>检查默认</strong>：
+  <div class="highlight"><pre><span></span><code>gcc<span class="w"> </span>-dumpspecs<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-A10<span class="w"> </span>pie
+</code></pre></div></li>
+</ul>
+<p>现代编译环境默认倾向于生成 <code>ET_DYN</code> 类型的 PIE 可执行文件，这要求所有链接的代码都是位置无关的。</p>
+<h3 id="_76">总结</h3>
+<ul>
+<li>PIE 可执行文件在 ELF 格式中被标记为 <code>ET_DYN</code>（共享对象类型）</li>
+<li>传统非 PIE 可执行文件被标记为 <code>ET_EXEC</code></li>
+<li>虽然类型显示为 "shared object"，但它们确实是可以正常执行的程序</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="cp"># 检查 GCC 是否默认启用 PIE</span>
+<span class="n">gcc</span><span class="w"> </span><span class="o">-</span><span class="n">v</span><span class="w">  </span><span class="err">#</span><span class="w"> </span><span class="n">在输出中查找</span><span class="w"> </span><span class="o">-</span><span class="n">pie</span><span class="w"> </span><span class="n">选项</span>
+
+<span class="cp"># 或者检查编译规格</span>
+<span class="n">gcc</span><span class="w"> </span><span class="o">-</span><span class="n">dumpspecs</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">grep</span><span class="w"> </span><span class="o">-</span><span class="n">A10</span><span class="w"> </span><span class="n">pie</span>
+</code></pre></div>
+<h3 id="_77">相关资料</h3>
+<p><a href="https://stackoverflow.com/questions/34519521/why-does-gcc-create-a-shared-object-instead-of-an-executable-binary-according-to/55704865#55704865">c - Why does GCC create a shared object instead of an executable binary according to file? - Stack Overflow</a></p>
 <h2 id="18_mywc">18_mywc</h2>
 <h2 id="19_mytrans">19_mytrans</h2>
+<h3 id="_78">代码</h3>
+<div class="highlight"><pre><span></span><code><span class="c1">// myhash.c</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;myhash.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string.h&gt;</span>
+
+<span class="c1">// djb2 哈希函数（经典字符串哈希，分布均匀）</span>
+<span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="nf">hash_function</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">str</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">hash</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5381</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">c</span><span class="p">;</span>
+<span class="w">  </span><span class="k">while</span><span class="w"> </span><span class="p">((</span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="n">str</span><span class="o">++</span><span class="p">))</span>
+<span class="w">    </span><span class="n">hash</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">((</span><span class="n">hash</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">hash</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">c</span><span class="p">;</span><span class="w"> </span><span class="c1">// hash * 33 + c</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">hash</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// 创建哈希表</span>
+<span class="n">HashTable</span><span class="w"> </span><span class="o">*</span><span class="nf">create_hash_table</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">HashTable</span><span class="w"> </span><span class="o">*</span><span class="n">table</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">HashTable</span><span class="p">));</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">table</span><span class="p">)</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">HASH_TABLE_SIZE</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">table</span><span class="o">-&gt;</span><span class="n">buckets</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">table</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// 释放单个节点</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">free_node</span><span class="p">(</span><span class="n">HashNode</span><span class="w"> </span><span class="o">*</span><span class="n">node</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">node</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">free</span><span class="p">(</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">key</span><span class="p">);</span>
+<span class="w">    </span><span class="n">free</span><span class="p">(</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">value</span><span class="p">);</span>
+<span class="w">    </span><span class="n">free</span><span class="p">(</span><span class="n">node</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// 释放整个哈希表</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">free_hash_table</span><span class="p">(</span><span class="n">HashTable</span><span class="w"> </span><span class="o">*</span><span class="n">table</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">table</span><span class="p">)</span>
+<span class="w">    </span><span class="k">return</span><span class="p">;</span>
+
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">freed_count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">HASH_TABLE_SIZE</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">//printf(&quot;free.....:%d\n&quot;, idx--);</span>
+<span class="w">    </span><span class="n">HashNode</span><span class="w"> </span><span class="o">*</span><span class="n">curr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">table</span><span class="o">-&gt;</span><span class="n">buckets</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">curr</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">HashNode</span><span class="w"> </span><span class="o">*</span><span class="n">tmp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">curr</span><span class="p">;</span>
+<span class="w">      </span><span class="n">curr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">curr</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+<span class="w">      </span><span class="n">free_node</span><span class="p">(</span><span class="n">tmp</span><span class="p">);</span>
+<span class="w">      </span><span class="n">freed_count</span><span class="o">++</span><span class="p">;</span>
+<span class="w">      </span><span class="c1">//printf(&quot;%d 节点\n&quot;, freed_count);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="c1">//printf(&quot;总共释放了 %d 个节点\n&quot;, freed_count);</span>
+<span class="w">  </span><span class="n">free</span><span class="p">(</span><span class="n">table</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// static int idx = 0;</span>
+<span class="c1">// 插入键值对</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">hash_table_insert</span><span class="p">(</span><span class="n">HashTable</span><span class="w"> </span><span class="o">*</span><span class="n">table</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">key</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">table</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="o">!</span><span class="n">key</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="o">!</span><span class="n">value</span><span class="p">)</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="w">  </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">hash</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hash_function</span><span class="p">(</span><span class="n">key</span><span class="p">)</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">HASH_TABLE_SIZE</span><span class="p">;</span>
+<span class="w">  </span><span class="n">HashNode</span><span class="w"> </span><span class="o">*</span><span class="n">node</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">table</span><span class="o">-&gt;</span><span class="n">buckets</span><span class="p">[</span><span class="n">hash</span><span class="p">];</span>
+
+<span class="w">  </span><span class="c1">// 键是否存在</span>
+<span class="w">  </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">node</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">strcmp</span><span class="p">(</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">key</span><span class="p">,</span><span class="w"> </span><span class="n">key</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="c1">// 键已存在，更新值，并返回1</span>
+<span class="w">      </span><span class="n">free</span><span class="p">(</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">value</span><span class="p">);</span><span class="w">  </span><span class="c1">// 释放旧值</span>
+<span class="w">      </span><span class="n">node</span><span class="o">-&gt;</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">strdup</span><span class="p">(</span><span class="n">value</span><span class="p">);</span><span class="w">  </span><span class="c1">// 复制新值</span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">value</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w">  </span><span class="c1">// 内存分配失败</span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">node</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">node</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="c1">// 键不存在，创建新节点</span>
+<span class="w">  </span><span class="n">HashNode</span><span class="w"> </span><span class="o">*</span><span class="n">new_node</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">HashNode</span><span class="p">));</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">new_node</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="w">  </span><span class="c1">// 复制键和值</span>
+<span class="w">  </span><span class="c1">// 尝试使用strdup来做看看</span>
+<span class="w">  </span><span class="c1">//printf(&quot;malloc...: %d\n&quot;, idx++);</span>
+<span class="w">  </span><span class="n">new_node</span><span class="o">-&gt;</span><span class="n">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">strdup</span><span class="p">(</span><span class="n">key</span><span class="p">);</span>
+<span class="w">  </span><span class="n">new_node</span><span class="o">-&gt;</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">strdup</span><span class="p">(</span><span class="n">value</span><span class="p">);</span>
+<span class="w">  </span><span class="c1">// 问题在于这里，没有初始化，导致在free的时候飘了</span>
+<span class="w">  </span><span class="n">new_node</span><span class="o">-&gt;</span><span class="n">next</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+
+
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">new_node</span><span class="o">-&gt;</span><span class="n">key</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="o">!</span><span class="n">new_node</span><span class="o">-&gt;</span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">free</span><span class="p">(</span><span class="n">new_node</span><span class="o">-&gt;</span><span class="n">key</span><span class="p">);</span>
+<span class="w">    </span><span class="n">free</span><span class="p">(</span><span class="n">new_node</span><span class="o">-&gt;</span><span class="n">value</span><span class="p">);</span>
+<span class="w">    </span><span class="n">free</span><span class="p">(</span><span class="n">new_node</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="c1">// 头插</span>
+<span class="w">  </span><span class="c1">// 注意不要错了，要用new_node</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">table</span><span class="o">-&gt;</span><span class="n">buckets</span><span class="p">[</span><span class="n">hash</span><span class="p">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">table</span><span class="o">-&gt;</span><span class="n">buckets</span><span class="p">[</span><span class="n">hash</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">new_node</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">new_node</span><span class="o">-&gt;</span><span class="n">next</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">table</span><span class="o">-&gt;</span><span class="n">buckets</span><span class="p">[</span><span class="n">hash</span><span class="p">];</span>
+<span class="w">    </span><span class="n">table</span><span class="o">-&gt;</span><span class="n">buckets</span><span class="p">[</span><span class="n">hash</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">new_node</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// 查找键</span>
+<span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="nf">hash_table_lookup</span><span class="p">(</span><span class="n">HashTable</span><span class="w"> </span><span class="o">*</span><span class="n">table</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">key</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">table</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="o">!</span><span class="n">key</span><span class="p">)</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+
+<span class="w">  </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">hash</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hash_function</span><span class="p">(</span><span class="n">key</span><span class="p">)</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">HASH_TABLE_SIZE</span><span class="p">;</span>
+<span class="w">  </span><span class="n">HashNode</span><span class="w"> </span><span class="o">*</span><span class="n">node</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">table</span><span class="o">-&gt;</span><span class="n">buckets</span><span class="p">[</span><span class="n">hash</span><span class="p">];</span>
+
+<span class="w">  </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">node</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">strcmp</span><span class="p">(</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">key</span><span class="p">,</span><span class="w"> </span><span class="n">key</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="n">node</span><span class="o">-&gt;</span><span class="n">value</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">node</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">node</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span><span class="w">  </span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span><span class="w"> </span><span class="c1">// 未找到</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1">// mytrans.c</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;myhash.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;ctype.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdint.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string.h&gt;</span>
+
+<span class="k">typedef</span><span class="w"> </span><span class="k">enum</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">STATE_EXPECT_WORD</span><span class="p">,</span><span class="w">      </span><span class="c1">// 期待单词行（以#开头）</span>
+<span class="w">  </span><span class="n">STATE_EXPECT_TRANSLATION</span><span class="p">,</span><span class="w"> </span><span class="c1">// 期待翻译行（以Trans:开头）</span>
+<span class="w">  </span><span class="n">STATE_ERROR</span><span class="w">             </span><span class="c1">// 错误状态</span>
+<span class="p">}</span><span class="w"> </span><span class="n">ParserState</span><span class="p">;</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">trim</span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">str</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">str</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span>
+
+<span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">start</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">str</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">end</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">str</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">strlen</span><span class="p">(</span><span class="n">str</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+
+<span class="w">  </span><span class="c1">// 去除前后的非单词字符: </span>
+<span class="w">  </span><span class="c1">// &#39; &#39;, &#39;\t&#39;, &#39;\r&#39;, &#39;\n&#39;</span>
+<span class="w">  </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">isspace</span><span class="p">((</span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="p">)</span><span class="o">*</span><span class="n">start</span><span class="p">))</span><span class="w"> </span><span class="n">start</span><span class="o">++</span><span class="p">;</span>
+<span class="w">  </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">end</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">start</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">isspace</span><span class="p">((</span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="p">)</span><span class="o">*</span><span class="n">end</span><span class="p">))</span><span class="w"> </span><span class="n">end</span><span class="o">--</span><span class="p">;</span>
+
+<span class="w">  </span><span class="c1">// 移动字符串到开头</span>
+<span class="w">  </span><span class="kt">size_t</span><span class="w"> </span><span class="n">len</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">end</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">start</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">start</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">str</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">memmove</span><span class="p">(</span><span class="n">str</span><span class="p">,</span><span class="w"> </span><span class="n">start</span><span class="p">,</span><span class="w"> </span><span class="n">len</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="n">str</span><span class="p">[</span><span class="n">len</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sc">&#39;\0&#39;</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">load_dictionary</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">filename</span><span class="p">,</span><span class="w"> </span><span class="n">HashTable</span><span class="w"> </span><span class="o">*</span><span class="n">table</span><span class="p">,</span>
+<span class="w">                    </span><span class="kt">uint64_t</span><span class="w"> </span><span class="o">*</span><span class="n">dict_count</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">table</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="o">!</span><span class="n">filename</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="o">!</span><span class="n">dict_count</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">-1</span><span class="p">;</span>
+
+<span class="w">  </span><span class="o">*</span><span class="n">dict_count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="w">  </span><span class="kt">FILE</span><span class="w"> </span><span class="o">*</span><span class="n">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fopen</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;r&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">file</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">perror</span><span class="p">(</span><span class="s">&quot;无法打开词典文件&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">-1</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="n">line</span><span class="p">[</span><span class="mi">1024</span><span class="p">];</span>
+<span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="n">current_word</span><span class="p">[</span><span class="mi">100</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+<span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="n">current_translation</span><span class="p">[</span><span class="mi">1024</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+<span class="w">  </span><span class="c1">//int in_entry = 0;</span>
+
+<span class="w">  </span><span class="n">ParserState</span><span class="w"> </span><span class="n">state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">STATE_EXPECT_WORD</span><span class="p">;</span>
+
+<span class="w">  </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">fgets</span><span class="p">(</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">line</span><span class="p">),</span><span class="w"> </span><span class="n">file</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">line</span><span class="p">[</span><span class="n">strcspn</span><span class="p">(</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sc">&#39;\0&#39;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">trim</span><span class="p">(</span><span class="n">line</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">strlen</span><span class="p">(</span><span class="n">line</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">continue</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">switch</span><span class="p">(</span><span class="n">state</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="no">STATE_EXPECT_WORD</span><span class="p">:</span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="sc">&#39;#&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// 只有100byte的大小</span>
+<span class="w">        </span><span class="n">strncpy</span><span class="p">(</span><span class="n">current_word</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">current_word</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+<span class="w">        </span><span class="n">current_word</span><span class="p">[</span><span class="k">sizeof</span><span class="p">(</span><span class="n">current_word</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sc">&#39;\0&#39;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">trim</span><span class="p">(</span><span class="n">current_word</span><span class="p">);</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">strlen</span><span class="p">(</span><span class="n">current_word</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="n">state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">STATE_EXPECT_TRANSLATION</span><span class="p">;</span>
+<span class="w">          </span><span class="c1">//进入翻译状态，先清空</span>
+<span class="w">          </span><span class="n">current_translation</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sc">&#39;\0&#39;</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="n">state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">STATE_ERROR</span><span class="p">;</span>
+<span class="w">          </span><span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;错误：空单词</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">          </span><span class="k">break</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">      </span><span class="k">break</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="no">STATE_EXPECT_TRANSLATION</span><span class="p">:</span>
+<span class="w">      </span><span class="c1">// 犯了个错：if (strcmp(line, &quot;Trans:&quot;) == 0) {</span>
+<span class="w">      </span><span class="c1">// 应该是判断前6个字符的。</span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">strncmp</span><span class="p">(</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Trans:&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">strncpy</span><span class="p">(</span><span class="n">current_translation</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">current_translation</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+<span class="w">        </span><span class="n">current_translation</span><span class="p">[</span><span class="k">sizeof</span><span class="p">(</span><span class="n">current_translation</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sc">&#39;\0&#39;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">trim</span><span class="p">(</span><span class="n">current_translation</span><span class="p">);</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">strlen</span><span class="p">(</span><span class="n">current_translation</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
+<span class="w">          </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">hash_table_insert</span><span class="p">(</span><span class="n">table</span><span class="p">,</span><span class="w"> </span><span class="n">current_word</span><span class="p">,</span><span class="w"> </span><span class="n">current_translation</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="p">(</span><span class="o">*</span><span class="n">dict_count</span><span class="p">)</span><span class="o">++</span><span class="p">;</span>
+<span class="w">            </span><span class="c1">// printf(&quot;加载: %s -&gt; %s\n&quot;, current_word, current_translation);</span>
+<span class="w">          </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;错误：插入哈希表失败: %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">current_word</span><span class="p">);</span>
+<span class="w">          </span><span class="p">}</span>
+
+<span class="w">          </span><span class="n">state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">STATE_EXPECT_WORD</span><span class="p">;</span><span class="w">  </span><span class="c1">// 成功处理，回到期待单词状态</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;警告：单词 &#39;%s&#39; 的翻译为空</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">current_word</span><span class="p">);</span>
+<span class="w">          </span><span class="n">state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">STATE_EXPECT_WORD</span><span class="p">;</span><span class="w">  </span><span class="c1">// 即使翻译为空，也继续处理下一个</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">      </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;错误：期待翻译行(以Trans:开头)，但得到: %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="p">);</span>
+<span class="w">        </span><span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;      单词 &#39;%s&#39; 将不会被加载</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">current_word</span><span class="p">);</span>
+<span class="w">        </span><span class="n">state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">STATE_EXPECT_WORD</span><span class="p">;</span><span class="w">  </span><span class="c1">// 错误恢复：回到初始状态</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">      </span><span class="k">break</span><span class="p">;</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="no">STATE_ERROR</span><span class="p">:</span>
+<span class="w">      </span><span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;错误行：%s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="p">);</span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="k">default</span><span class="o">:</span>
+<span class="w">      </span><span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;错误：未知状态</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="n">fclose</span><span class="p">(</span><span class="n">file</span><span class="p">);</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>主要是梳理整个load流程，用状态机思路做即可。</p>
+<h3 id="_79">未初始化指针的问题</h3>
+<div class="highlight"><pre><span></span><code>// myhash.c
+
+// 插入键值对
+int hash_table_insert(HashTable *table, const char *key, const char *value) {
+  if (!table || !key || !value)
+    return 0;
+    ...
+  // 键不存在，创建新节点
+  HashNode *new_node = malloc(sizeof(HashNode));
+  if (!new_node) return 0;
+  ...
+  new_node-&gt;key = strdup(key);
+  new_node-&gt;value = strdup(value);
+  // 问题在于这里，没有初始化，导致在free的时候飘了
+  new_node-&gt;next = NULL;
+
+   ....
+
+  return 1;
+}
+</code></pre></div>
+<h4 id="_80">进一步学习</h4>
+<ol>
+<li>
+<p>环境差异</p>
+<p>在自己的电脑上复现不出来，但是在CNB本地就会出现，环境差异：</p>
+<div class="highlight"><pre><span></span><code>//<span class="w"> </span>CNB
+➜<span class="w">  </span>/workspace<span class="w"> </span>git:<span class="o">(</span>main<span class="o">)</span><span class="w"> </span>gcc<span class="w"> </span>-v
+Using<span class="w"> </span>built-in<span class="w"> </span>specs.
+<span class="nv">COLLECT_GCC</span><span class="o">=</span>gcc
+<span class="nv">COLLECT_LTO_WRAPPER</span><span class="o">=</span>/usr/lib/gcc/x86_64-linux-gnu/12/lto-wrapper
+<span class="nv">OFFLOAD_TARGET_NAMES</span><span class="o">=</span>nvptx-none:amdgcn-amdhsa
+<span class="nv">OFFLOAD_TARGET_DEFAULT</span><span class="o">=</span><span class="m">1</span>
+Target:<span class="w"> </span>x86_64-linux-gnu
+Configured<span class="w"> </span>with:<span class="w"> </span>../src/configure<span class="w"> </span>-v<span class="w"> </span>--with-pkgversion<span class="o">=</span><span class="s1">&#39;Debian 12.2.0-14+deb12u1&#39;</span><span class="w"> </span>--with-bugurl<span class="o">=</span>file:///usr/share/doc/gcc-12/README.Bugs<span class="w"> </span>--enable-languages<span class="o">=</span>c,ada,c++,go,d,fortran,objc,obj-c++,m2<span class="w"> </span>--prefix<span class="o">=</span>/usr<span class="w"> </span>--with-gcc-major-version-only<span class="w"> </span>--program-suffix<span class="o">=</span>-12<span class="w"> </span>--program-prefix<span class="o">=</span>x86_64-linux-gnu-<span class="w"> </span>--enable-shared<span class="w"> </span>--enable-linker-build-id<span class="w"> </span>--libexecdir<span class="o">=</span>/usr/lib<span class="w"> </span>--without-included-gettext<span class="w"> </span>--enable-threads<span class="o">=</span>posix<span class="w"> </span>--libdir<span class="o">=</span>/usr/lib<span class="w"> </span>--enable-nls<span class="w"> </span>--enable-clocale<span class="o">=</span>gnu<span class="w"> </span>--enable-libstdcxx-debug<span class="w"> </span>--enable-libstdcxx-time<span class="o">=</span>yes<span class="w"> </span>--with-default-libstdcxx-abi<span class="o">=</span>new<span class="w"> </span>--enable-gnu-unique-object<span class="w"> </span>--disable-vtable-verify<span class="w"> </span>--enable-plugin<span class="w"> </span>--enable-default-pie<span class="w"> </span>--with-system-zlib<span class="w"> </span>--enable-libphobos-checking<span class="o">=</span>release<span class="w"> </span>--with-target-system-zlib<span class="o">=</span>auto<span class="w"> </span>--enable-objc-gc<span class="o">=</span>auto<span class="w"> </span>--enable-multiarch<span class="w"> </span>--disable-werror<span class="w"> </span>--enable-cet<span class="w"> </span>--with-arch-32<span class="o">=</span>i686<span class="w"> </span>--with-abi<span class="o">=</span>m64<span class="w"> </span>--with-multilib-list<span class="o">=</span>m32,m64,mx32<span class="w"> </span>--enable-multilib<span class="w"> </span>--with-tune<span class="o">=</span>generic<span class="w"> </span>--enable-offload-targets<span class="o">=</span>nvptx-none<span class="o">=</span>/build/reproducible-path/gcc-12-12.2.0/debian/tmp-nvptx/usr,amdgcn-amdhsa<span class="o">=</span>/build/reproducible-path/gcc-12-12.2.0/debian/tmp-gcn/usr<span class="w"> </span>--enable-offload-defaulted<span class="w"> </span>--without-cuda-driver<span class="w"> </span>--enable-checking<span class="o">=</span>release<span class="w"> </span>--build<span class="o">=</span>x86_64-linux-gnu<span class="w"> </span>--host<span class="o">=</span>x86_64-linux-gnu<span class="w"> </span>--target<span class="o">=</span>x86_64-linux-gnu
+Thread<span class="w"> </span>model:<span class="w"> </span>posix
+Supported<span class="w"> </span>LTO<span class="w"> </span>compression<span class="w"> </span>algorithms:<span class="w"> </span>zlib<span class="w"> </span>zstd
+gcc<span class="w"> </span>version<span class="w"> </span><span class="m">12</span>.2.0<span class="w"> </span><span class="o">(</span>Debian<span class="w"> </span><span class="m">12</span>.2.0-14+deb12u1<span class="o">)</span><span class="w"> </span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>//<span class="w"> </span>自己Ubuntu虚拟机
+gcc<span class="w"> </span>-v
+Using<span class="w"> </span>built-in<span class="w"> </span>specs.
+<span class="nv">COLLECT_GCC</span><span class="o">=</span>gcc
+<span class="nv">COLLECT_LTO_WRAPPER</span><span class="o">=</span>/usr/lib/gcc/x86_64-linux-gnu/11/lto-wrapper
+<span class="nv">OFFLOAD_TARGET_NAMES</span><span class="o">=</span>nvptx-none:amdgcn-amdhsa
+<span class="nv">OFFLOAD_TARGET_DEFAULT</span><span class="o">=</span><span class="m">1</span>
+Target:<span class="w"> </span>x86_64-linux-gnu
+Configured<span class="w"> </span>with:<span class="w"> </span>../src/configure<span class="w"> </span>-v<span class="w"> </span>--with-pkgversion<span class="o">=</span><span class="s1">&#39;Ubuntu 11.4.0-1ubuntu1~22.04.2&#39;</span><span class="w"> </span>--with-bugurl<span class="o">=</span>file:///usr/share/doc/gcc-11/README.Bugs<span class="w"> </span>--enable-languages<span class="o">=</span>c,ada,c++,go,brig,d,fortran,objc,obj-c++,m2<span class="w"> </span>--prefix<span class="o">=</span>/usr<span class="w"> </span>--with-gcc-major-version-only<span class="w"> </span>--program-suffix<span class="o">=</span>-11<span class="w"> </span>--program-prefix<span class="o">=</span>x86_64-linux-gnu-<span class="w"> </span>--enable-shared<span class="w"> </span>--enable-linker-build-id<span class="w"> </span>--libexecdir<span class="o">=</span>/usr/lib<span class="w"> </span>--without-included-gettext<span class="w"> </span>--enable-threads<span class="o">=</span>posix<span class="w"> </span>--libdir<span class="o">=</span>/usr/lib<span class="w"> </span>--enable-nls<span class="w"> </span>--enable-bootstrap<span class="w"> </span>--enable-clocale<span class="o">=</span>gnu<span class="w"> </span>--enable-libstdcxx-debug<span class="w"> </span>--enable-libstdcxx-time<span class="o">=</span>yes<span class="w"> </span>--with-default-libstdcxx-abi<span class="o">=</span>new<span class="w"> </span>--enable-gnu-unique-object<span class="w"> </span>--disable-vtable-verify<span class="w"> </span>--enable-plugin<span class="w"> </span>--enable-default-pie<span class="w"> </span>--with-system-zlib<span class="w"> </span>--enable-libphobos-checking<span class="o">=</span>release<span class="w"> </span>--with-target-system-zlib<span class="o">=</span>auto<span class="w"> </span>--enable-objc-gc<span class="o">=</span>auto<span class="w"> </span>--enable-multiarch<span class="w"> </span>--disable-werror<span class="w"> </span>--enable-cet<span class="w"> </span>--with-arch-32<span class="o">=</span>i686<span class="w"> </span>--with-abi<span class="o">=</span>m64<span class="w"> </span>--with-multilib-list<span class="o">=</span>m32,m64,mx32<span class="w"> </span>--enable-multilib<span class="w"> </span>--with-tune<span class="o">=</span>generic<span class="w"> </span>--enable-offload-targets<span class="o">=</span>nvptx-none<span class="o">=</span>/build/gcc-11-2Y5pKs/gcc-11-11.4.0/debian/tmp-nvptx/usr,amdgcn-amdhsa<span class="o">=</span>/build/gcc-11-2Y5pKs/gcc-11-11.4.0/debian/tmp-gcn/usr<span class="w"> </span>--without-cuda-driver<span class="w"> </span>--enable-checking<span class="o">=</span>release<span class="w"> </span>--build<span class="o">=</span>x86_64-linux-gnu<span class="w"> </span>--host<span class="o">=</span>x86_64-linux-gnu<span class="w"> </span>--target<span class="o">=</span>x86_64-linux-gnu<span class="w"> </span>--with-build-config<span class="o">=</span>bootstrap-lto-lean<span class="w"> </span>--enable-link-serialization<span class="o">=</span><span class="m">2</span>
+Thread<span class="w"> </span>model:<span class="w"> </span>posix
+Supported<span class="w"> </span>LTO<span class="w"> </span>compression<span class="w"> </span>algorithms:<span class="w"> </span>zlib<span class="w"> </span>zstd
+gcc<span class="w"> </span>version<span class="w"> </span><span class="m">11</span>.4.0<span class="w"> </span><span class="o">(</span>Ubuntu<span class="w"> </span><span class="m">11</span>.4.0-1ubuntu1~22.04.2<span class="o">)</span><span class="w"> </span>
+</code></pre></div>
+</li>
+<li>
+<p>学习原理</p>
+<p>先明确自己的需求：使用链表来解决哈希冲突，梳理原理：</p>
+<ol>
+<li>计算键的哈希值，找到对应的桶索引。</li>
+<li>遍历该桶对应的链表，检查键是否已经存在。如果存在，更新值并返回。</li>
+<li>如果不存在，创建新节点，并采用头插法插入到链表中。</li>
+</ol>
+<p>这里就会涉及到分配/释放内存、和插入链表节点了。</p>
+<p>但是我这里使用的 <code>malloc</code>，而<strong>C标准明确规定：<code>malloc</code>分配的内存内容是不确定的（indeterminate）</strong>。这意味着标准不要求清零，内存中可能包含任何随机数据。</p>
+<p>这样子会在之后的头插、free用到这个next的地方就会出现问题？进一步看代码</p>
+</li>
+<li>
+<p>：未初始化 <code>next</code> 指针</p>
+<ol>
+<li>场景1：头插（不过在我这里应该不会有，词典数据应该已经去过重了）</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="c1">// 创建新节点（没有初始化 next）</span>
+<span class="n">HashNode</span><span class="w"> </span><span class="o">*</span><span class="n">new_node</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">HashNode</span><span class="p">));</span>
+<span class="n">new_node</span><span class="o">-&gt;</span><span class="n">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">strdup</span><span class="p">(</span><span class="s">&quot;hello&quot;</span><span class="p">);</span>
+<span class="n">new_node</span><span class="o">-&gt;</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">strdup</span><span class="p">(</span><span class="s">&quot;你好&quot;</span><span class="p">);</span>
+<span class="c1">// new_node-&gt;next 现在是随机值，比如 0x7f8a3b2c1d00</span>
+
+<span class="c1">// 假如是空桶</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">table</span><span class="o">-&gt;</span><span class="n">buckets</span><span class="p">[</span><span class="n">hash</span><span class="p">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">table</span><span class="o">-&gt;</span><span class="n">buckets</span><span class="p">[</span><span class="n">hash</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">new_node</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">// 现在链表：new_node -&gt; ??? (随机地址)</span>
+<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">new_node</span><span class="o">-&gt;</span><span class="n">next</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">table</span><span class="o">-&gt;</span><span class="n">buckets</span><span class="p">[</span><span class="n">hash</span><span class="p">];</span>
+<span class="w">    </span><span class="n">table</span><span class="o">-&gt;</span><span class="n">buckets</span><span class="p">[</span><span class="n">hash</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">new_node</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><strong>此时链表结构</strong>：</p>
+<div class="highlight"><pre><span></span><code><span class="n">table</span><span class="o">-&gt;</span><span class="n">buckets</span><span class="p">[</span><span class="n">hash</span><span class="p">]</span><span class="w"> </span><span class="err">→</span><span class="w"> </span><span class="p">[</span><span class="n">key</span><span class="o">:</span><span class="s">&quot;hello&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="o">:</span><span class="s">&quot;你好&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">next</span><span class="o">:</span><span class="mh">0x7f8a3b2c1d00</span><span class="p">(</span><span class="n">random</span><span class="p">)]</span>
+</code></pre></div>
+<ol>
+<li>
+<p>场景2：遍历这个链表</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// 查找操作</span>
+<span class="n">HashNode</span><span class="w"> </span><span class="o">*</span><span class="n">curr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">table</span><span class="o">-&gt;</span><span class="n">buckets</span><span class="p">[</span><span class="n">hash</span><span class="p">];</span>
+<span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">curr</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">  </span><span class="c1">// curr 不为空，进入循环</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">strcmp</span><span class="p">(</span><span class="n">curr</span><span class="o">-&gt;</span><span class="n">key</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;hello&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">curr</span><span class="o">-&gt;</span><span class="n">value</span><span class="p">;</span><span class="w">  </span><span class="c1">// 找到单词</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">curr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">curr</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span><span class="w">  </span><span class="c1">// 问题在这里！curr-&gt;next 是随机值</span>
+<span class="w">    </span><span class="c1">// 现在 curr 可能指向无效内存地址</span>
+<span class="p">}</span>
+</code></pre></div>
+</li>
+<li>
+<p>场景3：释放这个链表</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// 释放操作</span>
+<span class="n">HashNode</span><span class="w"> </span><span class="o">*</span><span class="n">curr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">table</span><span class="o">-&gt;</span><span class="n">buckets</span><span class="p">[</span><span class="n">hash</span><span class="p">];</span>
+<span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">curr</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">HashNode</span><span class="w"> </span><span class="o">*</span><span class="n">tmp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">curr</span><span class="p">;</span>
+<span class="w">    </span><span class="n">curr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">curr</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span><span class="w">  </span><span class="c1">// curr-&gt;next 是随机值，可能指向非法地址</span>
+<span class="w">    </span><span class="n">free_node</span><span class="p">(</span><span class="n">tmp</span><span class="p">);</span><span class="w">     </span><span class="c1">// 当尝试访问 curr-&gt;key 时崩溃</span>
+<span class="p">}</span>
+</code></pre></div>
+</li>
+</ol>
+</li>
+<li>
+<p>链表进一步学习</p>
+<p>链表就像一列火车：</p>
+<ul>
+<li>每个车厢（节点）连接着下一个车厢</li>
+<li><strong>最后一节车厢</strong>必须明确表示"后面没有了"</li>
+<li><code>NULL</code> 就是那个"终点标志"</li>
+</ul>
+<p>没有 <code>NULL</code> 的链表：</p>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">车厢1</span><span class="p">]</span><span class="w"> </span><span class="err">→</span><span class="w"> </span><span class="p">[</span><span class="n">随机地址</span><span class="p">]</span><span class="w"> </span><span class="err">→</span><span class="w"> </span><span class="o">???</span><span class="w"> </span><span class="p">(</span><span class="n">可能是悬崖</span><span class="p">)</span>
+</code></pre></div>
+<p>有 <code>NULL</code> 的链表：</p>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">车厢1</span><span class="p">]</span><span class="w"> </span><span class="err">→</span><span class="w"> </span><span class="nb">NULL</span><span class="w"> </span><span class="p">(</span><span class="n">明确终点</span><span class="p">)</span>
+</code></pre></div>
+</li>
+</ol>
+<h3 id="_81">经验</h3>
+<p>在C语言中，<strong>永远不要假设新分配的内存是干净的</strong>，总是显式初始化所有字段！！</p>
+<p>要么用calloc！</p>
 <h2 id="20_mybash">20_mybash</h2>
-<h2 id="todo">TODO</h2>
-<h2 id="todo_1">TODO</h2>
+<p>主要是学习构建一个相对复杂的Makefile目录结构的。</p>
+<p>顶层Makefile：</p>
+<div class="highlight"><pre><span></span><code><span class="c"># =============================================</span>
+<span class="c"># 主 Makefile</span>
+<span class="c"># 功能：</span>
+<span class="c">#   - mybash：生成二进制，放到 bin/</span>
+<span class="c">#   - 其他模块（mysed, myfile, mywc, mytrans）：生成静态库 .a，放到 obj/xxx/，.o 放到 obj/xxx/（或 out/，但建议统一）</span>
+<span class="c">#   - 所有子模块 Makefile 应支持 OBJDIR 和 BINDIR 参数</span>
+<span class="c">#   - OBJDIR 和 BINDIR 参数应由主 Makefile 传入，子模块 Makefile 不应修改</span>
+<span class="c"># =============================================</span>
+
+
+<span class="nv">PWD</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">$(</span>shell<span class="w"> </span><span class="nb">pwd</span><span class="k">)</span>
+
+<span class="c"># 所有子模块目录（静态库：生成 .a）</span>
+<span class="nv">SUBDIRS</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>mysed<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>myfile<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>mywc<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>mytrans
+
+<span class="nv">OBJDIR</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">$(</span>PWD<span class="k">)</span>/obj
+<span class="nv">BINDIR</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">$(</span>PWD<span class="k">)</span>/bin
+
+<span class="c"># 默认目标：构建 mybash（依赖其他库）</span>
+<span class="nf">all</span><span class="o">:</span><span class="w"> </span><span class="n">mybash</span>
+
+<span class="nf">$(SUBDIRS)</span><span class="o">:</span>
+<span class="w">    </span>@echo<span class="w"> </span><span class="s2">&quot;Building </span><span class="nv">$@</span><span class="s2">...&quot;</span>
+<span class="w">    </span>@mkdir<span class="w"> </span>-p<span class="w"> </span><span class="k">$(</span>OBJDIR<span class="k">)</span>/<span class="nv">$@</span>
+<span class="w">    </span><span class="k">$(</span>MAKE<span class="k">)</span><span class="w"> </span>-C<span class="w"> </span>src/<span class="nv">$@</span><span class="w"> </span><span class="nv">OBJDIR</span><span class="o">=</span><span class="k">$(</span>OBJDIR<span class="k">)</span>/<span class="nv">$@</span><span class="w"> </span><span class="nv">BINDIR</span><span class="o">=</span><span class="k">$(</span>BINDIR<span class="k">)</span>
+
+<span class="nf">mybash</span><span class="o">:</span><span class="w"> </span><span class="k">$(</span><span class="nv">SUBDIRS</span><span class="k">)</span>
+<span class="w">    </span>@echo<span class="w"> </span><span class="s2">&quot;Building mybash...&quot;</span>
+<span class="w">    </span>@mkdir<span class="w"> </span>-p<span class="w"> </span><span class="k">$(</span>BINDIR<span class="k">)</span>
+<span class="w">    </span><span class="k">$(</span>MAKE<span class="k">)</span><span class="w"> </span>-C<span class="w"> </span>src/mybash<span class="w"> </span><span class="nv">OBJDIR</span><span class="o">=</span><span class="k">$(</span>OBJDIR<span class="k">)</span>/mybash<span class="w"> </span><span class="nv">BINDIR</span><span class="o">=</span><span class="k">$(</span>BINDIR<span class="k">)</span>
+
+<span class="nf">clean</span><span class="o">:</span>
+<span class="w">    </span>@echo<span class="w"> </span><span class="s2">&quot;Cleaning all...&quot;</span>
+<span class="c">    # @for dir in $(SUBDIRS) mybash; do \</span>
+<span class="c">    #   echo &quot;Cleaning $$dir...&quot;; \</span>
+<span class="c">    #   $(MAKE) -C $$dir clean OBJDIR=$(OBJDIR)/$$dir BINDIR=$(BINDIR); \</span>
+<span class="c">    # done</span>
+<span class="w">    </span>rm<span class="w"> </span>-rf<span class="w"> </span><span class="k">$(</span>OBJDIR<span class="k">)</span><span class="w"> </span><span class="k">$(</span>BINDIR<span class="k">)</span>
+
+<span class="nf">.PHONY</span><span class="o">:</span><span class="w"> </span><span class="n">all</span> <span class="k">$(</span><span class="nv">SUBDIRS</span><span class="k">)</span> <span class="n">mybash</span> <span class="n">clean</span>
+</code></pre></div>
 
 
 
@@ -6366,7 +7166,7 @@ argc = 2
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2025-10-08T18:45:41+02:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2025-10-08</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2025-11-13T14:38:06+01:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2025-11-13</span>
   </span>
 
     
