@@ -5,7 +5,6 @@ import logging
 # 配置日志
 logging.basicConfig(filename="deploy.log", level=logging.INFO, format="%(asctime)s - %(message)s")
 
-
 def run_command(command):
     """运行系统命令并捕获输出"""
     try:
