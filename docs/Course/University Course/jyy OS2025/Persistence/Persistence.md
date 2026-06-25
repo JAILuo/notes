@@ -180,7 +180,7 @@
 
 
 
-依旧阅读： [Coding for SSDs](https://codecapsule.com/2014/02/12/coding-for-ssds-part-1-introduction-and-table-of-contents/)
+依旧推荐阅读： [Coding for SSDs](https://codecapsule.com/2014/02/12/coding-for-ssds-part-1-introduction-and-table-of-contents/)
 
 
 

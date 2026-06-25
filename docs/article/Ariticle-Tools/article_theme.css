@@ -1,0 +1,1185 @@
+/* 默认样式，最佳实践 - 蓝白主题版 */
+
+/* 全局属性 */
+#wemd {
+  font-family: 
+    -apple-system, BlinkMacSystemFont, 
+    "Segoe UI", Roboto, 
+    "Helvetica Neue", Arial, 
+    "PingFang SC", "Microsoft YaHei", 
+    sans-serif;
+  font-size: 16px;
+  color: #1f2d3d;
+  line-height: 1.7;
+  letter-spacing: 0.3px;
+}
+
+/* 段落 */
+#wemd p {
+  font-size: 16px;
+  margin: 0;
+  line-height: 26px;
+  color: #000000;
+}
+
+/* 标题 */
+#wemd h1,
+#wemd h2,
+#wemd h3,
+#wemd h4,
+#wemd h5,
+#wemd h6 {
+  margin-top: 30px;
+  margin-bottom: 15px;
+  padding: 0px;
+  font-weight: bold;
+  color: #000000;
+}
+#wemd h1 {
+  font-size: 24px;
+}
+#wemd h2 {
+  font-size: 22px;
+}
+#wemd h3 {
+  font-size: 20px;
+}
+#wemd h4 {
+  font-size: 18px;
+}
+#wemd h5 {
+  font-size: 16px;
+}
+#wemd h6 {
+  font-size: 16px;
+}
+
+#wemd h1 .prefix,
+#wemd h2 .prefix,
+#wemd h3 .prefix,
+#wemd h4 .prefix,
+#wemd h5 .prefix,
+#wemd h6 .prefix {
+  display: none;
+}
+
+#wemd h1 .suffix,
+#wemd h2 .suffix,
+#wemd h3 .suffix,
+#wemd h4 .suffix,
+#wemd h5 .suffix,
+#wemd h6 .suffix {
+  display: none;
+}
+
+/* 列表 */
+#wemd ul,
+#wemd ol {
+  margin-top: 8px;
+  margin-bottom: 8px;
+  padding-left: 25px;
+  color: #000000;
+}
+#wemd ul {
+  list-style-type: disc;
+}
+#wemd ul ul {
+  list-style-type: square;
+}
+
+#wemd ol {
+  list-style-type: decimal;
+}
+
+#wemd ol ol{
+  list-style-type: lower-alpha !important;
+}
+
+#wemd li section {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  line-height: 26px;
+  text-align: left;
+  color: #010101;
+  font-weight: 500;
+}
+
+/* 引用 */
+#wemd blockquote {
+  border: none;
+}
+
+#wemd .multiquote-1 {
+  display: block;
+  font-size: 0.9em;
+  overflow: auto;
+  overflow-scrolling: touch;
+  border-left: 3px solid rgba(0, 0, 0, 0.4);
+  background: rgba(0, 0, 0, 0.05);
+  color: #6a737d;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 20px;
+  padding-right: 10px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+#wemd .multiquote-1 p {
+  margin: 0px;
+  color: #000000;
+  line-height: 26px;
+}
+
+#wemd .multiquote-2 {
+  box-shadow: 1px 1px 10px rgba(0,0,0,0.2);
+  padding: 20px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+#wemd .multiquote-3 {
+  box-shadow: 1px 1px 10px rgba(0,0,0,0.2);
+  padding: 20px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+#wemd .multiquote-3 p {
+  text-align: center;
+}
+
+#wemd .multiquote-3 h3 {
+  text-align: center;
+}
+
+#wemd .table-of-contents a {
+  border: none;
+  color: #000000;
+  font-weight: normal;
+}
+
+/* 链接 */
+#wemd a {
+  text-decoration: none;
+  color: #1e6bb8;
+  word-wrap: break-word;
+  font-weight: bold;
+  border-bottom: 1px solid #1e6bb8;
+}
+
+/* 加粗 */
+#wemd strong {
+  font-weight: bold;
+  color: #000000;
+}
+
+/* 斜体 */
+#wemd em {
+  font-style: italic;
+  color: #000000;
+}
+
+/* 加粗斜体 */
+#wemd em strong {
+  font-weight: bold;
+  color: #000000;
+}
+
+/* 删除线 */
+#wemd del {
+  font-style: italic;
+  color: #000000;
+}
+
+/* 下划线 */
+#wemd u {
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+  text-decoration-thickness: 1px;
+}
+
+/* 分隔线 */
+#wemd hr {
+  height: 1px;
+  margin: 0;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: none;
+  border-top: 1px solid black;
+}
+
+/* 代码块容器 */
+#wemd pre {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+#wemd pre.custom {
+  padding: 0;
+  border-radius: 6px;
+  overflow: hidden;
+  overflow-x: auto;
+}
+
+#wemd pre code {
+  display: block;
+  font-family: Operator Mono, Consolas, Monaco, Menlo, monospace;
+  border-radius: 0px;
+  font-size: 12px;
+  white-space: pre;
+  min-width: max-content;
+  -webkit-overflow-scrolling: touch;
+}
+
+#wemd pre code span {
+  line-height: 26px;
+}
+
+/* 行内代码 */
+#wemd p code,
+#wemd li code {
+  font-size: 14px;
+  word-wrap: break-word;
+  padding: 2px 4px;
+  border-radius: 4px;
+  margin: 0 2px;
+  color: #1e6bb8;
+  background-color: rgba(27,31,35,.05);
+  font-family: Operator Mono, Consolas, Monaco, Menlo, monospace;
+  word-break: break-all;
+}
+
+/* 图片 */
+#wemd img {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+}
+
+/* 图片 */
+#wemd figure {
+  margin: 0;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+/* 图片描述文字 */
+#wemd figcaption {
+  margin-top: 5px;
+  text-align: center;
+  color: #888;
+  font-size: 14px;
+}
+
+
+/* 表格容器 */
+#wemd .table-container{
+  overflow-x: auto;
+}
+
+/* 表格 */
+#wemd table {
+  display: table;
+  text-align: left;
+}
+#wemd tbody {
+  border: 0;
+}
+
+#wemd table tr {
+  border: 0;
+  border-top: 1px solid #ccc;
+  background-color: #ffffff;
+}
+
+#wemd table tr:nth-child(2n) {
+  background-color: #F8F8F8;
+}
+
+#wemd table tr th,
+#wemd table tr td {
+  font-size: 16px;
+  border: 1px solid #ccc;
+  padding: 5px 10px;
+  text-align: left;
+}
+
+#wemd table tr th {
+  font-weight: bold;
+  background-color: #f0f0f0;
+}
+
+/* 表格最小列宽4个汉字 */
+#wemd table tr th:nth-of-type(n),
+#wemd table tr td:nth-of-type(n){
+  min-width:85px;
+}
+
+#wemd .footnote-word {
+  color: #1e6bb8;
+  font-weight: bold;
+}
+
+#wemd .footnote-ref {
+  color: #1e6bb8;
+  font-weight: bold;
+}
+
+#wemd .footnote-item {
+  display: flex;
+}
+
+#wemd .footnote-num {
+  display: inline;
+  width: 10%;
+  background: none;
+  font-size: 80%;
+  opacity: 0.6;
+  line-height: 26px;
+  font-family: ptima-Regular, Optima, PingFangSC-light, PingFangTC-light, 'PingFang SC', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+#wemd .footnote-item p {
+  display: inline;
+  font-size: 14px;
+  width: 90%;
+  padding: 0px;
+  margin: 0;
+  line-height: 26px;
+  color: #000000;
+  word-break:break-all;
+  width: calc(100%-50)
+}
+
+#wemd sub, sup {
+  line-height: 0;
+}
+
+#wemd .footnotes-sep:before {
+  content: "参考资料";
+  display: block;
+}
+
+/* 解决公式问题 */
+#wemd .block-equation {
+  display:block;
+  text-align: center;
+  overflow: auto;
+  display: block;
+  -webkit-overflow-scrolling: touch;
+}
+
+#wemd .block-equation svg {
+  max-width: 300% !important;
+  -webkit-overflow-scrolling: touch;
+}
+
+#wemd .inline-equation {
+}
+
+#wemd .inline-equation svg {
+}
+
+#wemd .imageflow-layer1 {
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+  white-space: normal;
+  border: 0px none;
+  padding: 0px;
+  overflow: hidden;
+}
+
+#wemd .imageflow-layer2 {
+  white-space: nowrap;
+  width: 100%;
+  overflow-x: scroll;
+}
+
+#wemd .imageflow-layer3 {
+  display: inline-block;
+  word-wrap: break-word;
+  white-space: normal;
+  vertical-align: top;
+  width: 80%;
+  margin-right: 10px;
+  flex-shrink: 0;
+}
+
+#wemd .imageflow-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 300px;
+  object-fit: contain;
+  border-radius: 4px;
+}
+
+#wemd .imageflow-caption {
+  text-align: center;
+  margin-top: 0px;
+  padding-top: 0px;
+  color: #888;
+}
+
+#wemd .nice-suffix-juejin-container {
+  margin-top: 20px !important;
+}
+
+#wemd figure a {
+  border: none;
+}
+
+#wemd figure a img {
+  margin: 0px;
+}
+
+#wemd figure {
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 图片链接嵌套 */
+#wemd figure a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 图片链接嵌套，图片解释 */
+#wemd figure a + figcaption {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: -35px;
+  background: rgba(0,0,0,0.7);
+  color: #ffffff;
+  line-height: 35px;
+  z-index: 20;
+}
+
+#wemd .callout {
+  margin: 24px 0;
+  padding: 18px 20px;
+  border-radius: 16px;
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  box-shadow: 0 12px 25px rgba(15, 23, 42, 0.08);
+}
+
+#wemd .callout-title {
+  font-weight: 600;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  letter-spacing: 0.05em;
+}
+
+#wemd .callout-icon { margin-right: 8px;
+  font-size: 18px;
+}
+
+#wemd .callout-note { border-left: 4px solid #6366f1; background: #f5f5ff; }
+#wemd .callout-tip { border-left: 4px solid #10b981; background: #ecfdf5; }
+#wemd .callout-important { border-left: 4px solid #8b5cf6; background: #f5f3ff; }
+#wemd .callout-warning { border-left: 4px solid #f59e0b; background: #fffbeb; }
+#wemd .callout-caution { border-left: 4px solid #ef4444; background: #fff5f5; }
+
+
+#wemd .task-list-item {
+  list-style: none;
+  margin-left: -1.2em;
+  margin-bottom: 6px;
+  display: flex;
+  gap: 0;
+  align-items: flex-start;
+}
+
+#wemd .task-list-item input[type='checkbox'] {
+  margin-top: 4px;
+  pointer-events: none;
+}
+
+/* ========== 自定义样式,实时生效,浏览器实时缓存 ========== */
+
+/* 全局属性 - 提高行距，更舒展 */
+#wemd {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  color: #2c3e50;
+  line-height: 2.0;
+  font-size: 16px;
+  letter-spacing: 0.3px;
+}
+
+/* 段落 - 提高行距，与全局统一 */
+#wemd p {
+  margin: 8px 0;
+  font-size: 16px;
+  color: #34495e;
+  line-height: 2.0;
+  letter-spacing: 0.5px;
+}
+
+/* 一级标题 - 保持原默认主题样式（简单下划线） */
+#wemd h1 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 10px 0 20px;
+  text-align: center;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #1890ff;  /* 蓝色下划线 */
+  letter-spacing: 1px;
+}
+
+/* 一级标题内容 */
+#wemd h1 .content {
+}
+
+/* 一级标题前缀 */
+#wemd h1 .prefix {
+}
+
+/* 一级标题后缀 */
+#wemd h1 .suffix {
+}
+
+/* ===== 二级标题 - 极简下划线风格 ===== */
+#wemd h2 {
+  display: block;
+  width: fit-content;
+  max-width: 100%;
+  
+  font-size: 22px;
+  font-weight: 600;
+  margin: 32px 0 20px 0;
+  padding-bottom: 8px;
+  
+  /* 蓝色底部渐变细线 */
+  border-bottom: 2px solid #1890ff;
+  
+  color: #1f2d3d;
+  letter-spacing: 0.3px;
+  line-height: 1.4;
+}
+
+/* 二级标题内的内容（如果原有 .content 包装）保持继承 */
+#wemd h2 .content {
+  display: block;
+  color: inherit;
+  background: none;
+  padding: 0;
+  border: none;
+  box-shadow: none;
+}
+
+/* 二级标题前缀/后缀隐藏（如果有） */
+#wemd h2 .prefix,
+#wemd h2 .suffix {
+  display: none;
+}
+
+/* ===== 三级标题 - 左侧细线（优雅层级） ===== */
+#wemd h3 {
+  font-size: 19px;
+  font-weight: 600;
+  color: #1f2d3d;
+  margin: 28px 0 14px;
+  padding-left: 14px;
+  border-left: 3px solid #1890ff;  /* 蓝色左边线 */
+  line-height: 1.4;
+  letter-spacing: 0.3px;
+}
+
+#wemd h3 .content {
+  display: inline;
+  background: none;
+  padding: 0;
+}
+
+#wemd h3 .prefix,
+#wemd h3 .suffix {
+  display: none;
+}
+
+/* 四级标题 - 蓝色文字 */
+#wemd h4 {
+  font-size: 17px;
+  font-weight: 600;
+  color: #1890ff;   /* 主题蓝色 */
+  margin: 20px 0 10px;
+  letter-spacing: 0.3px;
+}
+
+/* 四级标题内容 */
+#wemd h4 .content {
+}
+
+/* 四级标题前缀 */
+#wemd h4 .prefix {
+}
+
+/* 四级标题后缀 */
+#wemd h4 .suffix {
+}
+
+/* 五级标题 */
+#wemd h5 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #5a6c7d;
+  margin: 18px 0 8px;
+}
+
+/* 六级标题 */
+#wemd h6 {
+  font-size: 15px;
+  font-weight: 600;
+  color: #7f8c8d;
+  margin: 16px 0 8px;
+}
+
+/* 无序列表整体样式 */
+#wemd ul {
+  padding-left: 24px;
+  list-style-type: disc;
+  color: #34495e;
+}
+
+/* 列表项标记颜色改为蓝色 */
+#wemd ul li {
+  padding-left: 4px;
+  color: #1890ff;
+}
+
+#wemd ul li section {
+  color: #34495e;
+}
+
+/* 嵌套列表 */
+#wemd ul ul {
+  list-style-type: circle;
+}
+
+#wemd ul ul ul {
+  list-style-type: square;
+}
+
+/* 有序列表整体样式 */
+#wemd ol {
+  padding-left: 24px;
+  list-style-type: decimal;
+  color: #34495e;
+}
+
+#wemd ol li {
+  padding-left: 4px;
+}
+
+/* 列表内容 */
+#wemd li section {
+  margin: 8px 0;
+  line-height: 2.0;
+  font-size: 16px;
+  color: #34495e;
+}
+
+/* 一级引用 - 蓝色左边框 */
+#wemd .multiquote-1 {
+  border-left: 4px solid #1890ff;
+  background: #f6f8fa;
+  padding: 16px 20px;
+  margin: 20px 0;
+  color: #475569;
+  border-radius: 2px;
+}
+
+/* 一级引用文字 */
+#wemd .multiquote-1 p {
+  margin: 0;
+  font-size: 15px;
+  color: #475569;
+  line-height: 1.9;
+}
+
+/* 二级引用 */
+#wemd .multiquote-2 {
+  border-left: 3px solid #1677ff;  /* 深蓝色 */
+  background: #fafafa;
+  padding: 14px 18px;
+  margin: 16px 0;
+  border-radius: 2px;
+}
+
+/* 二级引用文字 */
+#wemd .multiquote-2 p {
+  margin: 0;
+  font-size: 15px;
+  color: #64748b;
+  line-height: 1.9;
+}
+
+/* 三级引用 */
+#wemd .multiquote-3 {
+  border-left: 2px solid #1890ff;
+  background: #fafafa;
+  padding: 12px 16px;
+  margin: 14px 0;
+  border-radius: 2px;
+}
+
+/* 三级引用文字 */
+#wemd .multiquote-3 p {
+  margin: 0;
+  font-size: 14px;
+  color: #64748b;
+}
+
+/* 链接 - 蓝色主题 */
+#wemd a {
+  color: #1890ff;
+  text-decoration: none;
+  border-bottom: 1px solid #1890ff;
+  font-weight: 500;
+}
+
+/* 加粗 - 蓝色主题色，正常加粗 */
+#wemd strong {
+  font-weight: 600;
+  color: #1890ff;
+  letter-spacing: 0.2px;
+}
+
+/* 斜体 - 蓝色主题 */
+#wemd em {
+  font-style: italic;
+  color: #1890ff;
+  font-weight: 500;
+}
+
+/* 加粗斜体 - 深蓝色 */
+#wemd em strong {
+  font-weight: 700;
+  font-style: italic;
+  color: #1677ff;
+}
+
+/* 删除线 */
+#wemd del {
+  text-decoration: line-through;
+  color: #94a3b8;
+  opacity: 0.7;
+}
+
+/* 分隔线 */
+#wemd hr {
+  border: none;
+  height: 1px;
+  background: #e2e8f0;
+  margin: 28px 0;
+}
+
+/* 图片 */
+#wemd img {
+  display: block;
+  margin: 24px auto;
+  max-width: 100%;
+  border-radius: 4px;
+}
+
+/* 图片描述文字 */
+#wemd figcaption {
+  text-align: center;
+  font-size: 14px;
+  color: #94a3b8;
+  margin-top: 8px;
+  letter-spacing: 0.2px;
+}
+
+/* 行内代码 - 蓝白风格 */
+#wemd p code, #wemd li code {
+  background: none;
+  padding: 0 2px;
+  border-radius: 0;
+  color: #1677ff;            /* 保留一点蓝色作为语义提示 */
+  font-family: "SF Mono", Monaco, "Cascadia Code", "Roboto Mono", Consolas, monospace;
+  font-size: 0.9em;
+  margin: 0;
+  border: none;
+  font-weight: 500;          /* 适当加一点字重，不刺眼 */
+}
+
+/* 代码块 */
+#wemd pre code {
+  display: block;
+  background: #f8fafc;
+  padding: 16px;
+  border-radius: 4px;
+  overflow-x: auto;
+  font-family: "SF Mono", Monaco, "Cascadia Code", "Roboto Mono", Consolas, monospace;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #334155;
+  border: 1px solid #e2e8f0;
+}
+
+/* 表格 */
+#wemd table tr th,
+#wemd table tr td {
+  border: 1px solid #e2e8f0;
+  padding: 10px 14px;
+  font-size: 15px;
+  color: #334155;
+  line-height: 1.6;
+}
+
+/* 表头 - 浅蓝背景，深蓝文字 */
+#wemd table tr th {
+  background: #eff6ff;
+  color: #1e40af;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+#wemd table tr:nth-child(2n) {
+  background-color: #f8fafc;
+}
+
+/* 表格列宽 */
+#wemd table tr th:nth-of-type(n),
+#wemd table tr td:nth-of-type(n){
+  min-width: 100px;
+}
+
+/* 脚注文字 */
+#wemd .footnote-word {
+  color: #1890ff;
+  font-weight: 500;
+  border-bottom: 1px dashed #1890ff;
+}
+
+/* 脚注上标 */
+#wemd .footnote-ref {
+  color: #1890ff;
+  font-weight: 600;
+}
+
+/* "参考资料"四个字 */
+#wemd .footnotes-sep:before {
+  content: "参考资料";
+  font-weight: 600;
+  margin-top: 36px;
+  margin-bottom: 16px;
+  display: block;
+  font-size: 18px;
+  color: #1a1a1a;
+  letter-spacing: 0.5px;
+}
+
+/* 参考资料编号 */
+#wemd .footnote-num {
+  display: inline-block;
+  width: 24px;
+  text-align: right;
+  margin-right: 8px;
+  color: #94a3b8;
+  font-weight: 500;
+}
+
+/* 参考资料文字 */
+#wemd .footnote-item p { 
+  display: inline;
+  font-size: 14px;
+  color: #64748b;
+  line-height: 1.8;
+}
+
+/* 参考资料解释 */
+#wemd .footnote-item p em {
+  font-style: normal;
+  color: #94a3b8;
+  margin-left: 6px;
+}
+
+/* 行间公式 */
+#wemd .block-equation svg {
+  display: block;
+  margin: 20px auto;
+  max-width: 300% !important;
+}
+
+/* 行内公式 */
+#wemd .inline-equation svg { 
+  vertical-align: middle;
+}
+
+/* Callout 提示块 - 蓝白主题（完全去除绿色/橙/红色） */
+#wemd .callout {
+  margin: 28px 0;
+  padding: 22px 24px;
+  border-radius: 22px;
+  border: 1px solid rgba(24, 144, 255, 0.15);
+  background: #ffffff;
+  box-shadow: 0 25px 45px rgba(15, 23, 42, 0.12);
+  position: relative;
+  overflow: hidden;
+}
+
+#wemd .callout::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 22px;
+  pointer-events: none;
+  background: linear-gradient(120deg, rgba(24, 144, 255, 0.05), rgba(0, 112, 243, 0.03));
+}
+
+#wemd .callout-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: #0f172a;
+  font-size: 16px;
+  letter-spacing: 0.05em;
+}
+
+#wemd .callout-icon { margin-right: 8px;
+  font-size: 20px;
+}
+
+/* 所有提示类型统一为蓝白风格，通过深浅区分 */
+#wemd .callout-note {
+  border-color: rgba(24, 144, 255, 0.3);
+  background: linear-gradient(135deg, #f7f9ff, #edf2ff);
+}
+
+#wemd .callout-tip {
+  border-color: rgba(24, 144, 255, 0.3);
+  background: linear-gradient(135deg, #eff6ff, #e0f2fe);
+}
+
+#wemd .callout-important {
+  border-color: rgba(24, 144, 255, 0.4);
+  background: linear-gradient(135deg, #f0f9ff, #e0f2ff);
+}
+
+#wemd .callout-warning {
+  border-color: rgba(24, 144, 255, 0.35);
+  background: linear-gradient(135deg, #f5f9ff, #eef4ff);
+}
+
+#wemd .callout-caution {
+  border-color: rgba(24, 144, 255, 0.4);
+  background: linear-gradient(135deg, #fafcff, #f0f7ff);
+}
+
+/* 高亮文本 - 保留原本黄色高亮（不属于绿色，不强制改） */
+#wemd mark {
+  background: linear-gradient(135deg, #fff9c4, #fff59d);
+  color: #1a1a1a;
+  padding: 2px 4px;
+  border-radius: 3px;
+  font-weight: 500;
+}
+
+/* 上标 & 下标 - 蓝色 */
+#wemd sup {
+  font-size: 0.75em;
+  vertical-align: super;
+  color: #0284c7;
+}
+
+#wemd sub {
+  font-size: 0.75em;
+  vertical-align: sub;
+  color: #0284c7;
+}
+
+/* Imageflow CSS - 保持原样 */
+#wemd .imageflow-layer1 {
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+  border: 0px none;
+  padding: 0px;
+  overflow: hidden;
+}
+
+#wemd .imageflow-layer2 {
+  white-space: nowrap;
+  width: 100%;
+  overflow-x: scroll;
+}
+
+#wemd .imageflow-layer3 {
+  display: inline-block;
+  word-wrap: break-word;
+  white-space: normal;
+  vertical-align: top;
+  width: 80%;
+  margin-right: 10px;
+  flex-shrink: 0;
+}
+
+#wemd .imageflow-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 300px;
+  object-fit: contain;
+  border-radius: 4px;
+}
+
+#wemd .imageflow-caption {
+  text-align: center;
+  margin-top: 0px;
+  padding-top: 0px;
+  color: #888;
+}
+
+/*
+github.com style (c) Vasily Polovnyov <vast@whiteants.net>
+保留原样，无绿色依赖
+*/
+
+#wemd .hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 16px;
+  color: #333;
+  background: #f8f8f8;
+}
+
+#wemd .hljs-comment,
+#wemd .hljs-quote {
+  color: #998;
+  font-style: italic;
+}
+
+#wemd .hljs-keyword,
+#wemd .hljs-selector-tag,
+#wemd .hljs-subst {
+  color: #333;
+  font-weight: bold;
+}
+
+#wemd .hljs-number,
+#wemd .hljs-literal,
+#wemd .hljs-variable,
+#wemd .hljs-template-variable,
+#wemd .hljs-tag .hljs-attr {
+  color: #008080;
+}
+
+#wemd .hljs-string,
+#wemd .hljs-doctag {
+  color: #d14;
+}
+
+#wemd .hljs-title,
+#wemd .hljs-section,
+#wemd .hljs-selector-id {
+  color: #900;
+  font-weight: bold;
+}
+
+#wemd .hljs-subst {
+  font-weight: normal;
+}
+
+#wemd .hljs-type,
+#wemd .hljs-class .hljs-title {
+  color: #458;
+  font-weight: bold;
+}
+
+#wemd .hljs-tag,
+#wemd .hljs-name,
+#wemd .hljs-attribute {
+  color: #000080;
+  font-weight: normal;
+}
+
+#wemd .hljs-regexp,
+#wemd .hljs-link {
+  color: #009926;
+}
+
+#wemd .hljs-symbol,
+#wemd .hljs-bullet {
+  color: #990073;
+}
+
+#wemd .hljs-built_in,
+#wemd .hljs-builtin-name {
+  color: #0086b3;
+}
+
+#wemd .hljs-meta {
+  color: #999;
+  font-weight: bold;
+}
+
+#wemd .hljs-deletion {
+  background: #fdd;
+}
+
+#wemd .hljs-addition {
+  background: #dfd;
+}
+
+#wemd .hljs-emphasis {
+  font-style: italic;
+}
+
+#wemd .hljs-strong {
+  font-weight: bold;
+}
+
+/* 再次确保 Imageflow CSS 不丢失（如有重复，最后生效） */
+#wemd .imageflow-layer1 {
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+  border: 0px none;
+  padding: 0px;
+  overflow: hidden;
+}
+
+#wemd .imageflow-layer2 {
+  white-space: nowrap;
+  width: 100%;
+  overflow-x: scroll;
+}
+
+#wemd .imageflow-layer3 {
+  display: inline-block;
+  word-wrap: break-word;
+  white-space: normal;
+  vertical-align: top;
+  width: 80%;
+  margin-right: 10px;
+  flex-shrink: 0;
+}
+
+#wemd .imageflow-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 300px;
+  object-fit: contain;
+  border-radius: 4px;
+}
+
+#wemd .imageflow-caption {
+  text-align: center;
+  margin-top: 0px;
+  padding-top: 0px;
+  color: #888;
+}

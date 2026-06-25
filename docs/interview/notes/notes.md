@@ -266,7 +266,7 @@
 >     #define immI() do { *imm = SEXT(BITS(i, 31, 20), 12); } while(0)
 >     #define immU() do { *imm = SEXT(BITS(i, 31, 12), 20) << 12; } while(0)
 >     #define immS() do { *imm = (SEXT(BITS(i, 31, 25), 7) << 5) | BITS(i, 11, 7); } while(0)
->                                     
+>                                             
 >     static void decode_operand(Decode *s, int *rd, word_t *src1, word_t *src2, word_t *imm, int type) {
 >       uint32_t i = s->isa.inst.val;
 >       int rs1 = BITS(i, 19, 15);
@@ -278,7 +278,7 @@
 >         case TYPE_S: src1R(); src2R(); immS(); break;
 >       }
 >     }
->                                     
+>                                             
 >     ```
 >
 >     首先，通过 `BITS` 提取到指令中的15到19位，也就是 `rs1`。 
@@ -824,7 +824,7 @@
 
     
 
-    这个博主做过相关的分析：[laumy.tech/1282.html](https://www.laumy.tech/1282.html)
+    这个博主做过相关的分析：[arch初始化 - laumy的学习笔记](https://www.laumy.tech/1278.html/二、arch初始化/)
 
     因为有了基础，所以直接上手看都是能看懂的！！
 

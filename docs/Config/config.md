@@ -45,7 +45,7 @@ sh install.sh -s Dracula -p dracula --skip-dircolors
 
 ### vim9 安装
 
-[Ubuntu 升级安装 Vim 9 - 程序知路](https://icxzl.com/2233.html)
+https://zhuanlan.zhihu.com/p/550341865
 
 
 
