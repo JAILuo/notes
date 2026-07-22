@@ -1,0 +1,749 @@
+<mxfile host="app.diagrams.net" pages="7">
+  <diagram name="SoC Architecture Overview" id="Hs0m71HMqD81ckrxn8jz">
+    <mxGraphModel dx="1120" dy="851" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="GXNeeFGbuaCHAHwLssQV-1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;horizontal=0;fontStyle=1;fontSize=18;fontColor=#333333;" value="Interconnect bus" vertex="1">
+          <mxGeometry height="850" width="60" x="450" y="360" as="geometry" />
+        </mxCell>
+        <mxCell id="GXNeeFGbuaCHAHwLssQV-2" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" value="&lt;b style=&quot;font-size: 14px;&quot;&gt;Figure 2/3-1: A high level view of a typical System-on-Chip (SoC)&lt;/b&gt;&lt;br&gt;&lt;br&gt;At a high level, an SoC is a collection of Intellectual&lt;br&gt;Property (IP) cores connected by an interconnect bus." vertex="1">
+          <mxGeometry height="60" width="440" x="690" y="210" as="geometry" />
+        </mxCell>
+        <mxCell id="GXNeeFGbuaCHAHwLssQV-3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;align=center;verticalAlign=top;spacingTop=5;spacingLeft=5;spacingRight=5;" value="&lt;b style=&quot;font-size:14px;&quot;&gt;NPU/AI&lt;/b&gt;&lt;hr&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt;2019+ chipsets often include a &quot;Neural Processing Unit&quot; to emulate neural networks&lt;/span&gt;" vertex="1">
+          <mxGeometry height="80" width="240" x="150" y="410" as="geometry" />
+        </mxCell>
+        <mxCell id="GXNeeFGbuaCHAHwLssQV-4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;align=center;verticalAlign=top;spacingTop=5;spacingLeft=5;spacingRight=5;" value="&lt;b style=&quot;font-size:14px;&quot;&gt;TPU&lt;/b&gt;&lt;hr&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt;Tensor operations (needed for AI) may be carried out by compute DSP or dedicated Tensor Processing Unit&lt;/span&gt;" vertex="1">
+          <mxGeometry height="80" width="240" x="150" y="530" as="geometry" />
+        </mxCell>
+        <mxCell id="GXNeeFGbuaCHAHwLssQV-5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;align=center;verticalAlign=top;spacingTop=5;spacingLeft=5;spacingRight=5;" value="&lt;b style=&quot;font-size:14px;&quot;&gt;PMIC&lt;/b&gt;&lt;hr&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt;Power Management Integrated Circuit arbitrates power to components&lt;/span&gt;" vertex="1">
+          <mxGeometry height="80" width="240" x="150" y="650" as="geometry" />
+        </mxCell>
+        <mxCell id="GXNeeFGbuaCHAHwLssQV-6" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;align=center;verticalAlign=top;spacingTop=5;spacingLeft=5;spacingRight=5;" value="&lt;b style=&quot;font-size:14px;&quot;&gt;SPU&lt;/b&gt;&lt;hr&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt;Secure Processing Unit handles cryptography and out-of-CPU security services&lt;/span&gt;" vertex="1">
+          <mxGeometry height="80" width="240" x="150" y="770" as="geometry" />
+        </mxCell>
+        <mxCell id="GXNeeFGbuaCHAHwLssQV-7" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;align=center;verticalAlign=top;spacingTop=5;spacingLeft=5;spacingRight=5;" value="&lt;b style=&quot;font-size:14px;&quot;&gt;Sensor Hub&lt;/b&gt;&lt;hr&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt;Sensor Hub controls and aggregates data from accelerometer, gyro, etc. establishing device &quot;context&quot;&lt;/span&gt;" vertex="1">
+          <mxGeometry height="80" width="240" x="150" y="890" as="geometry" />
+        </mxCell>
+        <mxCell id="GXNeeFGbuaCHAHwLssQV-8" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;align=center;verticalAlign=top;spacingTop=5;spacingLeft=5;spacingRight=5;" value="&lt;b style=&quot;font-size:14px;&quot;&gt;Peripherals&lt;/b&gt;&lt;hr&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt;Numerous other peripherals may be connected via I²C and/or other means&lt;/span&gt;" vertex="1">
+          <mxGeometry height="80" width="240" x="150" y="1010" as="geometry" />
+        </mxCell>
+        <mxCell id="GXNeeFGbuaCHAHwLssQV-9" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;fontColor=#333333;strokeColor=#d6b656;align=center;verticalAlign=top;spacingTop=5;spacingLeft=5;spacingRight=5;" value="&lt;b style=&quot;font-size:14px;&quot;&gt;RAM&lt;/b&gt;&lt;hr&gt;&lt;span style=&quot;font-size: 10px;&quot;&gt;RAM provides AP with memory and DMA from other processors&lt;/span&gt;" vertex="1">
+          <mxGeometry height="70" width="160" x="570" y="360" as="geometry" />
+        </mxCell>
+        <mxCell id="GXNeeFGbuaCHAHwLssQV-10" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;fontColor=#333333;strokeColor=#d6b656;align=center;verticalAlign=top;spacingTop=5;spacingLeft=5;spacingRight=5;" value="&lt;b style=&quot;font-size:14px;&quot;&gt;NAND&lt;/b&gt;&lt;hr&gt;&lt;span style=&quot;font-size: 10px;&quot;&gt;Flash memory provides persistent (non volatile) memory&lt;/span&gt;" vertex="1">
+          <mxGeometry height="70" width="160" x="750" y="360" as="geometry" />
+        </mxCell>
+        <mxCell id="GXNeeFGbuaCHAHwLssQV-11" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;align=center;verticalAlign=top;spacingTop=5;spacingLeft=5;spacingRight=5;" value="&lt;b style=&quot;font-size:14px;&quot;&gt;AP (CPU)&lt;/b&gt;&lt;hr&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt;Application Processor is multicore CPU running &quot;High Level OS&quot; (HLOS), e.g. Android&lt;/span&gt;" vertex="1">
+          <mxGeometry height="80" width="240" x="570" y="470" as="geometry" />
+        </mxCell>
+        <mxCell id="GXNeeFGbuaCHAHwLssQV-12" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;align=center;verticalAlign=top;spacingTop=5;spacingLeft=5;spacingRight=5;" value="&lt;b style=&quot;font-size:14px;&quot;&gt;GPU&lt;/b&gt;&lt;hr&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt;Graphics Processing Unit handles screen graphics and hardware acceleration&lt;/span&gt;" vertex="1">
+          <mxGeometry height="80" width="240" x="570" y="590" as="geometry" />
+        </mxCell>
+        <mxCell id="GXNeeFGbuaCHAHwLssQV-13" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;align=center;verticalAlign=top;spacingTop=5;spacingLeft=5;spacingRight=5;" value="&lt;b style=&quot;font-size:14px;&quot;&gt;DSP&lt;/b&gt;&lt;hr&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt;Digital Signal Processor handles voice and audio codecs, may offload vector computations&lt;/span&gt;" vertex="1">
+          <mxGeometry height="80" width="240" x="570" y="710" as="geometry" />
+        </mxCell>
+        <mxCell id="GXNeeFGbuaCHAHwLssQV-14" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;align=center;verticalAlign=top;spacingTop=5;spacingLeft=5;spacingRight=5;" value="&lt;b style=&quot;font-size:14px;&quot;&gt;ISP&lt;/b&gt;&lt;hr&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt;Image Signal Processor handles large megapixel photos, face detection&lt;/span&gt;" vertex="1">
+          <mxGeometry height="80" width="240" x="570" y="830" as="geometry" />
+        </mxCell>
+        <mxCell id="GXNeeFGbuaCHAHwLssQV-15" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;align=center;verticalAlign=top;spacingTop=5;spacingLeft=5;spacingRight=5;" value="&lt;b style=&quot;font-size:14px;&quot;&gt;BT/WiFi&lt;/b&gt;&lt;hr&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt;WiFi chipset handles 802.11 connectivity and often also includes BlueTooth&lt;/span&gt;" vertex="1">
+          <mxGeometry height="80" width="240" x="570" y="950" as="geometry" />
+        </mxCell>
+        <mxCell id="GXNeeFGbuaCHAHwLssQV-16" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;align=center;verticalAlign=top;spacingTop=5;spacingLeft=5;spacingRight=5;" value="&lt;b style=&quot;font-size:14px;&quot;&gt;Baseband&lt;/b&gt;&lt;hr&gt;&lt;span style=&quot;font-size: 11px;&quot;&gt;Baseband (modem) provides cell connectivity (outside WiFi only devices)&lt;/span&gt;" vertex="1">
+          <mxGeometry height="80" width="240" x="570" y="1070" as="geometry" />
+        </mxCell>
+        <mxCell id="GXNeeFGbuaCHAHwLssQV-17" edge="1" parent="1" source="GXNeeFGbuaCHAHwLssQV-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.106;strokeWidth=2;" target="GXNeeFGbuaCHAHwLssQV-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="GXNeeFGbuaCHAHwLssQV-18" edge="1" parent="1" source="GXNeeFGbuaCHAHwLssQV-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.247;strokeWidth=2;" target="GXNeeFGbuaCHAHwLssQV-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="GXNeeFGbuaCHAHwLssQV-19" edge="1" parent="1" source="GXNeeFGbuaCHAHwLssQV-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.388;strokeWidth=2;" target="GXNeeFGbuaCHAHwLssQV-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="GXNeeFGbuaCHAHwLssQV-20" edge="1" parent="1" source="GXNeeFGbuaCHAHwLssQV-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.529;strokeWidth=2;" target="GXNeeFGbuaCHAHwLssQV-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="GXNeeFGbuaCHAHwLssQV-21" edge="1" parent="1" source="GXNeeFGbuaCHAHwLssQV-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.671;strokeWidth=2;" target="GXNeeFGbuaCHAHwLssQV-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="GXNeeFGbuaCHAHwLssQV-22" edge="1" parent="1" source="GXNeeFGbuaCHAHwLssQV-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.812;strokeWidth=2;" target="GXNeeFGbuaCHAHwLssQV-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="GXNeeFGbuaCHAHwLssQV-23" edge="1" parent="1" source="GXNeeFGbuaCHAHwLssQV-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.176;exitX=0;exitY=0.5;strokeWidth=2;" target="GXNeeFGbuaCHAHwLssQV-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="GXNeeFGbuaCHAHwLssQV-24" edge="1" parent="1" source="GXNeeFGbuaCHAHwLssQV-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.318;exitX=0;exitY=0.5;strokeWidth=2;" target="GXNeeFGbuaCHAHwLssQV-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="GXNeeFGbuaCHAHwLssQV-25" edge="1" parent="1" source="GXNeeFGbuaCHAHwLssQV-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.459;exitX=0;exitY=0.5;strokeWidth=2;" target="GXNeeFGbuaCHAHwLssQV-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="GXNeeFGbuaCHAHwLssQV-26" edge="1" parent="1" source="GXNeeFGbuaCHAHwLssQV-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.600;exitX=0;exitY=0.5;strokeWidth=2;" target="GXNeeFGbuaCHAHwLssQV-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="GXNeeFGbuaCHAHwLssQV-27" edge="1" parent="1" source="GXNeeFGbuaCHAHwLssQV-15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.741;exitX=0;exitY=0.5;strokeWidth=2;" target="GXNeeFGbuaCHAHwLssQV-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="GXNeeFGbuaCHAHwLssQV-28" edge="1" parent="1" source="GXNeeFGbuaCHAHwLssQV-16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.882;exitX=0;exitY=0.5;strokeWidth=2;" target="GXNeeFGbuaCHAHwLssQV-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="GXNeeFGbuaCHAHwLssQV-29" edge="1" parent="1" source="GXNeeFGbuaCHAHwLssQV-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.25;entryY=0;dashed=1;strokeWidth=2;" target="GXNeeFGbuaCHAHwLssQV-11">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="GXNeeFGbuaCHAHwLssQV-30" edge="1" parent="1" source="GXNeeFGbuaCHAHwLssQV-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.75;entryY=0;dashed=1;strokeWidth=2;" target="GXNeeFGbuaCHAHwLssQV-11">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="nOFr19OsrKnUknf2X1bY" name="第 2 页">
+    <mxGraphModel dx="1040" dy="790" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="znqnyk_9NlMsixgug5nS-1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FAFAFA;strokeColor=#B0BEC5;strokeWidth=2;dashed=1;dashPattern=8 8;align=right;verticalAlign=bottom;spacing=15;fontColor=#90A4AE;fontSize=16;fontStyle=1;arcSize=2;" value="SoC (System-on-Chip) Package Boundary" vertex="1">
+          <mxGeometry height="850" width="780" x="130" y="200" as="geometry" />
+        </mxCell>
+        <mxCell id="znqnyk_9NlMsixgug5nS-2" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" value="&lt;b style=&quot;font-size: 24px; color: #2C3E50;&quot;&gt;System-on-Chip (SoC) High-Level Architecture&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size: 14px; color: #7F8C8D;&quot;&gt;A structural overview of Intellectual Property (IP) cores connected via a central interconnect bus.&lt;/span&gt;" vertex="1">
+          <mxGeometry height="60" width="700" x="170" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="znqnyk_9NlMsixgug5nS-3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#37474F;strokeColor=none;fontColor=#ECEFF1;horizontal=0;shadow=1;arcSize=10;" value="&lt;b style=&quot;font-size:22px;letter-spacing:3px;&quot;&gt;I N T E R C O N N E C T &amp;nbsp; B U S&lt;/b&gt;" vertex="1">
+          <mxGeometry height="690" width="40" x="500" y="330" as="geometry" />
+        </mxCell>
+        <mxCell id="znqnyk_9NlMsixgug5nS-4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1F5FE;strokeColor=#0288D1;strokeWidth=2;shadow=1;arcSize=6;spacingTop=8;spacingLeft=12;spacingRight=12;verticalAlign=top;align=left;" value="&lt;b style=&quot;font-size: 16px; color: #01579B;&quot;&gt;NPU / AI&lt;/b&gt;&lt;hr style=&quot;border: 1px solid #81D4FA; margin: 6px 0;&quot;&gt;&lt;span style=&quot;font-size: 12px; color: #455A64;&quot;&gt;2019+ chipsets often include a &amp;quot;Neural Processing Unit&amp;quot; to emulate neural networks.&lt;/span&gt;" vertex="1">
+          <mxGeometry height="85" width="300" x="160" y="350" as="geometry" />
+        </mxCell>
+        <mxCell id="znqnyk_9NlMsixgug5nS-5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1F5FE;strokeColor=#0288D1;strokeWidth=2;shadow=1;arcSize=6;spacingTop=8;spacingLeft=12;spacingRight=12;verticalAlign=top;align=left;" value="&lt;b style=&quot;font-size: 16px; color: #01579B;&quot;&gt;TPU&lt;/b&gt;&lt;hr style=&quot;border: 1px solid #81D4FA; margin: 6px 0;&quot;&gt;&lt;span style=&quot;font-size: 12px; color: #455A64;&quot;&gt;Tensor operations (needed for AI) may be carried out by compute DSP or dedicated Tensor Processing Unit.&lt;/span&gt;" vertex="1">
+          <mxGeometry height="85" width="300" x="160" y="470" as="geometry" />
+        </mxCell>
+        <mxCell id="znqnyk_9NlMsixgug5nS-6" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E0F2F1;strokeColor=#00897B;strokeWidth=2;shadow=1;arcSize=6;spacingTop=8;spacingLeft=12;spacingRight=12;verticalAlign=top;align=left;" value="&lt;b style=&quot;font-size: 16px; color: #004D40;&quot;&gt;PMIC&lt;/b&gt;&lt;hr style=&quot;border: 1px solid #80CBC4; margin: 6px 0;&quot;&gt;&lt;span style=&quot;font-size: 12px; color: #37474F;&quot;&gt;Power Management Integrated Circuit arbitrates power to components.&lt;/span&gt;" vertex="1">
+          <mxGeometry height="85" width="300" x="160" y="590" as="geometry" />
+        </mxCell>
+        <mxCell id="znqnyk_9NlMsixgug5nS-7" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E0F2F1;strokeColor=#00897B;strokeWidth=2;shadow=1;arcSize=6;spacingTop=8;spacingLeft=12;spacingRight=12;verticalAlign=top;align=left;" value="&lt;b style=&quot;font-size: 16px; color: #004D40;&quot;&gt;SPU&lt;/b&gt;&lt;hr style=&quot;border: 1px solid #80CBC4; margin: 6px 0;&quot;&gt;&lt;span style=&quot;font-size: 12px; color: #37474F;&quot;&gt;Secure Processing Unit handles cryptography and out-of-CPU security services.&lt;/span&gt;" vertex="1">
+          <mxGeometry height="85" width="300" x="160" y="710" as="geometry" />
+        </mxCell>
+        <mxCell id="znqnyk_9NlMsixgug5nS-8" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E0F2F1;strokeColor=#00897B;strokeWidth=2;shadow=1;arcSize=6;spacingTop=8;spacingLeft=12;spacingRight=12;verticalAlign=top;align=left;" value="&lt;b style=&quot;font-size: 16px; color: #004D40;&quot;&gt;Sensor Hub&lt;/b&gt;&lt;hr style=&quot;border: 1px solid #80CBC4; margin: 6px 0;&quot;&gt;&lt;span style=&quot;font-size: 12px; color: #37474F;&quot;&gt;Controls and aggregates data from accelerometer, gyro, etc. establishing device &amp;quot;context&amp;quot;.&lt;/span&gt;" vertex="1">
+          <mxGeometry height="85" width="300" x="160" y="830" as="geometry" />
+        </mxCell>
+        <mxCell id="znqnyk_9NlMsixgug5nS-9" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E0F2F1;strokeColor=#00897B;strokeWidth=2;shadow=1;arcSize=6;spacingTop=8;spacingLeft=12;spacingRight=12;verticalAlign=top;align=left;" value="&lt;b style=&quot;font-size: 16px; color: #004D40;&quot;&gt;Peripherals&lt;/b&gt;&lt;hr style=&quot;border: 1px solid #80CBC4; margin: 6px 0;&quot;&gt;&lt;span style=&quot;font-size: 12px; color: #37474F;&quot;&gt;Numerous other peripherals may be connected via I²C and/or other means.&lt;/span&gt;" vertex="1">
+          <mxGeometry height="85" width="300" x="160" y="950" as="geometry" />
+        </mxCell>
+        <mxCell id="znqnyk_9NlMsixgug5nS-10" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1F5FE;strokeColor=#0288D1;strokeWidth=2;shadow=1;arcSize=6;spacingTop=8;spacingLeft=12;spacingRight=12;verticalAlign=top;align=left;" value="&lt;b style=&quot;font-size: 16px; color: #01579B;&quot;&gt;AP (CPU)&lt;/b&gt;&lt;hr style=&quot;border: 1px solid #81D4FA; margin: 6px 0;&quot;&gt;&lt;span style=&quot;font-size: 12px; color: #455A64;&quot;&gt;Application Processor is multicore CPU running &amp;quot;High Level OS&amp;quot; (HLOS), e.g. Android.&lt;/span&gt;" vertex="1">
+          <mxGeometry height="85" width="300" x="580" y="350" as="geometry" />
+        </mxCell>
+        <mxCell id="znqnyk_9NlMsixgug5nS-11" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1F5FE;strokeColor=#0288D1;strokeWidth=2;shadow=1;arcSize=6;spacingTop=8;spacingLeft=12;spacingRight=12;verticalAlign=top;align=left;" value="&lt;b style=&quot;font-size: 16px; color: #01579B;&quot;&gt;GPU&lt;/b&gt;&lt;hr style=&quot;border: 1px solid #81D4FA; margin: 6px 0;&quot;&gt;&lt;span style=&quot;font-size: 12px; color: #455A64;&quot;&gt;Graphics Processing Unit handles screen graphics and hardware acceleration.&lt;/span&gt;" vertex="1">
+          <mxGeometry height="85" width="300" x="580" y="470" as="geometry" />
+        </mxCell>
+        <mxCell id="znqnyk_9NlMsixgug5nS-12" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1F5FE;strokeColor=#0288D1;strokeWidth=2;shadow=1;arcSize=6;spacingTop=8;spacingLeft=12;spacingRight=12;verticalAlign=top;align=left;" value="&lt;b style=&quot;font-size: 16px; color: #01579B;&quot;&gt;DSP&lt;/b&gt;&lt;hr style=&quot;border: 1px solid #81D4FA; margin: 6px 0;&quot;&gt;&lt;span style=&quot;font-size: 12px; color: #455A64;&quot;&gt;Digital Signal Processor handles voice and audio codecs, may offload vector computations.&lt;/span&gt;" vertex="1">
+          <mxGeometry height="85" width="300" x="580" y="590" as="geometry" />
+        </mxCell>
+        <mxCell id="znqnyk_9NlMsixgug5nS-13" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1F5FE;strokeColor=#0288D1;strokeWidth=2;shadow=1;arcSize=6;spacingTop=8;spacingLeft=12;spacingRight=12;verticalAlign=top;align=left;" value="&lt;b style=&quot;font-size: 16px; color: #01579B;&quot;&gt;ISP&lt;/b&gt;&lt;hr style=&quot;border: 1px solid #81D4FA; margin: 6px 0;&quot;&gt;&lt;span style=&quot;font-size: 12px; color: #455A64;&quot;&gt;Image Signal Processor handles large megapixel photos, face detection.&lt;/span&gt;" vertex="1">
+          <mxGeometry height="85" width="300" x="580" y="710" as="geometry" />
+        </mxCell>
+        <mxCell id="znqnyk_9NlMsixgug5nS-14" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#388E3C;strokeWidth=2;shadow=1;arcSize=6;spacingTop=8;spacingLeft=12;spacingRight=12;verticalAlign=top;align=left;" value="&lt;b style=&quot;font-size: 16px; color: #1B5E20;&quot;&gt;BT/WiFi&lt;/b&gt;&lt;hr style=&quot;border: 1px solid #A5D6A7; margin: 6px 0;&quot;&gt;&lt;span style=&quot;font-size: 12px; color: #2E7D32;&quot;&gt;WiFi chipset handles 802.11 connectivity and often also includes BlueTooth.&lt;/span&gt;" vertex="1">
+          <mxGeometry height="85" width="300" x="580" y="830" as="geometry" />
+        </mxCell>
+        <mxCell id="znqnyk_9NlMsixgug5nS-15" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#388E3C;strokeWidth=2;shadow=1;arcSize=6;spacingTop=8;spacingLeft=12;spacingRight=12;verticalAlign=top;align=left;" value="&lt;b style=&quot;font-size: 16px; color: #1B5E20;&quot;&gt;Baseband&lt;/b&gt;&lt;hr style=&quot;border: 1px solid #A5D6A7; margin: 6px 0;&quot;&gt;&lt;span style=&quot;font-size: 12px; color: #2E7D32;&quot;&gt;Baseband (modem) provides cell connectivity (outside WiFi only devices).&lt;/span&gt;" vertex="1">
+          <mxGeometry height="85" width="300" x="580" y="950" as="geometry" />
+        </mxCell>
+        <mxCell id="znqnyk_9NlMsixgug5nS-16" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF8E1;strokeColor=#FF8F00;strokeWidth=2;shadow=1;arcSize=6;spacing=5;verticalAlign=top;align=center;" value="&lt;div style=&quot;text-align: center;&quot;&gt;&lt;b style=&quot;font-size: 16px; color: #E65100;&quot;&gt;RAM&lt;/b&gt;&lt;hr style=&quot;border: 1px solid #FFE082; margin: 6px 0;&quot;&gt;&lt;span style=&quot;font-size: 11px; color: #5D4037;&quot;&gt;Provides AP with memory &amp;amp; DMA from others&lt;/span&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="90" width="140" x="580" y="230" as="geometry" />
+        </mxCell>
+        <mxCell id="znqnyk_9NlMsixgug5nS-17" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF8E1;strokeColor=#FF8F00;strokeWidth=2;shadow=1;arcSize=6;spacing=5;verticalAlign=top;align=center;" value="&lt;div style=&quot;text-align: center;&quot;&gt;&lt;b style=&quot;font-size: 16px; color: #E65100;&quot;&gt;NAND&lt;/b&gt;&lt;hr style=&quot;border: 1px solid #FFE082; margin: 6px 0;&quot;&gt;&lt;span style=&quot;font-size: 11px; color: #5D4037;&quot;&gt;Flash memory provides persistent storage&lt;/span&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="90" width="140" x="740" y="230" as="geometry" />
+        </mxCell>
+        <mxCell id="znqnyk_9NlMsixgug5nS-18" edge="1" parent="1" source="znqnyk_9NlMsixgug5nS-4" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=3;strokeColor=#546E7A;endArrow=none;startArrow=none;entryX=0;entryY=0.08;" target="znqnyk_9NlMsixgug5nS-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="znqnyk_9NlMsixgug5nS-19" edge="1" parent="1" source="znqnyk_9NlMsixgug5nS-5" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=3;strokeColor=#546E7A;endArrow=none;startArrow=none;entryX=0;entryY=0.25;" target="znqnyk_9NlMsixgug5nS-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="znqnyk_9NlMsixgug5nS-20" edge="1" parent="1" source="znqnyk_9NlMsixgug5nS-6" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=3;strokeColor=#546E7A;endArrow=none;startArrow=none;entryX=0;entryY=0.42;" target="znqnyk_9NlMsixgug5nS-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="znqnyk_9NlMsixgug5nS-21" edge="1" parent="1" source="znqnyk_9NlMsixgug5nS-7" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=3;strokeColor=#546E7A;endArrow=none;startArrow=none;entryX=0;entryY=0.59;" target="znqnyk_9NlMsixgug5nS-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="znqnyk_9NlMsixgug5nS-22" edge="1" parent="1" source="znqnyk_9NlMsixgug5nS-8" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=3;strokeColor=#546E7A;endArrow=none;startArrow=none;entryX=0;entryY=0.76;" target="znqnyk_9NlMsixgug5nS-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="znqnyk_9NlMsixgug5nS-23" edge="1" parent="1" source="znqnyk_9NlMsixgug5nS-9" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=3;strokeColor=#546E7A;endArrow=none;startArrow=none;entryX=0;entryY=0.93;" target="znqnyk_9NlMsixgug5nS-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="znqnyk_9NlMsixgug5nS-24" edge="1" parent="1" source="znqnyk_9NlMsixgug5nS-10" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=3;strokeColor=#546E7A;endArrow=none;startArrow=none;entryX=1;entryY=0.08;" target="znqnyk_9NlMsixgug5nS-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="znqnyk_9NlMsixgug5nS-25" edge="1" parent="1" source="znqnyk_9NlMsixgug5nS-11" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=3;strokeColor=#546E7A;endArrow=none;startArrow=none;entryX=1;entryY=0.25;" target="znqnyk_9NlMsixgug5nS-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="znqnyk_9NlMsixgug5nS-26" edge="1" parent="1" source="znqnyk_9NlMsixgug5nS-12" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=3;strokeColor=#546E7A;endArrow=none;startArrow=none;entryX=1;entryY=0.42;" target="znqnyk_9NlMsixgug5nS-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="znqnyk_9NlMsixgug5nS-27" edge="1" parent="1" source="znqnyk_9NlMsixgug5nS-13" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=3;strokeColor=#546E7A;endArrow=none;startArrow=none;entryX=1;entryY=0.59;" target="znqnyk_9NlMsixgug5nS-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="znqnyk_9NlMsixgug5nS-28" edge="1" parent="1" source="znqnyk_9NlMsixgug5nS-14" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=3;strokeColor=#546E7A;endArrow=none;startArrow=none;entryX=1;entryY=0.76;" target="znqnyk_9NlMsixgug5nS-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="znqnyk_9NlMsixgug5nS-29" edge="1" parent="1" source="znqnyk_9NlMsixgug5nS-15" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=3;strokeColor=#546E7A;endArrow=none;startArrow=none;entryX=1;entryY=0.93;" target="znqnyk_9NlMsixgug5nS-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="znqnyk_9NlMsixgug5nS-30" edge="1" parent="1" source="znqnyk_9NlMsixgug5nS-16" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#FF8F00;dashed=1;startArrow=classic;endArrow=classic;exitX=0.5;exitY=1;entryX=0.23;entryY=0;" target="znqnyk_9NlMsixgug5nS-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="znqnyk_9NlMsixgug5nS-31" edge="1" parent="1" source="znqnyk_9NlMsixgug5nS-17" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#FF8F00;dashed=1;startArrow=classic;endArrow=classic;exitX=0.5;exitY=1;entryX=0.77;entryY=0;" target="znqnyk_9NlMsixgug5nS-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="ZlPdC3T0DbiqAa1EkPH2" name="第 3 页">
+    <mxGraphModel dx="1370" dy="839" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="L3vqry6cuXJ4YUd-MeIt-1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FAFAFA;strokeColor=#B0BEC5;strokeWidth=2;dashed=1;dashPattern=8 8;align=right;verticalAlign=bottom;spacing=15;fontColor=#90A4AE;fontSize=14;fontStyle=1;arcSize=2;" value="&lt;font face=&quot;Comic Sans MS&quot;&gt;SoC (System-on-Chip) 芯片物理边界&lt;/font&gt;" vertex="1">
+          <mxGeometry height="610" width="1160" x="110" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="L3vqry6cuXJ4YUd-MeIt-2" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Comic Sans MS;" value="&lt;b style=&quot;font-size: 24px; color: rgb(44, 62, 80);&quot;&gt;片上系统 (SoC) high level架构&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size: 14px; color: rgb(127, 140, 141);&quot;&gt;通过中央互联总线 (Interconnect Bus) 连接各个 IP 核的典型硬件概览&lt;/span&gt;" vertex="1">
+          <mxGeometry height="60" width="700" x="340" y="140" as="geometry" />
+        </mxCell>
+        <mxCell id="L3vqry6cuXJ4YUd-MeIt-3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#37474F;strokeColor=none;fontColor=#ECEFF1;shadow=1;arcSize=10;fontFamily=Comic Sans MS;" value="&lt;b style=&quot;font-size:20px;letter-spacing:10px;&quot;&gt;&lt;font&gt;互 联 总 线 &amp;nbsp; (Interconnect Bus)&lt;/font&gt;&lt;/b&gt;" vertex="1">
+          <mxGeometry height="45" width="1080" x="150" y="500" as="geometry" />
+        </mxCell>
+        <mxCell id="L3vqry6cuXJ4YUd-MeIt-4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1F5FE;strokeColor=#0288D1;strokeWidth=2;shadow=1;arcSize=6;spacingTop=6;spacingLeft=10;spacingRight=10;verticalAlign=top;align=left;fontFamily=Comic Sans MS;" value="&lt;b style=&quot;font-size: 15px; color: #01579B;&quot;&gt;应用处理器 (AP)&lt;/b&gt;&lt;hr style=&quot;border: 1px solid #81D4FA; margin: 4px 0;&quot;&gt;&lt;span style=&quot;font-size: 11px; color: #455A64;&quot;&gt;多核 CPU，负责运行诸如 Android 等“高级操作系统 (HLOS)”。&lt;/span&gt;" vertex="1">
+          <mxGeometry height="110" width="170" x="150" y="350" as="geometry" />
+        </mxCell>
+        <mxCell id="L3vqry6cuXJ4YUd-MeIt-5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1F5FE;strokeColor=#0288D1;strokeWidth=2;shadow=1;arcSize=6;spacingTop=6;spacingLeft=10;spacingRight=10;verticalAlign=top;align=left;fontFamily=Comic Sans MS;" value="&lt;b style=&quot;font-size: 15px; color: #01579B;&quot;&gt;图形处理器 (GPU)&lt;/b&gt;&lt;hr style=&quot;border: 1px solid #81D4FA; margin: 4px 0;&quot;&gt;&lt;span style=&quot;font-size: 11px; color: #455A64;&quot;&gt;处理屏幕图像渲染任务，并提供系统级的硬件加速。&lt;/span&gt;" vertex="1">
+          <mxGeometry height="110" width="170" x="330" y="350" as="geometry" />
+        </mxCell>
+        <mxCell id="L3vqry6cuXJ4YUd-MeIt-6" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1F5FE;strokeColor=#0288D1;strokeWidth=2;shadow=1;arcSize=6;spacingTop=6;spacingLeft=10;spacingRight=10;verticalAlign=top;align=left;fontFamily=Comic Sans MS;" value="&lt;b style=&quot;font-size: 15px; color: #01579B;&quot;&gt;数字信号处理器 (DSP)&lt;/b&gt;&lt;hr style=&quot;border: 1px solid #81D4FA; margin: 4px 0;&quot;&gt;&lt;span style=&quot;font-size: 11px; color: #455A64;&quot;&gt;处理语音和音频编解码，有时也用于卸载矢量计算任务。&lt;/span&gt;" vertex="1">
+          <mxGeometry height="110" width="170" x="510" y="350" as="geometry" />
+        </mxCell>
+        <mxCell id="L3vqry6cuXJ4YUd-MeIt-7" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1F5FE;strokeColor=#0288D1;strokeWidth=2;shadow=1;arcSize=6;spacingTop=6;spacingLeft=10;spacingRight=10;verticalAlign=top;align=left;fontFamily=Comic Sans MS;" value="&lt;b style=&quot;font-size: 15px; color: #01579B;&quot;&gt;图像信号处理器 (ISP)&lt;/b&gt;&lt;hr style=&quot;border: 1px solid #81D4FA; margin: 4px 0;&quot;&gt;&lt;span style=&quot;font-size: 11px; color: #455A64;&quot;&gt;处理千万像素级的巨量照片数据，执行面部检测等计算。&lt;/span&gt;" vertex="1">
+          <mxGeometry height="110" width="170" x="690" y="350" as="geometry" />
+        </mxCell>
+        <mxCell id="L3vqry6cuXJ4YUd-MeIt-8" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#388E3C;strokeWidth=2;shadow=1;arcSize=6;spacingTop=6;spacingLeft=10;spacingRight=10;verticalAlign=top;align=left;fontFamily=Comic Sans MS;" value="&lt;b style=&quot;font-size: 15px; color: #1B5E20;&quot;&gt;蓝牙 / WiFi&lt;/b&gt;&lt;hr style=&quot;border: 1px solid #A5D6A7; margin: 4px 0;&quot;&gt;&lt;span style=&quot;font-size: 11px; color: #2E7D32;&quot;&gt;WiFi芯片组，处理 802.11 无线连接，通常也集成了蓝牙功能。&lt;/span&gt;" vertex="1">
+          <mxGeometry height="110" width="170" x="870" y="350" as="geometry" />
+        </mxCell>
+        <mxCell id="L3vqry6cuXJ4YUd-MeIt-9" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#388E3C;strokeWidth=2;shadow=1;arcSize=6;spacingTop=6;spacingLeft=10;spacingRight=10;verticalAlign=top;align=left;fontFamily=Comic Sans MS;" value="&lt;b style=&quot;font-size: 15px; color: #1B5E20;&quot;&gt;基带 (Modem)&lt;/b&gt;&lt;hr style=&quot;border: 1px solid #A5D6A7; margin: 4px 0;&quot;&gt;&lt;span style=&quot;font-size: 11px; color: #2E7D32;&quot;&gt;调制解调器，为设备提供蜂窝网络连接（纯WiFi设备除外）。&lt;/span&gt;" vertex="1">
+          <mxGeometry height="110" width="170" x="1050" y="350" as="geometry" />
+        </mxCell>
+        <mxCell id="L3vqry6cuXJ4YUd-MeIt-10" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF8E1;strokeColor=#FF8F00;strokeWidth=2;shadow=1;arcSize=6;spacing=2;verticalAlign=top;align=center;fontFamily=Comic Sans MS;" value="&lt;div style=&quot;text-align: center;&quot;&gt;&lt;b style=&quot;font-size: 14px; color: #E65100;&quot;&gt;运行内存&lt;br&gt;(RAM)&lt;/b&gt;&lt;hr style=&quot;border: 1px solid #FFE082; margin: 4px 0;&quot;&gt;&lt;span style=&quot;font-size: 10px; color: #5D4037;&quot;&gt;提供AP内存及DMA访问&lt;/span&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="100" width="80" x="560" y="210" as="geometry" />
+        </mxCell>
+        <mxCell id="L3vqry6cuXJ4YUd-MeIt-11" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF8E1;strokeColor=#FF8F00;strokeWidth=2;shadow=1;arcSize=6;spacing=2;verticalAlign=top;align=center;fontFamily=Comic Sans MS;" value="&lt;div style=&quot;text-align: center;&quot;&gt;&lt;b style=&quot;font-size: 14px; color: #E65100;&quot;&gt;闪存&lt;br&gt;(NAND)&lt;/b&gt;&lt;hr style=&quot;border: 1px solid #FFE082; margin: 4px 0;&quot;&gt;&lt;span style=&quot;font-size: 10px; color: #5D4037;&quot;&gt;提供系统持久化(非易失)存储&lt;/span&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="100" width="80" x="730" y="210" as="geometry" />
+        </mxCell>
+        <mxCell id="L3vqry6cuXJ4YUd-MeIt-12" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1F5FE;strokeColor=#0288D1;strokeWidth=2;shadow=1;arcSize=6;spacingTop=6;spacingLeft=10;spacingRight=10;verticalAlign=top;align=left;fontFamily=Comic Sans MS;" value="&lt;b style=&quot;font-size: 15px; color: #01579B;&quot;&gt;神经网络 / AI (NPU)&lt;/b&gt;&lt;hr style=&quot;border: 1px solid #81D4FA; margin: 4px 0;&quot;&gt;&lt;span style=&quot;font-size: 11px; color: #455A64;&quot;&gt;2019年后的芯片常包含专用的神经网络处理单元，以模拟神经网络计算。&lt;/span&gt;" vertex="1">
+          <mxGeometry height="110" width="170" x="150" y="580" as="geometry" />
+        </mxCell>
+        <mxCell id="L3vqry6cuXJ4YUd-MeIt-13" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1F5FE;strokeColor=#0288D1;strokeWidth=2;shadow=1;arcSize=6;spacingTop=6;spacingLeft=10;spacingRight=10;verticalAlign=top;align=left;fontFamily=Comic Sans MS;" value="&lt;b style=&quot;font-size: 15px; color: #01579B;&quot;&gt;张量处理器 (TPU)&lt;/b&gt;&lt;hr style=&quot;border: 1px solid #81D4FA; margin: 4px 0;&quot;&gt;&lt;span style=&quot;font-size: 11px; color: #455A64;&quot;&gt;AI所需的张量运算可由特定的计算DSP完成，或由专用的TPU执行。&lt;/span&gt;" vertex="1">
+          <mxGeometry height="110" width="170" x="330" y="580" as="geometry" />
+        </mxCell>
+        <mxCell id="L3vqry6cuXJ4YUd-MeIt-14" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E0F2F1;strokeColor=#00897B;strokeWidth=2;shadow=1;arcSize=6;spacingTop=6;spacingLeft=10;spacingRight=10;verticalAlign=top;align=left;fontFamily=Comic Sans MS;" value="&lt;b style=&quot;font-size: 15px; color: #004D40;&quot;&gt;电源管理 (PMIC)&lt;/b&gt;&lt;hr style=&quot;border: 1px solid #80CBC4; margin: 4px 0;&quot;&gt;&lt;span style=&quot;font-size: 11px; color: #37474F;&quot;&gt;电源管理集成电路，负责为系统内的各个组件仲裁和分配电力。&lt;/span&gt;" vertex="1">
+          <mxGeometry height="110" width="170" x="510" y="580" as="geometry" />
+        </mxCell>
+        <mxCell id="L3vqry6cuXJ4YUd-MeIt-15" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E0F2F1;strokeColor=#00897B;strokeWidth=2;shadow=1;arcSize=6;spacingTop=6;spacingLeft=10;spacingRight=10;verticalAlign=top;align=left;fontFamily=Comic Sans MS;" value="&lt;b style=&quot;font-size: 15px; color: #004D40;&quot;&gt;安全处理单元 (SPU)&lt;/b&gt;&lt;hr style=&quot;border: 1px solid #80CBC4; margin: 4px 0;&quot;&gt;&lt;span style=&quot;font-size: 11px; color: #37474F;&quot;&gt;独立于主CPU之外，专门处理密码学运算并提供底层安全服务。&lt;/span&gt;" vertex="1">
+          <mxGeometry height="110" width="170" x="690" y="580" as="geometry" />
+        </mxCell>
+        <mxCell id="L3vqry6cuXJ4YUd-MeIt-16" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E0F2F1;strokeColor=#00897B;strokeWidth=2;shadow=1;arcSize=6;spacingTop=6;spacingLeft=10;spacingRight=10;verticalAlign=top;align=left;fontFamily=Comic Sans MS;" value="&lt;b style=&quot;font-size: 15px; color: rgb(0, 77, 64);&quot;&gt;Sensor Hub&lt;/b&gt;&lt;hr style=&quot;border: 1px solid rgb(128, 203, 196); margin: 4px 0px;&quot;&gt;&lt;span style=&quot;font-size: 11px; color: rgb(55, 71, 79);&quot;&gt;控制并聚合来自加速度计、陀螺仪等的数据，建立设备的“上下文”。&lt;/span&gt;" vertex="1">
+          <mxGeometry height="110" width="170" x="870" y="580" as="geometry" />
+        </mxCell>
+        <mxCell id="L3vqry6cuXJ4YUd-MeIt-17" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E0F2F1;strokeColor=#00897B;strokeWidth=2;shadow=1;arcSize=6;spacingTop=6;spacingLeft=10;spacingRight=10;verticalAlign=top;align=left;fontFamily=Comic Sans MS;" value="&lt;b style=&quot;font-size: 15px; color: #004D40;&quot;&gt;外设 (Peripherals)&lt;/b&gt;&lt;hr style=&quot;border: 1px solid #80CBC4; margin: 4px 0;&quot;&gt;&lt;span style=&quot;font-size: 11px; color: #37474F;&quot;&gt;各类其他外围设备，通常通过 I²C 协议或其它硬件接口接入系统。&lt;/span&gt;" vertex="1">
+          <mxGeometry height="110" width="170" x="1050" y="580" as="geometry" />
+        </mxCell>
+        <mxCell id="L3vqry6cuXJ4YUd-MeIt-20" edge="1" parent="1" source="L3vqry6cuXJ4YUd-MeIt-4" style="edgeStyle=none;html=1;strokeWidth=3;strokeColor=#546E7A;endArrow=none;exitX=0.5;exitY=1;entryX=0.08;entryY=0;" target="L3vqry6cuXJ4YUd-MeIt-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="L3vqry6cuXJ4YUd-MeIt-21" edge="1" parent="1" source="L3vqry6cuXJ4YUd-MeIt-5" style="edgeStyle=none;html=1;strokeWidth=3;strokeColor=#546E7A;endArrow=none;exitX=0.5;exitY=1;entryX=0.25;entryY=0;" target="L3vqry6cuXJ4YUd-MeIt-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="L3vqry6cuXJ4YUd-MeIt-22" edge="1" parent="1" source="L3vqry6cuXJ4YUd-MeIt-6" style="edgeStyle=none;html=1;strokeWidth=3;strokeColor=#546E7A;endArrow=none;exitX=0.5;exitY=1;entryX=0.41;entryY=0;" target="L3vqry6cuXJ4YUd-MeIt-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="L3vqry6cuXJ4YUd-MeIt-23" edge="1" parent="1" source="L3vqry6cuXJ4YUd-MeIt-7" style="edgeStyle=none;html=1;strokeWidth=3;strokeColor=#546E7A;endArrow=none;exitX=0.5;exitY=1;entryX=0.58;entryY=0;" target="L3vqry6cuXJ4YUd-MeIt-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="L3vqry6cuXJ4YUd-MeIt-24" edge="1" parent="1" source="L3vqry6cuXJ4YUd-MeIt-8" style="edgeStyle=none;html=1;strokeWidth=3;strokeColor=#546E7A;endArrow=none;exitX=0.5;exitY=1;entryX=0.75;entryY=0;" target="L3vqry6cuXJ4YUd-MeIt-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="L3vqry6cuXJ4YUd-MeIt-25" edge="1" parent="1" source="L3vqry6cuXJ4YUd-MeIt-9" style="edgeStyle=none;html=1;strokeWidth=3;strokeColor=#546E7A;endArrow=none;exitX=0.5;exitY=1;entryX=0.91;entryY=0;" target="L3vqry6cuXJ4YUd-MeIt-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="L3vqry6cuXJ4YUd-MeIt-26" edge="1" parent="1" source="L3vqry6cuXJ4YUd-MeIt-12" style="edgeStyle=none;html=1;strokeWidth=3;strokeColor=#546E7A;endArrow=none;exitX=0.5;exitY=0;entryX=0.08;entryY=1;" target="L3vqry6cuXJ4YUd-MeIt-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="L3vqry6cuXJ4YUd-MeIt-27" edge="1" parent="1" source="L3vqry6cuXJ4YUd-MeIt-13" style="edgeStyle=none;html=1;strokeWidth=3;strokeColor=#546E7A;endArrow=none;exitX=0.5;exitY=0;entryX=0.25;entryY=1;" target="L3vqry6cuXJ4YUd-MeIt-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="L3vqry6cuXJ4YUd-MeIt-28" edge="1" parent="1" source="L3vqry6cuXJ4YUd-MeIt-14" style="edgeStyle=none;html=1;strokeWidth=3;strokeColor=#546E7A;endArrow=none;exitX=0.5;exitY=0;entryX=0.41;entryY=1;" target="L3vqry6cuXJ4YUd-MeIt-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="L3vqry6cuXJ4YUd-MeIt-29" edge="1" parent="1" source="L3vqry6cuXJ4YUd-MeIt-15" style="edgeStyle=none;html=1;strokeWidth=3;strokeColor=#546E7A;endArrow=none;exitX=0.5;exitY=0;entryX=0.58;entryY=1;" target="L3vqry6cuXJ4YUd-MeIt-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="L3vqry6cuXJ4YUd-MeIt-30" edge="1" parent="1" source="L3vqry6cuXJ4YUd-MeIt-16" style="edgeStyle=none;html=1;strokeWidth=3;strokeColor=#546E7A;endArrow=none;exitX=0.5;exitY=0;entryX=0.75;entryY=1;" target="L3vqry6cuXJ4YUd-MeIt-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="L3vqry6cuXJ4YUd-MeIt-31" edge="1" parent="1" source="L3vqry6cuXJ4YUd-MeIt-17" style="edgeStyle=none;html=1;strokeWidth=3;strokeColor=#546E7A;endArrow=none;exitX=0.5;exitY=0;entryX=0.91;entryY=1;" target="L3vqry6cuXJ4YUd-MeIt-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="XrumGw3OUpGZ98oQuA85" name="第 4 页">
+    <mxGraphModel dx="1128" dy="651" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="2lWPLS22yn9Cp41EMGf9-1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FAFAFA;strokeColor=#B0BEC5;strokeWidth=2;dashed=1;dashPattern=8 8;align=right;verticalAlign=bottom;spacing=15;fontColor=#90A4AE;fontSize=14;fontStyle=1;arcSize=2;fontFamily=Comic Sans MS;" value="SoC (System-on-Chip) 芯片/封装物理边界" vertex="1">
+          <mxGeometry height="610" width="1160" x="150" y="126" as="geometry" />
+        </mxCell>
+        <mxCell id="2lWPLS22yn9Cp41EMGf9-2" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Comic Sans MS;" value="&lt;b style=&quot;font-size: 22px; color: rgb(44, 62, 80);&quot;&gt;片上系统 (SoC) 内部 IP 核架构&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size: 13px; color: rgb(127, 140, 141);&quot;&gt;展示 SoC 内部核心通过内部互联总线通信的拓扑。&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;font-size: 13px; color: rgb(127, 140, 141);&quot;&gt;DDR 采用封装级集成(SiP)独立托管，不直接挂载在系统通用总线上。&lt;/span&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="700" x="380" y="135" as="geometry" />
+        </mxCell>
+        <mxCell id="2lWPLS22yn9Cp41EMGf9-3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF8E1;strokeColor=#FF8F00;strokeWidth=2;shadow=1;arcSize=6;spacingTop=6;spacingLeft=12;spacingRight=12;verticalAlign=top;align=left;fontFamily=Comic Sans MS;" value="&lt;b style=&quot;font-size: 15px; color: rgb(230, 81, 0);&quot;&gt;LPDDR 运行内存 (SiP / PoP / 先进封装集成)&lt;/b&gt;&lt;hr style=&quot;border: 1px solid rgb(255, 224, 130); margin: 4px 0px;&quot;&gt;&lt;span style=&quot;font-size: 11px; color: rgb(93, 64, 55);&quot;&gt;一般来说，DRAM物理上是独立的存储晶圆，不属于 SoC 逻辑晶圆（单片集成/eDRAM除外）。&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;font-size: 11px; color: rgb(93, 64, 55);&quot;&gt;SoC 内部通过专用内存控制器和 PHY 与封装内的 DRAM 通信，DRAM 不直接挂载在 SoC 内部的通用互联总线（如 AXI/CHI）上。&lt;/span&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="75" width="1080" x="190" y="230" as="geometry" />
+        </mxCell>
+        <mxCell id="2lWPLS22yn9Cp41EMGf9-4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#37474F;strokeColor=none;fontColor=#ECEFF1;shadow=1;arcSize=10;fontFamily=Comic Sans MS;" value="&lt;b style=&quot;font-size:20px;letter-spacing:10px;&quot;&gt;内 部 互 联 总 线 &amp;nbsp; (System Interconnect Bus)&lt;/b&gt;" vertex="1">
+          <mxGeometry height="45" width="1080" x="190" y="510" as="geometry" />
+        </mxCell>
+        <mxCell id="2lWPLS22yn9Cp41EMGf9-5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1F5FE;strokeColor=#0288D1;strokeWidth=2;shadow=1;arcSize=6;spacingTop=6;spacingLeft=10;spacingRight=10;verticalAlign=top;align=left;fontFamily=Comic Sans MS;" value="&lt;b style=&quot;font-size: 15px; color: #01579B;&quot;&gt;应用处理器 (AP / CPU)&lt;/b&gt;&lt;hr style=&quot;border: 1px solid #81D4FA; margin: 4px 0;&quot;&gt;&lt;span style=&quot;font-size: 11px; color: #455A64;&quot;&gt;多核高性能中央处理器，负责运行操作系统 (HLOS) 及核心调度。&lt;/span&gt;" vertex="1">
+          <mxGeometry height="110" width="170" x="190" y="360" as="geometry" />
+        </mxCell>
+        <mxCell id="2lWPLS22yn9Cp41EMGf9-6" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1F5FE;strokeColor=#0288D1;strokeWidth=2;shadow=1;arcSize=6;spacingTop=6;spacingLeft=10;spacingRight=10;verticalAlign=top;align=left;fontFamily=Comic Sans MS;" value="&lt;b style=&quot;font-size: 15px; color: #01579B;&quot;&gt;图形处理器 (GPU)&lt;/b&gt;&lt;hr style=&quot;border: 1px solid #81D4FA; margin: 4px 0;&quot;&gt;&lt;span style=&quot;font-size: 11px; color: #455A64;&quot;&gt;负责屏幕图形渲染、UI界面合成以及 GPU 硬件计算加速。&lt;/span&gt;" vertex="1">
+          <mxGeometry height="110" width="170" x="370" y="360" as="geometry" />
+        </mxCell>
+        <mxCell id="2lWPLS22yn9Cp41EMGf9-7" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1F5FE;strokeColor=#0288D1;strokeWidth=2;shadow=1;arcSize=6;spacingTop=6;spacingLeft=10;spacingRight=10;verticalAlign=top;align=left;fontFamily=Comic Sans MS;" value="&lt;b style=&quot;font-size: 15px; color: #01579B;&quot;&gt;数字信号处理器 (DSP)&lt;/b&gt;&lt;hr style=&quot;border: 1px solid #81D4FA; margin: 4px 0;&quot;&gt;&lt;span style=&quot;font-size: 11px; color: #455A64;&quot;&gt;专门用于高效处理语音、音频编解码以及超低功耗待机监听。&lt;/span&gt;" vertex="1">
+          <mxGeometry height="110" width="170" x="550" y="360" as="geometry" />
+        </mxCell>
+        <mxCell id="2lWPLS22yn9Cp41EMGf9-8" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1F5FE;strokeColor=#0288D1;strokeWidth=2;shadow=1;arcSize=6;spacingTop=6;spacingLeft=10;spacingRight=10;verticalAlign=top;align=left;fontFamily=Comic Sans MS;" value="&lt;b style=&quot;font-size: 15px; color: #01579B;&quot;&gt;图像信号处理器 (ISP)&lt;/b&gt;&lt;hr style=&quot;border: 1px solid #81D4FA; margin: 4px 0;&quot;&gt;&lt;span style=&quot;font-size: 11px; color: #455A64;&quot;&gt;硬件级处理相机传感器传回的原始数据，执行降噪、对焦与色彩。&lt;/span&gt;" vertex="1">
+          <mxGeometry height="110" width="170" x="730" y="360" as="geometry" />
+        </mxCell>
+        <mxCell id="2lWPLS22yn9Cp41EMGf9-9" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#388E3C;strokeWidth=2;shadow=1;arcSize=6;spacingTop=6;spacingLeft=10;spacingRight=10;verticalAlign=top;align=left;fontFamily=Comic Sans MS;" value="&lt;b style=&quot;font-size: 15px; color: #1B5E20;&quot;&gt;蓝牙 / WiFi 协议栈&lt;/b&gt;&lt;hr style=&quot;border: 1px solid #A5D6A7; margin: 4px 0;&quot;&gt;&lt;span style=&quot;font-size: 11px; color: #2E7D32;&quot;&gt;处理无线连接的基带与协议层逻辑，对接外部射频前端前端。&lt;/span&gt;" vertex="1">
+          <mxGeometry height="110" width="170" x="910" y="360" as="geometry" />
+        </mxCell>
+        <mxCell id="2lWPLS22yn9Cp41EMGf9-10" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#388E3C;strokeWidth=2;shadow=1;arcSize=6;spacingTop=6;spacingLeft=10;spacingRight=10;verticalAlign=top;align=left;fontFamily=Comic Sans MS;" value="&lt;b style=&quot;font-size: 15px; color: #1B5E20;&quot;&gt;蜂窝基带 (Modem)&lt;/b&gt;&lt;hr style=&quot;border: 1px solid #A5D6A7; margin: 4px 0;&quot;&gt;&lt;span style=&quot;font-size: 11px; color: #2E7D32;&quot;&gt;处理 4G/5G 移动网络通信协议计算，包含专用数字信号处理器。&lt;/span&gt;" vertex="1">
+          <mxGeometry height="110" width="170" x="1090" y="360" as="geometry" />
+        </mxCell>
+        <mxCell id="2lWPLS22yn9Cp41EMGf9-11" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1F5FE;strokeColor=#0288D1;strokeWidth=2;shadow=1;arcSize=6;spacingTop=6;spacingLeft=10;spacingRight=10;verticalAlign=top;align=left;fontFamily=Comic Sans MS;" value="&lt;b style=&quot;font-size: 15px; color: #01579B;&quot;&gt;神经网络单元 (NPU)&lt;/b&gt;&lt;hr style=&quot;border: 1px solid #81D4FA; margin: 4px 0;&quot;&gt;&lt;span style=&quot;font-size: 11px; color: #455A64;&quot;&gt;专为端侧 AI 设计的加速器，高效执行深度学习中的矩阵和矢量运算。&lt;/span&gt;" vertex="1">
+          <mxGeometry height="110" width="170" x="190" y="590" as="geometry" />
+        </mxCell>
+        <mxCell id="2lWPLS22yn9Cp41EMGf9-12" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1F5FE;strokeColor=#0288D1;strokeWidth=2;shadow=1;arcSize=6;spacingTop=6;spacingLeft=10;spacingRight=10;verticalAlign=top;align=left;fontFamily=Comic Sans MS;" value="&lt;b style=&quot;font-size: 15px; color: #01579B;&quot;&gt;张量处理器 (TPU)&lt;/b&gt;&lt;hr style=&quot;border: 1px solid #81D4FA; margin: 4px 0;&quot;&gt;&lt;span style=&quot;font-size: 11px; color: #455A64;&quot;&gt;执行更高级的大规模 AI 张量运算，部分SoC中由高阶 DSP 或 NPU 复用。&lt;/span&gt;" vertex="1">
+          <mxGeometry height="110" width="170" x="370" y="590" as="geometry" />
+        </mxCell>
+        <mxCell id="2lWPLS22yn9Cp41EMGf9-13" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E0F2F1;strokeColor=#00897B;strokeWidth=2;shadow=1;arcSize=6;spacingTop=6;spacingLeft=10;spacingRight=10;verticalAlign=top;align=left;fontFamily=Comic Sans MS;" value="&lt;b style=&quot;font-size: 15px; color: #004D40;&quot;&gt;电源控制逻辑&lt;/b&gt;&lt;hr style=&quot;border: 1px solid #80CBC4; margin: 4px 0;&quot;&gt;&lt;span style=&quot;font-size: 11px; color: #37474F;&quot;&gt;SoC 内部的分区电源动态管理逻辑 (DVFS)，对接外部 PMIC 芯片。&lt;/span&gt;" vertex="1">
+          <mxGeometry height="110" width="170" x="550" y="590" as="geometry" />
+        </mxCell>
+        <mxCell id="2lWPLS22yn9Cp41EMGf9-14" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E0F2F1;strokeColor=#00897B;strokeWidth=2;shadow=1;arcSize=6;spacingTop=6;spacingLeft=10;spacingRight=10;verticalAlign=top;align=left;fontFamily=Comic Sans MS;" value="&lt;b style=&quot;font-size: 15px; color: #004D40;&quot;&gt;安全处理单元 (SPU)&lt;/b&gt;&lt;hr style=&quot;border: 1px solid #80CBC4; margin: 4px 0;&quot;&gt;&lt;span style=&quot;font-size: 11px; color: #37474F;&quot;&gt;物理隔离的安全岛，存放指纹、面部加密密钥及执行高安全操作。&lt;/span&gt;" vertex="1">
+          <mxGeometry height="110" width="170" x="730" y="590" as="geometry" />
+        </mxCell>
+        <mxCell id="2lWPLS22yn9Cp41EMGf9-15" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E0F2F1;strokeColor=#00897B;strokeWidth=2;shadow=1;arcSize=6;spacingTop=6;spacingLeft=10;spacingRight=10;verticalAlign=top;align=left;fontFamily=Comic Sans MS;" value="&lt;b style=&quot;font-size: 15px; color: #004D40;&quot;&gt;传感器中枢 (Hub)&lt;/b&gt;&lt;hr style=&quot;border: 1px solid #80CBC4; margin: 4px 0;&quot;&gt;&lt;span style=&quot;font-size: 11px; color: #37474F;&quot;&gt;超低功耗协同处理器，全天候不间断收集外部传感器数据以建立上下文。&lt;/span&gt;" vertex="1">
+          <mxGeometry height="110" width="170" x="910" y="590" as="geometry" />
+        </mxCell>
+        <mxCell id="2lWPLS22yn9Cp41EMGf9-16" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E0F2F1;strokeColor=#00897B;strokeWidth=2;shadow=1;arcSize=6;spacingTop=6;spacingLeft=10;spacingRight=10;verticalAlign=top;align=left;fontFamily=Comic Sans MS;" value="&lt;b style=&quot;font-size: 15px; color: #004D40;&quot;&gt;外设总线控制器&lt;/b&gt;&lt;hr style=&quot;border: 1px solid #80CBC4; margin: 4px 0;&quot;&gt;&lt;span style=&quot;font-size: 11px; color: #37474F;&quot;&gt;包含 I²C、SPI、UART、GPIO 等通用控制器的物理层与主控单元。&lt;/span&gt;" vertex="1">
+          <mxGeometry height="110" width="170" x="1090" y="590" as="geometry" />
+        </mxCell>
+        <mxCell id="2lWPLS22yn9Cp41EMGf9-17" edge="1" parent="1" source="2lWPLS22yn9Cp41EMGf9-5" style="edgeStyle=none;html=1;strokeWidth=3;strokeColor=#546E7A;endArrow=none;exitX=0.5;exitY=1;entryX=0.08;entryY=0;fontFamily=Comic Sans MS;" target="2lWPLS22yn9Cp41EMGf9-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="2lWPLS22yn9Cp41EMGf9-18" edge="1" parent="1" source="2lWPLS22yn9Cp41EMGf9-6" style="edgeStyle=none;html=1;strokeWidth=3;strokeColor=#546E7A;endArrow=none;exitX=0.5;exitY=1;entryX=0.25;entryY=0;fontFamily=Comic Sans MS;" target="2lWPLS22yn9Cp41EMGf9-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="2lWPLS22yn9Cp41EMGf9-19" edge="1" parent="1" source="2lWPLS22yn9Cp41EMGf9-7" style="edgeStyle=none;html=1;strokeWidth=3;strokeColor=#546E7A;endArrow=none;exitX=0.5;exitY=1;entryX=0.41;entryY=0;fontFamily=Comic Sans MS;" target="2lWPLS22yn9Cp41EMGf9-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="2lWPLS22yn9Cp41EMGf9-20" edge="1" parent="1" source="2lWPLS22yn9Cp41EMGf9-8" style="edgeStyle=none;html=1;strokeWidth=3;strokeColor=#546E7A;endArrow=none;exitX=0.5;exitY=1;entryX=0.58;entryY=0;fontFamily=Comic Sans MS;" target="2lWPLS22yn9Cp41EMGf9-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="2lWPLS22yn9Cp41EMGf9-21" edge="1" parent="1" source="2lWPLS22yn9Cp41EMGf9-9" style="edgeStyle=none;html=1;strokeWidth=3;strokeColor=#546E7A;endArrow=none;exitX=0.5;exitY=1;entryX=0.75;entryY=0;fontFamily=Comic Sans MS;" target="2lWPLS22yn9Cp41EMGf9-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="2lWPLS22yn9Cp41EMGf9-22" edge="1" parent="1" source="2lWPLS22yn9Cp41EMGf9-10" style="edgeStyle=none;html=1;strokeWidth=3;strokeColor=#546E7A;endArrow=none;exitX=0.5;exitY=1;entryX=0.91;entryY=0;fontFamily=Comic Sans MS;" target="2lWPLS22yn9Cp41EMGf9-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="2lWPLS22yn9Cp41EMGf9-23" edge="1" parent="1" source="2lWPLS22yn9Cp41EMGf9-11" style="edgeStyle=none;html=1;strokeWidth=3;strokeColor=#546E7A;endArrow=none;exitX=0.5;exitY=0;entryX=0.08;entryY=1;fontFamily=Comic Sans MS;" target="2lWPLS22yn9Cp41EMGf9-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="2lWPLS22yn9Cp41EMGf9-24" edge="1" parent="1" source="2lWPLS22yn9Cp41EMGf9-12" style="edgeStyle=none;html=1;strokeWidth=3;strokeColor=#546E7A;endArrow=none;exitX=0.5;exitY=0;entryX=0.25;entryY=1;fontFamily=Comic Sans MS;" target="2lWPLS22yn9Cp41EMGf9-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="2lWPLS22yn9Cp41EMGf9-25" edge="1" parent="1" source="2lWPLS22yn9Cp41EMGf9-13" style="edgeStyle=none;html=1;strokeWidth=3;strokeColor=#546E7A;endArrow=none;exitX=0.5;exitY=0;entryX=0.41;entryY=1;fontFamily=Comic Sans MS;" target="2lWPLS22yn9Cp41EMGf9-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="2lWPLS22yn9Cp41EMGf9-26" edge="1" parent="1" source="2lWPLS22yn9Cp41EMGf9-14" style="edgeStyle=none;html=1;strokeWidth=3;strokeColor=#546E7A;endArrow=none;exitX=0.5;exitY=0;entryX=0.58;entryY=1;fontFamily=Comic Sans MS;" target="2lWPLS22yn9Cp41EMGf9-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="2lWPLS22yn9Cp41EMGf9-27" edge="1" parent="1" source="2lWPLS22yn9Cp41EMGf9-15" style="edgeStyle=none;html=1;strokeWidth=3;strokeColor=#546E7A;endArrow=none;exitX=0.5;exitY=0;entryX=0.75;entryY=1;fontFamily=Comic Sans MS;" target="2lWPLS22yn9Cp41EMGf9-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="2lWPLS22yn9Cp41EMGf9-28" edge="1" parent="1" source="2lWPLS22yn9Cp41EMGf9-16" style="edgeStyle=none;html=1;strokeWidth=3;strokeColor=#546E7A;endArrow=none;exitX=0.5;exitY=0;entryX=0.91;entryY=1;fontFamily=Comic Sans MS;" target="2lWPLS22yn9Cp41EMGf9-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="Ms3IdlImSg-Y3wOx61D6" name="第 5 页">
+    <mxGraphModel dx="1128" dy="651" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="W6PaB_jN0Ac-A0Uw5HY8-22" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FAFAFA;strokeColor=#607D8B;strokeWidth=2.5;dashed=1;dashPattern=8 8;align=right;verticalAlign=bottom;spacing=20;fontColor=#455A64;fontSize=15;fontStyle=1;arcSize=1;fontFamily=Comic Sans MS;" value="高端智能手机双面多层高密度主板 (PCB 实际原理图拓扑演进)" vertex="1">
+          <mxGeometry height="835" width="1340" x="727" y="750" as="geometry" />
+        </mxCell>
+        <mxCell id="W6PaB_jN0Ac-A0Uw5HY8-23" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Comic Sans MS;" value="&lt;b style=&quot;font-size: 24px; color: rgb(26, 37, 44);&quot;&gt;智能手机系统级主板架构与外设全景连接拓扑&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size: 13px; color: rgb(84, 110, 122);&quot;&gt;参考高通 QRD、联发科参考设计及量产旗舰机维修原理图重构。明确各离散子系统、射频链路及双供电架构的物理协议总线互连。&lt;/span&gt;" vertex="1">
+          <mxGeometry height="60" width="700" x="1051" y="790" as="geometry" />
+        </mxCell>
+        <mxCell id="W6PaB_jN0Ac-A0Uw5HY8-24" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#212121;strokeColor=#0D47A1;strokeWidth=3;shadow=1;arcSize=4;spacingTop=6;spacingLeft=12;spacingRight=12;verticalAlign=top;align=center;fontFamily=Comic Sans MS;" value="&lt;b style=&quot;font-size: 18px; color: #FFFFFF;&quot;&gt;中央主控 SoC 核心芯片&lt;/b&gt;&lt;br&gt;&lt;b style=&quot;font-size: 13px; color: #CFD8DC;&quot;&gt;(内置 AP应用核 + 5G基带Modem)&lt;/b&gt;&lt;hr style=&quot;border: 1px solid #455A64; margin: 6px 0;&quot;&gt;&lt;span style=&quot;font-size: 12px; color: #ECEFF1;&quot;&gt;系统绝对核心。集成多核CPU/GPU/NPU、射频基带逻辑、相机编解码器及各类标准高速外设控制器 PHY。&lt;/span&gt;" vertex="1">
+          <mxGeometry height="120" width="320" x="1241" y="1085" as="geometry" />
+        </mxCell>
+        <mxCell id="W6PaB_jN0Ac-A0Uw5HY8-25" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF8E1;strokeColor=#FF8F00;strokeWidth=2;shadow=1;arcSize=6;spacingTop=6;spacingLeft=10;spacingRight=10;verticalAlign=top;align=left;fontFamily=Comic Sans MS;" value="&lt;b style=&quot;font-size: 15px; color: rgb(230, 81, 0);&quot;&gt;LPDDR5/5X 运行内存颗粒&lt;/b&gt;&lt;hr style=&quot;border: 1px solid rgb(255, 224, 130); margin: 4px 0px;&quot;&gt;&lt;span style=&quot;font-size: 11px; color: rgb(93, 64, 55);&quot;&gt;通过 PoP 3D /SiP 封装和 SoC 连接，一般就在 SoC 头顶或在旁边紧密排布，走极短距离线宽。&lt;/span&gt;" vertex="1">
+          <mxGeometry height="95" width="240" x="1110" y="890" as="geometry" />
+        </mxCell>
+        <mxCell id="W6PaB_jN0Ac-A0Uw5HY8-26" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF8E1;strokeColor=#FF8F00;strokeWidth=2;shadow=1;arcSize=6;spacingTop=6;spacingLeft=10;spacingRight=10;verticalAlign=top;align=left;fontFamily=Comic Sans MS;" value="&lt;b style=&quot;font-size: 15px; color: #E65100;&quot;&gt;UFS 4.0 闪存芯片 (NAND)&lt;/b&gt;&lt;hr style=&quot;border: 1px solid #FFE082; margin: 4px 0;&quot;&gt;&lt;span style=&quot;font-size: 11px; color: #5D4037;&quot;&gt;独立于 SoC 的大容量离散存储颗粒，存放系统固件、APP 与用户数据。&lt;/span&gt;" vertex="1">
+          <mxGeometry height="95" width="240" x="1450" y="890" as="geometry" />
+        </mxCell>
+        <mxCell id="W6PaB_jN0Ac-A0Uw5HY8-27" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1F5FE;strokeColor=#0288D1;strokeWidth=2;shadow=1;arcSize=6;spacingTop=6;spacingLeft=10;spacingRight=10;verticalAlign=top;align=left;fontFamily=Comic Sans MS;" value="&lt;b style=&quot;font-size: 15px; color: #01579B;&quot;&gt;多摄图像模组 (CMOS Sensor)&lt;/b&gt;&lt;hr style=&quot;border: 1px solid #81D4FA; margin: 4px 0;&quot;&gt;&lt;span style=&quot;font-size: 11px; color: #455A64;&quot;&gt;主摄/超广角/长焦多感光元件，含 OIS 光学防抖及马达控制。&lt;/span&gt;" vertex="1">
+          <mxGeometry height="95" width="240" x="780" y="890" as="geometry" />
+        </mxCell>
+        <mxCell id="W6PaB_jN0Ac-A0Uw5HY8-28" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1F5FE;strokeColor=#0288D1;strokeWidth=2;shadow=1;arcSize=6;spacingTop=6;spacingLeft=10;spacingRight=10;verticalAlign=top;align=left;fontFamily=Comic Sans MS;" value="&lt;b style=&quot;font-size: 15px; color: #01579B;&quot;&gt;OLED 高刷显示屏 &amp;amp; 触控&lt;/b&gt;&lt;hr style=&quot;border: 1px solid #81D4FA; margin: 4px 0;&quot;&gt;&lt;span style=&quot;font-size: 11px; color: #455A64;&quot;&gt;高刷屏幕面板，集成独立 Touch 触控 IC、指纹透光区。&lt;/span&gt;" vertex="1">
+          <mxGeometry height="95" width="240" x="780" y="1020" as="geometry" />
+        </mxCell>
+        <mxCell id="W6PaB_jN0Ac-A0Uw5HY8-29" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1F5FE;strokeColor=#0288D1;strokeWidth=2;shadow=1;arcSize=6;spacingTop=6;spacingLeft=10;spacingRight=10;verticalAlign=top;align=left;fontFamily=Comic Sans MS;" value="&lt;b style=&quot;font-size: 15px; color: #01579B;&quot;&gt;超声波指纹 &amp;amp; 独立安全芯片&lt;/b&gt;&lt;hr style=&quot;border: 1px solid #81D4FA; margin: 4px 0;&quot;&gt;&lt;span style=&quot;font-size: 11px; color: #455A64;&quot;&gt;屏下指纹识别传感器 + 独立安全元件(eSE)，用于存储金融级支付密钥。&lt;/span&gt;" vertex="1">
+          <mxGeometry height="95" width="240" x="780" y="1150" as="geometry" />
+        </mxCell>
+        <mxCell id="W6PaB_jN0Ac-A0Uw5HY8-30" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#388E3C;strokeWidth=2;shadow=1;arcSize=6;spacingTop=6;spacingLeft=10;spacingRight=10;verticalAlign=top;align=left;fontFamily=Comic Sans MS;" value="&lt;b style=&quot;font-size: 15px; color: #1B5E20;&quot;&gt;Wi-Fi 7 / 蓝牙 / GPS / NFC 芯片&lt;/b&gt;&lt;hr style=&quot;border: 1px solid #A5D6A7; margin: 4px 0;&quot;&gt;&lt;span style=&quot;font-size: 11px; color: #2E7D32;&quot;&gt;主板独立无线无线复合芯片（如高通WCN系列）。单独控制无线协议，配有高频多合一天线。&lt;/span&gt;" vertex="1">
+          <mxGeometry height="105" width="240" x="1780" y="890" as="geometry" />
+        </mxCell>
+        <mxCell id="W6PaB_jN0Ac-A0Uw5HY8-31" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#388E3C;strokeWidth=2;shadow=1;arcSize=6;spacingTop=6;spacingLeft=10;spacingRight=10;verticalAlign=top;align=left;fontFamily=Comic Sans MS;" value="&lt;b style=&quot;font-size: 15px; color: #1B5E20;&quot;&gt;5G 射频前端复杂子系统&lt;/b&gt;&lt;hr style=&quot;border: 1px solid #A5D6A7; margin: 4px 0;&quot;&gt;&lt;span style=&quot;font-size: 11px; color: #2E7D32;&quot;&gt;高度复杂的射频链路：包含射频收发器(Transceiver)、多频段PA功率放大器、分集接收(DRX)及MIMO天线调谐器。&lt;/span&gt;" vertex="1">
+          <mxGeometry height="120" width="240" x="1780" y="1025" as="geometry" />
+        </mxCell>
+        <mxCell id="W6PaB_jN0Ac-A0Uw5HY8-32" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#388E3C;strokeWidth=2;shadow=1;arcSize=6;spacingTop=6;spacingLeft=10;spacingRight=10;verticalAlign=top;align=left;fontFamily=Comic Sans MS;" value="&lt;b style=&quot;font-size: 15px; color: #1B5E20;&quot;&gt;SIM 卡槽 &amp;amp; eSIM 贴片芯片&lt;/b&gt;&lt;hr style=&quot;border: 1px solid #A5D6A7; margin: 4px 0;&quot;&gt;&lt;span style=&quot;font-size: 11px; color: #2E7D32;&quot;&gt;外部物理双卡卡座，或板载嵌入式安全 eSIM 颗粒，直接与基带握手。&lt;/span&gt;" vertex="1">
+          <mxGeometry height="85" width="240" x="1780" y="1175" as="geometry" />
+        </mxCell>
+        <mxCell id="W6PaB_jN0Ac-A0Uw5HY8-33" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E0F2F1;strokeColor=#00897B;strokeWidth=2;shadow=1;arcSize=6;spacingTop=6;spacingLeft=10;spacingRight=10;verticalAlign=top;align=left;fontFamily=Comic Sans MS;" value="&lt;b style=&quot;font-size: 15px; color: #004D40;&quot;&gt;音频 Codec &amp;amp; 智能功放&lt;/b&gt;&lt;hr style=&quot;border: 1px solid #80CBC4; margin: 4px 0;&quot;&gt;&lt;span style=&quot;font-size: 11px; color: #37474F;&quot;&gt;离散音频解码芯片及大功率 Smart PA，驱动立体声扬声器与降噪麦克风。&lt;/span&gt;" vertex="1">
+          <mxGeometry height="95" width="240" x="780" y="1310" as="geometry" />
+        </mxCell>
+        <mxCell id="W6PaB_jN0Ac-A0Uw5HY8-53" edge="1" parent="1" source="W6PaB_jN0Ac-A0Uw5HY8-34" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=Comic Sans MS;" target="W6PaB_jN0Ac-A0Uw5HY8-35" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="W6PaB_jN0Ac-A0Uw5HY8-34" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E0F2F1;strokeColor=#00897B;strokeWidth=2;shadow=1;arcSize=6;spacingTop=6;spacingLeft=10;spacingRight=10;verticalAlign=top;align=left;fontFamily=Comic Sans MS;" value="&lt;b style=&quot;font-size: 15px; color: #004D40;&quot;&gt;主电源管理芯片 (PMIC)&lt;/b&gt;&lt;hr style=&quot;border: 1px solid #80CBC4; margin: 4px 0;&quot;&gt;&lt;span style=&quot;font-size: 11px; color: #37474F;&quot;&gt;系统供电大脑。通过多路 Buck 降压与 LDO 线性稳压管理全板各芯片复杂的开机供电时序。&lt;/span&gt;" vertex="1">
+          <mxGeometry height="95" width="240" x="1080" y="1310" as="geometry" />
+        </mxCell>
+        <mxCell id="W6PaB_jN0Ac-A0Uw5HY8-35" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E0F2F1;strokeColor=#00897B;strokeWidth=2;shadow=1;arcSize=6;spacingTop=6;spacingLeft=10;spacingRight=10;verticalAlign=top;align=left;fontFamily=Comic Sans MS;" value="&lt;b style=&quot;font-size: 15px; color: #004D40;&quot;&gt;独立电荷泵快充芯片&lt;/b&gt;&lt;hr style=&quot;border: 1px solid #80CBC4; margin: 4px 0;&quot;&gt;&lt;span style=&quot;font-size: 11px; color: #37474F;&quot;&gt;专门管理高压直充的离散芯片。与 USB-C 接口连接，并通过 I²C 总线与主 PMIC 及 SoC 动态协同。&lt;/span&gt;" vertex="1">
+          <mxGeometry height="95" width="240" x="1380" y="1310" as="geometry" />
+        </mxCell>
+        <mxCell id="W6PaB_jN0Ac-A0Uw5HY8-36" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E0F2F1;strokeColor=#00897B;strokeWidth=2;shadow=1;arcSize=6;spacingTop=6;spacingLeft=10;spacingRight=10;verticalAlign=top;align=left;fontFamily=Comic Sans MS;" value="&lt;b style=&quot;font-size: 15px; color: #004D40;&quot;&gt;USB Type-C 接口 &amp;amp; CC控制器&lt;/b&gt;&lt;hr style=&quot;border: 1px solid #80CBC4; margin: 4px 0;&quot;&gt;&lt;span style=&quot;font-size: 11px; color: #37474F;&quot;&gt;物理输入接口。内置 PD 协议握手、超高速差分对，支持快充、数据传与 DisplayPort 投屏。&lt;/span&gt;" vertex="1">
+          <mxGeometry height="95" width="240" x="1680" y="1310" as="geometry" />
+        </mxCell>
+        <mxCell id="W6PaB_jN0Ac-A0Uw5HY8-37" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E0F2F1;strokeColor=#00897B;strokeWidth=2;shadow=1;arcSize=4;spacingTop=6;spacingLeft=12;spacingRight=12;verticalAlign=top;align=left;fontFamily=Comic Sans MS;" value="&lt;b style=&quot;font-size: 15px; color: #004D40;&quot;&gt;板载低速外设组 (低功耗传感器、振动马达、相机闪光灯、物理按键)&lt;/b&gt;&lt;hr style=&quot;border: 1px solid #80CBC4; margin: 4px 0;&quot;&gt;&lt;span style=&quot;font-size: 11px; color: #37474F;&quot;&gt;包含主板底层的惯性测量单元（IMU 陀螺仪+加速度计）、X轴线性马达驱动电路、高电流LED闪光灯驱动和侧边物理按键的中断判定线路。&lt;/span&gt;" vertex="1">
+          <mxGeometry height="85" width="540" x="1080" y="1480" as="geometry" />
+        </mxCell>
+        <mxCell id="W6PaB_jN0Ac-A0Uw5HY8-38" edge="1" parent="1" source="W6PaB_jN0Ac-A0Uw5HY8-25" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2.5;strokeColor=#D84315;fontColor=#D84315;labelBackgroundColor=#FFFFFF;fontSize=11;fontStyle=1;exitX=0.5;exitY=1;entryX=0.25;entryY=0;dashed=1;fontFamily=Comic Sans MS;" target="W6PaB_jN0Ac-A0Uw5HY8-24" value="DRAM 独立高频寻址并行通道">
+          <mxGeometry relative="1" x="0.2562" y="15" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="W6PaB_jN0Ac-A0Uw5HY8-39" edge="1" parent="1" source="W6PaB_jN0Ac-A0Uw5HY8-26" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2.5;strokeColor=#FF8F00;fontColor=#E65100;labelBackgroundColor=#FFFFFF;fontSize=11;fontStyle=1;exitX=0.5;exitY=1;entryX=0.75;entryY=0;fontFamily=Comic Sans MS;" target="W6PaB_jN0Ac-A0Uw5HY8-24" value="MIPI M-PHY / UniPro 闪存总线">
+          <mxGeometry relative="1" x="-0.0037" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="W6PaB_jN0Ac-A0Uw5HY8-40" edge="1" parent="1" source="W6PaB_jN0Ac-A0Uw5HY8-27" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#0288D1;fontColor=#01579B;labelBackgroundColor=#FFFFFF;fontSize=11;fontStyle=1;exitX=1;exitY=0.5;entryX=0;entryY=0.15;fontFamily=Comic Sans MS;" target="W6PaB_jN0Ac-A0Uw5HY8-24" value="MIPI CSI-2 串行视频流接口">
+          <mxGeometry relative="1" x="0.1773" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="1070" y="938" />
+              <mxPoint x="1070" y="990" />
+              <mxPoint x="1140" y="990" />
+              <mxPoint x="1140" y="1079" />
+              <mxPoint x="1220" y="1079" />
+              <mxPoint x="1220" y="1103" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="W6PaB_jN0Ac-A0Uw5HY8-41" edge="1" parent="1" source="W6PaB_jN0Ac-A0Uw5HY8-28" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#0288D1;fontColor=#01579B;labelBackgroundColor=#FFFFFF;fontSize=11;fontStyle=1;exitX=1;exitY=0.5;entryX=0;entryY=0.45;fontFamily=Comic Sans MS;" target="W6PaB_jN0Ac-A0Uw5HY8-24" value="MIPI DSI 差分显示信号接口">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="W6PaB_jN0Ac-A0Uw5HY8-42" edge="1" parent="1" source="W6PaB_jN0Ac-A0Uw5HY8-29" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#0288D1;fontColor=#01579B;labelBackgroundColor=#FFFFFF;fontSize=11;fontStyle=1;exitX=1;exitY=0.5;entryX=0;entryY=0.75;fontFamily=Comic Sans MS;" target="W6PaB_jN0Ac-A0Uw5HY8-24" value="SPI 高速安全总线 / GPIO 外部中断">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="W6PaB_jN0Ac-A0Uw5HY8-43" edge="1" parent="1" source="W6PaB_jN0Ac-A0Uw5HY8-30" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#388E3C;fontColor=#1B5E20;labelBackgroundColor=#FFFFFF;fontSize=11;fontStyle=1;exitX=0;exitY=0.5;entryX=1;entryY=0.15;fontFamily=Comic Sans MS;jumpStyle=arc;" target="W6PaB_jN0Ac-A0Uw5HY8-24" value="PCIe Gen3 / SDIO 3.0 高速内部互联">
+          <mxGeometry relative="1" x="-0.1152" y="20" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="1780" y="990" />
+              <mxPoint x="1700" y="990" />
+              <mxPoint x="1700" y="1103" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="W6PaB_jN0Ac-A0Uw5HY8-44" edge="1" parent="1" source="W6PaB_jN0Ac-A0Uw5HY8-31" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#388E3C;fontColor=#1B5E20;labelBackgroundColor=#FFFFFF;fontSize=11;fontStyle=1;exitX=0;exitY=0.5;entryX=1;entryY=0.45;fontFamily=Comic Sans MS;jumpStyle=arc;" target="W6PaB_jN0Ac-A0Uw5HY8-24" value="IQ 差分正交基带 ＋ MIPI RFFE 射频控制总线">
+          <mxGeometry relative="1" x="-0.4872" y="35" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="W6PaB_jN0Ac-A0Uw5HY8-45" edge="1" parent="1" source="W6PaB_jN0Ac-A0Uw5HY8-32" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#388E3C;fontColor=#1B5E20;labelBackgroundColor=#FFFFFF;fontSize=11;fontStyle=1;exitX=0;exitY=0.5;entryX=1;entryY=0.75;fontFamily=Comic Sans MS;" target="W6PaB_jN0Ac-A0Uw5HY8-24" value="ISO7816 SIM 卡标准控制协议">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="W6PaB_jN0Ac-A0Uw5HY8-46" edge="1" parent="1" source="W6PaB_jN0Ac-A0Uw5HY8-33" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#00897B;fontColor=#004D40;labelBackgroundColor=#FFFFFF;fontSize=11;fontStyle=1;exitX=0.5;exitY=0;entryX=0.1;entryY=1;fontFamily=Comic Sans MS;" target="W6PaB_jN0Ac-A0Uw5HY8-24" value="I²S / SoundWire 多媒体音频总线">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="W6PaB_jN0Ac-A0Uw5HY8-47" edge="1" parent="1" source="W6PaB_jN0Ac-A0Uw5HY8-34" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#00897B;fontColor=#004D40;labelBackgroundColor=#FFFFFF;fontSize=11;fontStyle=1;exitX=0.5;exitY=0;entryX=0.35;entryY=1;fontFamily=Comic Sans MS;" target="W6PaB_jN0Ac-A0Uw5HY8-24" value="SPMI 电源系统总线 ＋ 核心供电网络">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="W6PaB_jN0Ac-A0Uw5HY8-48" edge="1" parent="1" source="W6PaB_jN0Ac-A0Uw5HY8-35" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#00897B;fontColor=#004D40;labelBackgroundColor=#FFFFFF;fontSize=11;fontStyle=1;exitX=0.5;exitY=0;entryX=0.65;entryY=1;fontFamily=Comic Sans MS;" target="W6PaB_jN0Ac-A0Uw5HY8-24" value="I²C 快充参数配置">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="W6PaB_jN0Ac-A0Uw5HY8-49" edge="1" parent="1" source="W6PaB_jN0Ac-A0Uw5HY8-36" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#00897B;fontColor=#004D40;labelBackgroundColor=#FFFFFF;fontSize=11;fontStyle=1;exitX=0.5;exitY=0;entryX=0.9;entryY=1;fontFamily=Comic Sans MS;" target="W6PaB_jN0Ac-A0Uw5HY8-24" value="USB 3.2 Gen2 超高速链路">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1770" y="1310" />
+              <mxPoint x="1770" y="1257" />
+              <mxPoint x="1529" y="1257" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="W6PaB_jN0Ac-A0Uw5HY8-50" edge="1" parent="1" source="W6PaB_jN0Ac-A0Uw5HY8-36" style="edgeStyle=none;html=1;strokeWidth=3;strokeColor=#E65100;fontColor=#D84315;labelBackgroundColor=#FFFFFF;fontSize=11;fontStyle=1;exitX=0;exitY=0.5;entryX=1;entryY=0.5;fontFamily=Comic Sans MS;" target="W6PaB_jN0Ac-A0Uw5HY8-35" value="VBUS 高压大电流直流电力输入">
+          <mxGeometry relative="1" y="63" as="geometry">
+            <mxPoint y="-1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="W6PaB_jN0Ac-A0Uw5HY8-51" edge="1" parent="1" source="W6PaB_jN0Ac-A0Uw5HY8-35" style="edgeStyle=none;html=1;strokeWidth=2;strokeColor=#00897B;fontColor=#004D40;labelBackgroundColor=#FFFFFF;fontSize=11;exitX=0;exitY=0.5;entryX=1;entryY=0.5;fontFamily=Comic Sans MS;" target="W6PaB_jN0Ac-A0Uw5HY8-34" value="VBAT 充电握手与供电时序协同">
+          <mxGeometry relative="1" y="63" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="W6PaB_jN0Ac-A0Uw5HY8-52" edge="1" parent="1" source="W6PaB_jN0Ac-A0Uw5HY8-37" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#546E7A;fontColor=#37474F;labelBackgroundColor=#FFFFFF;fontSize=11;fontStyle=1;exitX=0.5;exitY=0;entryX=0.5;entryY=1;fontFamily=Comic Sans MS;" target="W6PaB_jN0Ac-A0Uw5HY8-24" value="I²C / SPI 低速串行总线 ＋ GPIO 中断信号线路">
+          <mxGeometry relative="1" x="-0.871" y="-10" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="1350" y="1300" />
+              <mxPoint x="1400" y="1300" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="EA89g4_LvttixXyR0dsE" name="第 7 页">
+    <mxGraphModel dx="1128" dy="651" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="qWVq7Pqy6OZzOo4xPE85-1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FAFAFA;strokeColor=#90A4AE;strokeWidth=2.5;dashed=1;dashPattern=6 6;align=right;verticalAlign=bottom;spacing=15;fontColor=#78909C;fontSize=14;fontStyle=1;arcSize=2;fontFamily=Comic Sans MS;" value="SoC (System-on-Chip) 芯片整体封装边界 (Package)" vertex="1">
+          <mxGeometry height="608" width="1130" x="170" y="257" as="geometry" />
+        </mxCell>
+        <mxCell id="qWVq7Pqy6OZzOo4xPE85-2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#78909C;strokeWidth=1.5;dashed=1;dashPattern=4 4;align=left;verticalAlign=bottom;spacing=15;fontColor=#546E7A;fontSize=13;fontStyle=1;arcSize=2;fontFamily=Comic Sans MS;" value="SoC Die (硅晶圆主芯片) 物理边界" vertex="1">
+          <mxGeometry height="435" width="1090" x="190" y="395" as="geometry" />
+        </mxCell>
+        <mxCell id="qWVq7Pqy6OZzOo4xPE85-3" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Comic Sans MS;" value="&lt;b style=&quot;font-size: 22px; color: rgb(44, 62, 80);&quot;&gt;片上系统 (SoC) 内部 IP 核与高级封装架构&lt;/b&gt;" vertex="1">
+          <mxGeometry height="60" width="700" x="475" y="197" as="geometry" />
+        </mxCell>
+        <mxCell id="qWVq7Pqy6OZzOo4xPE85-4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF8E1;strokeColor=#FF8F00;strokeWidth=2;shadow=1;arcSize=6;spacingTop=6;spacingLeft=12;spacingRight=12;verticalAlign=top;align=left;fontFamily=Comic Sans MS;" value="&lt;b style=&quot;font-size: 15px; color: #E65100;&quot;&gt;LPDDR 运行内存 (SiP / PoP / 先进封装集成)&lt;/b&gt;&lt;hr style=&quot;border: 1px solid #FFE082; margin: 4px 0;&quot;&gt;&lt;span style=&quot;font-size: 11px; color: #5D4037;&quot;&gt;采用封装级集成 (SiP/PoP)，作为独立 Die 封装于芯片内 (单片集成/eDRAM除外)。&lt;br&gt;物理上不属于 SoC 逻辑晶圆，通过高密度晶圆级微引脚与底层的存储物理层接口 (PHY) 实现对接。&lt;/span&gt;" vertex="1">
+          <mxGeometry height="80" width="1050" x="210" y="285" as="geometry" />
+        </mxCell>
+        <mxCell id="qWVq7Pqy6OZzOo4xPE85-5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#37474F;strokeColor=none;fontColor=#ECEFF1;shadow=1;arcSize=10;fontFamily=Comic Sans MS;" value="&lt;b style=&quot;font-size:20px;letter-spacing:10px;&quot;&gt;片 内 互 联 总 线 &amp;nbsp; (System Interconnect Bus)&lt;/b&gt;" vertex="1">
+          <mxGeometry height="45" width="1050" x="210" y="575" as="geometry" />
+        </mxCell>
+        <mxCell id="qWVq7Pqy6OZzOo4xPE85-6" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1F5FE;strokeColor=#0288D1;strokeWidth=2;shadow=1;arcSize=6;spacingTop=6;spacingLeft=10;spacingRight=10;verticalAlign=top;align=left;fontFamily=Comic Sans MS;" value="&lt;b style=&quot;font-size: 15px; color: #01579B;&quot;&gt;内存控制器&lt;br&gt;(DMC+PHY)&lt;/b&gt;&lt;hr style=&quot;border: 1px solid #81D4FA; margin: 4px 0;&quot;&gt;&lt;span style=&quot;font-size: 11px; color: #455A64;&quot;&gt;作为 AXI Slave 接收片内总线请求，转换为 DDR 物理时序协议对接封装内 DRAM。&lt;/span&gt;" vertex="1">
+          <mxGeometry height="110" width="150" x="210" y="425" as="geometry" />
+        </mxCell>
+        <mxCell id="qWVq7Pqy6OZzOo4xPE85-7" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1F5FE;strokeColor=#0288D1;strokeWidth=2;shadow=1;arcSize=6;spacingTop=6;spacingLeft=10;spacingRight=10;verticalAlign=top;align=left;fontFamily=Comic Sans MS;" value="&lt;b style=&quot;font-size: 15px; color: #01579B;&quot;&gt;应用处理器 (AP /&lt;br&gt;CPU)&lt;/b&gt;&lt;hr style=&quot;border: 1px solid #81D4FA; margin: 4px 0;&quot;&gt;&lt;span style=&quot;font-size: 11px; color: #455A64;&quot;&gt;多核高性能中央处理器，负责运行通用操作系统 (HLOS) 及核心事务调度。&lt;/span&gt;" vertex="1">
+          <mxGeometry height="110" width="150" x="390" y="425" as="geometry" />
+        </mxCell>
+        <mxCell id="qWVq7Pqy6OZzOo4xPE85-8" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1F5FE;strokeColor=#0288D1;strokeWidth=2;shadow=1;arcSize=6;spacingTop=6;spacingLeft=10;spacingRight=10;verticalAlign=top;align=left;fontFamily=Comic Sans MS;" value="&lt;b style=&quot;font-size: 15px; color: #01579B;&quot;&gt;图形处理器 (GPU)&lt;/b&gt;&lt;hr style=&quot;border: 1px solid #81D4FA; margin: 4px 0;&quot;&gt;&lt;span style=&quot;font-size: 11px; color: #455A64;&quot;&gt;负责屏幕图形物理渲染、UI界面深度合成以及通用 GPU 硬件并行计算加速。&lt;/span&gt;" vertex="1">
+          <mxGeometry height="110" width="150" x="570" y="425" as="geometry" />
+        </mxCell>
+        <mxCell id="qWVq7Pqy6OZzOo4xPE85-9" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1F5FE;strokeColor=#0288D1;strokeWidth=2;shadow=1;arcSize=6;spacingTop=6;spacingLeft=10;spacingRight=10;verticalAlign=top;align=left;fontFamily=Comic Sans MS;" value="&lt;b style=&quot;font-size: 15px; color: #01579B;&quot;&gt;数字信号处理器&lt;br&gt;(DSP)&lt;/b&gt;&lt;hr style=&quot;border: 1px solid #81D4FA; margin: 4px 0;&quot;&gt;&lt;span style=&quot;font-size: 11px; color: #455A64;&quot;&gt;专门用于高效处理低延迟语音、音频编解码以及超低功耗传感器流监听。&lt;/span&gt;" vertex="1">
+          <mxGeometry height="110" width="150" x="750" y="425" as="geometry" />
+        </mxCell>
+        <mxCell id="qWVq7Pqy6OZzOo4xPE85-10" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1F5FE;strokeColor=#0288D1;strokeWidth=2;shadow=1;arcSize=6;spacingTop=6;spacingLeft=10;spacingRight=10;verticalAlign=top;align=left;fontFamily=Comic Sans MS;" value="&lt;b style=&quot;font-size: 15px; color: #01579B;&quot;&gt;图像信号处理器&lt;br&gt;(ISP)&lt;/b&gt;&lt;hr style=&quot;border: 1px solid #81D4FA; margin: 4px 0;&quot;&gt;&lt;span style=&quot;font-size: 11px; color: #455A64;&quot;&gt;硬件级处理相机传感器传回的原始 RAW 流，执行实时降噪、HDR 与色彩重构。&lt;/span&gt;" vertex="1">
+          <mxGeometry height="110" width="150" x="390" y="655" as="geometry" />
+        </mxCell>
+        <mxCell id="qWVq7Pqy6OZzOo4xPE85-11" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#388E3C;strokeWidth=2;shadow=1;arcSize=6;spacingTop=6;spacingLeft=10;spacingRight=10;verticalAlign=top;align=left;fontFamily=Comic Sans MS;" value="&lt;b style=&quot;font-size: 15px; color: #1B5E20;&quot;&gt;蓝牙 / WiFi 协议栈&lt;/b&gt;&lt;hr style=&quot;border: 1px solid #A5D6A7; margin: 4px 0;&quot;&gt;&lt;span style=&quot;font-size: 11px; color: #2E7D32;&quot;&gt;处理无线连接的基带与协议层逻辑，对接外部射频前端前端。&lt;/span&gt;" vertex="1">
+          <mxGeometry height="110" width="150" x="930" y="425" as="geometry" />
+        </mxCell>
+        <mxCell id="qWVq7Pqy6OZzOo4xPE85-12" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1F5FE;strokeColor=#0288D1;strokeWidth=2;shadow=1;arcSize=6;spacingTop=6;spacingLeft=10;spacingRight=10;verticalAlign=top;align=left;fontFamily=Comic Sans MS;" value="&lt;b style=&quot;font-size: 15px; color: rgb(1, 87, 155);&quot;&gt;神经网络单元 (NPU) / AI加速器&lt;/b&gt;&lt;hr style=&quot;border: 1px solid rgb(129, 212, 250); margin: 4px 0px;&quot;&gt;&lt;span style=&quot;font-size: 11px; color: rgb(69, 90, 100);&quot;&gt;负责CNN/Transformer的大规模矩阵乘加与卷积运算加速&lt;/span&gt;" vertex="1">
+          <mxGeometry height="110" width="150" x="210" y="655" as="geometry" />
+        </mxCell>
+        <mxCell id="qWVq7Pqy6OZzOo4xPE85-14" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E0F2F1;strokeColor=#00897B;strokeWidth=2;shadow=1;arcSize=6;spacingTop=6;spacingLeft=10;spacingRight=10;verticalAlign=top;align=left;fontFamily=Comic Sans MS;" value="&lt;b style=&quot;font-size: 15px; color: #004D40;&quot;&gt;电源控制逻辑&lt;/b&gt;&lt;hr style=&quot;border: 1px solid #80CBC4; margin: 4px 0;&quot;&gt;&lt;span style=&quot;font-size: 11px; color: #37474F;&quot;&gt;SoC 内部的分区电源动态管理逻辑 (DVFS)，对接外部 PMIC 芯片。&lt;/span&gt;" vertex="1">
+          <mxGeometry height="110" width="150" x="570" y="655" as="geometry" />
+        </mxCell>
+        <mxCell id="qWVq7Pqy6OZzOo4xPE85-15" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E0F2F1;strokeColor=#00897B;strokeWidth=2;shadow=1;arcSize=6;spacingTop=6;spacingLeft=10;spacingRight=10;verticalAlign=top;align=left;fontFamily=Comic Sans MS;" value="&lt;b style=&quot;font-size: 15px; color: #004D40;&quot;&gt;安全处理单元 (SPU)&lt;/b&gt;&lt;hr style=&quot;border: 1px solid #80CBC4; margin: 4px 0;&quot;&gt;&lt;span style=&quot;font-size: 11px; color: #37474F;&quot;&gt;硬件物理隔离安全岛，负责系统底层国密/RSA加解密及安全启动。&lt;/span&gt;" vertex="1">
+          <mxGeometry height="110" width="150" x="750" y="655" as="geometry" />
+        </mxCell>
+        <mxCell id="qWVq7Pqy6OZzOo4xPE85-16" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E0F2F1;strokeColor=#00897B;strokeWidth=2;shadow=1;arcSize=6;spacingTop=6;spacingLeft=10;spacingRight=10;verticalAlign=top;align=left;fontFamily=Comic Sans MS;" value="&lt;b style=&quot;font-size: 15px; color: #004D40;&quot;&gt;SensorHub&lt;/b&gt;&lt;hr style=&quot;border: 1px solid #80CBC4; margin: 4px 0;&quot;&gt;&lt;span style=&quot;font-size: 11px; color: #37474F;&quot;&gt;全天候不间断工作的微控制核心，独立聚合各类低速传感器上下文。&lt;/span&gt;" vertex="1">
+          <mxGeometry height="110" width="150" x="930" y="655" as="geometry" />
+        </mxCell>
+        <mxCell id="qWVq7Pqy6OZzOo4xPE85-17" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E0F2F1;strokeColor=#00897B;strokeWidth=2;shadow=1;arcSize=6;spacingTop=6;spacingLeft=10;spacingRight=10;verticalAlign=top;align=left;fontFamily=Comic Sans MS;" value="&lt;b style=&quot;font-size: 15px; color: #004D40;&quot;&gt;通用外设总线主控&lt;/b&gt;&lt;hr style=&quot;border: 1px solid #80CBC4; margin: 4px 0;&quot;&gt;&lt;span style=&quot;font-size: 11px; color: #37474F;&quot;&gt;包含 I²C, SPI, UART, GPIO 等低速通信协议的硬件控制器 PHY 层。&lt;/span&gt;" vertex="1">
+          <mxGeometry height="110" width="150" x="1110" y="655" as="geometry" />
+        </mxCell>
+        <mxCell id="qWVq7Pqy6OZzOo4xPE85-20" edge="1" parent="1" source="qWVq7Pqy6OZzOo4xPE85-6" style="edgeStyle=none;html=1;strokeWidth=2.5;strokeColor=#E53935;fontColor=#E53935;labelBackgroundColor=#FFFFFF;fontSize=11;fontStyle=1;endArrow=classic;startArrow=classic;exitX=0.5;exitY=0;entryX=0.071;entryY=1;dashed=1;dashPattern=4 4;fontFamily=Comic Sans MS;" target="qWVq7Pqy6OZzOo4xPE85-4" value="DDR高频物理总线 (PHY通道)">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="qWVq7Pqy6OZzOo4xPE85-21" edge="1" parent="1" source="qWVq7Pqy6OZzOo4xPE85-6" style="edgeStyle=none;html=1;strokeWidth=3;strokeColor=#0288D1;endArrow=classic;startArrow=classic;exitX=0.5;exitY=1;entryX=0.071;entryY=0;fontFamily=Comic Sans MS;" target="qWVq7Pqy6OZzOo4xPE85-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="qWVq7Pqy6OZzOo4xPE85-22" edge="1" parent="1" source="qWVq7Pqy6OZzOo4xPE85-7" style="edgeStyle=none;html=1;strokeWidth=3;strokeColor=#546E7A;endArrow=none;exitX=0.5;exitY=1;entryX=0.242;entryY=0;fontFamily=Comic Sans MS;" target="qWVq7Pqy6OZzOo4xPE85-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="qWVq7Pqy6OZzOo4xPE85-23" edge="1" parent="1" source="qWVq7Pqy6OZzOo4xPE85-8" style="edgeStyle=none;html=1;strokeWidth=3;strokeColor=#546E7A;endArrow=none;exitX=0.5;exitY=1;entryX=0.414;entryY=0;fontFamily=Comic Sans MS;" target="qWVq7Pqy6OZzOo4xPE85-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="qWVq7Pqy6OZzOo4xPE85-24" edge="1" parent="1" source="qWVq7Pqy6OZzOo4xPE85-9" style="edgeStyle=none;html=1;strokeWidth=3;strokeColor=#546E7A;endArrow=none;exitX=0.5;exitY=1;entryX=0.585;entryY=0;fontFamily=Comic Sans MS;" target="qWVq7Pqy6OZzOo4xPE85-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="qWVq7Pqy6OZzOo4xPE85-26" edge="1" parent="1" source="qWVq7Pqy6OZzOo4xPE85-11" style="edgeStyle=none;html=1;strokeWidth=3;strokeColor=#546E7A;endArrow=none;exitX=0.5;exitY=1;entryX=0.758;entryY=0.011;fontFamily=Comic Sans MS;entryDx=0;entryDy=0;entryPerimeter=0;" target="qWVq7Pqy6OZzOo4xPE85-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="qWVq7Pqy6OZzOo4xPE85-27" edge="1" parent="1" source="qWVq7Pqy6OZzOo4xPE85-12" style="edgeStyle=none;html=1;strokeWidth=3;strokeColor=#546E7A;endArrow=none;exitX=0.5;exitY=0;entryX=0.071;entryY=1;fontFamily=Comic Sans MS;" target="qWVq7Pqy6OZzOo4xPE85-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="qWVq7Pqy6OZzOo4xPE85-28" edge="1" parent="1" source="qWVq7Pqy6OZzOo4xPE85-10" style="edgeStyle=none;html=1;strokeWidth=3;strokeColor=#546E7A;endArrow=none;exitX=0.482;exitY=-0.01;entryX=0.242;entryY=1;fontFamily=Comic Sans MS;exitDx=0;exitDy=0;exitPerimeter=0;" target="qWVq7Pqy6OZzOo4xPE85-5">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="435" y="950" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="qWVq7Pqy6OZzOo4xPE85-29" edge="1" parent="1" source="qWVq7Pqy6OZzOo4xPE85-14" style="edgeStyle=none;html=1;strokeWidth=3;strokeColor=#546E7A;endArrow=none;exitX=0.5;exitY=0;entryX=0.414;entryY=1;fontFamily=Comic Sans MS;" target="qWVq7Pqy6OZzOo4xPE85-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="qWVq7Pqy6OZzOo4xPE85-30" edge="1" parent="1" source="qWVq7Pqy6OZzOo4xPE85-15" style="edgeStyle=none;html=1;strokeWidth=3;strokeColor=#546E7A;endArrow=none;exitX=0.5;exitY=0;entryX=0.585;entryY=1;fontFamily=Comic Sans MS;" target="qWVq7Pqy6OZzOo4xPE85-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="qWVq7Pqy6OZzOo4xPE85-31" edge="1" parent="1" source="qWVq7Pqy6OZzOo4xPE85-16" style="edgeStyle=none;html=1;strokeWidth=3;strokeColor=#546E7A;endArrow=none;exitX=0.5;exitY=0;entryX=0.757;entryY=1;fontFamily=Comic Sans MS;" target="qWVq7Pqy6OZzOo4xPE85-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="qWVq7Pqy6OZzOo4xPE85-32" edge="1" parent="1" source="qWVq7Pqy6OZzOo4xPE85-17" style="edgeStyle=none;html=1;strokeWidth=3;strokeColor=#546E7A;endArrow=none;exitX=0.5;exitY=0;entryX=0.928;entryY=1;fontFamily=Comic Sans MS;" target="qWVq7Pqy6OZzOo4xPE85-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="7OrpW8CfGlQFPkVl6sLy-2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#388E3C;strokeWidth=2;shadow=1;arcSize=6;spacingTop=6;spacingLeft=10;spacingRight=10;verticalAlign=top;align=left;fontFamily=Comic Sans MS;" value="&lt;b style=&quot;font-size: 15px; color: rgb(27, 94, 32);&quot;&gt;蜂窝基带 (Modem)&lt;br&gt;&lt;i style=&quot;font-weight: 400; font-size: 11px; color: rgb(46, 125, 50);&quot;&gt;[内置集成 / 外挂选配]&lt;/i&gt;&lt;/b&gt;&lt;br&gt;&lt;hr style=&quot;border: 1px solid rgb(165, 214, 167); margin: 4px 0px;&quot;&gt;&lt;span style=&quot;color: rgb(46, 125, 50); font-size: 11px;&quot;&gt;整合 5G 移动网络基带及 Wi-Fi/BT 协议物理层链路逻辑控制。&lt;/span&gt;" vertex="1">
+          <mxGeometry height="110" width="150" x="1110" y="425" as="geometry" />
+        </mxCell>
+        <mxCell id="7OrpW8CfGlQFPkVl6sLy-3" edge="1" parent="1" source="7OrpW8CfGlQFPkVl6sLy-2" style="edgeStyle=none;html=1;strokeWidth=3;strokeColor=#546E7A;endArrow=none;exitX=0.5;exitY=1;entryX=0.925;entryY=0.043;fontFamily=Comic Sans MS;entryDx=0;entryDy=0;entryPerimeter=0;exitDx=0;exitDy=0;" target="qWVq7Pqy6OZzOo4xPE85-5">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1170" y="541" as="sourcePoint" />
+            <mxPoint x="1171" y="581" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="7uCMT1gnnD9pZUzEbtpK" name="第 8 页">
+    <mxGraphModel dx="1066" dy="614" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="Mz4qiJMaovWxtNlcfV9S-1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FAFAFA;strokeColor=#90A4AE;strokeWidth=2.5;dashed=1;dashPattern=6 6;align=right;verticalAlign=bottom;spacing=15;fontColor=#78909C;fontSize=14;fontStyle=1;arcSize=2;fontFamily=Comic Sans MS;" value="SoC (System-on-Chip) 芯片整体封装边界 (Package)" vertex="1">
+          <mxGeometry height="610" width="1110" x="170" y="230" as="geometry" />
+        </mxCell>
+        <mxCell id="Mz4qiJMaovWxtNlcfV9S-2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#78909C;strokeWidth=1.5;dashed=1;dashPattern=4 4;align=left;verticalAlign=bottom;spacing=15;fontColor=#546E7A;fontSize=13;fontStyle=1;arcSize=2;fontFamily=Comic Sans MS;" value="SoC Die (硅晶圆主芯片) 物理边界" vertex="1">
+          <mxGeometry height="435" width="1070" x="180" y="365" as="geometry" />
+        </mxCell>
+        <mxCell id="Mz4qiJMaovWxtNlcfV9S-3" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Comic Sans MS;" value="&lt;b style=&quot;font-size: 22px; color: rgb(44, 62, 80);&quot;&gt;通用片上系统 (SoC) 内部 IP 核内部 overview&lt;/b&gt;" vertex="1">
+          <mxGeometry height="60" width="700" x="360" y="180" as="geometry" />
+        </mxCell>
+        <mxCell id="Mz4qiJMaovWxtNlcfV9S-4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF8E1;strokeColor=#FF8F00;strokeWidth=2;shadow=1;arcSize=6;spacingTop=6;spacingLeft=12;spacingRight=12;verticalAlign=top;align=left;fontFamily=Comic Sans MS;" value="&lt;b style=&quot;font-size: 15px; color: #E65100;&quot;&gt;LPDDR 运行内存 (封装内独立 Die)&lt;/b&gt;&lt;hr style=&quot;border: 1px solid #FFE082; margin: 4px 0;&quot;&gt;&lt;span style=&quot;font-size: 11px; color: #5D4037;&quot;&gt;采用封装级集成 (SiP/PoP)，作为独立 Die 封装于芯片内 (单片集成/eDRAM除外)。&lt;br&gt;物理上不属于 SoC 逻辑晶圆，通过高密度晶圆级微引脚与底层的存储物理层接口 (PHY) 实现对接。&lt;/span&gt;" vertex="1">
+          <mxGeometry height="80" width="1030" x="200" y="255" as="geometry" />
+        </mxCell>
+        <mxCell id="Mz4qiJMaovWxtNlcfV9S-5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#37474F;strokeColor=none;fontColor=#ECEFF1;shadow=1;arcSize=10;fontFamily=Comic Sans MS;" value="&lt;b style=&quot;font-size:20px;letter-spacing:10px;&quot;&gt;片 内 互 联 总 线 &amp;nbsp; (System Interconnect Bus)&lt;/b&gt;" vertex="1">
+          <mxGeometry height="45" width="1030" x="200" y="545" as="geometry" />
+        </mxCell>
+        <mxCell id="Mz4qiJMaovWxtNlcfV9S-6" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1F5FE;strokeColor=#0288D1;strokeWidth=2;shadow=1;arcSize=6;spacingTop=6;spacingLeft=8;spacingRight=8;verticalAlign=top;align=left;fontFamily=Comic Sans MS;" value="&lt;b style=&quot;font-size: 15px; color: #01579B;&quot;&gt;内存控制器&lt;br&gt;(DMC+PHY)&lt;/b&gt;&lt;hr style=&quot;border: 1px solid #81D4FA; margin: 4px 0;&quot;&gt;&lt;span style=&quot;font-size: 10.5px; color: #455A64;&quot;&gt;作为 AXI Slave 接收片内请求，转换为 DDR 物理时序协议对接外部内存。&lt;/span&gt;" vertex="1">
+          <mxGeometry height="120" width="125" x="200" y="395" as="geometry" />
+        </mxCell>
+        <mxCell id="Mz4qiJMaovWxtNlcfV9S-7" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1F5FE;strokeColor=#0288D1;strokeWidth=2;shadow=1;arcSize=6;spacingTop=6;spacingLeft=8;spacingRight=8;verticalAlign=top;align=left;fontFamily=Comic Sans MS;" value="&lt;b style=&quot;font-size: 15px; color: #01579B;&quot;&gt;应用处理器&lt;br&gt;(AP/CPU)&lt;/b&gt;&lt;hr style=&quot;border: 1px solid #81D4FA; margin: 4px 0;&quot;&gt;&lt;span style=&quot;font-size: 10.5px; color: #455A64;&quot;&gt;多核高性能处理器，负责运行通用操作系统(HLOS)及核心事务调度。&lt;/span&gt;" vertex="1">
+          <mxGeometry height="120" width="125" x="340" y="395" as="geometry" />
+        </mxCell>
+        <mxCell id="Mz4qiJMaovWxtNlcfV9S-8" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1F5FE;strokeColor=#0288D1;strokeWidth=2;shadow=1;arcSize=6;spacingTop=6;spacingLeft=8;spacingRight=8;verticalAlign=top;align=left;fontFamily=Comic Sans MS;" value="&lt;b style=&quot;font-size: 15px; color: #01579B;&quot;&gt;图形处理器&lt;br&gt;(GPU)&lt;/b&gt;&lt;hr style=&quot;border: 1px solid #81D4FA; margin: 4px 0;&quot;&gt;&lt;span style=&quot;font-size: 10.5px; color: #455A64;&quot;&gt;负责3D图形物理渲染生成画面，及通用 GPU 硬件并行计算加速(GPGPU)。&lt;/span&gt;" vertex="1">
+          <mxGeometry height="120" width="125" x="480" y="395" as="geometry" />
+        </mxCell>
+        <mxCell id="Mz4qiJMaovWxtNlcfV9S-9" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1F5FE;strokeColor=#0288D1;strokeWidth=2;shadow=1;arcSize=6;spacingTop=6;spacingLeft=8;spacingRight=8;verticalAlign=top;align=left;fontFamily=Comic Sans MS;" value="&lt;b style=&quot;font-size: 15px; color: #01579B;&quot;&gt;显示处理器&lt;br&gt;(DPU)&lt;/b&gt;&lt;hr style=&quot;border: 1px solid #81D4FA; margin: 4px 0;&quot;&gt;&lt;span style=&quot;font-size: 10.5px; color: #455A64;&quot;&gt;负责2D图层合成、色彩转换，并驱动 MIPI DSI 接口直连屏幕，卸载 GPU 功耗。&lt;/span&gt;" vertex="1">
+          <mxGeometry height="120" width="125" x="620" y="395" as="geometry" />
+        </mxCell>
+        <mxCell id="Mz4qiJMaovWxtNlcfV9S-10" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1F5FE;strokeColor=#0288D1;strokeWidth=2;shadow=1;arcSize=6;spacingTop=6;spacingLeft=8;spacingRight=8;verticalAlign=top;align=left;fontFamily=Comic Sans MS;" value="&lt;b style=&quot;font-size: 15px; color: #01579B;&quot;&gt;图像处理器&lt;br&gt;(ISP)&lt;/b&gt;&lt;hr style=&quot;border: 1px solid #81D4FA; margin: 4px 0;&quot;&gt;&lt;span style=&quot;font-size: 10.5px; color: #455A64;&quot;&gt;硬件级处理相机传感器 RAW 流，执行实时降噪、HDR 与色彩重构。&lt;/span&gt;" vertex="1">
+          <mxGeometry height="120" width="125" x="760" y="395" as="geometry" />
+        </mxCell>
+        <mxCell id="Mz4qiJMaovWxtNlcfV9S-12" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#388E3C;strokeWidth=2;shadow=1;arcSize=6;spacingTop=6;spacingLeft=8;spacingRight=8;verticalAlign=top;align=left;fontFamily=Comic Sans MS;" value="&lt;b style=&quot;font-size: 15px; color: #1B5E20;&quot;&gt;蓝牙 / WiFi&lt;br&gt;协议栈&lt;/b&gt;&lt;hr style=&quot;border: 1px solid #A5D6A7; margin: 4px 0;&quot;&gt;&lt;span style=&quot;font-size: 10.5px; color: #2E7D32;&quot;&gt;处理无线连接的基带与协议层逻辑，对接外部射频前端天线模组。&lt;/span&gt;" vertex="1">
+          <mxGeometry height="120" width="125" x="1060" y="395" as="geometry" />
+        </mxCell>
+        <mxCell id="Mz4qiJMaovWxtNlcfV9S-15" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E0F2F1;strokeColor=#00897B;strokeWidth=2;shadow=1;arcSize=6;spacingTop=6;spacingLeft=10;spacingRight=10;verticalAlign=top;align=left;fontFamily=Comic Sans MS;" value="&lt;b style=&quot;font-size: 15px; color: rgb(0, 77, 64);&quot;&gt;电源控制逻辑&lt;/b&gt;&lt;hr style=&quot;border: 1px solid rgb(128, 203, 196); margin: 4px 0px;&quot;&gt;&lt;span style=&quot;font-size: 11px; color: rgb(55, 71, 79);&quot;&gt;SoC 内部的分区电压与频率动态管理逻辑，对接外部主板 PMIC 芯片。&lt;/span&gt;" vertex="1">
+          <mxGeometry height="120" width="145" x="528" y="625" as="geometry" />
+        </mxCell>
+        <mxCell id="Mz4qiJMaovWxtNlcfV9S-16" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E0F2F1;strokeColor=#00897B;strokeWidth=2;shadow=1;arcSize=6;spacingTop=6;spacingLeft=10;spacingRight=10;verticalAlign=top;align=left;fontFamily=Comic Sans MS;" value="&lt;b style=&quot;font-size: 15px; color: #004D40;&quot;&gt;安全处理单元 (SPU)&lt;/b&gt;&lt;hr style=&quot;border: 1px solid #80CBC4; margin: 4px 0;&quot;&gt;&lt;span style=&quot;font-size: 11px; color: #37474F;&quot;&gt;硬件物理隔离安全岛，负责系统底层国密/RSA加解密及安全启动。&lt;/span&gt;" vertex="1">
+          <mxGeometry height="120" width="145" x="692" y="625" as="geometry" />
+        </mxCell>
+        <mxCell id="Mz4qiJMaovWxtNlcfV9S-17" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E0F2F1;strokeColor=#00897B;strokeWidth=2;shadow=1;arcSize=6;spacingTop=6;spacingLeft=10;spacingRight=10;verticalAlign=top;align=left;fontFamily=Comic Sans MS;" value="&lt;b style=&quot;font-size: 15px; color: #004D40;&quot;&gt;低功耗 SensorHub&lt;/b&gt;&lt;hr style=&quot;border: 1px solid #80CBC4; margin: 4px 0;&quot;&gt;&lt;span style=&quot;font-size: 11px; color: #37474F;&quot;&gt;全天候不间断工作的微控制核心，独立聚合各类低速传感器上下文。&lt;/span&gt;" vertex="1">
+          <mxGeometry height="120" width="145" x="856" y="625" as="geometry" />
+        </mxCell>
+        <mxCell id="Mz4qiJMaovWxtNlcfV9S-18" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E0F2F1;strokeColor=#00897B;strokeWidth=2;shadow=1;arcSize=6;spacingTop=6;spacingLeft=10;spacingRight=10;verticalAlign=top;align=left;fontFamily=Comic Sans MS;" value="&lt;b style=&quot;font-size: 15px; color: #004D40;&quot;&gt;外设总线主控&lt;/b&gt;&lt;hr style=&quot;border: 1px solid #80CBC4; margin: 4px 0;&quot;&gt;&lt;span style=&quot;font-size: 11px; color: #37474F;&quot;&gt;包含 I²C, SPI, UART, GPIO 等低速通信协议的硬件主控与 PHY 层。&lt;/span&gt;" vertex="1">
+          <mxGeometry height="120" width="145" x="1020" y="625" as="geometry" />
+        </mxCell>
+        <mxCell id="Mz4qiJMaovWxtNlcfV9S-21" edge="1" parent="1" source="Mz4qiJMaovWxtNlcfV9S-6" style="edgeStyle=none;html=1;strokeWidth=2.5;strokeColor=#E53935;fontColor=#E53935;labelBackgroundColor=#FFFFFF;fontSize=11;fontStyle=1;endArrow=classic;startArrow=classic;exitX=0.5;exitY=0;entryX=0.06;entryY=1;dashed=1;dashPattern=4 4;fontFamily=Comic Sans MS;" target="Mz4qiJMaovWxtNlcfV9S-4" value="DDR高频物理总线 (PHY通道)">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Mz4qiJMaovWxtNlcfV9S-22" edge="1" parent="1" source="Mz4qiJMaovWxtNlcfV9S-6" style="edgeStyle=none;html=1;strokeWidth=3;strokeColor=#0288D1;endArrow=classic;startArrow=classic;exitX=0.5;exitY=1;entryX=0.060;entryY=0;fontFamily=Comic Sans MS;" target="Mz4qiJMaovWxtNlcfV9S-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Mz4qiJMaovWxtNlcfV9S-23" edge="1" parent="1" source="Mz4qiJMaovWxtNlcfV9S-7" style="edgeStyle=none;html=1;strokeWidth=3;strokeColor=#546E7A;endArrow=none;exitX=0.5;exitY=1;entryX=0.196;entryY=0;fontFamily=Comic Sans MS;" target="Mz4qiJMaovWxtNlcfV9S-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Mz4qiJMaovWxtNlcfV9S-24" edge="1" parent="1" source="Mz4qiJMaovWxtNlcfV9S-8" style="edgeStyle=none;html=1;strokeWidth=3;strokeColor=#546E7A;endArrow=none;exitX=0.5;exitY=1;entryX=0.332;entryY=0;fontFamily=Comic Sans MS;" target="Mz4qiJMaovWxtNlcfV9S-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Mz4qiJMaovWxtNlcfV9S-25" edge="1" parent="1" source="Mz4qiJMaovWxtNlcfV9S-9" style="edgeStyle=none;html=1;strokeWidth=3;strokeColor=#546E7A;endArrow=none;exitX=0.5;exitY=1;entryX=0.468;entryY=0;fontFamily=Comic Sans MS;" target="Mz4qiJMaovWxtNlcfV9S-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Mz4qiJMaovWxtNlcfV9S-26" edge="1" parent="1" source="Mz4qiJMaovWxtNlcfV9S-10" style="edgeStyle=none;html=1;strokeWidth=3;strokeColor=#546E7A;endArrow=none;exitX=0.5;exitY=1;entryX=0.604;entryY=0;fontFamily=Comic Sans MS;" target="Mz4qiJMaovWxtNlcfV9S-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Mz4qiJMaovWxtNlcfV9S-28" edge="1" parent="1" source="Mz4qiJMaovWxtNlcfV9S-12" style="edgeStyle=none;html=1;strokeWidth=3;strokeColor=#546E7A;endArrow=none;exitX=0.5;exitY=1;entryX=0.898;entryY=0.067;entryDx=0;entryDy=0;entryPerimeter=0;fontFamily=Comic Sans MS;" target="Mz4qiJMaovWxtNlcfV9S-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Mz4qiJMaovWxtNlcfV9S-29" edge="1" parent="1" source="GQ7StAOmXdMfM4eVdrR9-1" style="edgeStyle=none;html=1;strokeWidth=3;strokeColor=#546E7A;endArrow=none;exitX=0.5;exitY=0;entryX=0.070;entryY=1;exitDx=0;exitDy=0;fontFamily=Comic Sans MS;" target="Mz4qiJMaovWxtNlcfV9S-5">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="272.5" y="625" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Mz4qiJMaovWxtNlcfV9S-30" edge="1" parent="1" source="GQ7StAOmXdMfM4eVdrR9-3" style="edgeStyle=none;html=1;strokeWidth=3;strokeColor=#546E7A;endArrow=none;exitX=0.5;exitY=0;entryX=0.229;entryY=1;exitDx=0;exitDy=0;fontFamily=Comic Sans MS;" target="Mz4qiJMaovWxtNlcfV9S-5">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="436.5" y="625" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Mz4qiJMaovWxtNlcfV9S-31" edge="1" parent="1" source="Mz4qiJMaovWxtNlcfV9S-15" style="edgeStyle=none;html=1;strokeWidth=3;strokeColor=#546E7A;endArrow=none;exitX=0.5;exitY=0;entryX=0.388;entryY=1;fontFamily=Comic Sans MS;" target="Mz4qiJMaovWxtNlcfV9S-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Mz4qiJMaovWxtNlcfV9S-32" edge="1" parent="1" source="Mz4qiJMaovWxtNlcfV9S-16" style="edgeStyle=none;html=1;strokeWidth=3;strokeColor=#546E7A;endArrow=none;exitX=0.5;exitY=0;entryX=0.548;entryY=1;fontFamily=Comic Sans MS;" target="Mz4qiJMaovWxtNlcfV9S-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Mz4qiJMaovWxtNlcfV9S-33" edge="1" parent="1" source="Mz4qiJMaovWxtNlcfV9S-17" style="edgeStyle=none;html=1;strokeWidth=3;strokeColor=#546E7A;endArrow=none;exitX=0.5;exitY=0;entryX=0.707;entryY=1;fontFamily=Comic Sans MS;" target="Mz4qiJMaovWxtNlcfV9S-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Mz4qiJMaovWxtNlcfV9S-34" edge="1" parent="1" source="Mz4qiJMaovWxtNlcfV9S-18" style="edgeStyle=none;html=1;strokeWidth=3;strokeColor=#546E7A;endArrow=none;exitX=0.5;exitY=0;entryX=0.866;entryY=1;fontFamily=Comic Sans MS;" target="Mz4qiJMaovWxtNlcfV9S-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="GQ7StAOmXdMfM4eVdrR9-1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1F5FE;strokeColor=#0288D1;strokeWidth=2;shadow=1;arcSize=6;spacingTop=6;spacingLeft=10;spacingRight=10;verticalAlign=top;align=left;fontFamily=Comic Sans MS;" value="&lt;b style=&quot;font-size: 15px; color: rgb(1, 87, 155);&quot;&gt;神经网络单元 (NPU) / AI加速器&lt;/b&gt;&lt;hr style=&quot;border: 1px solid rgb(129, 212, 250); margin: 4px 0px;&quot;&gt;&lt;span style=&quot;font-size: 11px; color: rgb(69, 90, 100);&quot;&gt;负责CNN/Transformer的大规模矩阵乘加与卷积运算加速&lt;/span&gt;" vertex="1">
+          <mxGeometry height="115" width="150" x="200" y="625" as="geometry" />
+        </mxCell>
+        <mxCell id="GQ7StAOmXdMfM4eVdrR9-3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1F5FE;strokeColor=#0288D1;strokeWidth=2;shadow=1;arcSize=6;spacingTop=6;spacingLeft=8;spacingRight=8;verticalAlign=top;align=left;fontFamily=Comic Sans MS;" value="&lt;b style=&quot;font-size: 15px; color: #01579B;&quot;&gt;数字信号处理器 (DSP)&lt;/b&gt;&lt;hr style=&quot;border: 1px solid #81D4FA; margin: 4px 0;&quot;&gt;&lt;span style=&quot;font-size: 10.5px; color: #455A64;&quot;&gt;专门用于高效处理低延迟语音、音频编解码以及超低功耗传感器监听。&lt;/span&gt;" vertex="1">
+          <mxGeometry height="120" width="135" x="370" y="625" as="geometry" />
+        </mxCell>
+        <mxCell id="GQ7StAOmXdMfM4eVdrR9-4" edge="1" parent="1" source="ItwFZsdsswfFv4Y8FtMW-1" style="edgeStyle=none;html=1;strokeWidth=3;strokeColor=#546E7A;endArrow=none;exitX=0.431;exitY=0.991;entryX=0.739;entryY=0.016;entryDx=0;entryDy=0;entryPerimeter=0;exitDx=0;exitDy=0;exitPerimeter=0;fontFamily=Comic Sans MS;" target="Mz4qiJMaovWxtNlcfV9S-5">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="940" y="510" as="sourcePoint" />
+            <mxPoint x="944.5" y="540" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ItwFZsdsswfFv4Y8FtMW-1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#388E3C;strokeWidth=2;shadow=1;arcSize=6;spacingTop=6;spacingLeft=10;spacingRight=10;verticalAlign=top;align=left;fontFamily=Comic Sans MS;" value="&lt;b style=&quot;font-size: 15px; color: rgb(27, 94, 32);&quot;&gt;蜂窝基带(Modem)&lt;/b&gt;&lt;br&gt;&lt;hr style=&quot;border: 1px solid rgb(165, 214, 167); margin: 4px 0px;&quot;&gt;&lt;span style=&quot;color: rgb(46, 125, 50); font-size: 11px;&quot;&gt;&lt;b style=&quot;font-size: 15px; color: rgb(27, 94, 32);&quot;&gt;&lt;i style=&quot;font-weight: 400; font-size: 11px; color: rgb(46, 125, 50);&quot;&gt;[内置集成 / 外挂选配]&lt;/i&gt;&lt;/b&gt;&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;color: light-dark(rgb(46, 125, 50), rgb(100, 168, 104)); font-size: 11px; background-color: transparent;&quot;&gt;整合 5G 移动网络基带及 Wi-Fi/BT 协议物理层链路逻辑控制。&lt;/span&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="120" width="140" x="900" y="395" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
