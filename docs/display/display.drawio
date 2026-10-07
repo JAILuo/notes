@@ -1,0 +1,682 @@
+<mxfile host="app.diagrams.net" pages="3">
+  <diagram name="Android显示管线" id="p6MI6RII-aTipmrgnkrs">
+    <mxGraphModel dx="1209" dy="691" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="da2ST-oYFzSqJlBtKfv0-1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;align=left;verticalAlign=top;spacingLeft=15;spacingTop=10;fontStyle=1;fontSize=14;" value="User Space (Android Framework &amp; Apps)&#xa;生成像素 / 协调图层" vertex="1">
+          <mxGeometry height="600" width="560" x="NaN" y="NaN" as="geometry" />
+        </mxCell>
+        <mxCell id="da2ST-oYFzSqJlBtKfv0-2" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;align=left;verticalAlign=top;spacingLeft=15;spacingTop=10;fontStyle=1;fontSize=14;" value="Kernel Space (Linux DRM/KMS)&#xa;硬件抽象与控制" vertex="1">
+          <mxGeometry height="600" width="360" x="NaN" y="NaN" as="geometry" />
+        </mxCell>
+        <mxCell id="da2ST-oYFzSqJlBtKfv0-3" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;align=left;verticalAlign=top;spacingLeft=15;spacingTop=10;fontStyle=1;fontSize=14;" value="Hardware (SoC &amp; Panel)&#xa;真实物理执行" vertex="1">
+          <mxGeometry height="600" width="480" x="NaN" y="NaN" as="geometry" />
+        </mxCell>
+        <mxCell id="da2ST-oYFzSqJlBtKfv0-4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" value="App: System UI&#xa;(Status Bar)&#xa;[Surface]" vertex="1">
+          <mxGeometry height="80" width="120" x="NaN" y="NaN" as="geometry" />
+        </mxCell>
+        <mxCell id="da2ST-oYFzSqJlBtKfv0-5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" value="App: WeChat&#xa;(Notification)&#xa;[Surface]" vertex="1">
+          <mxGeometry height="80" width="120" x="NaN" y="NaN" as="geometry" />
+        </mxCell>
+        <mxCell id="da2ST-oYFzSqJlBtKfv0-6" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" value="App: Game&#xa;(3D Scene)&#xa;[Surface]" vertex="1">
+          <mxGeometry height="80" width="120" x="NaN" y="NaN" as="geometry" />
+        </mxCell>
+        <mxCell id="da2ST-oYFzSqJlBtKfv0-7" parent="1" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#ffe6cc;strokeColor=#d79b00;" value="GPU&#xa;(Rendering 3D/2D)&#xa;计算像素写入Buffer" vertex="1">
+          <mxGeometry height="70" width="120" x="NaN" y="NaN" as="geometry" />
+        </mxCell>
+        <mxCell id="da2ST-oYFzSqJlBtKfv0-8" edge="1" parent="1" source="da2ST-oYFzSqJlBtKfv0-6" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;dashed=1;fontColor=#666666;" target="da2ST-oYFzSqJlBtKfv0-7" value="OpenGL/Vulkan">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <Point x="200" y="625" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="da2ST-oYFzSqJlBtKfv0-9" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1" value="SurfaceFlinger&#xa;(图层大管家)&#xa;收集所有Buffer并排序" vertex="1">
+          <mxGeometry height="80" width="120" x="NaN" y="NaN" as="geometry" />
+        </mxCell>
+        <mxCell id="da2ST-oYFzSqJlBtKfv0-10" edge="1" parent="1" source="da2ST-oYFzSqJlBtKfv0-4" target="da2ST-oYFzSqJlBtKfv0-9">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <Point x="240" y="200" />
+              <Point x="240" y="340" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="da2ST-oYFzSqJlBtKfv0-11" edge="1" parent="1" source="da2ST-oYFzSqJlBtKfv0-5" target="da2ST-oYFzSqJlBtKfv0-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="da2ST-oYFzSqJlBtKfv0-12" edge="1" parent="1" source="da2ST-oYFzSqJlBtKfv0-6" target="da2ST-oYFzSqJlBtKfv0-9">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <Point x="240" y="520" />
+              <Point x="240" y="380" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="da2ST-oYFzSqJlBtKfv0-13" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1" value="HwComposer (HAL)&#xa;决定合成策略&#xa;(GPU or DPU?)" vertex="1">
+          <mxGeometry height="80" width="120" x="NaN" y="NaN" as="geometry" />
+        </mxCell>
+        <mxCell id="da2ST-oYFzSqJlBtKfv0-14" edge="1" parent="1" source="da2ST-oYFzSqJlBtKfv0-9" target="da2ST-oYFzSqJlBtKfv0-13">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="da2ST-oYFzSqJlBtKfv0-15" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;dashed=1;verticalAlign=top;spacingTop=5;" value="DRM Core" vertex="1">
+          <mxGeometry height="400" width="320" x="NaN" y="NaN" as="geometry" />
+        </mxCell>
+        <mxCell id="da2ST-oYFzSqJlBtKfv0-16" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#c3abd0;strokeColor=#9673a6;" value="Plane 1 (UI)" vertex="1">
+          <mxGeometry height="60" width="100" x="NaN" y="NaN" as="geometry" />
+        </mxCell>
+        <mxCell id="da2ST-oYFzSqJlBtKfv0-17" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#c3abd0;strokeColor=#9673a6;" value="Plane 2 (App)" vertex="1">
+          <mxGeometry height="60" width="100" x="NaN" y="NaN" as="geometry" />
+        </mxCell>
+        <mxCell id="da2ST-oYFzSqJlBtKfv0-18" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#c3abd0;strokeColor=#9673a6;" value="Plane 3 (Game)" vertex="1">
+          <mxGeometry height="60" width="100" x="NaN" y="NaN" as="geometry" />
+        </mxCell>
+        <mxCell id="da2ST-oYFzSqJlBtKfv0-19" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#c3abd0;strokeColor=#9673a6;fontStyle=1" value="CRTC&#xa;(Display Controller)&#xa;负责图层混合与时序" vertex="1">
+          <mxGeometry height="100" width="130" x="NaN" y="NaN" as="geometry" />
+        </mxCell>
+        <mxCell id="da2ST-oYFzSqJlBtKfv0-20" edge="1" parent="1" source="da2ST-oYFzSqJlBtKfv0-13" target="da2ST-oYFzSqJlBtKfv0-16">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <Point x="620" y="340" />
+              <Point x="620" y="230" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="da2ST-oYFzSqJlBtKfv0-21" edge="1" parent="1" source="da2ST-oYFzSqJlBtKfv0-13" target="da2ST-oYFzSqJlBtKfv0-17">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="da2ST-oYFzSqJlBtKfv0-22" edge="1" parent="1" source="da2ST-oYFzSqJlBtKfv0-13" target="da2ST-oYFzSqJlBtKfv0-18">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <Point x="620" y="380" />
+              <Point x="620" y="490" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="da2ST-oYFzSqJlBtKfv0-23" edge="1" parent="1" source="da2ST-oYFzSqJlBtKfv0-16" target="da2ST-oYFzSqJlBtKfv0-19">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="da2ST-oYFzSqJlBtKfv0-24" edge="1" parent="1" source="da2ST-oYFzSqJlBtKfv0-17" target="da2ST-oYFzSqJlBtKfv0-19">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="da2ST-oYFzSqJlBtKfv0-25" edge="1" parent="1" source="da2ST-oYFzSqJlBtKfv0-18" target="da2ST-oYFzSqJlBtKfv0-19">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="da2ST-oYFzSqJlBtKfv0-26" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;verticalAlign=top;spacingTop=10;" value="DPU (Display Processing Unit)&#xa;硬件图层叠加 (Overlays)" vertex="1">
+          <mxGeometry height="180" width="160" x="NaN" y="NaN" as="geometry" />
+        </mxCell>
+        <mxCell id="da2ST-oYFzSqJlBtKfv0-27" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#bac8d3;strokeColor=#23445d;" value="HW Overlay 1" vertex="1">
+          <mxGeometry height="30" width="100" x="NaN" y="NaN" as="geometry" />
+        </mxCell>
+        <mxCell id="da2ST-oYFzSqJlBtKfv0-28" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#bac8d3;strokeColor=#23445d;" value="HW Overlay 2" vertex="1">
+          <mxGeometry height="30" width="100" x="NaN" y="NaN" as="geometry" />
+        </mxCell>
+        <mxCell id="da2ST-oYFzSqJlBtKfv0-29" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#bac8d3;strokeColor=#23445d;" value="HW Overlay 3" vertex="1">
+          <mxGeometry height="30" width="100" x="NaN" y="NaN" as="geometry" />
+        </mxCell>
+        <mxCell id="da2ST-oYFzSqJlBtKfv0-30" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="Encoder &amp; Connector&#xa;(MIPI D-PHY / C-PHY)" vertex="1">
+          <mxGeometry height="60" width="100" x="NaN" y="NaN" as="geometry" />
+        </mxCell>
+        <mxCell id="da2ST-oYFzSqJlBtKfv0-31" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1" value="Display Panel&#xa;(DDIC 驱动 IC)" vertex="1">
+          <mxGeometry height="80" width="80" x="NaN" y="NaN" as="geometry" />
+        </mxCell>
+        <mxCell id="da2ST-oYFzSqJlBtKfv0-32" edge="1" parent="1" source="da2ST-oYFzSqJlBtKfv0-19" target="da2ST-oYFzSqJlBtKfv0-26">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="da2ST-oYFzSqJlBtKfv0-33" edge="1" parent="1" source="da2ST-oYFzSqJlBtKfv0-26" target="da2ST-oYFzSqJlBtKfv0-30">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="da2ST-oYFzSqJlBtKfv0-34" edge="1" parent="1" source="da2ST-oYFzSqJlBtKfv0-30" target="da2ST-oYFzSqJlBtKfv0-31">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="A3zgFwmNP0d3C71-Sr0M-1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;align=left;verticalAlign=top;spacingLeft=15;spacingTop=10;fontStyle=1;fontSize=14;" value="User Space (Android Framework &amp; Apps)&#xa;生成像素 / 协调图层" vertex="1">
+          <mxGeometry height="600" width="560" x="NaN" y="NaN" as="geometry" />
+        </mxCell>
+        <mxCell id="A3zgFwmNP0d3C71-Sr0M-2" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;align=left;verticalAlign=top;spacingLeft=15;spacingTop=10;fontStyle=1;fontSize=14;" value="Kernel Space (Linux DRM/KMS)&#xa;硬件抽象与控制" vertex="1">
+          <mxGeometry height="600" width="360" x="NaN" y="NaN" as="geometry" />
+        </mxCell>
+        <mxCell id="A3zgFwmNP0d3C71-Sr0M-3" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;align=left;verticalAlign=top;spacingLeft=15;spacingTop=10;fontStyle=1;fontSize=14;" value="Hardware (SoC &amp; Panel)&#xa;真实物理执行" vertex="1">
+          <mxGeometry height="600" width="480" x="NaN" y="NaN" as="geometry" />
+        </mxCell>
+        <mxCell id="A3zgFwmNP0d3C71-Sr0M-4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" value="App: System UI&#xa;(Status Bar)&#xa;[Surface]" vertex="1">
+          <mxGeometry height="80" width="120" x="NaN" y="NaN" as="geometry" />
+        </mxCell>
+        <mxCell id="A3zgFwmNP0d3C71-Sr0M-5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" value="App: WeChat&#xa;(Notification)&#xa;[Surface]" vertex="1">
+          <mxGeometry height="80" width="120" x="NaN" y="NaN" as="geometry" />
+        </mxCell>
+        <mxCell id="A3zgFwmNP0d3C71-Sr0M-6" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" value="App: Game&#xa;(3D Scene)&#xa;[Surface]" vertex="1">
+          <mxGeometry height="80" width="120" x="NaN" y="NaN" as="geometry" />
+        </mxCell>
+        <mxCell id="A3zgFwmNP0d3C71-Sr0M-7" parent="1" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#ffe6cc;strokeColor=#d79b00;" value="GPU&#xa;(Rendering 3D/2D)&#xa;计算像素写入Buffer" vertex="1">
+          <mxGeometry height="70" width="120" x="NaN" y="NaN" as="geometry" />
+        </mxCell>
+        <mxCell id="A3zgFwmNP0d3C71-Sr0M-8" edge="1" parent="1" source="A3zgFwmNP0d3C71-Sr0M-6" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;dashed=1;fontColor=#666666;" target="A3zgFwmNP0d3C71-Sr0M-7" value="OpenGL/Vulkan">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <Point x="200" y="625" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A3zgFwmNP0d3C71-Sr0M-9" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1" value="SurfaceFlinger&#xa;(图层大管家)&#xa;收集所有Buffer并排序" vertex="1">
+          <mxGeometry height="80" width="120" x="NaN" y="NaN" as="geometry" />
+        </mxCell>
+        <mxCell id="A3zgFwmNP0d3C71-Sr0M-10" edge="1" parent="1" source="A3zgFwmNP0d3C71-Sr0M-4" target="A3zgFwmNP0d3C71-Sr0M-9">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <Point x="240" y="200" />
+              <Point x="240" y="340" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A3zgFwmNP0d3C71-Sr0M-11" edge="1" parent="1" source="A3zgFwmNP0d3C71-Sr0M-5" target="A3zgFwmNP0d3C71-Sr0M-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="A3zgFwmNP0d3C71-Sr0M-12" edge="1" parent="1" source="A3zgFwmNP0d3C71-Sr0M-6" target="A3zgFwmNP0d3C71-Sr0M-9">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <Point x="240" y="520" />
+              <Point x="240" y="380" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A3zgFwmNP0d3C71-Sr0M-13" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1" value="HwComposer (HAL)&#xa;决定合成策略&#xa;(GPU or DPU?)" vertex="1">
+          <mxGeometry height="80" width="120" x="NaN" y="NaN" as="geometry" />
+        </mxCell>
+        <mxCell id="A3zgFwmNP0d3C71-Sr0M-14" edge="1" parent="1" source="A3zgFwmNP0d3C71-Sr0M-9" target="A3zgFwmNP0d3C71-Sr0M-13">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="A3zgFwmNP0d3C71-Sr0M-15" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;dashed=1;verticalAlign=top;spacingTop=5;" value="DRM Core" vertex="1">
+          <mxGeometry height="400" width="320" x="NaN" y="NaN" as="geometry" />
+        </mxCell>
+        <mxCell id="A3zgFwmNP0d3C71-Sr0M-16" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#c3abd0;strokeColor=#9673a6;" value="Plane 1 (UI)" vertex="1">
+          <mxGeometry height="60" width="100" x="NaN" y="NaN" as="geometry" />
+        </mxCell>
+        <mxCell id="A3zgFwmNP0d3C71-Sr0M-17" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#c3abd0;strokeColor=#9673a6;" value="Plane 2 (App)" vertex="1">
+          <mxGeometry height="60" width="100" x="NaN" y="NaN" as="geometry" />
+        </mxCell>
+        <mxCell id="A3zgFwmNP0d3C71-Sr0M-18" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#c3abd0;strokeColor=#9673a6;" value="Plane 3 (Game)" vertex="1">
+          <mxGeometry height="60" width="100" x="NaN" y="NaN" as="geometry" />
+        </mxCell>
+        <mxCell id="A3zgFwmNP0d3C71-Sr0M-19" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#c3abd0;strokeColor=#9673a6;fontStyle=1" value="CRTC&#xa;(Display Controller)&#xa;负责图层混合与时序" vertex="1">
+          <mxGeometry height="100" width="130" x="NaN" y="NaN" as="geometry" />
+        </mxCell>
+        <mxCell id="A3zgFwmNP0d3C71-Sr0M-20" edge="1" parent="1" source="A3zgFwmNP0d3C71-Sr0M-13" target="A3zgFwmNP0d3C71-Sr0M-16">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <Point x="620" y="340" />
+              <Point x="620" y="230" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A3zgFwmNP0d3C71-Sr0M-21" edge="1" parent="1" source="A3zgFwmNP0d3C71-Sr0M-13" target="A3zgFwmNP0d3C71-Sr0M-17">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="A3zgFwmNP0d3C71-Sr0M-22" edge="1" parent="1" source="A3zgFwmNP0d3C71-Sr0M-13" target="A3zgFwmNP0d3C71-Sr0M-18">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <Point x="620" y="380" />
+              <Point x="620" y="490" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A3zgFwmNP0d3C71-Sr0M-23" edge="1" parent="1" source="A3zgFwmNP0d3C71-Sr0M-16" target="A3zgFwmNP0d3C71-Sr0M-19">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="A3zgFwmNP0d3C71-Sr0M-24" edge="1" parent="1" source="A3zgFwmNP0d3C71-Sr0M-17" target="A3zgFwmNP0d3C71-Sr0M-19">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="A3zgFwmNP0d3C71-Sr0M-25" edge="1" parent="1" source="A3zgFwmNP0d3C71-Sr0M-18" target="A3zgFwmNP0d3C71-Sr0M-19">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="A3zgFwmNP0d3C71-Sr0M-26" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;verticalAlign=top;spacingTop=10;" value="DPU (Display Processing Unit)&#xa;硬件图层叠加 (Overlays)" vertex="1">
+          <mxGeometry height="180" width="160" x="NaN" y="NaN" as="geometry" />
+        </mxCell>
+        <mxCell id="A3zgFwmNP0d3C71-Sr0M-27" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#bac8d3;strokeColor=#23445d;" value="HW Overlay 1" vertex="1">
+          <mxGeometry height="30" width="100" x="NaN" y="NaN" as="geometry" />
+        </mxCell>
+        <mxCell id="A3zgFwmNP0d3C71-Sr0M-28" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#bac8d3;strokeColor=#23445d;" value="HW Overlay 2" vertex="1">
+          <mxGeometry height="30" width="100" x="NaN" y="NaN" as="geometry" />
+        </mxCell>
+        <mxCell id="A3zgFwmNP0d3C71-Sr0M-29" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#bac8d3;strokeColor=#23445d;" value="HW Overlay 3" vertex="1">
+          <mxGeometry height="30" width="100" x="NaN" y="NaN" as="geometry" />
+        </mxCell>
+        <mxCell id="A3zgFwmNP0d3C71-Sr0M-30" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="Encoder &amp; Connector&#xa;(MIPI D-PHY / C-PHY)" vertex="1">
+          <mxGeometry height="60" width="100" x="NaN" y="NaN" as="geometry" />
+        </mxCell>
+        <mxCell id="A3zgFwmNP0d3C71-Sr0M-31" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1" value="Display Panel&#xa;(DDIC 驱动 IC)" vertex="1">
+          <mxGeometry height="80" width="80" x="NaN" y="NaN" as="geometry" />
+        </mxCell>
+        <mxCell id="A3zgFwmNP0d3C71-Sr0M-32" edge="1" parent="1" source="A3zgFwmNP0d3C71-Sr0M-19" target="A3zgFwmNP0d3C71-Sr0M-26">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="A3zgFwmNP0d3C71-Sr0M-33" edge="1" parent="1" source="A3zgFwmNP0d3C71-Sr0M-26" target="A3zgFwmNP0d3C71-Sr0M-30">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="A3zgFwmNP0d3C71-Sr0M-34" edge="1" parent="1" source="A3zgFwmNP0d3C71-Sr0M-30" target="A3zgFwmNP0d3C71-Sr0M-31">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="A3zgFwmNP0d3C71-Sr0M-35" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;opacity=20;" value="" vertex="1">
+          <mxGeometry height="120" width="680" x="280" y="170" as="geometry" />
+        </mxCell>
+        <mxCell id="A3zgFwmNP0d3C71-Sr0M-36" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;opacity=20;" value="" vertex="1">
+          <mxGeometry height="200" width="680" x="280" y="330" as="geometry" />
+        </mxCell>
+        <mxCell id="A3zgFwmNP0d3C71-Sr0M-37" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;opacity=20;" value="" vertex="1">
+          <mxGeometry height="300" width="680" x="280" y="570" as="geometry" />
+        </mxCell>
+        <mxCell id="A3zgFwmNP0d3C71-Sr0M-38" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=13;fontStyle=1" value="应用层 (App)" vertex="1">
+          <mxGeometry height="20" width="150" x="290" y="175" as="geometry" />
+        </mxCell>
+        <mxCell id="A3zgFwmNP0d3C71-Sr0M-39" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=13;fontStyle=1" value="系统服务层 (SurfaceFlinger + HWC)" vertex="1">
+          <mxGeometry height="20" width="300" x="290" y="335" as="geometry" />
+        </mxCell>
+        <mxCell id="A3zgFwmNP0d3C71-Sr0M-40" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=13;fontStyle=1" value="内核层 (DRM/KMS + 显示控制器硬件)" vertex="1">
+          <mxGeometry height="20" width="350" x="290" y="575" as="geometry" />
+        </mxCell>
+        <mxCell id="A3zgFwmNP0d3C71-Sr0M-41" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="视频App Surface" vertex="1">
+          <mxGeometry height="40" width="140" x="320" y="200" as="geometry" />
+        </mxCell>
+        <mxCell id="A3zgFwmNP0d3C71-Sr0M-42" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="SystemUI Surface" vertex="1">
+          <mxGeometry height="40" width="140" x="520" y="200" as="geometry" />
+        </mxCell>
+        <mxCell id="A3zgFwmNP0d3C71-Sr0M-43" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="导航栏 Surface" vertex="1">
+          <mxGeometry height="40" width="140" x="720" y="200" as="geometry" />
+        </mxCell>
+        <mxCell id="A3zgFwmNP0d3C71-Sr0M-44" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" value="SurfaceFlinger (合成服务)" vertex="1">
+          <mxGeometry height="40" width="160" x="340" y="360" as="geometry" />
+        </mxCell>
+        <mxCell id="A3zgFwmNP0d3C71-Sr0M-45" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" value="HWC HAL (硬件合成策略)" vertex="1">
+          <mxGeometry height="40" width="160" x="780" y="360" as="geometry" />
+        </mxCell>
+        <mxCell id="A3zgFwmNP0d3C71-Sr0M-46" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" value="GPU Compositor (OpenGL ES)" vertex="1">
+          <mxGeometry height="40" width="200" x="520" y="450" as="geometry" />
+        </mxCell>
+        <mxCell id="A3zgFwmNP0d3C71-Sr0M-47" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="KMS 原子接口 (模式设置/Plane分配)" vertex="1">
+          <mxGeometry height="30" width="220" x="340" y="595" as="geometry" />
+        </mxCell>
+        <mxCell id="A3zgFwmNP0d3C71-Sr0M-48" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="Overlay Plane 1" vertex="1">
+          <mxGeometry height="35" width="120" x="320" y="645" as="geometry" />
+        </mxCell>
+        <mxCell id="A3zgFwmNP0d3C71-Sr0M-49" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="Overlay Plane 2" vertex="1">
+          <mxGeometry height="35" width="120" x="320" y="690" as="geometry" />
+        </mxCell>
+        <mxCell id="A3zgFwmNP0d3C71-Sr0M-50" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="Overlay Plane 3" vertex="1">
+          <mxGeometry height="35" width="120" x="320" y="735" as="geometry" />
+        </mxCell>
+        <mxCell id="A3zgFwmNP0d3C71-Sr0M-51" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="Primary Plane" vertex="1">
+          <mxGeometry height="40" width="120" x="800" y="670" as="geometry" />
+        </mxCell>
+        <mxCell id="A3zgFwmNP0d3C71-Sr0M-52" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" value="CRTC (扫描合成)" vertex="1">
+          <mxGeometry height="40" width="120" x="520" y="690" as="geometry" />
+        </mxCell>
+        <mxCell id="A3zgFwmNP0d3C71-Sr0M-53" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;" value="Encoder (时序生成)" vertex="1">
+          <mxGeometry height="35" width="120" x="520" y="750" as="geometry" />
+        </mxCell>
+        <mxCell id="A3zgFwmNP0d3C71-Sr0M-54" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;" value="Connector (DSI / eDP)" vertex="1">
+          <mxGeometry height="35" width="120" x="520" y="800" as="geometry" />
+        </mxCell>
+        <mxCell id="A3zgFwmNP0d3C71-Sr0M-55" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontStyle=1" value="显示面板 (LCD / OLED)" vertex="1">
+          <mxGeometry height="50" width="250" x="490" y="910" as="geometry" />
+        </mxCell>
+        <mxCell id="A3zgFwmNP0d3C71-Sr0M-56" edge="1" parent="1" source="A3zgFwmNP0d3C71-Sr0M-41" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.25;entryY=0;entryDx=0;entryDy=0;" target="A3zgFwmNP0d3C71-Sr0M-44">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="A3zgFwmNP0d3C71-Sr0M-57" edge="1" parent="1" source="A3zgFwmNP0d3C71-Sr0M-42" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="A3zgFwmNP0d3C71-Sr0M-44">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="A3zgFwmNP0d3C71-Sr0M-58" edge="1" parent="1" source="A3zgFwmNP0d3C71-Sr0M-43" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.75;entryY=0;entryDx=0;entryDy=0;" target="A3zgFwmNP0d3C71-Sr0M-44">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="A3zgFwmNP0d3C71-Sr0M-59" edge="1" parent="1" source="A3zgFwmNP0d3C71-Sr0M-44" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="A3zgFwmNP0d3C71-Sr0M-45">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="A3zgFwmNP0d3C71-Sr0M-60" edge="1" parent="1" source="A3zgFwmNP0d3C71-Sr0M-45" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="A3zgFwmNP0d3C71-Sr0M-46">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="A3zgFwmNP0d3C71-Sr0M-61" connectable="0" parent="A3zgFwmNP0d3C71-Sr0M-60" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fillColor=#f8cecc;" value="Overlay不足，GPU合成" vertex="1">
+          <mxGeometry relative="1" x="-0.2" y="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A3zgFwmNP0d3C71-Sr0M-62" edge="1" parent="1" source="A3zgFwmNP0d3C71-Sr0M-45" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="A3zgFwmNP0d3C71-Sr0M-48">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="780" y="480" />
+              <mxPoint x="380" y="480" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A3zgFwmNP0d3C71-Sr0M-63" connectable="0" parent="A3zgFwmNP0d3C71-Sr0M-62" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fillColor=#d5e8d4;" value="Overlay可用，直接硬件叠加" vertex="1">
+          <mxGeometry relative="1" x="-0.1" y="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A3zgFwmNP0d3C71-Sr0M-64" edge="1" parent="1" source="A3zgFwmNP0d3C71-Sr0M-46" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="A3zgFwmNP0d3C71-Sr0M-51">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="A3zgFwmNP0d3C71-Sr0M-65" connectable="0" parent="A3zgFwmNP0d3C71-Sr0M-64" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fillColor=#ffe6cc;" value="合成后的 Framebuffer" vertex="1">
+          <mxGeometry relative="1" x="-0.1" y="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="A3zgFwmNP0d3C71-Sr0M-66" edge="1" parent="1" source="A3zgFwmNP0d3C71-Sr0M-48" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.3;entryDx=0;entryDy=0;" target="A3zgFwmNP0d3C71-Sr0M-52">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="A3zgFwmNP0d3C71-Sr0M-67" edge="1" parent="1" source="A3zgFwmNP0d3C71-Sr0M-49" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="A3zgFwmNP0d3C71-Sr0M-52">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="A3zgFwmNP0d3C71-Sr0M-68" edge="1" parent="1" source="A3zgFwmNP0d3C71-Sr0M-50" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.7;entryDx=0;entryDy=0;" target="A3zgFwmNP0d3C71-Sr0M-52">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="A3zgFwmNP0d3C71-Sr0M-69" edge="1" parent="1" source="A3zgFwmNP0d3C71-Sr0M-51" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="A3zgFwmNP0d3C71-Sr0M-52">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="A3zgFwmNP0d3C71-Sr0M-70" edge="1" parent="1" source="A3zgFwmNP0d3C71-Sr0M-52" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="A3zgFwmNP0d3C71-Sr0M-53">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="A3zgFwmNP0d3C71-Sr0M-71" edge="1" parent="1" source="A3zgFwmNP0d3C71-Sr0M-53" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="A3zgFwmNP0d3C71-Sr0M-54">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="A3zgFwmNP0d3C71-Sr0M-72" edge="1" parent="1" source="A3zgFwmNP0d3C71-Sr0M-54" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="A3zgFwmNP0d3C71-Sr0M-55">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="A3zgFwmNP0d3C71-Sr0M-73" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=14;fontStyle=1" value="核心术语解释" vertex="1">
+          <mxGeometry height="30" width="180" x="1000" y="170" as="geometry" />
+        </mxCell>
+        <mxCell id="A3zgFwmNP0d3C71-Sr0M-74" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;" value="Surface: 带缓冲的画布，App绘图，SurfaceFlinger消费。" vertex="1">
+          <mxGeometry height="55" width="200" x="1000" y="205" as="geometry" />
+        </mxCell>
+        <mxCell id="A3zgFwmNP0d3C71-Sr0M-75" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;" value="Render: 渲染，将UI控件树转为像素缓冲的过程，GPU加速。" vertex="1">
+          <mxGeometry height="55" width="200" x="1000" y="270" as="geometry" />
+        </mxCell>
+        <mxCell id="A3zgFwmNP0d3C71-Sr0M-76" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;" value="SurfaceFlinger: 系统合成服务，收集所有Surface，管理合成。" vertex="1">
+          <mxGeometry height="55" width="200" x="1000" y="335" as="geometry" />
+        </mxCell>
+        <mxCell id="A3zgFwmNP0d3C71-Sr0M-77" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;" value="HWC: 硬件合成器抽象，利用硬件Planes叠加，无法处理时回退GPU。" vertex="1">
+          <mxGeometry height="60" width="200" x="1000" y="400" as="geometry" />
+        </mxCell>
+        <mxCell id="A3zgFwmNP0d3C71-Sr0M-78" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;" value="Overlay / Plane: 显示控制器中的硬件图层，独立访存，可缩放混合，省电。" vertex="1">
+          <mxGeometry height="55" width="200" x="1000" y="470" as="geometry" />
+        </mxCell>
+        <mxCell id="A3zgFwmNP0d3C71-Sr0M-79" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;" value="GPU 合成: 用OpenGL ES将多图层渲染成一张帧缓冲，功耗高，作为主Plane。" vertex="1">
+          <mxGeometry height="60" width="200" x="1000" y="535" as="geometry" />
+        </mxCell>
+        <mxCell id="A3zgFwmNP0d3C71-Sr0M-80" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;" value="DRM/KMS: Linux内核显示框架，管理Planes、CRTC等，取代老旧的fbdev。" vertex="1">
+          <mxGeometry height="60" width="200" x="1000" y="605" as="geometry" />
+        </mxCell>
+        <mxCell id="A3zgFwmNP0d3C71-Sr0M-81" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;align=left;verticalAlign=top;" value="Panel: 最终的液晶或OLED面板，接收DSI/eDP信号显示图像。" vertex="1">
+          <mxGeometry height="55" width="200" x="1000" y="675" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="G9FYXtnQ1u750Yxuo9H6" name="第 2 页">
+    <mxGraphModel dx="1138" dy="651" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="7O6HoFl5n1sq-3waYsgG-1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;align=left;verticalAlign=top;spacingLeft=15;spacingTop=10;fontStyle=1;fontSize=14;" value="User Space (Android Framework &amp; Apps)&#xa;生成像素 / 协调图层" vertex="1">
+          <mxGeometry height="600" width="560" x="NaN" y="NaN" as="geometry" />
+        </mxCell>
+        <mxCell id="7O6HoFl5n1sq-3waYsgG-2" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;align=left;verticalAlign=top;spacingLeft=15;spacingTop=10;fontStyle=1;fontSize=14;" value="Kernel Space (Linux DRM/KMS)&#xa;硬件抽象与控制" vertex="1">
+          <mxGeometry height="600" width="360" x="NaN" y="NaN" as="geometry" />
+        </mxCell>
+        <mxCell id="7O6HoFl5n1sq-3waYsgG-3" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;align=left;verticalAlign=top;spacingLeft=15;spacingTop=10;fontStyle=1;fontSize=14;" value="Hardware (SoC &amp; Panel)&#xa;真实物理执行" vertex="1">
+          <mxGeometry height="600" width="480" x="NaN" y="NaN" as="geometry" />
+        </mxCell>
+        <mxCell id="7O6HoFl5n1sq-3waYsgG-4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" value="App: System UI&#xa;(Status Bar)&#xa;[Surface]" vertex="1">
+          <mxGeometry height="80" width="120" x="NaN" y="NaN" as="geometry" />
+        </mxCell>
+        <mxCell id="7O6HoFl5n1sq-3waYsgG-5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" value="App: WeChat&#xa;(Notification)&#xa;[Surface]" vertex="1">
+          <mxGeometry height="80" width="120" x="NaN" y="NaN" as="geometry" />
+        </mxCell>
+        <mxCell id="7O6HoFl5n1sq-3waYsgG-6" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" value="App: Game&#xa;(3D Scene)&#xa;[Surface]" vertex="1">
+          <mxGeometry height="80" width="120" x="NaN" y="NaN" as="geometry" />
+        </mxCell>
+        <mxCell id="7O6HoFl5n1sq-3waYsgG-7" parent="1" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#ffe6cc;strokeColor=#d79b00;" value="GPU&#xa;(Rendering 3D/2D)&#xa;计算像素写入Buffer" vertex="1">
+          <mxGeometry height="70" width="120" x="NaN" y="NaN" as="geometry" />
+        </mxCell>
+        <mxCell id="7O6HoFl5n1sq-3waYsgG-8" edge="1" parent="1" source="7O6HoFl5n1sq-3waYsgG-6" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;dashed=1;fontColor=#666666;" target="7O6HoFl5n1sq-3waYsgG-7" value="OpenGL/Vulkan">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <Point x="200" y="625" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="7O6HoFl5n1sq-3waYsgG-9" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1" value="SurfaceFlinger&#xa;(图层大管家)&#xa;收集所有Buffer并排序" vertex="1">
+          <mxGeometry height="80" width="120" x="NaN" y="NaN" as="geometry" />
+        </mxCell>
+        <mxCell id="7O6HoFl5n1sq-3waYsgG-10" edge="1" parent="1" source="7O6HoFl5n1sq-3waYsgG-4" target="7O6HoFl5n1sq-3waYsgG-9">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <Point x="240" y="200" />
+              <Point x="240" y="340" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="7O6HoFl5n1sq-3waYsgG-11" edge="1" parent="1" source="7O6HoFl5n1sq-3waYsgG-5" target="7O6HoFl5n1sq-3waYsgG-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="7O6HoFl5n1sq-3waYsgG-12" edge="1" parent="1" source="7O6HoFl5n1sq-3waYsgG-6" target="7O6HoFl5n1sq-3waYsgG-9">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <Point x="240" y="520" />
+              <Point x="240" y="380" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="7O6HoFl5n1sq-3waYsgG-13" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1" value="HwComposer (HAL)&#xa;决定合成策略&#xa;(GPU or DPU?)" vertex="1">
+          <mxGeometry height="80" width="120" x="NaN" y="NaN" as="geometry" />
+        </mxCell>
+        <mxCell id="7O6HoFl5n1sq-3waYsgG-14" edge="1" parent="1" source="7O6HoFl5n1sq-3waYsgG-9" target="7O6HoFl5n1sq-3waYsgG-13">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="7O6HoFl5n1sq-3waYsgG-15" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;dashed=1;verticalAlign=top;spacingTop=5;" value="DRM Core" vertex="1">
+          <mxGeometry height="400" width="320" x="NaN" y="NaN" as="geometry" />
+        </mxCell>
+        <mxCell id="7O6HoFl5n1sq-3waYsgG-16" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#c3abd0;strokeColor=#9673a6;" value="Plane 1 (UI)" vertex="1">
+          <mxGeometry height="60" width="100" x="NaN" y="NaN" as="geometry" />
+        </mxCell>
+        <mxCell id="7O6HoFl5n1sq-3waYsgG-17" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#c3abd0;strokeColor=#9673a6;" value="Plane 2 (App)" vertex="1">
+          <mxGeometry height="60" width="100" x="NaN" y="NaN" as="geometry" />
+        </mxCell>
+        <mxCell id="7O6HoFl5n1sq-3waYsgG-18" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#c3abd0;strokeColor=#9673a6;" value="Plane 3 (Game)" vertex="1">
+          <mxGeometry height="60" width="100" x="NaN" y="NaN" as="geometry" />
+        </mxCell>
+        <mxCell id="7O6HoFl5n1sq-3waYsgG-19" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#c3abd0;strokeColor=#9673a6;fontStyle=1" value="CRTC&#xa;(Display Controller)&#xa;负责图层混合与时序" vertex="1">
+          <mxGeometry height="100" width="130" x="NaN" y="NaN" as="geometry" />
+        </mxCell>
+        <mxCell id="7O6HoFl5n1sq-3waYsgG-20" edge="1" parent="1" source="7O6HoFl5n1sq-3waYsgG-13" target="7O6HoFl5n1sq-3waYsgG-16">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <Point x="620" y="340" />
+              <Point x="620" y="230" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="7O6HoFl5n1sq-3waYsgG-21" edge="1" parent="1" source="7O6HoFl5n1sq-3waYsgG-13" target="7O6HoFl5n1sq-3waYsgG-17">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="7O6HoFl5n1sq-3waYsgG-22" edge="1" parent="1" source="7O6HoFl5n1sq-3waYsgG-13" target="7O6HoFl5n1sq-3waYsgG-18">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <Point x="620" y="380" />
+              <Point x="620" y="490" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="7O6HoFl5n1sq-3waYsgG-23" edge="1" parent="1" source="7O6HoFl5n1sq-3waYsgG-16" target="7O6HoFl5n1sq-3waYsgG-19">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="7O6HoFl5n1sq-3waYsgG-24" edge="1" parent="1" source="7O6HoFl5n1sq-3waYsgG-17" target="7O6HoFl5n1sq-3waYsgG-19">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="7O6HoFl5n1sq-3waYsgG-25" edge="1" parent="1" source="7O6HoFl5n1sq-3waYsgG-18" target="7O6HoFl5n1sq-3waYsgG-19">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="7O6HoFl5n1sq-3waYsgG-26" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;verticalAlign=top;spacingTop=10;" value="DPU (Display Processing Unit)&#xa;硬件图层叠加 (Overlays)" vertex="1">
+          <mxGeometry height="180" width="160" x="NaN" y="NaN" as="geometry" />
+        </mxCell>
+        <mxCell id="7O6HoFl5n1sq-3waYsgG-27" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#bac8d3;strokeColor=#23445d;" value="HW Overlay 1" vertex="1">
+          <mxGeometry height="30" width="100" x="NaN" y="NaN" as="geometry" />
+        </mxCell>
+        <mxCell id="7O6HoFl5n1sq-3waYsgG-28" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#bac8d3;strokeColor=#23445d;" value="HW Overlay 2" vertex="1">
+          <mxGeometry height="30" width="100" x="NaN" y="NaN" as="geometry" />
+        </mxCell>
+        <mxCell id="7O6HoFl5n1sq-3waYsgG-29" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#bac8d3;strokeColor=#23445d;" value="HW Overlay 3" vertex="1">
+          <mxGeometry height="30" width="100" x="NaN" y="NaN" as="geometry" />
+        </mxCell>
+        <mxCell id="7O6HoFl5n1sq-3waYsgG-30" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="Encoder &amp; Connector&#xa;(MIPI D-PHY / C-PHY)" vertex="1">
+          <mxGeometry height="60" width="100" x="NaN" y="NaN" as="geometry" />
+        </mxCell>
+        <mxCell id="7O6HoFl5n1sq-3waYsgG-31" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1" value="Display Panel&#xa;(DDIC 驱动 IC)" vertex="1">
+          <mxGeometry height="80" width="80" x="NaN" y="NaN" as="geometry" />
+        </mxCell>
+        <mxCell id="7O6HoFl5n1sq-3waYsgG-32" edge="1" parent="1" source="7O6HoFl5n1sq-3waYsgG-19" target="7O6HoFl5n1sq-3waYsgG-26">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="7O6HoFl5n1sq-3waYsgG-33" edge="1" parent="1" source="7O6HoFl5n1sq-3waYsgG-26" target="7O6HoFl5n1sq-3waYsgG-30">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="7O6HoFl5n1sq-3waYsgG-34" edge="1" parent="1" source="7O6HoFl5n1sq-3waYsgG-30" target="7O6HoFl5n1sq-3waYsgG-31">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="Iz8vxr_CPKolJrNhnDFV" name="第 3 页">
+    <mxGraphModel dx="4446" dy="2989" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="xa3t_u2NdzBxtbnbGAWr-2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=18;fontStyle=1;fillColor=#1a1a2e;strokeColor=#16213e;fontColor=#ffffff;" value="Bit Depth 演进：从 1-bit 到 32-bit" vertex="1">
+          <mxGeometry height="50" width="500" x="70" y="110" as="geometry" />
+        </mxCell>
+        <mxCell id="xa3t_u2NdzBxtbnbGAWr-3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;fontStyle=0;fillColor=#16213e;strokeColor=#0f3460;fontColor=#e0e0e0;" value="计算机如何用二进制控制屏幕像素的颜色" vertex="1">
+          <mxGeometry height="30" width="500" x="70" y="170" as="geometry" />
+        </mxCell>
+        <mxCell id="xa3t_u2NdzBxtbnbGAWr-4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fillColor=#2c2c2c;strokeColor=#000000;fontColor=#ffffff;" value="1-bit&#xa;(1970s)&#xa;&amp;lt;b&amp;gt;2 Colors&amp;lt;/b&amp;gt;&#xa;黑白文字终端&#xa;1 pixel = 1 bit&#xa;0=黑, 1=白" vertex="1">
+          <mxGeometry height="140" width="200" x="70" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="xa3t_u2NdzBxtbnbGAWr-5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fillColor=#1a237e;strokeColor=#000051;fontColor=#ffffff;" value="2-bit&#xa;(1981 CGA)&#xa;&amp;lt;b&amp;gt;4 Colors&amp;lt;/b&amp;gt;&#xa;00=黑 01=蓝&#xa;10=绿 11=白&#xa;硬件解码直接映射" vertex="1">
+          <mxGeometry height="140" width="200" x="310" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="xa3t_u2NdzBxtbnbGAWr-6" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fillColor=#00695c;strokeColor=#003d33;fontColor=#ffffff;" value="4-bit&#xa;(1984 EGA)&#xa;&amp;lt;b&amp;gt;16 Colors&amp;lt;/b&amp;gt;&#xa;RGBI 编码&#xa;I=亮度位&#xa;4 bit 查 16 色固定表" vertex="1">
+          <mxGeometry height="140" width="200" x="550" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="xa3t_u2NdzBxtbnbGAWr-7" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fillColor=#6a1b9a;strokeColor=#38006b;fontColor=#ffffff;" value="8-bit&#xa;(1987 VGA)&#xa;&amp;lt;b&amp;gt;256 Colors&amp;lt;/b&amp;gt;&#xa;8-bit = 调色板索引&#xa;查 256 个 18-bit 配方&#xa;(R6G6B6 DAC)" vertex="1">
+          <mxGeometry height="140" width="200" x="790" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="xa3t_u2NdzBxtbnbGAWr-8" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fillColor=#c62828;strokeColor=#8e0000;fontColor=#ffffff;" value="16-bit&#xa;(1995)&#xa;&amp;lt;b&amp;gt;65,536 Colors&amp;lt;/b&amp;gt;&#xa;High Color&#xa;直接存储 R5G6B5&#xa;无需调色板" vertex="1">
+          <mxGeometry height="140" width="200" x="1030" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="xa3t_u2NdzBxtbnbGAWr-9" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fillColor=#2e7d32;strokeColor=#1b5e20;fontColor=#ffffff;" value="24-bit&#xa;(1995+)&#xa;&amp;lt;b&amp;gt;16.7M Colors&amp;lt;/b&amp;gt;&#xa;True Color&#xa;直接存储 R8G8B8&#xa;超过人眼分辨极限" vertex="1">
+          <mxGeometry height="140" width="200" x="1270" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="xa3t_u2NdzBxtbnbGAWr-10" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fillColor=#e65100;strokeColor=#ac1900;fontColor=#ffffff;" value="32-bit&#xa;(2000+)&#xa;&amp;lt;b&amp;gt;16.7M + Alpha&amp;lt;/b&amp;gt;&#xa;ARGB / RGBA&#xa;A8+R8+G8+B8&#xa;透明度混合" vertex="1">
+          <mxGeometry height="140" width="200" x="1510" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="xa3t_u2NdzBxtbnbGAWr-11" edge="1" parent="1" source="xa3t_u2NdzBxtbnbGAWr-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=3;strokeColor=#607d8b;" target="xa3t_u2NdzBxtbnbGAWr-5" value="" />
+        <mxCell id="xa3t_u2NdzBxtbnbGAWr-12" edge="1" parent="1" source="xa3t_u2NdzBxtbnbGAWr-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=3;strokeColor=#607d8b;" target="xa3t_u2NdzBxtbnbGAWr-6" value="" />
+        <mxCell id="xa3t_u2NdzBxtbnbGAWr-13" edge="1" parent="1" source="xa3t_u2NdzBxtbnbGAWr-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=3;strokeColor=#607d8b;" target="xa3t_u2NdzBxtbnbGAWr-7" value="" />
+        <mxCell id="xa3t_u2NdzBxtbnbGAWr-14" edge="1" parent="1" source="xa3t_u2NdzBxtbnbGAWr-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=3;strokeColor=#607d8b;" target="xa3t_u2NdzBxtbnbGAWr-8" value="" />
+        <mxCell id="xa3t_u2NdzBxtbnbGAWr-15" edge="1" parent="1" source="xa3t_u2NdzBxtbnbGAWr-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=3;strokeColor=#607d8b;" target="xa3t_u2NdzBxtbnbGAWr-9" value="" />
+        <mxCell id="xa3t_u2NdzBxtbnbGAWr-16" edge="1" parent="1" source="xa3t_u2NdzBxtbnbGAWr-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=3;strokeColor=#607d8b;" target="xa3t_u2NdzBxtbnbGAWr-10" value="" />
+        <mxCell id="xa3t_u2NdzBxtbnbGAWr-17" parent="1" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=11;fontColor=#cccccc;" value="💡 本质：一个开关&#xa;控制一盏灯&#xa;亮=白 / 灭=黑" vertex="1">
+          <mxGeometry height="60" width="200" x="70" y="420" as="geometry" />
+        </mxCell>
+        <mxCell id="xa3t_u2NdzBxtbnbGAWr-18" parent="1" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=11;fontColor=#cccccc;" value="💡 本质：两个开关组合&#xa;解码电路决定&#xa;哪盏灯亮" vertex="1">
+          <mxGeometry height="60" width="200" x="310" y="420" as="geometry" />
+        </mxCell>
+        <mxCell id="xa3t_u2NdzBxtbnbGAWr-19" parent="1" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=11;fontColor=#cccccc;" value="💡 RGBI 编码&#xa;I=Intensity 亮度位&#xa;从 8 色扩展到 16 色" vertex="1">
+          <mxGeometry height="60" width="200" x="550" y="420" as="geometry" />
+        </mxCell>
+        <mxCell id="xa3t_u2NdzBxtbnbGAWr-20" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;fillColor=#fff3e0;strokeColor=#ff6f00;fontColor=#333333;" value="🎨 调色板 (Palette)&#xa;显存存「房间号」&#xa;调色板存「配方」" vertex="1">
+          <mxGeometry height="60" width="200" x="790" y="420" as="geometry" />
+        </mxCell>
+        <mxCell id="xa3t_u2NdzBxtbnbGAWr-21" parent="1" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=11;fontColor=#cccccc;" value="🎯 直接存颜色&#xa;R5+G6+B5 = 16bit&#xa;人眼对绿最敏感" vertex="1">
+          <mxGeometry height="60" width="200" x="1030" y="420" as="geometry" />
+        </mxCell>
+        <mxCell id="xa3t_u2NdzBxtbnbGAWr-22" parent="1" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=11;fontColor=#cccccc;" value="✅ True Color&#xa;1670万色 &gt; 人眼1000万&#xa;无需近似/抖动" vertex="1">
+          <mxGeometry height="60" width="200" x="1270" y="420" as="geometry" />
+        </mxCell>
+        <mxCell id="xa3t_u2NdzBxtbnbGAWr-23" parent="1" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=11;fontColor=#cccccc;" value="🔷 Alpha 通道&#xa;0=透明, 255=不透明&#xa;图层混合的基础" vertex="1">
+          <mxGeometry height="60" width="200" x="1510" y="420" as="geometry" />
+        </mxCell>
+        <mxCell id="xa3t_u2NdzBxtbnbGAWr-24" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=18;fontStyle=1;fillColor=#1a1a2e;strokeColor=#16213e;fontColor=#ffffff;" value="🔧 Bit → 硬件电路 → 电压 → 电子枪/子像素" vertex="1">
+          <mxGeometry height="40" width="1500" x="70" y="520" as="geometry" />
+        </mxCell>
+        <mxCell id="xa3t_u2NdzBxtbnbGAWr-25" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;fillColor=#e3f2fd;strokeColor=#1976d2;fontColor=#333333;" value="Bit=0/1&#xa;↓&#xa;简单开关&#xa;↓&#xa;电子枪 开/关" vertex="1">
+          <mxGeometry height="80" width="200" x="70" y="580" as="geometry" />
+        </mxCell>
+        <mxCell id="xa3t_u2NdzBxtbnbGAWr-26" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;fillColor=#e3f2fd;strokeColor=#1976d2;fontColor=#333333;" value="2-bit 组合&#xa;↓&#xa;解码电路&#xa;↓&#xa;选择 4 种预设" vertex="1">
+          <mxGeometry height="80" width="200" x="310" y="580" as="geometry" />
+        </mxCell>
+        <mxCell id="xa3t_u2NdzBxtbnbGAWr-27" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;fillColor=#e3f2fd;strokeColor=#1976d2;fontColor=#333333;" value="4-bit 值&#xa;↓&#xa;查 16 色表&#xa;↓&#xa;RGB+I 输出" vertex="1">
+          <mxGeometry height="80" width="200" x="550" y="580" as="geometry" />
+        </mxCell>
+        <mxCell id="xa3t_u2NdzBxtbnbGAWr-28" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;fillColor=#e3f2fd;strokeColor=#1976d2;fontColor=#333333;" value="8-bit 索引&#xa;↓&#xa;查调色板 RAM&#xa;↓&#xa;18-bit 配方&#xa;↓&#xa;6-bit DAC&#xa;→ 模拟电压" vertex="1">
+          <mxGeometry height="100" width="200" x="790" y="580" as="geometry" />
+        </mxCell>
+        <mxCell id="xa3t_u2NdzBxtbnbGAWr-29" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;fillColor=#e3f2fd;strokeColor=#1976d2;fontColor=#333333;" value="16-bit 值&#xa;↓&#xa;直接解析 R5G6B5&#xa;↓&#xa;DAC 转换&#xa;→ 模拟电压" vertex="1">
+          <mxGeometry height="80" width="200" x="1030" y="580" as="geometry" />
+        </mxCell>
+        <mxCell id="xa3t_u2NdzBxtbnbGAWr-30" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;fillColor=#e3f2fd;strokeColor=#1976d2;fontColor=#333333;" value="24-bit 值&#xa;↓&#xa;直接解析 R8G8B8&#xa;↓&#xa;8-bit DAC&#xa;→ 模拟电压" vertex="1">
+          <mxGeometry height="80" width="200" x="1270" y="580" as="geometry" />
+        </mxCell>
+        <mxCell id="xa3t_u2NdzBxtbnbGAWr-31" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;fillColor=#e3f2fd;strokeColor=#1976d2;fontColor=#333333;" value="32-bit 值&#xa;↓&#xa;解析 A8R8G8B8&#xa;↓&#xa;Alpha 混合计算&#xa;+ DAC 输出" vertex="1">
+          <mxGeometry height="80" width="200" x="1510" y="580" as="geometry" />
+        </mxCell>
+        <mxCell id="xa3t_u2NdzBxtbnbGAWr-32" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=18;fontStyle=1;fillColor=#1a1a2e;strokeColor=#16213e;fontColor=#ffffff;" value="📐 核心公式" vertex="1">
+          <mxGeometry height="40" width="200" x="70" y="710" as="geometry" />
+        </mxCell>
+        <mxCell id="xa3t_u2NdzBxtbnbGAWr-33" parent="1" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=13;fontStyle=1;fontColor=#ff9800;" value="1-bit: 2¹ = 2 色" vertex="1">
+          <mxGeometry height="40" width="180" x="310" y="710" as="geometry" />
+        </mxCell>
+        <mxCell id="xa3t_u2NdzBxtbnbGAWr-34" parent="1" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=13;fontStyle=1;fontColor=#ff9800;" value="2-bit: 2² = 4 色" vertex="1">
+          <mxGeometry height="40" width="180" x="510" y="710" as="geometry" />
+        </mxCell>
+        <mxCell id="xa3t_u2NdzBxtbnbGAWr-35" parent="1" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=13;fontStyle=1;fontColor=#ff9800;" value="4-bit: 2⁴ = 16 色" vertex="1">
+          <mxGeometry height="40" width="180" x="710" y="710" as="geometry" />
+        </mxCell>
+        <mxCell id="xa3t_u2NdzBxtbnbGAWr-36" parent="1" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=13;fontStyle=1;fontColor=#ff9800;" value="8-bit: 2⁸ = 256 索引 → 查 18-bit 配方" vertex="1">
+          <mxGeometry height="40" width="180" x="910" y="710" as="geometry" />
+        </mxCell>
+        <mxCell id="xa3t_u2NdzBxtbnbGAWr-37" parent="1" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=13;fontStyle=1;fontColor=#ff9800;" value="16-bit: 2¹⁶ = 65,536 色 (R5G6B5)" vertex="1">
+          <mxGeometry height="40" width="180" x="1150" y="710" as="geometry" />
+        </mxCell>
+        <mxCell id="xa3t_u2NdzBxtbnbGAWr-38" parent="1" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=13;fontStyle=1;fontColor=#ff9800;" value="24-bit: 2²⁴ = 16,777,216 色 (R8G8B8)" vertex="1">
+          <mxGeometry height="40" width="180" x="1350" y="710" as="geometry" />
+        </mxCell>
+        <mxCell id="xa3t_u2NdzBxtbnbGAWr-39" parent="1" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=13;fontStyle=1;fontColor=#ff9800;" value="32-bit: 2²⁴ 色 + 8-bit Alpha" vertex="1">
+          <mxGeometry height="40" width="180" x="1550" y="710" as="geometry" />
+        </mxCell>
+        <mxCell id="xa3t_u2NdzBxtbnbGAWr-40" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=18;fontStyle=1;fillColor=#1a1a2e;strokeColor=#16213e;fontColor=#ffffff;" value="🎨 VGA 8-bit 调色板详解（关键洞察）" vertex="1">
+          <mxGeometry height="40" width="500" x="70" y="790" as="geometry" />
+        </mxCell>
+        <mxCell id="xa3t_u2NdzBxtbnbGAWr-41" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;fillColor=#fff3e0;strokeColor=#ff6f00;fontColor=#333333;" value="显存中的像素值（8-bit）        调色板 RAM（256 条目 × 18-bit）&#xa;        │                              │&#xa;        │    索引（房间号）              │&#xa;        └────────► [查表] ─────────────┘&#xa;                        │&#xa;                        ▼&#xa;                实际颜色值（R6G6B6）&#xa;                        │&#xa;                        ▼&#xa;                6-bit DAC → 模拟电压 → 电子枪" vertex="1">
+          <mxGeometry height="140" width="500" x="70" y="840" as="geometry" />
+        </mxCell>
+        <mxCell id="xa3t_u2NdzBxtbnbGAWr-42" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=18;fontStyle=1;fillColor=#1a1a2e;strokeColor=#16213e;fontColor=#ffffff;" value="✅ 为什么叫 &quot;True Color&quot;？" vertex="1">
+          <mxGeometry height="40" width="500" x="610" y="790" as="geometry" />
+        </mxCell>
+        <mxCell id="xa3t_u2NdzBxtbnbGAWr-43" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fillColor=#2e7d32;strokeColor=#1b5e20;fontColor=#ffffff;" value="• 24-bit 直接存储颜色值（无需调色板查表）&#xa;• 1670 万种颜色 &gt; 人眼约 1000 万分辨极限&#xa;• 首次实现&quot;无需近似、无需抖动&quot;的真实色彩&#xa;• 每个像素的颜色值 = 物理世界的颜色&#xa;&#xa;之前：8-bit 是&quot;查房间号&quot;（间接）&#xa;现在：24-bit 是&quot;直接配方&quot;（直接）" vertex="1">
+          <mxGeometry height="140" width="500" x="610" y="840" as="geometry" />
+        </mxCell>
+        <mxCell id="xa3t_u2NdzBxtbnbGAWr-44" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=18;fontStyle=1;fillColor=#1a1a2e;strokeColor=#16213e;fontColor=#ffffff;" value="🔑 为什么 8-bit per channel 成了标准？" vertex="1">
+          <mxGeometry height="40" width="500" x="1150" y="790" as="geometry" />
+        </mxCell>
+        <mxCell id="xa3t_u2NdzBxtbnbGAWr-45" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;fillColor=#e3f2fd;strokeColor=#1976d2;fontColor=#333333;" value="1. 字节对齐：8-bit = 1 byte&#xa;   内存按字节寻址，24-bit=3字节，32-bit=4字节&#xa;&#xa;2. 人眼极限：1670万色 &gt; 1000万色&#xa;   再增加精度，肉眼已看不出区别&#xa;&#xa;3. 成本甜点：1995年后 8-bit DAC 成本可忽略&#xa;   而 10-bit DAC 仍显著更贵" vertex="1">
+          <mxGeometry height="140" width="500" x="1150" y="840" as="geometry" />
+        </mxCell>
+        <mxCell id="xa3t_u2NdzBxtbnbGAWr-46" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=18;fontStyle=1;fillColor=#1a1a2e;strokeColor=#16213e;fontColor=#ffffff;" value="📊 第一性原理总结" vertex="1">
+          <mxGeometry height="40" width="1580" x="70" y="1010" as="geometry" />
+        </mxCell>
+        <mxCell id="xa3t_u2NdzBxtbnbGAWr-47" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;fontStyle=0;fillColor=#16213e;strokeColor=#0f3460;fontColor=#e0e0e0;" value="Bit 本身不会发光。Bit 是&quot;指令&quot;，告诉硬件电路&quot;哪些颜色的灯该亮、亮多少&quot;。&#xa;&#xa;• 1~4 bit：硬件直接解码，从预设配色中选择（查固定小表）&#xa;• 8 bit：显存存&quot;房间号&quot;，查调色板 RAM 获取 18-bit 配方（R6G6B6）&#xa;• 16~32 bit：直接给 R/G/B 三个子像素各发一个亮度值，无需查表&#xa;&#xa;范式转变：从&quot;间接查表&quot;（调色板索引）→ &quot;直接存储&quot;（True Color）" vertex="1">
+          <mxGeometry height="120" width="1580" x="70" y="1060" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
