@@ -1,0 +1,2770 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://jailuo.github.io/notes/article/Learn%20BSP/bsp-basis/5.%20sys-dir-subsystem/sys.html">
+      
+      
+      
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.48">
+    
+    
+      
+        <title>Sys - Messy Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.6f8fc17f.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../css/timeago.css">
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#1-introduction" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../../index.html" title="Messy Notes" class="md-header__button md-logo" aria-label="Messy Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Messy Notes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Sys
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256l137.3-137.4c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/JAILuo/notes" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../../index.html" title="Messy Notes" class="md-nav__button md-logo" aria-label="Messy Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Messy Notes
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/JAILuo/notes" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    首页
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Article
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Article
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/article/concurrency sumary/summary.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    concurrency-summary
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/article/toolchain/toolchain.mc" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    toolchain
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/article/mount/mount.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    mount
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Course
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Course
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    University Course
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            University Course
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1_1" id="__nav_3_1_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    jyy OS2024
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_1_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            jyy OS2024
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_1_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1_1_1" id="__nav_3_1_1_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    course note
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_1_1_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            course note
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Course/University%20Course/jyy%20OS2024/cousre%20note/1.%20introduction/introduction.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    introduction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Course/University%20Course/jyy%20OS2024/cousre%20note/2.%20concurrency/concurrency.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    concurrency
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Course/University%20Course/jyy%20OS2024/cousre%20note/3.%20virtualization/virtualization.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    virtualization
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Course/University%20Course/jyy%20OS2024/cousre%20note/4.%20kernel/kernel.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    kernel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Course/University%20Course/jyy%20OS2024/cousre%20note/5.%20persistence/persistence.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    persistence
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_1_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1_1_2" id="__nav_3_1_1_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Mini Labs
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_1_1_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            Mini Labs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Course/University%20Course/jyy%20OS2024/Mini%20Labs/M1/M1.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    M1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Course/University%20Course/jyy%20OS2024/Mini%20Labs/M2/M2.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    M2
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Course/University%20Course/jyy%20OS2024/Mini%20Labs/M3/M3.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    M3
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_1_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1_1_3" id="__nav_3_1_1_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    OS Labs
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_1_1_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1_1_3">
+            <span class="md-nav__icon md-icon"></span>
+            OS Labs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Course/University%20Course/jyy%20OS2024/OS%20Labs/L0/L0.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    L0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Course/University%20Course/jyy%20OS2024/OS%20Labs/L1/L1.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    L1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    GeekTime
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            GeekTime
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2_1" id="__nav_3_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    深入理解计算机组成原理
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            深入理解计算机组成原理
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Course/GeekTime/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E4%B8%80%E5%91%A8%E7%9B%AE/1.%20%E6%8C%87%E4%BB%A4%E4%B8%8E%E8%BF%90%E7%AE%97/%E6%8C%87%E4%BB%A4%E4%B8%8E%E8%BF%90%E7%AE%97.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1. 指令与运算
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Course/GeekTime/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E4%B8%80%E5%91%A8%E7%9B%AE/2.%20%E5%A4%84%E7%90%86%E5%99%A8/%E5%A4%84%E7%90%86%E5%99%A8.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2. 处理器
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Course/GeekTime/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E4%B8%80%E5%91%A8%E7%9B%AE/3.%20%E5%AD%98%E5%82%A8%E4%B8%8EIO%E7%B3%BB%E7%BB%9F/%E5%AD%98%E5%82%A8%E4%B8%8EIO%E7%B3%BB%E7%BB%9F.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3. 存储与IO系统
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Course/GeekTime/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E4%B8%80%E5%91%A8%E7%9B%AE/4.%20%E5%BA%94%E7%94%A8/%E5%BA%94%E7%94%A8.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4. 应用
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2_2" id="__nav_3_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    计算基础实战课
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            计算基础实战课
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/1.%20MiniCPU%E8%AE%BE%E8%AE%A1/MiniCPU%E8%AE%BE%E8%AE%A1.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1. MiniCPU设计
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/2.%20%E8%AF%AD%E8%A8%80%E5%92%8C%E6%8C%87%E4%BB%A4/%E8%AF%AD%E8%A8%80%E5%92%8C%E6%8C%87%E4%BB%A4.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2. 语言和指令
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/3.%20%E5%BA%94%E7%94%A8%E5%92%8C%E5%86%85%E5%AD%98/%E5%BA%94%E7%94%A8%E5%92%8C%E5%86%85%E5%AD%98.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3. 应用和内存
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/4.%20IO%E4%B8%8E%E6%96%87%E4%BB%B6/IO%E5%92%8C%E6%96%87%E4%BB%B6.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4. IO与文件
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/5.%20%E7%BB%BC%E5%90%88%E5%BA%94%E7%94%A8/synthesis.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    5. 综合应用
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E5%92%8C%E5%B7%A5%E5%85%B7%E9%93%BE/%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    环境配置和工具链
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    ysyx
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            ysyx
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    NJU-ICS2023-PA
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            NJU-ICS2023-PA
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../ysyx/pa/pa1/pa1.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PA1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../ysyx/pa/pa2/pa2.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PA2
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../ysyx/pa/pa3/pa3.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PA3
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../ysyx/pa/pa4/pa4.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PA4
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../ysyx/pa/c_marco/macro.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    C Macro
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../ysyx/pa/summary/summary.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Summary
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../ysyx/pa/Linux_porting/porting.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Linux Porting
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../ysyx/digital-circuit/digital%20circuit.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Digital Circuit
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Tools
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Tools
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Tools/GDB/GDB.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GDB
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Vim
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            Vim
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Tools/vim/usage/usage.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    usage
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Tools/vim/vim-plugin/vim.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    vim-plugin
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Tools/doxygen/doxygen.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    doxygen
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Tools/gcc/gcc.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    gcc
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Tools/Git/Git.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Git
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Tools/md2slider/md2slider.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    md2slider
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Tools/tmux/tmux.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    tmux
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Todo%20List/todo.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TODO List
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<blockquote>
+<p><strong>注意：以下的内容均为个人观点。</strong></p>
+<p><strong>如果你看完后有不同的观点也没关系！请指出，我很乐意去学尝试积极的东西。</strong></p>
+</blockquote>
+<p>封面：</p>
+<p><img alt="Gemini_Generated_Image_tc5m62tc5m62tc5m" src="pic/Gemini_Generated_Image_tc5m62tc5m62tc5m.png" /></p>
+<h1 id="1-introduction">1. introduction</h1>
+<blockquote>
+<p>注意：以下的内容均为个人观点。</p>
+<p>如果你看完后有不同的观点也没关系！请指出，我很乐意去学尝试积极的东西。</p>
+</blockquote>
+<p>在做关于字符设备驱动实验的时候，用到了简单的 <code>/sys</code> 操作：</p>
+<ul>
+<li><a href="https://mp.weixin.qq.com/s?__biz=MzY5OTE1OTEzMA==&amp;mid=2247485381&amp;idx=1&amp;sn=42050aac3ddf92b64ec2891d30c4d00f&amp;chksm=f44200f0c33589e6916bbdbaf290f436baa182c67406f8a3fc50c11c53eb8e2128bd4d0b50eb&amp;scene=178&amp;cur_album_id=4441964449075331074&amp;search_click_id=#rd">3.3. 现代字符设备驱动框架</a></li>
+<li><a href="https://mp.weixin.qq.com/s?__biz=MzY5OTE1OTEzMA==&amp;mid=2247485383&amp;idx=1&amp;sn=84457a2dd78060997f3e022947f48b0e&amp;chksm=f44200f2c33589e4bbb28e55a3a3b8a7f9c0f216861ddb834cf7e2628873d6ad6aac9c07a897&amp;scene=178&amp;cur_album_id=4441964449075331074&amp;search_click_id=#rd">3.4. 从0开发Linux GPIO BSP驱动</a></li>
+</ul>
+<p>进而思考，自己对于 <code>/sys</code> 的了解基本是：“如果要读什么硬件的数据、看一下芯片当前的功耗，去这个目录找就行”，感觉没啥意思。</p>
+<p>另外对于 <code>udev</code> 的了解也就是类比为 <code>Windows</code> 的设备管理器的底层实现，一个负责设备热插拔的后台进程。</p>
+<p>而在看了 Neil Brown 两篇十年前关于设备模型的文章<sup>[1,2]</sup>后，感觉到非常 amazing！所以<strong>决定借此机会写部分自己感兴趣的 <code>/sys</code>、<code>udev</code>、设备模型、电源管理...杂七杂八...</strong></p>
+<p>我不会写什么具体什么的定义，只是直观展示每部分起到的作用+自己感兴趣的内容。</p>
+<p><img src="pic/image-20260513114455338.png" alt="image-20260513114455338" style="zoom: 50%;" /></p>
+<p>按照大家从小到大的学习习惯，我们总是会想在源码/课本里找到所谓的标准定义：</p>
+<p>比如说 <code>device</code> 什么是？几乎在各个文档/书籍/公众号资料中描述的定义，几乎就是这样：</p>
+<p>“A physical or virtual object which attaches to a (possibly virtual) bus<sup>[3]</sup> "</p>
+<p>（“设备是连接到总线上的物理或虚拟对象”）</p>
+<p>这种定义听起来太像课堂上我们学过的什么矩阵是什么、行列式是什么、xxx运动是什么......这种听起来非常好，非常通用的定义我是一直很讨厌的（并不是说他错，我只是想具体一点，想知道这玩意究竟是用来做什么的）......</p>
+<p>就拿上面的例子来说，Neil Brown 在十年前就指出这种定义与那零几年提出这个定义的时候的现实不符<sup>[1]</sup>：</p>
+<blockquote>
+<p>"For example, in the device model, a partition on a hard drive is a "device" much like the hard drive as a whole is. The hard drive as a whole may attach to a "bus", but the partition certainly doesn't: at best it attaches to the whole drive. Also, there are devices that don't attach to anything, let alone a "bus". The devices listed in directories under <code>/sys/devices/virtual</code> are not "attached" to anything. That "virtual" directory is not a special bus called "virtual", it is simply a place to put things that don't belong anywhere else."</p>
+</blockquote>
+<p>比如说，硬盘的分区是一个设备，但它显然不挂在某个真实的物理总线上；许多虚拟设备甚至不连接任何东西。正如 Neil 所言，<strong>这些术语并没有绝对的外部含义，它们是由实现它们的代码所定义的，“设备”只是一个承载接口和抽象的载体。</strong>Neil 然后给出 learned lesson<sup>[1]</sup>：</p>
+<blockquote>
+<p>“This, then, is the lesson of the driver model: the implementation provides functionality, not meaning. The meaning comes from the thoughts of developers and is coherent or disjoint in the same measure that those developers are of one mind, or not.”</p>
+<p>代码实现本身只负责完成具体的功能操作，但它并不自带“意义”——比如为什么要这样设计、它解决什么问题、如何与其他部分协调等。真正的“意义”来自于开发者的理解和意图。如果所有开发者在设计思路、目标、抽象概念上达成一致，那么整个系统的意义就是连贯、统一的；反之，如果开发者想法不一致，系统的意义就会变得支离破碎、相互矛盾。</p>
+<p>也就是说，技术实现只是躯壳，开发者之间的共同理解才是灵魂......进一步强调了沟通的重要性......</p>
+</blockquote>
+<p>其实这样让我想起之前再看蒋炎岩老师的 OS2024 的课的时候的截图<sup>[4]</sup>：</p>
+<p><img src="pic/image-20240701182859183.png" alt="image-20240701182859183" style="zoom:33%;" /></p>
+<p>扯远了，回到本文要讲的内容，下文将基于 <strong>QEMU ARM64 Virtual Machine (mach-virt)</strong> 的虚拟主板架构、Linux 6.12.28 做学习验证。（其中设备树描述使用的是 Core&amp;Chip 博主的该仓库中的设备树：https://gitee.com/core-chip_0/corechip_qemu_sdk/blob/master/out/cc_qemu_sdk.dts）</p>
+<p>往下看之前，脑海中还是需要有一张 SoC 的大致物理结构图，下图由 Gemini 生成：</p>
+<p><img src="pic/temp-draw-QEMU Virt Architecture.drawio.png" alt="temp-draw-QEMU Virt Architecture.drawio"  /></p>
+<p>有了这张物理拓扑的底图，我们再去理解内核是如何在内存中为其建立映射的，就会轻松很多。</p>
+<h1 id="2-sys">2. 探究 <code>/sys</code> 目录的真实面貌</h1>
+<p>要理解设备模型，个人觉得最直观的切入点就是 <code>/sys</code> 目录。</p>
+<p>在 Linux 系统中，<code>/sys</code> 是 <code>sysfs</code> 虚拟文件系统的挂载点，具体来说，它主要把将内核中复杂的数据结构关系（主要是树状结构）导出并暴露给用户空间。</p>
+<p>底层的 <code>ramfs</code> / <code>kobject</code> 实现细节，想学习了解，可以看参考[5]，这里不深入了。</p>
+<p>简单来说，可以直接 <code>/sys</code> 想象成内核态的物理硬件拓扑在用户空间的投影，在这个投影里看到的每一个目录，基本都对应着内核里的一个底层对象。</p>
+<p>比如直接在 x86 host 的终端看 <code>/sys</code> 的结构，布局如下：</p>
+<p><img alt="image-20260513223442838" src="pic/image-20260513223442838.png" /></p>
+<p>虽然目录很多，但按照本文的目标，梳理设备模型，我们初期只需要看其中最核心的四个目录即可：<code>devices</code>、<code>bus</code>、<code>class</code> 和 <code>dev</code>。</p>
+<p>实际上它们也并不是完全没关系，它们只是对同一套物理硬件的不同“观察视角”。</p>
+<h2 id="21-sysdevices">2.1 <code>/sys/devices</code>：物理拓扑（核心）</h2>
+<p>这个目录可以说是最核心的地方，它直接用一种层级排列的方式展示了整个系统/内核的<strong>设备</strong>，其中也是包含了各种文件，用来检查每个设备的详细信息。</p>
+<p>Neil 甚至专门写了一篇这方面的文章<sup>[2]</sup>，标题还就叫”A tour of /sys/devices”，里面举了三个概念来来理解 <code>/sys/devices</code> 目录结构。可以简单总结：在看这个 <code>/sys/devices</code> 的时候，抓住这三个点，<strong>父设备、设备的属性、命令空间管理（parentage, attributes, and namespace management）</strong></p>
+<blockquote>
+<p>实际上哪怕现在广为使用的 Linux 6.x（正在开发7.x不算），Neil 的几篇文章也一样适用，因为 Linux 设备模型的核心基础（<code>kobject</code>、<code>kset</code>、<code>bus</code>、<code>class</code>、<code>device</code>、<code>driver</code>）在 2.6 时代确立后基本也没有发生过什么根本性的颠覆，后来的版本更多是在此基础上做延伸（比如引入设备树的泛滥支持、电源管理的细化等）</p>
+</blockquote>
+<h3 id="211-parenthood">2.1.1 Parenthood：硬件连线拓扑</h3>
+<p>这部分怎么理解呢，“在 Linux 设备模型中，每一个代表实体或抽象事物的设备，大多都有一个“父设备”，但有时候也会遇到像 <code>workqueue</code> 这种没有父设备的。</p>
+<p><img alt="device-paretn" src="pic/device-paretn.png" /></p>
+<p>脑海里知道外部的设备(<code>tca6507</code>、<code>leds</code>)连接到 SoC 内部的 I2C 控制器即可。</p>
+<p>当然，这里可以补充一个具体例子来辅助理解这种 <code>parenthood</code>，比如以下命令，应该常用：</p>
+<div class="highlight"><pre><span></span><code><span class="nb">echo</span><span class="w"> </span><span class="m">100</span><span class="w"> </span>&gt;<span class="w"> </span>/sys/devices/platform/omap_i2c.2/i2c-2/2-0045/leds/gta04:green:power/brightness<span class="w">  </span>
+</code></pre></div>
+<p>在 Neil 的文章中<sup>[2]</sup>，他用就是这个例子，梳理了整个这个改变亮度的请求，是怎么一步步经过 Class层、Driver层、总线层，最终到达物理内存地址和硬件的，具体我让 Gemini 生成了张图，见下方：</p>
+<p><img src="pic/image-20260514111946125.png" alt="image-20260514111946125" style="zoom:67%;" /></p>
+<p>直白点理解：在硬件世界里，大家都是“挂靠”生存的。</p>
+<p>比如上面的例子，sensor 挂在 I2C 控制器上，I2C 控制器又挂在系统的主总线上。</p>
+<p>仔细看那个命令操作的 <code>/sys</code> 和设备对象，如果反过来一层层理解，是不是就是上面这个图标题描述的这样，是不是就是”通过叶子反向所引到根“这个理解？！</p>
+<p>在 <code>/sys/devices</code> 里，<strong>目录的层级就是硬件的连线，找设备的“父目录”，实际上就是在找“这玩意儿到底插在哪根线上”</strong>。</p>
+<p>你敲命令让设备干活，指令就是顺着这个目录树，一层层往上<strong>爹传爹</strong>，最后发给底层总线的。</p>
+<p>这也就是 Neil 在 [2] 中所描述的<strong>“Parent as connection point or service provider（连接点/服务提供者）”</strong>了。</p>
+<p>除此之外，Neil 还额外描述了两个点：</p>
+<ul>
+<li>Parent as discover（作为发现者）</li>
+<li>Parent as power source（作为电源来源（并非绝对））</li>
+</ul>
+<p>这两个点也能说很多东西，比如“discover”这个点：</p>
+<ul>
+<li>具有发现设备能力的总线（PCIe、USB等）是怎么探测新设备的插入的，对应的子系统的设计是什么样的？</li>
+<li>没有设备发现能力的总线（I2C、SPI、CAN等）是怎么通过 BIOS/ACPI/Device Tree 配置设备的。</li>
+</ul>
+<p><img alt="image-20260514114757278" src="pic/image-20260514114757278.png" /></p>
+<p>至于说电源管理，电源管理的部分确实是一个大头，因为设备模型的提出的很大一个原因就是电源管理，<strong>所以在阅读 Neil 的文章之前，我的认知就是电源管理应该在设备模型中占主要地位的，设备模型是围绕它来设计的</strong>，而且电源管理无非就是管理静态、运行的功耗：</p>
+<ul>
+<li>静态的，就是直接 suspend、hibernate，尽可能把多的设备置于最低功耗。</li>
+<li>runtime的，就是看设备在未被使用的时候就进入低功耗状态，具体关电源的顺序就是先关子设备，再关父设备，反之一样的。</li>
+</ul>
+<p>但 Neil 在 [2] 中甚至直接点名了这种观点哈哈（也算是和大佬想到一块去了哈哈（反）</p>
+<blockquote>
+<p>you might expect that power management would be fairly central. The reality is ... more complex.</p>
+<p>...</p>
+<p>However power often isn't managed in exactly the same way as device addressing, so the power management system needs a little more control, which it gets by having its own list.</p>
+<p><strong>Runtime power management does make some use of parent/child relationships, but not always. Possibly not even often.</strong>（运行时电源管理确实会在一定程度上利用父/子关系，但并非总是如此。甚至可能不经常这么用）</p>
+</blockquote>
+<p>有一个原因是有些<strong>设备、甚至总线支持的设备</strong>，都不支持 runtime 电源管理的，我起初还是挺惊讶的，但一想到有很多纯软件或虚拟抽象层、一些被专属框架接管的核心硬件、QEMU 测试的等，好像也却是这么个道理：</p>
+<p><img alt="image-20260514124310525" src="pic/image-20260514124310525.png" /></p>
+<p>Neil 也给出了它的指导：（看不懂就借助微信的翻译吧）</p>
+<blockquote>
+<p><strong>So while runtime power management can make use of the parent link, it doesn't to a great extent. The parent very often is <em>not</em> the source of power, only of addressing and control.</strong>（因此，虽然运行时电源管理可以利用父链路，但利用程度并不高。父链路往往不是电源的来源，而只是用于寻址和控制。）</p>
+<p>Despite the apparent richness of meaning we find in parenthood, the device model doesn't really use it much. As a message passes "up" the hierarchy, it doesn't follow the "<code>-&gt;parent</code>" links of the device model, but uses references that were provided to each device when it was initialized. The runtime power management code does make direct use of these <code>-&gt;parent</code> links, but not very much. It could just as easily make use of explicit dependencies, just as it does when there are dependencies that are not reflected in the hierarchy.</p>
+</blockquote>
+<p><img alt="image-20260514212028623" src="pic/image-20260514212028623.png" /></p>
+<p>所以，按照自己的理解推断，我是觉得这个 <code>/sys/devices</code> ，也就是设备模型树（Parent-Child）应该是不适合做电源管理的。</p>
+<p>但因为我没有这方面的经验，所以我问了 Gemini：</p>
+<ol>
+<li>控制流不等于电流： 设备树（Device Tree / <code>sysfs</code> hierarchy）反映的是总线探测和控制关系（例如 I2C 控制器下面挂了一个温湿度传感器）。但是，I2C 总线并不给传感器供电，传感器通常连在单独的 LDO（低压差线性稳压器）或 PMIC 上。如果严格按照父子关系，传感器不休眠，I2C 控制器就不能休眠，这是极大的能源浪费。</li>
+<li>电源域 (Power Domains) 的崛起： 因为父子关系不能准确描述电源拓扑，内核引入了 Generic Power Domain (<code>genpd</code>)。设备可能会挂载到特定的电源域中，当域内所有设备都 idle 时，才会真正下电。</li>
+<li>默认保守策略： Runtime PM 默认是关闭的（导致状态为 <code>unsupported</code>）。驱动开发者必须在 probe 函数中明确调用 <code>pm_runtime_enable(dev)</code> 并且实现对应的 <code>runtime_suspend</code> / <code>runtime_resume</code> 回调。如果不确定设备在低功耗状态下能否可靠唤醒（比如没有配置专属的中断唤醒引脚），开发者宁愿让它保持 Active，以防设备睡死。</li>
+<li>绝大部分逻辑设备依然是 <code>unsupported</code>，但是针对<strong>耗电大户</strong>，Runtime PM 会被压榨到极致。例如在底层的存储栈中，<strong>UFS 控制器</strong> (<code>ufshcd</code>) 或 <strong>eMMC</strong> 的驱动中会密集使用 <code>pm_runtime_get_sync()</code> 和 <code>pm_runtime_put_autosuspend()</code>。每一次 I/O 请求到来时迅速唤醒 <code>UniPro</code> 链路，I/O 队列一空立刻利用 <code>autosuspend</code> 机制让硬件进入低功耗状态（如 UFS 的 Hibern8 状态）。这些才是 Runtime PM 真正大显身手的主战场。</li>
+</ol>
+<p>得等我有机会可以实践看看，算是一个TODO项吧。</p>
+<p>不管上面的内容如何，至少借助” ‘parent’ + 硬件拓扑结构“这个话题，我确实对 <code>/sys/devices</code> 有了自己的理解。</p>
+<h3 id="212-attributes">2.1.2 属性 (Attributes)：设备的细枝末节</h3>
+<blockquote>
+<p>如果说目录搭建了骨架，那“属性”就是填充细节的血肉。</p>
+</blockquote>
+<p>设备属性就是关于给定设备的一些任意细节，在 <code>/sys/devices</code> 内部就表现为很多被称为“属性文件”的小文件。</p>
+<p>绝大多数时候，这些属性文件基本都是散落的，直接平铺在<strong>设备的专属目录</strong>底下。但为了不让目录看起来太乱，内核有时候会把一类相关的属性“打包”放到一个单独的子目录里。</p>
+<p><strong>最典型、最普遍的例子就是在每个设备目录下都能看到的 <code>power</code> 文件夹</strong>，里面装的全是跟电源状态相关的属性</p>
+<p><img alt="image-20260514213258728" src="pic/image-20260514213258728.png" /></p>
+<p>当然了，具体有什么属性，对应设备具体怎么处理，还得看具体代码怎么实现的。</p>
+<p>但这里可以有一个认知，<strong>几乎设备目录都会拥有这个 <code>power</code> 子目录</strong>，也可以算是一个判断方法吧。</p>
+<h3 id="213-namespace-management">2.1.3 命名空间管理 (Namespace management)</h3>
+<p>这部分我不懂也没啥理解，反正就是不要重名就行，可能有什么高深的地方我不懂，我直接问的 Gemini：</p>
+<p>整个 <code>/sys</code> 里面成百上千的节点，其实 Linux 并没有一个强制的“中央命名局”来审批谁叫什么名字。大家基本全靠“江湖规矩”和代码 Review 来避免重名，实在撞名了，内核就会打印抱怨。</p>
+<p>在同一个设备目录里，经常会挤着来自不同命名空间的名字。抓准这几个避免冲突的核心套路，看目录的时候就不容易晕：</p>
+<ol>
+<li><strong>大分类井水不犯河水：</strong> 总线 (<code>/sys/bus</code>) 和类 (<code>/sys/class</code>) 分属两个独立的命名空间，它们各自管各自的，名字几乎不会重叠。</li>
+<li><strong>总线自己定规矩：</strong> 每个总线或类，都会给自家手底下的设备定个“起名格式”。比如 I2C 总线，如果设备代表的是 I2C 适配器本身，就叫 <code>i2c-%d</code>；如果是挂在上面的实体芯片，就叫 <code>%d-%04x</code>。</li>
+<li><strong>系统保留词的“特权隔离”：</strong> 驱动开发自己定义的属性名，绝不能跟总线或系统强加的属性名冲突。内核的做法是“垄断”掉几个特定的词。比如，内核把 <code>power</code> 作为一个目录名独占了。 <strong>这个设计非常聪明：</strong> 它相当于划了一块保护区。以后内核想加任何新的电源管理属性（比如 <code>pm_qos_latency_tolerance_us</code>），全往 <code>power</code> 这个目录里塞就行了。这样既保证了扩展性，又绝不会污染外面设备的命名空间，把名字冲突的风险降到了最低。</li>
+</ol>
+<h3 id="214">2.1.4 总结！</h3>
+<p>关于 <code>/sys/devices</code> 的总结，Neil在 [2] 中给出了一些指导（有些我也不知道是否仍然适合用在如今的 Linux 6.x）：</p>
+<ol>
+<li>
+<p>如何一眼识别“设备目录”</p>
+<p><strong>每一个包含 <code>uevent</code> 文件的目录，就代表一个设备。</strong></p>
+<ul>
+<li>可以向 <code>uevent</code> 写入命令来触发设备添加/移除等事件（给 <code>udev</code> 用）。</li>
+<li>也可以读取它来查看该设备的事件上下文信息。
+    这是遍历整个树时，用来区分“设备目录”和“非设备目录”的最核心标准。</li>
+</ul>
+</li>
+<li>
+<p>每个设备目录的标配成员</p>
+<p>在一个设备目录下，你几乎都能看到：</p>
+<ul>
+<li><strong><code>power/</code> 目录</strong>：包含电源管理相关属性，每个设备都有。</li>
+<li><strong><code>subsystem</code> 符号链接</strong>：指向所属的子系统（位于 <code>/sys/bus/</code> 或 <code>/sys/class/</code>）。
+    <em>（例外：像 USB 的 endpoint、port 这类内部设备，即使属于 USB 子系统，也可能没有这个链接，也不出现在 <code>/sys/bus/usb/devices</code> 中）</em></li>
+<li><strong><code>device</code> 链接（遗留）</strong>：通常指向最近的一个父设备。</li>
+<li><strong><code>of_node</code> 链接（Linux 4.1+）</strong>：如果设备由设备树描述，会指向 <code>/sys/firmware/devicetree</code> 中对应的节点。</li>
+</ul>
+</li>
+<li>
+<p>子目录只有三种可能</p>
+<p>一个设备目录下的子目录，一定属于以下三类之一：</p>
+<ol>
+<li><strong>子设备目录</strong>（如果父设备是 bus 或 class 设备）
+    → 识别方法：子目录里也有 <code>uevent</code> 文件。</li>
+<li><strong>按 class 名称分组的子设备目录</strong>（仅当父设备是 <strong>bus 设备</strong> 时出现）
+    → 例如 <code>.../i2c-2/2-0045/leds/</code>，这里 <code>leds</code> 目录本身不是设备，其下的目录才是设备（包含 <code>uevent</code>）。识别方法：目录名与某个 class 同名，且其子目录才有 <code>uevent</code>。</li>
+<li><strong>纯粹的属性分组目录</strong>
+    → 里面只有属性文件、链接或更深的子目录，<strong>绝不包含设备目录（没有 <code>uevent</code>）</strong>。比如某些驱动把一组属性组织在一个子目录下。</li>
+</ol>
+</li>
+<li>
+<p>目录结构与 parent 关系的对应规则</p>
+<ul>
+<li><strong>有 parent 的设备</strong>：它的目录要么直接挂在 <strong>父设备的设备目录</strong> 下，要么挂在父设备目录下的 <strong>以自己 class 命名的中间分组目录</strong> 下。</li>
+<li><strong>没有 parent 的设备</strong>：位置取决于设备类型：<ul>
+<li><strong>bus 设备</strong>：可以自行决定放在 <code>/sys/devices/</code>（根）、<code>/sys/devices/virtual/</code> 或 <code>/sys/devices/system/</code> 下。</li>
+<li><strong>class 设备</strong>：全部强制放在 <code>/sys/devices/virtual/</code> 下，并且外面会有一层以 class 名命名的中间目录。
+    例如：md RAID 块设备是 <code>/sys/devices/virtual/block/md0</code>。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="22-bus">2.2 （可跳过）硬件上的 bus 是什么</h2>
+<p>我想看看硬件和软件上的总线都是什么？</p>
+<p><strong>本节可跳过！</strong></p>
+<p>实际上还是从这个东西被提出是为了解决什么问题的角度理解好了：下面开始讲历史。</p>
+<p>我自己是把总线理解成<strong>一个特殊的 I/O 设备</strong>。而 I/O 设备就是一个能与 <code>cpu core</code> 交换数据的接口/控制器。</p>
+<blockquote>
+<p>对于I/O，自己的理解说就是一根线，一根连接到 <code>cpu core</code> 的线，当然这条线可能复杂点，<code>cpu</code> 出来的这条线可能会连接到一个控制器，这个控制器就能够连接到外部的各种设备：DDR/UFS/LED...</p>
+</blockquote>
+<p>再本质一点， I/O 设备可以被理解为多个寄存器组合在一起（你外部要造什么设备，就拿这个寄存器往外连接就行），只要给这个寄存器赋予了地址，那 <code>cpu</code> 就能够直接使用指令（<code>in/out/MMIO</code>）和设备进行交互，这也就是蒋炎岩老师的上课讲到的东西<sup>[7]</sup>：</p>
+<p><img alt="image-20260514231625272" src="pic/image-20260514231625272.png" /></p>
+<p>但是，可以想象，以前的设备都是定死的，固定某一个地址就是某一个设备（控制器/寄存器），<strong>这样就过于受到限制了</strong>。我想接入更多 (甚至<strong>未知</strong>) 的 I/O 设备！要是有一天出了新型产品硬件，能不能就直接接入我的计算机系统，而不用改硬件？</p>
+<p>总线就干了这么一件事，<strong><code>cpu core</code> 只需连接总线这一个设备，其他的设备都挂在这上面，<code>cpu</code> 要访问/读/写对应的设备，总线直接帮我进行转发即可；甚至还能总线挂总线（桥接，USB挂PCIe）。</strong></p>
+<p>可以回想前面看看，总线是有自己的地址空间的、有自己的寄存器的.....总线就是 I/O 设备嘛。</p>
+<blockquote>
+<p>这种理解，是不是也是一种“虚拟化“呢？注册与转发？挺有意思，总线做的就是某种意义上的 I/O 设备虚拟。</p>
+<p>突然想了下，总线能不能做 DMA？似乎行？<code>sudo cat /proc/iomem</code></p>
+</blockquote>
+<p>如今的 PCIe 不就是这样？可以实际看看：</p>
+<blockquote>
+<p><code>lspci -tv</code> 和 <code>lsusb -tv</code>: 查看系统中总线上的设备</p>
+<ul>
+<li>概念简单，实际非常复杂……<ul>
+<li>电气特性、burst 传输、中断、Plug and Play</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<p><img alt="image-20260514233612569" src="pic/image-20260514233612569.png" /></p>
+<h2 id="23-sysbus">2.3 <code>/sys/bus</code>：硬件连线与匹配</h2>
+<blockquote>
+<p><code>driver</code> ，一段程序代码，检测/管理控制设备的，不展开，没什么好讲的。</p>
+</blockquote>
+<p>回到主题，软件上的 <code>bus</code> 是什么？按照 [3] 中给出的定义：“A device which serves as an attachment point for other devices（一个作为其他设备连接点的装置）”。</p>
+<blockquote>
+<p>这个定义其实挺直观的，软件、硬件都对上了</p>
+</blockquote>
+<p>在 Linux 当前的设备模型的软件抽象里，<strong><code>/sys/bus</code> 的核心职责其实是充当“红娘”，它提供的是一种“匹配机制”（Match &amp; Probe）</strong>。</p>
+<p>回想一下，在写 <code>bare-metal</code> 的时候，关于总线的驱动代码做的都是什么工作？无非就是让硬件具体是怎么在电气或协议层面上连接的（比如 I2C 的仲裁机制、总线重传），但是他是不知道怎么样让具体的设备干活的，所以需要配合一堆独立的“Drivers”来干活。</p>
+<p>比如下面的 <code>stm32</code> 的 HAL库的I2C 驱动代码 + <code>I2C-OLED</code> 的例子：</p>
+<p><img alt="image-20260515110239469" src="pic/image-20260515110239469.png" /></p>
+<p>而在 Linux 的软件抽象里也是一样做的也是一样的：<code>bus</code>，<strong>本质上就是一套部分实现的代码机制，它的核心使命是配合一堆独立的“Drivers”来干活</strong>。所以在很多文档会这么说：</p>
+<p>无论看任何一个具体的总线目录（比如 <code>/sys/bus/i2c/</code> 或者 <code>/sys/bus/amba/</code>），就看它们下面的这两个文件夹就行：</p>
+<ul>
+<li><strong><code>devices/</code></strong>：里面全是指向 <code>/sys/devices</code> 的软链接（代表“系统目前<strong>发现</strong>了哪些硬件来登记了”）。</li>
+<li><strong><code>drivers/</code></strong>：里面全是系统加载的驱动程序（代表“系统目前<strong>有谁</strong>能干活，把简历投进来了”）。</li>
+</ul>
+<p><img alt="image-20260515140605890" src="pic/image-20260515140605890.png" /></p>
+<p>具体来说，每当有一个新设备（Device）通过设备树解析或热插拔注册进来，或者有一个新驱动（Driver）被 <code>insmod</code> 加载进来，这个“介绍所”的红娘（也就是总线核心代码里的 <code>match</code> 函数）就会疯狂运转。她会拿着设备的档案（比如 DTS 里的 <code>compatible</code> 属性）去对比驱动的简历。</p>
+<p>一旦匹配上，总线就会安排他们“见面”——也就是调用驱动程序里的 <code>probe()</code> 函数。这也是为什么我们写驱动排查“我的 <code>probe</code> 为什么没执行”的第一现场，几乎都是会去 <code>devices/</code> 和 <code>drivers/</code> 目录下查花名册，看看是不是名字写错导致红娘直接拒接了。</p>
+<blockquote>
+<p>第三章会具体实操看看流程。</p>
+</blockquote>
+<p>TODO：补充记录：BSP 开发应该怎么做</p>
+<h2 id="24-sysclass">2.4 <code>/sys/class</code>：面向应用层的功能抽象</h2>
+<p>如果说 <code>devices</code> 关心的是“设备长什么样、怎么连的”，那么 <code>class</code> 关心的则是“这玩意儿能用来干什么”。</p>
+<p><code>/sys/class/</code> 提供的是<strong>基于功能分类</strong>的视图，<code>class</code> 提供了一个统一的接口，屏蔽了底层硬件的各种差异。</p>
+<p><img src="pic/image-20260515113218427.png" alt="image-20260515113218427" style="zoom: 50%;" /></p>
+<blockquote>
+<p>比如所有的鼠标、键盘，不管你是通过 USB 连入的，还是通过蓝牙连入的，也不管底层经过了多少级复杂的总线桥接，最终都会在 <code>/sys/class/input/</code> 下暴露一个统一的接口。</p>
+<p>和 <code>bus</code> 类似，<code>/sys/class/</code> 下的设备同样几乎全是<strong>软链接</strong>，最终指向 <code>/sys/devices/</code> 中的实体。</p>
+</blockquote>
+<p>比如说 Gemini 总结了一个例子（<strong>不一定对，有些可能是基于旧代码的，可能新的设备位置不在这里，但理解类似</strong>）：</p>
+<ol>
+<li>完整实现，抹平差异： <code>class</code> 的目的是屏蔽底层硬件的复杂连线。以 <code>/sys/class/leds</code> 为例，无论这个 LED 是通过 SoC 直接引出的 GPIO 控制的，还是挂在 I2C 总线上的 TCA6507 电源管理芯片控制的，在 <code>class</code> 层面，它们看起来一模一样。</li>
+<li>统一的接口： <code>class</code> 对用户空间（或 HAL 层）提供极度统一的 API（通常通过 sysfs 节点，比如 <code>brightness</code> 控制亮度）。外界根本不需要知道它挂在什么 <code>bus</code> 上，由什么 <code>driver</code> 驱动。</li>
+</ol>
+<p>简单来说，在用户层，操作这个目录的逻辑就是<strong>找功能，不找硬件</strong>，因为底层已经统一了好了接口。比如，Gemini 直接总结了个表，要什么，直接去里面找就好了：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">你想控制什么</th>
+<th style="text-align: left;">去哪个 class 目录</th>
+<th style="text-align: left;">操作哪个属性文件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>屏幕背光亮度</strong></td>
+<td style="text-align: left;"><code>/sys/class/backlight/</code> (如 <code>acpi_video0/</code>)</td>
+<td style="text-align: left;"><code>brightness</code> (数值 0~255) <code>max_brightness</code> (查看最大值)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>LED 指示灯</strong> (如电源灯、键盘灯)</td>
+<td style="text-align: left;"><code>/sys/class/leds/</code> (如 <code>input5::capslock/</code>)</td>
+<td style="text-align: left;"><code>brightness</code> (0=灭, 255=最亮，部分只支持0/1)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>CPU / GPU 频率</strong> (性能调节)</td>
+<td style="text-align: left;"><code>/sys/class/thermal/</code> (冷却设备) 或 <code>/sys/devices/system/cpu/</code> (但部分通过 <code>cpufreq</code> 子目录)</td>
+<td style="text-align: left;">更常见于 <code>/sys/class/thermal/cooling_deviceX/</code> 下的 <code>cur_state</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>电池电量百分比</strong></td>
+<td style="text-align: left;"><code>/sys/class/power_supply/</code> (如 <code>BAT0/</code>)</td>
+<td style="text-align: left;"><code>capacity</code> (0~100) <code>status</code> (Charging/Discharging)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>风扇转速</strong></td>
+<td style="text-align: left;"><code>/sys/class/thermal/</code> (冷却设备)</td>
+<td style="text-align: left;"><code>fanX_input</code> 或通过 <code>hwmon</code> (但 <code>hwmon</code> 也常链接在 <code>/sys/class/hwmon/</code>)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>音量/麦克风增益</strong></td>
+<td style="text-align: left;"><code>/sys/class/sound/</code> (如 <code>card0/controlC0</code>)</td>
+<td style="text-align: left;">音量不是简单的单一文件，需要通过 <code>amixer</code> 或 <code>alsamixer</code> 操作，但其底层设备节点也在 <code>sound</code> class 下。更直接的“音量”数值控制有时出现在 <code>/sys/class/audio/</code> (某些嵌入式平台)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>GPIO 电平</strong> (自定义控制)</td>
+<td style="text-align: left;"><code>/sys/class/gpio/</code> (旧接口) 或 <code>/sys/class/gpiochipX/</code> 或 <code>/dev</code>下 (新 <code>gpiolib</code>)</td>
+<td style="text-align: left;"><code>value</code> (0/1) —— 需要先 <code>export</code> 引脚</td>
+</tr>
+</tbody>
+</table>
+<h2 id="25-syssubsystem">2.5 为什么不是 <code>/sys/subsystem</code> ？</h2>
+<h3 id="251-bus-class">2.5.1 对比 <code>bus</code> 和 <code>class</code> 目录</h3>
+<p>对于上面的内容，我第一次感觉是非常混乱的，哪怕告诉了我说用户层就去 <code>/sys/class</code>，BSP 设备和驱动匹配就去 <code>/sys/bus</code>，我依然是觉得有很多重合的地方。还是这张图：</p>
+<p><img src="pic/image-20260515113218427.png" alt="image-20260515113218427" style="zoom: 50%;" /></p>
+<p>你会发现有各种同名的东西，还有下面的，<code>devices</code> 下面甚至也放了个按照 <code>class</code> 名字划分的virtual 设备... </p>
+<p><img src="pic/image-20260515115927455.png" alt="image-20260515115927455" style="zoom:50%;" /></p>
+<blockquote>
+<p>非常之混乱！我和 Gemini 对话了好几轮，聊了自己的看法后，我自己总结这就是<strong>在历史问题上雕花，但为了兼容，没办法...</strong>，如果后面人不理解上面的内容，只会越来越混乱。</p>
+<p>加之，再看了 Neil 在 [1] 写的总结，更加深以为然。</p>
+</blockquote>
+<p>回去看看 <code>/sys/bus</code> 看看，如果单纯以一个硬件/SoC工程师的视角来看，我会觉得这个目录是被污染了的，这个目录里的内容，可以看着划分（随便分的，别管）：</p>
+<ul>
+<li>
+<p>正宗的物理硬件或连接控制器的总线： <code>amba</code> (ARM 架构体系绝对的核心)、<code>i2c</code>、<code>pci</code>、<code>spi</code>、<code>mmc</code>、<code>sdio</code>。这些是实打实的、有电气连线、有控制器的总线。</p>
+</li>
+<li>
+<p>纯粹的软件虚拟框架（卧底）： <code>workqueue</code> (工作队列)、<code>genpd</code> (Generic Power Domain，通用电源域，SoC 电源管理的核心)、<code>clockevents</code> / <code>clocksource</code>。它们连一根毛线的物理引脚都没有，完全是内核为了复用 LDM（Linux Device Model）的 <code>match-probe</code> 绑定机制，强行把自己注册成了 <code>bus</code>。</p>
+<blockquote>
+<p>这里最让人惊讶的就是 <code>workqueue</code>，可以直接去看代码：</p>
+<p><img alt="image-20260515141707590" src="pic/image-20260515141707590.png" /></p>
+</blockquote>
+</li>
+<li>
+<p>通信框架： <code>rpmsg</code> (Remote Processor Messaging)、<code>tee</code> (Trusted Execution Environment)、非常重要的 platform 总线等等。在现代移动 SoC 中，通常有多个核心（AP, Modem, DSP）。这些节点代表了跨核通信的“虚拟总线”。</p>
+</li>
+</ul>
+<p>此时再去 <code>/sys/class</code> 下看，你会发现有很多东西是重合、甚至名字都差不多：</p>
+<ul>
+<li><strong>Storage：</strong><ul>
+<li><code>/sys/bus/mmc</code> 负责管理物理卡（匹配卡的类型和底层协议）。</li>
+<li><code>/sys/class/mmc_host</code> 负责暴露主机控制器的状态给上层。</li>
+<li><code>/sys/class/block</code> 才是最终呈现给文件系统的抽象块设备。</li>
+</ul>
+</li>
+<li><strong>网络/通信：</strong><ul>
+<li><code>/sys/bus/mdio_bus</code> vs <code>/sys/class/mdio_bus</code>。</li>
+<li><code>/sys/bus/rpmsg</code> vs <code>/sys/class/rpmsg</code>。</li>
+</ul>
+</li>
+</ul>
+<p>所以就很迷惑，而 Neil 对它的理解是：</p>
+<blockquote>
+<p>A "bus" is similar to a "class" in several ways, but it has an important difference. While a class is a complete implementation of the devices that are members of that class, the bus is only a partial implementation. For complete functionality, a bus usually works with a set of "drivers". A bus may implement some devices completely by itself, like a class does. Other devices will require a driver to be attached. The choice of driver can be made by the bus, by the driver (which can be asked if it "matches" a given device), or by a request through <code>sysfs</code>.</p>
+<p>也就是 Neil 说的Class 是“功能完备的实现”，Bus 只是“部分实现”。</p>
+</blockquote>
+<ul>
+<li>Class：它定义了一套功能接口，并且把这个接口的通用实现都做完了。一个设备只要说自己属于某个 class，用户空间就可以立刻通过 class 提供的标准文件来操作它，因为 class 层已经封装好了所有逻辑。</li>
+<li>而 Bus：它定义了一条通信通道（比如 I2C、USB、PCI），并提供了在这条通道上发现设备、匹配驱动的框架。但 bus 本身并不关心设备具体是什么功能，它只负责把设备和驱动拉在一起，由驱动来提供完整功能。</li>
+</ul>
+<blockquote>
+<p>Class 是卖“成品家具”的，到手直接能用；Bus 是卖“半成品 + 标准接口”的，需要你装一个驱动模块才能变成成品。</p>
+</blockquote>
+<p>但是还有问题，一个是给用户层用，一个导出硬件视图，这两者并不矛盾啊？！这也是 Neil 的发问<sup>[2]</sup>：When is a bus not a bus？</p>
+<p>对此，比如既然 Bus（比如 I2C 总线）和 Class（比如 Input 输入设备）</p>
+<p>他的看法是：<code>bus</code> 和 <code>class</code> 在软件层面上的界限其实是非常模糊的，甚至有些自相矛盾。</p>
+<ol>
+<li>伪装成 Class 的 Bus：比如前面说的 <code>workqueue</code>，他是直接在内核里注册为一个 <code>bus</code>，但它纯粹是软件概念，没有底层硬件，也没有注册任何独立的驱动。它其实干着 <code>class</code> 的活！</li>
+<li>伪装成 Bus 的 Class： <code>leds</code> 这个 <code>class</code>，它里面有一个 <code>trigger</code>（触发器）机制。你可以把 <code>[cpu0]</code> 触发器绑定给 LED，也可以把 <code>[mmc0]</code>（读写SD卡）绑定给 LED。这种“动态绑定机制”，不就是 <code>bus</code> 匹配 <code>driver</code> 的翻版吗？</li>
+</ol>
+<p>既然干的活都是“把复杂的物理设备节点提取出来，提供一个抽象的视图”，那在更高维度的面向对象思维里，它们凭什么要分开建两个文件夹？</p>
+<h3 id="252-subsystem">2.5.2 拥抱 <code>subsystem</code></h3>
+<p>所以 Neil 给出的最终结论：忘掉硬件包袱，拥抱 Subsystem（子系统）</p>
+<ul>
+<li>
+<p>"The implementation provides functionality, not meaning."（代码实现只提供功能，不提供绝对的物理意义）。</p>
+</li>
+<li>
+<p>在 Linux 设备模型中，不管是 <code>bus</code> 还是 <code>class</code>，它们本质上都是一种 <code>Subsystem</code>（子系统）。</p>
+<p>它们都是为了把具有某种共性的设备放在一起管理。</p>
+<p>如果这群设备需要复杂的驱动匹配机制，当年写代码的内核大佬可能就叫它 <code>bus</code>；如果不需要，就叫它 <code>class</code>。这完全取决于最初写这块代码的开发者是怎么看待这些硬件的（"in the eye of the beholder"）。</p>
+<p>也就是说，具体是什么bus/class，取决于开发者如何看待，就像上面写 <code>workqueue</code> 的代码，肯定是有开发者认识到：<code>bus</code> 和 <code>subsystem</code> 的概念，而不是 <code>class</code>。</p>
+</li>
+</ul>
+<p>但是我上面在和 Gemini 对话的时候，它似乎也一直再为这个规则”辩解“：</p>
+<blockquote>
+<ul>
+<li>“为什么还要在“历史烂摊子”上雕花？为了企业级工程的稳定性和向后兼容性。”</li>
+<li><strong>当你负责“点亮”一块新板子、写底层 Controller 驱动时：</strong> 请使用你之前“物理连线与匹配机制”的视角。死磕 <code>/sys/bus/</code>，把你的设备树（Device Tree）节点、中断、寄存器地址和驱动里的 <code>probe</code> 函数对齐。这是硬件工程师和驱动工程师的视角。</li>
+<li><strong>当你负责向上层应用提供 API，或者做抽象架构时：</strong> 请使用 Neil Brown 的视角。忘掉它是 I2C 还是 SPI，把它抽象为一个 <code>/sys/class/</code> 下的统一模型。这是系统架构师视的角。</li>
+</ul>
+</blockquote>
+<p>我其实是挺无语的。。。（期待有一天重构......或者有机会去看看 Zephyr 是怎么做的）</p>
+<p>但没办法，说的好听点就是：“<strong>在庞大且带有历史包袱的系统中，精准地定位问题并提供高可靠的解决方案</strong>。”</p>
+<p>但是！自己的理解还是按照 <code>subsystem</code> 来！</p>
+<blockquote>
+<p>Gemini 最后给了我一个总结：</p>
+<ul>
+<li>当你遇到一个跨核通信失败的 bug，你需要知道去 <code>/sys/bus/rpmsg/devices/</code> 下看通道是否建立。</li>
+<li>当你遇到一个外设掉电无法唤醒的问题，你需要熟练地操作 <code>/sys/bus/genpd/</code> 下的电源域状态。</li>
+<li>当你需要给 Android 框架层提供一个背光控制接口，你绝不会让框架层去读写 I2C 寄存器，而是老老实实在 <code>/sys/class/leds/</code> 下暴露出标准的属性节点。</li>
+</ul>
+</blockquote>
+<h3 id="253-workqueue-sysfs">2.5.3 （可跳过）<code>workqueue</code> 和 <code>sysfs</code></h3>
+<p>我其实在想，这个 <code>workqueue</code> 一定要做成 <code>/sys/bus</code> 吗？<strong>这是不是想要使用一些 <code>sysfs</code> 只能暴露给设备使用的操作呢？</strong></p>
+<p>欸，好像如果想让用户空间控制我这个软件内容，似乎就能够这么做？！</p>
+<p>比如什么：绑定 <code>CPU</code> 核数、最大并发数之类的。</p>
+<p>以前大家玩内核的时候，如果一个软件模块（比如工作队列、网络协议栈）想要把自己的内部状态，暴露给用户空间的开发者查看或修改，通常是去 <code>/proc</code> 目录下随便建个文件，或者去 <code>debugfs</code> 里乱塞一通。</p>
+<p>但是后来发现设备模型（Device Model）这套机制太香了！</p>
+<p>只要在软件结构体里塞入一个 <code>struct device</code>，然后把你这个子系统注册成一个虚拟的 <code>bus</code>（或者叫 subsystem），<strong>瞬间免费获得</strong>以下超能力：</p>
+<ol>
+<li>自动生成 <code>/sys</code> 层级目录： 内核自动维护父子节点关系，不用手写复杂的目录创建代码。</li>
+<li>标准化的属性（Attributes）读写接口： 你只需要定义几个 <code>show</code> 和 <code>store</code> 的回调函数，内核就能自动帮你生成供用户空间读写的小文件。</li>
+<li>生命周期管理： 借助底层的 <code>kobject</code> 和引用计数，不用担心内存泄漏或者非法访问。</li>
+<li>现成的事件通知： 状态改变了，还能顺便用 <code>uevent</code> 给用户空间发个广播。</li>
+</ol>
+<p>要这么说，其实能够理解 <code>workqueue</code> 的做法了。</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// kernel/workqueue.c</span>
+<span class="c1">// 伪造一个总线，但取名为 wq_subsys</span>
+<span class="k">static</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">bus_type</span><span class="w"> </span><span class="n">wq_subsys</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;workqueue&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">dev_groups</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">wq_sysfs_groups</span><span class="p">,</span><span class="w"> </span><span class="c1">// &lt;--- 重点！这里挂载了各种你 sysfs 属性文件</span>
+<span class="p">};</span>
+
+<span class="c1">// ....</span>
+<span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">__init</span><span class="w"> </span><span class="nf">wq_sysfs_init</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">subsys_virtual_register</span><span class="p">(</span><span class="o">&amp;</span><span class="n">wq_subsys</span><span class="p">,</span><span class="w"> </span><span class="n">wq_sysfs_cpumask_groups</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="n">core_initcall</span><span class="p">(</span><span class="n">wq_sysfs_init</span><span class="p">);</span>
+</code></pre></div>
+<p>注意看：</p>
+<p><img alt="image-20260519153649960" src="pic/image-20260519153649960.png" /></p>
+<div class="highlight"><pre><span></span><code>blkcg_punt_bio -&gt; ../../../devices/virtual/workqueue/blkcg_punt_bio
+</code></pre></div>
+<p>这里面的 <code>virtual</code> 目录是关键。因为工作队列没有真实的物理老爹（没有挂在 I2C 或 PCIe 上），所以内核专门准备了 <code>/sys/devices/virtual/</code> 这个“孤儿院”，所有纯软件伪装的设备，全放在这里。</p>
+<p>既然它费这么大劲注册成了设备，肯定是为了暴露一些核心参数供用户态操作。直接看：</p>
+<p><img alt="image-20260519153856282" src="pic/image-20260519153856282.png" /></p>
+<p>发现里面除了标配的 <code>power/</code> 和 <code>uevent</code> 之外，多了几个极其硬核的文件：</p>
+<ul>
+<li><strong><code>cpumask</code></strong>：你可以 <code>cat</code> 看看，它决定了这个工作队列可以在哪些 CPU 核心上运行。如果你想做性能调优，甚至可以 <code>echo</code> 修改它，把特定的工作队列绑在特定的大核或小核上！</li>
+<li><strong><code>max_active</code></strong>：这个工作队列最大允许同时执行多少个任务。</li>
+<li><strong><code>numa</code></strong>：相关的 NUMA 节点调度策略。</li>
+</ul>
+<p>所以能够理解，<code>workqueue</code> 的开发者就是为了能够通过 <code>echo</code> 和 <code>cat</code> 这几个文件来调优系统的并发性能，才强行把 <code>workqueue</code> 接入了设备模型。</p>
+<blockquote>
+<p>一个启发：</p>
+<p>若果我以后负责一个<strong>复杂的纯软件框架</strong>（比如某种内存池管理器、或者是某种自研的调度算法），我希望留给 Android 层或者测试部门一些动态调整参数的接口。</p>
+<p><strong>我就不用去老旧的 <code>/proc</code> 下面建文件了</strong></p>
+<p>直接向内核大佬们学习，直接把抽象的软件对象包上一层 <code>struct device</code> 的皮，向内核注册一个虚拟总线（<code>subsys_virtual_register</code>），然后把调优参数做成 <code>device attributes</code> 挂上去。</p>
+</blockquote>
+<p>Gemini给的指导：</p>
+<p>你可能会遇到以下场景，它们全依赖于你对 <code>/sys</code> 的理解：</p>
+<ol>
+<li><strong>功耗问题排查 (Power Management)：</strong> 手机耗电过快？你需要进入 <code>/sys/devices/platform/.../power/</code>，检查这个硬件模块的 <code>runtime_status</code> 是否成功进入了 <code>suspended</code>（休眠）状态，还是被某个进程死死拉住了（<code>active</code>）。</li>
+<li><strong>驱动连通性调试 (Driver Binding)：</strong> 硬件工程师焊好了一块新芯片，但系统没反应。你需要看 <code>/sys/bus/i2c/devices/</code> 下有没有出现设备节点，看这个节点下的 <code>driver</code> 软链接有没有挂载上。如果有设备没驱动，说明 <code>compatible</code> 属性没匹配上。</li>
+<li><strong>上层接口提供 (Sysfs Attributes)：</strong> 结构工程师需要一个接口来控制手机呼吸灯的亮度或马达的震动强度。你需要写一个底层驱动，在 <code>/sys/class/leds/.../</code> 下暴露出一个 <code>brightness</code> 文件，让 Android 的 HAL（硬件抽象层）去 <code>echo</code> 数值进去。</li>
+</ol>
+<h1 id="3-device-driver">3. 具体例子理解 device 和 driver 匹配过程</h1>
+<p>下面通过第一章中所描述 QEMU 板卡中的 <code>pl011</code> <code>uart</code>、<code>pl031</code> GPIO 等部件来梳理过程。先看Gemini的分析吧。</p>
+<h2 id="31-gemini">3.1 Gemini 分析</h2>
+<h3 id="dtssysdevices">第一阶段：设备进场 —— 解析 DTS，创建物理拓扑（<code>/sys/devices</code> 的诞生）</h3>
+<p><strong>【时机】</strong>：内核启动非常早期的阶段（<code>start_kernel</code> -&gt; <code>rest_init</code> 之前）。此时驱动代码很可能连个影子都还没出现。</p>
+<p><strong>【过程】</strong>：</p>
+<ol>
+<li>内核调用 <code>unflatten_device_tree()</code> 展开设备树。</li>
+<li>随后执行 <code>of_platform_populate()</code>，内核会遍历设备树里根节点 <code>/</code> 和 <code>simple-bus</code> 下的子节点。</li>
+<li>当遍历到 <code>pl011@9000000</code> 时，内核会为它分配一个 <code>struct platform_device</code> 结构体，并将物理地址、中断号等资源塞进去。</li>
+<li><strong>触发 <code>sysfs</code> 动作</strong>：调用 <code>device_add()</code>。此时，内核会在内存文件系统中<strong>真实地创建出目录</strong>：<code>/sys/devices/platform/9000000.pl011/</code>。</li>
+</ol>
+<p><strong>【工作实战排查点】</strong>：</p>
+<ul>
+<li><strong>现象</strong>：如果你发现系统中某个硬件不工作。</li>
+<li><strong>第一步</strong>：直接去 <code>/sys/devices/platform/</code> (或特定的物理总线目录下) 找有没有对应的目录。</li>
+<li><strong>结论</strong>：如果连这个目录都没有，说明你的<strong>设备树写错了</strong>，或者这个节点被 <code>status = "disabled"</code> 屏蔽了。此时去查驱动代码纯属浪费时间，因为“男嘉宾根本没来相亲现场”。</li>
+<li><strong>注意</strong>：这个目录存在，<strong>只代表设备树解析成功了，不代表驱动加载成功了！</strong></li>
+</ul>
+<hr />
+<h3 id="sysbus">第二阶段：驱动进场 —— 代码加载与匹配（<code>/sys/bus</code> 视角的建立）</h3>
+<p><strong>【时机】</strong>：随着内核继续启动，开始执行各种 <code>initcall</code>（针对编译进内核的 Built-in 驱动），或者用户空间的文件系统挂载后执行 <code>insmod/modprobe</code>（针对 .ko 模块）。</p>
+<p><strong>【过程】</strong>：</p>
+<ol>
+<li>
+<p>PL011 的驱动代码（<code>drivers/tty/serial/amba-pl011.c</code>）开始执行它的初始化函数，调用 <code>amba_driver_register()</code>（PL011 属于 AMBA 总线，类似 Platform 总线）。UFS 驱动则会调用 <code>platform_driver_register()</code>。</p>
+</li>
+<li>
+<p><strong>触发 <code>sysfs</code> 动作</strong>：内核会在 <code>/sys/bus/platform/drivers/</code>（或 amba）下创建一个以驱动名字命名的目录，例如 <code>/sys/bus/amba/drivers/pl011/</code>。</p>
+</li>
+<li>
+<p><strong>媒人撮合（The Match）</strong>：总线代码介入。总线会拿出刚才第一阶段创建的所有 Device，和这个刚注册的 Driver 进行比对。</p>
+<ul>
+<li><strong>怎么比对？</strong> 就是看 DTS 里的 <code>compatible = "arm,pl011"</code> 和驱动代码里 <code>of_match_table</code> 写的字符串是不是一模一样！</li>
+</ul>
+</li>
+<li>
+<p><strong>牵手成功（Bind）</strong>：一旦字符串对上号了，总线就会把他们绑在一起，并<strong>回调驱动代码里的 <code>probe()</code> 函数</strong>！</p>
+</li>
+<li>
+<p><strong>触发 sysfs 动作</strong>：内核为了让你知道他们“结婚了”，会在驱动目录下创建一个软链接指向设备：</p>
+<p><code>/sys/bus/amba/drivers/pl011/9000000.pl011 -&gt; ../../../../devices/platform/9000000.pl011</code></p>
+<p>同时在设备目录下也会创建一个软链接指向驱动：</p>
+<p><code>/sys/devices/platform/9000000.pl011/driver -&gt; ../../../../bus/amba/drivers/pl011</code></p>
+</li>
+</ol>
+<p><strong>【工作实战排查点】</strong>：</p>
+<ul>
+<li>你想确认某个硬件的驱动有没有挂载成功？</li>
+<li><strong>命令</strong>：<code>ls -l /sys/devices/platform/9000000.pl011/driver</code></li>
+<li><strong>结论</strong>：如果有这个 <code>driver</code> 软链接，说明 <code>probe()</code> 函数已经被触发过了（匹配成功）。如果没有这个软链接，说明：<ol>
+<li>驱动根本没被编译进去/没被加载。</li>
+<li>DTS 的 <code>compatible</code> 和代码里的对不上。</li>
+<li><code>probe()</code> 函数执行了，但是在里面 return 了一个错误（比如拿不到时钟、拿不到电源，导致 probe 失败）。</li>
+</ol>
+</li>
+</ul>
+<hr />
+<h3 id="probe-sysclass">第三阶段：驱动 Probe 执行 —— 注册逻辑框架（<code>/sys/class</code> 的诞生）</h3>
+<p>这是最关键、也是最容易让人晕的一步。</p>
+<p>物理设备（男）和驱动代码（女）结合后，他们要生孩子（<strong>逻辑抽象设备</strong>）了！</p>
+<p><strong>【过程】</strong>：</p>
+<ol>
+<li>
+<p>在 PL011 驱动的 <code>probe()</code> 函数里，不仅要配置寄存器，它还必须向内核的 TTY 子系统（框架）注册自己：<code>uart_add_one_port()</code>。</p>
+</li>
+<li>
+<p>在 UFS 驱动的 <code>probe()</code> 里，它会向 SCSI 子系统和 Block 子系统注册自己。屏幕驱动会向 DRM 子系统注册自己。</p>
+</li>
+<li>
+<p><strong>触发 sysfs 动作</strong>：这些子系统（Class）会在 <code>/sys/devices/platform/9000000.pl011/</code> 目录的<strong>内部</strong>，创建新的<strong>逻辑设备目录</strong>。</p>
+<p>例如，PL011 会在内部创建 <code>tty/ttyAMA0/</code>。UFS 会在内部创建 <code>host0/target0:0:0/0:0:0:0/block/sda/</code>。</p>
+</li>
+<li>
+<p><strong>触发 sysfs Class 动作</strong>：为了方便用户空间的程序（比如 Android）找到这些设备，不用去那深不见底的 <code>/sys/devices/...</code> 路径下翻找，内核会在 <code>/sys/class/</code> 下创建<strong>软链接</strong>的快捷方式：</p>
+<p><code>/sys/class/tty/ttyAMA0 -&gt; ../../devices/platform/9000000.pl011/tty/ttyAMA0</code></p>
+<p><code>/sys/class/block/sda -&gt; ../../devices/platform/.../ufs/.../block/sda</code></p>
+</li>
+</ol>
+<hr />
+<h3 id="_1">终极解答：它到底在哪里？</h3>
+<p>总结回答你的疑问：<strong>"最终加载的那个位置是什么？会出现在/sys目录的哪里？bus？class？还是都有？还是说是在最重要的/sys/devices？"</strong></p>
+<p>答案是：<strong>全都有，但它们的本质完全不同！</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>目录层级</strong></th>
+<th><strong>代表的含义</strong></th>
+<th><strong>数据实体</strong></th>
+<th><strong>实战用途</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><code>/sys/devices/</code></strong></td>
+<td><strong>真身（物理拓扑树）</strong></td>
+<td><strong>绝对的真实目录</strong>。这里反映了硬件是怎么连在主板上的。</td>
+<td>查电源状态、查硬件物理资源。所有的起点。</td>
+</tr>
+<tr>
+<td><strong><code>/sys/bus/</code></strong></td>
+<td><strong>婚姻登记处（匹配关系）</strong></td>
+<td>分门别类的<strong>软链接</strong>。分为 <code>devices</code> 集合和 <code>drivers</code> 集合。</td>
+<td>查某个驱动到底管控了哪些设备，或者手动解绑/绑定驱动。</td>
+</tr>
+<tr>
+<td><strong><code>/sys/class/</code></strong></td>
+<td><strong>职能部门（逻辑抽象分类）</strong></td>
+<td>全部是<strong>软链接</strong>。按照功能把设备分类（网卡、声卡、块设备、输入设备）。</td>
+<td>给 Android HAL 层或用户层程序使用的“稳定入口”。无论底层的物理路径怎么变，找 <code>/sys/class/input/event0</code> 永远是对的。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="debug">实战 Debug 指南</h3>
+<p>如果遇到一个设备“死活不工作”，按照以下顺序敲命令（以 I2C 触摸屏为例）：</p>
+<ol>
+<li>
+<p><strong>男方来了没？（查 DTS 解析设备了没）</strong></p>
+<p><code>ls /sys/bus/i2c/devices/</code> 看有没有对应的 I2C 地址。</p>
+</li>
+<li>
+<p><strong>女方来了没？（查 Driver 加载）</strong></p>
+<p><code>ls /sys/bus/i2c/drivers/</code> 看有没有对应的触摸屏驱动名字。</p>
+</li>
+<li>
+<p><strong>两人牵手成功没？（查 Binding）</strong></p>
+<p><code>ls /sys/bus/i2c/devices/1-0038/driver</code> (看软链接是否存在)。</p>
+<ul>
+<li><strong>如果不存在</strong>，说明 <code>probe</code> 失败了！可能是时钟没打开、GPIO 没申请到。</li>
+<li><strong>高级绝招</strong>：查看 <code>cat /sys/kernel/debug/devices_deferred</code>。Linux 有个机制叫“推迟 probe (Deferred Probe)”。如果触摸屏 probe 时发现需要的电源调节器（Regulator）还没准备好，它会说“我等会再试”。这个文件里记录了所有想 probe 但是因为依赖没满足而挂起的设备！</li>
+</ul>
+</li>
+<li>
+<p><strong>牵手成功了，生娃没？（查 Class 逻辑设备）</strong></p>
+<p>去 <code>/sys/class/input/</code> 看看有没有生成 <code>eventX</code> 节点。如果有，说明驱动不仅匹配了，而且完整的初始化跑完了！</p>
+</li>
+</ol>
+<p><strong>手动逼迫他们相亲/离婚（解绑与绑定）：</strong></p>
+<p>在开发调试时，你修改了驱动的寄存器想重启驱动，不需要重启整个板卡/手机。</p>
+<ul>
+<li>离婚（Unbind）：<code>echo "1-0038" &gt; /sys/bus/i2c/drivers/goodix_ts/unbind</code> (此时设备的 driver 软链接消失，资源释放)</li>
+<li>复婚（Bind）：<code>echo "1-0038" &gt; /sys/bus/i2c/drivers/goodix_ts/bind</code> (此时会再次触发驱动的 <code>probe()</code> 函数，方便你测试修改后的初始化逻辑)</li>
+</ul>
+<h2 id="32">3.2 实践——看启动日志</h2>
+<p>下面就基于 <code>introduction</code> 中基于 QEMU 启动的系统，以及 3.1 所 Gemini 描述的device、bus、class 来做这个实践。</p>
+<p>这里接住了几个调试来看到整个控制流/数据流：</p>
+<ul>
+<li>
+<p>直接在 <code>amba</code> 总线相关的地方加上打印</p>
+<p><img alt="image-20260523004333706" src="pic/image-20260523004333706.png" /></p>
+</li>
+<li>
+<p><code>dynamic debug</code>、<code>ftrace</code> 来具体看看</p>
+<p><code>make menuconfig</code> 打开下面配置：</p>
+<p><img alt="" src="pic/image-20260523003752014.png" /></p>
+<p>相关实践代码：</p>
+<p><code>ftrace</code>：</p>
+<blockquote>
+<p>注意：往 <code>bind/unbind</code> 下 <code>echo</code> 的，就是该设备在对应总线下的唯一标识符，也就是它在 <code>/sys/bus/&lt;总线名&gt;/devices/</code> 目录中的名称，比如下面的 <code>gpio</code> 控制器对应的 <code>9030000.pl061</code>。</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code>mount<span class="w"> </span>-t<span class="w"> </span>tracefs<span class="w"> </span>tracefs<span class="w"> </span>/sys/kernel/tracing
+
+<span class="c1"># 进入 ftrace 目录</span>
+<span class="nb">cd</span><span class="w"> </span>/sys/kernel/tracing/<span class="w">  </span><span class="c1"># 较老内核可能是 /sys/kernel/debug/tracing/</span>
+
+<span class="c1"># 关闭追踪，准备配置</span>
+<span class="nb">echo</span><span class="w"> </span><span class="m">0</span><span class="w"> </span>&gt;<span class="w"> </span>tracing_on
+
+<span class="c1"># 设置追踪器为函数调用图</span>
+<span class="nb">echo</span><span class="w"> </span>function_graph<span class="w"> </span>&gt;<span class="w"> </span>current_tracer
+
+<span class="c1"># 设置你要追踪的核心函数（设备模型、设备树、AMBA总线相关）</span>
+<span class="c1"># of_platform_populate: 解析设备树并创建设备</span>
+<span class="c1"># amba_device_add: 添加 AMBA 设备</span>
+<span class="c1"># amba_match: AMBA 总线的 match 函数</span>
+<span class="c1"># really_probe: Linux 驱动模型核心 probe 入口</span>
+<span class="c1"># pl061_probe: 具体驱动的 probe</span>
+<span class="nb">echo</span><span class="w"> </span>of_platform_populate<span class="w"> </span>amba_device_add<span class="w"> </span>amba_match<span class="w"> </span>really_probe<span class="w"> </span>pl061_probe<span class="w"> </span>&gt;<span class="w"> </span>set_ftrace_filter
+
+<span class="c1"># 如果你想看更深层次的调用，可以设置追踪深度</span>
+<span class="nb">echo</span><span class="w"> </span><span class="m">5</span><span class="w"> </span>&gt;<span class="w"> </span>max_graph_depth
+
+<span class="c1"># 清空之前的历史 trace</span>
+<span class="nb">echo</span><span class="w"> </span>&gt;<span class="w"> </span>trace
+
+<span class="c1"># 开启追踪</span>
+<span class="nb">echo</span><span class="w"> </span><span class="m">1</span><span class="w"> </span>&gt;<span class="w"> </span>tracing_on
+
+<span class="c1"># 触发要观察的动作（比如重新 bind 设备）</span>
+<span class="nb">echo</span><span class="w"> </span><span class="m">9030000</span>.pl061<span class="w"> </span>&gt;<span class="w"> </span>/sys/bus/amba/drivers/pl061_gpio/bind<span class="w"> </span>
+
+<span class="c1"># 关闭追踪并查看结果</span>
+<span class="nb">echo</span><span class="w"> </span><span class="m">0</span><span class="w"> </span>&gt;<span class="w"> </span>tracing_on
+cat<span class="w"> </span>trace
+</code></pre></div>
+<p><code>dynamic debug</code>：</p>
+<p>法一：在启动时追踪（追踪设备树解析和设备创建）</p>
+<div class="highlight"><pre><span></span><code><span class="nv">dyndbg</span><span class="o">=</span><span class="s2">&quot;file drivers/of/platform.c +p; file drivers/base/core.c +p; file drivers/base/dd.c +p; file drivers/amba/bus.c +p&quot;</span>
+</code></pre></div>
+<p>法二：运行时加打印：</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 挂载 debugfs（如果没挂载的话）</span>
+mount<span class="w"> </span>-t<span class="w"> </span>debugfs<span class="w"> </span>none<span class="w"> </span>/sys/kernel/debug
+
+<span class="c1"># 开启 drivers/base/dd.c (Driver Core) 中所有的 debug 打印</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;file drivers/base/dd.c +p&#39;</span><span class="w"> </span>&gt;<span class="w"> </span>/sys/kernel/debug/dynamic_debug/control
+
+<span class="c1"># 开启 AMBA 总线的 debug 打印</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;file drivers/amba/bus.c +p&#39;</span><span class="w"> </span>&gt;<span class="w"> </span>/sys/kernel/debug/dynamic_debug/control
+
+<span class="c1"># 执行 bind</span>
+...
+
+<span class="c1"># 此时用 dmesg 就能看到丰富的底层交互过程了</span>
+dmesg
+</code></pre></div>
+</li>
+<li>
+<p>对于一些UART 还没初始化好的打印、以及早于Dynamic Debug (<code>dyndbg</code>) 初始化的组件打印（比如设备树：<code>drivers/of/fdt.c</code> 的）</p>
+<p>直接暴力打开 <code>DEBUG</code></p>
+<div class="highlight"><pre><span></span><code><span class="c"># drivers/of/Makefile</span>
+<span class="c"># 让这个目录下的所有 .c 文件在编译时都带上 DEBUG 宏</span>
+<span class="nv">ccflags-y</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>-DDEBUG
+</code></pre></div>
+</li>
+</ul>
+<p>经过以上几个手段，然后重新编译出内核，再配合 <code>qemu</code> 启动：</p>
+<div class="highlight"><pre><span></span><code>qemu-system-aarch64<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-machine<span class="w"> </span>virt,virtualization<span class="o">=</span>true,gic-version<span class="o">=</span><span class="m">3</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-nographic<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-m<span class="w"> </span><span class="nv">size</span><span class="o">=</span>1G<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-cpu<span class="w"> </span>cortex-a72<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-smp<span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-kernel<span class="w"> </span>out/Image<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-initrd<span class="w"> </span>out/rootfs.cpio<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-dtb<span class="w"> </span>out/cc_qemu_sdk.dtb<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-fsdev<span class="w"> </span>local,id<span class="o">=</span>shareid,path<span class="o">=</span>./share,security_model<span class="o">=</span>none<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-device<span class="w"> </span>virtio-9p-device,fsdev<span class="o">=</span>shareid,mount_tag<span class="o">=</span>share<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-append<span class="w"> </span><span class="s1">&#39;earlycon ignore_loglevel console=ttyAMA0 rdinit=/linuxrc dyndbg=&quot;file drivers/base/dd.c +p; file /drivers/base/core.c +p; file drivers/base/platform.c +p; file drivers/amba/bus.c +p; file drivers/of/fdt.c +p; file drivers/of/platform.c +p; file arch/arm64/kernel/setup.c +p&quot; ftrace=function_graph ftrace_filter=&quot;of_platform_populate amba_device_add amba_match really_probe&quot; trace_buf_size=10M&#39;</span>
+
+<span class="c1"># 注意！：这里 append 加了一些追踪的文件</span>
+</code></pre></div>
+<p>下面直接实践。</p>
+<p>首先的问题就是内核是在什么时候开始解析设备树、创建节点的呢？这里并不多说，网络上文章挺多了，直接问 AI 更快。直接给流程：</p>
+<div class="highlight"><pre><span></span><code><span class="cp"># 架构初始化</span>
+<span class="n">primary_entry</span>
+<span class="w">    </span><span class="p">...</span><span class="w"> </span>
+<span class="w">    </span><span class="n">start_kernel</span>
+
+<span class="cp"># 内核入口</span>
+<span class="n">start_kernel</span>
+<span class="w">  </span><span class="n">setup_arch</span><span class="w">  </span>
+<span class="w">    </span><span class="n">setup_machine_fdt</span>
+<span class="w">    </span><span class="n">unflatten_device_tree</span><span class="w"> </span><span class="o">&lt;---------</span><span class="w"> </span><span class="n">扁平设备树解开</span>
+<span class="w">    </span><span class="p">(</span><span class="n">里面有相关打印</span><span class="err">：</span><span class="n">Unflattening</span><span class="w"> </span><span class="n">device</span><span class="w"> </span><span class="n">tree</span><span class="o">:</span><span class="err">，</span><span class="n">当然主要是填充</span><span class="w"> </span><span class="o">/</span><span class="n">sys</span><span class="o">/</span><span class="p">)</span>
+<span class="w">  </span><span class="p">...</span>
+<span class="w">  </span><span class="n">arch_call_rest_init</span>
+<span class="w">    </span><span class="n">rest_init</span>
+<span class="w">      </span><span class="n">user_mode_thread</span>
+<span class="w">      </span><span class="n">pid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">kernel_thread</span><span class="p">(</span><span class="n">kernel_init</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">CLONE_FS</span><span class="p">);</span><span class="w"> </span>
+<span class="w">        </span><span class="n">kernel_init</span>
+<span class="w">          </span><span class="n">kernel_init_freeable</span><span class="w"> </span>
+<span class="w">            </span><span class="n">do_basic_setup</span>
+<span class="w">              </span><span class="n">driver_init</span>
+<span class="w">                </span><span class="n">of_core_init</span>
+<span class="w">                  </span><span class="n">kset_create_and_add</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">在</span><span class="w"> </span><span class="o">/</span><span class="n">sys</span><span class="o">/</span><span class="n">firmware</span><span class="o">/</span><span class="w"> </span><span class="n">下创建</span><span class="w"> </span><span class="s">&quot;devicetree&quot;</span><span class="w"> </span><span class="n">目录</span><span class="p">)</span>
+<span class="w">                  </span><span class="n">__of_attach_node_sysfs</span><span class="w"> </span><span class="p">(</span><span class="n">具体执行者</span><span class="err">，</span><span class="n">负责为单个设备树节点创建</span><span class="w"> </span><span class="n">sysfs</span><span class="w"> </span><span class="n">目录</span><span class="p">)</span>
+<span class="w">                    </span><span class="n">kobject_add</span><span class="w"> </span><span class="p">(</span><span class="n">在父目录下</span><span class="err">，</span><span class="n">以确定好的</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="n">创建一个新目录</span><span class="w"> </span><span class="p">(</span><span class="n">kobject</span><span class="p">))</span>
+
+<span class="w">              </span><span class="n">do_initcalls</span>
+<span class="w">                </span><span class="n">arch_initcall_sync</span><span class="p">(</span><span class="n">of_platform_default_populate_init</span><span class="p">)</span>
+<span class="w">                  </span><span class="p">...</span>
+<span class="w">                  </span><span class="n">of_platform_populate</span><span class="w"> </span><span class="o">&lt;---------</span><span class="w"> </span><span class="n">填充设备树</span>
+<span class="w">                    </span><span class="n">of_platform_bus_create</span>
+<span class="w">                      </span><span class="n">of_amba_device_create</span><span class="w">   </span><span class="o">&lt;---</span><span class="w"> </span><span class="n">创建</span><span class="w"> </span><span class="n">amba</span><span class="w"> </span><span class="n">设备</span>
+<span class="w">                        </span><span class="n">of_platform_device_create_pdata</span>
+<span class="w">                          </span><span class="n">of_device_add</span>
+<span class="w">                            </span><span class="n">device_add</span>
+<span class="w">                              </span><span class="n">kobject_add</span>
+<span class="w">                                </span><span class="p">...</span>
+<span class="w">                                </span><span class="n">kobject_add_internal</span>
+<span class="w">                                  </span><span class="n">create_dir</span>
+
+<span class="w">                </span><span class="p">...</span>
+<span class="w">        </span><span class="n">run_init_process</span><span class="p">(</span><span class="n">execute_command</span><span class="p">)</span><span class="w"> </span><span class="c1">//启动第一个应用进程</span>
+</code></pre></div>
+<p>在脑海中有了大致的执行流程后，就可以开始简单大致流程验证了，就看上面几个关键函数的相关日志。</p>
+<p>下面是早期启动日志：</p>
+<div class="highlight"><pre><span></span><code>[    0.000000] OF: fdt: ** translation for device pl011@9000000 **
+[    0.000000] OF: fdt: bus (na=2, ns=2) on 
+[    0.000000] OF: fdt: translating address: 00000000 00000009
+[    0.000000] OF: fdt: reached root node
+[    0.000000] earlycon: pl11 at MMIO 0x0000000009000000 (options &#39;&#39;)
+[    0.000000] printk: legacy bootconsole [pl11] enabled
+...
+[    0.000000] OF: fdt:  -&gt; unflatten_device_tree()
+[    0.000000] OF: fdt: fixed up name for gpio-keys -&gt; gpio-keys
+[    0.000000] OF: fdt: fixed up name for poweroff -&gt; poweroff
+[    0.000000] OF: fdt: fixed up name for pl061@9030000 -&gt; pl061
+...
+[    2.609498] Serial: AMBA PL011 UART driver
+[    2.611138] [JAI Trace] 2. 注册 AMBA 驱动 [uart-pl011]
+</code></pre></div>
+<p>再到具体创建 <code>gpio</code> 设备过程：</p>
+<blockquote>
+<p>这里 <code>gpio-keys</code> 和 <code>pl061</code> 在之后可能会写，<code>amba device</code> 和 <code>platform device</code> 还是有点区别。</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code># 填充设备树
+[    2.621694] OF: of_platform_populate()
+[    2.622801] OF:  starting at: 
+...
+# 添加 gpio 设备
+
+[    4.506092] OF: create platform device: /gpio-keys
+[    4.525893] OF: Creating amba device /pl061@9030000
+...
+[    4.539539] [JAI Trace] 1. 向系统添加 AMBA 设备 [9030000.pl061] &lt;-- 从设备树提取节点
+...
+[    4.567411] [JAI Trace] 3. 尝试匹配 设备[9030000.pl061] &lt;===&gt; 驱动[uart-pl011] (每添加一个设备，做一次总线匹配)
+...
+</code></pre></div>
+<p>但是上面还没有匹配驱动，所以再看 <code>pl011</code>，也就是 <code>uart</code>：</p>
+<div class="highlight"><pre><span></span><code># 添加 uart 设备
+[    4.908518] OF: Creating amba device /pl011@9000000  
+...
+[    4.921099] [JAI Trace] 1. 向系统添加 AMBA 设备 [9000000.pl011] 
+...
+[    4.942740] [JAI Trace] 3. 尝试匹配 设备[9000000.pl011] &lt;===&gt; 驱动[uart-pl011]
+</code></pre></div>
+<p>可以看到对应驱动和设备在 <code>amba</code> 总线 <code>match</code> 上了(就是匹配名字/id)，</p>
+<p>也就是 Gemini 说的：</p>
+<blockquote>
+<p><strong>怎么比对？</strong> 就是看 DTS 里的 <code>compatible = "arm,pl011"</code> 和驱动代码里 <code>of_match_table</code> 写的字符串是不是一模一样</p>
+</blockquote>
+<p>接着看 <code>match</code> 之后输出的日志：</p>
+<div class="highlight"><pre><span></span><code>[    4.943859] amba 9000000.pl011: bus: &#39;amba&#39;: __driver_probe_device: matched device with driver uart-pl011
+[    4.945651] amba 9000000.pl011: bus: &#39;amba&#39;: really_probe: probing driver uart-pl011 with device
+[    4.947166] OF: no dma-ranges found for node()
+[    4.948207] uart-pl011 9000000.pl011: device is not dma coherent
+[    4.949265] uart-pl011 9000000.pl011: device is not behind an iommu
+[    4.950589] OF: of_irq_parse_one: dev=/pl011@9000000, index=0
+[    4.952433] OF:  parent=/intc@8000000, intsize=3
+[    4.953502] OF:  intspec=0
+...(设备树描述的uart的中断配置)
+[    4.987462] OF: comparing apb_pclk with uartclk
+[    4.988684] OF: comparing apb_pclk with apb_pclk
+[    4.990091] uart-pl011 9000000.pl011: &gt;&gt;&gt;&gt; JAI Debug: pl011_probe is strictly running! &lt;&lt;&lt;&lt;
+</code></pre></div>
+<p>最后进入 <code>probe</code>，最终 <code>pl011</code> <code>uart</code> 驱动通过串口核心（serial core）注册到 <code>tty</code> 子系统，使硬件设备呈现为 TTY 设备（如 /dev/ttyAMA0）。</p>
+<p>这里也就是前面说Gemini说的：</p>
+<blockquote>
+<p>“物理设备和驱动代码结合后，他们要生孩子（逻辑抽象设备）了！... PL011 会在内部创建 <code>tty/ttyAMA0/</code> ... 内核会在 <code>/sys/class/</code> 下创建软链接”</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code>---&gt; [    4.990091] uart-pl011 9000000.pl011: &gt;&gt;&gt;&gt; JAI Debug: pl011_probe is strictly running! &lt;&lt;&lt;&lt;[    5.020506] serial-base 9000000.pl011:0: bus: &#39;serial-base&#39;: __driver_probe_device: matched device with driver ctrl
+[    5.022163] serial-base 9000000.pl011:0: bus: &#39;serial-base&#39;: really_probe: probing driver ctrl with device
+[    5.025192] ctrl 9000000.pl011:0: driver: &#39;ctrl&#39;: driver_bound: bound to device
+[    5.026882] ctrl 9000000.pl011:0: bus: &#39;serial-base&#39;: really_probe: bound device to driver ctrl
+[    5.031852] serial-base 9000000.pl011:0.0: bus: &#39;serial-base&#39;: __driver_probe_device: matched device with driver port
+[    5.034199] serial-base 9000000.pl011:0.0: bus: &#39;serial-base&#39;: really_probe: probing driver port with device
+[    5.036321] port 9000000.pl011:0.0: driver: &#39;port&#39;: driver_bound: bound to device 
+[    5.037538] port 9000000.pl011:0.0: bus: &#39;serial-base&#39;: really_probe: bound device to driver port
+---&gt; [    5.042669] 9000000.pl011: ttyAMA0 at MMIO 0x9000000 (irq = 14, base_baud = 0) is a PL011 rev1 &lt;-- “生娃”成功！向 TTY 子系统注册了 ttyAMA0
+[    5.047195] printk: legacy console [ttyAMA0] enabled
+[    5.047195] printk: legacy console [ttyAMA0] enabled
+[    5.049269] printk: legacy bootconsole [pl11] disabled
+[    5.049269] printk: legacy bootconsole [pl11] disabled
+---&gt; [    5.079996] uart-pl011 9000000.pl011: driver: &#39;uart-pl011&#39;: driver_bound: bound to device &lt;-- 彻底绑定完毕 (Bind)
+[    5.083181] uart-pl011 9000000.pl011: bus: &#39;amba&#39;: really_probe: bound device to driver uart-pl011
+</code></pre></div>
+<blockquote>
+<p>当然关于什么 <code>earlycon</code>、<code>tty</code> 的内容也挺有意思的，有空可以写，也可以看这两篇：[8, 9]。</p>
+</blockquote>
+<p>无论怎么样，设备树/系统中描述的其他设备最终也会按照上面类似的过程创建在 <code>/sys</code> 下。</p>
+<h2 id="33-bindunbind">3.3 实践——运行时 bind/unbind 看看</h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># echo 9030000.pl061 &gt; /sys/bus/amba/drivers/pl061_gpio/unbind </span>
+</code></pre></div>
+<p>首先 <code>unbind</code>，然后看这个目录下有什么内容：</p>
+<p><img alt="image-20260525001045436" src="pic/image-20260525001045436.png" /></p>
+<p>再次 <code>bind</code>：</p>
+<p><img alt="image-20260525001141496" src="pic/image-20260525001141496.png" /></p>
+<p>输出各种日志，就是之前在 3.1 中描述过的 <code>device</code> 和 <code>driver</code> 的在 <code>amba</code> 总线上的 <code>match</code> 和 <code>probe</code> 的行为。</p>
+<p>具体来说，就是在这个 <code>/sys/devices</code> 目录下（就是设备）和 <code>amba</code> 下的注册的 <code>driver</code> 匹配起来了。</p>
+<p><img alt="image-20260525001233269" src="pic/image-20260525001233269.png" /></p>
+<p>由此回到之前 Gemini 3.1 最后总结的一些技巧：硬件是否正确连接/识别了（设备树）、驱动是否正常加载了（）、设备对应子系统是否绑定成功了（<code>/sys/class</code> 或者 <code>/sys/bus</code> 是否出现了对应节点）</p>
+<h2 id="34gpio-keys">3.4（可跳过）<code>gpio-keys</code></h2>
+<p>当然，重新 <code>bind</code> 后，<code>gpio</code> 还有一个报错：</p>
+<p><code>gpio-keys gpio-keys: Failed to create device link (0x180) with 9030000.pl061</code></p>
+<p>可以看到，虽然之前的 <code>PL061</code> 这个 GPIO 控制器本身注册成功了，但依赖它的 <code>gpio-keys</code>（按键子系统）在建立设备链接（Device Link，用于管理电源和挂起唤醒的依赖关系）时失败了。</p>
+<p>因为在电源管理中有一个“供应商-消费者”（Supplier-Consumer）的概念：</p>
+<ul>
+<li><strong>Supplier（供应商）：</strong> <code>PL061</code>，它提供 GPIO 管脚。</li>
+<li><strong>Consumer（消费者）：</strong> <code>gpio-keys</code>（虚拟机的电源键/按键），它需要读取 PL061 的某个管脚状态。</li>
+</ul>
+<p>所以内核为了防止“消费者还在用，供应商却跑路了”导致内核崩溃的问题，引入了 Device Link 机制。</p>
+<p>正常开机时，<code>PL061</code> 先 <code>probe</code> 成功，然后 <code>gpio-keys</code> <code>probe</code> 成功，内核给它们建了一个 <code>Link</code>。</p>
+<p>但是，我上面是手动往 <code>sysfs</code> 的 <code>unbind</code> 写入 了<code>PL061</code> 的，相当于强行“杀死了”供应商，所以 <code>gpio-keys</code> 失去了底层依赖，处于半死不活的状态。</p>
+<p>而当我再次 <code>bind</code> <code>PL061</code> 时，<code>PL061</code> 重新生成了实例，但旧的 Device Link 状态混乱了，所以报出了 <code>Failed to create device link</code> 的警告。</p>
+<p>解决方法就是重新绑定 <code>gpio-keys</code> 驱动（逼它重新 probe，此时它会发现 PL061 已经在等它了），因为设备树之前就描述好了：</p>
+<div class="highlight"><pre><span></span><code><span class="l l-Scalar l-Scalar-Plain">gpio-keys {</span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">compatible = &quot;gpio-keys&quot;;</span>
+
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">poweroff {</span>
+<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">gpios = &lt;&amp;gpio0 0x03 0x00&gt;;</span>
+<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">linux,code = &lt;0x74&gt;;</span>
+<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">label = &quot;GPIO Key Poweroff&quot;;</span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">};</span>
+<span class="l l-Scalar l-Scalar-Plain">};</span>
+
+<span class="l l-Scalar l-Scalar-Plain">gpio0</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pl061@9030000 {</span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">phandle = &lt;0x8004&gt;;</span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">clock-names = &quot;apb_pclk&quot;;</span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">clocks = &lt;&amp;apb_pclk&gt;;</span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">interrupts = &lt;0x00 0x07 0x04&gt;;</span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">gpio-controller;</span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">#gpio-cells = &lt;0x02&gt;;</span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">compatible = &quot;arm,pl061\0arm,primecell&quot;;</span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">reg = &lt;0x00 0x9030000 0x00 0x1000&gt;;</span>
+<span class="err">}</span><span class="l l-Scalar l-Scalar-Plain">;</span>
+</code></pre></div>
+<p>然后输入：</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># echo gpio-keys &gt; /sys/bus/platform/drivers/gpio-keys/unbind</span>
+<span class="c1"># echo gpio-keys &gt; /sys/bus/platform/drivers/gpio-keys/bind</span>
+...
+<span class="o">[</span><span class="w">  </span><span class="m">373</span>.323786<span class="o">]</span><span class="w"> </span>platform<span class="w"> </span>gpio-keys:<span class="w"> </span>bus:<span class="w"> </span><span class="s1">&#39;platform&#39;</span>:<span class="w"> </span>really_probe:<span class="w"> </span>probing<span class="w"> </span>driver<span class="w"> </span>gpio-keys<span class="w"> </span>with<span class="w"> </span>device
+<span class="o">[</span><span class="w">  </span><span class="m">373</span>.332391<span class="o">]</span><span class="w"> </span>input:<span class="w"> </span>gpio-keys<span class="w"> </span>as<span class="w"> </span>/devices/platform/gpio-keys/input/input1
+<span class="o">[</span><span class="w">  </span><span class="m">373</span>.335481<span class="o">]</span><span class="w"> </span>gpio-keys<span class="w"> </span>gpio-keys:<span class="w"> </span>driver:<span class="w"> </span><span class="s1">&#39;gpio-keys&#39;</span>:<span class="w"> </span>driver_bound:<span class="w"> </span>bound<span class="w"> </span>to<span class="w"> </span>device
+</code></pre></div>
+<p>至于说，<code>gpio-keys</code> 是个啥，自己的理解就是，这就是一个软件抽象（所以也才是一个 <code>platform device</code>）。</p>
+<p>我自己认为这种设计解决了这个问题：<strong>按键码的语义不统一</strong></p>
+<p>在一开始学习写 MCU 或者按键相关的内容的时候，大家一般都会被教学这么写：</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// board_a.h</span>
+<span class="cp">#define BTN_VOL_UP   1</span>
+<span class="c1">// 应用代码里</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">msg</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">BTN_VOL_UP</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">volume_up</span><span class="p">();</span><span class="w"> </span><span class="p">}</span>
+<span class="cp"># 借助</span>
+</code></pre></div>
+<p>而不要这么写：</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">GPIOA</span><span class="o">-&gt;</span><span class="n">IDR</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">BIT0</span><span class="p">){</span>
+<span class="w">    </span><span class="p">...</span>
+<span class="p">}</span>
+<span class="cp"># 或者</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">HAL_GPIO_ReadPin</span><span class="p">(</span><span class="n">GPIOA</span><span class="p">,</span><span class="w"> </span><span class="n">GPIO_PIN_0</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">GPIO_SET</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">....</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>说这种设计：应用层所有判断 <code>BTN_VOL_UP</code> 的地方理论上不需要改，前提是它只依赖这个宏，而不是魔数。如果宏的名字保持一致，那只要重新包含新板子的头文件，应用代码就可以不变。</p>
+<p><strong>所以我的项目只要维护一张设计得更加优秀的 GPIO/设备资源表就可以了</strong>。</p>
+<blockquote>
+<p>这实际上也是Linux设备树的作用，设备树只是让项目更加好维护、内核可以去除更多无关代码、编译的内核镜像更小，但是并没有改变内核设备中 <code>adapter</code>（内核中把这个设计叫做总线）的思想。 </p>
+</blockquote>
+<p>平心而论，这种设计真的不好吗？我倒是觉得<strong>并不糟糕，甚至对于其应用场景来说，还合理的。</strong></p>
+<p>我直接在一个基于 MCU 上做开发，直接维护一个 C 语言结构体数组（比如 <code>struct button_config_t</code>），里面存着 GPIO 端口、引脚号、有效电平和对应的按键键值（宏定义枚举）。然后写一个通用的轮询任务，遍历这个表，做软件消抖，最后把键值扔进一个消息队列。</p>
+<p>我不照样做到了数据与代码解耦？还省了个设备树的负担。</p>
+<p>但是问题在哪里？应用层代码真不变吗？我觉得问题就是谁来保证上面这些宏的名字和语义在所有板子/项目之间都是统一的？</p>
+<ul>
+<li>每一家芯片原厂提供的 BSP，或者每一个公司的中间件团队，都有自己定义的消息结构体和枚举。比如公司 A 定义音量加是 <code>#define BTN_VOL_UP 0x01</code>，公司 B 定义是 <code>enum { KEY_V_PLUS = 10 }</code>。</li>
+<li><strong>导致的后果：</strong> 如果你的应用层跑的是一个第三方的图形框架（比如 LVGL）或者一个复杂的音频引擎，每次换一块不同厂家的开发板，你就必须写一层“胶水代码（Porting Layer）”，把 BSP 发出来的自定义宏，翻译成 LVGL 能听懂的输入事件。这就叫“跨平台复用性差”。</li>
+</ul>
+<p>所以我的理解就是：<strong>跨项目复用做不到的原因，不是“维护一个 GPIO 表”这个动作本身，而是整个生态缺少一套强制绑定的“标准按键语义”。</strong></p>
+<blockquote>
+<p>当然，早期的 Linux 按键应该也会遇到额外的问题，比如什么不同的按键有自己的字符设备驱动、有自己的消抖、中断、节点等特性。<code>gpio-keys</code> 也可以解决这个，但我认为最重要的还是语义统一。</p>
+</blockquote>
+<p>所以这个 <code>gpio-keys</code> 强迫了所有人使用 Input 子系统规定的标准键码（linux,code）。</p>
+<p>比如之前的：</p>
+<div class="highlight"><pre><span></span><code><span class="l l-Scalar l-Scalar-Plain">volume_up {</span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">gpios = &lt;&amp;gpio1 2 GPIO_ACTIVE_LOW&gt;;</span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">linux,code = &lt;115&gt;;   // KEY_VOLUMEUP</span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">debounce-interval = &lt;20&gt;;</span>
+<span class="l l-Scalar l-Scalar-Plain">};</span>
+</code></pre></div>
+<p>这里 <code>115</code> 是 Linux 内核头文件里明确定义的 <code>KEY_VOLUMEUP</code>，全球所有 Linux 系统都一样。
+然后，<code>gpio-keys</code> 驱动通过 <code>input_report_key(dev, KEY_VOLUMEUP, 1)</code> 上报事件。
+应用层直接从 <code>/dev/input/eventX</code> 读到的就是一个标准的 <code>struct input_event</code>，它的 <code>code</code> 字段就是 <code>115</code>。</p>
+<p><strong>现在换到任何一块板子，只要我在设备树里把“物理 GPIO”映射到同一个 <code>linux,code</code>，应用层一行代码都不需要动。</strong>
+无论底层是 SoC 直连 GPIO，还是 I²C 扩展芯片，应用完全无感。</p>
+<p>也可以说是一种机制（如何读引脚、如何消抖）与策略（这是个什么引脚、代表什么按键）分离吧。</p>
+<h1 id="_2">参考</h1>
+<p>[1] Neil Brown. (2015). A fresh look at the kernel's device model. https://lwn.net/Articles/645810/</p>
+<p>[2] Neil Brown. (2015). A tour of /sys/devices. https://lwn.net/Articles/646617/</p>
+<p>[3] Corbet. (2003). (Series: Porting device drivers to the 2.6 kernel) Driver porting: Device model overview：https://lwn.net/Articles/31185/</p>
+<p>[4] JiangYY. OS2024. 操作系统概述：https://jyywiki.cn/OS/2024/lect1.md</p>
+<p>[5] Corbet. (2003). (Series: Porting device drivers to the 2.6 kernel) The zen of kobjects：https://lwn.net/Articles/51437/</p>
+<p>[6] Neil Brown. (2010). A critical look at sysfs attribute values：https://lwn.net/Articles/378884/</p>
+<p>[7] JiangYY. OS2024. 输入输出设备：https://jyywiki.cn/OS/2024/lect26.md</p>
+<p>[8] 终端和 UNIX Shell：https://www.bilibili.com/video/BV1nQXsBuEUz</p>
+<p>[9]【技术杂谈】shell和terminal：https://www.bilibili.com/video/BV16A411675V</p>
+
+
+
+
+
+
+
+  
+    
+  
+  
+    
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Last update">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2026-06-25T15:55:15+02:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2026-06-25</span>
+  </span>
+
+    
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Created">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2026-06-25T15:55:15+02:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2026-06-25</span>
+  </span>
+
+    
+    
+    
+  </aside>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://github.com/JAILuo" target="_blank" rel="noopener" title="JAILuo" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../../..", "features": ["navigation.footer"], "search": "../../../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.83f73b43.min.js"></script>
+      
+        <script src="../../../../js/timeago.min.js"></script>
+      
+        <script src="../../../../js/timeago_mkdocs_material.js"></script>
+      
+        <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+      
+    
+  </body>
+</html>

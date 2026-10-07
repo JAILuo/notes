@@ -1,0 +1,2264 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://jailuo.github.io/notes/article/Debug-Insides/DI-02%20Uninitialized-global-variable/di-02.html">
+      
+      
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.48">
+    
+    
+      
+        <title>Di 02 - Messy Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.6f8fc17f.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../css/timeago.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#1-introduction" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../index.html" title="Messy Notes" class="md-header__button md-logo" aria-label="Messy Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Messy Notes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Di 02
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256l137.3-137.4c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/JAILuo/notes" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../index.html" title="Messy Notes" class="md-nav__button md-logo" aria-label="Messy Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Messy Notes
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/JAILuo/notes" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    首页
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Article
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Article
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/article/concurrency sumary/summary.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    concurrency-summary
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/article/toolchain/toolchain.mc" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    toolchain
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/article/mount/mount.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    mount
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Course
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Course
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    University Course
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            University Course
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1_1" id="__nav_3_1_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    jyy OS2024
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_1_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            jyy OS2024
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_1_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1_1_1" id="__nav_3_1_1_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    course note
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_1_1_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            course note
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/University%20Course/jyy%20OS2024/cousre%20note/1.%20introduction/introduction.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    introduction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/University%20Course/jyy%20OS2024/cousre%20note/2.%20concurrency/concurrency.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    concurrency
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/University%20Course/jyy%20OS2024/cousre%20note/3.%20virtualization/virtualization.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    virtualization
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/University%20Course/jyy%20OS2024/cousre%20note/4.%20kernel/kernel.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    kernel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/University%20Course/jyy%20OS2024/cousre%20note/5.%20persistence/persistence.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    persistence
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_1_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1_1_2" id="__nav_3_1_1_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Mini Labs
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_1_1_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            Mini Labs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/University%20Course/jyy%20OS2024/Mini%20Labs/M1/M1.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    M1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/University%20Course/jyy%20OS2024/Mini%20Labs/M2/M2.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    M2
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/University%20Course/jyy%20OS2024/Mini%20Labs/M3/M3.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    M3
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_1_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1_1_3" id="__nav_3_1_1_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    OS Labs
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_1_1_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1_1_3">
+            <span class="md-nav__icon md-icon"></span>
+            OS Labs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/University%20Course/jyy%20OS2024/OS%20Labs/L0/L0.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    L0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/University%20Course/jyy%20OS2024/OS%20Labs/L1/L1.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    L1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    GeekTime
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            GeekTime
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2_1" id="__nav_3_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    深入理解计算机组成原理
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            深入理解计算机组成原理
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/GeekTime/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E4%B8%80%E5%91%A8%E7%9B%AE/1.%20%E6%8C%87%E4%BB%A4%E4%B8%8E%E8%BF%90%E7%AE%97/%E6%8C%87%E4%BB%A4%E4%B8%8E%E8%BF%90%E7%AE%97.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1. 指令与运算
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/GeekTime/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E4%B8%80%E5%91%A8%E7%9B%AE/2.%20%E5%A4%84%E7%90%86%E5%99%A8/%E5%A4%84%E7%90%86%E5%99%A8.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2. 处理器
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/GeekTime/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E4%B8%80%E5%91%A8%E7%9B%AE/3.%20%E5%AD%98%E5%82%A8%E4%B8%8EIO%E7%B3%BB%E7%BB%9F/%E5%AD%98%E5%82%A8%E4%B8%8EIO%E7%B3%BB%E7%BB%9F.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3. 存储与IO系统
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/GeekTime/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E4%B8%80%E5%91%A8%E7%9B%AE/4.%20%E5%BA%94%E7%94%A8/%E5%BA%94%E7%94%A8.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4. 应用
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2_2" id="__nav_3_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    计算基础实战课
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            计算基础实战课
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/1.%20MiniCPU%E8%AE%BE%E8%AE%A1/MiniCPU%E8%AE%BE%E8%AE%A1.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1. MiniCPU设计
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/2.%20%E8%AF%AD%E8%A8%80%E5%92%8C%E6%8C%87%E4%BB%A4/%E8%AF%AD%E8%A8%80%E5%92%8C%E6%8C%87%E4%BB%A4.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2. 语言和指令
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/3.%20%E5%BA%94%E7%94%A8%E5%92%8C%E5%86%85%E5%AD%98/%E5%BA%94%E7%94%A8%E5%92%8C%E5%86%85%E5%AD%98.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3. 应用和内存
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/4.%20IO%E4%B8%8E%E6%96%87%E4%BB%B6/IO%E5%92%8C%E6%96%87%E4%BB%B6.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4. IO与文件
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/5.%20%E7%BB%BC%E5%90%88%E5%BA%94%E7%94%A8/synthesis.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    5. 综合应用
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E5%92%8C%E5%B7%A5%E5%85%B7%E9%93%BE/%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    环境配置和工具链
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    ysyx
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            ysyx
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    NJU-ICS2023-PA
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            NJU-ICS2023-PA
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../ysyx/pa/pa1/pa1.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PA1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../ysyx/pa/pa2/pa2.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PA2
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../ysyx/pa/pa3/pa3.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PA3
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../ysyx/pa/pa4/pa4.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PA4
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../ysyx/pa/c_marco/macro.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    C Macro
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../ysyx/pa/summary/summary.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Summary
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../ysyx/pa/Linux_porting/porting.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Linux Porting
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../ysyx/digital-circuit/digital%20circuit.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Digital Circuit
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Tools
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Tools
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Tools/GDB/GDB.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GDB
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Vim
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            Vim
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Tools/vim/usage/usage.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    usage
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Tools/vim/vim-plugin/vim.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    vim-plugin
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Tools/doxygen/doxygen.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    doxygen
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Tools/gcc/gcc.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    gcc
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Tools/Git/Git.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Git
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Tools/md2slider/md2slider.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    md2slider
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Tools/tmux/tmux.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    tmux
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Todo%20List/todo.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TODO List
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<p>封面：</p>
+<p><img alt="ChatGPT Image 2026年6月9日 12_00_32" src="pic/ChatGPT%20Image%202026%E5%B9%B46%E6%9C%889%E6%97%A5%2012_00_32.png" /></p>
+<h1 id="1-introduction">1. introduction</h1>
+<p>写这篇的经历主要是有一位师弟在面试拓竹（Bambu Lab）的时候被问到了这个问题：</p>
+<p><strong>“没有初始化的全局变量，会不会增加固件大小”</strong></p>
+<p>我的第一反应是这部分的变量会放进 <code>.bss</code> 段存储，而不会增加固件的大小，但是最终还是会增加 RAM 的占用。</p>
+<p>但是他说的面试官提示说要看编译器具体怎么做，有些编译器会给变量直接设 0，一开始下意思想反驳难道编译器不是都是会给 0？但仔细一想好像确实是这么个道理，因此我想验证一下这个差异。</p>
+<p>另外，一和别人沟通下来，我发现身边人的印象是“既然定义了变量，肯定要占空间啊”（因为都是学电子的，可能对计算机基础了解不多）。所以我觉得有必要补充一点东西，也相当于自己玩玩。</p>
+<h1 id="2-bss-data">2. <code>.bss</code> 和 <code>.data</code></h1>
+<p>先都是在 OS 的环境下做讨论，之后再到 <code>bare-metal</code> 的。</p>
+<h2 id="21">2.1 编译流程</h2>
+<p>先不谈这两个概念，先补充一点计算机基础。</p>
+<p>首先众所周知，对于 C 写出来的代码，其最终是要变成可执行文件才能够被 <code>cpu core</code> 执行，<code>cpu core</code> 也只认识可执行文件中包含的一条条的计算机指令（<code>mov</code> 指令等，或者说二进制，但是就还是认为汇编是最后一层了）。也就是这个经典的流程，自己搜一下都能懂哈或者问AI：</p>
+<p><img alt="image-20260428115645520" src="pic/image-20260428115645520.png" /></p>
+<p>图来源：B站-安枫的叶</p>
+<h2 id="22">2.2 链接视角</h2>
+<p>而想要理解这个最开始那个问题，全局变量到底占不占固件（如 <code>.bin</code>、<code>.hex</code> 或 <code>.elf</code> 文件）的空间，无非就是要去看编译器最终生成的产物格式标准，而目前现代 OS 和大多数嵌入式高级工具链中，这个标准通常是 ELF (Executable and Linkable Format)。 </p>
+<p>首先，当编译器把我们的 <code>.c</code> 代码转换成目标文件（<code>.o</code>）时，它并不是把代码和数据随便地堆在一起的。</p>
+<p>实际上 ELF 文件内部是按照了一定的结构来划分的，它通过一个 ELF 头部（Header）作为“路线图”，将程序的各种信息分门别类地存放在不同的模块里的，这里就会涉及到 <code>section</code> 和 <code>segment</code> 的内容了，也可以认为这是导致上面那个问题混乱的原因。</p>
+<p>ELF 标准为了既方便程序的链接，又方便程序的执行，ELF 文件格式提供了一个设计：两种平行的视图（Parallel Views）（这里以及下文参考的都是 System V ABI Edition 4.1，因为这里也没有用到关于 processor-specific 的内容）：</p>
+<p><img alt="image-20260428174951722" src="pic/image-20260428174951722.png" /></p>
+<p>由于这两种视图，就有了底层开发中让人比较易混淆的两个概念——<code>Section</code> 与 <code>Segment</code>。在中文里它们常被混为一谈，但它们有着本质的区别：（Gemini生成）</p>
+<ol>
+<li>链接视图（Linking View）——由 <code>Section</code> 组成： 这是给链接器（Linker）看的。编译器在生成 <code>.o</code> 目标文件时，会把功能相同的代码或数据分门别类地放在不同的 <code>Section</code> 中（比如我们常说的 <code>.text</code>、<code>.data</code>、<code>.bss</code>）。每一个 <code>Section</code> 都有一个统一的 Section Header 来描述它 。  </li>
+<li>执行视图（Execution View）——由 <code>Segment</code> 组成： 这是给系统加载器（Loader）或操作系统看的 。当程序真正要跑起来时，系统并不关心那么多细碎的 <code>Section</code>。它只关心哪些内存是可读的、可写的、可执行的。因此，一个 <code>Segment</code> 通常会包含一个或多个属性相似的 <code>Section</code> 。  </li>
+</ol>
+<blockquote>
+<p>这里实际上对于 <code>Section</code> 和 <code>Segment</code> 都会有一个 <code>header table</code> 来描述他们的信息的，程序也不能动态知道这个程序要多大，执行需要占用多少 RAM的，这里就不展开讲了，网上资料也挺多的，总之知道这 <code>table</code> 存在就好了，你真正需要分析的时候再去看看别人的讲解或者规范。</p>
+</blockquote>
+<p>在搞清了这个背景后，再回到面试题，我们定义的全局变量的位置，取决于在“链接视图”下，它被链接器扔进了哪个特殊的 <code>Section</code> 里，此时再回去看 ELF 规范的 Special Sections：</p>
+<p><img alt="image-20260428180700849" src="pic/image-20260428180700849.png" /></p>
+<blockquote>
+<p>按照规范描述，根据该 <code>section</code> 的 <code>SHT_NOBITS</code> 类型，<code>.bss</code> 是不占用空间的，程序运行时这部分的变量会被初始化为 0。</p>
+<p>但是为啥又说了这 <code>.bss</code> 会对 <code>program's memory image</code> 有 <code>contribution</code> 呢？下一节解答。</p>
+</blockquote>
+<p>下面由 Gemini 总结下（有时候觉得这些名字起的还挺有趣的，拿 LLM 来起名字还挺好哈哈）：</p>
+<ul>
+<li>
+<p><code>.data</code> 段：实打实的“空间吞噬者” </p>
+<p>规范指出，<code>.data</code> 段用于保存有助于程序内存映像的已初始化数据 。 因为你赋予了全局变量具体的非零初始值（例如 <code>int global_var = 123;</code>），所以 <code>123</code> 这个确切的数值必须真实地“刻”在物理固件文件中（其规范中的段类型为 <code>SHT_PROGBITS</code>，意味着它由程序定义并占用空间 ）。</p>
+<p>系统上电时，底层的启动代码会将这段数据从 Flash 搬运到 RAM 中。 </p>
+<blockquote>
+<p>具体怎么哪部分代码我也不记得，行为是不是真的是这样去看看代码问问 LLM。</p>
+</blockquote>
+<p>结论： <code>.data</code> 段是“双向吃货”，它既增加固件的物理体积，又消耗运行时的 RAM 空间。  </p>
+</li>
+<li>
+<p><code>.bss</code> 段：聪明的“空间魔术师”</p>
+<p>对于未初始化的全局变量（例如 <code>int uninit_var;</code>），ELF 规范给出了截然不同的待遇：</p>
+<ol>
+<li>首先，它规定“系统在程序开始运行时，会将这些数据初始化为零” 。  </li>
+<li>其次，也是最核心的一点，它的段类型被定义为 <code>SHT_NOBITS</code> 。规范明确声明，这种类型的段“不占用文件空间（occupies no file space）” 。  </li>
+</ol>
+</li>
+</ul>
+<p><strong>但上面还只是整个故事的一半。</strong></p>
+<h2 id="23">2.3 执行视角</h2>
+<blockquote>
+<p>Given an object file, the system must load it into memory for the program to run.</p>
+</blockquote>
+<p>所以故事的下一半是：链接器读取了这些上面划分得到的 Sections，然后将它们合并成成更粗粒度的 Segments，之后这个程序就会被装载到 memory 中使用（具体由 loader 做这个事情，这里不深入了）。</p>
+<p>但是具体都有什么 Segments？</p>
+<p><img alt="segment" src="pic/segment.png" /></p>
+<p>似乎挺多，但是我们并不需要关心这么多，就关注这个 <code>PT_LOAD</code>。</p>
+<p>规范里说的是，<code>PT_LOAD</code> 是 Program Header Table（程序头表） 中一个条目的类型值，用来告诉操作系统：</p>
+<blockquote>
+<p>“这个 Segment 需要被加载到内存里，成为进程地址空间的一部分。”</p>
+</blockquote>
+<p>所以我们知道每个 <code>PT_LOAD</code> 段都代表程序运行时的一块连续内存区域，比如后后面说的 <code>Text Sement</code>、<code>Data Segment</code> 等。程序能跑起来，所依赖的所有内存映射，几乎都来自 <code>PT_LOAD</code> 段。</p>
+<p><img alt="image-20260428182717070" src="pic/image-20260428182717070.png" /></p>
+<p>那就好说了，程序怎么运行，<code>cpu core</code> 怎么读取 <code>Text Segment</code> 运行起来，我们不管，回到之前“链接视角”遗留的问题：“为啥 <code>.bss</code> 会对 <code>program's memory image</code> 有 <code>contribution</code> ？”</p>
+<p>既然各个 <code>.bss</code> 和 <code>.data</code> 变成 <code>segment</code>，打包合并在一起了，那为什么说 <code>The section occu pies no file space</code>？程序最终用到 <code>.bss</code> 里的变量的时候肯定得占空间吧？有点奇怪了喔？</p>
+<p>还是看规范：</p>
+<p><img alt="image-20260428183704457" src="pic/image-20260428183704457.png" /></p>
+<p>最后一句话这里就是问题所在了（<code>p_memsz ≥ p_filesz</code>），关键在于描述 <code>Segment</code> 的 <code>header table</code> 中的这两个变量：</p>
+<p><img alt="image-20260428184509408" src="pic/image-20260428184509408.png" /></p>
+<p>甚至描述都长得挺像的，区别就在于描述的是 <code>memory</code> 还是 <code>file</code>，也即分别表示：</p>
+<ul>
+<li><code>p_filesz</code>：表示这个 Segment 在 ELF 文件中实际占用的字节数。</li>
+<li><code>p_memsz</code>：表示这个 Segment 加载到内存中时需要占用的字节数。</li>
+</ul>
+<p>那其实就明白了，链接器在最开始就记录了这两个部分的数值，在生成的固件里，<code>.bss</code> 仅仅保留了极小的“元数据”。直到程序真正准备运行前，底层的启动代码才会根据描述符，在 RAM 中圈出一块地并全部清零。</p>
+<p><strong>结论：</strong> <code>.bss</code> 段<strong>几乎不占用固件的物理存储空间，仅仅在程序运行时动态消耗 RAM</strong>。</p>
+<p>再来看看由 Gemini 画的这个图：</p>
+<p><img alt="mermaid-20260428_185517" src="pic/mermaid-20260428_185517.png" /></p>
+<h1 id="3">3. 动手实操</h1>
+<p>上面可能是理论分析，还是想看看实际环境是怎么样的，但是本人这里只有虚拟机，没有实际的环境，这里暂时配合交叉工具链的 <code>binutils</code> 来看。</p>
+<p>环境版本：</p>
+<ul>
+<li>Ubuntu 22.04 + apt 下载的工具链：<code>sudo apt install gcc-aarch64-linux-gnu qemu-user</code></li>
+</ul>
+<p>版本如下：</p>
+<p><img alt="image-20260428190537628" src="pic/image-20260428190537628.png" /></p>
+<h2 id="31-1-os">3.1 测试-1：直接交叉编译程序对比-带OS环境</h2>
+<p>两个程序对比</p>
+<p><img alt="image-20260428190714281" src="pic/image-20260428190714281.png" /></p>
+<p>直接编译过后就能看到结果：</p>
+<p><img alt="image-20260428190903846" src="pic/image-20260428190903846.png" /></p>
+<p>单纯文件大小体积就差了挺多的，再具体一点，直接看它的符号和地址：</p>
+<p><img alt="image-20260428191310655" src="pic/image-20260428191310655.png" /></p>
+<p><img alt="image-20260428192955687" src="pic/image-20260428192955687.png" /></p>
+<h2 id="32-2bare-metal-bss">3.2 测试-2：<code>bare-metal</code> 测试清零 <code>.bss</code></h2>
+<p>由于问这个问题的是做嵌入式的，MCU的，所以看看在 <code>bare-metal</code> 的环境下测试，看看是哪部分做了这些工作。</p>
+<p>这部分的内容主要就依靠两位：链接器（Linker） 和 启动代码（Startup Code）。</p>
+<p>Gemini 解析：</p>
+<ol>
+<li>
+<p>角色一：链接器与链接脚本（Linker Script）</p>
+<p>当编译器把 <code>.c</code> 文件编译成 <code>.o</code> 目标文件后，链接器负责把它们拼装成最终的固件。在这个过程中，你可以通过链接脚本（<code>.ld</code> 文件）告诉链接器：“请把所有未初始化的变量放在一起，并告诉我这块区域的开头和结尾在哪里”。 链接器会在最终的 ELF 固件里生成两个特殊的符号（也就是你说的“极小的元数据”）：</p>
+<ul>
+<li><code>__bss_start</code>：记录 <code>.bss</code> 段在 RAM 中的起始物理地址。</li>
+<li><code>__bss_end</code>：记录 <code>.bss</code> 段在 RAM 中的结束物理地址。</li>
+</ul>
+</li>
+<li>
+<p>角色二：启动汇编代码（Startup Code</p>
+<p>这是芯片上电复位后执行的第一段代码（在进入 <code>main()</code> 函数之前）。它一般用汇编语言编写。它的其中一个核心任务就是：读取 <code>__bss_start</code> 和 <code>__bss_end</code> 的地址，写一个循环，把这块内存区域填满 0。</p>
+</li>
+</ol>
+<p>所以实践要做的就是：</p>
+<ol>
+<li>编写链接脚本 <code>link.ld</code></li>
+<li>编写 ARMv8 启动汇编 <code>boot.S</code></li>
+<li>编写业务代码 <code>main.c</code></li>
+</ol>
+<p>也就是这些：</p>
+<div class="highlight"><pre><span></span><code><span class="cm">/* link.ld */</span>
+<span class="nf">ENTRY</span><span class="p">(</span><span class="no">_start</span><span class="p">)</span>
+
+<span class="nf">SECTIONS</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cm">/* 假设我们的 RAM 从地址 0x40000000 开始 */</span>
+<span class="w">    </span><span class="err">.</span><span class="w"> </span><span class="err">=</span><span class="w"> </span><span class="err">0</span><span class="nf">x40000000</span><span class="c1">;</span>
+
+<span class="w">    </span><span class="na">.text</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">*(.</span><span class="no">text</span><span class="p">)</span><span class="w"> </span><span class="p">}</span><span class="w">   </span><span class="cm">/* 代码段 */</span>
+<span class="w">    </span><span class="na">.data</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">*(.</span><span class="no">data</span><span class="p">)</span><span class="w"> </span><span class="p">}</span><span class="w">   </span><span class="cm">/* 已初始化数据段 */</span>
+
+<span class="w">    </span><span class="cm">/* BSS 段处理 */</span>
+<span class="w">    </span><span class="na">.bss</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="err">.</span><span class="w"> </span><span class="err">=</span><span class="w"> </span><span class="nf">ALIGN</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span><span class="c1">;      /* ARMv8 要求 8 字节对齐 */</span>
+<span class="w">        </span><span class="nf">__bss_start</span><span class="w"> </span><span class="err">=</span><span class="w"> </span><span class="p">.</span><span class="c1">;   /* 记录此时的当前地址，作为起始地址 */</span>
+
+<span class="w">        </span><span class="err">*(</span><span class="na">.bss</span><span class="p">)</span><span class="w"> </span><span class="p">*(.</span><span class="no">bss.</span><span class="p">*)</span><span class="w">  </span><span class="cm">/* 存放所有的 bss 数据 */</span>
+
+<span class="w">        </span><span class="err">.</span><span class="w"> </span><span class="err">=</span><span class="w"> </span><span class="nf">ALIGN</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span><span class="c1">;</span>
+<span class="w">        </span><span class="nf">__bss_end</span><span class="w"> </span><span class="err">=</span><span class="w"> </span><span class="p">.</span><span class="c1">;     /* 记录存放完之后的地址，作为结束地址 */</span>
+<span class="w">    </span><span class="err">}</span>
+<span class="err">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="cm">/* boot.S */</span>
+<span class="na">.global</span><span class="w"> </span><span class="no">_start</span>
+<span class="na">.section</span><span class="w"> </span><span class="no">.text</span>
+
+<span class="nl">_start:</span>
+<span class="w">    </span><span class="cm">/* 1. 加载链接脚本中定义的元数据（起止地址）到寄存器 */</span>
+<span class="w">    </span><span class="nf">ldr</span><span class="w"> </span><span class="no">x0</span><span class="p">,</span><span class="w"> </span><span class="err">=</span><span class="no">__bss_start</span><span class="w">  </span><span class="cm">/* x0 = BSS 起始地址 */</span>
+<span class="w">    </span><span class="nf">ldr</span><span class="w"> </span><span class="no">x1</span><span class="p">,</span><span class="w"> </span><span class="err">=</span><span class="no">__bss_end</span><span class="w">    </span><span class="cm">/* x1 = BSS 结束地址 */</span>
+<span class="w">    </span><span class="nf">mov</span><span class="w"> </span><span class="no">x2</span><span class="p">,</span><span class="w"> </span><span class="mi">#0</span><span class="w">            </span><span class="cm">/* x2 = 准备写入的 0 值 */</span>
+
+<span class="w">    </span><span class="cm">/* 2. 核心逻辑：循环清零 RAM */</span>
+<span class="nl">clear_bss:</span>
+<span class="w">    </span><span class="nf">cmp</span><span class="w"> </span><span class="no">x0</span><span class="p">,</span><span class="w"> </span><span class="no">x1</span><span class="w">            </span><span class="cm">/* 检查：当前地址 &gt;= 结束地址了吗？ */</span>
+<span class="w">    </span><span class="nf">b.ge</span><span class="w"> </span><span class="no">run_main</span><span class="w">         </span><span class="cm">/* 如果是，说明清完了，跳出循环 */</span>
+
+<span class="w">    </span><span class="nf">str</span><span class="w"> </span><span class="no">x2</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="no">x0</span><span class="p">],</span><span class="w"> </span><span class="mi">#8</span><span class="w">      </span><span class="cm">/* 不是，则将 x2(0) 存入 x0 指向的内存，然后 x0 往后移 8 字节 */</span>
+<span class="w">    </span><span class="nf">b</span><span class="w"> </span><span class="no">clear_bss</span><span class="w">           </span><span class="cm">/* 跳转回去继续循环 */</span>
+
+<span class="nl">run_main:</span>
+<span class="w">    </span><span class="cm">/* （实际这里还需要设置栈指针 SP，为了演示简洁省去） */</span>
+<span class="w">    </span><span class="nf">bl</span><span class="w"> </span><span class="no">main</span><span class="w">               </span><span class="cm">/* 跳转到 C 语言的 main 函数 */</span>
+
+<span class="nl">hang:</span>
+<span class="w">    </span><span class="nf">b</span><span class="w"> </span><span class="no">hang</span><span class="w">                </span><span class="cm">/* 兜底：如果 main 函数返回了，就在这里死循环 */</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="cm">/* main.c */</span>
+<span class="c1">// 定义一个 400 字节的未初始化全局数组</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">uninit_array</span><span class="p">[</span><span class="mi">100</span><span class="p">];</span><span class="w"> </span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 此时 uninit_array 已经被前面的 boot.S 填充为 0 了</span>
+<span class="w">    </span><span class="n">uninit_array</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">42</span><span class="p">;</span><span class="w"> </span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>编译：<code>aarch64-linux-gnu-gcc -nostdlib -T link.ld -g boot.S main.c -o baremetal.elf</code></p>
+<p><img alt="image-20260428201602955" src="pic/image-20260428201602955.png" /></p>
+<p>再来看看实际的 <code>qemu</code> 运行：</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># -M virt: 模拟通用的 ARMv8 虚拟开发板（RAM 默认从 0x40000000 开始，刚好匹配我们的 link.ld）</span>
+<span class="c1"># -kernel: 加载我们的裸机固件</span>
+<span class="c1"># -S: CPU 上电后暂停运行</span>
+<span class="c1"># -s: 开启本地 1234 端口，等待 GDB 连接</span>
+qemu-system-aarch64<span class="w"> </span>-M<span class="w"> </span>virt<span class="w"> </span>-cpu<span class="w"> </span>cortex-a53<span class="w"> </span>-nographic<span class="w"> </span>-kernel<span class="w"> </span>baremetal.elf<span class="w"> </span>-S<span class="w"> </span>-s
+</code></pre></div>
+<p><code>gdb</code> 调试运行结果：</p>
+<p><img alt="image-20260428201005553" src="pic/image-20260428201005553.png" /></p>
+<p>可以看到，对 <code>main</code> 和 <code>clear_bss</code>打了两个断点，然后在清零 <code>.bss</code> 之前，在 GDB 里手动往 <code>uninit_array</code> 写入一些垃圾数据 <code>deadbeaf</code>，之后进一步让程序执行到 <code>main</code>，发现确实被清零了。</p>
+<p>当然最后也再补一个对比的测试吧：</p>
+<div class="highlight"><pre><span></span><code><span class="cm">/* main.c */</span>
+<span class="c1">// 两者对比</span>
+<span class="c1">// int uninit_array[10000] = {1, 2, 3, 4};</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">uninit_array</span><span class="p">[</span><span class="mi">10000</span><span class="p">];</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 此时 uninit_array 已经被前面的 boot.S 填充为 0 了</span>
+<span class="w">    </span><span class="n">uninit_array</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">42</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>未初始化的：</p>
+<p><img alt="image-20260428202433728" src="pic/image-20260428202433728.png" /></p>
+<p>初始化的：</p>
+<p><img alt="image-20260428202457663" src="pic/image-20260428202457663.png" /></p>
+<h2 id="33-3keil-mdk">3.3 测试-3：使用KEIL-MDK测试下</h2>
+<p>学习的时候，身边人最常用的就是这个 IDE /编译器了，测试版本：</p>
+<div class="highlight"><pre><span></span><code>***<span class="w"> </span>Using<span class="w"> </span>Compiler<span class="w"> </span><span class="s1">&#39;V5.06 update 7 (build 960)&#39;</span>,
+</code></pre></div>
+<p>测试程序 <code>main.c</code> + HAL 库 + -O0 优化：</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// ---------------- 新增测试    宏与变量 ----------------</span>
+<span class="cp">#define TEST_ARRAY_SIZE 25000 </span><span class="c1">// 100KB 大小 (25000 * 4 Bytes)</span>
+
+<span class="c1">// 测试场景 1：未初始化数组 (对应 .bss / ZI-data)</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">test_array</span><span class="p">[</span><span class="n">TEST_ARRAY_SIZE</span><span class="p">];</span><span class="w"> </span>
+
+<span class="c1">// 测试场景 2：已初始化数组 (对应 .data / RW-data)</span>
+<span class="c1">// int test_array[TEST_ARRAY_SIZE] = {1, 2, 3}; // 只要首元素非0，整个数组就会被强行塞入 RW-data</span>
+<span class="c1">// --------------------------------------------------</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">SCB_EnableICache</span><span class="p">();</span><span class="w">     </span><span class="c1">// 使能ICache</span>
+<span class="w">    </span><span class="n">SCB_EnableDCache</span><span class="p">();</span><span class="w">     </span><span class="c1">// 使能DCache</span>
+<span class="w">    </span><span class="n">HAL_Init</span><span class="p">();</span><span class="w">                 </span><span class="c1">// 初始化HAL库</span>
+<span class="w">    </span><span class="n">SystemClock_Config</span><span class="p">();</span><span class="w">   </span><span class="c1">// 配置系统时钟，主频480MHz</span>
+<span class="w">    </span><span class="n">LED_Init</span><span class="p">();</span><span class="w">                 </span><span class="c1">// 初始化LED引脚</span>
+
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">LED1_Toggle</span><span class="p">;</span>
+<span class="w">        </span><span class="n">HAL_Delay</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">// 防止数组被编译器优化掉的伪操作</span>
+<span class="w">        </span><span class="n">test_array</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">++</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<ol>
+<li>
+<p>正常环境无测试</p>
+<div class="highlight"><pre><span></span><code>Program<span class="w"> </span>Size:<span class="w"> </span><span class="nv">Code</span><span class="o">=</span><span class="m">5902</span><span class="w"> </span>RO-data<span class="o">=</span><span class="m">714</span><span class="w"> </span>RW-data<span class="o">=</span><span class="m">20</span><span class="w"> </span>ZI-data<span class="o">=</span><span class="m">1028</span><span class="w">  </span>
+</code></pre></div>
+<p><img alt="image-20260428210438300" src="pic/image-20260428210438300.png" /></p>
+</li>
+<li>
+<p>未初始化</p>
+<div class="highlight"><pre><span></span><code>Program<span class="w"> </span>Size:<span class="w"> </span><span class="nv">Code</span><span class="o">=</span><span class="m">5910</span><span class="w"> </span>RO-data<span class="o">=</span><span class="m">714</span><span class="w"> </span>RW-data<span class="o">=</span><span class="m">20</span><span class="w"> </span>ZI-data<span class="o">=</span><span class="m">101028</span><span class="w">  </span>
+</code></pre></div>
+<p>map 文件输出：</p>
+<p><img alt="image-20260428205719045" src="pic/image-20260428205719045.png" /></p>
+<p>​    Execution Region RW_IRAM2 (Exec base: 0x24000000, Load base: 0x08000d10, Size: 0x00018ab8, Max: 0x00080000, ABSOLUTE)：</p>
+<p><img alt="image-20260428205439521" src="pic/image-20260428205439521.png" /></p>
+<p><img alt="image-20260428210642596" src="pic/image-20260428210642596.png" /></p>
+</li>
+<li>
+<p>初始化</p>
+<div class="highlight"><pre><span></span><code>Program<span class="w"> </span>Size:<span class="w"> </span><span class="nv">Code</span><span class="o">=</span><span class="m">5998</span><span class="w"> </span>RO-data<span class="o">=</span><span class="m">714</span><span class="w"> </span>RW-data<span class="o">=</span><span class="m">100020</span><span class="w"> </span>ZI-data<span class="o">=</span><span class="m">1028</span><span class="w">  </span>
+</code></pre></div>
+<p>map 文件输出：</p>
+<p><img alt="image-20260428205758375" src="pic/image-20260428205758375.png" /></p>
+<p>​    Execution Region RW_IRAM2 (Exec base: 0x24000000, Load base: 0x08000d10, Size: 0x00018ab8, Max: 0x00080000, ABSOLUTE, COMPRESSED[0x00000324])</p>
+<p><img alt="image-20260428211030721" src="pic/image-20260428211030721.png" /></p>
+<p><img alt="image-20260428210518172" src="pic/image-20260428210518172.png" /></p>
+</li>
+</ol>
+<p>这本来是一个很简单的测试，但如果你仔细观察，初始化了的 ROM Size，就会发现一个有意思的现象：为什么他这里明明算上了 RW Data，这个 ROM 占用竟然这么小？和 RW Size 似乎不一样喔？问问 Gemini吧，</p>
+<ol>
+<li>
+<p>诡异的 <code>COMPRESSED</code> 标记</p>
+<p>看<code>Memory Map of the image</code>（内存映射）部分，仔细看 <code>RW_IRAM2</code> 这一行：</p>
+<p>Execution Region RW_IRAM2 (Exec base: 0x24000000, Load base: 0x08000d10, Size: 0x00018ab8, Max: 0x00080000, ABSOLUTE, COMPRESSED[0x00000324])</p>
+<p>注意到了吗？它后面跟着一个 <code>COMPRESSED[0x00000324]</code>。 <code>0x324</code> 转换成十进制是多少？804 字节！ 也就是说，原本大小为 <code>0x186A0</code>（100,000 字节）的 <code>test_array</code> 数据，被硬生生压缩成了 804 字节放在了 Flash 里。</p>
+</li>
+<li>
+<p>神秘的解压函数</p>
+<p>再往上看 <code>Image Symbol Table</code>（符号表），你会发现链接器偷偷往你的固件里塞进了几个你根本没写过的函数：</p>
+<ul>
+<li><code>__decompress1     0x08100049   Thumb Code    86  __dczerorl2.o(.text)</code></li>
+<li><code>__scatterload     0x080002b1   Thumb Code    28  init.o(.text)</code></li>
+</ul>
+<p>特别是 <code>__dczerorl2.o</code>，它的全拼是 Decompress Zero Run-Length version 2（零值游程解压器 V2）。</p>
+</li>
+<li>
+<p>两组统计数据的碰撞 在你给出的最后一部分汇总表中：</p>
+<ul>
+<li><code>Grand Totals                        5998  314   714  100020  1028  1240544</code></li>
+<li><code>ELF Image Totals (compressed)       5998  314   714     804  1028  1240544</code></li>
+</ul>
+<p>注意看 <code>ZI Data</code> 的对比，原始计算是 <code>100020</code>，但在生成镜像时（compressed 这一行），它变成了 <code>804</code>。</p>
+</li>
+<li>
+<p>商业链接器的“极限压榨” (RW Data Compression)</p>
+<p>其实，根据 C 语言和 ELF 规范，当你写下 <code>int test_array[25000] = {1, 2, 3};</code> 时，它<strong>确实</strong>变成了一个已初始化的强符号，理应被放入 <code>.data</code>（RW-data）段，并且必须在 Flash 中占用 100KB 的体积。</p>
+<p>但是，Keil MDK 背后的 <code>armlink</code>（ARM 链接器）太聪明了。作为极其昂贵的商业工具链，它的首要任务就是帮资本家省 Flash 成本。</p>
+<p><code>armlink</code> 在打包生成固件前的最后一刻，会扫描所有的 <code>.data</code> 段数据。它发现了一个惊人的事实：在这 100,000 个字节中，<strong>除了开头那 12 个字节（1, 2, 3），后面整整 99,988 个字节全都是 0！</strong></p>
+<p>于是，链接器启动了 <strong>RW 压缩机制（RW Data Compression）</strong>：</p>
+<ol>
+<li>它用一种类似“游程编码”（Run-Length Encoding）的算法，把这几万个 0 压缩成了一句描述：“这里有 99,988 个零”。这句描述连同 <code>1,2,3</code> 一起，被压缩打包存入了 Flash（也就是那 804 字节）。</li>
+<li>它自动在你的启动代码中插入了 <code>__dczerorl2.o</code> 解压库。</li>
+<li>当 STM32 上电运行，在执行到 <code>__main</code> 里的 <code>__scatterload</code>（分散加载）阶段时，CPU 会执行解压算法，把 Flash 里的这 804 字节“爆开”，在 RAM 中还原成 100,000 字节的真实数组。</li>
+</ol>
+<p>这就是为什么你的 <code>.map</code> 文件显示 Flash（ROM Size）依然很小的终极真相！</p>
+</li>
+</ol>
+<h2 id="34-4">3.4 测试-4：聪明的编译器</h2>
+<p>因为面试官说“不同编译器处理不同”，但我想详细看看究竟是哪里不同。</p>
+<p>个人认为的是否在变量显式初始化：</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">[</span><span class="mi">1000000</span><span class="p">];</span><span class="w"> </span><span class="err">（</span><span class="n">完全未初始化</span><span class="err">）</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">b</span><span class="p">[</span><span class="mi">1000000</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">0</span><span class="p">};</span><span class="w"> </span><span class="err">（</span><span class="n">显式初始化为</span><span class="w"> </span><span class="mi">0</span><span class="err">）</span>
+</code></pre></div>
+<p>首先对于第一种，毫无争议，所有正经的编译器都会把它归入 <code>.bss</code>（或 <code>COMMON</code> 然后由链接器放入 <code>.bss</code>），不增加固件大小。</p>
+<p>所以问题应该在这第二种：它到底是算作 <code>.bss</code> 还是 <code>.data</code>？</p>
+<p>按照我的认知：</p>
+<ul>
+<li>老旧编译器 / “笨”编译器： 只要看到有 <code>=</code> 赋值，就傻傻地地认为它被初始化了，必须放到 <code>.data</code> 段。这会导致编译器也是傻傻地往固件的 Flash 里塞入 <code>00 00 00 00</code>，严重增加固件大小。</li>
+<li>现代编译器 / “聪明”编译器（如较新的 GCC、Clang、Keil MDK/ARM Compiler 6）： 具有零初始化优化（ZI-data 优化）。它理应会聪明地发现：“虽然你初始化了，但你初始化的全是 0 啊！这和未初始化的效果不是一模一样吗？” 于是它会强行把 <code>b</code> 优化进 <code>.bss</code> 段，不增加固件大小。</li>
+<li>还有一个编译标志：<code>-fno-zero-initialized-in-bss</code> ，比较新的编译器初始化变量为0时都是会放到 <code>.bss</code> 的，而这个标志可以显式地关闭零初始化优化。</li>
+</ul>
+<p>这里我直接在我的虚拟机里做好了，因为刚好有两个版本的编译工具链：</p>
+<p><img alt="image-20260428220406150" src="pic/image-20260428220406150.png" /></p>
+<p>由于要测试的东西比较多了（不同编译器、<code>-fno-zero-initialized-in-bss</code>），所以我这里直接写了个脚本来测，结果如下：</p>
+<div class="highlight"><pre><span></span><code>~/own_tmp/test_bss_data/demo-3-explicit-implicit<span class="w"> </span>./compare_bss.sh<span class="w"> </span>
+<span class="o">==================================================</span>
+<span class="w"> </span>开始编译<span class="w"> </span><span class="m">4</span><span class="w"> </span>组测试文件...
+<span class="o">==================================================</span>
+编译完成！生成文件如下：
+new_dumb.elf
+new_smart.elf
+old_dumb.elf
+old_smart.elf
+
+<span class="o">==================================================</span>
+<span class="w"> </span><span class="m">1</span>.<span class="w"> </span>固件物理大小对比<span class="w"> </span><span class="o">(</span>ls<span class="w"> </span>-lh<span class="o">)</span>
+<span class="w">    </span>-&gt;<span class="w"> </span>观察哪个文件被实打实地塞入了<span class="w"> </span>4MB<span class="w"> </span><span class="nv">数据</span>
+<span class="o">==================================================</span>
+-rwxrwxr-x<span class="w"> </span><span class="m">1</span><span class="w"> </span>jai<span class="w"> </span>jai<span class="w"> </span><span class="m">3</span>.9M<span class="w">  </span>4月<span class="w"> </span><span class="m">28</span><span class="w"> </span><span class="m">22</span>:22<span class="w"> </span>new_dumb.elf
+-rwxrwxr-x<span class="w"> </span><span class="m">1</span><span class="w"> </span>jai<span class="w"> </span>jai<span class="w"> </span><span class="m">8</span>.8K<span class="w">  </span>4月<span class="w"> </span><span class="m">28</span><span class="w"> </span><span class="m">22</span>:22<span class="w"> </span>new_smart.elf
+-rwxrwxr-x<span class="w"> </span><span class="m">1</span><span class="w"> </span>jai<span class="w"> </span>jai<span class="w"> </span><span class="m">3</span>.9M<span class="w">  </span>4月<span class="w"> </span><span class="m">28</span><span class="w"> </span><span class="m">22</span>:22<span class="w"> </span>old_dumb.elf
+-rwxrwxr-x<span class="w"> </span><span class="m">1</span><span class="w"> </span>jai<span class="w"> </span>jai<span class="w">  </span>15K<span class="w">  </span>4月<span class="w"> </span><span class="m">28</span><span class="w"> </span><span class="m">22</span>:22<span class="w"> </span>old_smart.elf
+
+<span class="o">==================================================</span>
+<span class="w"> </span><span class="m">2</span>.<span class="w"> </span>RAM<span class="w"> </span>内存分配对比<span class="w"> </span><span class="o">(</span>size<span class="o">)</span>
+<span class="w">    </span>-&gt;<span class="w"> </span>观察<span class="w"> </span>4MB<span class="w"> </span><span class="o">(</span>约<span class="w"> </span><span class="m">4000000</span><span class="o">)</span><span class="w"> </span>落在<span class="w"> </span>data<span class="w"> </span>还是<span class="w"> </span><span class="nv">bss</span>
+<span class="o">==================================================</span>
+<span class="w">   </span>text<span class="w">    </span>data<span class="w">     </span>bss<span class="w">     </span>dec<span class="w">     </span>hex<span class="w"> </span>filename
+<span class="w">   </span><span class="m">1626</span><span class="w"> </span><span class="m">4000640</span><span class="w">       </span><span class="m">8</span><span class="w"> </span><span class="m">4002274</span><span class="w">  </span>3d11e2<span class="w"> </span>new_dumb.elf
+<span class="w">   </span><span class="m">1626</span><span class="w">     </span><span class="m">640</span><span class="w"> </span><span class="m">4000008</span><span class="w"> </span><span class="m">4002274</span><span class="w">  </span>3d11e2<span class="w"> </span>new_smart.elf
+<span class="w">   </span><span class="m">1088</span><span class="w"> </span><span class="m">4000568</span><span class="w">       </span><span class="m">8</span><span class="w"> </span><span class="m">4001664</span><span class="w">  </span>3d0f80<span class="w"> </span>old_dumb.elf
+<span class="w">   </span><span class="m">1088</span><span class="w">     </span><span class="m">568</span><span class="w"> </span><span class="m">4000008</span><span class="w"> </span><span class="m">4001664</span><span class="w">  </span>3d0f80<span class="w"> </span>old_smart.elf
+
+<span class="o">==================================================</span>
+<span class="w"> </span><span class="m">3</span>.<span class="w"> </span>符号表归属深度分析<span class="w"> </span><span class="o">(</span>nm<span class="o">)</span>
+<span class="w">    </span>-&gt;<span class="w"> </span>观察<span class="w"> </span>zero_array<span class="w"> </span>前面的字母是<span class="w"> </span><span class="s1">&#39;B&#39;</span><span class="o">(</span>BSS<span class="o">)</span><span class="w"> </span>还是<span class="w"> </span><span class="s1">&#39;D&#39;</span><span class="o">(</span>Data<span class="o">)</span>
+<span class="o">==================================================</span>
+&gt;&gt;&gt;<span class="w"> </span>解析文件:<span class="w"> </span>new_smart.elf<span class="w"> </span><span class="o">&lt;&lt;&lt;</span>
+00000000003e1918<span class="w"> </span>B<span class="w"> </span>__bss_end__
+00000000003e1918<span class="w"> </span>B<span class="w"> </span>_bss_end__
+<span class="m">0000000000011010</span><span class="w"> </span>B<span class="w"> </span>__bss_start
+<span class="m">0000000000011010</span><span class="w"> </span>B<span class="w"> </span>__bss_start__
+<span class="m">0000000000011018</span><span class="w"> </span>B<span class="w"> </span>zero_array
+--------------------------------------------------
+&gt;&gt;&gt;<span class="w"> </span>解析文件:<span class="w"> </span>new_dumb.elf<span class="w"> </span><span class="o">&lt;&lt;&lt;</span>
+00000000003e1918<span class="w"> </span>B<span class="w"> </span>__bss_end__
+00000000003e1918<span class="w"> </span>B<span class="w"> </span>_bss_end__
+00000000003e1910<span class="w"> </span>B<span class="w"> </span>__bss_start
+00000000003e1910<span class="w"> </span>B<span class="w"> </span>__bss_start__
+<span class="m">0000000000011010</span><span class="w"> </span>D<span class="w"> </span>zero_array
+--------------------------------------------------
+&gt;&gt;&gt;<span class="w"> </span>解析文件:<span class="w"> </span>old_smart.elf<span class="w"> </span><span class="o">&lt;&lt;&lt;</span>
+00000000007e1938<span class="w"> </span>B<span class="w"> </span>__bss_end__
+00000000007e1938<span class="w"> </span>B<span class="w"> </span>_bss_end__
+<span class="m">0000000000411030</span><span class="w"> </span>B<span class="w"> </span>__bss_start
+<span class="m">0000000000411030</span><span class="w"> </span>B<span class="w"> </span>__bss_start__
+<span class="m">0000000000411038</span><span class="w"> </span>B<span class="w"> </span>zero_array
+--------------------------------------------------
+&gt;&gt;&gt;<span class="w"> </span>解析文件:<span class="w"> </span>old_dumb.elf<span class="w"> </span><span class="o">&lt;&lt;&lt;</span>
+00000000007e1938<span class="w"> </span>B<span class="w"> </span>__bss_end__
+00000000007e1938<span class="w"> </span>B<span class="w"> </span>_bss_end__
+00000000007e1930<span class="w"> </span>B<span class="w"> </span>__bss_start
+00000000007e1930<span class="w"> </span>B<span class="w"> </span>__bss_start__
+<span class="m">0000000000411030</span><span class="w"> </span>D<span class="w"> </span>zero_array
+--------------------------------------------------
+对比测试结束！
+</code></pre></div>
+<p>我也懒了，直接 Gemini 生成解析报告：</p>
+<ol>
+<li>
+<p>固件体积的视觉暴击（<code>ls -lh</code> 的真相） 无论是在老牌的 Linaro GCC 7.3 还是在新版编译器中，默认情况下（<code>v11.4</code>）它们都极其聪明地触发了零初始化优化，将 4MB 的数组化于无形，固件仅有 10KB 左右。而一旦我们使用 <code>-fno-zero-initialized-in-bss</code> 参数强行关闭该优化（<code>dumb</code>），两个固件的物理体积瞬间暴增到 3.9MB。多出来的近 4MB 空间，全是被强行塞入物理文件的“0”。</p>
+</li>
+<li>
+<p>内存消耗的“守恒定律”（<code>size</code> 的洞察） 仔细观察 <code>size</code> 命令输出的 <code>dec</code>（总内存需求）这一列。你会发现一个极其优美的现象：无论物理固件是 10KB 还是 3.9MB，它们在运行时需要的总内存完全一致（约 4MB）。 这完美印证了“不占 Flash 绝对不代表不占 RAM”。底层的唯一区别仅仅在于：这 4MB 的开销是被记在了 <code>bss</code> 的账上，还是被记在了 <code>data</code> 的账上。</p>
+</li>
+<li>
+<p>符号表的终极审判（<code>nm</code> 的实锤） 如果说前面的大小只是表象，那么 <code>nm</code> 的输出就是底层的“基因检测”。</p>
+<ul>
+<li>不显式加 <code>-fno-zero-initialized-in-bss</code>，<code>zero_array</code> 前面的属性是 <code>B</code>，代表它被成功归入 <code>.bss</code> 段，享受着启动代码的动态清零服务。</li>
+<li>优化关闭后，<code>zero_array</code> 前面的属性变成了 <code>D</code>，代表它被强行降级为 <code>.data</code> 段，成为了固件文件中的沉重负担。</li>
+</ul>
+</li>
+</ol>
+<p>核心启发： 在现代嵌入式底层开发中，编译器远比我们想象的要聪明，但也极其死板。多写一个 <code>{0}</code>、漏掉一个编译参数，都有可能导致几十上百 KB 的 Flash 空间被白白浪费。</p>
+<h1 id="_1">参考</h1>
+<p>[1]. <a href="https://refspecs.linuxfoundation.org/elf/gabi41.pdf">gabi41.pdf</a></p>
+<h1 id="_2">更多资料</h1>
+<ul>
+<li><a href="https://refspecs.linuxfoundation.org/elf/index.html">refspecs.linuxfoundation.org/elf/index.html</a></li>
+<li><a href="https://github.com/ARM-software/abi-aa/blob/main/sysvabi64/sysvabi64.rst">Github-abi-aa仓库 sysvabi64</a></li>
+<li>《程序员的自我修养——链接、装载与库》</li>
+<li>《深入理解计算机系统》 (CS:APP - Computer Systems: A Programmer's Perspective)</li>
+<li>《Linkers and Loaders》</li>
+<li>你所使用的编译器指南</li>
+</ul>
+
+
+
+
+
+
+
+  
+    
+  
+  
+    
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Last update">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2026-06-25T15:55:15+02:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2026-06-25</span>
+  </span>
+
+    
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Created">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2026-06-25T15:55:15+02:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2026-06-25</span>
+  </span>
+
+    
+    
+    
+  </aside>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://github.com/JAILuo" target="_blank" rel="noopener" title="JAILuo" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.footer"], "search": "../../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.83f73b43.min.js"></script>
+      
+        <script src="../../../js/timeago.min.js"></script>
+      
+        <script src="../../../js/timeago_mkdocs_material.js"></script>
+      
+        <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+      
+    
+  </body>
+</html>

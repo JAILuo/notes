@@ -1,0 +1,2134 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://jailuo.github.io/notes/article/Debug-Insides/DI-04%20backtrace/1.%20prologue-call/01.html">
+      
+      
+      
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.48">
+    
+    
+      
+        <title>01 - Messy Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.6f8fc17f.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../css/timeago.css">
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#1-introduction" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../../index.html" title="Messy Notes" class="md-header__button md-logo" aria-label="Messy Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Messy Notes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              01
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256l137.3-137.4c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/JAILuo/notes" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../../index.html" title="Messy Notes" class="md-nav__button md-logo" aria-label="Messy Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Messy Notes
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/JAILuo/notes" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    首页
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Article
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Article
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/article/concurrency sumary/summary.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    concurrency-summary
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/article/toolchain/toolchain.mc" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    toolchain
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/article/mount/mount.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    mount
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Course
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Course
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    University Course
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            University Course
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1_1" id="__nav_3_1_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    jyy OS2024
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_1_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            jyy OS2024
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_1_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1_1_1" id="__nav_3_1_1_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    course note
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_1_1_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            course note
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Course/University%20Course/jyy%20OS2024/cousre%20note/1.%20introduction/introduction.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    introduction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Course/University%20Course/jyy%20OS2024/cousre%20note/2.%20concurrency/concurrency.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    concurrency
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Course/University%20Course/jyy%20OS2024/cousre%20note/3.%20virtualization/virtualization.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    virtualization
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Course/University%20Course/jyy%20OS2024/cousre%20note/4.%20kernel/kernel.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    kernel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Course/University%20Course/jyy%20OS2024/cousre%20note/5.%20persistence/persistence.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    persistence
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_1_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1_1_2" id="__nav_3_1_1_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Mini Labs
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_1_1_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            Mini Labs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Course/University%20Course/jyy%20OS2024/Mini%20Labs/M1/M1.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    M1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Course/University%20Course/jyy%20OS2024/Mini%20Labs/M2/M2.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    M2
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Course/University%20Course/jyy%20OS2024/Mini%20Labs/M3/M3.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    M3
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_1_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1_1_3" id="__nav_3_1_1_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    OS Labs
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_1_1_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1_1_3">
+            <span class="md-nav__icon md-icon"></span>
+            OS Labs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Course/University%20Course/jyy%20OS2024/OS%20Labs/L0/L0.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    L0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Course/University%20Course/jyy%20OS2024/OS%20Labs/L1/L1.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    L1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    GeekTime
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            GeekTime
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2_1" id="__nav_3_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    深入理解计算机组成原理
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            深入理解计算机组成原理
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Course/GeekTime/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E4%B8%80%E5%91%A8%E7%9B%AE/1.%20%E6%8C%87%E4%BB%A4%E4%B8%8E%E8%BF%90%E7%AE%97/%E6%8C%87%E4%BB%A4%E4%B8%8E%E8%BF%90%E7%AE%97.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1. 指令与运算
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Course/GeekTime/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E4%B8%80%E5%91%A8%E7%9B%AE/2.%20%E5%A4%84%E7%90%86%E5%99%A8/%E5%A4%84%E7%90%86%E5%99%A8.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2. 处理器
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Course/GeekTime/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E4%B8%80%E5%91%A8%E7%9B%AE/3.%20%E5%AD%98%E5%82%A8%E4%B8%8EIO%E7%B3%BB%E7%BB%9F/%E5%AD%98%E5%82%A8%E4%B8%8EIO%E7%B3%BB%E7%BB%9F.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3. 存储与IO系统
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Course/GeekTime/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E4%B8%80%E5%91%A8%E7%9B%AE/4.%20%E5%BA%94%E7%94%A8/%E5%BA%94%E7%94%A8.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4. 应用
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2_2" id="__nav_3_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    计算基础实战课
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            计算基础实战课
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/1.%20MiniCPU%E8%AE%BE%E8%AE%A1/MiniCPU%E8%AE%BE%E8%AE%A1.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1. MiniCPU设计
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/2.%20%E8%AF%AD%E8%A8%80%E5%92%8C%E6%8C%87%E4%BB%A4/%E8%AF%AD%E8%A8%80%E5%92%8C%E6%8C%87%E4%BB%A4.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2. 语言和指令
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/3.%20%E5%BA%94%E7%94%A8%E5%92%8C%E5%86%85%E5%AD%98/%E5%BA%94%E7%94%A8%E5%92%8C%E5%86%85%E5%AD%98.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3. 应用和内存
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/4.%20IO%E4%B8%8E%E6%96%87%E4%BB%B6/IO%E5%92%8C%E6%96%87%E4%BB%B6.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4. IO与文件
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/5.%20%E7%BB%BC%E5%90%88%E5%BA%94%E7%94%A8/synthesis.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    5. 综合应用
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E5%92%8C%E5%B7%A5%E5%85%B7%E9%93%BE/%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    环境配置和工具链
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    ysyx
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            ysyx
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    NJU-ICS2023-PA
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            NJU-ICS2023-PA
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../ysyx/pa/pa1/pa1.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PA1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../ysyx/pa/pa2/pa2.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PA2
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../ysyx/pa/pa3/pa3.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PA3
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../ysyx/pa/pa4/pa4.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PA4
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../ysyx/pa/c_marco/macro.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    C Macro
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../ysyx/pa/summary/summary.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Summary
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../ysyx/pa/Linux_porting/porting.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Linux Porting
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../ysyx/digital-circuit/digital%20circuit.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Digital Circuit
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Tools
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Tools
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Tools/GDB/GDB.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GDB
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Vim
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            Vim
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Tools/vim/usage/usage.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    usage
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Tools/vim/vim-plugin/vim.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    vim-plugin
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Tools/doxygen/doxygen.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    doxygen
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Tools/gcc/gcc.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    gcc
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Tools/Git/Git.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Git
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Tools/md2slider/md2slider.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    md2slider
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Tools/tmux/tmux.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    tmux
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Todo%20List/todo.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TODO List
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<blockquote>
+<p><strong>注意：以下的内容均为个人观点+在学习/实践中得出。</strong></p>
+<p><strong>如果你看完后有不同的观点也没关系！请指出，我很乐意去尝试积极的东西。</strong></p>
+</blockquote>
+<p>封面：</p>
+<p><img alt="ChatGPT Image 2026年6月12日 14_58_08" src="pic/ChatGPT%20Image%202026%E5%B9%B46%E6%9C%8812%E6%97%A5%2014_58_08.png" /></p>
+<h1 id="1-introduction">1. introduction</h1>
+<p>在日常 <code>gdb</code> 调试、解 <code>coredump</code> 的时候，我们基本都会使用到这个命令：<code>bt/backtrace</code>，会被告诉说这个命令使用来看栈回溯的，看调用链就行，但是结合我的之前的实习经验来看，如果出现了以下这种情况<sup>[1]</sup>：</p>
+<div class="highlight"><pre><span></span><code><span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>bt<span class="w"> </span>
+<span class="c1">#0  0xb38e32c4 in pthread_getname_np () from /home/enrique/buildroot/output5/staging/lib/libpthread.so.0</span>
+<span class="c1">#1  0xb38e103c in __lll_timedlock_wait () from /home/enrique/buildroot/output5/staging/lib/libpthread.so.0 </span>
+Backtrace<span class="w"> </span>stopped:<span class="w"> </span>previous<span class="w"> </span>frame<span class="w"> </span>identical<span class="w"> </span>to<span class="w"> </span>this<span class="w"> </span>frame<span class="w"> </span><span class="o">(</span>corrupt<span class="w"> </span>stack?<span class="o">)</span>
+</code></pre></div>
+<p>如果不明白内部以及一些 <code>ELF</code> 的基础知识，往往会抓瞎，甚至得出错误的 <code>debug</code> 结论。</p>
+<p>比如我实习的时候就遇到了和上面一样的 <code>corrupt stack</code>，甚至在周会汇报上（还没和 <code>mentor</code> 交流...），脑子一热（其实自己当时也不确定，有侥幸心理的）直接就说出了 <code>stack</code> 坏了的结论，直接就被大佬怼了。</p>
+<p>而会后了解相关的背景知识后，才发现自己真的是 <code>too young too simple</code>，这也是准备写这几篇文章的缘由。</p>
+<blockquote>
+<p>那个时候也可以说是第一次明白新手和真正的工程师的差距，在没有是实习之前，我想的一直都是说，反正平时我自己也写了一些东西了，<code>bug</code> 也调一堆，实习进去总不会这么菜吧。</p>
+<p>确实。进去之后发现和一般的实习生/同事相比其实水平都差不多，甚至犹有过之，但是和真正优秀的工程师差距其实还是肉眼可见的。</p>
+<p>其中最让我明白差距的就是：<strong>大家不会轻易对一个问题下结论，因为整个系统过于复杂，没有人能搞明白所有的东西，大家都是根据观察到的现象进一步去推导可能的事实，然后再证明或证伪。</strong></p>
+<p>扯远了，只是有所感悟罢了。</p>
+</blockquote>
+<p>回到这里 <code>gdb</code> 的 <code>backtrace</code> 的问题，鉴于上面的经历，所以我打算写一个小的系列笔记，写自己觉得需要补充的：<code>ELF</code> 符号表、调试信息、<code>gdb</code> 内部的实现 <code>backtrace</code>、<code>arm64</code> 的调用内容等等内容，大概就三、四篇。</p>
+<p><strong>本文主要讲的是自己理解的程序执行/函数调用的本质、以及部分的 Procedure Call Standard for Arm Architecture (AAPCS)，最后会给出一个小 <code>demo</code> 关于 <code>dump</code> 的。</strong></p>
+<h1 id="2">2. 状态机</h1>
+<h2 id="21">2.1 程序执行</h2>
+<p>按照 <code>first principle</code>，先忘记 <code>gdb</code>，站在 <code>CPU</code> 侧，理解函数调用的本质。</p>
+<p><code>CPU</code> 只会执行我们安排好给它的指令，不管是在写什么语言的应用程序，还是像 Android、<code>os</code> 等比较 <code>low-level</code> 的代码，本质就是二进制的东西：<code>01010111000....</code></p>
+<p>而且，如果把现代计算机的结构剥离到只剩最核心的部件，基本就只剩下这几样：</p>
+<ul>
+<li>存储器 (Memory)：装指令和数据的地方（存状态）</li>
+<li>寄存器 (Registers)：CPU 内部极快、极小的暂存空间（不断和存储器做数据交换太耗时）  </li>
+<li>程序计数器 (PC)：永远指向下一条要执行的指令</li>
+</ul>
+<blockquote>
+<p>注意：从计算理论来看，寄存器并不是必须的：因为只要有办法保存当前的状态，那理论程序上就能够无限运行下去。</p>
+<p>上面概念的本质就是我们熟悉的 <code>Turing Machine</code>（它的“状态”是通过读写无限长的纸带并改变内部状态来管理的）<sup>[2]</sup>。</p>
+</blockquote>
+<p>计算机唯一会做的就是这个死循环：</p>
+<div class="highlight"><pre><span></span><code><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">从</span><span class="w"> </span><span class="n">PC</span><span class="w"> </span><span class="n">指示的内存地址取出指令</span><span class="p">;</span>
+<span class="w">    </span><span class="n">执行指令</span><span class="w"> </span><span class="p">(</span><span class="n">顺便算算加减法</span><span class="err">、</span><span class="n">挪挪寄存器里的值</span><span class="p">);</span>
+<span class="w">    </span><span class="n">更新</span><span class="w"> </span><span class="n">PC</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>如果学过一些数字逻辑电路，那你就能明白一个非常重要点：计算机是一个状态机<sup>[3]</sup>：</p>
+<blockquote>
+<p>既然计算机是一个数组逻辑电路, 那么我们可以把计算机划分成两部分, 一部分由所有时序逻辑部件(存储器, 计数器, 寄存器)构成, 另一部分则是剩余的组合逻辑部件(如加法器等). </p>
+<p>这样以后, 我们就可以从状态机模型的视角来理解计算机的工作过程了: 在每个时钟周期到来的时候, 计算机根据当前时序逻辑部件的状态, 在组合逻辑部件的作用下, 计算出并转移到下一时钟周期的新状态.</p>
+<p>计算机的这个视角有什么用呢? 好像除了让你明白计算机硬件不再那么神秘之外, 也没什么特别的用处. 毕竟ICS课不要求大家用硬件描述语言来实现计算机硬件, 大家只要相信这件事能做成就可以了.</p>
+<p>不过对于程序来说, 这个视角的作用会超乎你的想象.</p>
+</blockquote>
+<p>有兴趣的可以去做 NJU 的计算机系统基础实验<sup>[3]</sup>，就这么说吧，<strong>只要你能认真地独立完成这个实验，你就会有勇气面对所有的 <code>bug</code></strong>。但这不是我们的重点。</p>
+<p>既然计算机是一个状态机，那么运行在计算机上面的程序又是什么呢？可以想当然的回答，程序也是状态机。</p>
+<p>但如果程序是状态机，那他的初始状态是什么？</p>
+<p>很直白的，前文就说了，存储器/寄存器中存储着程序当前的状态，那状态如何迁移？</p>
+<p>那状态迁移又是怎么做的？就是经过某种操作改变了状态，改变了存储器中的状态，仔细想想想，计算机指令似乎干的就是这事！指令就是输入，每执行一条指令，<code>CPU</code> 的寄存器和内存状态就发生一次确定的转移！合理</p>
+<p>看看下图<sup>[2]</sup>：</p>
+<p><img src="pic/image-20260611174737331.png" alt="image-20260611174737331" style="zoom:50%;" /></p>
+<p>可以得出推论，<strong>程序也可以看成一个状态机</strong>，非常推荐去看 [2] 中关于程序是状态机的部分，写的很好！</p>
+<h2 id="22">2.2. 函数调用</h2>
+<p>既然程序是一个随着指令流不断变化的状态机，那我们写的代码的函数调用是个啥？</p>
+<p>如果代码只是一条直线，PC 无脑 +1 往下跑不就行了，显然不对，进入到别的函数后，你还得回来，所以进一步理解，函数调用的本质：</p>
+<p>“离开当前状态，去执行一段子状态（机），最后还要能准确无误地回到离开时的位置”</p>
+<p>很自然，怎么记住离开地址/返回地址？直接存起来就行，存储器嘛。（自然就会带来相比寄存器，内存太慢了的问题）</p>
+<p>接着就到了很多文档资料都能搜到的内容了，挺无聊的，AI 总结：</p>
+<blockquote>
+<p>函数调用有一个天然的特性：<strong>后进先出（LIFO）</strong>。</p>
+<p>A 调 B，B 调 C，最后一定是 C 先返回，再 B 返回。这完美契合了栈（Stack）这种数据结构。</p>
+<p>于是，栈指针（Stack Pointer, 简称 SP）诞生了。 在早期的 x86 等架构中，栈和 SP 几乎包揽了所有脏活累活：</p>
+<ul>
+<li>调用函数？把返回地址 <code>push</code> 进栈（SP 减小）。</li>
+<li>传参数？把参数 <code>push</code> 进栈。</li>
+<li>存局部变量？把 SP 往下挪，腾出空间。</li>
+</ul>
+</blockquote>
+<p>而上面这种多层函数调用（也就是嵌套），也会被叫为 <code>call stack</code> 了。</p>
+<p>进一步，每个函数调用在 <code>stack</code> 上占据一块区域，称为各自的 <code>stack frame</code> 。</p>
+<blockquote>
+<p>而且，为了区分不同的帧（避免搞混，比如同一个函数被递归调用多次），GDB 给每个帧一个帧 ID（具体怎么分，会在第三篇的时候写）</p>
+</blockquote>
+<p>但上面的内容和现代的 <code>CPU</code> 还有点差距，最大的原因：内存相比寄存器太慢了点，快快快，还要在快。</p>
+<p>也就进一步实现：<code>LR(link register)</code> 和 <code>FP(frame pointer)</code>。</p>
+<h3 id="221-lr">2.2.1 LR 寄存器</h3>
+<p>LR 寄存器没什么好说的，直接看文档<sup>[4]</sup>：</p>
+<p><img alt="image-20260611201525662" src="pic/image-20260611201525662.png" /></p>
+<p>当发生函数跳转（执行 <code>bl</code> 指令）时，不再主动去压栈，而是直接把返回地址塞进一个专属的高速寄存器中——链接寄存器（Link Register, 简称 LR，也就是 x30）。</p>
+<p>我们直接把返回地址放到 LR 中后，访问速度确实快了，但是还有一个问题，想象这么一串函数调用：<code>A() → B() → C()</code></p>
+<p>能很简单地就想到新的调用 <code>B()/C()</code> 的 <code>bl</code> 指令会无情地覆盖掉 <code>x30</code> 里 <code>A()/B()</code> 的返回地址，所以设计者们还使用到了栈：<code>B()</code> 在准备调用 <code>C()</code> 之前，把旧的 <code>x30</code> 保存到内存（栈）里。</p>
+<h3 id="222-fp">2.2.2 FP寄存器</h3>
+<p>但是 <code>fp(frame pointer)</code> 很有意思。</p>
+<p>历史上解决这个问题的背景是这样的：</p>
+<blockquote>
+<p>在一个函数内部，只要你申请一个局部变量，或者动态分配一点内存，SP 就会上下乱窜。</p>
+<p>如果在调试或者发生 Coredump 时，想通过 SP 往回推导调用链，你会发现根本找不到规律——因为你不知道上一个函数的返回地址到底被埋在了 SP 偏移多少的位置。</p>
+</blockquote>
+<p>所以为了解决前面提到的“SP 上下乱窜找不到北”的问题，AAPCS64 引入了 FP 的设计——<strong>栈帧指针（Frame Pointer, 简称 FP，也就是 x29）</strong>。</p>
+<p>无论 SP 在函数执行时怎么跳动，FP 一直都指向当前执行函数的 <code>stack frame</code> 的起始位置（栈底），或或者按照手册<sup>[4]</sup>：比较不那么直白的定义：</p>
+<blockquote>
+<p>The frame record for the innermost frame (belonging to the most recent routine invocation) shall be pointed to by the frame pointer register (FP).</p>
+<p>最里面的帧（属于最近的函数调用）的帧记录应由帧指针寄存器（FP）指向。</p>
+</blockquote>
+<p>再来看看官方文档<sup>[4]</sup>：</p>
+<p><img alt="image-20260611225655752" src="pic/image-20260611225655752.png" /></p>
+<p>文档要求对于 <code>arm64</code> 的函数调用，需要构建一个 <code>linked list of stack-frames</code>。</p>
+<p>意思就是构建一个由 <code>stack frame</code> 作为节点的物理链条/表，其中每一个 <code>frame</code> 节点由两个双字，也就是两个 <code>64-bits</code> 组成（就是FP 寄存器 + LR 寄存器啦）。</p>
+<p>但是具体怎么串起来的？这个链表的 <code>next/prev</code> 节点是啥？</p>
+<p>别忘了，FP 存的就是上一个 <code>stack frame</code> 的其实位置呀。自然就能串起来了。</p>
+<p><img src="pic/image-20260611230854030.png" alt="image-20260611230854030" style="zoom: 33%;" /></p>
+<p>注意起始 FP 是0：</p>
+<blockquote>
+<p>The end of the frame record chain is indicated by the address zero in the address for the previous frame.</p>
+</blockquote>
+<p>还有一点，关于 LR 和 FP 的位置，手册明确指明：</p>
+<blockquote>
+<p>The lowest addressed double-word shall point to the previous frame record and the highest addressed double-word shall contain the value passed in LR on entry to the current function.</p>
+</blockquote>
+<p>也就是 LR 寄存器存放在地址空间的高位，FP则放在地址空间的地位。</p>
+<p>再结合手册的 <code>full-descending</code> 栈（向低地址方向生长，同时 SP 指向最后一个压入 <code>stack</code> 的数据，不是下一个空闲位置）：<code>[limit, base)</code></p>
+<p><img alt="image-20260611233330086" src="pic/image-20260611233330086.png" /></p>
+<p>也就是我上一张图片画的那样的位置了，或者如下文字图：</p>
+<div class="highlight"><pre><span></span><code>高地址 (High Address)
+                | ... 上个栈帧的局部变量 ...|
+                +---------------------------+ 
+Old FP 指向 -&gt;  | ... 上个栈帧的基址 ...       |
+                +===========================+  &lt;--- 当前栈帧的 FP (x29) 指向这里 (栈帧底 / 高地址)
+                | 保存的 LR (x30, 返回地址)   | 
+                +---------------------------+  &lt;--- FP + 8
+                | 保存的 Old FP (上一个x29)   | 
+                +---------------------------+
+                | 当前函数的局部变量           |
+                | 寄存器保护区等              |
+                | ...                       |
+                +===========================+  &lt;--- 当前的 SP 指向这里 (栈顶 / 低地址)
+       低地址 (Low Address)
+</code></pre></div>
+<p>这也可以看出，如果要做 <code>stack backtrace</code>（调试分析 <code>coredump</code> 或 <code>Oops</code> 信息）时，调试器只需要拿到当前的 <code>FP</code>：</p>
+<ol>
+<li>
+<p>读 <code>*FP</code> 就能跳回上一层函数的栈底。</p>
+</li>
+<li>
+<p>读 <code>*(FP + 8)</code> 就能知道上一层函数是在哪里调用的。</p>
+<p>如此循环，就能完整地把整个函数调用链（Call Stack）从低地址（深层调用）向高地址（浅层调用）串联并还原出来。</p>
+</li>
+</ol>
+<p>其实在写到这里，大致有点没眉头了，在我实习之前了解到的程序也就到这里为止了。</p>
+<blockquote>
+<p>如果看过一些 <code>arm64</code> 的函数调用的开头代码：</p>
+<div class="highlight"><pre><span></span><code><span class="nf">stp</span><span class="w"> </span><span class="no">x29</span><span class="p">,</span><span class="w"> </span><span class="no">x30</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="no">sp</span><span class="p">,</span><span class="w"> </span><span class="mi">#-16</span><span class="p">]!</span><span class="w">   </span><span class="c1">// 把旧的 FP 和 LR 压入栈中，同时 SP 下移 16 字节</span>
+<span class="nf">mov</span><span class="w"> </span><span class="no">x29</span><span class="p">,</span><span class="w"> </span><span class="no">sp</span><span class="w">                 </span><span class="c1">// 让当前的 FP 指向新的栈顶</span>
+</code></pre></div>
+<p>这两步做的基本就是构建当前函数 <code>stack frame</code> 了。</p>
+</blockquote>
+<p>总结一下：</p>
+<p>理解了前面说的，看明白了基于 <code>fp</code> 构建的 <code>linked list of stack frame</code>，大概就也能才到一点 <code>arm64</code> 的 <code>backtrace</code> 的实现了！</p>
+<p>回想一下，这是不是就是 2.1 说到的，程序是个状态机的实际体现？<code>stack frame</code> 中存储好了状态，每次一次函数调用是不是就切换状态，甚至说是切换到子状态机！</p>
+<p>而 <code>backtrace</code> 是不是就是根据 <code>memory</code> 和 寄存器（<code>stack frame</code> 和 FP 寄存器）去”猜“出当初那个状态机是怎么走过来的？</p>
+<p>再回到第一章说的：</p>
+<div class="highlight"><pre><span></span><code><span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>bt<span class="w"> </span>
+<span class="c1">#0  0xb38e32c4 in pthread_getname_np () from /home/enrique/buildroot/output5/staging/lib/libpthread.so.0</span>
+<span class="c1">#1  0xb38e103c in __lll_timedlock_wait () from /home/enrique/buildroot/output5/staging/lib/libpthread.so.0 </span>
+Backtrace<span class="w"> </span>stopped:<span class="w"> </span>previous<span class="w"> </span>frame<span class="w"> </span>identical<span class="w"> </span>to<span class="w"> </span>this<span class="w"> </span>frame<span class="w"> </span><span class="o">(</span>corrupt<span class="w"> </span>stack?<span class="o">)</span>
+</code></pre></div>
+<p>是不是只要一旦内存状态不符合 GDB 的预设规则，<code>backtrace</code> 就罢工了，丢给你一句 <code>corrupt stack?</code> 啦？好像什么都串起来了？</p>
+<h1 id="3">3. 拓展</h1>
+<p>在这一篇：<a href="https://mp.weixin.qq.com/s/0iWsRplRTopvvkK5dpPx4A">你的技术想象力，受限于你的信息边界</a> 中，写道：</p>
+<p>“（我觉得）在这个时代的下，你们最需要的就是有一个清晰的概念什么事情是能办到的，因为人没有办法做自己想象不到的东西，而扩展你的想象力的方式就是去看别人想到了什么。“</p>
+<p>所以，在今后的文章中，考虑篇幅合适的情况下，我都会用以上类似的 <code>prompt</code> + 本文前面几章的总结 + ARM 官方手册，去和 AI 聊，让 AI 帮我看看有什么冷门但重要的东西值得去看看的！</p>
+<p>下面写我觉得有意思的</p>
+<h2 id="31-pointer-signing-rop">3.1 指针签名（Pointer Signing）—— 防 ROP 攻击</h2>
+<p>在 AAPCS64 手册里有这么一句话：<code>pointer signing extension</code></p>
+<blockquote>
+<p><em>If code uses the pointer signing extension to sign return addresses, the value in LR must be signed before storing it in the frame record.</em></p>
+<p><em>如果代码使用指针签名扩展对返回地址进行签名，则必须先对LR中的值进行签名，然后再将其存储到帧记录中</em></p>
+</blockquote>
+<p>按照之前的理解，FP 指向上一帧，<code>[FP]</code> 存上一帧的 FP，<code>[FP+8]</code> 存返回地址 LR。</p>
+<p>也就是：<code>LR = Return Address</code></p>
+<p>但是现在的工程现实变成了：<code>LR = Return Address + Signature</code></p>
+<p>原因在于 ARMv8.3-A 引入了指针认证（<code>PAuth</code>），返回地址被加密签名。保存在栈帧里的 LR 必须是<strong>已签名</strong>的版本，返回时再验证。</p>
+<p><img alt="image-20260612111021268" src="pic/image-20260612111021268.png" /></p>
+<p>没理解这一点的话，理解就会停留在“裸地址”。</p>
+<p>这部分我直接展示实践例子结果，完整代码参考：https://github.com/JAILuo/wechat-demos</p>
+<p><img alt="image-20260612115222531" src="pic/image-20260612115222531.png" /></p>
+<p>可以看到如果是执行 <code>main_nopac</code>，我们确实直接劫持了控制流，执行了我们代码中特定插入的 <code>system(/bin/sh)</code>，</p>
+<p>如果是执行 <code>main_pac</code>，直接崩溃：</p>
+<p><img alt="image-20260612115611163" src="pic/image-20260612115611163.png" /></p>
+<p>尽管上述内容获得的运行权限只是一个普通用户（如果是内核态搞出了这个，那就可以执行任意内核代码了），但有学习意义的，对于我们做 BSP 的人来说，可以参考知道有这个问题。</p>
+<p>而且，回到我这系列的主题 <code>backtrace</code>，如果你直接在 <code>gdb</code> 中输入 <code>bt</code>，因为是比较老的调试器，所以非常有可能找不到符号，或者 <code>bt</code> 挂掉：</p>
+<p><img alt="image-20260612122324988" src="pic/image-20260612122324988.png" /></p>
+<p>当然这个时候，还是有一些解决办法的：</p>
+<ul>
+<li>手动看这个地址，人肉去除签名，像上面一样</li>
+<li>升级 GDB 工具？我没试过（因为我这里已经是 GDB 12.1了，但仍有问题）</li>
+<li>python脚本辅助自动化吧，写一个  Frame Filter 或 Unwinder 脚本，GDB 读 <code>[FP + 8]</code> 的时候，拦截这个动作，做：<code>new_pc = raw_pc &amp; 0x0000FFFFFFFFFFFF</code></li>
+</ul>
+<p>考虑到篇幅就不再说了。</p>
+<p>如果对安全感兴趣的，推荐阅读以下文档：</p>
+<ul>
+<li>Code reuse attacks: the compiler story：https://developer.arm.com/community/arm-community-blogs/b/tools-software-ides-blog/posts/code-reuse-attacks-the-compiler-story</li>
+<li>Pointer Authentication on Arm | Arm Learning Paths：https://learn.arm.com/learning-paths/servers-and-cloud-computing/pac/pac/</li>
+<li>Ret2win - arm64 - HackTricks：https://hacktricks.alquymia.com.br/binary-exploitation/stack-overflow/ret2win/ret2win-arm64.html#finding-the-offset</li>
+</ul>
+<p>实际上，AI 还给了另外一点东西：</p>
+<blockquote>
+<p>如果想更深入、更确信 ROP 的防御原理，可以借 <strong>Linux Kernel LKDTM</strong>（Linux Kernel Dynamic Memory Testing Module，内核动态内存测试模块）这个现成的基础设施来展示破坏 PAC 的后果。</p>
+<p>LKDTM 是内核专门用于测试安全特性的模块。它包含一个叫 <code>CORRUPT_PAC</code> 的测试点，在内核启用了 <code>CONFIG_ARM64_PTR_AUTH</code>（指针认证内核配置）的情况下，<strong>主动将当前函数返回地址的 PAC 签名擦除</strong>（直接把 LR 高位清 0，破坏完整性），然后让它返回，触发内核 abort。这是 <strong>验证 PAC 有效性的最直接方法</strong>。</p>
+</blockquote>
+<p>想深入就再问问 AI 吧！</p>
+<h2 id="32">3.2 其他</h2>
+<p>其他的内容我觉得也挺有意思，但是我不展开写了，不是重点。</p>
+<ul>
+<li>
+<p>LR 本质是返回地址 Cache（容量只有8byte的，专门针对返回地址的）</p>
+<p>比如A → B → C：</p>
+<p>如果状态B不再调用其他函数，这个Cache就“命中”了。函数执行完直接<code>RET</code>（把LR的值塞回PC），全程零内存交互，极大地加速了状态恢复。</p>
+<p>如果状态B还要调用状态C，新的返回地址会覆盖LR。这时就发生了“Cache驱逐（Eviction）”——旧的LR值必须被压入栈（内存）中保存。</p>
+</li>
+<li>
+<p>Tail Call 会让调用栈消失</p>
+</li>
+<li>
+<p>不是所有平台都展开FP</p>
+<blockquote>
+<p>A platform shall mandate the minimum level of conformance … It may permit the frame pointer register to be used as a general-purpose callee-saved register … It may elect not to maintain a frame chain …</p>
+</blockquote>
+<p><img src="pic/image-20260612124730588.png" alt="image-20260612124730588" style="zoom: 50%;" /></p>
+</li>
+<li>
+<p>引入 动态链接、PLT、GOT的</p>
+<p><img src="pic/image-20260612124102640.png" alt="image-20260612124102640" style="zoom: 50%;" /></p>
+</li>
+</ul>
+<p>......</p>
+<p>很多。</p>
+<h1 id="4">4. 深入理解</h1>
+<p>最后这里讲讲”程序是个状态机“这一推论自己的理解。</p>
+<ol>
+<li>
+<p>既然每一个程序都是状态机，都是从某个初始状态经过各种状态迁移变成了如今程序的样子，那在我调试的时候一样可以用这个理论！</p>
+<p><strong>所谓 bug，那就是原本程序有一个正常/正确的执行流（状态机），而因为某种不知名的原因，导致程序做了一步偏离我本意的状态迁移，从而导致 bug 的产生。</strong></p>
+<p>这个理论，也是我一直以来调试程序的总结出来的自己的方法，尽管是一个理论上/比较抽象的总结，但我也因此解决了很多问题！</p>
+<p>我在这篇文章中也写了：<a href="https://mp.weixin.qq.com/s/PNqGyIRGHcyj1wFxYdz2Sg">自用的问题调试排查</a></p>
+</li>
+<li>
+<p>第二个则是和本系列的 <code>backtrace</code> 或许更加相关</p>
+<p><strong>只要有 memory 和 regs，就能完整地保存一个程序在某个时刻的状态！各种 dump（<code>coredump</code>、<code>ramdump</code>...）就是给这个状态机拍照！</strong></p>
+</li>
+</ol>
+<p>重点是第二个观点。</p>
+<blockquote>
+<p>可能有人好奇为什么叫 <code>dump</code>：</p>
+</blockquote>
+<p><img src="pic/image-20260612143233998.png" alt="image-20260612143233998" style="zoom: 50%;" /></p>
+<blockquote>
+<p>计算机发展的早期（1960-70年代），主流存储器是磁芯存储器（Magnetic Core Memory）。它由无数个微小的磁性圆环（磁芯）组成，每个磁芯能存储一个比特（0/1）。</p>
+<p>所以，当时的程序员和工程师就直接用 <code>Core</code> 来指代计算机的<strong>内存</strong>。</p>
+<p>因此，当程序崩溃时把内存内容保存下来，就自然叫做 <code>Core Dump</code>。</p>
+<p><code>Dump</code> 原意是“倾倒”、“倒垃圾”。在计算机领域，</p>
+<ul>
+<li>粗暴、不加区分：Dump 就是把内存里的所有原始数据（二进制 0 和 1）一股脑地倾倒出来，就像一个卡车把整车垃圾直接卸在地上。它不关心哪些数据有用、哪些没用，也不会重新整理或翻译。</li>
+<li>原始、未经处理：这个文件是内存的“快照”，是纯粹的原始副本，不是格式化的报告。</li>
+</ul>
+</blockquote>
+<p>我让 AI 做了以下的内容：</p>
+<p>用一个很小的、可运行的 <strong>Python 项目</strong>，手工实现一个“微型状态机 + dump/restore”的 demo，来印证这个理论：</p>
+<ul>
+<li>
+<p>一个运行中的程序 = 内存数据 + 寄存器 + 程序计数器 (PC)</p>
+</li>
+<li>
+<p>只要把这些值完整保存下来，就能在之后 <strong>完全恢复</strong> 并继续执行。</p>
+</li>
+<li>
+<p>模拟一个极简的 CPU（只有 3 个寄存器、256 字节内存），执行几条指令。</p>
+<p>然后在某个时刻 <strong>dump 到 JSON 文件</strong>，之后 <strong>load 回来继续跑</strong>，状态完全一致。</p>
+</li>
+</ul>
+<p>直接看结果（代码依然在：https://github.com/JAILuo/wechat-demos）：</p>
+<p><img alt="image-20260612144404528" src="pic/image-20260612144404528.png" /></p>
+<p><img alt="image-20260612144435789" src="pic/image-20260612144435789.png" /></p>
+<p>可以想象，基于这个想法，memory + regs，再加上各 ISA 的通用寄存器，特殊状态寄存器：<code>mcause</code>、<code>cr3</code>、<code>CPSR</code>、<code>PSTATE(抽象概念)</code>、<code>SPSR_ELx</code>、<code>ELR_ELx</code>等等，程序的行为是不是就能被复原出来！<code>coredump</code> 的基础不就是这样吗？！</p>
+<p>所以，本文写了一些很基础的东西，但是很多的工具、基础设施都是建立在这之上的呀！</p>
+<p>至此，本文已完成，下一篇讲述符号表、调试信息等 <code>ELF</code> 相关的东西。</p>
+<h1 id="_1">参考</h1>
+<p>[1] Figuring out corrupt stacktraces on ARM：https://eocanha.org/blog/2020/10/16/figuring-out-corrupt-stacktraces-on-arm/</p>
+<p>[2] Universal Turing machine - Wikipedia：https://en.wikipedia.org/wiki/Universal_Turing_machine#cite_note-FOOTNOTEDavis2000193_quoting_''Time''_magazine_of_29_March_1999-5</p>
+<p>[3] NJU ICS PA：https://nju-projectn.github.io/ics-pa-gitbook/ics2025/1.2.html</p>
+<p>[4] AAPCS64 文档</p>
+
+
+
+
+
+
+
+  
+    
+  
+  
+    
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Last update">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2026-06-25T15:55:15+02:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2026-06-25</span>
+  </span>
+
+    
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Created">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2026-06-25T15:55:15+02:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2026-06-25</span>
+  </span>
+
+    
+    
+    
+  </aside>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://github.com/JAILuo" target="_blank" rel="noopener" title="JAILuo" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../../..", "features": ["navigation.footer"], "search": "../../../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.83f73b43.min.js"></script>
+      
+        <script src="../../../../js/timeago.min.js"></script>
+      
+        <script src="../../../../js/timeago_mkdocs_material.js"></script>
+      
+        <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+      
+    
+  </body>
+</html>

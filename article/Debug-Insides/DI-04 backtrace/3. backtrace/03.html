@@ -1,0 +1,3297 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://jailuo.github.io/notes/article/Debug-Insides/DI-04%20backtrace/3.%20backtrace/03.html">
+      
+      
+      
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.48">
+    
+    
+      
+        <title>03 - Messy Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.6f8fc17f.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../css/timeago.css">
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#1-introduction" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../../index.html" title="Messy Notes" class="md-header__button md-logo" aria-label="Messy Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Messy Notes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              03
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256l137.3-137.4c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/JAILuo/notes" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../../index.html" title="Messy Notes" class="md-nav__button md-logo" aria-label="Messy Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Messy Notes
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/JAILuo/notes" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    首页
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Article
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Article
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/article/concurrency sumary/summary.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    concurrency-summary
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/article/toolchain/toolchain.mc" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    toolchain
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/article/mount/mount.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    mount
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Course
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Course
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    University Course
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            University Course
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1_1" id="__nav_3_1_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    jyy OS2024
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_1_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            jyy OS2024
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_1_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1_1_1" id="__nav_3_1_1_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    course note
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_1_1_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            course note
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Course/University%20Course/jyy%20OS2024/cousre%20note/1.%20introduction/introduction.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    introduction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Course/University%20Course/jyy%20OS2024/cousre%20note/2.%20concurrency/concurrency.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    concurrency
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Course/University%20Course/jyy%20OS2024/cousre%20note/3.%20virtualization/virtualization.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    virtualization
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Course/University%20Course/jyy%20OS2024/cousre%20note/4.%20kernel/kernel.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    kernel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Course/University%20Course/jyy%20OS2024/cousre%20note/5.%20persistence/persistence.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    persistence
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_1_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1_1_2" id="__nav_3_1_1_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Mini Labs
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_1_1_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            Mini Labs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Course/University%20Course/jyy%20OS2024/Mini%20Labs/M1/M1.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    M1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Course/University%20Course/jyy%20OS2024/Mini%20Labs/M2/M2.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    M2
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Course/University%20Course/jyy%20OS2024/Mini%20Labs/M3/M3.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    M3
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_1_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1_1_3" id="__nav_3_1_1_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    OS Labs
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_1_1_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1_1_3">
+            <span class="md-nav__icon md-icon"></span>
+            OS Labs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Course/University%20Course/jyy%20OS2024/OS%20Labs/L0/L0.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    L0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Course/University%20Course/jyy%20OS2024/OS%20Labs/L1/L1.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    L1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    GeekTime
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            GeekTime
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2_1" id="__nav_3_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    深入理解计算机组成原理
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            深入理解计算机组成原理
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Course/GeekTime/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E4%B8%80%E5%91%A8%E7%9B%AE/1.%20%E6%8C%87%E4%BB%A4%E4%B8%8E%E8%BF%90%E7%AE%97/%E6%8C%87%E4%BB%A4%E4%B8%8E%E8%BF%90%E7%AE%97.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1. 指令与运算
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Course/GeekTime/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E4%B8%80%E5%91%A8%E7%9B%AE/2.%20%E5%A4%84%E7%90%86%E5%99%A8/%E5%A4%84%E7%90%86%E5%99%A8.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2. 处理器
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Course/GeekTime/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E4%B8%80%E5%91%A8%E7%9B%AE/3.%20%E5%AD%98%E5%82%A8%E4%B8%8EIO%E7%B3%BB%E7%BB%9F/%E5%AD%98%E5%82%A8%E4%B8%8EIO%E7%B3%BB%E7%BB%9F.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3. 存储与IO系统
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Course/GeekTime/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E4%B8%80%E5%91%A8%E7%9B%AE/4.%20%E5%BA%94%E7%94%A8/%E5%BA%94%E7%94%A8.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4. 应用
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2_2" id="__nav_3_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    计算基础实战课
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            计算基础实战课
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/1.%20MiniCPU%E8%AE%BE%E8%AE%A1/MiniCPU%E8%AE%BE%E8%AE%A1.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1. MiniCPU设计
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/2.%20%E8%AF%AD%E8%A8%80%E5%92%8C%E6%8C%87%E4%BB%A4/%E8%AF%AD%E8%A8%80%E5%92%8C%E6%8C%87%E4%BB%A4.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2. 语言和指令
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/3.%20%E5%BA%94%E7%94%A8%E5%92%8C%E5%86%85%E5%AD%98/%E5%BA%94%E7%94%A8%E5%92%8C%E5%86%85%E5%AD%98.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3. 应用和内存
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/4.%20IO%E4%B8%8E%E6%96%87%E4%BB%B6/IO%E5%92%8C%E6%96%87%E4%BB%B6.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4. IO与文件
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/5.%20%E7%BB%BC%E5%90%88%E5%BA%94%E7%94%A8/synthesis.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    5. 综合应用
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E5%92%8C%E5%B7%A5%E5%85%B7%E9%93%BE/%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    环境配置和工具链
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    ysyx
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            ysyx
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    NJU-ICS2023-PA
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            NJU-ICS2023-PA
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../ysyx/pa/pa1/pa1.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PA1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../ysyx/pa/pa2/pa2.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PA2
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../ysyx/pa/pa3/pa3.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PA3
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../ysyx/pa/pa4/pa4.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PA4
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../ysyx/pa/c_marco/macro.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    C Macro
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../ysyx/pa/summary/summary.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Summary
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../ysyx/pa/Linux_porting/porting.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Linux Porting
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../ysyx/digital-circuit/digital%20circuit.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Digital Circuit
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Tools
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Tools
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Tools/GDB/GDB.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GDB
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Vim
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            Vim
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Tools/vim/usage/usage.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    usage
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Tools/vim/vim-plugin/vim.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    vim-plugin
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Tools/doxygen/doxygen.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    doxygen
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Tools/gcc/gcc.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    gcc
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Tools/Git/Git.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Git
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Tools/md2slider/md2slider.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    md2slider
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Tools/tmux/tmux.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    tmux
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Todo%20List/todo.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TODO List
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#11-stack-frame-unwind-backtrace" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1 stack frame 和 unwind 和 backtrace
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<blockquote>
+<p><strong>注意：以下的内容均为个人观点+在学习/实践中得出。</strong></p>
+<p><strong>如果你看完后有不同的观点也没关系！请指出，我很乐意去尝试积极的东西。</strong></p>
+</blockquote>
+<p>封面：</p>
+<p><img alt="ChatGPT Image 2026年6月17日 19_48_28" src="pic/ChatGPT%20Image%202026%E5%B9%B46%E6%9C%8817%E6%97%A5%2019_48_28.png" /></p>
+<h1 id="1-introduction">1. introduction</h1>
+<p>在完成了前面两篇后：</p>
+<ul>
+<li><a href="https://mp.weixin.qq.com/s/ULNN7Pz7TmwUwRRB9U1HGg">backtrace系列（一）：从底层到本质：理解函数调用与 LR/FP 的设计与思想</a></li>
+<li><a href="https://mp.weixin.qq.com/s/08Ps9NT4yVIc59yNxHe0Ww">backtrace（二）：事实与语义：深度解构 ELF 符号表与 DWARF 调试信息（上）</a></li>
+</ul>
+<p>其实我在实习时遇到的问题就已经差不多解决了。那本文还能写什么呢？</p>
+<p>回顾前两篇：</p>
+<p>第一篇：程序运行，如何保存状态？<code>memory + regs + PC</code></p>
+<p>第二篇：程序如何保存名字？</p>
+<p>仔细回想一下，我的逻辑链：</p>
+<blockquote>
+<p>程序运行 → 状态被保存在 <code>memory + regs + PC</code> 中 → 函数调用形成层级关系 → 试图恢复调用历史</p>
+</blockquote>
+<p>所以，<code>GDB</code> 这种调试器就是在根据保存下来的事实，去恢复以下的内容：</p>
+<ol>
+<li>当前执行位置</li>
+<li>局部变量</li>
+<li>调用关系</li>
+</ol>
+<p>而我们的 <code>backtrace</code> 不就是调用关系嘛（当然信息更多）。</p>
+<p><strong>所以本文讲述 <code>backtrace</code> 的相关内容，几种 <code>GDB</code> 目前的 <code>backtrace</code> 的实现方法。也算是对的起这个系列的 <code>backtrace</code> 标题了。</strong></p>
+<p><strong>另外，我觉得前面第二篇引入 DWARF 的时候写的并不好，导致可能看了还是懵逼的，所以本文还是会补充 DWARF 的内容。</strong></p>
+<p>注意，本文可能会有点啰嗦！！</p>
+<h2 id="11-stack-frame-unwind-backtrace">1.1 <code>stack frame</code> 和 <code>unwind</code> 和 <code>backtrace</code></h2>
+<p>讲之前，先补充一些词：<code>stack frame</code> 和 <code>unwind</code> 和 <code>backtrace</code>。</p>
+<p>在涉及到一些新词时，我一般会去看一些比较权威的手册对于这里的理解，所以下面看看 <code>GDB</code> 手册对这几个词的解释<sup>[1-3]</sup>。</p>
+<p><img alt="image-20260615164533047" src="pic/image-20260615164533047.png" /></p>
+<blockquote>
+<p>所谓 <code>stack frame</code>，就是：</p>
+<p>函数调用时生成的一块数据，保存了该次调用的<strong>现场信息</strong>：调用位置、参数、局部变量。多个 <code>stack frame</code> 按调用顺序堆叠在 <code>call stack</code> 上。</p>
+</blockquote>
+<p><img alt="image-20260615163503337" src="pic/image-20260615163503337.png" /></p>
+<blockquote>
+<p><code>Unwinding is the process of finding the previous stack frame.</code></p>
+<p>所以本质是<strong>单步操作</strong>：是 <code>current frame</code> → <code>previous frame</code>。是 <code>backtrace</code> 的底层机制。</p>
+<p>当前 <code>stack frame</code> 解析出 <code>caller frame</code> 的位置和寄存器状态。<code>GDB</code> 能逐个调用 <code>unwinder</code> 的 <code>sniffer</code> 来找到能处理当前帧的解析器，完成一步"向上回溯"。</p>
+</blockquote>
+<p><img alt="image-20260615164948015" src="pic/image-20260615164948015.png" /></p>
+<blockquote>
+<p><strong>聚合结果</strong>：从当前帧（<code>frame 0</code>）开始，<strong>重复执行 unwind</strong> 直到栈顶，输出每一帧的摘要信息（函数名、地址、参数等）。</p>
+</blockquote>
+<p>一句话总结：</p>
+<p><strong><code>backtrace</code> = 连续 <code>unwind</code> 的聚合输出（<code>repeated unwind</code>）；<code>unwind</code> 操作的对象是 <code>stack frame</code>。</strong></p>
+<p>但我还是要提醒一句，不要过于纠结这些定义：</p>
+<blockquote>
+<p>"......the implementation provides functionality, not meaning. The meaning comes from the thoughts of developers and is coherent or disjoint in the same measure that those developers are of one mind, or not."（代码实现只提供功能，不提供绝对的物理意义。功能的“意义”源自开发人员的想法。当开发人员意见一致时，功能的“意义”也就连贯；反之，则显得杂乱无章）<sup>[4]</sup>。</p>
+</blockquote>
+<p>尽管这句话是 Neil Brown 对于 Linux 设备驱动模型说的，但放在这里反过来理解，我依然觉得很有道理。</p>
+<h1 id="2-unwind-frame-pointer">2. 最简单的 unwind —— frame pointer</h1>
+<h2 id="21">2.1 基本原理</h2>
+<p>其实在第一篇：<a href="https://mp.weixin.qq.com/s/ULNN7Pz7TmwUwRRB9U1HGg">backtrace（一）：从底层到本质：理解函数调用与 LR/FP 的设计与思想</a>已经讲到了：</p>
+<p><img src="pic/image-20260615165828760.png" alt="image-20260615165828760" style="zoom:50%;" /></p>
+<p>因此这里，不多说了，记住关键也是 <code>AAPCS64</code> 手册上说的：<strong>FP 本质上构成了一条单向链表。</strong></p>
+<h2 id="22">2.2 自己实现一个</h2>
+<p>那这一章还讲什么？直接实践看看，自己做一个 <code>backtrace</code>。</p>
+<p>代码在：https://github.com/JAILuo/wechat-demos</p>
+<p>核心原理很简单：</p>
+<div class="highlight"><pre><span></span><code><span class="k">struct</span><span class="w"> </span><span class="nc">frame</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">frame</span><span class="w"> </span><span class="o">*</span><span class="n">prev</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">lr</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">unwind</span><span class="p">(</span><span class="n">Frame</span><span class="w"> </span><span class="o">*</span><span class="n">fp</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">while</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%p</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">fp</span><span class="o">-&gt;</span><span class="n">lr</span><span class="p">);</span>
+<span class="w">        </span><span class="n">fp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fp</span><span class="o">-&gt;</span><span class="n">prev</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>直接看代码：</p>
+<div class="highlight"><pre><span></span><code><span class="cp">#define _GNU_SOURCE</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdint.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;dlfcn.h&gt;</span><span class="c1"> // 提供 dladdr 函数进行符号解析</span>
+
+<span class="c1">// 严格遵循 AArch64 (AAPCS64) 规范的 Frame Record 结构</span>
+<span class="c1">// [FP, #0] 是上一层的 FP</span>
+<span class="c1">// [FP, #8] 是上一层的 LR (返回地址)</span>
+<span class="k">struct</span><span class="w"> </span><span class="nc">frame_record</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">frame_record</span><span class="w"> </span><span class="o">*</span><span class="n">prev_fp</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">lr</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="c1">// Unwind 引擎</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">unwinder</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 获取当前状态机的起点 (FP)</span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">frame_record</span><span class="w"> </span><span class="o">*</span><span class="n">fp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">frame_record</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="n">__builtin_frame_address</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">depth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">MAX_DEPTH</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">15</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">[System Exception] Initiating Hierarchical State Machine Unwind...</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;==================================================================</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">fp</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nb">NULL</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">depth</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">MAX_DEPTH</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Dl_info</span><span class="w"> </span><span class="n">info</span><span class="p">;</span>
+<span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">func_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&lt;unknown_symbol&gt;&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">offset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="w">        </span><span class="c1">// 核心：利用底层 API，把内存地址翻译成人类可读的函数名</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">fp</span><span class="o">-&gt;</span><span class="n">lr</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nb">NULL</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">dladdr</span><span class="p">(</span><span class="n">fp</span><span class="o">-&gt;</span><span class="n">lr</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">info</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">info</span><span class="p">.</span><span class="n">dli_sname</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">func_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">info</span><span class="p">.</span><span class="n">dli_sname</span><span class="p">;</span>
+<span class="w">            </span><span class="c1">// 计算指令在函数内部的偏移量 (当前 PC - 函数起始地址)</span>
+<span class="w">            </span><span class="n">offset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="p">)((</span><span class="kt">uintptr_t</span><span class="p">)</span><span class="n">fp</span><span class="o">-&gt;</span><span class="n">lr</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="p">(</span><span class="kt">uintptr_t</span><span class="p">)</span><span class="n">info</span><span class="p">.</span><span class="n">dli_saddr</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="c1">// 渲染树状层次结构</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">depth</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;  │  &quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">depth</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;  │  &quot;</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">// 打印当前帧信息</span>
+<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;  ├─&gt; [Level %d] %s + %p</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">depth</span><span class="p">,</span><span class="w"> </span><span class="n">func_name</span><span class="p">,</span><span class="w"> </span><span class="n">offset</span><span class="p">);</span>
+
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">depth</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;  │  &quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;  │   (FP: %p | LR: %p)</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">fp</span><span class="p">,</span><span class="w"> </span><span class="n">fp</span><span class="o">-&gt;</span><span class="n">lr</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">// 状态机校验与回退</span>
+<span class="w">        </span><span class="k">struct</span><span class="w"> </span><span class="nc">frame_record</span><span class="w"> </span><span class="o">*</span><span class="n">next_fp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fp</span><span class="o">-&gt;</span><span class="n">prev_fp</span><span class="p">;</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">next_fp</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nb">NULL</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="p">(</span><span class="kt">uintptr_t</span><span class="p">)</span><span class="n">next_fp</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="p">(</span><span class="kt">uintptr_t</span><span class="p">)</span><span class="n">fp</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">depth</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;  │  &quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">depth</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;  │  &quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;  [!] Stack Corruption Detected at %p. Halting.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">fp</span><span class="p">);</span>
+<span class="w">            </span><span class="k">break</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="c1">// 进入上一层状态机</span>
+<span class="w">        </span><span class="n">fp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">next_fp</span><span class="p">;</span>
+<span class="w">        </span><span class="n">depth</span><span class="o">++</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;==================================================================</span><span class="se">\n\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// 模拟深层嵌套调用链</span>
+<span class="n">__attribute__</span><span class="p">((</span><span class="n">noinline</span><span class="p">))</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">driver_write_reg</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">unwinder</span><span class="p">();</span>
+<span class="p">}</span>
+<span class="n">__attribute__</span><span class="p">((</span><span class="n">noinline</span><span class="p">))</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">ipc_send_message</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">driver_write_reg</span><span class="p">();</span>
+<span class="p">}</span>
+<span class="n">__attribute__</span><span class="p">((</span><span class="n">noinline</span><span class="p">))</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">dsp_process_audio</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">ipc_send_message</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="n">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">dsp_process_audio</span><span class="p">();</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>编译命令：<code>aarch64-linux-gnu-gcc -rdynamic -fno-omit-frame-pointer main.c  -ldl</code></p>
+<p><img alt="image-20260615175016412" src="pic/image-20260615175016412.png" /></p>
+<p>程序的逻辑比较简单：</p>
+<ol>
+<li>获取当前 <code>stack frame</code> 的 <code>FP</code>（这个 <code>FP</code> 指向父函数（调用者）的地址） </li>
+<li>动态符号解析，获取函数名，</li>
+<li>打印当前 <code>frame</code> 的信息：[调用栈深度] 函数名 + offset</li>
+<li>状态机校验与回退，结束 <code>backtrace</code></li>
+</ol>
+<p>这里需要注意一下的是第三步的这个 <code>offset</code>。</p>
+<p>它的含义是：<strong>当前执行的指令，距离这个函数起始位置的字节偏移量</strong>。</p>
+<p>具体看这行代码：<code>offset = fp-&gt;lr - info.dli_saddr</code>：</p>
+<ul>
+<li><code>fp-&gt;lr</code> (返回地址)： 它是状态机当前的绝对坐标（PC 指针），记录子函数执行完毕后，应该回到父函数里的哪一个具体的内存地址继续执行。</li>
+<li><code>info.dli_saddr</code> (函数基址)： 这是通过 <code>dladdr</code> API 查到的。它代表这个函数（比如 <code>dsp_process_audio</code>）在内存中被加载的起始绝对坐标。</li>
+</ul>
+<p>而我们这个地址又是返回到父函数时的地址，所以，这里的意思就是<strong>执行完子函数后，程序将返回到父函数起点+offset 的地址去执行下一条指令。</strong></p>
+<p>而且，特别的，对于 <code>armv8</code> 这种 RISC 架构来说，每条指令固定占 4 个字节。</p>
+<p><strong>所以也就是返回到父函数内部的第 <code>(offset / 4) + 1</code> 条指令。</strong></p>
+<p>综上，可以看到，这个基于 <code>FP</code> 的 <code>unwind</code> 比较简单，关键还是第一篇讲到的<strong>程序是个状态机、FP/LR</strong>的内容。</p>
+<p><img alt="image-20260617223919661" src="pic/image-20260617223919661.png" /></p>
+<h2 id="23-fp">2.3 <code>FP</code> 失效</h2>
+<p>但是但是，这种方法非常脆弱。只要遇到内存越界踩坏了栈上的 <code>next_fp</code>，或者为了极限压榨空间而在编译期移除了 <code>FP</code> 寄存器的使用，这条单向链表就断了。比如这么编译：</p>
+<p><code>aarch64-linux-gnu-gcc -rdynamic -fomit-frame-pointer main.c  -ldl</code>：</p>
+<p><img alt="image-20260615181734509" src="pic/image-20260615181734509.png" /></p>
+<p>甚至看不什么，如果是在主机上，那就更离谱了：</p>
+<p><img alt="image-20260615181805966" src="pic/image-20260615181805966.png" /></p>
+<p>而且，这个 <code>-fomit-frame-pointer</code> 用不用，社区/不 同领域似乎还并不相同呢？下面是 <code>kimi</code> 搜索的结果（不保证下面内容的准确性）</p>
+<p><img src="pic/image-20260615183701271.png" alt="image-20260615183701271" style="zoom: 50%;" /></p>
+<p>不过如果让我做决策，我应该会开 <code>FP</code> 的，真的需要省下那一个寄存器来提升性能嘛？现代CPU的应该还是挺强大的（乱序、寄存器重命名什么的），不过我也没了解过。</p>
+<p>像 Android 的 <code>perfotto</code> 或者工具是怎么决策的，还得再仔细看看。</p>
+<p>那回到 <code>backtrace</code> 的主题，没了 <code>FP</code> 怎么搞？</p>
+<p>其实上面也已经给了一些答案了，下面讲 <code>DWARF unwind</code>。</p>
+<h1 id="3-dwarf-unwind">3. DWARF Unwind</h1>
+<blockquote>
+<p>⚠️⚠️⚠️ <strong>注意！！！</strong></p>
+<p><strong>下面是我自己当时的思想实验，会非常啰嗦！！但是我还是自己想到了这个方法！！看不下去的直接看 <code>CFA</code>之后的东西吧！</strong></p>
+</blockquote>
+<h2 id="31">3.1（可跳过/很啰嗦）思想实验</h2>
+<h3 id="311">3.1.1 思考方法</h3>
+<p>我们可以这么想，假设现在内存出现了越界，刚好没有 FP 寄存器来表征程序事实了，你会怎么想？还是从 <code>first principle</code> 想想看目标：<strong>恢复函数调用历史</strong>。</p>
+<p>程序状态是用 <code>memory + regs + PC</code> 表示的，而目前的 <code>memory</code> + <code>regs</code> 提供的事实不够用了。怎么办怎么办？......</p>
+<p>拓宽思路，追随源头想想：程序是个状态机，我们是在用 <code>GDB</code> 复原被毁掉了的程序状态机。</p>
+<p>之前的整个解析回溯过程是什么？<code>GDB</code> 是通过检查 <code>memory + regs</code> 上的事实 + 自实现 <code>FP</code> 回溯算法来复原整个状态机的。</p>
+<p>事实是什么？是 <code>FP</code> 链表：</p>
+<div class="highlight"><pre><span></span><code><span class="nf">FP</span><span class="w"> </span><span class="err">→</span><span class="w"> </span><span class="no">frame3</span><span class="w"> </span><span class="err">→</span><span class="w"> </span><span class="no">frame2</span><span class="w"> </span><span class="err">→</span><span class="w"> </span><span class="no">frame1</span>
+</code></pre></div>
+<p>但是他坏了。也就是说，目前的问题是事实丢了，而不是 <code>GDB</code> 失去了能力？对！</p>
+<blockquote>
+<p><strong><code>GDB</code> 不是失去了能力。</strong></p>
+<p><strong><code>GDB</code> 是失去了事实。</strong></p>
+</blockquote>
+<p>到这里，我其实想到的是，现在坏掉的事实是没法改变的，那能不能再<strong>增加额外的事实</strong>，让 <code>GDB</code> 现有的能力（或者在添加一点），依然能够做呢？</p>
+<p>也就是：<strong>在崩溃前或者程序运行之前，我提前多存一点关于程序运行的信息可不可以？一些看着冗余的信息？我能不能在我的 <code>ELF</code> 里再重新插入一个 <code>section</code> 来表示程序的运行？</strong></p>
+<p><strong>或者，我能不能提前预知到会有这种 <code>FP</code> 崩溃的情况？我提前把一种程序恢复的方法存在我这个运行的 <code>ELF</code> 里？就是一个 <code>section</code>？假设这种方法存在？</strong></p>
+<p>举个例子，原来的函数长这样：</p>
+<div class="highlight"><pre><span></span><code><span class="nl">foo:</span>
+<span class="w">    </span><span class="nf">sub</span><span class="w"> </span><span class="no">sp</span><span class="p">,</span><span class="w"> </span><span class="no">sp</span><span class="p">,</span><span class="w"> </span><span class="mi">#32</span>
+<span class="w">    </span><span class="nf">str</span><span class="w"> </span><span class="no">x30</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="no">sp</span><span class="p">,</span><span class="mi">#24</span><span class="p">]</span>
+</code></pre></div>
+<p>作为人，肯定是知道 <code>LR/x30</code> 这个 <code>foo</code> 的返回地址是被放到了 <code>SP + 24</code> 的，等等......这是编译器告诉我的。</p>
+<p>那也就是说，我能够改进编译器代码，让他额外存一份 <code>section</code>，这个 <code>section</code> 就是用来回到某一天被问到：“<code>foo</code> 的返回地址在哪里” 的问题！（同理，<code>FP</code> 就在 <code>SP + 16</code> 处）</p>
+<p>呃，似乎上面的这种想法是可以的？</p>
+<p>因为我没有把这种方法和 <code>memory + regs</code> 这些程序运行状态保留在一起，那就意味着，哪怕有一点，<code>FP</code> 坏了，自己其实是有办法再去<strong>把整个函数返回地址+栈帧地址捞回来的。</strong></p>
+<p>所以，我上面做的是什么？我实在<strong>保存恢复事实的方法</strong>！这算不算一种 <strong>元数据</strong> 呢？</p>
+<blockquote>
+<p>极端一点的例子：</p>
+<ul>
+<li><code>FP</code>：答案写在卷子上</li>
+<li>我这种方法，直接存好解题步骤</li>
+</ul>
+<p>实际上，上面的这部分已经出现 DWARF 的思想了。但真的就是这么想出来的（尽管我提前知道了 DWARF，但我对 DWARF 的理解就是一种跨平台指令集+虚拟机，我其实并不够了解字节码，但是文档说 DWARF 是一种规范格式）。</p>
+</blockquote>
+<h3 id="312-sp">3.1.2 <code>SP</code> 会不断改变</h3>
+<p>那目前的问题就是，我要把这个 <code>SP</code> 存下来？呃呃等等，这个 <code>SP</code> 是会变的吧</p>
+<p>在 <code>stack frame</code> 里，总是会有这种代码：<code>sub sp, sp, #128</code>，导致 <code>SP</code> 改变。</p>
+<p>但是仔细一想，我需要的实际上并不是 <code>SP</code>，我需要的是不变的东西，能反应出 <strong>「返回地址相对于某个参考坐标的位置」</strong>，注意，这里是讨论的是上一个 <code>stack frame</code> ！</p>
+<p>所以就变成：假如这个不会变的坐标是 <code>X</code>，那我就能够知道 <code>foo</code> 的返回地址是在 <code>X + 24</code>：</p>
+<p><code>return_addr = *(X + 24)</code> 。</p>
+<p>此时 <code>GDB</code> 就能够通过这个公式找到 <code>foo</code> 的 <code>caller</code> 啦.</p>
+<p>但是这个 <code>X</code> 是什么？我其实第一想到又是 <code>FP</code>，因为 <code>FP</code> 不就是为了解决 <code>SP</code> 上蹿下跳而发明的嘛。但是之前就说了：<code>-fomit-frame-pointer</code>、<code>FP</code> 被破坏......</p>
+<p>死胡同。再想想。</p>
+<h3 id="313">3.1.3 找到不变量</h3>
+<p>此时在进一步啊，<code>foo</code> 的返回地址是什么？是调用 <code>foo</code> 的 <code>stack frame</code> 中的某一个位置：</p>
+<div class="highlight"><pre><span></span><code>高地址 (High Address)
+                | ... 上个栈帧的局部变量 ...|
+                +---------------------------+ 
+Old FP 指向 -&gt;  | ... 上个栈帧的基址 ...       |
+                +===========================+  &lt;--- 当前栈帧的 FP (x29) 指向这里 (栈帧底 / 高地址)
+                | 保存的 LR (x30, 返回地址)   |  &lt;--- 就是 foo 的返回地址了
+                +---------------------------+  &lt;--- FP + 8
+                | 保存的 Old FP (上一个x29)   | 
+                +---------------------------+
+                | 当前函数的局部变量           |
+                | 寄存器保护区等              |
+                | ...                       |
+                +===========================+  &lt;--- 当前的 SP 指向这里 (栈顶 / 低地址)
+       低地址 (Low Address)            
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">caller</span>
+<span class="w"> </span><span class="o">|</span>
+<span class="w"> </span><span class="o">+----</span><span class="w"> </span><span class="n">call</span><span class="w"> </span><span class="n">foo</span><span class="p">()</span>
+<span class="w">           </span><span class="o">|</span>
+<span class="w">           </span><span class="n">v</span>
+<span class="w">          </span><span class="n">foo</span>
+</code></pre></div>
+<p>举个例子，假设调用发生的时候，此时的 <code>SP = 0x1000</code>。</p>
+<p>那么进入到 <code>foo</code> 后，执行 <code>sub sp,sp,#32</code>，<code>SP = 0x0fe0</code></p>
+<p>接着又一次函数：<code>sub sp,sp,#128</code>，<code>SP = 0x0f60</code></p>
+<p>我已经发现了，对于当前的 <code>stack frame</code> 来说，<code>SP</code> 一直变，但是 <code>foo</code> 这个 <code>stack frame</code> 的顶部边界是不变的！也就是 <code>caller</code> 调用 <code>foo</code> 时的 <code>SP</code> 不变。</p>
+<p>嗯嗯非常好，找到关键了，既然我找到了 <code>current frame</code> 的固定基地了，我依旧设为 <code>X</code>。</p>
+<h3 id="314-gdb-x">3.1.4 <code>GDB</code> 怎么知道 <code>X</code>？</h3>
+<p><strong>此时的问题就变成了怎么让 <code>GDB</code> 知道这个 <code>X</code> 是多少。这个问题似乎才比较关键。</strong></p>
+<p>因为本质上我们是要去看 <code>SP</code> 的值，<code>SP</code> 的值只是在某一刻或者某一段时间内，才不变。</p>
+<p>那也很简单，直接构一张表，在某个时间段内，记录一次这个 <code>SP</code> 值？</p>
+<p>那这个时间是什么？就是 <code>PC</code> 啊！！举个例子：</p>
+<div class="highlight"><pre><span></span><code><span class="err">&lt;</span><span class="nf">foo</span><span class="err">&gt;</span><span class="p">:</span>
+<span class="w">  </span><span class="c1">// PC: 0x1000  (函数刚入口，SP还没来得及动)</span>
+<span class="w">  </span><span class="c1">// [编译器内心 OS：此时 GPS 还在原点，X = SP + 0]</span>
+<span class="w">  </span><span class="err">0</span><span class="nl">x1000:</span><span class="w">   </span><span class="nf">sub</span><span class="w">     </span><span class="no">sp</span><span class="p">,</span><span class="w"> </span><span class="no">sp</span><span class="p">,</span><span class="w"> </span><span class="mi">#32</span><span class="w">      </span><span class="c1">// 分配32字节栈空间</span>
+
+<span class="w">  </span><span class="c1">// PC: 0x1004</span>
+<span class="w">  </span><span class="c1">// [编译器内心 OS：完蛋，SP 往下掉 32 了！赶紧更新公式：X = SP + 32]</span>
+<span class="w">  </span><span class="err">0</span><span class="nl">x1004:</span><span class="w">   </span><span class="nf">stp</span><span class="w">     </span><span class="no">x29</span><span class="p">,</span><span class="w"> </span><span class="no">x30</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="no">sp</span><span class="p">,</span><span class="w"> </span><span class="mi">#16</span><span class="p">]</span>
+<span class="w">  </span><span class="err">0</span><span class="nl">x1008:</span><span class="w">   </span><span class="nf">mov</span><span class="w">     </span><span class="no">x29</span><span class="p">,</span><span class="w"> </span><span class="no">sp</span>
+
+<span class="w">  </span><span class="c1">// 假设中间有一些局部变量分配，又需要压栈</span>
+<span class="w">  </span><span class="c1">// PC: 0x1010</span>
+<span class="w">  </span><span class="err">0</span><span class="nl">x1010:</span><span class="w">   </span><span class="nf">sub</span><span class="w">     </span><span class="no">sp</span><span class="p">,</span><span class="w"> </span><span class="no">sp</span><span class="p">,</span><span class="w"> </span><span class="mi">#128</span><span class="w">     </span><span class="c1">// 又分配了 128 字节</span>
+
+<span class="w">  </span><span class="c1">// PC: 0x1014</span>
+<span class="w">  </span><span class="c1">// [编译器内心 OS：SP 又往下掉了 128！继续更新公式：X = SP + 160]</span>
+<span class="w">  </span><span class="err">0</span><span class="nl">x1014:</span><span class="w">   </span><span class="nf">mov</span><span class="w">     </span><span class="no">x0</span><span class="p">,</span><span class="w"> </span><span class="mi">#1</span>
+<span class="w">  </span><span class="err">0</span><span class="nl">x1018:</span><span class="w">   </span><span class="nf">bl</span><span class="w">      </span><span class="err">&lt;</span><span class="no">bar</span><span class="err">&gt;</span><span class="w">            </span><span class="c1">// 去调用其他函数</span>
+<span class="w">  </span><span class="err">0</span><span class="nl">x101C:</span><span class="w">   </span><span class="nf">nop</span>
+</code></pre></div>
+<p>于是我构建这么一张表：</p>
+<table>
+<thead>
+<tr>
+<th><strong>起始 PC</strong></th>
+<th><strong>结束 PC</strong></th>
+<th><strong>适用的 CFA 计算公式</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>0x1000</code></td>
+<td><code>0x1003</code></td>
+<td><code>CFA = SP + 0</code></td>
+<td>刚进函数，第一条 <code>sub sp</code> 还没执行完。</td>
+</tr>
+<tr>
+<td><code>0x1004</code></td>
+<td><code>0x100F</code></td>
+<td><code>CFA = SP + 32</code></td>
+<td>执行完第一次减 SP 后。</td>
+</tr>
+<tr>
+<td><code>0x1014</code></td>
+<td>...</td>
+<td><code>CFA = SP + 160</code></td>
+<td>执行完第二次减 SP 后。</td>
+</tr>
+</tbody>
+</table>
+<p>非常完美！此时切换到 <code>GDB</code> 的视角，如果我再调试一个 <code>Coredump</code>，看 <code>memory + regs</code> 快照：</p>
+<ul>
+<li>当前 <code>PC = 0x1018</code>（刚好崩在调用 <code>bar</code> 的时候或者刚回来的时候）。</li>
+<li>当前 <code>SP = 0x7F60</code>。</li>
+</ul>
+<p>这个时候，还是根本不知道这个程序之前经历了什么，你只知道它死在了 <code>0x1018</code>。但是呢，我有上面这个方法：</p>
+<ol>
+<li>查表找规则： 拿 <code>PC = 0x1018</code> 跑去查编译器留下的那张表。</li>
+<li>命中范围： 发现 <code>0x1018</code> 落在了 <code>0x1014 ~ ...</code> 这个 PC 范围内。</li>
+<li>获取公式： 这个范围对应的规则是 <code>X = SP + 160</code>。</li>
+<li>计算原点： <code>X = 0x7F60 + 160 = 0x8000</code>。</li>
+</ol>
+<p>哦吼，这不就计算出 <code>X</code> 了？这就是进入 <code>foo</code> 之前没有动过的 <code>SP</code>！</p>
+<p>那之后回溯的事情不是更简单，再次查表 + 根据 <code>AAPCS64</code>，<code>FP</code> 和 <code>LR</code> 的位置我们都知道：</p>
+<p><code>LR = X - 8</code>，<code>FP = X - 16</code></p>
+<p>完美解决！</p>
+<h2 id="32-dwarf-cfa-cfi">3.2 DWARF 的 CFA 和 CFI</h2>
+<h3 id="321-cfa">3.2.1 CFA</h3>
+<p>实际上，上面的 <code>X</code> 就是 <code>DWARF</code> 的 <code>CFA(Canonical Frame Address，规范帧地址)</code>：</p>
+<p>(G)DWARF 官方手册的定义：</p>
+<blockquote>
+<p><strong>"The call frame is identified by an address on the stack. We refer to this address as the Canonical Frame Address or CFA. Typically, the CFA is defined to be the value of the stack pointer at the call site in the previous frame (which may be different from its value on entry to the current frame)."<sup>[5]</sup></strong></p>
+<p><strong>“调用帧是通过栈上的某个地址来标识的。我们将这个地址称为“标准帧地址”或 CFA。通常，CFA 指的是在上一帧的调用点处，栈指针所指向的值（该值可能与当前帧开始时的栈指针值不同）。”</strong></p>
+</blockquote>
+<p>Arm 64-bit Architecture 的 <code>ELF</code> 的定义：</p>
+<blockquote>
+<p><strong>”The term Canonical Frame Address (CFA) is defined in GDWARF, §6.4, Call Frame Information.</strong></p>
+<p><strong>This ABI adopts the typical definition of CFA given there:</strong></p>
+<p><strong>The CFA is the value of the stack pointer (sp) at the call site in the previous frame“<sup>[6]</sup></strong>  </p>
+</blockquote>
+<h3 id="322-cfi">3.2.2 CFI</h3>
+<p>那上面那张表呢？其实这张表已经和 DWARF 中的思想已经非常接近了。</p>
+<p>DWARF 并没有规定某个特定的回溯算法，它定义的是：</p>
+<blockquote>
+<p><strong>一套描述「如何恢复上一层状态机」的规则格式。</strong></p>
+</blockquote>
+<p>抽象一点看，DWARF 希望描述这样一张巨大的表：</p>
+<div class="highlight"><pre><span></span><code><span class="n">PC</span><span class="w">        </span><span class="n">CFA规则</span><span class="w">         </span><span class="n">LR规则</span><span class="w">         </span><span class="n">FP规则</span>
+<span class="o">------------------------------------------------</span>
+<span class="mh">0x1000</span><span class="w">    </span><span class="n">SP</span><span class="o">+</span><span class="mi">0</span><span class="w">           </span><span class="n">CFA</span><span class="mi">-8</span><span class="w">         </span><span class="n">CFA</span><span class="mi">-16</span>
+<span class="mh">0x1004</span><span class="w">    </span><span class="n">SP</span><span class="o">+</span><span class="mi">32</span><span class="w">          </span><span class="n">CFA</span><span class="mi">-8</span><span class="w">         </span><span class="n">CFA</span><span class="mi">-16</span>
+<span class="mh">0x1014</span><span class="w">    </span><span class="n">SP</span><span class="o">+</span><span class="mi">160</span><span class="w">         </span><span class="n">CFA</span><span class="mi">-8</span><span class="w">         </span><span class="n">CFA</span><span class="mi">-16</span>
+<span class="p">...</span>
+</code></pre></div>
+<p>也就是对于任意一个PC，<code>GDB</code> 都能按照以下的流程做一次 <code>unwind</code>：</p>
+<p><code>PC → 查表 → 计算CFA → 恢复寄存器 → 得到 caller</code></p>
+<p>那问题来了，这张表到底叫什么？DWARF 把这些用于恢复栈帧的信息统称为：</p>
+<p><code>CFI(Call Frame Information)</code></p>
+<p>名字也很直白，就是 <code>Call Frame + Information</code>，关于栈帧恢复的信息。</p>
+<p>看看手册：</p>
+<blockquote>
+<p><strong>"DWARF supports virtual unwinding by defining an architecture independent basis for recording how subprograms save and restore registers during their lifetimes."</strong></p>
+<p><strong>记录函数生命周期中寄存器的保存/恢复规则，使得调试器可以"虚拟地"回溯栈帧。</strong></p>
+<p><strong>”Abstractly, this mechanism describes a very large table...“<sup>[5]</sup></strong></p>
+</blockquote>
+<p><img src="pic/image-20260617122620128.png" alt="image-20260617122620128" style="zoom:50%;" /></p>
+<p>由此我们可以总结：</p>
+<ul>
+<li><code>CFI</code>：恢复规则</li>
+<li><code>CFA</code>：恢复规则里的坐标原点</li>
+</ul>
+<h2 id="33eh_frame-debug_frame">3.3（可跳过）<code>.eh_frame</code> 和 <code>.debug_frame</code></h2>
+<p>知道结论：目前用户态基本用的就是 <code>.eh_frame</code>。但我自己写的东西，自己想探索。</p>
+<h3 id="331">3.3.1 二者对比</h3>
+<p>还有一个问题，那上面这张表存在哪里呢？我们看文档<sup>[5]</sup>：</p>
+<blockquote>
+<p><strong>"The virtual unwind information is encoded in a self-contained section called <code>.debug_frame</code>. Entries in a <code>.debug_frame</code> section are aligned on a multiple of the address size relative to the start of the section and come in two forms: a Common Information Entry (CIE) and a Frame Description Entry (FDE)."</strong></p>
+</blockquote>
+<p>也就是说，<code>CFI</code> 数据被编码在 <code>.debug_frame</code> 这个 <code>section</code> 中。</p>
+<blockquote>
+<p>更加细节重要的 <code>CIE</code> 和 <code>FDE</code> 总结（本文不展开讲）：</p>
+<p><code>CIE</code> 是 <code>unwind</code> 规则的公共模板，定义了所有函数共享的初始状态（如对齐因子、默认寄存器规则）；<code>FDE</code> 则是针对单个函数的实例条目，引用某个 <code>CIE</code> 并记录该函数代码范围内的增量规则变化。两者配合使得编译器只需存储差异而非完整表格，大幅压缩了 <code>unwind</code> 信息的体积。</p>
+</blockquote>
+<p>可以是如果你去看实际工具链编译出来的 <code>section</code>，似乎没看到 <code>debug_frame</code>：</p>
+<p><img alt="image-20260617164103585" src="pic/image-20260617164103585.png" /></p>
+<div class="highlight"><pre><span></span><code><span class="p">.</span><span class="n">debug_aranges</span><span class="w">   </span><span class="err">←</span><span class="w"> </span><span class="n">地址范围查找表</span>
+<span class="p">.</span><span class="n">debug_info</span><span class="w">      </span><span class="err">←</span><span class="w"> </span><span class="n">DIE</span><span class="err">（</span><span class="n">调试信息条目</span><span class="err">）</span>
+<span class="p">.</span><span class="n">debug_abbrev</span><span class="w">    </span><span class="err">←</span><span class="w"> </span><span class="n">DIE</span><span class="w"> </span><span class="n">的缩写表</span>
+<span class="p">.</span><span class="n">debug_line</span><span class="w">      </span><span class="err">←</span><span class="w"> </span><span class="n">行号信息</span>
+<span class="p">.</span><span class="n">debug_str</span><span class="w">       </span><span class="err">←</span><span class="w"> </span><span class="n">字符串表</span>
+<span class="p">.</span><span class="n">debug_line_str</span><span class="w">  </span><span class="err">←</span><span class="w"> </span><span class="n">行号字符串表</span>
+</code></pre></div>
+<p>类似的也只是一个 <code>.eh_frame</code>（我只知道 C++ 异常处理相关的内容似乎会用这个内容）</p>
+<p>这部分我不太懂，直接问了 <code>kimi</code> 搜索了一些资料（原因是我觉得 <code>kimi</code> 在搜资料方面的能力更强点），找到了 <code>Linux Standard Base Core Specification</code> 其中的 <code>Generic Part</code> <sup>[7]</sup>：</p>
+<p><img src="pic/image-20260617170425132.png" alt="image-20260617170425132" style="zoom: 50%;" /></p>
+<p>按照上面的理解，<code>.eh_frame</code> 是用于给一些支持异常处理的语言（比如 C++）提供基础能力的，<strong>能够描述在处理异常期间必须展开的调用帧。</strong></p>
+<p>而且：<code>.eh_frame</code> 和 <code>.debug_frame</code> 目的都类似，只是很多细节不一样，如果问题不大用来替代好像也行。</p>
+<p>问问 AI：<code>.eh_frame</code> 和 <code>.dbeug_frame</code> 给谁看？（不想看就直接跳吧）</p>
+<ul>
+<li>
+<p><strong>视角一：线下分析与调试（.debug_frame）</strong></p>
+<p>GDB 是在程序崩溃（Coredump）或者被打断时介入的。它运行在外部进程，有着上帝视角。对于 GDB 来说，哪怕这份说明书再厚，采用 64 位绝对地址（DWARF64）记录，也完全不是负担，因为它<strong>不需要被加载到目标系统的运行时内存中</strong>。<code>.debug_frame</code> 就是这样一个纯粹用于线下辅助调试的只读 Section。</p>
+</li>
+<li>
+<p><strong>视角二：运行时的自我救赎（.eh_frame）</strong></p>
+<p>当程序执行 <code>throw</code> 抛出异常时，它不能指望 GDB 来救场，它必须在<strong>运行阶段</strong>自己顺着栈帧往回找对应的 <code>catch</code> 块。这就要求栈回溯的说明书必须<strong>常驻于进程的虚拟内存中</strong>。这就是 <code>.eh_frame</code>（Exception Handling Frame）的由来。</p>
+</li>
+</ul>
+<h4 id="_1">核心差异对比</h4>
+<p>既然 <code>.eh_frame</code> 必须伴随程序一同加载到内存，它的设计就必须满足两个严苛的要求：<strong>体积小</strong>且<strong>位置无关（Position Independent）</strong>。基于你提供的参考资料，我们可以总结出以下核心差异：</p>
+<table>
+<thead>
+<tr>
+<th><strong>核心特性</strong></th>
+<th><strong>.debug_frame (DWARF 原生标准)</strong></th>
+<th><strong>.eh_frame (LSB)</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>存在形态</strong></td>
+<td>仅存在于磁盘，<strong>无</strong> <code>SHF_ALLOC</code> 标志。</td>
+<td>伴随进程加载到内存，<strong>有</strong> <code>SHF_ALLOC</code> 标志。</td>
+</tr>
+<tr>
+<td><strong>主要使用者</strong></td>
+<td>外部调试器 (如 GDB)。</td>
+<td>C++ 运行时 (如 libgcc_s 的 <code>_Unwind_Backtrace</code>)。</td>
+</tr>
+<tr>
+<td><strong>寻址方式</strong></td>
+<td>绝对偏移 (Absolute Offset)。</td>
+<td>相对偏移 (Relative Offset, 如 <code>DW_EH_PE_pcrel</code>)。</td>
+</tr>
+<tr>
+<td><strong>CIE 增强字段</strong></td>
+<td>标准化，仅用于调试回溯。</td>
+<td>引入 <code>Augmentation String</code> (如 'z','R','P')，用于定位 LSDA 等异常处理数据。</td>
+</tr>
+<tr>
+<td><strong>存储效率</strong></td>
+<td>较差。文件增大时需升级 DWARF64，AArch64 的 <code>initial_location</code> 需占用 8 字节。</td>
+<td>极高。相对寻址突破了 32 位限制，AArch64 的指令地址通常只需 4 字节。</td>
+</tr>
+</tbody>
+</table>
+<h4 id="eh_frame"><code>.eh_frame</code>的架构改良：相对寻址的艺术</h4>
+<p>深入 CIE (Common Information Entry) 和 FDE (Frame Description Entry) 的内部，你会发现 <code>.eh_frame</code> 做了一个非常优雅的架构级优化。</p>
+<p>在原始的 <code>.debug_frame</code> 中，每一个 FDE 想要找到它从属的 CIE，靠的是一个<strong>绝对位置的 Section 偏移量</strong>。这带来了一个致命问题：如果文件超过 4GB，就不得不切换到臃肿的 DWARF64 格式。</p>
+<p>而在 <code>.eh_frame</code> 中，<code>CIE_pointer</code> 被改成了一个<strong>相对偏移量</strong>（也就是从当前位置往回倒退的字节数）。这种改进就像在分析 ARMv8 内存布局时，利用 PC-relative（如 <code>ADRP</code>）寻址能完美避开绝对地址的重定位开销一样。它不仅永远不需要担心 32 位溢出的问题（如果距离太远，编译器大不了再生成一个新的 CIE 即可），还完美契合了现代操作系统的 ASLR（地址空间布局随机化）和 PIE（位置无关可执行文件）机制。</p>
+<h4 id="augmentation">Augmentation：超越栈回溯</h4>
+<p>既然 <code>.eh_frame</code> 服务于异常处理，那它不仅要回答“上一层栈帧在哪里”，还要回答“异常发生时，我该怎么处理？”。</p>
+<p>因此，<code>.eh_frame</code> 的 CIE 引入了 <strong>Augmentation String（增强字符串）</strong>，它像一个协议头一样，指示了后续的解析规则：</p>
+<ul>
+<li>如果包含 <code>'R'</code>，则指定了 FDE 中的地址编码方式（如 <code>DW_EH_PE_pcrel | DW_EH_PE_sdata4</code>）。</li>
+<li>如果包含 <code>'P'</code>，则后面跟着一个指向 <strong>Personality Routine</strong> 的指针（告诉运行时用什么语言的规则去处理这个异常）。</li>
+<li>如果包含 <code>'L'</code>，则指示了 <strong>LSDA (Language Specific Data Area)</strong> 的位置，LSDA 里面才真正记录了 <code>try-catch</code> 块的匹配信息。</li>
+</ul>
+<p>正是由于这些为运行时量身定制的优化，<code>.eh_frame</code> 的体积不仅通常比 <code>.debug_frame</code> 要小，而且成为了现代编译器（如 GCC/Clang）即使在禁用 C++ 异常（<code>-fno-exceptions</code>）时，也常常默认生成的首选 Unwind 结构。</p>
+<blockquote>
+<p>除此之外，我最的懵逼的是为什么会在 <code>LSB</code> 的文档里？在 <code>DWARF</code> 和 <code>C++</code> 标准里似乎都没有这方面的定义，所以我又问了 AI，发现了很多有意思的东西！</p>
+</blockquote>
+<h3 id="33eh_frame">3.3（可跳过）<code>eh_frame</code> 的来由</h3>
+<p>直接结论：</p>
+<blockquote>
+<p><strong><code>.debug_frame</code> 是一份写给 GDB 看的调试图纸，归 DWARF 标准管；而 <code>.eh_frame</code> 是一份写给 Linux 操作系统和 C++ 运行时库看的二进制法律合同，它是系统 ABI（Application Binary Interface）不可分割的一部分，因此它是由 Linux 标准基准（LSB）来定义的。</strong></p>
+</blockquote>
+<p>要理解 LSB 的作用，首先要明白在“异常处理”这件事上，谁不管事：</p>
+<ul>
+<li><strong>DWARF 规范不管“运行时”：</strong> DWARF 的初衷和定位非常纯粹——我只负责指导外部调试器（如 GDB）怎么解析静态文件。至于你的程序在运行阶段怎么把这些数据加载进内存？怎么处理段错误？怎么跑 C++ 的 <code>throw/catch</code>？对不起，那不是调试标准的职责范围。</li>
+<li><strong>C++ 语言标准不管“二进制实现”：</strong> C++ 标准（ISO C++）只规定了语言语义：“当抛出异常时，应当沿调用栈向上寻找匹配的 <code>catch</code> 块，并调用沿途局部变量的析构函数”。至于这套机制在底层是用 <code>setjmp/longjmp</code> 实现，还是用栈回溯实现？表结构长什么样？C++ 标准一概不管。</li>
+</ul>
+<p>哦所以！这就出现了一个真空地带：<strong>GCC/Clang 应该也想到了要决定用类似 DWARF 的表结构来实现 C++ 异常，但这套表在运行时怎么被操作系统和动态链接器识别？</strong> </p>
+<p>没人给出一个权威的跨平台/跨发行版的二进制契约。那 <code>LSB</code> 来做也很合理！<code>LSB</code> 就用来<strong>保证二进制兼容性</strong>，确保在 Ubuntu 上用 GCC 编译出的 <code>ELF</code>，直接拷到 CentOS 或 Fedora 上也能跑。</p>
+<p>但实际做起来没这么简单，有很多问题：</p>
+<ol>
+<li><strong>内存加载问题：</strong> <code>.eh_frame</code> 必须被 OS 的加载器（Loader）加载到内存中。为了让运行时库（如 <code>libgcc_s</code> 的 Unwinder）能极其快速地找到这块表，ELF 文件中专门引入了一个名为 <code>PT_GNU_EH_FRAME</code> 的 Program Header 标志。<strong>ELF 格式的扩展和规范，正是 LSB 的管辖范围。</strong>(具有 <code>SHF_ALLOC</code> 标志，作为 <code>image</code> 的一部分)</li>
+<li><strong>跨动态库抛出异常：</strong> 假设你在主程序里 <code>throw</code> 了一个异常，但 <code>catch</code> 却在一个由别人编译的 <code>.so</code> 动态链接库里。如果大家对 <code>.eh_frame</code> 的表结构、相对寻址公式（比如那个 <code>DW_EH_PE_pcrel</code>）理解不一致，程序当场就会崩溃。</li>
+<li><strong>异构工具链的协同：</strong> 必须保证 Clang 编译的代码抛出的异常，GCC 编译的代码能接住。大家必须遵守同一套底层数据结构。</li>
+</ol>
+<p>因此，LSB 必须把 <code>.eh_frame</code> 纳入其核心规范（Core Specification）。<strong>在 LSB 眼里，<code>.eh_frame</code> 根本不是什么“调试信息”，而是 Linux 平台上标准的应用程序二进制接口（ABI）的一部分。</strong></p>
+<p>再深入一点，还有一点历史渊源：Itanium C++ ABI：</p>
+<p>如果你再往深处挖一点，会发现 LSB 其实也是个“搬运工”。</p>
+<p>当年 Intel 和 HP 联合搞 Itanium（安腾）架构时，顺手牵头制定了一套极其优秀的 <strong>Itanium C++ ABI</strong>。这套 ABI 首次详细定义了“零成本异常处理（Zero-cost Exception Handling）”该怎么做，其中就魔改了 DWARF 标准，创造出了带有 <code>Augmentation String</code>、<code>LSDA</code>、<code>Personality Routine</code> 并且使用相对寻址的 <code>.eh_frame</code>。</p>
+<p>因为这套设计太优秀了，后来的 x86_64、ARM64 甚至所有的 Unix-like 系统（包括 Linux、macOS、FreeBSD）全部抄了这套作业，把它变成了行业事实上的标准。LSB 只是以官方的身份，把这个“事实标准”白纸黑字地写进了 Linux 的规范里。</p>
+<h3 id="332">3.3.2 编译标志</h3>
+<p>来点实际用的 GCC/Clang 编译标志，一位（清华的）大佬的博客总结的生成 <code>.eh_frame</code> 的<sup>[8]</sup>：</p>
+<div class="highlight"><pre><span></span><code>Compiler options                                  Produced section
+-fasynchronous-unwind-tables -fexceptions        .eh_frame
+-fno-asynchronous-unwind-tables -fexceptions     .eh_frame
+-fasynchronous-unwind-tables -fno-exceptions     .eh_frame
+-fno-asynchronous-unwind-tables -fno-exceptions  none (-g0) or .debug_frame (-g1 and above)
+</code></pre></div>
+<p>而我的编译器是默认开启的 <code>-fasynchronous-unwind-tables</code>：</p>
+<p><img alt="image-20260617174233511" src="pic/image-20260617174233511.png" /></p>
+<p>不过比较奇怪的是，在我的环境上单纯用 <code>-fno-asynchronous-unwind-tables -fno-exceptions</code> 似乎还是会生成 <code>.eh_frame</code>，要加上 <code>-fno-unwind-tables</code> 才不会生成：</p>
+<p><img alt="image-20260617174502753" src="pic/image-20260617174502753.png" /></p>
+<h2 id="34">3.4 自己实现</h2>
+<p>上面扯了这么多，不如自己用 C 语言<strong>硬编码实现一个迷你版 CFI 规则表查询器</strong>。</p>
+<p>在这个 <code>Demo</code> 中，我编译开启 <code>-fomit-frame-pointer</code>，函数内部没有任何 FP 链表，纯靠这张规则表在栈被破坏、没有 FP 的情况下实现逆向流转。</p>
+<p>代码在：https://github.com/JAILuo/wechat-demos</p>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdint.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdbool.h&gt;</span>
+
+<span class="c1">// 1. 模拟处理器的寄存器结构体（状态机快照）</span>
+<span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">uintptr_t</span><span class="w"> </span><span class="n">pc</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">uintptr_t</span><span class="w"> </span><span class="n">sp</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">uintptr_t</span><span class="w"> </span><span class="n">fp</span><span class="p">;</span><span class="w"> </span><span class="c1">// 虽然没有物理 FP 链，但寄存器本身依然存在</span>
+<span class="p">}</span><span class="w"> </span><span class="n">registers_t</span><span class="p">;</span>
+
+<span class="c1">// 2. 定义一条 CFI 规则（对应真实 DWARF 表中的一行）</span>
+<span class="c1">// 描述在某个 PC 范围内，如何恢复上一个状态</span>
+<span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">uintptr_t</span><span class="w"> </span><span class="n">pc_start</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">uintptr_t</span><span class="w"> </span><span class="n">pc_end</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// CFA 计算规则：CFA = 基准寄存器 + 偏移量</span>
+<span class="w">    </span><span class="c1">// 0 代表基于 SP，1 代表基于 FP</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">cfa_base_reg</span><span class="p">;</span><span class="w"> </span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">cfa_offset</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// 寄存器恢复规则（相对于 CFA 的偏移量）</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">ra_offset_from_cfa</span><span class="p">;</span><span class="w"> </span><span class="c1">// 上一层 PC (Return Address) 的存放位置</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">fp_offset_from_cfa</span><span class="p">;</span><span class="w"> </span><span class="c1">// 上一层 FP 的存放位置</span>
+<span class="p">}</span><span class="w"> </span><span class="n">cfi_row_t</span><span class="p">;</span>
+
+<span class="c1">// 3. 模拟编译器为各个函数生成的 CFI 规则表</span>
+<span class="c1">// 现实中这些数据存放在 ELF 的 .eh_frame 段</span>
+<span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">cfi_row_t</span><span class="w"> </span><span class="n">mock_cfi_table</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 模拟 func_c 的 PC 范围内的恢复规则（假设函数内部压栈消耗了 32 字节）</span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="p">.</span><span class="n">pc_start</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x1030</span><span class="p">,</span><span class="w"> </span><span class="p">.</span><span class="n">pc_end</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x10cf</span><span class="p">,</span><span class="w"> </span><span class="p">.</span><span class="n">cfa_base_reg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="p">.</span><span class="n">cfa_offset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="p">,</span><span class="w"> </span><span class="p">.</span><span class="n">ra_offset_from_cfa</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">-8</span><span class="p">,</span><span class="w"> </span><span class="p">.</span><span class="n">fp_offset_from_cfa</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">-16</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="c1">// 模拟 func_b 的 PC 范围内的恢复规则（假设函数内部压栈消耗了 16 字节）</span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="p">.</span><span class="n">pc_start</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x1010</span><span class="p">,</span><span class="w"> </span><span class="p">.</span><span class="n">pc_end</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x102f</span><span class="p">,</span><span class="w"> </span><span class="p">.</span><span class="n">cfa_base_reg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="p">.</span><span class="n">cfa_offset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">16</span><span class="p">,</span><span class="w"> </span><span class="p">.</span><span class="n">ra_offset_from_cfa</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">-8</span><span class="p">,</span><span class="w"> </span><span class="p">.</span><span class="n">fp_offset_from_cfa</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">-16</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="c1">// 模拟 func_a 的 PC 范围</span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="p">.</span><span class="n">pc_start</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x1000</span><span class="p">,</span><span class="w"> </span><span class="p">.</span><span class="n">pc_end</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x100f</span><span class="p">,</span><span class="w"> </span><span class="p">.</span><span class="n">cfa_base_reg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="p">.</span><span class="n">cfa_offset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">16</span><span class="p">,</span><span class="w"> </span><span class="p">.</span><span class="n">ra_offset_from_cfa</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">-8</span><span class="p">,</span><span class="w"> </span><span class="p">.</span><span class="n">fp_offset_from_cfa</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">-16</span><span class="w"> </span><span class="p">},</span>
+<span class="p">};</span>
+<span class="cp">#define CFI_TABLE_SIZE (sizeof(mock_cfi_table) / sizeof(mock_cfi_table[0]))</span>
+
+<span class="c1">// 4. 根据当前 PC 检索对应的 CFI 规则</span>
+<span class="k">const</span><span class="w"> </span><span class="n">cfi_row_t</span><span class="o">*</span><span class="w"> </span><span class="nf">find_cfi_rule</span><span class="p">(</span><span class="kt">uintptr_t</span><span class="w"> </span><span class="n">pc</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">CFI_TABLE_SIZE</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">pc</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">mock_cfi_table</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">pc_start</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">pc</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">mock_cfi_table</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">pc_end</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="o">&amp;</span><span class="n">mock_cfi_table</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// 5. 基于 DWARF CFI 规则的虚拟 Unwind 引擎</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">do_dwarf_unwind</span><span class="p">(</span><span class="n">registers_t</span><span class="w"> </span><span class="o">*</span><span class="n">regs</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">--- Starting DWARF (CFI) Unwind ---</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">depth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">depth</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;[Frame %d] Current PC: 0x%lx | SP: 0x%lx | FP: 0x%lx</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">               </span><span class="n">depth</span><span class="p">,</span><span class="w"> </span><span class="n">regs</span><span class="o">-&gt;</span><span class="n">pc</span><span class="p">,</span><span class="w"> </span><span class="n">regs</span><span class="o">-&gt;</span><span class="n">sp</span><span class="p">,</span><span class="w"> </span><span class="n">regs</span><span class="o">-&gt;</span><span class="n">fp</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">// 步骤 A：拿着当前状态机的 PC 去查规则手册</span>
+<span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="n">cfi_row_t</span><span class="w"> </span><span class="o">*</span><span class="n">rule</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">find_cfi_rule</span><span class="p">(</span><span class="n">regs</span><span class="o">-&gt;</span><span class="n">pc</span><span class="p">);</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">rule</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;No CFI rule found for PC 0x%lx. Stopping unwind.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">regs</span><span class="o">-&gt;</span><span class="n">pc</span><span class="p">);</span>
+<span class="w">            </span><span class="k">break</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="c1">// 步骤 B：根据规则，计算当前帧的绝对锚点 CFA</span>
+<span class="w">        </span><span class="kt">uintptr_t</span><span class="w"> </span><span class="n">cfa</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">rule</span><span class="o">-&gt;</span><span class="n">cfa_base_reg</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// 基于 SP</span>
+<span class="w">            </span><span class="n">cfa</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">regs</span><span class="o">-&gt;</span><span class="n">sp</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">rule</span><span class="o">-&gt;</span><span class="n">cfa_offset</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// 基于 FP</span>
+<span class="w">            </span><span class="n">cfa</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">regs</span><span class="o">-&gt;</span><span class="n">fp</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">rule</span><span class="o">-&gt;</span><span class="n">cfa_offset</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;  -&gt; Calculated CFA: 0x%lx</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">cfa</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">// 步骤 C：依据 CFA 和规则定义的相对偏移，从内存中读取并“恢复”上一个状态机的核心寄存器</span>
+<span class="w">        </span><span class="kt">uintptr_t</span><span class="w"> </span><span class="n">next_pc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="p">(</span><span class="kt">uintptr_t</span><span class="o">*</span><span class="p">)(</span><span class="n">cfa</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">rule</span><span class="o">-&gt;</span><span class="n">ra_offset_from_cfa</span><span class="p">);</span>
+<span class="w">        </span><span class="kt">uintptr_t</span><span class="w"> </span><span class="n">next_fp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="p">(</span><span class="kt">uintptr_t</span><span class="o">*</span><span class="p">)(</span><span class="n">cfa</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">rule</span><span class="o">-&gt;</span><span class="n">fp_offset_from_cfa</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">// 依据 CFA 的定义，上一层的 SP 就是当前的 CFA </span>
+<span class="w">        </span><span class="kt">uintptr_t</span><span class="w"> </span><span class="n">next_sp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cfa</span><span class="p">;</span><span class="w"> </span>
+
+<span class="w">        </span><span class="c1">// 步骤 D：状态机回退更新</span>
+<span class="w">        </span><span class="n">regs</span><span class="o">-&gt;</span><span class="n">pc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">next_pc</span><span class="p">;</span>
+<span class="w">        </span><span class="n">regs</span><span class="o">-&gt;</span><span class="n">sp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">next_sp</span><span class="p">;</span>
+<span class="w">        </span><span class="n">regs</span><span class="o">-&gt;</span><span class="n">fp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">next_fp</span><span class="p">;</span>
+
+<span class="w">        </span><span class="c1">// 如果回溯到了主函数或起点（模拟动作为 0），则结束</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">regs</span><span class="o">-&gt;</span><span class="n">pc</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;[Frame %d] Reached start of execution (PC == 0).</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">depth</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+<span class="w">            </span><span class="k">break</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="n">depth</span><span class="o">++</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;--- Unwind Complete ---</span><span class="se">\n\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// ================= 测试场景构造 =================</span>
+<span class="c1">// 虚构一个由于崩溃捕获到的、已经抛弃了物理 FP 链的内存栈数据</span>
+<span class="kt">uint8_t</span><span class="w"> </span><span class="n">fake_stack</span><span class="p">[</span><span class="mi">256</span><span class="p">];</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">setup_fake_environment</span><span class="p">(</span><span class="n">registers_t</span><span class="w"> </span><span class="o">*</span><span class="n">regs</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 模拟栈底在 fake_stack + 128 的位置</span>
+<span class="w">    </span><span class="kt">uintptr_t</span><span class="w"> </span><span class="n">stack_bottom</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">uintptr_t</span><span class="p">)</span><span class="o">&amp;</span><span class="n">fake_stack</span><span class="p">[</span><span class="mi">128</span><span class="p">];</span>
+
+<span class="w">    </span><span class="c1">// 1. 模拟 func_a 运行时的物理栈帧布局 (CFA = stack_bottom)</span>
+<span class="w">    </span><span class="o">*</span><span class="p">(</span><span class="kt">uintptr_t</span><span class="o">*</span><span class="p">)(</span><span class="n">stack_bottom</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">8</span><span class="p">)</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mh">0x0</span><span class="p">;</span><span class="w">       </span><span class="c1">// func_a 的返回地址是 0 (起点)</span>
+<span class="w">    </span><span class="o">*</span><span class="p">(</span><span class="kt">uintptr_t</span><span class="o">*</span><span class="p">)(</span><span class="n">stack_bottom</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">16</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x9999</span><span class="p">;</span><span class="w">  </span><span class="c1">// 原始的老 FP</span>
+
+<span class="w">    </span><span class="c1">// func_a 调用 func_b，分配了 16 字节，下一层 CFA = stack_bottom - 16</span>
+<span class="w">    </span><span class="kt">uintptr_t</span><span class="w"> </span><span class="n">cfa_b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">stack_bottom</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">16</span><span class="p">;</span>
+<span class="w">    </span><span class="o">*</span><span class="p">(</span><span class="kt">uintptr_t</span><span class="o">*</span><span class="p">)(</span><span class="n">cfa_b</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">8</span><span class="p">)</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mh">0x1005</span><span class="p">;</span><span class="w"> </span><span class="c1">// func_b 的返回地址落在 func_a 的范围内 (0x1000~0x100f)</span>
+<span class="w">    </span><span class="o">*</span><span class="p">(</span><span class="kt">uintptr_t</span><span class="o">*</span><span class="p">)(</span><span class="n">cfa_b</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">16</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x8888</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// func_b 调用 func_c，分配了 16 字节，下一层 CFA = cfa_b - 16</span>
+<span class="w">    </span><span class="kt">uintptr_t</span><span class="w"> </span><span class="n">cfa_c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cfa_b</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">16</span><span class="p">;</span>
+<span class="w">    </span><span class="o">*</span><span class="p">(</span><span class="kt">uintptr_t</span><span class="o">*</span><span class="p">)(</span><span class="n">cfa_c</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">8</span><span class="p">)</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mh">0x1018</span><span class="p">;</span><span class="w"> </span><span class="c1">// func_c 的返回地址落在 func_b 的范围内 (0x1010~0x102f)</span>
+<span class="w">    </span><span class="o">*</span><span class="p">(</span><span class="kt">uintptr_t</span><span class="o">*</span><span class="p">)(</span><span class="n">cfa_c</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">16</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x7777</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// 2. 当前崩溃发生在 func_c 内部的 0x1050 处</span>
+<span class="w">    </span><span class="c1">// 此时 func_c 内部再次消耗了 16 字节空间用于局部变量，所以当前 SP 还要减去 16</span>
+<span class="w">    </span><span class="n">regs</span><span class="o">-&gt;</span><span class="n">pc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x1050</span><span class="p">;</span><span class="w"> </span>
+<span class="w">    </span><span class="n">regs</span><span class="o">-&gt;</span><span class="n">sp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cfa_c</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">16</span><span class="p">;</span><span class="w"> </span>
+<span class="w">    </span><span class="n">regs</span><span class="o">-&gt;</span><span class="n">fp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0xDEADBEEF</span><span class="p">;</span><span class="w"> </span><span class="c1">// 故意写入垃圾值，证明整个恢复过程完全不依赖物理 FP 指针</span>
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">registers_t</span><span class="w"> </span><span class="n">crashed_regs</span><span class="p">;</span>
+<span class="w">    </span><span class="n">setup_fake_environment</span><span class="p">(</span><span class="o">&amp;</span><span class="n">crashed_regs</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// 启动 DWARF 规则展开</span>
+<span class="w">    </span><span class="n">do_dwarf_unwind</span><span class="p">(</span><span class="o">&amp;</span><span class="n">crashed_regs</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>编译：<code>aarch64-linux-gnu-gcc  -fomit-frame-pointer  main.c -o main</code></p>
+<p>运行：<code>qemu-aarch64 -L /usr/aarch64-linux-gnu/ ./main</code></p>
+<div class="highlight"><pre><span></span><code>高地址
+  ┌─────────────────────┐
+  │      (未使用)        │  ← stack_bottom
+  ├─────────────────────┤
+  │  RA_a = 0x0000      │  ← stack_bottom - 8   (func_a 返回地址)
+  ├─────────────────────┤
+  │  FP_a = 0x9999      │  ← stack_bottom - 16  (func_a 帧指针)
+  ├─────────────────────┤
+  │  RA_b = 0x1008      │  ← stack_bottom - 24  (func_b 返回地址 → func_a)
+  ├─────────────────────┤
+  │  FP_b = 0x8888      │  ← stack_bottom - 32  (func_b 帧指针)
+  ├─────────────────────┤
+  │  RA_c = 0x101c      │  ← stack_bottom - 40  (func_c 返回地址 → func_b)
+  ├─────────────────────┤
+  │  FP_c = 0x7777      │  ← stack_bottom - 48  = 初始 SP 指向此处
+  └─────────────────────┘
+低地址
+</code></pre></div>
+<p><img alt="image-20260617223911763" src="pic/image-20260617223911763.png" /></p>
+<p><img alt="image-20260617191055063" src="pic/image-20260617191055063.png" /></p>
+<p>可以看到：即使物理寄存器 <code>FP</code> 被填入了垃圾值（<code>0xDEADBEEF</code>），整个系统依然能通过 <code>[Rule Hit]</code> 算出下一层的基址 CFA，一层层拨开整个调用栈。</p>
+<p>对于实际 <code>GDB</code> 的处理也差不多（第二篇也讲过，但是没有这些什么CFA、CIE、FDE）：</p>
+<ol>
+<li>根据当前帧的 <code>PC</code> 寻找编译期塞入的 <code>FDE (Frame Description Entry)</code>。</li>
+<li>通过计算虚拟的 <code>CFA</code>，将由于编译器优化（如寄存器重用、栈空间复用）导致的混乱内存重新整理出确定性的空间秩序。</li>
+<li>这就对应了 GDB 手册中关于 <strong>"Virtual Frame Pointer"</strong> 的描述：它是一个在调试期根据规则动态计算出来的影子指针，而非真实存在于运行时硬件中的寄存器。</li>
+</ol>
+<p>而且，如果真的想要探究细节，得去了解 <code>CIE</code>、<code>FDE</code> 的内容，这里推荐两篇文章：</p>
+<ul>
+<li>也就是参考[8]，<code>MaksyRay</code> 大佬的：Stack unwinding | MaskRay：https://maskray.me/blog/2020-11-08-stack-unwinding</li>
+<li>.eh_frame – Airs – Ian Lance Taylor：https://www.airs.com/blog/archives/460</li>
+</ul>
+<p>如果你对  <code>V8</code> 和 <code>x86_64</code> 比较熟悉，也可以看看这篇：</p>
+<ul>
+<li>Teaching gdb to Unwind V8 JIT Frames on x64 | Joyee Cheung's Blog：https://joyeecheung.github.io/blog/2026/03/24/teaching-gdb-to-unwind-v8-jit-frames-on-x64/</li>
+</ul>
+<p>或者更加直接的，直接问问 AI 不就好啦！</p>
+<p>下面是AI的指导：</p>
+<div class="highlight"><pre><span></span><code>文章逻辑                       GDB 代码对应
+─────────────────────────────────────────────────────────────
+PC → 查表                      dwarf2_frame_find_fde() [bsearch]
+获取 CFA 计算公式              execute_cfa_program() 解析 CIE/FDE
+计算 CFA (X)                   cache-&gt;cfa = reg + offset / execute_stack_op()
+恢复上一层寄存器               dwarf2_frame_prev_register()
+  - LR (返回地址)              cache-&gt;reg[retaddr_column]
+  - FP (帧指针)                cache-&gt;reg[FP_regnum]
+  - SP                         隐含：上一层的 SP = 当前 CFA
+</code></pre></div>
+<p>到此，本篇结束，考虑到文章篇幅以及现在人基本不愿意看长文的（<strong>而且都是自己的思考过程，对多大多数人应该是没用的</strong>），是下一篇会补充 Linux 的ORC unwinder、<code>backtrace</code> 拓展等内容。</p>
+<h1 id="_2">参考</h1>
+<p>[1] Stack (Debugging with GDB)：https://sourceware.org/gdb/current/onlinedocs/gdb.html/Stack.html#Stack</p>
+<p>[2] Unwinding Frames in Python (Debugging with GDB)：https://sourceware.org/gdb/current/onlinedocs/gdb.html/Unwinding-Frames-in-Python.html</p>
+<p>[3] Backtrace (Debugging with GDB)]：https://sourceware.org/gdb/current/onlinedocs/gdb.html/Backtrace.html#Backtrace</p>
+<p>[4] Neil Brown. (2015). A fresh look at the kernel's device model. https://lwn.net/Articles/645810/</p>
+<p>[5] DWARF Debugging Information Format Version 5：https://dwarfstd.org/doc/DWARF5.pdf</p>
+<p>[6] DWARF for the Arm 64-bit Architecture：https://github.com/ARM-software/abi-aa/releases/tag/2025Q4</p>
+<p>[7] Linux Standard Base Core Specification：https://refspecs.linuxfoundation.org/lsb.shtml</p>
+<p>[8] Stack unwinding | MaskRay：https://maskray.me/blog/2020-11-08-stack-unwinding</p>
+<hr />
+<blockquote>
+<p><strong>注意：以下的内容均为个人观点+在学习/实践中得出。</strong></p>
+<p><strong>如果你看完后有不同的观点也没关系！请指出，我很乐意去学尝试积极的东西。</strong></p>
+</blockquote>
+<p>封面：</p>
+<p><img alt="ChatGPT Image 2026年6月19日 12_53_22" src="pic/ChatGPT%20Image%202026%E5%B9%B46%E6%9C%8819%E6%97%A5%2012_53_22.png" /></p>
+<h1 id="1-introduction_1">1. introduction</h1>
+<p>在前面一篇：<a href="https://mp.weixin.qq.com/s/PlL2WnSima8e2b0JFZj2aQ">backtrace（三）：从 FP 到 DWARF ：解析用户态回溯技术</a> 讲了 <code>FP</code> 和 DWARF  的 <code>CFI</code> 实现 <code>unwind</code> 方法，但是如果再多搜索一下，你还会看到 Linux 内核里一个叫 <code>ORC Unwinder</code> 的东西<sup>[1]</sup>：</p>
+<p><img src="pic/image-20260618151711331.png" alt="image-20260618151711331" style="zoom: 50%;" /></p>
+<p>所以本文讲述 <code>ORC Unwinder</code>、<code>SFrame</code> 等内容。</p>
+<h1 id="2-linux-orc-unwinder">2. Linux 的 ORC Unwinder</h1>
+<h2 id="21_1">2.1 引入</h2>
+<p>如果单纯看 DWARF 里的 CFI，感觉已经万事大吉了，它和 <code>FP</code> 都是在解决如何恢复 <code>previous state</code> 的问题，区别只是 <strong>恢复规则存在哪里</strong> 和 <strong>恢复规则怎么执行</strong>。</p>
+<p>那既然功能正确了，问题自然也解决了。了吗？</p>
+<p>上面的工具似乎都是在调试用户空间的程序。</p>
+<p>内核开发者往往想得更加深入（或许这才是工程上的真正考虑的问题）：</p>
+<p><strong>功能正确 + 什么时候正确 + 在什么状态下正确 + 代价是多少</strong></p>
+<p>前面的 DWARF 做 <code>unwind</code> 的过程：基本就是查表，计算 <code>CFA</code>，恢复寄存器。</p>
+<blockquote>
+<p>而这里有一个前提就是我的程序能够正确地解析规则，本质就是解释器解析各种字节码（<code>DW_CFA_xxx</code>），有点像 <code>python</code> 脚本。</p>
+<p>这也很好理解，因为我们是在调出问题的用户程序，而 DWARF 生成的是外部调试信息（<strong>out-of-band（带外数据）</strong>），是给 <code>GDB</code> 用的，那出问题的用户程序自然不会影响到我们的 <code>unwind</code>。</p>
+</blockquote>
+<p>但对于内核来说，<code>kernel</code> 都挂了（<code>memory</code>、<code>stack</code>可能坏了），还要在这个挂了的环境上跑个解释器？跑着跑着解释器挂了不是更离谱？而且最重要的是 DWARF 生成的信息似乎并不由内核所掌控（<code>GCC</code> 生成）。</p>
+<p><strong>所以我理解的 <code>ORC Unwinder</code>  更加重要的是应该是可靠性，而不是文档中所说的性能（<code>simpler and faster</code>），性能只是副产品。</strong></p>
+<blockquote>
+<p><strong>这里插一句，以前我总是会怕表达自己对某个技术/文档的观点，总是会去想自己可能没想得到什么部分。但现在我觉得应该做的是：想确实没错，但更应该说出来让别人批判，要敢于犯错。</strong></p>
+</blockquote>
+<p>比如开发会遇到的各种问题：</p>
+<div class="highlight"><pre><span></span><code><span class="n">Kernel</span><span class="w"> </span><span class="n">Panic</span>
+<span class="n">Memory</span><span class="w"> </span><span class="n">Corruption</span>
+<span class="n">Double</span><span class="w"> </span><span class="n">Fault</span>
+<span class="n">Interrupt</span><span class="w"> </span><span class="n">Nesting</span>
+<span class="p">...</span>
+</code></pre></div>
+<p>所以在这样的极端环境下，我要的就是这个 <code>Call Trace</code> <strong>快速、可靠地工作</strong>，而不是像 DWARF 的 <code>CFI</code> 那样整个信息的表达有多全面（配个虚拟机啥的）。下图来源：[2]</p>
+<p><img alt="oops" src="pic/oops.png" /></p>
+<blockquote>
+<p>此时这里可以回去想一个内容，那对于用户程序来说，<code>FP</code> 那种方法肯定是 <code>not reliable</code>（在中断和异常处理的情况下）；DWARF 的 <code>CFI</code> 由于是在外部存调用信息，可以说是 <code>reliable</code> 的<sup>[2]</sup>？</p>
+</blockquote>
+<p>Linus 也确实对上面的一些现象发表过评价：</p>
+<blockquote>
+<p>Linus was clear that no DWARF unwinder would be allowed in the kernel: “Because from the last time we had fancy unwindoers [sic], and all the problems it caused for oops handling with absolutely zero_ upsides ever, I do not ever again want to see fancy unwinders with complex state machine handling used by the oopsing code.”</p>
+<p>Linus 明确表示，绝不允许任何复杂的异常处理机制被引入内核中：“因为上一次我们使用了那些复杂的异常处理机制后，不仅给错误处理带来了诸多问题，而且没有任何好处。我再也不想看到那种需要复杂状态机来处理的异常处理机制被用于错误处理代码中了。”</p>
+</blockquote>
+<p>而且有一点在内核很重要的是：汇编。</p>
+<p>DWARF 依赖编译器生成 <code>.eh_frame</code>，但内核中有大量的手写汇编代码（估计也有几万行了）。编译器无法为汇编生成 CFI 信息，必须手动标注 <code>.cfi_*</code> 伪指令——这在历史上被证明是<strong>不可维护的</strong>。</p>
+<blockquote>
+<p>"asm annotations were tried in the past and were found to be unmaintainable. They were often incorrect/incomplete and mde the code harder to read and keep updated."<sup>[1]</sup></p>
+</blockquote>
+<h2 id="22_1">2.2 如何解决/设计</h2>
+<p>AI 总结的 DWARF 的问题：</p>
+<ul>
+<li>太复杂（相当于跑虚拟机）： DWARF 的 <code>CFI</code> 规则本质上是一种字节码。解析它需要在内核里跑一个微型的状态机引擎。在 Panic 的废墟上跑虚拟机，极易引发二次崩溃（Double Fault），导致连崩溃日志都打印不出来。</li>
+<li>太慢： DWARF 的规则是增量式的（每一行只记录相对于上一行的变化），为了知道当前 PC 的恢复规则，解析器往往需要从函数开头的规则一路模拟计算过来，耗时极长。</li>
+<li>不可靠的代码补丁： 内核经常使用汇编手写底层逻辑（如异常向量表、上下文切换），而手写汇编很难完美维护复杂的 DWARF 注释。</li>
+</ul>
+<blockquote>
+<p>针对上面的种种问题，对于 <code>x86-64</code> 平台，Josh Poimboeuf 在社区讨论开发过程中提出了一种新的 <code>unwinder</code> 和调试信息格式，就是 ORC Unwinder。</p>
+<p>该方案利用 <code>objtool</code> 工具以及现有的堆栈验证机制，创建了一种全新的自定义调试信息格式。与 DWARF 格式相比，ORC 格式的体积更小、结构更简单。因此，在解析调试信息时，无需使用复杂的状态机来处理数据。</p>
+</blockquote>
+<p><strong>但是，我觉得上面还漏了一个点：少了 OS 内核非常重要的中断/异常处理，这在用户态都没有嘛，而且绝大多数崩溃也是在中断异常处理的时候呀。</strong></p>
+<p>我们知道，Linux 中每一个进程都会有各自的用户栈和内核栈，对于那些通过系统调用/中断/异常等方式进入到内核态的时候，就需要保存对应到上下文（也就是那个巨大的  <code>pt_regs</code>），所以这部分也是需要处理的。</p>
+<h3 id="221">2.2.1 自己理解</h3>
+<p>按照我常用的“程序是个状态机”的理论，来理解上面的 <code>ORC Unwinder</code>。</p>
+<p>从 <code>first principle</code> 来看，DWARF CFI 是怎么做的？</p>
+<ol>
+<li>由编译器编译器对应源文件，生成 <code>.eh_frame</code> 存储对应恢复 <code>call stack</code> 的规则（就是那个 <code>CFI</code>）</li>
+<li><code>GDB</code> 运行时去执行规则（<code>.eh_frame</code>），获取当前PC，获取 CFA 计算公式，计算 CFA，恢复上一层寄存器（<code>LR/FP/SP</code>）。</li>
+</ol>
+<p>我们可以看到，这里本质上 GDB 还是在做<strong>运行时计算</strong>的，那熟悉 C++/性能优化的人，自然也能想到去用<strong>编译时计算</strong>来做。</p>
+<p>所以 ORC 的核心思想，我理解的是，干脆在编译内核的时候，就让 GCC 直接把结果算好，然后结果全部摊平，构成一张查找表，之后用到就直接去查标记可。</p>
+<p>这样子，我就不需要 DWARF 那种复杂的字节码（<code>DW_CFA_xxx</code>），但还是和我在第三篇的思想类似：仍然按照 <code>PC</code> 去查找 <code>CFA</code>。</p>
+<blockquote>
+<p>当然，还有一些别的细节，比如编译构造这张表的时候就已经按 <code>PC</code> 排好序，任何给定的 <code>PC</code>，通过一次简单的二分查找，就能直接得到 <code>CFA</code> 和上一层栈帧的具体偏移。</p>
+</blockquote>
+<p>所以你看，本质上 ORC 只是把 DWARF CFI 从 DWARF 中搬出来了，不需要这么 DWARF 里重型的”解释器/虚拟机“。</p>
+<blockquote>
+<p>当然此时我觉得理解为状态机更好点，因为突然也意识到 DWARF 描述的是<strong>每条指令执行时的寄存器状态</strong>。</p>
+</blockquote>
+<p>所以思想还是：<a href="https://mp.weixin.qq.com/s/PlL2WnSima8e2b0JFZj2aQ">backtrace（三）：从 FP 到 DWARF ：解析用户态回溯技术</a> 中写到的很罗嗦的那一部分。</p>
+<blockquote>
+<p><strong>当然 ORC unwinder还有很多细节（其中我觉得最有意思的是怎么 <code>objtool</code> 对于逆向 GCC 代码生成流程 + <code>UNWIND_HINT_REGS</code> 的内容），还是推荐阅读：</strong></p>
+<ul>
+<li>
+<p><strong>内核文档：[1]：ORC unwinder：https://www.kernel.org/doc/html/latest/arch/x86/orc-unwinder.html</strong> </p>
+</li>
+<li>
+<p><strong>依旧是 MaskRay 大佬的文章：Stack unwinding：https://maskray.me/blog/2020-11-08-stack-unwinding</strong></p>
+</li>
+</ul>
+<p><strong>去看看深入的细节</strong></p>
+</blockquote>
+<p>哦对还有一个有意思的，来自内核文档的对于ORC的词源<sup>[1]</sup>：</p>
+<p><img alt="image-20260618200956045" src="pic/image-20260618200956045.png" /></p>
+<blockquote>
+<p><strong>9.6. 词源</strong></p>
+</blockquote>
+<p>兽人（Orcs），中世纪民间传说中的可怕生物，是矮人（Dwarves）的天敌。同样，ORC unwinder 的诞生正是为了对抗 DWARF 的复杂与缓慢。</p>
+<p>“尽管兽人很少考虑问题的多种解决方案，但他们确实擅长把事情做成，因为他们是行动的生物，而非思考的生物。”类似地，与深奥的 DWARF unwinder 不同，求真务实的 ORC unwinder 不会浪费任何时间或硅基精力去解码那些基于状态机的、变长零扩展无符号整数字节编码的调试信息条目。</p>
+<p>就像兽人经常挫败对手精心策划的计划一样，ORC unwinder 也经常以残酷、不屈不挠的效率展开栈回溯。</p>
+<p>ORC 代表 Oops Rewind Capability（Oops 回退能力）。</p>
+<h2 id="24">2.4 自己实现</h2>
+<p>按照我的风格，肯定要自己弄一个ORC玩玩看啦。</p>
+<p>代码在：https://github.com/JAILuo/wechat-demos/tree/main/debug-inside/di-04-backtrace/03-backtrace/03-orc</p>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdint.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdbool.h&gt;</span>
+
+<span class="c1">// 1. 模拟处理器上下文</span>
+<span class="c1">// 注意：相比 DWARF 需要维护数十个寄存器，ORC 只关心 3 个核心寄存器</span>
+<span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">uintptr_t</span><span class="w"> </span><span class="n">pc</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">uintptr_t</span><span class="w"> </span><span class="n">sp</span><span class="p">;</span>
+<span class="p">}</span><span class="w"> </span><span class="n">regs_t</span><span class="p">;</span>
+
+<span class="c1">// 2. ORC 表结构 (极致压缩：摒弃了 DWARF 虚拟机)</span>
+<span class="c1">// 内核只需要知道 &quot;SP/FP/RA 在哪里&quot;，不需要通用表达式求值</span>
+<span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">uintptr_t</span><span class="w"> </span><span class="n">pc</span><span class="p">;</span><span class="w">           </span><span class="c1">// 指令地址（实际存储为 PC-relative 压缩值）</span>
+<span class="w">    </span><span class="kt">int16_t</span><span class="w"> </span><span class="n">sp_offset</span><span class="p">;</span><span class="w">      </span><span class="c1">// SP 恢复：直接加法，无字节码解析</span>
+<span class="w">    </span><span class="kt">int16_t</span><span class="w"> </span><span class="n">bp_offset</span><span class="p">;</span><span class="w">      </span><span class="c1">// FP 恢复：直接加法</span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">sp_reg</span><span class="o">:</span><span class="mi">4</span><span class="p">;</span><span class="w">       </span><span class="c1">// 基址寄存器：SP/FP/PREV_SP/UNDEFINED</span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">type</span><span class="o">:</span><span class="mi">2</span><span class="p">;</span><span class="w">         </span><span class="c1">// 0=CALL, 1=REGS（中断上下文 pt_regs）</span>
+<span class="p">}</span><span class="w"> </span><span class="n">orc_entry_t</span><span class="p">;</span>
+
+<span class="c1">// 按 PC 严格排序的 ORC 表 (编译期生成，运行时只读)</span>
+<span class="c1">// 相比 DWARF 的 CIE/FDE 嵌套结构，这是纯扁平数组，极致缓存友好</span>
+<span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">orc_entry_t</span><span class="w"> </span><span class="n">mock_orc_table</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// sys_read: 普通函数调用，SP 偏移 16，FP 在 CFA-16</span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="p">.</span><span class="n">pc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x1000</span><span class="p">,</span><span class="w"> </span><span class="p">.</span><span class="n">sp_offset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">16</span><span class="p">,</span><span class="w">  </span><span class="p">.</span><span class="n">bp_offset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">-16</span><span class="p">,</span><span class="w"> </span><span class="p">.</span><span class="n">sp_reg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="p">.</span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="c1">// do_IRQ: 中断帧！type=1 表示栈上保存了 256 字节的 pt_regs</span>
+<span class="w">    </span><span class="c1">// 这是 ORC 相比 DWARF 的关键优化：直接识别中断上下文</span>
+<span class="w">    </span><span class="c1">// 注意是：256(pt_regs)/中断 + 32(局部栈帧) = 288</span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="p">.</span><span class="n">pc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x2000</span><span class="p">,</span><span class="w"> </span><span class="p">.</span><span class="n">sp_offset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">288</span><span class="p">,</span><span class="w"> </span><span class="p">.</span><span class="n">bp_offset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">-16</span><span class="p">,</span><span class="w"> </span><span class="p">.</span><span class="n">sp_reg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="p">.</span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="c1">// driver_bug: 底层驱动函数</span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="p">.</span><span class="n">pc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x3000</span><span class="p">,</span><span class="w"> </span><span class="p">.</span><span class="n">sp_offset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="p">,</span><span class="w">  </span><span class="p">.</span><span class="n">bp_offset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">-16</span><span class="p">,</span><span class="w"> </span><span class="p">.</span><span class="n">sp_reg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="p">.</span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">},</span>
+<span class="p">};</span>
+<span class="cp">#define ORC_TABLE_SIZE (sizeof(mock_orc_table) / sizeof(mock_orc_table[0]))</span>
+
+<span class="c1">// ================= 内核符号表模拟 =================</span>
+<span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">uintptr_t</span><span class="w"> </span><span class="n">addr_start</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">uintptr_t</span><span class="w"> </span><span class="n">addr_end</span><span class="p">;</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">func_name</span><span class="p">;</span>
+<span class="p">}</span><span class="w"> </span><span class="n">symbol_t</span><span class="p">;</span>
+
+<span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">symbol_t</span><span class="w"> </span><span class="n">mock_symtab</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="mh">0x1000</span><span class="p">,</span><span class="w"> </span><span class="mh">0x1050</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;sys_read&quot;</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="mh">0x2000</span><span class="p">,</span><span class="w"> </span><span class="mh">0x2050</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;do_IRQ&quot;</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="mh">0x3000</span><span class="p">,</span><span class="w"> </span><span class="mh">0x3050</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;driver_bug&quot;</span><span class="w"> </span><span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="nf">resolve_symbol</span><span class="p">(</span><span class="kt">uintptr_t</span><span class="w"> </span><span class="n">pc</span><span class="p">,</span><span class="w"> </span><span class="kt">uintptr_t</span><span class="w"> </span><span class="o">*</span><span class="n">offset</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">mock_symtab</span><span class="p">)</span><span class="o">/</span><span class="k">sizeof</span><span class="p">(</span><span class="n">mock_symtab</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">pc</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">mock_symtab</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">addr_start</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">pc</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">mock_symtab</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">addr_end</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="o">*</span><span class="n">offset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pc</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">mock_symtab</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">addr_start</span><span class="p">;</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">mock_symtab</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">func_name</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="o">*</span><span class="n">offset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;&lt;unknown_symbol&gt;&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="c1">// ===================================================</span>
+
+<span class="c1">// O(log N) 极速二分查找：在不触发任何虚拟机指令的情况下定位规则</span>
+<span class="c1">// 对比 DWARF：需要解析 CIE/FDE 头，执行 CFA 程序字节码</span>
+<span class="k">const</span><span class="w"> </span><span class="n">orc_entry_t</span><span class="o">*</span><span class="w"> </span><span class="nf">orc_find_entry</span><span class="p">(</span><span class="kt">uintptr_t</span><span class="w"> </span><span class="n">pc</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">left</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">right</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ORC_TABLE_SIZE</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">orc_entry_t</span><span class="w"> </span><span class="o">*</span><span class="n">found</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">left</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">right</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">mid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">left</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">right</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">left</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="w">        </span><span class="c1">// ORC 的查找逻辑：纯整数比较，无变长编码解析</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">mock_orc_table</span><span class="p">[</span><span class="n">mid</span><span class="p">].</span><span class="n">pc</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">pc</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">found</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">mock_orc_table</span><span class="p">[</span><span class="n">mid</span><span class="p">];</span><span class="w"> </span><span class="c1">// 命中最后一个小于等于当前 PC 的规则</span>
+<span class="w">            </span><span class="n">left</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mid</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">right</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mid</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">found</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// 带有 ASCII 树状渲染的内核 ORC Unwinder</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">do_orc_unwind</span><span class="p">(</span><span class="n">regs_t</span><span class="w"> </span><span class="o">*</span><span class="n">regs</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">[Kernel Panic] Initiating ORC Extreme-Speed Unwinder...</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;==================================================================</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">depth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">depth</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">regs</span><span class="o">-&gt;</span><span class="n">pc</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">uintptr_t</span><span class="w"> </span><span class="n">offset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">func_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">resolve_symbol</span><span class="p">(</span><span class="n">regs</span><span class="o">-&gt;</span><span class="n">pc</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">offset</span><span class="p">);</span>
+<span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="n">orc_entry_t</span><span class="w"> </span><span class="o">*</span><span class="n">entry</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">orc_find_entry</span><span class="p">(</span><span class="n">regs</span><span class="o">-&gt;</span><span class="n">pc</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">// 渲染树状缩进</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">depth</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;  │  &quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">depth</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">depth</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;  │  &quot;</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">// 【核心视觉高亮】：检测到中断帧！</span>
+<span class="w">        </span><span class="c1">// ORC 的 type 字段直接区分中断上下文，无需像 DWARF 那样解析复杂的状态</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">entry</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">entry</span><span class="o">-&gt;</span><span class="n">type</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;  ├─&gt; [Level %d] %s + 0x%lx  &lt;-- [⚠️ INTERRUPT: pt_regs Detected!]</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">depth</span><span class="p">,</span><span class="w"> </span><span class="n">func_name</span><span class="p">,</span><span class="w"> </span><span class="n">offset</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;  ├─&gt; [Level %d] %s + 0x%lx</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">depth</span><span class="p">,</span><span class="w"> </span><span class="n">func_name</span><span class="p">,</span><span class="w"> </span><span class="n">offset</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">depth</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;  │  &quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;  │   (PC: 0x%lx | SP: 0x%lx)</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">regs</span><span class="o">-&gt;</span><span class="n">pc</span><span class="p">,</span><span class="w"> </span><span class="n">regs</span><span class="o">-&gt;</span><span class="n">sp</span><span class="p">);</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">entry</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">depth</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;  │  &quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">depth</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;  │  &quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;  [!] ORC Table miss at PC 0x%lx. System Halted.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">regs</span><span class="o">-&gt;</span><span class="n">pc</span><span class="p">);</span>
+<span class="w">            </span><span class="k">break</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="c1">// ORC 极简查表算法：只有加法，没有解析器</span>
+<span class="w">        </span><span class="c1">// 对比 DWARF 的 execute_cfa_program()：无字节码循环，无状态机维护</span>
+<span class="w">        </span><span class="kt">uintptr_t</span><span class="w"> </span><span class="n">cfa</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">regs</span><span class="o">-&gt;</span><span class="n">sp</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">entry</span><span class="o">-&gt;</span><span class="n">sp_offset</span><span class="p">;</span>
+
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">depth</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;  │  &quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;  │   [ORC Hit] CFA = SP + %d =&gt; 0x%lx</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">entry</span><span class="o">-&gt;</span><span class="n">sp_offset</span><span class="p">,</span><span class="w"> </span><span class="n">cfa</span><span class="p">);</span>
+
+<span class="w">        </span><span class="kt">uintptr_t</span><span class="w"> </span><span class="n">next_pc</span><span class="p">;</span>
+<span class="w">        </span><span class="c1">// 【核心修复】：如果是中断帧，必须去 pt_regs 的深处把 PC 挖出来！</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">entry</span><span class="o">-&gt;</span><span class="n">type</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// 中断发生前，SP 位于 CFA。随后压入了 256 字节的 pt_regs。</span>
+<span class="w">            </span><span class="c1">// 按照我们的 setup 模拟，被打断的 PC 存在 pt_regs 的底部，即 (cfa - 256 - 8)</span>
+<span class="w">            </span><span class="n">next_pc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="p">(</span><span class="kt">uintptr_t</span><span class="o">*</span><span class="p">)(</span><span class="n">cfa</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">256</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">8</span><span class="p">);</span>
+<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">depth</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;  │  &quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;  │   [Hardware Magic] Decoding PC from pt_regs...</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// 普通函数，PC 存在 CFA - 8</span>
+<span class="w">            </span><span class="n">next_pc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="p">(</span><span class="kt">uintptr_t</span><span class="o">*</span><span class="p">)(</span><span class="n">cfa</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">8</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="kt">uintptr_t</span><span class="w"> </span><span class="n">next_sp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cfa</span><span class="p">;</span>
+
+<span class="w">        </span><span class="c1">// 状态机极速回退</span>
+<span class="w">        </span><span class="n">regs</span><span class="o">-&gt;</span><span class="n">pc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">next_pc</span><span class="p">;</span>
+<span class="w">        </span><span class="n">regs</span><span class="o">-&gt;</span><span class="n">sp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">next_sp</span><span class="p">;</span>
+<span class="w">        </span><span class="n">depth</span><span class="o">++</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;==================================================================</span><span class="se">\n\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// 模拟极其复杂的内核崩溃现场（带有硬件中断介入）</span>
+<span class="kt">uint8_t</span><span class="w"> </span><span class="n">fake_kernel_stack</span><span class="p">[</span><span class="mi">1024</span><span class="p">];</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">setup_kernel_environment</span><span class="p">(</span><span class="n">regs_t</span><span class="w"> </span><span class="o">*</span><span class="n">regs</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">uintptr_t</span><span class="w"> </span><span class="n">stack_bottom</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">uintptr_t</span><span class="p">)</span><span class="o">&amp;</span><span class="n">fake_kernel_stack</span><span class="p">[</span><span class="mi">1024</span><span class="p">];</span>
+
+<span class="w">    </span><span class="c1">// 1. 用户态发起系统调用，进入内核态的 sys_read</span>
+<span class="w">    </span><span class="c1">// 栈布局：RA | FP | 局部变量...</span>
+<span class="w">    </span><span class="kt">uintptr_t</span><span class="w"> </span><span class="n">cfa_sys_read</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">stack_bottom</span><span class="p">;</span>
+<span class="w">    </span><span class="o">*</span><span class="p">(</span><span class="kt">uintptr_t</span><span class="o">*</span><span class="p">)(</span><span class="n">cfa_sys_read</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">8</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x0</span><span class="p">;</span><span class="w"> </span>
+
+<span class="w">    </span><span class="c1">// 2. 硬件中断突然打断了 sys_read！</span>
+<span class="w">    </span><span class="c1">// 内核将整个 CPU 上下文 (pt_regs) 压入栈中，消耗了 256 字节。进入 do_IRQ。</span>
+<span class="w">    </span><span class="c1">// 这是 ORC type=1（REGS）的场景：不是普通函数调用，而是中断保存</span>
+<span class="w">    </span><span class="kt">uintptr_t</span><span class="w"> </span><span class="n">cfa_irq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cfa_sys_read</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">256</span><span class="p">;</span><span class="w"> </span>
+<span class="w">    </span><span class="o">*</span><span class="p">(</span><span class="kt">uintptr_t</span><span class="o">*</span><span class="p">)(</span><span class="n">cfa_irq</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">8</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x1024</span><span class="p">;</span><span class="w"> </span><span class="c1">// 被打断的地址：落在 sys_read 范围内</span>
+
+<span class="w">    </span><span class="c1">// 3. do_IRQ 处理时，调用到了有 Bug 的底层驱动</span>
+<span class="w">    </span><span class="kt">uintptr_t</span><span class="w"> </span><span class="n">cfa_bug</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cfa_irq</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">32</span><span class="p">;</span>
+<span class="w">    </span><span class="o">*</span><span class="p">(</span><span class="kt">uintptr_t</span><span class="o">*</span><span class="p">)(</span><span class="n">cfa_bug</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">8</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x2018</span><span class="p">;</span><span class="w"> </span><span class="c1">// 返回地址：落在 do_IRQ 范围内</span>
+
+<span class="w">    </span><span class="c1">// 4. 当前崩溃定格在 driver_bug 内部的 0x3010</span>
+<span class="w">    </span><span class="n">regs</span><span class="o">-&gt;</span><span class="n">pc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x3010</span><span class="p">;</span><span class="w"> </span>
+<span class="w">    </span><span class="n">regs</span><span class="o">-&gt;</span><span class="n">sp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cfa_bug</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">32</span><span class="p">;</span><span class="w"> </span><span class="c1">// driver_bug 自身消耗了 32 字节</span>
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">regs_t</span><span class="w"> </span><span class="n">crashed_regs</span><span class="p">;</span>
+<span class="w">    </span><span class="n">setup_kernel_environment</span><span class="p">(</span><span class="o">&amp;</span><span class="n">crashed_regs</span><span class="p">);</span>
+<span class="w">    </span><span class="n">do_orc_unwind</span><span class="p">(</span><span class="o">&amp;</span><span class="n">crashed_regs</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><img alt="image-20260618202308221" src="pic/image-20260618202308221.png" /></p>
+<p>上面只是模拟的触发中断处理之后回溯的内容，具体 <code>objtool</code> 怎么生成这张表（特别是怎么处理中断上下文的回溯的）得具体看看。</p>
+<p>AI 总结：</p>
+<p><strong>ORC 表由 <code>objtool</code> 反汇编分析生成；中断上下文通过 <code>type=1</code> 直接标记为 <code>pt_regs</code> 帧，运行时跳过普通 RA 寻址，从 <code>pt_regs</code> 结构里取回被打断的 PC——这是把 DWARF 的复杂状态机拍扁成一张只读数组的关键设计。</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">场景</th>
+<th style="text-align: left;">普通函数调用 (<code>type=0</code>)</th>
+<th style="text-align: left;">中断/异常 (<code>type=1</code>)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>栈上保存了什么</strong></td>
+<td style="text-align: left;">返回地址 (RA) + 可能有的 FP</td>
+<td style="text-align: left;">完整的 <code>pt_regs</code>（整个 CPU 上下文，x86-64 上 168~256 字节）</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>RA 位置</strong></td>
+<td style="text-align: left;"><code>CFA - 8</code>（固定）</td>
+<td style="text-align: left;">埋在 <code>pt_regs</code> 结构深处，需按架构偏移量去取</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>objtool 怎么识别</strong></td>
+<td style="text-align: left;">分析 <code>call</code> 指令后的正常栈调整</td>
+<td style="text-align: left;">识别 <code>ENTRY()</code>/<code>ENDPROC()</code> 标注的入口代码，或 <code>UNWIND_HINT_REGS</code> 等手工 hint</td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li>内核入口代码（如 <code>do_IRQ</code>、<code>entry_SYSCALL_64</code>）在 asm 里用 <code>UNWIND_HINT_REGS</code> 宏（或等效标注）告诉 <code>objtool</code>："这里不是普通函数调用，硬件会自动压入 pt_regs" 。</li>
+<li><code>objtool</code> 分析到这些标注后，生成 <code>type = ORC_TYPE_REGS</code> 的条目，<code>sp_offset</code> 覆盖 <code>pt_regs</code> 大小 + 函数自身栈帧。</li>
+<li>运行时 unwinder 看到 <code>type == 1</code>，就知道<strong>不能按普通 <code>CFA-8</code> 去取返回地址</strong>，而要去 <code>pt_regs</code> 结构里按固定偏移把被打断的 PC 挖出来。</li>
+</ol>
+<p><img alt="image-20260619124504803" src="pic/image-20260619124504803.png" /></p>
+<h2 id="25-reliable-stacktrace">2.5 <code>reliable stacktrace</code></h2>
+<p>如果你前面仔细阅读了 ORC 的内容 ，你会发现，<strong><code>ORC Unwinder</code> 的核心，是前面的 <code>objtool</code>。</strong><code>objtool</code> 是 Linux 内核源码树中的一个编译时工具（位于 <code>tools/objtool/</code>）。</p>
+<p>主要做的就是静态分析所有代码，然后生成 <code>unwind metadata</code>（ <code>.orc_unwind</code> 和 <code>.orc_unwind_ip</code>），然后在链接时合并所有 ORC section → 启动时排序/后处理，最后给到内核 <code>unwinder</code> 使用。</p>
+<p>为什么内核社区要费这么大劲搞这套庞大且复杂的静态分析机制？如果在内核社区的讨论中再上升一个抽象层次，我理解这么搞的目标其实是：<strong><code>Reliable Stacktrace</code>（绝对可靠的栈回溯）</strong>。</p>
+<blockquote>
+<p>是不是想到了我们前面是不是说的中断/异常处理对 <code>unwind</code> 的影响？</p>
+<p>下面的内容，由 AI 总结，他总结得挺好的，因为我总感觉自己好像没有特别懂文档这里的内容<sup>[3]</sup>。</p>
+</blockquote>
+<p><img src="pic/image-20260618222919193.png" alt="image-20260618222919193" style="zoom: 33%;" /></p>
+<p>按照内核文档的定义，普通的栈回溯往往是“尽力而为（best-effort）”的，这用来辅助调试打印 Oops 没问题。但在诸如 <strong><code>Livepatching</code>（内核热补丁）</strong> 这样的场景下，系统必须 100% 确信当前没有任何任务停留在即将被替换的函数中。</p>
+<p>这就要求 <code>Stacktrace</code> 必须做到：<strong>要么完美无缺地回溯出所有调用栈，要么明确报错说“我遇到了无法解析的脏状态（返回非 0）”，绝不能给出错误的猜测。</strong></p>
+<p>要做到这种可靠，文档指出了几个极其棘手的挑战（也是普通 <code>unwinder</code> 容易翻车的地方）：</p>
+<ol>
+<li>
+<p><strong>跨越中断与异常（Interrupts and Exceptions）</strong></p>
+<p>当函数正在执行 Prologue（压栈）或 Epilogue（弹栈）时，如果突然来了一个中断，此时的栈指针和帧指针是处于“中间不一致状态”的。普通的 unwinder 在这里极其容易迷失，而 Reliable Stacktrace 必须能精准识别出这种边界状态并决定是继续回溯还是安全拒绝（文档 4.3 节）。</p>
+</li>
+<li>
+<p><strong>返回地址被篡改（Rewriting of return addresses）</strong> </p>
+<p>内核里有很多黑魔法，比如 <code>ftrace</code>（函数追踪）或 <code>kprobes</code>（动态探测）。它们会用“蹦床（Trampoline）”技术把原本存在栈上的返回地址临时替换掉，等执行完探测代码再跳回去。这就导致 unwinder 在栈上找不到真实的返回地址（文档 4.4 节）。</p>
+</li>
+<li>
+<p><strong>架构特有的寄存器二义性（Link Register Unreliability）</strong> </p>
+<p>在 x86 上，<code>call</code> 指令会自动把返回地址压栈；</p>
+<p>但在 ARM64 等 RISC 架构上，<code>BL</code>（函数调用）指令是把返回地址放到 <strong>LR (Link Register, X30)</strong> 寄存器中，而不是马上压栈。在函数执行的过程中，返回地址可能仅存在于 LR 中，也可能刚被压入栈中，甚至可能因为某些汇编优化被覆盖。</p>
+<p>如果仅仅依赖运行时去猜，很容易出现同一个函数在 Call Trace 中出现两次，或者层级颠倒的错误（文档 4.6 节）。</p>
+</li>
+</ol>
+<p><strong>这就解释了为什么 x86 的 ORC 能成功：</strong> 面对上面这些变态的场景，x86 依靠 <code>objtool</code> 这个苦力，在编译时就把所有这些黑魔法、中断上下文和栈变化情况全部分析得一清二楚，做成一张绝对可靠的表。运行时查表，自然就实现了 <code>Reliable Stacktrace</code>。</p>
+<h1 id="3-sfram">3. <code>SFram</code></h1>
+<h2 id="31-introduction">3.1 introduction</h2>
+<p>你会发现，<code>ORC</code> 似乎还只是给 <code>x86-64</code> 用的，2026年了，<code>arm64</code> 似乎都没有 <code>ORC</code>？</p>
+<p><img src="pic/image-20260618220817118.png" alt="image-20260618220817118" style="zoom: 50%;" /></p>
+<p>尽管 Linux 社区这几年也一直有在做 <code>objtool → arm64</code><sup>[4]</sup>（虽然看上去就只有 <code>objtool</code> 的作者 Josh Poimboeu 自己在弄），<code>patch</code> 也有，但 <code>ORC metadata format</code> 还就是没正式进入 <code>arm64</code> 主线。</p>
+<p>为啥呢？<code>arm64</code> 社区在关心另一个方向：<code>SFrame</code>。</p>
+<p>或许你会说，既然有个这么好用的 <code>ORC Unwinder</code>，<code>reliable stacktrace</code> 不也做的OK嘛？</p>
+<p>为啥不用呢？开发者也不是没想到，他们的起初的做法<sup>[5]</sup>：</p>
+<blockquote>
+<ul>
+<li>Proposed a “dynamic” form of frame pointer validation<ul>
+<li>The frame pointer on the stack is validated against the frame pointer offset pulled from the ORC table</li>
+<li>If the calculated FP does not match the expected one, the unwind is considered unreliable</li>
+</ul>
+</li>
+<li>Involved substantial reorganization of the objtool/ORC code to separate the architecture-generic vs architecture-specific components</li>
+</ul>
+</blockquote>
+<ul>
+<li>提出了一种“动态”形式的帧指针验<ul>
+<li>堆栈上的帧指针根据从ORC表中提取的帧指针偏移进行验证</li>
+<li>如果计算出的FP与预期不符，则认为解卷不可靠</li>
+</ul>
+</li>
+<li>涉及对objtool/ORC代码进行实质性重组，以将架构通用组件与架构特定组件分开</li>
+</ul>
+<p>但是社区给的回复，ORC 强依赖 <code>objtool</code>，非常脆弱<sup>[5]</sup>：</p>
+<ol>
+<li><strong>逆向控制流的问题</strong>：<code>objtool</code> 的本质是去逆向工程（Reverse-engineer）编译器生成的二进制控制流。一旦遇到复杂的边界情况（例如跳转表 Jump tables），这种事后推导非常容易失败。（本质就是一种hack）</li>
+<li><strong>维护成本</strong>：编译器的代码生成策略是不断演进的。只要编译器一改动，<code>objtool</code> 就必须被动地跟进维护去适配新的指令排列，这种打补丁式的方案在长远来看是不可持续的。</li>
+</ol>
+<p><img src="pic/image-20260618225342370.png" alt="image-20260618225342370" style="zoom: 33%;" /></p>
+<blockquote>
+<p>例子 A：尾调用优化（Tail Call Optimization） 正常函数结束，汇编是这样的：</p>
+<ol>
+<li>恢复栈底 <code>pop %rbp</code></li>
+<li>返回上一层 <code>ret</code> <code>objtool</code> 一看这套连招，就知道：“哦，函数结束了，栈状态安全。”</li>
+</ol>
+<p>但突然有一天，GCC 编译器升级了，变得更聪明了。它发现你的函数在最后一行调用了另一个函数。为了省事，GCC 直接不用 <code>call</code> 和 <code>ret</code> 了，直接生成一条 <code>jmp</code>（无条件跳转）跳到下一个函数。 这下 <code>objtool</code> 又傻眼了：“说好的 <code>ret</code> 结尾呢？这个 <code>jmp</code> 到底是函数内部的代码跳转，还是函数结束的标志？” 于是，内核开发者只能赶紧去改 <code>objtool</code> 的 C 代码，给它打个补丁：“如果遇到某某情况的 <code>jmp</code>，你要把它当成函数返回来处理。”</p>
+<p>例子 B：安全漏洞的终极折磨（如 Spectre 漏洞的 Retpoline 补丁） 当年爆出 CPU 幽灵漏洞（Spectre）时，为了防止黑客利用“间接跳转”预测执行，编译器发明了一种极其反人类的黑魔法叫 Retpoline。 它故意用一套 <code>call</code>、<code>pause</code>、改写栈上返回地址的魔改汇编，把 CPU 的预测器骗得团团转。 连 CPU 都被骗了，负责静态分析汇编的 <code>objtool</code> 直接原地爆炸。为了让 <code>objtool</code> 能看懂这种为了防漏洞而故意写得乱七八糟的汇编，内核维护者被迫在 <code>objtool</code> 里写了成百上千行的“特例判断代码”。</p>
+</blockquote>
+<p>所有：与其用外部工具在事后辛苦地去“猜”控制流，更理想的方案应该是直接使用由编译器（Compiler）原生生成的数据<sup>[5]</sup>。</p>
+<h2 id="32-sframe">3.2 引入SFrame</h2>
+<p>可以说：</p>
+<blockquote>
+<p><strong>与其让外部工具去猜编译器做了什么，不如直接让编译器把答案留下来。</strong></p>
+</blockquote>
+<p>这便是 <code>SFrame</code> 的核心思想。 </p>
+<p>实际上 <code>SFrame</code> 做的事情非常直接，也和 ORC 很像，但是它只保留堆栈跟踪所需的最少必要信息<sup>[6]</sup>，<code>unwind</code> 的时候直接查表即可（FRE），关键还是下面这些信息：</p>
+<div class="highlight"><pre><span></span><code>FP 在哪里
+RA 在哪里
+CFA 怎么算
+</code></pre></div>
+<p>但是，和 <code>ORC</code> 最大一点的区别是：</p>
+<ul>
+<li><code>ORC</code> → 编译后计算</li>
+<li><code>SFrame</code> → 编译器直接生成结果</li>
+</ul>
+<p>或者引入 <code>objtool</code> 说的更准确一点的，就是不用 hack 了：Similar to ORC, but avoids reverse-engineering the binary<sup>[5]</sup>：</p>
+<ul>
+<li>
+<p><code>ORC</code></p>
+<p><code>Compiler → Binary → objtool → ORC Table</code></p>
+</li>
+<li>
+<p><code>SFrame</code></p>
+<p><code>Compiler → SFrame</code></p>
+</li>
+</ul>
+<p>一个事后分析，一个原生生成看着就不错。</p>
+<p>而且，我觉得更为重要的是 SFrame 还能在用户态上跑，因为它从设计之初就是<strong>GNU Binutils 标准格式<sup>[6]</sup></strong>，而非内核专属（ORC 要用内核的工具 <code>objtool</code>），比如以下对比：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">属性</th>
+<th style="text-align: left;">SFrame</th>
+<th style="text-align: left;">ORC</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">ELF Section</td>
+<td style="text-align: left;"><code>.sframe</code> (标准名)</td>
+<td style="text-align: left;"><code>.orc_unwind</code> (内核硬编码)</td>
+</tr>
+<tr>
+<td style="text-align: left;">Program Header</td>
+<td style="text-align: left;"><code>PT_GNU_SFRAME</code> (标准类型)</td>
+<td style="text-align: left;">无</td>
+</tr>
+<tr>
+<td style="text-align: left;">Section Type</td>
+<td style="text-align: left;"><code>SHT_GNU_SFRAME</code> (标准类型)</td>
+<td style="text-align: left;">无</td>
+</tr>
+<tr>
+<td style="text-align: left;">维护者</td>
+<td style="text-align: left;">Sourceware/Binutils</td>
+<td style="text-align: left;">Linux Kernel</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>任何 ELF 可执行文件</strong>都可以携带 <code>.sframe</code> 段</li>
+<li><strong>内核加载器</strong>（<code>fs/binfmt_elf.c</code>）通过标准 <code>PT_GNU_SFRAME</code> 识别并映射</li>
+<li><strong>perf/BPF</strong> 可以像访问 <code>.text</code> 一样访问 <code>.sframe</code></li>
+</ul>
+<p>可以具体看 wiki<sup>[6]</sup>：</p>
+<p><img alt="image-20260619010450614" src="pic/image-20260619010450614.png" /></p>
+<p>当然了，这个特性还是在比较新的 <code>binutils</code> 里支持的：</p>
+<table>
+<thead>
+<tr>
+<th>GNU Binutils 2.40</th>
+<th>SFrame Version 1 (Obsoleted, Do not use)</th>
+<th>(<a href="https://sourceware.org/binutils/docs-2.40/sframe-spec.html">html</a>, <a href="https://sourceware.org/binutils/docs-2.40/sframe-spec.pdf">pdf</a>)</th>
+<th>Support for x86_64, AArch64</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GNU Binutils 2.41</td>
+<td>SFrame Version 2</td>
+<td>(<a href="https://sourceware.org/binutils/docs-2.41/sframe-spec.html">html</a>, <a href="https://sourceware.org/binutils/docs-2.41/sframe-spec.pdf">pdf</a>)</td>
+<td>Fix for unaligned SFrame FDEs, Fix Rep Block representation</td>
+</tr>
+<tr>
+<td>GNU Binutils 2.44</td>
+<td>SFrame Version 2</td>
+<td>(<a href="https://sourceware.org/binutils/docs-2.44/sframe-spec.html">html</a>, <a href="https://sourceware.org/binutils/docs-2.44/sframe-spec.pdf">pdf</a>)</td>
+<td>Bugfixes</td>
+</tr>
+<tr>
+<td>GNU Binutils 2.45</td>
+<td>SFrame Version 2 (Errata 1)</td>
+<td>(<a href="https://sourceware.org/binutils/docs-2.45/sframe-spec.html">html</a>, <a href="https://sourceware.org/binutils/docs-2.45/sframe-spec.pdf">pdf</a>)</td>
+<td>Relocatable links fixed, Support for s390x</td>
+</tr>
+<tr>
+<td>GNU Binutils 2.46</td>
+<td>SFrame Version 3</td>
+<td>TBD</td>
+<td>Mark outermost frame, Support for text &gt; 2GiB, Support for flexible topmost frames. More details at <a href="https://sourceware.org/binutils/wiki/sframe/sframev3todo#preview">SFrame V3</a>.</td>
+</tr>
+</tbody>
+</table>
+<p>我的 Ubuntu22.04 就不支持：</p>
+<p><img alt="image-20260619010819197" src="pic/image-20260619010819197.png" /></p>
+<h2 id="33">3.3 现状</h2>
+<p>上面说了一堆的优点，但 SFrame 还是有很大争议的：</p>
+<ul>
+<li><strong>Peter Zijlstra (x86 ORC 开发者)</strong> 认为：x86_64 不会采用 SFrame，ORC 已足够好<sup>[7]</sup></li>
+<li><strong>MaskRay (LLVM 开发者)</strong> 质疑：<code>.sframe</code> 体积比 <code>.eh_frame</code> 大 10%，用户态 adoption 不现实<sup>[7]</sup></li>
+<li><strong>但 ARM64 社区</strong> 认为：这是 ARM64 获得 reliable stacktrace 的最可行路径<sup>[8]</sup></li>
+</ul>
+<p>还有就是用户态 SFrame 有一个<strong>致命的安全问题</strong>：</p>
+<p><strong>问题</strong>：perf 采样发生在<strong>中断/NMI 上下文</strong>，此时：</p>
+<ul>
+<li>用户态页表可能未映射</li>
+<li><code>.sframe</code> 段可能被 swap out</li>
+<li>直接读取用户态内存会导致 <strong>page fault</strong></li>
+</ul>
+<p>在中断上下文中触发 page fault 是<strong>致命的</strong>——内核无法处理（没有可切换的任务上下文），只能 panic。</p>
+<p><strong>解决方案：Deferred Stacktrace</strong></p>
+<div class="highlight"><pre><span></span><code>传统 perf 采样流程：
+  NMI/IRQ ──► 读取 PC/SP ──► 立即 unwind ──► 输出调用链
+                              ↑
+                              └── 此时读用户态 .sframe 可能 page fault！
+
+Deferred Stacktrace 流程：
+  NMI/IRQ ──► 读取 PC/SP ──► 存入 perf ring buffer ──► 返回
+                                              ↓
+  进程返回用户态时（syscall exit）────────────► 读取 .sframe ──► unwind
+                                              ↑
+                                              └── 此时用户态内存安全可访问
+</code></pre></div>
+<p>但这带来了新的问题：</p>
+<ul>
+<li><strong>BPF 无法实时 unwind</strong>：BPF 程序在中断上下文中不能延迟处理</li>
+<li><strong>可能丢栈</strong>：如果采样发生在 syscall 末尾，进程可能在下一次采样前退出，导致栈丢失</li>
+</ul>
+<p>还有一个性能悖论：</p>
+<p>SFrame 的目标是<strong>省略 frame pointer</strong> 以节省寄存器，但：</p>
+<ul>
+<li><strong>FP unwind</strong>：2-3 次内存访问，极快</li>
+<li><strong>SFrame unwind</strong>：二分查找 + 内存访问 + 计算，更慢</li>
+</ul>
+<p>如果 omit-fp 节省的性能被 unwind 开销抵消，得不偿失。</p>
+<p>总而言之，该特性仍在发展当中，说不定未来呢？</p>
+<h1 id="4">4. 拓展</h1>
+<blockquote>
+<p>在这一篇：<a href="https://mp.weixin.qq.com/s/0iWsRplRTopvvkK5dpPx4A">你的技术想象力，受限于你的信息边界</a> 中：</p>
+<p>“（我觉得）在这个时代的下，你们最需要的就是有一个清晰的概念什么事情是能办到的，因为人没有办法做自己想象不到的东西，而扩展你的想象力的方式就是去看别人想到了什么。“</p>
+<p>所以，在今后的文章中，考虑篇幅合适的情况下，我都会用以上类似的 <code>prompt</code> + 本文前面几章的总结 + <code>xxx</code> 官方手册，去和 AI 聊，让 AI 帮我看看有什么冷门但重要的东西值得去看看的！</p>
+<p>下面写我觉得有意思的。</p>
+</blockquote>
+<h2 id="41-livepatch-ota">4.1 <code>livepatch</code> 和 <code>OTA</code></h2>
+<p>经过前文的理解，我们一般看的普通的 <code>backtrace</code>，其实做的是：尽量恢复(Best Effort)。</p>
+<p>而 <code>ORC</code> 的终极目标不是 <code>ORC</code>，而是：<code>Reliable Stacktrace</code>（要么完全正确/要么明确失败）</p>
+<p>因为普通的 Oops 栈回溯哪怕错了一层，顶多是开发者看日志时骂一句。</p>
+<p>但热补丁场景（比如给底层的存储驱动 <code>sd_mod</code> 或文件系统打补丁），系统必须 100% 确认：</p>
+<p><strong>当前没有任何一个休眠的线程正停留在准备被替换的旧函数中。</strong></p>
+<p>如果有，热替换一旦执行，线程醒来后执行的控制流就会全部错乱。</p>
+<p>对 <code>livepatch</code> 感兴趣的还是阅读：参考 [3]</p>
+<p>除此之外，如果有人熟悉 <code>OTA</code> 的话，可能会混淆（我没做过OTA，我只知道是远程更新，下面有误请指出）。</p>
+<p>实际上 <code>OTA</code> 应该不需要这个的，OTA 本质是：</p>
+<div class="highlight"><pre><span></span><code>旧镜像 → 重启 → 新镜像
+</code></pre></div>
+<p>就比如：<code>slot_a/slot_b</code> 的 A/B 升级。</p>
+<p>所以所以 <code>OTA</code> 不关心当前线程在哪里，因为所有线程都死了，直接重启即可。</p>
+<p>所以不要弄混了？</p>
+<p>但是如果你完全可以继续追问，为什么自己的手机好像是无感的OTA呢？怎么做到的？我不懂，问了AI后给我了一个名词：<code>RoR(Resume-on-Reboot)</code></p>
+<blockquote>
+<p>传统 OTA 更新流程中，重启后会遇到一个问题：</p>
+<blockquote>
+<p>Android 的 <strong>Credential Encrypted（CE）存储</strong> 在每次重启后都会被锁定，必须等用户输入 PIN/密码/图案后才能解锁。</p>
+</blockquote>
+<p>而 OTA 更新后，系统需要重建 Dalvik 缓存（显示为 "Android is upgrading..."），这个操作需要访问 CE 存储中的 App 数据。如果用户不在场手动解锁，更新流程就会卡在那里，设备无法真正完成启动。</p>
+<p><code>RoR</code> 的思路是：<strong>在 OTA 安装前，安全地临时保存用户的锁屏凭证（PIN/密码/图案）</strong>，重启后自动用这些凭证解锁 CE 存储，让系统可以在无人值守的情况下完成 Dalvik 缓存重建等收尾工作。</p>
+</blockquote>
+<p>所以还是挺有意思的！</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">场景</th>
+<th style="text-align: left;">没有 RoR</th>
+<th style="text-align: left;">有 RoR</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">夜间自动更新</td>
+<td style="text-align: left;">重启后卡在锁屏界面，等用户早上解锁才能用</td>
+<td style="text-align: left;">重启后自动完成全部流程，用户早上直接可用</td>
+</tr>
+<tr>
+<td style="text-align: left;">企业批量部署</td>
+<td style="text-align: left;">每台设备都需要人工干预</td>
+<td style="text-align: left;">可完全无人值守</td>
+</tr>
+<tr>
+<td style="text-align: left;">A/B 无缝更新</td>
+<td style="text-align: left;">虽然更新在后台完成，但重启后仍需解锁</td>
+<td style="text-align: left;">真正实现"无缝"</td>
+</tr>
+</tbody>
+</table>
+<h2 id="42">4.2 性能</h2>
+<p><strong>观测者的困境：eBPF 与性能剖析（Profiling）</strong></p>
+<p>观测系统本身的开销，不能改变被观测系统的状态（海森堡测不准原理的软件版）。</p>
+<p><strong>概念速览</strong>：在做底层性能分析时（比如用 eBPF 追踪中断延迟或块设备 I/O），我们需要高频地抓取调用栈。如果像 SFrame 那样存在用户态 Page Fault 的风险，或者像 DWARF 那样耗时太长，观测工具自己就会成为系统的性能瓶颈，甚至引发崩溃。这也是为什么 eBPF 社区对快速的、基于 BPF 内部实现的 unwinder 需求极其旺盛的原因。</p>
+<p>这部分我懂得不多，所以不展开讲啦，但是我知道 <code>profile</code> 和 <code>Observability</code> 对于 <code>Call Stack</code> 确实很重要。</p>
+<p><code>perf</code>、<code>eBPF</code>、<code>ftrace</code></p>
+<p>本质都依赖：<code>Call Stack</code>，因为普通的 <code>PC</code> 只能告诉你现在在哪，而 <code>Call Stack</code> 能告诉你为什么在这。</p>
+<h1 id="_3">参考</h1>
+<p>[1] 9. ORC unwinder — The Linux Kernel documentation：https://www.kernel.org/doc/html/latest/arch/x86/orc-unwinder.html</p>
+<p>[2] The Linux x86 ORC Stack Unwinder：https://www.codeblueprint.co.uk/2017/07/31/the-orc-unwinder.html</p>
+<p>[3] Reliable Stacktrace — The Linux Kernel documentation：https://docs.kernel.org/livepatch/reliable-stacktrace.html</p>
+<p>[4] objtool/arm64: Port klp-build to arm64：https://lwn.net/Articles/1072616/</p>
+<p>[5] Arm64 SFrame for Reliable Stacktrace：https://lpc.events/event/19/contributions/2077/attachments/1874/4018/Arm64%20SFrame%20for%20Reliable%20Stacktrace%20--%20LPC%202025.pdf</p>
+<p>[6] sframe - BINUTILS Wiki：https://sourceware.org/binutils/wiki/sframe#What_is_SFrame.3F</p>
+<p>[7] LKML: Fangrui Song: Re: Concerns about SFrame viability for userspace stack walking：https://lkml.org/lkml/2025/10/30/1959</p>
+<p>[8] [RFC] Adding SFrame support to llvm - Code Generation - LLVM Discussion Forums：https://discourse.llvm.org/t/rfc-adding-sframe-support-to-llvm/86900/6</p>
+<h1 id="_4">总结</h1>
+<p><a href="https://sourceware.org/pipermail/gdb/2020-January/048335.html">回溯停止：前一个帧与当前帧完全相同（可能是堆栈损坏？） --- Backtrace stopped: previous frame identical to this frame (corrupt stack?)</a></p>
+<p>总结教训。</p>
+<p>拓展：</p>
+<p>TODO：<code>thread apply all backtrace</code>, GDB will display the backtrace for all the threads; this is handy when you debug a core dump of a multi-threaded program.</p>
+<p>可以写一个多线程的程序，然后来调试。</p>
+<p>你说得对，关键是要从<strong>第一性原理</strong>理清栈回溯的本质，而不是被具体的实现细节（比如 <code>eh_frame</code>、帧指针）淹没。我们来一步步构建这个认知。</p>
+<h2 id="1">1. 栈回溯的核心问题</h2>
+<p>当你调用一个函数时，计算机需要记住：
+- <strong>从哪里来</strong>（返回地址）
+- <strong>用什么环境</strong>（栈指针、寄存器等）</p>
+<p>栈回溯（backtrace）就是从当前正在执行的函数，反向找到它的“调用者”，再找调用者的调用者……直到程序入口。</p>
+<p>这就像在一条链子上，每个环节只知道下一个环节是谁。回溯就是沿着链子反向走。</p>
+<h2 id="2">2. 如何唯一标识一个“帧”？</h2>
+<p>每个函数调用在栈上占据一块区域，称为<strong>帧</strong>。为了区分不同的帧（避免搞混，比如同一个函数被递归调用多次），GDB 给每个帧一个<strong>帧 ID</strong>。这个 ID 通常是：
+- <strong>栈地址</strong>（stack_addr）—— 帧的起始地址，由栈指针 SP 表示
+- <strong>程序计数器</strong>（code_addr）—— 帧所对应的函数代码地址（可选）
+- 也可能包含一个“特殊地址”</p>
+<p>只要两个帧的这些信息完全一样，GDB 就认为它们是 <strong>同一个帧</strong>。</p>
+<h2 id="3">3. 如何从当前帧找到上一帧？</h2>
+<p>这就是 <strong>栈展开（stack unwinding）</strong> 要做的事。GDB 使用一组“展开器（unwinder）”，每个展开器知道一种方法来计算上一帧的寄存器值（尤其是 PC 和 SP）。</p>
+<p>常见的展开方法有：
+- <strong>DWARF 调试信息</strong>（<code>.eh_frame</code> / <code>.debug_frame</code>）—— 最精确，编译器生成的指令如何恢复寄存器。
+- <strong>帧指针链</strong>（frame pointer）—— 传统的 <code>ebp/rbp</code> 链，简单但可能被优化掉。
+- <strong>启发式猜测</strong>（heuristic）—— 当没有符号信息时，GDB 根据当前指令模式猜测。</p>
+<p>无论哪种方法，最终 GDB 都要为上一帧计算出一个<strong>帧 ID</strong>。</p>
+<h2 id="4-unwind_same_id">4. 为什么会出现 <code>UNWIND_SAME_ID</code>？</h2>
+<p>假设当前帧是 <strong>F</strong>，GDB 尝试解开得到上一帧 <strong>P</strong>。</p>
+<ul>
+<li>它先计算出 <strong>P</strong> 的帧 ID。</li>
+<li>然后 GDB 会检查：<strong>这个 ID 是否已经存在于已经见过的帧列表中？</strong></li>
+</ul>
+<p>如果 <strong>P</strong> 的 ID 恰好等于 <strong>F</strong> 的 ID（或者等于链中更早的某个帧的 ID），GDB 就认为出现了<strong>循环</strong> —— 继续展开会永远卡在这里。于是它停止，并报告 <code>UNWIND_SAME_ID</code>。</p>
+<p><strong>本质原因</strong>：展开器“误以为”上一帧和当前帧是同一个帧（或者和之前的帧重复）。</p>
+<h2 id="5-id">5. 什么情况下会误以为 ID 相同？</h2>
+<h3 id="_5">情况一：栈真的坏了</h3>
+<ul>
+<li>程序错误导致栈内存被覆盖，比如缓冲区溢出，把返回地址覆盖成当前函数的地址。</li>
+<li>展开器从坏掉的栈数据中读取到的 SP 和 PC 恰好等于当前帧的值。</li>
+</ul>
+<h3 id="_6">情况二：展开信息错误或缺失</h3>
+<ul>
+<li>没有调试符号，GDB 使用启发式猜测，猜错了。</li>
+<li>有 <code>.eh_frame</code> 信息，但信息损坏或与当前运行的程序不匹配（比如加载了错误的共享库）。</li>
+<li>编译器优化（如尾调用优化、帧指针省略）导致标准展开方法失效。</li>
+</ul>
+<h3 id="_7">情况三：误将“同一个函数的不同调用”当作同一帧</h3>
+<ul>
+<li>例如递归函数，每次调用栈地址不同，但某些展开器可能错误地计算出相同的 SP（极少见）。</li>
+</ul>
+<h2 id="6-unwind_">6. 其他 <code>UNWIND_*</code> 原因简析</h2>
+<p>它们都是 GDB 用来解释“为什么无法继续回溯”的原因，定义在 <code>unwind_stop_reasons.def</code> 中。</p>
+<table>
+<thead>
+<tr>
+<th>原因</th>
+<th>含义</th>
+<th>触发场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>UNWIND_NO_REASON</code></td>
+<td>没有错误，正常</td>
+<td>成功展开或尚未尝试</td>
+</tr>
+<tr>
+<td><code>UNWIND_OUTERMOST</code></td>
+<td>已经到了最外层（如 <code>_start</code>）</td>
+<td>正常终止</td>
+</tr>
+<tr>
+<td><code>UNWIND_UNAVAILABLE</code></td>
+<td>需要的寄存器或内存值不可用</td>
+<td>调试远程目标、core文件缺失数据</td>
+</tr>
+<tr>
+<td><code>UNWIND_INNER_ID</code></td>
+<td>上一帧的栈地址比当前帧还<strong>内</strong>（按理应该更外）</td>
+<td>栈指针方向错误，展开器逻辑错误</td>
+</tr>
+<tr>
+<td><strong><code>UNWIND_SAME_ID</code></strong></td>
+<td>上一帧的 ID 等于当前帧的 ID</td>
+<td>上面说的情况</td>
+</tr>
+<tr>
+<td><code>UNWIND_NO_SAVED_PC</code></td>
+<td>无法找到返回地址（PC）</td>
+<td>展开器找不到保存 PC 的位置</td>
+</tr>
+<tr>
+<td><code>UNWIND_MEMORY_ERROR</code></td>
+<td>读取内存时出错</td>
+<td>无效地址、权限问题</td>
+</tr>
+</tbody>
+</table>
+<h2 id="7-unwind_same_id">7. 回到你的问题：<code>UNWIND_SAME_ID</code> 怎么引发的？</h2>
+<p>结合你当初的调试场景：
+<div class="highlight"><pre><span></span><code>(gdb) bt 
+#0  pthread_getname_np ()
+#1  __lll_timedlock_wait ()
+Backtrace stopped: previous frame identical to this frame (corrupt stack?)
+</code></pre></div></p>
+<p><strong>最可能的直接原因</strong>：GDB 在从 <code>#1</code> 展开到 <code>#0</code> 的“上一帧”时，计算出的帧 ID 与 <code>#1</code> 自身的 ID 相同。<br />
+- 为什么？因为 <code>pthread_getname_np</code> 是一个库函数，可能没有 <code>.eh_frame</code> 信息（或被 strip 了），GDB 使用启发式猜测，猜错了栈布局，错误地认为上一帧的 SP 和 PC 与 <code>#1</code> 完全一样。
+- 也可能这个库函数用了特殊的栈切换（如信号处理、线程局部存储），导致 GDB 无法正确计算。</p>
+<h2 id="8">8. 从第一性原理总结</h2>
+<blockquote>
+<p><strong>栈回溯的本质是根据当前帧的信息，计算出调用者的帧信息。每个帧必须有唯一的 ID。如果计算出的调用者帧 ID 等于当前帧 ID，说明出现循环，回溯停止，这就是 <code>UNWIND_SAME_ID</code>。</strong><br />
+根本原因是 <strong>展开器给出的信息错误</strong>，通常由于缺少调试信息、栈损坏、或异常的控制流（如信号、setjmp）。</p>
+</blockquote>
+<p>你不必纠结于 <code>eh_frame</code> 还是帧指针的具体细节，只要记住：<strong>GDB 是“盲人摸象”，它依赖元数据（或猜测）来推断上一帧。一旦推断出矛盾的 ID，它就拒绝继续，并用这个错误告诉你“栈可能坏了或者信息不全”。</strong></p>
+<p>如果你还想了解“GDB 具体如何选择 unwinder”或“如何一步步计算出 ID”，我可以再给你画一张简洁的概念图，但核心原理已经在这里了。</p>
+
+
+
+
+
+
+
+  
+    
+  
+  
+    
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Last update">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2026-07-22T19:03:02+02:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2026-07-22</span>
+  </span>
+
+    
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Created">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2026-06-25T15:55:15+02:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2026-06-25</span>
+  </span>
+
+    
+    
+    
+  </aside>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://github.com/JAILuo" target="_blank" rel="noopener" title="JAILuo" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../../..", "features": ["navigation.footer"], "search": "../../../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.83f73b43.min.js"></script>
+      
+        <script src="../../../../js/timeago.min.js"></script>
+      
+        <script src="../../../../js/timeago_mkdocs_material.js"></script>
+      
+        <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+      
+    
+  </body>
+</html>

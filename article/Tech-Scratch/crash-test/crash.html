@@ -1,0 +1,3688 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://jailuo.github.io/notes/article/Tech-Scratch/crash-test/crash.html">
+      
+      
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.48">
+    
+    
+      
+        <title>Crash - Messy Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.6f8fc17f.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../css/timeago.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#1-introduction" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../index.html" title="Messy Notes" class="md-header__button md-logo" aria-label="Messy Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Messy Notes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Crash
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256l137.3-137.4c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/JAILuo/notes" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../index.html" title="Messy Notes" class="md-nav__button md-logo" aria-label="Messy Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Messy Notes
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/JAILuo/notes" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    首页
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Article
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Article
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/article/concurrency sumary/summary.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    concurrency-summary
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/article/toolchain/toolchain.mc" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    toolchain
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/article/mount/mount.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    mount
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Course
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Course
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    University Course
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            University Course
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1_1" id="__nav_3_1_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    jyy OS2024
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_1_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            jyy OS2024
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_1_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1_1_1" id="__nav_3_1_1_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    course note
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_1_1_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            course note
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/University%20Course/jyy%20OS2024/cousre%20note/1.%20introduction/introduction.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    introduction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/University%20Course/jyy%20OS2024/cousre%20note/2.%20concurrency/concurrency.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    concurrency
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/University%20Course/jyy%20OS2024/cousre%20note/3.%20virtualization/virtualization.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    virtualization
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/University%20Course/jyy%20OS2024/cousre%20note/4.%20kernel/kernel.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    kernel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/University%20Course/jyy%20OS2024/cousre%20note/5.%20persistence/persistence.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    persistence
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_1_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1_1_2" id="__nav_3_1_1_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Mini Labs
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_1_1_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            Mini Labs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/University%20Course/jyy%20OS2024/Mini%20Labs/M1/M1.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    M1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/University%20Course/jyy%20OS2024/Mini%20Labs/M2/M2.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    M2
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/University%20Course/jyy%20OS2024/Mini%20Labs/M3/M3.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    M3
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_1_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1_1_3" id="__nav_3_1_1_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    OS Labs
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_1_1_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1_1_3">
+            <span class="md-nav__icon md-icon"></span>
+            OS Labs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/University%20Course/jyy%20OS2024/OS%20Labs/L0/L0.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    L0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/University%20Course/jyy%20OS2024/OS%20Labs/L1/L1.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    L1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    GeekTime
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            GeekTime
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2_1" id="__nav_3_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    深入理解计算机组成原理
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            深入理解计算机组成原理
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/GeekTime/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E4%B8%80%E5%91%A8%E7%9B%AE/1.%20%E6%8C%87%E4%BB%A4%E4%B8%8E%E8%BF%90%E7%AE%97/%E6%8C%87%E4%BB%A4%E4%B8%8E%E8%BF%90%E7%AE%97.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1. 指令与运算
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/GeekTime/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E4%B8%80%E5%91%A8%E7%9B%AE/2.%20%E5%A4%84%E7%90%86%E5%99%A8/%E5%A4%84%E7%90%86%E5%99%A8.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2. 处理器
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/GeekTime/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E4%B8%80%E5%91%A8%E7%9B%AE/3.%20%E5%AD%98%E5%82%A8%E4%B8%8EIO%E7%B3%BB%E7%BB%9F/%E5%AD%98%E5%82%A8%E4%B8%8EIO%E7%B3%BB%E7%BB%9F.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3. 存储与IO系统
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/GeekTime/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E4%B8%80%E5%91%A8%E7%9B%AE/4.%20%E5%BA%94%E7%94%A8/%E5%BA%94%E7%94%A8.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4. 应用
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2_2" id="__nav_3_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    计算基础实战课
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            计算基础实战课
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/1.%20MiniCPU%E8%AE%BE%E8%AE%A1/MiniCPU%E8%AE%BE%E8%AE%A1.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1. MiniCPU设计
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/2.%20%E8%AF%AD%E8%A8%80%E5%92%8C%E6%8C%87%E4%BB%A4/%E8%AF%AD%E8%A8%80%E5%92%8C%E6%8C%87%E4%BB%A4.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2. 语言和指令
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/3.%20%E5%BA%94%E7%94%A8%E5%92%8C%E5%86%85%E5%AD%98/%E5%BA%94%E7%94%A8%E5%92%8C%E5%86%85%E5%AD%98.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3. 应用和内存
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/4.%20IO%E4%B8%8E%E6%96%87%E4%BB%B6/IO%E5%92%8C%E6%96%87%E4%BB%B6.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4. IO与文件
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/5.%20%E7%BB%BC%E5%90%88%E5%BA%94%E7%94%A8/synthesis.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    5. 综合应用
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E5%92%8C%E5%B7%A5%E5%85%B7%E9%93%BE/%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    环境配置和工具链
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    ysyx
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            ysyx
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    NJU-ICS2023-PA
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            NJU-ICS2023-PA
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../ysyx/pa/pa1/pa1.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PA1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../ysyx/pa/pa2/pa2.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PA2
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../ysyx/pa/pa3/pa3.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PA3
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../ysyx/pa/pa4/pa4.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PA4
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../ysyx/pa/c_marco/macro.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    C Macro
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../ysyx/pa/summary/summary.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Summary
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../ysyx/pa/Linux_porting/porting.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Linux Porting
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../ysyx/digital-circuit/digital%20circuit.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Digital Circuit
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Tools
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Tools
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Tools/GDB/GDB.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GDB
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Vim
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            Vim
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Tools/vim/usage/usage.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    usage
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Tools/vim/vim-plugin/vim.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    vim-plugin
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Tools/doxygen/doxygen.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    doxygen
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Tools/gcc/gcc.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    gcc
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Tools/Git/Git.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Git
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Tools/md2slider/md2slider.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    md2slider
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Tools/tmux/tmux.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    tmux
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Todo%20List/todo.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TODO List
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#11-program-process" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1 program → process（程序 → 进程）
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-multitasking" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2 multitasking（多任务）
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<blockquote>
+<p><strong>注意：以下的内容均为个人观点+在学习/实践中得出。</strong></p>
+<p><strong>如果你看完后有不同的观点也没关系！请指出，我很乐意去尝试积极的东西。</strong></p>
+</blockquote>
+<p>封面：</p>
+<p><img alt="ChatGPT Image 2026年6月30日 22_36_32" src="pic/ChatGPT%20Image%202026%E5%B9%B46%E6%9C%8830%E6%97%A5%2022_36_32.png" /></p>
+<p>目录：</p>
+<div class="highlight"><pre><span></span><code>1. introduction
+    1.1 program → process（程序 → 进程）
+    1.2 multitasking（多任务）
+2. preemption（抢占）
+    2.1 mental model（心智模型）
+    2.2 调度策略
+    2.3 总结
+3. 并发
+    3.1 谁能打断 CPU？
+    3.2 bare-metal &amp; RTOS
+    3.3 过渡到Linux：关抢占和关抢占区别？
+        3.3.1 RTOS
+        3.3.2 Linux 关抢占
+    3.4 spinlock
+    3.5 more
+        3.5.1 atomic operation
+        3.5.2 barrier
+    4. 资料推荐
+</code></pre></div>
+<h1 id="1-introduction">1. introduction</h1>
+<blockquote>
+<p>近期由于毕业搬东西+毕业旅游玩了几天，所以没更新，不过也积累了好几个话题：锁、并发等等，本文就和这部分相关。下面是原 <code>introduction</code>。</p>
+</blockquote>
+<p>最近在看到一些师弟买了一些八股文/面经资料回来看/背，回想自己去年秋招的时候，可以说几乎没怎么背过这些问题（遇到问题现场想，现场推，面试官说答错了我就直接问），我不评价八股文如何如何，但我就是很厌恶这个东西。</p>
+<p>我一直认为的是：合格的面试官问合格的问题是考察你对 <code>xxx</code> 部分了解的多少。但为啥现在似乎变了呢？哦对，国内的环境，你只要人过来干活就行啦，想这么多干嘛！工作而已嘛，早点被 AI 消灭吧！</p>
+<p>扯多了，写的原因是自己想验证一个自己之前看到的问题（也就是别人说的八股）：</p>
+<p>“为什么 <code>spinlcok</code> 后不能 <code>sleep</code>？为什么中断处理中不能实现 <code>sleep</code>？......类似的问题”，</p>
+<p>同时梳理部分几年前自己没有写下的相关基础内容（进程、并发）。</p>
+<p><img alt="image-20260630205158938" src="pic/image-20260630205158938.png" /></p>
+<h2 id="11-program-process">1.1 program → process（程序 → 进程）</h2>
+<p>最基础的：</p>
+<blockquote>
+<p><strong>While a computer program is a passive collection of instructions typically stored in a file on disk, a process is the execution of those instructions after being loaded from the disk into memory<sup>[1]</sup></strong></p>
+<p><strong>计算机程序是通常存储在磁盘文件中的一组被动指令集合，而进程则是这些指令从磁盘加载到内存后执行的过程。</strong></p>
+</blockquote>
+<p>就像下面这个图：</p>
+<div class="highlight"><pre><span></span><code><span class="w">                </span><span class="o">+---------------------------+</span><span class="w"> </span>
+<span class="w">                </span><span class="o">|</span><span class="w">         </span><span class="n">PROGRAM</span><span class="mo">-01</span><span class="w">         </span><span class="o">|</span>
+<span class="w">                </span><span class="o">+---------------------------+</span><span class="w">  </span>
+<span class="w">                </span><span class="o">|</span><span class="w">         </span><span class="n">PROGRAM</span><span class="mo">-02</span><span class="w">         </span><span class="o">|</span>
+<span class="w">                </span><span class="o">+---------------------------+</span><span class="w">  </span>
+<span class="w">                </span><span class="o">|</span><span class="w">         </span><span class="n">PROGRAM</span><span class="mo">-03</span><span class="w">         </span><span class="o">|</span>
+<span class="w">                </span><span class="o">+---------------------------+</span>
+<span class="w">                </span><span class="o">|</span><span class="w">         </span><span class="n">PROGRAM</span><span class="mo">-04</span><span class="w">         </span><span class="o">|</span>
+<span class="w">                </span><span class="o">+---------------------------+</span>
+<span class="w">                </span><span class="o">|</span><span class="w">         </span><span class="p">..........</span><span class="w">         </span><span class="o">|</span>
+<span class="w">                </span><span class="o">|</span><span class="w">         </span><span class="p">..........</span><span class="w">         </span><span class="o">|</span>
+<span class="w">                </span><span class="o">+===========================+</span><span class="w">  </span>
+</code></pre></div>
+<p>作为一种 <code>conceptual model</code>，程序都是按照顺序规则（<code>sequential</code>）放在提前规划好的内存地址空间中属于他们的部分。</p>
+<p>只不过现代的 <code>process</code>（或者说本来 <code>process</code> 被发明出来就是这样，六七十年代应该就有MMU了<sup>[2]</sup>）依赖于MMU给程序执行起来时带了一个 VR 眼镜，认为 SoC（或者说 <code>cpu + bus</code>）所提供的整个内存地址空间都是每一个执行实体的（也就是 <code>Virtualization</code> 了<sup>[3]</sup> ）。</p>
+<p>还有一个有意思的例子是：进程是动起来的程序。</p>
+<blockquote>
+<p><strong>"A process is fundamentally a container that holds all the information needed to run a program... A process is essentially an executing program, including the current values of the program counter, registers, and variables."<sup>[4]</sup></strong></p>
+<p><strong>进程本质上是一个容器，用于存储运行程序所需的所有信息……进程本质上是正在执行的程序，包括程序计数器、寄存器和变量的当前值</strong></p>
+</blockquote>
+<h2 id="12-multitasking">1.2 multitasking（多任务）</h2>
+<p>之后便到了大家常说的多任务处理（<code>multitasking</code>）。</p>
+<p>每个 <code>cpu core</code> 一次只能执行一个进程，但依赖于 OS/MMU 提供的虚拟化能力，每个 <code>cpu core</code> 能够在各个 <code>process</code> 中来回切换，无需等待每个进程全部执行完毕（所谓的抢占式调度）。而依赖于 <code>cpu core</code>飞快的执行速度，我们所感知到的就变成有多个 <code>cpu core</code> 在帮我们做事。</p>
+<blockquote>
+<p>不像我们人这种只能单线做完一件事情再做下一件事的生物。当然，具体到 <code>ms/us/ns...</code> 这种可以说某一时刻的词语，<code>cpu core</code>，自然也是只能做一件事情，但如果是 <code>multi-core</code>，那天生就是并行，自然实现真正多开、真正多任务，也就像多人做同一个任务。</p>
+</blockquote>
+<p>这种技术，也叫 <code>time-sharing</code>：多个任务或用户同时共享计算资源。</p>
+<p>类似的，我们常常也会听到要实现多任务/多进程的目标，其底层实现手段往往会依赖 <code>time-sharing</code>。</p>
+<p>更进一步讨论多任务，如果从任务切换的角度来看，基本可以分为：</p>
+<ul>
+<li><code>cooperative multitasking / non-preemptive multitasking</code>（协同多任务）</li>
+<li><code>preemptive multitasking</code> （抢占多任务）</li>
+</ul>
+<blockquote>
+<p>如果从系统设计的角度来分类，往往大家还会说有 RTOS、分时 OS、通用 OS...就像教科书上写的那样，挺混乱的。</p>
+</blockquote>
+<p>对于协同多任务，它的工作方式基于一个约定：用户进程周期性地主动让出 <code>CPU</code> 的控制权，从而让其它进程得到运行的机会，而这件事往往需要操作系统提供一个特殊的系统调用：<code>sys_yield</code><sup>[5]</sup></p>
+<blockquote>
+<p>e.g. <code>Linux</code> 中的 <code>sched_yield</code>（系统调用）、 <code>FreeRTOS</code> 中的 <code>taskYIELD</code>。</p>
+</blockquote>
+<p>但协同多任务不是本文的重点，重点是抢占多任务：<code>Preemptive</code>。</p>
+<p>简单来说，抢占多任务是基于硬件中断（通常是时钟中断）强行进行上下文切换的：该机制会暂停当前正在执行的进程，然后由调度程序来决定下一个应执行的进程，这样一来，所有进程在任何时候都能获得一定的 CPU 使用时间。</p>
+<blockquote>
+<p><strong>对处理器上正在执行的任务进行此类操作，被称为上下文切换。</strong></p>
+</blockquote>
+<h1 id="2-preemption">2. preemption（抢占）</h1>
+<h2 id="21-mental-model">2.1 mental model（心智模型）</h2>
+<p>按照我自己的理解，<code>preemptive multitasking</code> 是用来区分：</p>
+<p><em>那种允许任务被抢占的系统</em> 与 <em>那种需要进程或任务在不需要系统资源时主动让出资源的协作式多任务系统</em>。</p>
+<p>也就是 <strong>抢占</strong> 这个动作，<code>preemption</code> 这个词意味着：<strong>在别人之前拿过来</strong>。</p>
+<blockquote>
+<ul>
+<li><strong>Pre-</strong>（前缀）：表示“之前”、“在前面”。</li>
+<li><strong>-empt-</strong>（词根）：源自拉丁语 <em>emere</em>，意为“拿取”、“购买”。</li>
+<li><strong>-ion</strong>（名词后缀）：表示行为或状态。</li>
+</ul>
+</blockquote>
+<p>在计算机领域，这个抢占我们一般说的是 <code>CPU</code> 控制权的转移，而且是非自愿的转移，别人强行操控；更上层软件一点的就是：当前执行的程序被迫停下来，另外一个程序抢占执行。</p>
+<p>综上，我自己总结了一个“状态机转移”来描述上述这个任务（没错，又是这篇写的：<a href="https://mp.weixin.qq.com/s/ULNN7Pz7TmwUwRRB9U1HGg">backtrace（一）：从底层到本质：理解函数调用与 LR/FP 的设计与思想</a>）：</p>
+<p><strong>触发器（trigger） -&gt; 仲裁器（arbiter） -&gt; 执行（action）</strong></p>
+<p>触发器，很好理解，因为任务不会自动交出执行权，要实现 <code>preemption</code> 那就要外部强制介入了，那就是硬件中断来强行剥夺当前执行流。具体用两种：</p>
+<ul>
+<li>
+<p><strong>定时器中断：</strong> 系统的心跳，Tick（很常见了，MCU里的 <code>systick</code> 记得吧？类似的）</p>
+<p>定时器中断定期强制打断当前任务，把控制权交还给内核。</p>
+</li>
+<li>
+<p><strong>外部设备中断或 IPI（核间中断）：</strong> 网卡收到数据包、<code>disk</code> 读取完成等。</p>
+<p>设备会打断当前任务，唤醒等待这些数据的任务。这是实现“基于事件/优先级抢占”的物理基础。</p>
+</li>
+</ul>
+<p>仲裁器，自然就是决定当前任务被抢占后下一步执行什么啦，也就是内核的调度器做的事情了。中断把控制权交给了内核调度器，调度自然是有它的判断策略来选择下一步该做什么，这也就是调度策略了。</p>
+<p>最后是执行，如果仲裁器决定需要切换当前执行流了，且是安全的（比如后面会说的：<code>preempt_count == 0</code>），那内核就会做上下文切换了（保存当前任务的寄存器状态，加载新任务的寄存器状态，完成抢占）。</p>
+<h2 id="22">2.2 调度策略</h2>
+<p>这里可以具体看看 1.3.1 所说的仲裁器所选择的调度策略。</p>
+<p>记住首要目标，调度器是要 <code>preemption</code>（抢占），从 <code>first principle</code> 看，要看一个事情/程序能不能执行，按照人的思想，无非就是：</p>
+<p>事情是否紧急？是否有时间做？若紧急肯定紧急的先，不紧急那就公平来做。</p>
+<p>所以核心就两个点：<strong>紧急、公平</strong></p>
+<p>也就分别对应了目前实现主流调度策略的基础：时间片（抢占）、优先级/事件（抢占）。</p>
+<ul>
+<li>
+<p>时间片：众生平等，大家都一样</p>
+<p>给每一个在系统中的任务分配好各自的配额（比如1ms），每个任务的配额用完了，自然就会被别的任务抢占执行了。</p>
+<p>触发条件：定时器中断到来，内核检查当前运行任务的配额，用完了就换。</p>
+</li>
+<li>
+<p>优先级/事件：有更紧急的且已经准备的任务（比如着火逃命肯定比你吃饭重要）</p>
+<p>别人的优先级高，自然要等别人做完才行。低优先级任务先做着，更高优先级的来了自然轮到它跑。</p>
+<p>触发条件：外部中断唤醒了一个高优先级任务、当前任务释放了锁，导致高优先级任务就绪。</p>
+</li>
+</ul>
+<blockquote>
+<p>单纯实现时间片以及优先级，其实在现代大型的系统已经比较少了。</p>
+<p>对于时间片，更多时候是平时自己玩、教程之类的会选择，因为这部分讲起来，理解比较容易，就像 NJU 的 PA<sup>[5]</sup>的默认实现（这个 lab 可以说是计算机系统基础国内顶尖的了，涵盖全面，你要是自己改造调度也是可以的）。</p>
+<p>对于优先级，这部分可以说是现代 RTOS 的核心调度方式了（<code>FreeRTOS</code>、<code>QNX</code>、<code>Zephyr</code>好像也是？）、Linux也有（<code>SCHED_FIFO</code> 和 <code>SCHED_RR</code> 实时调度类）</p>
+</blockquote>
+<p>但是，内核的调度或者说实际实现的调度器没有上面说的这么简单了，最开始就说了调度关键就紧急和公平。这两个可以说“道”，实际内核会综合起来玩各种各样的花活。</p>
+<blockquote>
+<p><strong>AI 总结看看（不保证下面的正确性，请自行验证，只是拓宽视野）：</strong></p>
+</blockquote>
+<ul>
+<li>
+<p>CFS：用“时间”的尺度来衡量“优先级”</p>
+<p>在传统的调度器里，时间片和优先级是两套分离的系统（高优先级分的时间片长，低优先级分的时间片短）。</p>
+<p>CFS（完全公平调度器）的核心思想是：<strong>彻底消灭传统意义上的“时间片”和“绝对优先级”，把优先级转换成“时间的流逝速度”。</strong></p>
+<p>在 CFS 中，优先级（Nice 值）被映射为任务的权重（Weight）。</p>
+<p>任务运行的虚拟时间 $\Delta vruntime$ 与实际物理时间 $\Delta exec_time$ 的关系如下公式表示：</p>
+<p>$$
+\Delta vruntime = \Delta exec_time \times \frac{weight_{NICE_0}}{weight_{task}}
+$$</p>
+<ul>
+<li>如果你的<strong>优先级高</strong>（权重极大），分母变大，你的 $vruntime$ 增长得就极慢。</li>
+<li>调度器每次都挑 $vruntime$ 最小的执行。因为你的 $vruntime$ 涨得慢，所以你就会<strong>变相获得更多的物理执行时间</strong>（抢占别人）。</li>
+</ul>
+<p><strong>结论：</strong> CFS 看起来是“比进度（<code>vruntime</code>）”，但底座依然是<strong>时间轮转</strong>，而它的驱动力引擎依然是<strong>优先级</strong>。</p>
+</li>
+<li>
+<p>EEVDF：用“时间”动态计算“优先级”</p>
+<p>如果说 CFS 是“优先级决定时间分配”，那么 Deadline 和较新的 EEVDF（最早合格虚拟截止时间优先）算法，就是反过来的：<strong>“时间决定了当下的优先级”。</strong></p>
+<p>在绝对优先级模型（如 <code>SCHED_FIFO</code>）中，优先级是一个静态的数字（比如 99）。但在 Deadline 模型中：</p>
+<ul>
+<li>任务的优先级变成了动态的：<strong>距离 Deadline 越近，隐式优先级就越高。</strong></li>
+<li>当一个低优先级任务快要错过死线时，它的“动态优先级”会瞬间飙升，从而抢占当前的运行任务。</li>
+</ul>
+<p><strong>结论：</strong> 这依然没有跳出这两大支柱，它只是一种<strong>基于时间戳动态生成优先级</strong>的高级抢占策略。</p>
+</li>
+</ul>
+<h2 id="23">2.3 总结</h2>
+<blockquote>
+<p><strong>说了这么多，其实是给几年前的自己学习的时候一个回答吧（虽然自己早就知道了，但之前没有记录下来的习惯）。</strong></p>
+</blockquote>
+<p>在我刚学 FreeRTOS 的时候，其实是不能理解时间片这个东西的，说是吧时间切成一片片的，但是“没用过+没人指点/没找到好的资料/脑子笨”，我一直觉得有点不太通顺+做不出啥东西（现在想其实当时就应该无脑做）。加之当时身边人看法基本都是写写应用代码，不用了解。</p>
+<p>但直到我完成 NJU PA<sup>[5]</sup> 后，实现了定时器中断+时间片，也才明白只要把程序运行和时间片结合起来理解就行了。</p>
+<p>更加重要的是，当我第一次接触 Linux，我时不时就会结合 FreeRTOS 的优先级抢占的机制去理解，自然也就会想到实时 + Linux 的内容，加上由于时不时就能在网络上刷到各种N手/质量参差不齐的资料，</p>
+<p>导致我第一次了解 Linux 的 <code>preemption</code>（抢占）的时候，<strong>我默认实时 Linux 是通过它的优先级抢占实现的，就简单认为 Linux 已经做到实时。</strong></p>
+<p>当然现在经过实践之后的理解，也纠正了一些概念了，算是进一步反向理解 <code>cooperative multitasking</code> 了吧哈哈。</p>
+<blockquote>
+<p>⚠️⚠️⚠️<strong>本文并不会引入过多深入的实时系统的内容，我的文章大致也只包括：</strong></p>
+<div class="highlight"><pre><span></span><code><span class="n">Process</span>
+<span class="err">→</span><span class="w"> </span><span class="n">Scheduler</span>
+<span class="err">→</span><span class="w"> </span><span class="n">Context</span><span class="w"> </span><span class="n">Switch</span>
+<span class="err">→</span><span class="w"> </span><span class="n">Sleeping</span>
+<span class="err">→</span><span class="w"> </span><span class="n">Wakeup</span>
+<span class="err">→</span><span class="w"> </span><span class="n">Spinlock</span>
+</code></pre></div>
+<p>不过 Linux 的实时补丁（<code>PREEMPT_RT</code>）（好像 Linux 6.12 已经合入主线了，现在也有很多文章写）</p>
+<p>感兴趣的话直接到本文的最后（参考的前面）或者评论区，去看一些文章吧！</p>
+</blockquote>
+<h1 id="3">3. 并发</h1>
+<p>要回答我最初的疑问，单凭上面的基础还是不够的。现在补充并发/ <code>spinlock</code> 的内容。</p>
+<h2 id="31-cpu">3.1 谁能打断 CPU？</h2>
+<p>依然从这篇：<a href="https://mp.weixin.qq.com/s/ULNN7Pz7TmwUwRRB9U1HGg">backtrace（一）：从底层到本质：理解函数调用与 LR/FP 的设计与思想</a> 说的“程序是个状态机”出发，只不过这会从理论模型<sup>[6]</sup>变成了实际的 <code>cpu</code> 内部的 <code>pipeline</code><sup>[7]</sup>。</p>
+<p><img src="pic/image-20260630135021233.png" alt="image-20260630135021233" style="zoom: 33%;" /></p>
+<blockquote>
+<p>S = <R, M>：State = <regs, memory></p>
+<p>R = {GPR, PC, SR}：regs = {general purpose regs, PC, status regs}</p>
+</blockquote>
+<p><img src="pic/image-20260630140333353.png" alt="image-20260630140333353" style="zoom: 50%;" />
+CPU一直在做：</p>
+<div class="highlight"><pre><span></span><code>取指 → 执行 → 取指 → 执行 → 取指 → 执行...
+</code></pre></div>
+<p>严格意义上来说它并不知道什么进程，RTOS/Linux 上下文切换，<code>schedule</code> 等。</p>
+<p>它只知道要根据 <code>PC</code> 去执行，如果说的绝对一点，系统里实际上就一个执行流：PC→PC......</p>
+<p>既然一直都是这个执行流，那为什么我们仍会觉得软件层面的 <code>Task</code> 会停下来呢？无非就两个：</p>
+<ul>
+<li>
+<p>同步（自己主动停）</p>
+<p><code>call</code>、<code>yield</code>、<code>sleep</code>、<code>schedule()</code>...</p>
+</li>
+<li>
+<p>异步（别人强制）</p>
+<p><code>interrupt</code> / <code>exception</code>...（这里不区分什么异常/中断的异步/同步实现）</p>
+</li>
+</ul>
+<p>还记得前面说的 <strong>硬件中断</strong> 对于整个系统的抢占的关键性作用嘛？</p>
+<p>所以我几乎可以说中断就是打断当前执行流唯一的外部东西，或者我让 AI 说的学术一点：</p>
+<blockquote>
+<p><strong>Interrupt/Exception 就是CPU主动停止当前执行流的一种硬件机制。</strong></p>
+</blockquote>
+<p>就像前面1.3.1说的，目前的OS几乎都依赖硬件中断来调度(就是改变执行流)</p>
+<h2 id="32-bare-metal-rtos">3.2 bare-metal &amp; RTOS</h2>
+<p>对于绝大数电子的学生，第一次接触嵌入式几乎都是 MCU 的往往都会写类似的代码：</p>
+<div class="highlight"><pre><span></span><code><span class="n">main</span><span class="p">()</span><span class="o">:</span><span class="w"> </span><span class="n">counter</span><span class="o">++</span>
+<span class="nl">ISR</span><span class="p">:</span><span class="w">    </span><span class="n">counter</span><span class="o">--</span>
+</code></pre></div>
+<p>显然，哪怕是在单核裸机上，这也是会存在并发问题，解决问题也很简单：</p>
+<div class="highlight"><pre><span></span><code>disable_irq();
+counter++;
+enable_irq();
+</code></pre></div>
+<p>可以说，在正常的程序状态机执行过程中，中断就是唯一的异步执行流。</p>
+<p>所以，关中断 = 没人能打断我 = stop the world，这个 world，就是 <code>Critical Section</code> 了。</p>
+<p>哪怕加上 RTOS，有task/thread概念后，变成了是多个任务+中断ISR对共享内容做访问。</p>
+<p>那那前面的解决措施变了吗？影响因素变成了任务之间的切换（+中断）的并发影响。自然就会问：任务之间如何切换？比如两个任务：TaskA、TaskB：
+<div class="highlight"><pre><span></span><code><span class="n">TaskA</span>
+<span class="err">↓</span>
+<span class="n">timer</span><span class="o">-</span><span class="n">irq</span><span class="w"> </span><span class="p">(</span><span class="n">比如cortex</span><span class="o">-</span><span class="n">M</span><span class="w"> </span><span class="n">的</span><span class="w"> </span><span class="n">SysTick</span><span class="p">)</span>
+<span class="err">↓</span>
+<span class="n">ISR</span>
+<span class="err">↓</span>
+<span class="n">Scheduler</span>
+<span class="err">↓</span>
+<span class="n">Context</span><span class="w"> </span><span class="n">Switch</span><span class="w"> </span><span class="p">(</span><span class="n">TaskB</span><span class="p">)</span>
+</code></pre></div></p>
+<p>依然是 1.3.1 说到的定时器中断中做任务的抢占（时间片）。</p>
+<p>到这里，我也能得出一个结论：RTOS 的抢占，本质还是中断呀。</p>
+<p>哪怕是对于单核的 RTOS：</p>
+<div class="highlight"><pre><span></span><code><span class="n">disable_irq</span><span class="p">()</span>
+<span class="err">↓</span>
+<span class="n">Timer</span><span class="w"> </span><span class="n">ISR</span><span class="w"> </span><span class="n">不执行</span>
+<span class="err">↓</span>
+<span class="n">Scheduler</span><span class="w"> </span><span class="n">不执行</span>
+<span class="err">↓</span>
+<span class="n">Task</span><span class="w"> </span><span class="n">B</span><span class="w"> </span><span class="n">不运行</span>
+</code></pre></div>
+<p>所以：关中断依然可以实现互斥。"RTOS 和裸机其实没本质区别。"</p>
+<blockquote>
+<p>⚠️⚠️⚠️<strong>这里还有一个更重要的点</strong></p>
+<p>这里或许有人会说 OS 内核也能自己主动调用 <code>schedule()</code> 呀。</p>
+<p>比如 FreeRTOS 做定时器周期检查是否许哟啊切换任务、<code>taskYIELD()</code>。</p>
+<p>这些内容，对于 <code>armv7</code> 的 <code>Cortex-M</code> 来说，本质上都是一个中断，触发一个 <code>PendSV</code>（可悬起系统调用）中断，把切换动作推迟到中断上下文。</p>
+<p>关中断确实能够挡住抢占了。</p>
+<p>但是还有问题，还有一个 API 是 <code>vTaskSuspendAll()</code>：挂起/关闭调度器。</p>
+<ul>
+<li>如果中断和内核同时访问了共享变量（TCB结构体、内核链表...），单单靠挂起调度器是做不到防范这种并发的。</li>
+<li>如果是任务与任务之间的，那单纯靠挂起调度就能防住。</li>
+</ul>
+<p>所以，这个操作不在于防中断，在于用户层的 “延迟切换” 和 “批处理”：<strong>比如在遍历一个大数组的时候，时间片用完或者高优先级任务就绪导致任务切换，改乱了数据。</strong></p>
+<p>具体细节来说，当我挂起了调度器，但是中断仍然在响应，<code>PendSV</code> 依然触发，但调度器内部（一个计数器）阻止了实际的上下文切换，直到调用对应的 <code>vTaskResumeAll()</code> 后，系统才会检查是否有 <code>PendSV</code> 等待，如果有，才统一执行一次切换。</p>
+</blockquote>
+<p>举个例子：
+<div class="highlight"><pre><span></span><code><span class="cm">/* 场景：任务A和ISR同时访问一个全局计数器 */</span>
+<span class="k">volatile</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">g_counter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">ISR_Timer</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">g_counter</span><span class="o">++</span><span class="p">;</span><span class="w">  </span><span class="c1">// 中断里直接改</span>
+<span class="p">}</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">TaskA</span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">pv</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">vTaskSuspendAll</span><span class="p">();</span><span class="w">   </span><span class="c1">// 只挂起调度器，中断还在跑</span>
+
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">g_counter</span><span class="p">;</span><span class="w">   </span><span class="c1">// 读取</span>
+<span class="w">    </span><span class="n">temp</span><span class="o">++</span><span class="p">;</span><span class="w">                       </span><span class="c1">// 修改</span>
+<span class="w">    </span><span class="n">g_counter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">temp</span><span class="p">;</span><span class="w">             </span><span class="c1">// 写回</span>
+
+<span class="w">    </span><span class="n">xTaskResumeAll</span><span class="p">();</span><span class="w">    </span><span class="c1">// 如果这期间ISR跑了，g_counter已经被改了</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<p><strong>问题</strong>：<code>vTaskSuspendAll()</code> 只阻止了任务切换，但 <code>ISR_Timer</code> 依然会在每个定时周期执行。如果 ISR 在 <code>temp = g_counter</code> 和 <code>g_counter = temp</code> 之间触发，就会丢失一次递增。</p>
+<p>要么就用 <code>taskENTER_CRITICAL</code>、<code>taskEXIT_CRITICAL</code>。</p>
+<p><strong>最后，注意我上面说的是用户层的“延迟切换”和”批处理“。下面会引出更加重要的内容。</strong></p>
+<h2 id="33-linux">3.3 过渡到Linux：关抢占和关抢占区别？</h2>
+<h3 id="331-rtos">3.3.1 RTOS</h3>
+<p>如果都了解了上面的内容后，且自己已经有对应的 RTOS 经历，同时如果自己是实现过玩具OS的话（就像NJU PA的默认基础实现），如果不去了解 Linux 内部的实现的话，就会像我之前一样默认：</p>
+<p><strong>关中断 = schedule()不运行</strong></p>
+<blockquote>
+<p>记住这个我当时初学非常困惑的问题（网上讲的乱七八糟的）：关中断和关抢占有啥区别？不是都是为了互斥？一样吧？</p>
+</blockquote>
+<p>没问题！在 <code>bare-metal</code> + 不支持内核抢占的 RTOS 上这么说是没问题的。</p>
+<p>因为 RTOS 的核心就是 Determinism，确定性，<strong>他们的内核是不支持被其他任务所抢占的（我说的是内核，不是任务与任务之间，中断仍然能打断当前执行流）</strong>。</p>
+<p>相信做嵌入式的几乎都听过 RTOS 被称为实时，不是说它执行快，而是准时与可预测性。</p>
+<blockquote>
+<p>就比如：</p>
+<ul>
+<li>如果 RTOS 内核允许在操作链表（比如把任务从挂起队列移到就绪队列）的中途被抢占，那么计算一个任务从触发到实际执行的时间（响应时间）就会变成一场噩梦，因为我无法预测内核会被抢占多少次、抢占多久。（WCET：最坏执行时间）</li>
+<li>反之，如果内核在执行这些操作时直接关闭中断或锁死调度器（进入临界区），那么这个操作的时长就是固定的（比如明确只有几十条汇编指令）。这样开发者就能精确算出系统的最坏延迟是多少。</li>
+</ul>
+</blockquote>
+<p>举个 FreeRTOS 的例子：所有对其内核的任务控制块（TCB）链表、就绪队列、事件链表的操作都被严格包裹在 <code>taskENTER_CRITICAL()</code> 中。以队列发送为例<sup>[8]</sup>：</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// xQueueGenericSend</span>
+<span class="n">taskENTER_CRITICAL</span><span class="p">();</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// ....</span>
+<span class="w">    </span><span class="cm">/* 如果有任务在等待获取此消息队列 */</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">listLIST_IS_EMPTY</span><span class="p">(</span><span class="o">&amp;</span><span class="p">(</span><span class="n">pxQueue</span><span class="o">-&gt;</span><span class="n">xTasksWaitingToReceive</span><span class="p">))</span><span class="o">==</span><span class="n">pdFALSE</span><span class="w"> </span><span class="p">){</span>
+<span class="w">        </span><span class="cm">/* 将任务从阻塞中恢复 —— 修改事件链表！ */</span>
+<span class="w">        </span><span class="cm">/* 修改队列内部链表：xTasksWaitingToReceive */</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">xTaskRemoveFromEventList</span><span class="p">(</span>
+<span class="w">              </span><span class="o">&amp;</span><span class="p">(</span><span class="w"> </span><span class="n">pxQueue</span><span class="o">-&gt;</span><span class="n">xTasksWaitingToReceive</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">)</span><span class="o">!=</span><span class="n">pdFALSE</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">queueYIELD_IF_USING_PREEMPTION</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="p">}</span>
+<span class="n">taskEXIT_CRITICAL</span><span class="p">();</span>
+</code></pre></div>
+<p><code>xTaskRemoveFromEventList()</code> 的源码注释明确写道：</p>
+<blockquote>
+<p><strong>"THIS FUNCTION MUST BE CALLED FROM A CRITICAL SECTION."<sup>[8]</sup></strong></p>
+</blockquote>
+<p>因为其内部连续执行了：</p>
+<ol>
+<li><code>listGET_OWNER_OF_HEAD_ENTRY()</code> —— 读链表头</li>
+<li><code>uxListRemove()</code> —— 修改事件链表指针</li>
+<li><code>prvAddTaskToReadyList()</code> —— 插入就绪链表</li>
+</ol>
+<p>这三步<strong>必须原子地完成</strong>。如果在第2步和第3步之间被中断打断，ISR 里的 <code>xQueueSendFromISR()</code> 也去尝试修改同一个链表，那就会导致出现诡异的并发 bug。</p>
+<blockquote>
+<p><strong>可以说就是因为自己没有理清内核是否能够抢占，才导致了后面我混淆Linux的关中断、关调度/抢占两个内容，以至于后面看什么 spinlock、atomic context都想通过 RTOS 类比理解...</strong></p>
+</blockquote>
+<p>总结来说：</p>
+<blockquote>
+<p><strong>RTOS（不支持内核抢占的），关中断即是stop the world，实现互斥。</strong></p>
+</blockquote>
+<h3 id="332-linux">3.3.2 Linux 关抢占</h3>
+<p>反观 Linux：</p>
+<p>Linux 2.4之前都是在追求高吞吐量（希望 CPU 每时每刻都在做有用功），<strong>并不支持内核抢占的，就像上面的RTOS那样，所以在那个时候的 Linux，且是单核，那关中断就是能够实现互斥/stop the world。</strong></p>
+<p>但随着当时 Linux 逐渐占领桌面，考虑到<strong>交互响应</strong>，甚至说“预料”到了未来移动端OS的需求，Linux 在 2.6 引入了内核抢占后，也就是在 <code>Kconfig</code> 中看到的 <code>CONFIG_PREEMPT</code>，情况发生了变化。</p>
+<p>如果内核能够抢占，意味着就不再像之前的 <code>timer_irq → schedule</code> 这么简单了。</p>
+<p>关中断确实也能挡住部分并发的问题，因为在 <code>Timer</code> 的 ISR 中，中断完成后，确实也会有这么一个调度点，但不够，还有很多：</p>
+<div class="highlight"><pre><span></span><code><span class="n">mutex_unlock</span><span class="p">()</span>
+<span class="err">↓</span>
+<span class="n">wake_up</span><span class="p">()</span>
+<span class="err">↓</span>
+<span class="n">schedule</span><span class="p">()</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">syscall完成返回用户空间</span>
+<span class="err">↓</span>
+<span class="n">schedule</span><span class="p">()</span>
+</code></pre></div>
+<p>甚至是在内核代码中大量放置的显式抢占点 <code>cond_resched</code> 。</p>
+<p>我还让 AI 总结了一个：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">抢占点类型</th>
+<th style="text-align: left;">描述</th>
+<th style="text-align: left;">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>1. 显式抢占点</strong></td>
+<td style="text-align: left;"><code>cond_resched()</code> 及其同类函数</td>
+<td style="text-align: left;">这是开发者在代码中<strong>主动、显式</strong>放置的检查点，用于判断是否需要让出CPU。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>2. 返回用户空间</strong></td>
+<td style="text-align: left;">从系统调用或异常返回用户空间时</td>
+<td style="text-align: left;">这是内核在返回用户态前检查并执行调度的时机。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>3. 返回内核空间</strong></td>
+<td style="text-align: left;">在Tick、IPI或中断退出时</td>
+<td style="text-align: left;">这是内核在中断处理完成后，返回被中断的内核代码前检查抢占的时机。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>4. 可抢占区段结束</strong></td>
+<td style="text-align: left;">当 <code>preempt_count()</code> 归零时</td>
+<td style="text-align: left;">这标志着一段通过 <code>preempt_disable()</code> 等机制保护的、不可抢占的临界区结束。</td>
+</tr>
+</tbody>
+</table>
+<p>由此可见，关中断只挡住ISR，并没有挡住主动 <code>schedule()</code>。</p>
+<p>所以 Linux 把 <code>IRQ</code> 和 <code>preemption</code> 分离了。</p>
+<p>对于"关中断和关抢占为什么不同"自然就明白了，但它们的目标都是为了消除并发。</p>
+<blockquote>
+<ul>
+<li><strong>关中断（<code>local_irq_disable</code>）</strong>：为了防止中断上下文（ISR）的并发访问。</li>
+<li><strong>关抢占 （<code>preempt_disable</code>）</strong>：为了防止进程上下文的并发访问。</li>
+</ul>
+</blockquote>
+<p>中断/进程上下文是什么？这也是一个很用了很多，但是没有明确说明的概念，我这里以这个回答为示范<sup>[9]</sup>，我觉得总结得挺好的：</p>
+<blockquote>
+<ul>
+<li>进程上下文——普通进程和系统调用都在该上下文中执行，该上下文可能会被中断请求打断。</li>
+<li>原子/中断上下文——中断处理通常是在这种上下文中进行的，这些中断并不属于某个特定的进程，而是由某个设备发起的（为简化说明，此处不考虑异常）。一旦中断上下文进入休眠状态或放弃对 CPU 的占用，那么它就无法被再唤醒了。因此，这种上下文也被称为“原子上下文”</li>
+</ul>
+</blockquote>
+<p>而这个划分，我觉得可以进一步，就是为了解决内核路径能否睡眠的问题：</p>
+<ul>
+<li><strong>进程上下文</strong>：可以睡眠（因为有自己的<code>task_struct</code>，能保存状态并等待唤醒）。</li>
+<li><strong>中断上下文</strong>：不能睡眠（因为没有独立的进程实体来“等待”，睡过去就真的“死”了）。</li>
+</ul>
+<p>但有几个几个说明：</p>
+<ul>
+<li>上面定义主要适用于<strong>硬中断（中断上半部）</strong>，<strong>软中断/<code>tasklet</code></strong> 也属于原子/中断上下文（同样不能睡眠），但它们不是在硬件中断信号触发时立刻执行，而是在硬件中断返回后、或内核调度时机（如<code>ksoftirqd</code>内核线程）中执行。不过为了简化说明，这个作者这么定义也OK。</li>
+<li><strong>缺页异常（Page Fault）</strong>通常发生在进程上下文（可以睡眠去交换磁盘数据），也很好说，如果在中断上下文中发生了缺页异常，那将是一场灾难（因为无法睡眠去读盘）。</li>
+</ul>
+<h2 id="34-spinlock">3.4 spinlock</h2>
+<p>到这里，我才会写所谓的 <code>spinlcok</code>，在 2.6 实现内核抢占的一些细节。</p>
+<p>当时的开发者对于 <code>CONFIG_PREMMPT</code> 的实现，巧妙地复用了当时为 SMP 准备的并发保护机制，那个时候 Linux 内核里已经大量铺设了 <code>spin_lock()</code>。</p>
+<blockquote>
+<p><code>spinlock</code>：自旋锁：</p>
+<ul>
+<li>如果一段代码被自旋锁保护，意味着它不能被另一个 CPU 核上的代码并发执行</li>
+<li>抢占的逻辑：如果一段数据不允许被其他 CPU 并发修改，那它同样不允许被同一个 CPU 上的其他线程抢占修改。</li>
+</ul>
+</blockquote>
+<p>他们做了一个改动：在每一个 <code>spin_lock</code> 的实现里，隐含地增加了对 <code>preempt_count</code>（抢占计数器）的操作。</p>
+<p>只要当前任务没有持有任何自旋锁（<code>preempt_count == 0</code>），它在内核态就是绝对安全的，随时可以被高优先级任务踢下 CPU。</p>
+<p>而一旦拿了锁，系统就会自动禁止当前核的抢占。</p>
+<p>所以也就是会在 <code>spin_lock</code>中看到 <code>preempt_disable(preempt_count++)</code>：</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// include/linux/spinlock.h</span>
+<span class="k">static</span><span class="w"> </span><span class="n">__always_inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">spin_lock</span><span class="p">(</span><span class="n">spinlock_t</span><span class="w"> </span><span class="o">*</span><span class="n">lock</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">raw_spin_lock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lock</span><span class="o">-&gt;</span><span class="n">rlock</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="cp">#define raw_spin_lock(lock)    _raw_spin_lock(lock)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1">// include/linux/spinlock_api_smp.h</span>
+<span class="cp">#ifdef CONFIG_INLINE_SPIN_LOCK</span>
+<span class="cp">#define _raw_spin_lock(lock) __raw_spin_lock(lock)</span>
+<span class="cp">#endif</span>
+
+<span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">__raw_spin_lock</span><span class="p">(</span><span class="n">raw_spinlock_t</span><span class="w"> </span><span class="o">*</span><span class="n">lock</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">preempt_disable</span><span class="p">();</span><span class="w">                          </span><span class="c1">// ① 关闭抢占</span>
+<span class="w">    </span><span class="n">spin_acquire</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lock</span><span class="o">-&gt;</span><span class="n">dep_map</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">_RET_IP_</span><span class="p">);</span><span class="w"> </span><span class="c1">// ② lockdep调试（无实际代码）</span>
+<span class="w">    </span><span class="n">LOCK_CONTENDED</span><span class="p">(</span><span class="n">lock</span><span class="p">,</span><span class="w"> </span><span class="n">do_raw_spin_trylock</span><span class="p">,</span><span class="w"> </span><span class="n">do_raw_spin_lock</span><span class="p">);</span><span class="w"> </span><span class="c1">// ③ 竞争加锁</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>当然，还有另一个 API：<code>spin_lock_irqsave()</code>，中断、抢占两者都关，同时还保存了中断状态，这个似乎才是更加常用的。这个时候再去看看面试指南总结，不是更明了嘛：</p>
+<ul>
+<li><strong>进程上下文 &amp; 不确定中断状态</strong>：<strong>必须用 <code>spin_lock_irqsave()</code></strong>（绝大多数驱动场景）。</li>
+<li><strong>进程上下文 &amp; 明确知道中断全程开启</strong>（如刚进系统调用）：可用 <code>spin_lock_irq()</code>（性能微优化，但极不推荐新手用）。</li>
+<li><strong>中断上下文（ISR）</strong>：此时本地中断本就关着，<strong>只用 <code>spin_lock()</code></strong> 即可（再去关中断会重复操作引发BUG）。</li>
+</ul>
+<h2 id="35-more">3.5 more</h2>
+<h3 id="351-atomic-operation">3.5.1 atomic operation</h3>
+<p>但是，上面这么做就够了吗？</p>
+<p>忘掉前面一节的内容，我们再从中断的角度切入：依然是定时器中断+外部硬件中断。</p>
+<ul>
+<li>对于时间片的，时间片到了，<code>ISR</code> 返回调用 <code>schedule</code>，关中断确实没法阻挡了时间片的schedule了。</li>
+<li>对于在进程以及中断的 handler 中共享变量，关中断也确实挡住了。</li>
+</ul>
+<p>但仍然有问题，设想一下：</p>
+<ul>
+<li>如果是多核的处理器，关中断也只是关闭了当前处理器核心的中断，别的核并发地访问共享内容依然会出问题，所以也就会看到大家说的：使用硬件支持的 <code>atomic operation</code></li>
+</ul>
+<p>所以可以说，对于单核+支持内核抢占的系统：需要依赖关中断和关抢占二者来实现互斥/stop the world；在前面的基础上，加上多核后，那就还需要atomic operation的操作来保证SMP上的并发问题。</p>
+<h3 id="352-barrier">3.5.2 barrier</h3>
+<p>还有，我们前面默认的假设是：CPU 就是一条条按照程序顺序执行指令。真的嘛？</p>
+<p>CPU0：</p>
+<div class="highlight"><pre><span></span><code><span class="n">lock</span><span class="p">();</span>
+
+<span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+
+<span class="n">unlock</span><span class="p">();</span>
+</code></pre></div>
+<p>CPU1：</p>
+<div class="highlight"><pre><span></span><code>lock();
+printf(&quot;%d %d\n&quot;, x, y);
+unlock();
+</code></pre></div>
+<p>一定输出 <code>1 1</code>？</p>
+<p>CPU/编译器：我为什么一定要按你的顺序？</p>
+<div class="highlight"><pre><span></span><code><span class="n">CPU可能</span><span class="err">：</span><span class="n">先发y</span><span class="err">，</span><span class="n">后发x</span>
+
+<span class="n">Compiler</span><span class="err">：</span><span class="n">先生成y</span><span class="err">，</span><span class="n">再生成x</span>
+
+<span class="n">Store</span><span class="w"> </span><span class="n">Buffer</span><span class="err">：</span><span class="n">先看到y</span><span class="err">，</span><span class="n">x还没出去</span>
+
+<span class="n">Cache</span><span class="err">：</span><span class="n">CPU1先看见y</span><span class="err">，</span><span class="n">CPU1还没看见x</span>
+</code></pre></div>
+<p>于是CPU1：x=0，y=1</p>
+<p>完全可能呀！我锁不是已经拿到了吗？为什么数据还是乱？</p>
+<p>因为我解决的是：<strong>谁执行</strong>的问题；仍然没有解决<strong>数据什么时候真正被别人看见</strong>的问题。</p>
+<p>于是 Barrier 出现了，Barrier不是为了互斥，Barrier 是为了 <strong>保证观察顺序（Ordering）。</strong></p>
+<p>可以说是完全不同的问题，或者说是二维平面的不同维的问题。</p>
+<p>所以到这里，并发可以说有两个世界：</p>
+<ul>
+<li>
+<p>Execution</p>
+<p>lock、interrupt、preemption、spinlock</p>
+</li>
+<li>
+<p>Memory</p>
+<p>barrier、fence、acquire、release</p>
+</li>
+</ul>
+<p>此时再回到 <code>spinlock</code> 的调用，看看这个由 AI 总结的完整调用链：</p>
+<div class="highlight"><pre><span></span><code><span class="n">spin_lock</span><span class="p">()</span>
+<span class="w">  </span><span class="err">└──</span><span class="w"> </span><span class="n">queued_spin_lock</span><span class="p">()</span>
+<span class="w">        </span><span class="err">└──</span><span class="w"> </span><span class="n">atomic_try_cmpxchg_acquire</span><span class="p">()</span><span class="w"> </span>
+<span class="w">              </span><span class="err">└──</span><span class="w"> </span><span class="n">__lse__cmpxchg_case_acq_32</span><span class="p">()</span>
+<span class="w">                    </span><span class="err">└──</span><span class="w"> </span><span class="n">casal</span><span class="w"> </span><span class="n">w0</span><span class="p">,</span><span class="w"> </span><span class="n">w1</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">x2</span><span class="p">]</span><span class="w">    </span><span class="c1">// ACQUIRE语义（Load-Acquire）</span>
+
+<span class="w">        </span><span class="p">[</span><span class="n">如果快速路径失败</span><span class="err">，</span><span class="n">进入慢速路径</span><span class="p">]</span>
+
+<span class="w">        </span><span class="err">└──</span><span class="w"> </span><span class="n">queued_spin_lock_slowpath</span><span class="p">()</span>
+<span class="w">              </span><span class="err">├──</span><span class="w"> </span><span class="n">smp_cond_load_acquire</span><span class="p">()</span><span class="w">      </span><span class="c1">// ACQUIRE等待</span>
+<span class="w">              </span><span class="err">│</span><span class="w">     </span><span class="err">└──</span><span class="w"> </span><span class="n">ldar</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">ldarh</span><span class="w">           </span><span class="c1">// Load-Acquire指令</span>
+<span class="w">              </span><span class="err">│</span>
+<span class="w">              </span><span class="err">├──</span><span class="w"> </span><span class="n">smp_wmb</span><span class="p">()</span><span class="w">                    </span><span class="c1">// 写内存屏障</span>
+<span class="w">              </span><span class="err">│</span><span class="w">     </span><span class="err">└──</span><span class="w"> </span><span class="n">dmb</span><span class="w"> </span><span class="n">ishst</span><span class="w">              </span><span class="c1">// Data Memory Barrier</span>
+<span class="w">              </span><span class="err">│</span>
+<span class="w">              </span><span class="err">├──</span><span class="w"> </span><span class="n">barrier</span><span class="p">()</span><span class="w">                    </span><span class="c1">// 编译器屏障</span>
+<span class="w">              </span><span class="err">│</span>
+<span class="w">              </span><span class="err">└──</span><span class="w"> </span><span class="n">atomic_cond_read_acquire</span><span class="p">()</span><span class="w">   </span><span class="c1">// ACQUIRE读取</span>
+<span class="w">                    </span><span class="err">└──</span><span class="w"> </span><span class="n">ldar</span><span class="w">                   </span><span class="c1">// Load-Acquire</span>
+
+<span class="n">spin_unlock</span><span class="p">()</span>
+<span class="w">  </span><span class="err">└──</span><span class="w"> </span><span class="n">queued_spin_unlock</span><span class="p">()</span>
+<span class="w">        </span><span class="err">└──</span><span class="w"> </span><span class="n">smp_store_release</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lock</span><span class="o">-&gt;</span><span class="n">locked</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="w">              </span><span class="err">└──</span><span class="w"> </span><span class="n">stlrh</span><span class="w"> </span><span class="n">w0</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">x1</span><span class="p">]</span><span class="w">               </span><span class="c1">// RELEASE语义（Store-Release）</span>
+
+<span class="n">smp_mb__after_spinlock</span><span class="p">()</span>
+<span class="w">  </span><span class="err">└──</span><span class="w"> </span><span class="n">smp_mb</span><span class="p">()</span>
+<span class="w">        </span><span class="err">└──</span><span class="w"> </span><span class="n">dmb</span><span class="w"> </span><span class="n">ish</span><span class="w">                            </span><span class="c1">// 全内存屏障</span>
+</code></pre></div>
+<p>你也能对整体框架有认知了！将来真正遇到 barrier 也能有一点印象。这里涉及的东西太多了，甚至还要讲 memory model 的东西，所以不展开了，也不是重点。</p>
+<h1 id="4">4. 资料推荐</h1>
+<p>自己曾经用AI总结，格式排版也很乱的一篇：<a href="https://mp.weixin.qq.com/s/UEFUWLKn5o3psL6q__P7Bg">互斥：atomic 之下</a>，不过没啥质量。</p>
+<p>优先看：</p>
+<ul>
+<li>
+<p>Lock types and their rules：https://www.kernel.org/doc/html/latest/locking/locktypes.html?utm_source=chatgpt.com</p>
+<p>官方解释 spinlock、mutex、atomic context、PREEMPT_RT</p>
+</li>
+<li>
+<p>Proper Locking Under a Preemptible Kernel: Keeping Kernel Code Preempt-Safe：https://docs.kernel.org/locking/preempt-locking.html</p>
+</li>
+<li>
+<p>Linux kernel memory barriers：https://docs.kernel.org/core-api/wrappers/memory-barriers.html</p>
+</li>
+<li>
+<p>《Linux Kernel Development (3rd Edition)》/ 《Understanding the Linux Kernel (3rd Edition)》（比较旧，但还是有用）</p>
+</li>
+<li>
+<p>《Is Parallel Programming Hard, And, If So, What Can You Do About It?》：https://arxiv.org/pdf/1701.00854)</p>
+<p>Linux RCU 的主要作者，本书从硬件缓存讲到 RCU，包含大量 Linux 内核实际案例和 litmus test</p>
+</li>
+<li>
+<p>Linux-Kernel Memory Model：https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2018/p0124r6.html</p>
+</li>
+<li>
+<p>实时系列</p>
+<ul>
+<li>
+<p>Preemption Model - Linux Kernel Internals：https://kernel-internals.org/sched/preemption/</p>
+</li>
+<li>
+<p>LWM 文章</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">文章</th>
+<th style="text-align: left;">年份</th>
+<th style="text-align: left;">内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Approaches to Realtime Linux：<br />https://lwn.net/Articles/106010/</td>
+<td style="text-align: left;">2004</td>
+<td style="text-align: left;">2004年所有实时方案综述</td>
+</tr>
+<tr>
+<td style="text-align: left;">A Realtime Preemption Overview：<br />https://lwn.net/Articles/146861/</td>
+<td style="text-align: left;">2005</td>
+<td style="text-align: left;">PREEMPT_RT 核心思想</td>
+</tr>
+<tr>
+<td style="text-align: left;">Priority Inheritance in the Kernel：<br />https://lwn.net/Articles/178253/</td>
+<td style="text-align: left;">2006</td>
+<td style="text-align: left;">优先级继承协议</td>
+</tr>
+<tr>
+<td style="text-align: left;">Moving Interrupts to Threads：<br />https://lwn.net/Articles/302043/</td>
+<td style="text-align: left;">2009</td>
+<td style="text-align: left;">中断线程化</td>
+</tr>
+<tr>
+<td style="text-align: left;">Revisiting the Kernel's Preemption Model：<br />https://lwn.net/Articles/945422/</td>
+<td style="text-align: left;">2023（⭐）</td>
+<td style="text-align: left;">从 none 到 realtime 的所有模式</td>
+</tr>
+<tr>
+<td style="text-align: left;">The Long Road to Lazy Preemption：<br />https://lwn.net/Articles/994322/</td>
+<td style="text-align: left;">2024</td>
+<td style="text-align: left;">PREEMPT_LAZY 新模式</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+</li>
+<li>
+<p>Other：</p>
+<ul>
+<li>Memory Models：https://research.swtch.com/mm</li>
+</ul>
+</li>
+</ul>
+<h1 id="_1">参考</h1>
+<p>[1] Process (computing) - Wikipedia：https://en.wikipedia.org/wiki/Process_(computing)</p>
+<p>[2] Milestones:The Atlas computer and the Invention of Virtual Memory：https://ieeemilestones.ethw.org/Milestones:The_Atlas_computer_and_the_Invention_of_Virtual_Memory</p>
+<p>[3] Arpaci-Dusseau, R. H., &amp; Arpaci-Dusseau, A. C. (2018). <em>Operating Systems: Three Easy Pieces</em> (Version 1.01). Arpaci-Dusseau Books. http://www.ostep.org/</p>
+<p>[4] — Andrew S. Tanenbaum, Herbert Bos. <em>Modern Operating Systems</em>, 5th Edition (2023), P39, P86</p>
+<p>[5] 来自外部的声音：https://nju-projectn.github.io/ics-pa-gitbook/ics2025/4.4.html</p>
+<p>[6] 穿越时空的旅程：https://nju-projectn.github.io/ics-pa-gitbook/ics2025/3.2.html</p>
+<p>[7] Patterson, D. A., &amp; Hennessy, J. L. (2020). <em>Computer Organization and Design: The Hardware/Software Interface</em> (RISC-V Edition, 5th ed.). Morgan Kaufmann. P277</p>
+<p>[8] FreeRTOS-Kernelhttps://github.com/FreeRTOS/FreeRTOS-Kernel/blob/main/</p>
+<p>[9] atomic context and process context/interrupt context：https://stackoverflow.com/questions/47063693/atomic-context-and-process-context-interrupt-context</p>
+<h1 id="todo">TODO</h1>
+<p>最后，给出上面的内容对 我在OEM 开发的一些建议指导。（驱动、OTA、功耗、性能等等）</p>
+<p>既然说是线程调度。调度的是进程还是线程？？</p>
+<p>需要梳理清楚，清楚之后，然后进一步去去看看现代的Linux内核是怎么调度的。</p>
+<p>为什么会看到preempt？</p>
+<hr />
+<blockquote>
+<p><strong>注意：以下的内容均为个人观点+在学习/实践中得出。</strong></p>
+<p><strong>如果你看完后有不同的观点也没关系！请指出，我很乐意去尝试积极的东西。</strong></p>
+</blockquote>
+<p>封面：<img alt="ChatGPT Image 2026年7月3日 00_21_27" src="pic/ChatGPT%20Image%202026%E5%B9%B47%E6%9C%883%E6%97%A5%2000_21_27.png" /></p>
+<p>目录：</p>
+<div class="highlight"><pre><span></span><code>1. introduction
+2. 代码走读
+    2.1 overview
+    2.2 代码 flow
+        2.2.1 前置
+    2.3 简单总结
+3. `kmalloc` 的 `GFP_xxx`
+    3.1 `GFP` 和 `kmalloc`
+    3.2 First Principle：Allocator 为什么可能睡眠？
+        3.2.1 相关基础定义
+        3.2.2 reclaim → sleep？
+    3.3 重新审视 Allocation Policy
+    3.4 为什么 `spinlock` 里不能 `GFP_KERNEL`？
+    3.5 那 GFP_ATOMIC 到底做了什么？
+    3.6 More 拓展
+        3.6.1 `__GFP_NOFS`
+        3.6.2 无敌的 `GFP_ATOMIC` ？
+    3.7 总结
+4. 企业实践/建议
+参考
+</code></pre></div>
+<h1 id="1-introduction_1">1. introduction</h1>
+<p>前文<a href="https://mp.weixin.qq.com/s/mAukEjpcrvul_fHy92cojg">深入理解 OS 的抢占：以 spinlock 后能否 sleep为例（上）</a>已经讲了很多基础的内容（没看的建议去看），本文直接实践：<code>spinlock</code> 后直接调用 <code>sleep</code> 可以嘛？</p>
+<p>环境：QEMU + aarch64 + Linux 6.12.28</p>
+<p><img alt="image-20260630205507290" src="pic/image-20260630205507290.png" /></p>
+<div class="highlight"><pre><span></span><code>qemu-system-aarch64<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-machine<span class="w"> </span>virt,virtualization<span class="o">=</span>true,gic-version<span class="o">=</span><span class="m">3</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-nographic<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-m<span class="w"> </span><span class="nv">size</span><span class="o">=</span>1G<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-cpu<span class="w"> </span>cortex-a72<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-smp<span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-kernel<span class="w"> </span>out/Image<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-initrd<span class="w"> </span>out/rootfs.cpio<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-dtb<span class="w"> </span>out/cc_qemu_sdk.dtb<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-fsdev<span class="w"> </span>local,id<span class="o">=</span>shareid,path<span class="o">=</span>./share,security_model<span class="o">=</span>none<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-device<span class="w"> </span>virtio-9p-device,fsdev<span class="o">=</span>shareid,mount_tag<span class="o">=</span>share<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-append<span class="w"> </span><span class="s2">&quot;console=ttyAMA0 rdinit=/linuxrc&quot;</span><span class="w"> </span><span class="nv">$@</span>
+</code></pre></div>
+<h1 id="2">2. 代码走读</h1>
+<h2 id="21-overview">2.1 overview</h2>
+<p>第一篇如果完全仔细看了，要回答就很简单了，我们只需要把运行日志和代码对应起来，走一遍内核的实际行为即可。</p>
+<p>代码位置：https://github.com/JAILuo/wechat-demos/tree/main/tech-scratch/scr-01-spinlock</p>
+<p>核心片段：</p>
+<div class="highlight"><pre><span></span><code><span class="cm">/* 场景 3：Sleeping while atomic (原子上下文中休眠)</span>
+<span class="cm"> * 真实场景：在自旋锁或中断上下文中，调用了可能引起休眠的函数（如 msleep, mutex_lock, copy_from_user, 或者 GFP_KERNEL 的 kmalloc）。</span>
+<span class="cm"> */</span>
+<span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">trigger_sleep_in_atomic</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">tmp_buf</span><span class="p">;</span>
+<span class="w">    </span><span class="n">pr_info</span><span class="p">(</span><span class="s">&quot;[JAI_TEST] Triggering Sleep in Atomic Context...</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">spin_lock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">g_ctx</span><span class="o">-&gt;</span><span class="n">hw_lock</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">pr_info</span><span class="p">(</span><span class="s">&quot;[JAI_TEST] Allocating memory with GFP_KERNEL inside spinlock...</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">tmp_buf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">kmalloc</span><span class="p">(</span><span class="mi">4096</span><span class="p">,</span><span class="w"> </span><span class="n">GFP_KERNEL</span><span class="p">);</span><span class="w"> </span>
+
+<span class="w">    </span><span class="c1">// 所以直接调用休眠导致报错易观察</span>
+<span class="w">    </span><span class="n">msleep</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span><span class="w"> </span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">tmp_buf</span><span class="p">)</span><span class="w"> </span><span class="n">kfree</span><span class="p">(</span><span class="n">tmp_buf</span><span class="p">);</span>
+<span class="w">    </span><span class="n">spin_unlock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">g_ctx</span><span class="o">-&gt;</span><span class="n">hw_lock</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>运行日志：</p>
+<p><img alt="image-20260630205207285" src="pic/image-20260630205207285.png" /></p>
+<p>完整的从 <code>msleep</code> 一步步往下的函数调用提前列出来，之后再一步步走（有些函数内联，<code>dump_stack</code> 看不到）：</p>
+<div class="highlight"><pre><span></span><code><span class="n">msleep</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="w">                             </span><span class="c1">// kernel/time/timer.c</span>
+<span class="w">  </span><span class="err">└──</span><span class="w"> </span><span class="n">schedule_timeout</span><span class="p">(</span><span class="n">timeout</span><span class="p">)</span><span class="w">         </span><span class="c1">// kernel/time/timer.c</span>
+<span class="w">        </span><span class="err">└──</span><span class="w"> </span><span class="n">schedule</span><span class="p">()</span><span class="w">                  </span><span class="c1">// kernel/sched/core.c</span>
+<span class="w">                </span><span class="err">└──</span><span class="w"> </span><span class="n">preempt_disable</span><span class="p">()</span><span class="w">   </span><span class="c1">// preempt_count = 2（spin_lock贡献了1，这里再+1）</span>
+<span class="w">                </span><span class="err">└──</span><span class="w"> </span><span class="n">__schedule</span><span class="p">(</span><span class="n">SM_NONE</span><span class="p">)</span><span class="w"> </span><span class="c1">// kernel/sched/core.c</span>
+<span class="w">                        </span><span class="err">└──</span><span class="w"> </span><span class="n">schedule_debug</span><span class="p">(</span><span class="n">prev</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">)</span><span class="w">  </span><span class="c1">// preempt = false</span>
+<span class="w">                                </span><span class="err">└──</span><span class="w"> </span><span class="n">in_atomic_preempt_off</span><span class="p">()</span><span class="w">  </span><span class="c1">// 2 != 1 ? YES!</span>
+<span class="w">                                        </span><span class="err">└──</span><span class="w"> </span><span class="n">__schedule_bug</span><span class="p">(</span><span class="n">prev</span><span class="p">)</span>
+<span class="w">                                                </span><span class="err">└──</span><span class="w"> </span><span class="n">printk</span><span class="p">(</span><span class="s">&quot;BUG: scheduling while atomic&quot;</span><span class="p">)</span>
+<span class="w">                                                </span><span class="err">└──</span><span class="w"> </span><span class="n">preempt_count_set</span><span class="p">(</span><span class="n">PREEMPT_DISABLED</span><span class="p">)</span>
+</code></pre></div>
+<p>关键的 BUG 以及起点：</p>
+<div class="highlight"><pre><span></span><code>[189957.141816] BUG: scheduling while atomic: insmod/245/0x00000002
+</code></pre></div>
+<p>注意这个 <code>0x00000002</code>，它就是之前说过 <code>preempt_count</code> 的当前值。</p>
+<p>第一篇就说过，<code>spin_lock()</code> 内部会调用 <code>preempt_disable()</code>，也就是把 <code>preempt_count++</code>。此时 <code>preempt_count != 0</code>，内核应该是会知道我们正处于一个原子上下文中的。</p>
+<p>真的是这样吗？别着急下结论，这只是初步认知。</p>
+<p>具体还看看代码怎么判断 <code>atomic</code> 的，下面是完整的代码 flow。</p>
+<h2 id="22-flow">2.2 代码 flow</h2>
+<p>基于Linux 6.12：https://elixir.bootlin.com/linux/v6.12.28/source/</p>
+<h3 id="221">2.2.1 前置</h3>
+<ol>
+<li>
+<p><code>msleep</code> —— <code>kernel/time/timer.c</code></p>
+<div class="highlight"><pre><span></span><code><span class="kt">signed</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">__sched</span><span class="w"> </span><span class="nf">schedule_timeout_uninterruptible</span><span class="p">(</span><span class="kt">signed</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">timeout</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">__set_current_state</span><span class="p">(</span><span class="n">TASK_UNINTERRUPTIBLE</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">schedule_timeout</span><span class="p">(</span><span class="n">timeout</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="n">EXPORT_SYMBOL</span><span class="p">(</span><span class="n">schedule_timeout_uninterruptible</span><span class="p">);</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * msleep - sleep safely even with waitqueue interruptions</span>
+<span class="cm"> * @msecs: Time in milliseconds to sleep for</span>
+<span class="cm"> */</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">msleep</span><span class="p">(</span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">msecs</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">timeout</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">msecs_to_jiffies</span><span class="p">(</span><span class="n">msecs</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">timeout</span><span class="p">)</span>
+<span class="w">        </span><span class="n">timeout</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">schedule_timeout_uninterruptible</span><span class="p">(</span><span class="n">timeout</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">EXPORT_SYMBOL</span><span class="p">(</span><span class="n">msleep</span><span class="p">);</span>
+</code></pre></div>
+<p><code>msleep</code> 内部把当前任务状态设为 <code>TASK_UNINTERRUPTIBLE</code>，然后请求调度器挂起自己。</p>
+</li>
+<li>
+<p><code>schedule_timeout(timeout)</code> —— <code>kernel/time/timer.c</code></p>
+<div class="highlight"><pre><span></span><code><span class="kt">signed</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">__sched</span><span class="w"> </span><span class="nf">schedule_timeout</span><span class="p">(</span><span class="kt">signed</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">timeout</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="p">...</span>
+<span class="w">    </span><span class="n">timer</span><span class="p">.</span><span class="n">task</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">current</span><span class="p">;</span>
+<span class="w">    </span><span class="n">timer_setup_on_stack</span><span class="p">(</span><span class="o">&amp;</span><span class="n">timer</span><span class="p">.</span><span class="n">timer</span><span class="p">,</span><span class="w"> </span><span class="n">process_timeout</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="w">    </span><span class="n">__mod_timer</span><span class="p">(</span><span class="o">&amp;</span><span class="n">timer</span><span class="p">.</span><span class="n">timer</span><span class="p">,</span><span class="w"> </span><span class="n">expire</span><span class="p">,</span><span class="w"> </span><span class="n">MOD_TIMER_NOTPENDING</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">schedule</span><span class="p">();</span><span class="w"> </span>
+
+<span class="w">    </span><span class="n">del_timer_sync</span><span class="p">(</span><span class="o">&amp;</span><span class="n">timer</span><span class="p">.</span><span class="n">timer</span><span class="p">);</span>
+<span class="w">    </span><span class="p">...</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>在当前任务的栈上设置一个定时器（超时后才调用 <code>process_timeout</code> 回调重新唤醒自己这个任务），调用 <code>schedule()</code> 让出 CPU。</p>
+</li>
+</ol>
+<h3 id="222-schedule">2.2.2 <code>schedule</code> 实体</h3>
+<p><code>schedule()</code> — <code>kernel/sched/core.c</code></p>
+<div class="highlight"><pre><span></span><code><span class="cp">#define SM_NONE         0</span>
+
+<span class="k">static</span><span class="w"> </span><span class="n">__always_inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">__schedule_loop</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">sched_mode</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">do</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">preempt_disable</span><span class="p">();</span>
+<span class="w">        </span><span class="n">__schedule</span><span class="p">(</span><span class="n">sched_mode</span><span class="p">);</span>
+<span class="w">        </span><span class="n">sched_preempt_enable_no_resched</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">need_resched</span><span class="p">());</span>
+<span class="p">}</span>
+
+<span class="n">asmlinkage</span><span class="w"> </span><span class="n">__visible</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">__sched</span><span class="w"> </span><span class="n">schedule</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">task_struct</span><span class="w"> </span><span class="o">*</span><span class="n">tsk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">current</span><span class="p">;</span>
+<span class="cp">#ifdef CONFIG_RT_MUTEXES</span>
+<span class="w">    </span><span class="n">lockdep_assert</span><span class="p">(</span><span class="o">!</span><span class="n">tsk</span><span class="o">-&gt;</span><span class="n">sched_rt_mutex</span><span class="p">);</span>
+<span class="cp">#endif</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">task_is_running</span><span class="p">(</span><span class="n">tsk</span><span class="p">))</span>
+<span class="w">        </span><span class="n">sched_submit_work</span><span class="p">(</span><span class="n">tsk</span><span class="p">);</span>
+<span class="w">    </span><span class="n">__schedule_loop</span><span class="p">(</span><span class="n">SM_NONE</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sched_update_worker</span><span class="p">(</span><span class="n">tsk</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// /include/linux/sched.h</span>
+<span class="cp">#define task_is_running(task)       (READ_ONCE((task)-&gt;__state) == TASK_RUNNING)</span>
+</code></pre></div>
+<p>这个函数有很多有意思的点：</p>
+<ul>
+<li>
+<p><code>task_is_running(tsk)</code>：看当前任务是否为 <code>TASK_RUNNING</code></p>
+<p>如果不是运行的（比如在 <code>TASK_INTERRUPTIBLE</code>、<code>TASK_UNINTERRUPTIBLE</code> 等睡眠状态），则执行 <code>sched_submit_work(tsk)</code>。进一步区分：</p>
+<ul>
+<li>
+<p><strong>情况 A（自愿睡眠）</strong>：当前任务主动调用 <code>schedule_timeout()</code>、<code>wait_event()</code> 等，将自己置为睡眠状态后，再调用 <code>schedule()</code>。</p>
+<p>此时它可能在睡眠前积累了一些待提交的 Block I/O 请求（存放在“plug”队列中，一种批处理优化）。如果不及时刷新，这些 I/O 请求可能会被挂起很久，导致性能问题甚至死锁。</p>
+<p><code>sched_submit_work()</code> 调用 <code>blk_flush_plug()</code> 将积压的 I/O 请求提交给块设备层。</p>
+<p>只在真正要“睡眠”的时候才处理积压的 I/O，避免频繁调度的无谓的刷盘开销。</p>
+</li>
+<li>
+<p><strong>情况 B（被抢占/被动调度）</strong>：当前任务状态仍为 <code>TASK_RUNNING</code>，只是因为时间片用完或被更高优先级任务打断而调用 <code>schedule()</code>。此时它很快就会回来继续运行，<strong>不需要</strong>刷新 I/O 请求（刷新了反而破坏批处理的缓存局部性，降低性能）。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><code>__schedule_loop</code> 的又一次 <code>preempt_disable</code></p>
+<p>还记得 <code>spinlock</code> 里也做了 <code>preempt_disable</code> 嘛？可以结合上一篇来想想为什么这么做。</p>
+<p>回到之前总结的 <strong>触发器（Trigger） -&gt; 仲裁器（Arbiter） -&gt; 执行（Action）</strong> 状态机模型来分析，<code>schedule()</code> 本身就是“仲裁器”和“执行”的核心主干。</p>
+<p>关抢占的目的，不就是为了放置多个任务之间的抢占嘛，具体一点，不就是防止调度器被调度器自己抢占嘛，即防重入（<code>re-entrancy</code>）嘛（不然栈都爆了）</p>
+<p>如果还想不明白，这么看：</p>
+<ol>
+<li><strong>准备阶段：</strong> Task A 的状态被改成了 <code>TASK_INTERRUPTIBLE</code>（或者 <code>TASK_UNINTERRUPTIBLE</code>），准备从 <code>Runqueue</code>就绪队列中摘除。</li>
+<li><strong>Trigger 介入：</strong> 就在这时，突然来了一个定时器中断或者外设中断</li>
+<li><strong>中断上下文：</strong> CPU 强行打断当前的 <code>schedule()</code> 流程，去执行 ISR。在这个 ISR 中，刚好唤醒了一个更高优先级的 Task B。ISR 随即将 <code>need_resched()</code> 标志位置 1。</li>
+<li><strong>嵌套调度：</strong> ISR 执行完毕，准备返回原来被打断的上下文（即 Task A 的 <code>schedule()</code> 中途）。但由于开着内核抢占（<code>CONFIG_PREEMPT=y</code>），内核在从中断返回前，会检查 <code>need_resched()</code>。发现标志被置位，且当前没关抢占，<strong>内核就会立刻触发一次新的抢占式 <code>schedule()</code>。</strong></li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="n">Task</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="n">正常执行</span>
+<span class="w">  </span><span class="err">└──</span><span class="w"> </span><span class="n">schedule</span><span class="p">()</span><span class="w">  </span><span class="p">(</span><span class="n">第一次</span><span class="err">，</span><span class="n">主动让出</span><span class="err">，</span><span class="n">还没走完</span><span class="p">)</span>
+<span class="w">        </span><span class="err">└──</span><span class="w"> </span><span class="p">[</span><span class="n">硬件中断打断</span><span class="p">]</span>
+<span class="w">              </span><span class="err">└──</span><span class="w"> </span><span class="n">ISR</span><span class="w"> </span><span class="n">唤醒</span><span class="w"> </span><span class="n">Task</span><span class="w"> </span><span class="n">B</span>
+<span class="w">                    </span><span class="err">└──</span><span class="w"> </span><span class="n">preempt_schedule_irq</span><span class="p">()</span><span class="w"> </span>
+<span class="w">                          </span><span class="err">└──</span><span class="w"> </span><span class="n">schedule</span><span class="p">()</span><span class="w"> </span><span class="p">(</span><span class="n">第二次</span><span class="err">，</span><span class="n">被动抢占</span><span class="p">)</span>
+</code></pre></div>
+<p>还有，如果 <code>schedule</code> 里刚好拿到一个锁，在重入不久死锁了嘛。所以关抢占挺好。</p>
+<p>但还有问题，对于 SMP、中断怎么防？</p>
+<p>还是看哪里用了全局/ <code>per-cpu</code> 变量呗</p>
+</li>
+</ul>
+<p><code>__schedule(int sched_mode)</code> — <code>kernel/sched/core.c</code></p>
+<div class="highlight"><pre><span></span><code><span class="cm">/*</span>
+<span class="cm"> * __schedule() is the main scheduler function.</span>
+<span class="cm"> *</span>
+<span class="cm"> * The main means of driving the scheduler and thus entering this function are:</span>
+<span class="cm"> *</span>
+<span class="cm"> *   1. Explicit blocking: mutex, semaphore, waitqueue, etc.</span>
+<span class="cm"> *</span>
+<span class="cm"> *   2. TIF_NEED_RESCHED flag is checked on interrupt and userspace return</span>
+<span class="cm"> *      paths. For example, see arch/x86/entry_64.S.</span>
+<span class="cm"> *</span>
+<span class="cm"> *      To drive preemption between tasks, the scheduler sets the flag in timer</span>
+<span class="cm"> *      interrupt handler sched_tick().</span>
+<span class="cm"> *</span>
+<span class="cm"> *   3. Wakeups don&#39;t really cause entry into schedule(). They add a</span>
+<span class="cm"> *      task to the run-queue and that&#39;s it.</span>
+<span class="cm"> *</span>
+<span class="cm"> *      Now, if the new task added to the run-queue preempts the current</span>
+<span class="cm"> *      task, then the wakeup sets TIF_NEED_RESCHED and schedule() gets</span>
+<span class="cm"> *      called on the nearest possible occasion:</span>
+<span class="cm"> *</span>
+<span class="cm"> *       - If the kernel is preemptible (CONFIG_PREEMPTION=y):</span>
+<span class="cm"> *</span>
+<span class="cm"> *         - in syscall or exception context, at the next outmost</span>
+<span class="cm"> *           preempt_enable(). (this might be as soon as the wake_up()&#39;s</span>
+<span class="cm"> *           spin_unlock()!)</span>
+<span class="cm"> *</span>
+<span class="cm"> *         - in IRQ context, return from interrupt-handler to</span>
+<span class="cm"> *           preemptible context</span>
+<span class="cm"> *</span>
+<span class="cm"> *       - If the kernel is not preemptible (CONFIG_PREEMPTION is not set)</span>
+<span class="cm"> *         then at the next:</span>
+<span class="cm"> *</span>
+<span class="cm"> *          - cond_resched() call</span>
+<span class="cm"> *          - explicit schedule() call</span>
+<span class="cm"> *          - return from syscall or exception to user-space</span>
+<span class="cm"> *          - return from interrupt-handler to user-space</span>
+<span class="cm"> *</span>
+<span class="cm"> * WARNING: must be called with preemption disabled!</span>
+<span class="cm"> */</span>
+<span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">__sched</span><span class="w"> </span><span class="n">notrace</span><span class="w"> </span><span class="n">__schedule</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">sched_mode</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">task_struct</span><span class="w"> </span><span class="o">*</span><span class="n">prev</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="n">next</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">bool</span><span class="w"> </span><span class="n">preempt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sched_mode</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">SM_NONE</span><span class="p">;</span><span class="w">      </span><span class="c1">// SM_NONE = 0, 所以 preempt = false</span>
+<span class="w">    </span><span class="p">...</span>
+
+<span class="w">    </span><span class="n">cpu</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">smp_processor_id</span><span class="p">();</span>
+<span class="w">    </span><span class="n">rq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cpu_rq</span><span class="p">(</span><span class="n">cpu</span><span class="p">);</span>
+<span class="w">    </span><span class="n">prev</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rq</span><span class="o">-&gt;</span><span class="n">curr</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">schedule_debug</span><span class="p">(</span><span class="n">prev</span><span class="p">,</span><span class="w"> </span><span class="n">preempt</span><span class="p">);</span><span class="w">             </span><span class="c1">// schedule_debug(prev, false)</span>
+<span class="w">    </span><span class="p">...</span>
+<span class="w">    </span><span class="n">local_irq_disable</span><span class="p">();</span>
+<span class="w">    </span><span class="p">...</span>
+<span class="w">    </span><span class="n">rq_lock</span><span class="p">(</span><span class="n">rq</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">rf</span><span class="p">);</span>
+<span class="w">    </span><span class="n">smp_mb__after_spinlock</span><span class="p">();</span>
+<span class="w">    </span><span class="p">...</span>
+<span class="w">        </span><span class="cm">/* Also unlocks the rq: */</span>
+<span class="w">        </span><span class="n">rq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">context_switch</span><span class="p">(</span><span class="n">rq</span><span class="p">,</span><span class="w"> </span><span class="n">prev</span><span class="p">,</span><span class="w"> </span><span class="n">next</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">rf</span><span class="p">);</span>
+<span class="w">    </span><span class="p">...</span>
+<span class="p">}</span>
+</code></pre></div>
+<ul>
+<li>
+<p>注释：<code>WARNING: must be called with preemption disabled!</code>，正好呼应了外层 <code>__schedule_loop</code> 做的 <code>preempt_disable()</code>。</p>
+</li>
+<li>
+<p>还有关中断：<code>local_irq_disable()</code>，真正开始操作调度队列之前，防止任务和中断之间的并发。</p>
+</li>
+<li>
+<p>SMP 并发：使用 <code>rq_lock</code>：内部其实就是获取一把 <code>raw_spin_lock</code>。</p>
+<p>虽然关了本地中断，但其他 <code>CPU</code> 核（比如正在处理网卡中断的 <code>CPU 1</code>）可能正好想要唤醒一个任务，并试图把它塞进我们这个核（<code>CPU 0</code>）的运行队列里。如果没有这把锁，<code>CPU 0</code> 和 <code>CPU 1</code> 就会把 <code>Runqueue</code> 的链表指针改乱。</p>
+</li>
+</ul>
+<p><strong>除此之外，还有两个彩蛋</strong>：</p>
+<ul>
+<li>
+<p><code>smp_mb__after_spinlock()</code></p>
+<p>内核写了一堆的注释：</p>
+<div class="highlight"><pre><span></span><code>/*
+ * Make sure that signal_pending_state()-&gt;signal_pending() below
+ * can&#39;t be reordered with __set_current_state(TASK_INTERRUPTIBLE)
+ * done by the caller to avoid the race with signal_wake_up():
+ *
+ * __set_current_state(@state)      signal_wake_up()
+ * schedule()                 set_tsk_thread_flag(p, TIF_SIGPENDING)
+ *                    wake_up_state(p, state)
+ *   LOCK rq-&gt;lock              LOCK p-&gt;pi_state
+ *   smp_mb__after_spinlock()           smp_mb__after_spinlock()
+ *     if (signal_pending_state())      if (p-&gt;state &amp; @state)
+ *
+ * Also, the membarrier system call requires a full memory barrier
+ * after coming from user-space, before storing to rq-&gt;curr; this
+ * barrier matches a full barrier in the proximity of the membarrier
+ * system call exit.
+ */
+</code></pre></div>
+<p>这不就是上一篇的 <code>3.5.2 barrier</code> 写的：<strong>“CPU/编译器：我为什么一定要按你的顺序？”</strong> 内核在这里显式插入了一个全内存屏障（<code>Full Memory Barrier</code>），确保“拿到锁”这个动作和“读取任务状态”的操作绝对不会被 <code>CPU</code> 的 <code>Store Buffer</code> / <code>cache</code> 给乱序重排了。</p>
+</li>
+<li>
+<p><code>Context Switch</code></p>
+<div class="highlight"><pre><span></span><code><span class="cm">/* Also unlocks the rq: */</span>
+<span class="n">rq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">context_switch</span><span class="p">(</span><span class="n">rq</span><span class="p">,</span><span class="w"> </span><span class="n">prev</span><span class="p">,</span><span class="w"> </span><span class="n">next</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">rf</span><span class="p">);</span>
+</code></pre></div>
+<p>正常我们的思维都是：<code>lock()</code> 和 <code>unlock()</code> 必须在同一个函数、同一个线程里成对出现。 </p>
+<p>但在调度器里，<strong>A 任务拿了锁，切走之后，可能是由 B 任务来解开这把锁的！</strong> </p>
+<p><code>context_switch</code> 会把 CPU 的寄存器（包括栈指针）彻底切换到 <code>next</code> 任务，当它返回时，当前的执行流已经变成了 <code>next</code> 任务。</p>
+<p>所以解锁的动作实际上是隐藏在 <code>context_switch</code> 内部的 <code>finish_task_switch</code> 里完成的</p>
+<blockquote>
+<p>我大概也有点猜到为什么调试内核死锁这么痛苦了。传统的锁追踪逻辑用在这里不太行。</p>
+</blockquote>
+</li>
+</ul>
+<p>当然了，上面的不是主线，下面接着走到具体打印出日志的地方。</p>
+<p><code>schedule_debug(struct task_struct *prev, bool preempt)</code> — <code>kernel/sched/core.c</code></p>
+<div class="highlight"><pre><span></span><code><span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">schedule_debug</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">task_struct</span><span class="w"> </span><span class="o">*</span><span class="n">prev</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">preempt</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="p">...</span>
+<span class="cp">#ifdef CONFIG_DEBUG_ATOMIC_SLEEP</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">preempt</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">READ_ONCE</span><span class="p">(</span><span class="n">prev</span><span class="o">-&gt;</span><span class="n">__state</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">prev</span><span class="o">-&gt;</span><span class="n">non_block_count</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">printk</span><span class="p">(</span><span class="n">KERN_ERR</span><span class="w"> </span><span class="s">&quot;BUG: scheduling in a non-blocking section: %s/%d/%i</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="n">prev</span><span class="o">-&gt;</span><span class="n">comm</span><span class="p">,</span><span class="w"> </span><span class="n">prev</span><span class="o">-&gt;</span><span class="n">pid</span><span class="p">,</span><span class="w"> </span><span class="n">prev</span><span class="o">-&gt;</span><span class="n">non_block_count</span><span class="p">);</span>
+<span class="w">        </span><span class="n">dump_stack</span><span class="p">();</span>
+<span class="w">        </span><span class="n">add_taint</span><span class="p">(</span><span class="n">TAINT_WARN</span><span class="p">,</span><span class="w"> </span><span class="n">LOCKDEP_STILL_OK</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="cp">#endif</span>
+<span class="w">    </span><span class="c1">// 检查是否在 atomic context 中调用 schedule()</span>
+<span class="w">    </span><span class="c1">// 注意：不是 in_atomic()，而是 in_atomic_preempt_off()</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">unlikely</span><span class="p">(</span><span class="n">in_atomic_preempt_off</span><span class="p">()))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">__schedule_bug</span><span class="p">(</span><span class="n">prev</span><span class="p">);</span>
+<span class="w">        </span><span class="n">preempt_count_set</span><span class="p">(</span><span class="n">PREEMPT_DISABLED</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">rcu_sleep_check</span><span class="p">();</span>
+
+<span class="p">}</span>
+</code></pre></div>
+<p>看到了关键的打印 <code>printk</code> ，但注意那个 <code>in_atomic_preempt_off</code>：</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// /include/linux/preempt.h</span>
+
+<span class="cm">/*</span>
+<span class="cm"> * Are we running in atomic context?  WARNING: this macro cannot</span>
+<span class="cm"> * always detect atomic context; in particular, it cannot know about</span>
+<span class="cm"> * held spinlocks in non-preemptible kernels.  Thus it should not be</span>
+<span class="cm"> * used in the general case to determine whether sleeping is possible.</span>
+<span class="cm"> * Do not use in_atomic() in driver code.</span>
+<span class="cm"> */</span>
+<span class="cp">#define in_atomic() (preempt_count() != 0)</span>
+
+<span class="cm">/*</span>
+<span class="cm"> * Check whether we were atomic before we did preempt_disable():</span>
+<span class="cm"> * (used by the scheduler)</span>
+<span class="cm"> */</span>
+<span class="cp">#define in_atomic_preempt_off() (preempt_count() != PREEMPT_DISABLE_OFFSET)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="cp">#define PREEMPT_SHIFT   0</span>
+
+<span class="cp">#define PREEMPT_OFFSET  (1UL &lt;&lt; PREEMPT_SHIFT)</span>
+
+<span class="cm">/*</span>
+<span class="cm"> * The preempt_count offset after preempt_disable();</span>
+<span class="cm"> */</span>
+<span class="cp">#if defined(CONFIG_PREEMPT_COUNT)</span>
+<span class="cp"># define PREEMPT_DISABLE_OFFSET PREEMPT_OFFSET</span>
+<span class="cp">#else</span>
+<span class="cp"># define PREEMPT_DISABLE_OFFSET 0</span>
+<span class="cp">#endif</span>
+</code></pre></div>
+<p><img src="pic/image-20260702130806105.png" alt="image-20260702130806105" style="zoom:50%;" /></p>
+<p>可以看到，<code>in_atomic_preempt_off</code> 判断的是 1，因为 <code>schedule()</code> 也调用了 <code>preempt_disable</code>，给 <code>preempt_count++</code> 了。</p>
+<p>而且注释也明确说了这是给 <code>scheduler</code> 用的，是一个相对检查。</p>
+<p>哦，所以之前认为的 <code>preempt_count != 0</code> 略微有点误差，知道调度器内部有这回事。</p>
+<p>至于 <code>in_atmoic</code> 这个宏，给非调度器的用，同时也记得不要在驱动代码中用。</p>
+<p>在非抢占内核（<code>CONFIG_PREEMPT=n</code>）中：</p>
+<ul>
+<li><code>spin_lock()</code> <strong>不调用</strong> <code>preempt_disable()</code></li>
+<li><code>preempt_count</code> <strong>不会增加</strong></li>
+<li>但 <code>spin_lock()</code> 仍然禁止抢占（通过关闭内核抢占实现）</li>
+<li>此时 <code>in_atomic()</code> 返回 <strong>false</strong>，但代码实际上在 atomic context 中</li>
+</ul>
+<p>所以：这也是注释警告的地方。</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">in_atomic</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">msleep</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span><span class="w">  </span><span class="c1">// 在非抢占内核中，拿着 spinlock 也会进这里，触发 BUG</span>
+<span class="p">}</span>
+</code></pre></div>
+<blockquote>
+<p>那驱动中用什么？</p>
+<ul>
+<li>如果你知道自己在 atomic context，就用 <code>GFP_ATOMIC</code></li>
+<li>如果你知道自己在进程上下文，就用 <code>GFP_KERNEL</code></li>
+<li>不要运行时检查 <code>in_atomic()</code> 来决定行为</li>
+</ul>
+<p>根据代码路径的静态语义来决定，而不是运行时检查。</p>
+</blockquote>
+<h2 id="23_1">2.3 简单总结</h2>
+<p>简单过了一遍代码，再凭着基础流程就大致清楚了。</p>
+<p><code>preempt_count</code> 在调度器调用的 <code>in_atomic_preempt_off</code> 判断：不等于 <code>PREEMPT_DISABLE_OFFSET(这里是1)</code> 就是原子上下文了，也就是说明当前任务持有自旋锁或者显式关闭了抢占。这时候如果允许你睡眠、任务切出去，那就意味着：</p>
+<ul>
+<li>别的任务/中断可能运行在同一把锁上（如果这是 SMP）</li>
+<li>更致命的是，<strong>你自己可能再也醒不来了</strong>——因为你没有 <code>task_struct</code> 来排队等待唤醒（中断上下文），或者你破坏了 <code>spin_lock</code> → <code>spin_unlock</code> 的配对语义</li>
+</ul>
+<p>所以内核直接 <code>BUG_ON()</code>：</p>
+<div class="highlight"><pre><span></span><code>[189957.141816] BUG: scheduling while atomic: insmod/245/0x00000002
+</code></pre></div>
+<p>后面的 <code>call trace</code> 也清清楚楚：</p>
+<div class="highlight"><pre><span></span><code><span class="n">__schedule_bug</span><span class="w">          </span><span class="c1">// 检测到非法调度</span>
+<span class="n">__schedule</span>
+<span class="n">schedule</span>
+<span class="n">schedule_timeout</span>
+<span class="n">msleep</span><span class="w">                  </span><span class="c1">// 你的代码</span>
+<span class="n">own_init</span><span class="w">                </span><span class="c1">// 模块入口</span>
+</code></pre></div>
+<p>所以，内核并不判断 <code>if (holding_spinlock())</code>，按照调用栈，内核只是发现了当前状态不能调度，所以 <code>BUG</code> 了，注意，这里的原因不是调用了 <code>msleep</code>，而是调用了 <code>schedule</code>。</p>
+<p>而<code>schedule()</code> 本质就是：当前任务暂停，切换别的任务运行。</p>
+<p>因此 <code>schedule</code> 成立有一个前提：当前任务可以被挂起。</p>
+<p>那什么时候不能被挂起？比如 <code>spinlcok</code> 保护的：</p>
+<div class="highlight"><pre><span></span><code>spin_lock();
+...
+</code></pre></div>
+<p>我正在保护共享状态，如果此时：线程A拿锁 → 线程A睡觉；那么：线程B、线程C、线程D 全部可能在：<code>spin_lock()</code> 疯狂空转。所以，拿着 <code>spinlock</code> 的线程，没有资格 <code>schedule</code></p>
+<p>这也就是产生了上一篇说的 <code>atomic context</code>。</p>
+<p>有时候我就这么理解这个 <code>atomic context</code>：<strong>不是不能睡眠，而是不能被调度器挂起</strong>。。。</p>
+<p>最后再写写为什么日志没有提 <code>spinlock</code>，只有这个 <code>scheduling while atomic</code>。</p>
+<p>想想看，对于 <code>scheduler</code> 来说，它根本不关心，你为什么进入 atomic context</p>
+<p>可能是：<code>spin_lock()</code>，也可能是：<code>preempt_disable()</code>，也可能是：<code>rcu_read_lock()</code></p>
+<p>可以这么说，<strong>看系统状态，不看原因</strong>。</p>
+<blockquote>
+<p><strong>此时，为什么 <code>mutex_lock</code> 为什么能 <code>sleep</code>？抢占关了吗？影响 scheduler 了吗？发生在哪个上下文？</strong></p>
+</blockquote>
+<h1 id="3-kmalloc-gfp_xxx">3. <code>kmalloc</code> 的 <code>GFP_xxx</code></h1>
+<p>如果看 2.1 的示例代码再仔细一点，虽然没有这方面的报错，但其实还有一个隐藏得更深的问题：<code>spinlock</code> 后的 <code>kmalloc</code> 的 <code>GFP_KERNEL</code> 标志。</p>
+<p>其中类似的比如：</p>
+<blockquote>
+<p><code>kmalloc</code> 调用的几个 <code>gfp flag</code> 有什么差异？最常用的 <code>GFP_KERNEL</code> 为什么不能配 <code>sleep</code>？在中断、进程等代码中会选用什么标志？用了就真的这么做吗？</p>
+</blockquote>
+<h2 id="31-gfp-kmalloc">3.1 <code>GFP</code> 和 <code>kmalloc</code></h2>
+<p>前面我们一直在说 <code>msleep(100)</code> 导致 <code>BUG: scheduling while atomic</code>，代码这里：</p>
+<div class="highlight"><pre><span></span><code><span class="n">spin_lock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">g_ctx</span><span class="o">-&gt;</span><span class="n">hw_lock</span><span class="p">);</span>
+<span class="n">tmp_buf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">kmalloc</span><span class="p">(</span><span class="mi">4096</span><span class="p">,</span><span class="w"> </span><span class="n">GFP_KERNEL</span><span class="p">);</span>
+<span class="n">spin_unlock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">g_ctx</span><span class="o">-&gt;</span><span class="n">hw_lock</span><span class="p">);</span>
+</code></pre></div>
+<p>这里有什么问题？<code>kmalloc</code>？这里只是申请内存，但是没有 <code>msleep</code>，没有影响调度器挂起呀？</p>
+<p>但在 Linux 文档中<sup>[1]</sup>的一句话实际上说明了一切：</p>
+<div class="highlight"><pre><span></span><code>The GFP flags control the behavior of the allocator.
+</code></pre></div>
+<p>注意是 <code>behavior</code>。</p>
+<p><strong>不是控制可以分配哪里的内存，而是控制 <code>allocator</code> 可以采取哪些行动。</strong></p>
+<p>这才是 <code>GFP(get free pages)</code>，这个缩略词的精髓，故这里面能说的东西就很多了。</p>
+<h2 id="32-first-principleallocator">3.2 First Principle：Allocator 为什么可能睡眠？</h2>
+<p>在展开讲具体的 3.3 Allocation Policy 前，先补充一些断层的知识：</p>
+<p><strong>建立 Linux 的 <code>page cache</code> / <code>reclaim</code> / <code>writeback</code> 整个链条。</strong></p>
+<p><strong>Allocator → Reclaim → Writeback → Filesystem</strong></p>
+<blockquote>
+<p>实际上， Linux 的 Documentation<sup>[1]</sup> 也是按照这个思路组织的，而不是先讲 <code>GFP</code>。不然直接说 <code>GFP</code>，就会觉得：为什么一个 <code>kmalloc</code>，怎么突然就和 <code>IO</code>、<code>FS</code> 扯上关系了。</p>
+</blockquote>
+<h3 id="321">3.2.1 相关基础定义</h3>
+<p>回到最简单的问题：<code>buf = kmalloc(4096, GFP_KERNEL);</code></p>
+<p><code>allocator</code> 第一件事情是什么？不是申请页面/内存，而是：</p>
+<div class="highlight"><pre><span></span><code>还有没有空闲 Page？
+            kmalloc
+               │
+               ▼
+       Free List 还有 Page ?
+         │             │
+        YES           NO
+         │             │
+      返回Page      怎么办？
+</code></pre></div>
+<p>如果没有，那 <code>allocator</code> 唯一能做的事情就是：<strong>想办法重新创造一个 Free Page。</strong></p>
+<p>Linux 把这个过程称为 <code>Reclaim</code>。</p>
+<p>当然更加具体的定义<sup>[2]</sup>：</p>
+<blockquote>
+<p><strong>The process of freeing the reclaimable physical memory pages and repurposing them is called (surprise!) reclaim.</strong></p>
+<p><strong>释放那些可以被重新利用的物理内存页并重新分配给其他用途的过程，就叫做“reclaim”</strong>。</p>
+</blockquote>
+<p>什么叫 <code>reclaimable ... pages</code>？</p>
+<blockquote>
+<p><strong>Depending on the page usage it is treated differently by the Linux memory management. The pages that can be freed at any time, either because they cache the data available elsewhere, for instance, on a hard disk, or because they can be swapped out, again, to the hard disk, are called reclaimable. The most notable categories of the reclaimable pages are page cache and anonymous memory.<sup>[2]</sup></strong></p>
+<p>根据页的使用情况，Linux 内存管理会以不同的方式来处理这些页。那些可以随时被释放的页面，要么是因为它们缓存了存储在硬盘等其他地方的数据，要么是因为它们可以被 <code>swap</code> 到硬盘上。这类页面被称为“可回收页面”。其中，最典型的可回收页面就是页面缓存和匿名内存。</p>
+</blockquote>
+<p>什么叫 <code>page cache</code>？磁盘的缓存。因为存 page 的磁盘太慢了，所以存一份缓存到内存中。</p>
+<blockquote>
+<p><code>page cache</code>：</p>
+<p><strong>The physical memory is volatile and the common case for getting data into the memory is to read it from files. Whenever a file is read, the data is put into the page cache to avoid expensive disk access on the subsequent reads. Similarly, when one writes to a file, the data is placed in the page cache and eventually gets into the backing storage device. The written pages are marked as dirty and when Linux decides to reuse them for other purposes, it makes sure to synchronize the file contents on the device with the updated data.<sup>[2]</sup></strong></p>
+<p>物理内存具有易失性，因此，通常情况下，数据都是从文件中读取到内存中的。每当读取某个文件时，数据会被先存储在 page cache 中，从而避免在后续读取时再次访问成本较高的磁盘。同样地，当向文件写入数据时，数据也会先被存储在 page cache 中，之后才会被写入到后备存储设备中。被写入的页面会被标记为“脏页”；当 Linux 决定重新使用这些页面时，它会确保设备上的文件内容与更新后的数据保持一致。</p>
+</blockquote>
+<p>进一步分类：</p>
+<ul>
+<li>
+<p><strong>匿名页 (Anonymous Page)</strong>：<strong>没有</strong>任何磁盘文件作为数据来源（后备存储）的内存页。</p>
+<p>其内容在内存中被创建和修改，回收时只能写入<strong>交换分区（swap space）</strong>。</p>
+<ul>
+<li><strong>典型例子</strong>：进程的<strong>堆（Heap）</strong> 和<strong>栈（Stack）</strong>、<strong><code>mmap</code> 匿名映射</strong></li>
+</ul>
+</li>
+<li>
+<p><strong>文件页 (File-backed Page / File Page) / Page Cache</strong>：以磁盘文件的数据作为内容来源的内存页。（<code>reclaim</code> 更容易）</p>
+<p>它是磁盘数据在内存中的缓存，回收时可直接<strong>丢弃</strong>（干净页）或<strong>写回</strong>原始文件（脏页）。</p>
+<ul>
+<li>
+<p><strong>典型例子</strong>：<strong>程序的代码段</strong>（可执行文件映射）、通过<code>mmap</code>映射的<strong>文件内容</strong>。</p>
+</li>
+<li>
+<p><strong>关于“Page Cache”</strong>：它是文件页的<strong>集合与管理机制</strong>。</p>
+<p>听起来像是一个额外的东西，这很正常，但在底层的视角下： </p>
+<p><strong>所有的文件背景页，其生命周期都是由 Page Cache 机制来管理的。</strong> </p>
+<p>哪怕是程序的 <code>main()</code> 函数所在的物理页，在内核眼中，它不过是“某个 <code>ELF</code> 文件在 Page Cache 中的一个被标记为只读且可执行的缓存页”而已。</p>
+<p>在日常语境中，“文件页”与“Page Cache”指代相同的内存，可以混用。</p>
+</li>
+</ul>
+<blockquote>
+<p>当然还有一个例外哈：<code>tmpfs</code>（如 <code>/dev/shm</code>）和共享内存（SHMEM）：
+它们虽然从技术上讲是“文件页”（有虚拟文件系统 <code>inode</code>），但<strong>没有磁盘文件</strong>作为后备。因此，其回收行为和<strong>匿名页</strong>一样，需要<strong>交换（Swap）</strong> 到磁盘。</p>
+</blockquote>
+</li>
+</ul>
+<p>注意下，这里或许有人会把 <code>reclaim</code> 当成应用层调用的 <code>free()</code>，也不完全是<strong>。</strong></p>
+<ul>
+<li><strong>因为 <code>kernel</code> 要不停寻找：哪些 page 是可以被释放的，而 <code>free()</code> 是应用层根据明确记录来释放内存。</strong>。</li>
+<li>更重要的是，具体的释放 <code>page cache</code> 非常复杂，就比如你要把一个员工（<code>page</code>）开除，必须先让他把手头的工作（脏数据）干完（写回），还要去人事（<code>inode</code> 映射树）把他的名字划掉。进人事（加锁）和让他干完活（调用 <code>writepage</code>），所以，这个操作需要一些 <code>filesystem</code> 的操作，这点还是很重要的。所以最好就不要吧他想象成一个纯内存的 <code>free()</code> 操作</li>
+</ul>
+<h3 id="322-reclaim-sleep">3.2.2 reclaim → sleep？</h3>
+<p>回到 <code>reclaim</code>，下面以 <code>page cache</code> 为例： <code>cat huge_file</code> 的大致流程</p>
+<div class="highlight"><pre><span></span><code>SSD → 读取数据 → Page Cache 存 → 用户程序用
+</code></pre></div>
+<p>由于所以后可能还要读，所以文件内容会一直留在内存里，于是：</p>
+<div class="highlight"><pre><span></span><code>Memory
++----------------+
+ Page Cache
+ Page Cache
+ Page Cache
++----------------+
+</code></pre></div>
+<p>如果现在 <code>kmalloc</code> 发现没有 <code>free page</code> 了，内核的反应是这些 <code>cache</code> 还要不要？不要就：</p>
+<div class="highlight"><pre><span></span><code>Page Reclaim → 扫描 LRU →  找到旧的 Page Cache → 释放
+</code></pre></div>
+<p>此时 <code>allocator</code> 才能继续。</p>
+<p>接着才是重点。是不是上面回收的时候<strong>扫描一下就 <code>free</code>，然后就结束了？</strong>中间还有 <code>schedule</code>，因为很多 <code>page</code> 根本不能直接释放呀：<code>dirty page</code>。</p>
+<blockquote>
+<p>假设你 <code>vim</code> 改了一个文件的一个字符，OS 不会立刻将它写回底层 Flash 的，而是先写入 <code>page cache</code>，标记为 <code>dirty</code>（表示内存里的内容比磁盘上的新）。</p>
+<p>如果 <code>reclaim</code> 遇到 <code>dirty page</code> 时直接将其释放，文件就永久损坏了。</p>
+</blockquote>
+<p>这也是在VFS<sup>[3]</sup>文档叫 <code>dirty page</code> 的原因，因为 <code>needs writeback</code>。</p>
+<p>所以，流程变成了这样：</p>
+<div class="highlight"><pre><span></span><code>Dirty Page → Writeback → SSD → Clean Page → Free
+</code></pre></div>
+<p>但更具体一点：</p>
+<div class="highlight"><pre><span></span><code>Dirty → Writeback → 等待 IO → IO 完成 → Clean → 释放
+</code></pre></div>
+<p>这里就已经出现等待了，磁盘还是比较慢的<sup>[4,5]</sup>：<code>SSD 150us / L1 cache 0.5ns</code></p>
+<p><img alt="image-20260702212819286" src="pic/image-20260702212819286.png" /></p>
+<p>所以 Linux 一定会做：</p>
+<div class="highlight"><pre><span></span><code>提交 IO → 当前 Task Sleep → 调度其他 Task
+...
+IO 完成 → Wakeup → 继续 reclaim
+</code></pre></div>
+<p>所以，关键在于要等待，所以才 <code>schedule</code> 了。</p>
+<h2 id="33-allocation-policy">3.3 重新审视 Allocation Policy</h2>
+<p>回到正题。依旧假设现在没有 <code>free page</code>，<code>allocator</code> 能怎么办？</p>
+<p>Linux 几种办法：</p>
+<ol>
+<li>
+<p><strong>直接失败</strong></p>
+<p>直接：<code>return NULL;</code></p>
+<p>最快，没有大家背的什么内存分配的<strong>等待、reclaim、IO、调度...</strong></p>
+<p>这也就是这个 <code>GFP</code> 的内容：<code>GFP_NOWAIT</code>。</p>
+</li>
+<li>
+<p><strong>没有页，但可以等等，让 <code>kswap daemon</code> 后台回收，自己不阻塞</strong></p>
+<p>对应 <code>GFP</code>：<code>__GFP_KSWAPD_RECLAIM</code></p>
+</li>
+<li>
+<p><strong>没有页，自己去 <code>reclaim</code></strong>，Direct Reclaim</p>
+<p>对应 <code>GFP</code>：<code>__GFP_DIRECT_RECLAIM</code></p>
+</li>
+<li>
+<p><strong>如果 <code>reclaim</code> 还不够？</strong></p>
+<p>还能 <code>Compaction</code>，移动页面、等待、迁移、<code>sleep</code>。</p>
+</li>
+</ol>
+<p>此时再回头看 <code>GFP_KERNEL</code>：</p>
+<div class="highlight"><pre><span></span><code><span class="cp">#define GFP_KERNEL \</span>
+<span class="cp">(__GFP_RECLAIM | __GFP_IO | __GFP_FS)</span>
+</code></pre></div>
+<ul>
+<li>
+<p><code>__GFP_RECLAIM</code>：这个就是因为 <code>allocator</code> 要 <code>direct reclaim</code>。</p>
+</li>
+<li>
+<p><code>__GFP_IO</code>：这个就是因为因为 <code>reclaim</code> 里面可能遇到 <code>dirty page</code>。如果不能 IO，那 <code>dirty page</code> 永远不能协会，则 <code>reclaim</code> 卡死。</p>
+</li>
+<li>
+<p><code>__GFP_FS</code>：还记得前面 3.2.1 的最后说的释放 <code>page cache</code> 需要进入文件系统操作嘛？问题就在这，由于很多页都属于：<code>page cache</code>，要真正释放这些页，需要会进入 <code>filesystem</code>，比如：</p>
+<div class="highlight"><pre><span></span><code><span class="n">shrink_page_list</span><span class="p">()</span>
+<span class="err">↓</span>
+<span class="n">writeback</span>
+<span class="err">↓</span>
+<span class="n">filesystem</span>
+<span class="err">↓</span>
+<span class="n">ext4</span>
+<span class="err">↓</span>
+<span class="n">f2fs</span>
+</code></pre></div>
+<p>如果这里禁止 FS，很多页根本不能回收的！</p>
+</li>
+</ul>
+<p><strong>综上：<code>GFP_KERNEL</code> = 允许 <code>reclaim</code> + 允许 <code>IO</code> + 允许进入 <code>FS</code></strong></p>
+<h2 id="34-spinlock-gfp_kernel">3.4 为什么 <code>spinlock</code> 里不能 <code>GFP_KERNEL</code>？</h2>
+<p>很简单明了：</p>
+<div class="highlight"><pre><span></span><code>spin_lock() → Atomic Context → kmalloc(GFP_KERNEL)
+
+↓ (注意，是有可能进)
+
+Direct Reclaim → schedule() → BUG
+</code></pre></div>
+<p>这就是 Linux 官方文档一直强调 <code>GFP_KERNEL may sleep</code> 的真正原因。</p>
+<p>不是 <code>kmalloc</code> 会 <code>sleep</code>，而是 <code>allocator</code> 为了满足你的申请，<strong>允许自己进入 reclaim。</strong></p>
+<p>而 <code>reclaim</code> 最终可能调用：<code>schedule()</code>。</p>
+<h2 id="35-gfp_atomic">3.5 那 GFP_ATOMIC 到底做了什么？</h2>
+<p>那如果当前处于中断处理函数或持有 <code>spinlock</code>，<strong>又不能进 <code>reclaim</code> 等待，但又必须立刻要到内存，<code>allocator</code> 还能怎么办？</strong></p>
+<div class="highlight"><pre><span></span><code><span class="cm">/**</span>
+<span class="cm"> ...</span>
+<span class="cm"> * %GFP_ATOMIC users can not sleep and need the allocation to succeed. A lower</span>
+<span class="cm"> * watermark is applied to allow access to &quot;atomic reserves&quot;.</span>
+<span class="cm"> * The current implementation doesn&#39;t support NMI and few other strict</span>
+<span class="cm"> * non-preemptive contexts (e.g. raw_spin_lock). The same applies to %GFP_NOWAIT.</span>
+<span class="cm"> * ...</span>
+<span class="cm"> */</span>
+<span class="cp">#define GFP_ATOMIC  (__GFP_HIGH|__GFP_KSWAPD_RECLAIM)</span>
+</code></pre></div>
+<p>直接使用系统已经预留好的内存（<code>GFP_ATOMIC</code>），就Linux 为此维护了一部分<strong>原子保留页（atomic reserves）</strong>。注释：</p>
+<blockquote>
+<p><strong>A lower watermark is applied to allow access to "atomic reserves".</strong></p>
+</blockquote>
+<p>也就是说普通进程：</p>
+<div class="highlight"><pre><span></span><code>Free Page → 低于 Watermark → 停止分配
+</code></pre></div>
+<p>而 <code>GFP_ATOMIC</code>：</p>
+<div class="highlight"><pre><span></span><code>GFP_ATOMIC → 允许突破 Watermark → 使用保留内存
+</code></pre></div>
+<p>这真的是因为这种情况下（中断、<code>spin_lock</code>...）真的没机会 <code>sleep</code> 呀。</p>
+<p>所以内核宁愿把保留内存给你，也不能调用 <code>schedule()</code> 呀。</p>
+<p>综上：<code>GFP_ATOMIC</code> = 不能 <code>reclaim</code> + 不能 <code>sleep</code> +使用 <code>emergency reserve</code></p>
+<h2 id="36-more">3.6 More 拓展</h2>
+<h3 id="361-__gfp_nofs">3.6.1 <code>__GFP_NOFS</code></h3>
+<p>前面 3.3 写的 <code>__GFP_FS</code> 很有意思，<strong>但很多时候我们要剥夺 <code>__GFP_FS</code> 权限（使用 <code>GFP_NOFS</code>）</strong> </p>
+<p>这对于 BSP 工程师来说是个经典的死锁陷阱。因为底层存储设备（如 SSD/UFS）根本不认识 <code>page</code>，真正知道“这个 <code>page</code> 属于哪个 <code>inode</code>，该写到哪个 <code>block</code>”的是文件系统。</p>
+<p>如果在 ext4 的核心逻辑里（比如正拿着 <code>inode</code> 锁）调用了 <code>kmalloc(GFP_KERNEL)</code>，触发了内存回收，回收又触发了写回，写回又调回了 ext4。</p>
+<p>这就形成了致命的递归调用：<code>FS → Reclaim → FS → Deadlock</code>。 </p>
+<blockquote>
+<p><strong>注：这也是注释中说的：</strong></p>
+<div class="highlight"><pre><span></span><code><span class="cm">/**</span>
+<span class="cm"> * ...</span>
+<span class="cm"> * %GFP_NOFS will use direct reclaim but will not use any filesystem interfaces.</span>
+<span class="cm"> * Please try to avoid using this flag directly and instead use</span>
+<span class="cm"> * memalloc_nofs_{save,restore} to mark the whole scope which cannot/shouldn&#39;t</span>
+<span class="cm"> * recurse into the FS layer with a short explanation why. All allocation</span>
+<span class="cm"> * requests will inherit GFP_NOFS implicitly.</span>
+<span class="cm"> * ...</span>
+<span class="cm"> */</span>
+</code></pre></div>
+<p><strong>推荐使用 <code>memalloc_nofs_save()</code> / <code>restore()</code> 来标记无文件系统回收的作用域，而不是在单个分配中硬编码 <code>GFP_NOFS</code>，这样更容易审计且安全。</strong></p>
+</blockquote>
+<p>因为我没有写过存储控制器驱动，所以这里让 AI 总结：</p>
+<ol>
+<li>
+<p>致命递归</p>
+<p>假设你在为一块 UFS 存储芯片写 ext4 驱动，在 <code>ext4_da_write_begin()</code> 函数中，为了给新数据准备内存，你调用了 <code>grab_cache_page_write_begin()</code>。这个函数内部为了分配页结构，会调用 <code>kmalloc(GFP_KERNEL)</code>。</p>
+<p>此时的调用栈（Stack）长这样（从上往下看）：</p>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">持有锁</span><span class="p">]</span><span class="w"> </span><span class="n">ext4_da_write_begin</span><span class="p">()</span><span class="w"> </span>
+<span class="w">  </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">持有</span><span class="w"> </span><span class="n">inode</span><span class="o">-&gt;</span><span class="n">i_rwsem</span><span class="w"> </span><span class="p">(</span><span class="n">写者锁</span><span class="p">)</span>
+<span class="w">  </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">grab_cache_page_write_begin</span><span class="p">()</span>
+<span class="w">    </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">pagecache_get_page</span><span class="p">()</span>
+<span class="w">      </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">__filemap_get_folio</span><span class="p">()</span>
+<span class="w">        </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">kmem_cache_alloc</span><span class="p">(</span><span class="n">GFP_KERNEL</span><span class="p">)</span><span class="w">   </span><span class="o">&lt;---</span><span class="w"> </span><span class="n">你在这里分配内存</span>
+</code></pre></div>
+<p>接着，因为内存紧张，<code>kmalloc(GFP_KERNEL)</code> 触发了下面这场噩梦：</p>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">触发回收</span><span class="p">]</span><span class="w"> </span><span class="n">kmalloc</span><span class="p">(</span><span class="n">GFP_KERNEL</span><span class="p">)</span><span class="w"> </span>
+<span class="w">  </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">__alloc_pages</span><span class="p">()</span>
+<span class="w">    </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">__alloc_pages_slowpath</span><span class="p">()</span>
+<span class="w">      </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">__alloc_pages_direct_reclaim</span><span class="p">()</span>
+<span class="w">        </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">try_to_free_pages</span><span class="p">()</span>
+<span class="w">          </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">shrink_node</span><span class="p">()</span>
+<span class="w">            </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">shrink_list</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">shrink_page_list</span><span class="p">()</span><span class="w">  </span><span class="o">&lt;---</span><span class="w"> </span><span class="n">开始清理</span><span class="w"> </span><span class="n">Page</span><span class="w"> </span><span class="n">Cache</span>
+</code></pre></div>
+<p>现在，<code>shrink_page_list()</code> 遍历到了<strong>同一个文件</strong>（你正在写的那个文件）的一页<strong>脏 Page Cache</strong>。它需要写回，于是调用：</p>
+<div class="highlight"><pre><span></span><code>[回调 FS] shrink_page_list()
+  -&gt; mapping-&gt;a_ops-&gt;writepage()  (多态回调)
+  -&gt; 实际上是 ext4_writepage()
+    -&gt; ext4_io_submit()
+      -&gt; ext4_map_blocks() 
+        -&gt; 需要查询磁盘映射，试图获取 inode-&gt;i_rwsem 锁
+</code></pre></div>
+<p><strong>死锁现场：</strong></p>
+<ul>
+<li>上层的 <code>ext4_da_write_begin()</code> 正抱着 <code>inode-&gt;i_rwsem</code> 在等内存分配完成。</li>
+<li>下层的 <code>ext4_writepage()</code> 想把脏页写出去，但它必须拿到<strong>同一把</strong> <code>inode-&gt;i_rwsem</code> 才能查映射表。</li>
+</ul>
+<p>如果允许 <code>__GFP_FS</code>，内核代码的执行流就会变成：</p>
+<p><strong>A（持锁等内存）→ B（回收等锁）</strong>，两者互不相让，系统直接 Hang 死（软锁死）。</p>
+</li>
+<li>
+<p>为什么用 <code>GFP_NOFS</code> 能止血？</p>
+<p>当你把 <code>kmalloc(GFP_KERNEL)</code> 改成 <code>kmalloc(GFP_NOFS)</code> 时：</p>
+<ul>
+<li>在 <code>__alloc_pages_direct_reclaim()</code> 的入口处，会检查 <code>current-&gt;flags</code> 或分配掩码。</li>
+<li>因为去掉了 <code>__GFP_FS</code>，回收逻辑会<strong>直接跳过</strong>所有需要回写文件系统的 Page Cache（只回收匿名页或可回收的 Slab）。</li>
+<li>虽然这导致内存回收效率降低了（因为脏页不参与回收），但<strong>保住了命</strong>——代码不会递归回 ext4 去拿锁，上层顺利拿到内存，释放锁，系统继续运转。</li>
+</ul>
+</li>
+</ol>
+<h3 id="362-gfp_atomic">3.6.2 无敌的 <code>GFP_ATOMIC</code> ？</h3>
+<p><strong><code>GFP_ATOMIC</code> 就是无敌的吗？</strong></p>
+<p>很多文章会告诉你“<code>GFP_ATOMIC</code> 可以在任何中断和锁里使用”。还是看注释。</p>
+<p><code>include/linux/gfp_types.h</code> 里的注释：</p>
+<blockquote>
+<p>The current implementation doesn't support NMI and few other strict non-preemptive contexts (e.g. raw_spin_lock).</p>
+</blockquote>
+<p>为什么连 <code>GFP_ATOMIC</code> 都有不能用的地方？ </p>
+<p>注意：<code>GFP_ATOMIC</code> 只是不触发 <code>reclaim</code>，但 <code>allocator</code> 内部去拿保留内存时，依然是需要获取内部的自旋锁的（<code>zone-&gt;lock</code>）。</p>
+<p>如果在 <strong>NMI（不可屏蔽中断）</strong> 或 <strong><code>raw_spin_lock</code>（绝对不可抢占上下文）</strong> 中调用，<code>allocator</code> 去拿内部锁时，就很容易和已经被打断的常规分配过程发生死锁问题。</p>
+<h2 id="37">3.7 总结</h2>
+<p>建议直接去看 <code>/linux/include/gfp_types.h</code>、<code>/linux/include/preempt.h</code> 等源码/注释/文档（比如参考中的），能收获很多。</p>
+<p>同时多问几个不同场景，比如说：</p>
+<blockquote>
+<ul>
+<li>如果使用的是 <code>PREEMPT_RT</code> 了呢？上面的几个分析有变化嘛？有什么问题？</li>
+</ul>
+</blockquote>
+<p>最后一张总结图：</p>
+<div class="highlight"><pre><span></span><code>                 kmalloc()
+                     │
+        ┌────────────┴────────────┐
+        │                         │
+   GFP_KERNEL                 GFP_ATOMIC
+        │                         │
+        ▼                         ▼
+ Direct Reclaim?              不允许
+        │                         │
+        ▼                         ▼
+ Writeback?                  尝试普通空闲页
+        │                         │
+        ▼                         ▼
+ Filesystem?                    不足？
+        │                         │
+        ▼                         ▼
+ schedule()             使用 Atomic Reserve(__GFP_HIGH)
+        │                         │
+        ▼                         ▼
+ 可睡眠(Process)            不睡眠(Atomic Context)
+                                  │
+                                  ▼
+                     仍可能失败（不是保证成功）
+                                  │
+                                  ▼
+              NMI/raw_spin_lock 等极端上下文官方不保证支持
+</code></pre></div>
+<h1 id="4_1">4. 企业实践/建议</h1>
+<p>最后的最后，由于我刚毕业，还没有入职，只能让 GPT 给我列出一些使用的建议！至于好不好用，仁者见仁，智者见智了。</p>
+<ol>
+<li>
+<p>先问：「这段代码运行在哪个 Context？」</p>
+<p>一个 Driver 的 Bug，很多时候第一件事情不是看 API，而是先判断：</p>
+<div class="highlight"><pre><span></span><code><span class="n">Process</span><span class="w"> </span><span class="n">Context</span><span class="w"> </span><span class="o">?</span>
+<span class="n">IRQ</span><span class="w"> </span><span class="n">Context</span><span class="w"> </span><span class="o">?</span>
+<span class="n">Softirq</span><span class="w"> </span><span class="o">?</span>
+<span class="n">Workqueue</span><span class="w"> </span><span class="o">?</span>
+<span class="n">Threaded</span><span class="w"> </span><span class="n">IRQ</span><span class="w"> </span><span class="o">?</span>
+</code></pre></div>
+<p>因为 Context 几乎决定了一切：</p>
+<ul>
+<li>能不能 sleep？</li>
+<li>能不能 kmalloc(GFP_KERNEL)？</li>
+<li>能不能拿 mutex？</li>
+<li>能不能 copy_to_user？</li>
+<li>能不能访问 user space？</li>
+</ul>
+<p>很多线上 Bug，本质都不是 API 调错，而是：</p>
+<blockquote>
+<p><strong>Context 判断错了。</strong></p>
+</blockquote>
+<p>所以很多资深 BSP 工程师看到一段代码第一句话就是：</p>
+<blockquote>
+<p>"这是谁调用的？"</p>
+</blockquote>
+</li>
+<li>
+<p>先问：「谁负责等待？」</p>
+<p>OEM 很容易遇到这种代码：</p>
+<div class="highlight"><pre><span></span><code>send_cmd();
+while (!done);
+</code></pre></div>
+<p>新人可能觉得很简单。</p>
+<p>但是真正的问题是：谁负责等待？</p>
+<p>如果等待期间：</p>
+<ul>
+<li>占着 spinlock</li>
+<li>关中断</li>
+<li>禁止抢占</li>
+</ul>
+<p>整个系统都会受到影响，所以 Linux 的设计一直都是：</p>
+<div class="highlight"><pre><span></span><code>不能忙等
+↓
+让 Scheduler 去等待
+↓
+Wakeup
+↓
+继续执行
+</code></pre></div>
+<p>真正优秀的 Driver，大多数都是：</p>
+<div class="highlight"><pre><span></span><code>request
+↓
+sleep
+↓
+interrupt
+↓
+wake up
+↓
+continue
+</code></pre></div>
+<p>而不是：</p>
+<div class="highlight"><pre><span></span><code>request
+↓
+while(...)
+</code></pre></div>
+<p>所以以后看 Driver，不要先看寄存器，先看：</p>
+<blockquote>
+<p><strong>等待是谁负责的。</strong></p>
+</blockquote>
+</li>
+<li>
+<p>沿着调用链思考，而不是 API 思考</p>
+<p>OEM 调试几乎每天都是这样。</p>
+<div class="highlight"><pre><span></span><code>clk_prepare_enable()
+↓
+runtime PM
+↓
+genpd
+↓
+regulator
+↓
+I2C
+↓
+sleep
+</code></pre></div>
+<p>或者：</p>
+<div class="highlight"><pre><span></span><code>dma_alloc_attrs()
+↓
+kmalloc()
+↓
+page allocator
+↓
+reclaim
+↓
+schedule()
+</code></pre></div>
+<p>一直往下问：<strong>最终是谁完成了这件事情？</strong></p>
+</li>
+<li>
+<p>kimi链接</p>
+<ul>
+<li>OEM建议：https://www.kimi.com/share/19f23917-90d2-8776-8000-000009a17595</li>
+<li>学会使用工具：https://www.kimi.com/share/19f2392b-3552-8657-8000-00001930220f</li>
+</ul>
+</li>
+</ol>
+<h1 id="_2">参考</h1>
+<p>[1] Documentation/core-api/memory-allocation.rst：https://www.kernel.org/doc/Documentation/core-api/memory-allocation.rst</p>
+<p>[2] Documentation/admin-guide/mm/concepts.rst：https://www.kernel.org/doc/Documentation/admin-guide/mm/concepts.rst</p>
+<p>[3] Documentation/filesystems/vfs.rst：https://www.kernel.org/doc/Documentation/filesystems/vfs.rst</p>
+<p>[4] Latency Numbers Every Programmer Should Know：https://gist.github.com/jboner/2841832</p>
+<p>[5] Numbers Every Programmer Should Know By Year：https://colin-scott.github.io/personal_website/research/interactive_latency.html</p>
+<blockquote>
+<p>你问到了一个非常关键的问题：<strong>从"能看懂调用链"到"实际工程中高效追踪调用链"</strong>，这是从学习者到工程师的分水岭。</p>
+<p>对于手机 OEM 底软工程师（BSP/驱动/内核），日常面对的场景通常是：
+- 某个模块挂了，抓到了 ramdump/vmcore，需要快速定位
+- 某个驱动行为异常，需要看函数调用路径
+- 性能问题，需要看某个操作的完整耗时链
+- 不能随意加打印重新烧机（尤其是 bringup 阶段）</p>
+<p>以下是实际工程中分层的、由浅入深的方法：</p>
+<hr />
+<h2 id="_3">第一层：死机现场分析（你最常用的场景）</h2>
+<p>你日志中的 <code>BUG: scheduling while atomic</code> + <code>dump_stack()</code> 就是典型的<strong>死机现场</strong>。实际工作中，你往往不是一步步跟代码，而是<strong>逆向从现场倒推</strong>。</p>
+<h3 id="11-ramdumpvmcore">1.1 从 ramdump/vmcore 反推调用链</h3>
+<p>手机 OEM 最常用的就是 Qualcomm/MediaTek 平台的 ramdump 解析：</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 使用 crash 工具分析 vmcore</span>
+crash<span class="w"> </span>vmlinux<span class="w"> </span>vmcore
+
+<span class="c1"># 查看当前任务的调用栈</span>
+crash&gt;<span class="w"> </span>bt<span class="w"> </span>-a<span class="w">                    </span><span class="c1"># 所有 CPU 的 backtrace</span>
+crash&gt;<span class="w"> </span>bt<span class="w"> </span>&lt;pid&gt;<span class="w">                </span><span class="c1"># 指定 PID 的 backtrace</span>
+crash&gt;<span class="w"> </span>task<span class="w"> </span>&lt;addr&gt;<span class="w">             </span><span class="c1"># 查看 task_struct</span>
+crash&gt;<span class="w"> </span>runq<span class="w">                    </span><span class="c1"># 查看 runqueue</span>
+crash&gt;<span class="w"> </span>timer<span class="w">                   </span><span class="c1"># 查看定时器</span>
+crash&gt;<span class="w"> </span>ps<span class="w"> </span>-k<span class="w">                   </span><span class="c1"># 查看所有内核线程</span>
+</code></pre></div>
+<p><strong>关键认知</strong>：ramdump 里已经包含了完整的 <code>struct task_struct</code> 和寄存器现场，调用栈是<strong>自动恢复</strong>的，不需要你手动跟代码。</p>
+<h3 id="12-addr2lineobjdump">1.2 从 addr2line/objdump 定位源码</h3>
+<p>日志中的 <code>__schedule_bug+0x58/0x70</code>，实际工程中这样用：</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 找到 vmlinux 中的符号地址</span>
+aarch64-linux-android-addr2line<span class="w"> </span>-e<span class="w"> </span>vmlinux<span class="w"> </span>-f<span class="w"> </span>-C<span class="w"> </span>__schedule_bug
+
+<span class="c1"># 或者直接反汇编看上下文</span>
+aarch64-linux-android-objdump<span class="w"> </span>-d<span class="w"> </span>vmlinux<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-A<span class="w"> </span><span class="m">20</span><span class="w"> </span><span class="s2">&quot;&lt;__schedule_bug&gt;:&quot;</span>
+</code></pre></div>
+<p><strong>这比你看源码快 10 倍</strong>，因为直接定位到编译后的二进制对应的源码行。</p>
+<hr />
+<h2 id="_4">第二层：动态追踪（不修改代码，不重新编译）</h2>
+<p>这是现代内核工程师最重要的技能。你不需要像学生一样一个个函数点进去看，而是让内核自己告诉你调用链。</p>
+<h3 id="21-ftrace-android">2.1 ftrace（最基础，所有 Android 内核都支持）</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># 手机端通过 adb 操作 ftrace</span>
+adb<span class="w"> </span>shell<span class="w"> </span><span class="s2">&quot;echo 0 &gt; /sys/kernel/tracing/tracing_on&quot;</span>
+adb<span class="w"> </span>shell<span class="w"> </span><span class="s2">&quot;echo function &gt; /sys/kernel/tracing/current_tracer&quot;</span>
+adb<span class="w"> </span>shell<span class="w"> </span><span class="s2">&quot;echo __schedule msleep schedule_timeout &gt; /sys/kernel/tracing/set_ftrace_filter&quot;</span>
+adb<span class="w"> </span>shell<span class="w"> </span><span class="s2">&quot;echo 1 &gt; /sys/kernel/tracing/tracing_on&quot;</span>
+
+<span class="c1"># 触发你的模块加载</span>
+adb<span class="w"> </span>shell<span class="w"> </span>insmod<span class="w"> </span>/data/crash_test.ko
+
+<span class="c1"># 抓 trace</span>
+adb<span class="w"> </span>shell<span class="w"> </span>cat<span class="w"> </span>/sys/kernel/tracing/trace<span class="w"> </span>&gt;<span class="w"> </span>/tmp/trace.txt
+</code></pre></div>
+<p>你会看到类似这样的输出：</p>
+<div class="highlight"><pre><span></span><code>insmod-245    [000] ....   189.957141: msleep &lt;-own_init
+insmod-245    [000] ....   189.957142: schedule_timeout &lt;-msleep
+insmod-245    [000] ....   189.957143: schedule &lt;-schedule_timeout
+insmod-245    [000] ....   189.957144: __schedule &lt;-schedule
+insmod-245    [000] ....   189.957145: __schedule_bug &lt;-__schedule
+</code></pre></div>
+<p><strong>注意</strong>：ftrace 是<strong>非侵入式</strong>的，不需要改代码、不需要重新编译内核。这是实际工程中最常用的手段。</p>
+<h3 id="22-trace-cmd-kernelshark">2.2 trace-cmd + kernelshark（可视化）</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># 在手机上录制</span>
+adb<span class="w"> </span>shell<span class="w"> </span>trace-cmd<span class="w"> </span>record<span class="w"> </span>-p<span class="w"> </span><span class="k">function</span><span class="w"> </span>-l<span class="w"> </span>msleep<span class="w"> </span>-l<span class="w"> </span>schedule<span class="w"> </span>-l<span class="w"> </span>__schedule<span class="w"> </span>-l<span class="w"> </span>own_init
+
+<span class="c1"># 拉取到 PC 分析</span>
+adb<span class="w"> </span>pull<span class="w"> </span>/data/local/tmp/trace.dat<span class="w"> </span>.
+trace-cmd<span class="w"> </span>report<span class="w"> </span>trace.dat<span class="w"> </span><span class="p">|</span><span class="w"> </span>less
+
+<span class="c1"># 或者用 GUI 看时序</span>
+kernelshark<span class="w"> </span>trace.dat
+</code></pre></div>
+<h3 id="23-bpftraceebpfandroid">2.3 bpftrace（eBPF，现代方法，Android 较新内核支持）</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># 写一个 bpftrace 脚本追踪 msleep 的调用链</span>
+cat<span class="w"> </span>&gt;<span class="w"> </span>trace_msleep.bt<span class="w"> </span><span class="s">&lt;&lt; &#39;EOF&#39;</span>
+<span class="s">kprobe:msleep {</span>
+<span class="s">    printf(&quot;msleep called by %s (%d)\\n&quot;, comm, pid);</span>
+<span class="s">    print(kstack);</span>
+<span class="s">}</span>
+<span class="s">kprobe:__schedule_bug {</span>
+<span class="s">    printf(&quot;BUG hit! preempt_count=0x%x\\n&quot;, </span>
+<span class="s">           *(u32*)(task_struct + 0x...));  # 偏移需要适配</span>
+<span class="s">    print(kstack);</span>
+<span class="s">}</span>
+<span class="s">EOF</span>
+
+adb<span class="w"> </span>push<span class="w"> </span>trace_msleep.bt<span class="w"> </span>/data/local/tmp/
+adb<span class="w"> </span>shell<span class="w"> </span>bpftrace<span class="w"> </span>/data/local/tmp/trace_msleep.bt
+</code></pre></div>
+<p><strong>bpftrace 的优势</strong>：可以安全地在内核运行时插入探测点，<strong>生产环境也可以用</strong>（低开销）。</p>
+<hr />
+<h2 id="_5">第三层：静态代码分析（日常阅读/开发）</h2>
+<p>当你需要理解一个陌生模块的调用关系，而不是追踪一次具体执行时：</p>
+<h3 id="31-cscope-vim">3.1 cscope + vim（老牌但高效）</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># 在内核源码根目录建立索引</span>
+cscope<span class="w"> </span>-Rbqk
+
+<span class="c1"># 然后 vim 里直接跳转</span>
+<span class="c1"># Ctrl+] 跳转到定义</span>
+<span class="c1"># Ctrl+t 返回</span>
+<span class="c1"># :cs find c msleep  找所有调用 msleep 的地方</span>
+</code></pre></div>
+<h3 id="32-clangd-vscode">3.2 clangd + VSCode（现代推荐）</h3>
+<p>配置好 <code>compile_commands.json</code> 后，VSCode 可以：
+- 按住 Cmd/Ctrl 点击函数跳转
+- 查看所有引用（Find All References）
+- 查看调用层次（Call Hierarchy）</p>
+<p><strong>对于 OEM 厂商</strong>，通常有完整的 <code>Android.bp</code> 或 <code>Makefile</code>，可以生成 <code>compile_commands.json</code>。</p>
+<h3 id="33-scriptstagssh">3.3 内核自带的 scripts/tags.sh</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># 内核源码根目录</span>
+./scripts/tags.sh
+
+<span class="c1"># 生成 TAGS（emacs）、tags（vim）、cscope.out</span>
+<span class="c1"># 包含所有内核符号，包括汇编</span>
+</code></pre></div>
+<hr />
+<h2 id="_6">第四层：主动调试（深度问题）</h2>
+<h3 id="41-gdb-qemu">4.1 GDB + QEMU（本地模拟）</h3>
+<p>对于你这种 <code>BUG: scheduling while atomic</code> 的问题，如果线上难以复现：</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 用 QEMU 启动内核，带 GDB stub</span>
+qemu-system-aarch64<span class="w"> </span>-kernel<span class="w"> </span>Image<span class="w"> </span>-append<span class="w"> </span><span class="s2">&quot;nokaslr&quot;</span><span class="w"> </span>-S<span class="w"> </span>-s<span class="w"> </span>...
+
+<span class="c1"># 另一个窗口 GDB 连接</span>
+aarch64-linux-android-gdb<span class="w"> </span>vmlinux
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>target<span class="w"> </span>remote<span class="w"> </span>:1234
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>b<span class="w"> </span>__schedule_bug
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>b<span class="w"> </span>own_init
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>c
+
+<span class="c1"># 当命中 __schedule_bug 时</span>
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>bt<span class="w">                    </span><span class="c1"># 完整 backtrace</span>
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>p<span class="w"> </span>preempt_count<span class="o">()</span><span class="w">     </span><span class="c1"># 查看 preempt_count</span>
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>p<span class="w"> </span>current-&gt;preempt_count<span class="w">  </span><span class="c1"># 直接看 task_struct</span>
+<span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>info<span class="w"> </span>registers<span class="w">        </span><span class="c1"># 查看 ARM64 寄存器</span>
+</code></pre></div>
+<p><strong>这是理解内核最彻底的方法</strong>，可以单步、可以看变量、可以断点。</p>
+<h3 id="42-jtag-trace32oem-bringup">4.2 JTAG / Trace32（硬件调试，OEM  bringup 阶段）</h3>
+<p>在手机 bringup 阶段，硬件还没稳定，printk 都可能挂，这时候用：
+- <strong>Trace32 (Lauterbach)</strong>：硬件调试器，可以看 ARM64 的 EL1/EL2/EL3 状态
+- <strong>JTAG</strong>：直接连 SoC，看 CPU 寄存器、内存</p>
+<p>这是 OEM 底软工程师的<strong>终极武器</strong>，但成本高、需要硬件配合。</p>
+<hr />
+<h2 id="_7">第五层：针对你当前场景的最佳实践</h2>
+<p>回到你的 <code>spinlock + msleep</code> 问题，实际工程中我会这样操作：</p>
+<h3 id="1">步骤1：先看现场（如果已经死机）</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># 如果有 ramdump</span>
+crash<span class="w"> </span>vmlinux<span class="w"> </span>ramdump
+
+crash&gt;<span class="w"> </span>bt<span class="w"> </span><span class="m">245</span><span class="w">                    </span><span class="c1"># 看 PID 245 的调用栈</span>
+crash&gt;<span class="w"> </span>p<span class="w"> </span>__schedule_bug<span class="w">          </span><span class="c1"># 确认符号地址</span>
+crash&gt;<span class="w"> </span>rd<span class="w"> </span>-s<span class="w"> </span>0xffff...<span class="w">           </span><span class="c1"># 看 stack 内存</span>
+</code></pre></div>
+<h3 id="2-ftrace">步骤2：如果可复现，用 ftrace 抓调用链</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># 只追踪相关函数，减少开销</span>
+<span class="nb">echo</span><span class="w"> </span>__schedule_bug<span class="w"> </span>__schedule<span class="w"> </span>schedule<span class="w"> </span>schedule_timeout<span class="w"> </span>msleep<span class="w"> </span>own_init<span class="w"> </span><span class="se">\</span>
+<span class="w">     </span>&gt;<span class="w"> </span>/sys/kernel/tracing/set_ftrace_filter
+<span class="nb">echo</span><span class="w"> </span><span class="k">function</span><span class="w"> </span>&gt;<span class="w"> </span>/sys/kernel/tracing/current_tracer
+<span class="nb">echo</span><span class="w"> </span><span class="m">1</span><span class="w"> </span>&gt;<span class="w"> </span>/sys/kernel/tracing/tracing_on
+
+<span class="c1"># 触发问题</span>
+insmod<span class="w"> </span>crash_test.ko
+
+<span class="c1"># 查看结果</span>
+cat<span class="w"> </span>/sys/kernel/tracing/trace
+</code></pre></div>
+<h3 id="3-warn_on">步骤3：如果还搞不清，加 WARN_ON 定位</h3>
+<div class="highlight"><pre><span></span><code><span class="c1">// 在可疑的代码路径加</span>
+<span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">__init</span><span class="w"> </span><span class="nf">own_init</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">spin_lock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">g_ctx</span><span class="o">-&gt;</span><span class="n">hw_lock</span><span class="p">);</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="n">WARN_ON</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span><span class="w">                    </span><span class="c1">// 会打印调用栈但继续执行</span>
+<span class="w">    </span><span class="c1">// 或者</span>
+<span class="w">    </span><span class="n">dump_stack</span><span class="p">();</span><span class="w">                  </span><span class="c1">// 直接打印调用栈</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="n">msleep</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span><span class="w">                   </span><span class="c1">// 这里会触发 BUG</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="n">spin_unlock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">g_ctx</span><span class="o">-&gt;</span><span class="n">hw_lock</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><strong><code>WARN_ON(1)</code> 是内核工程师的 <code>printf</code> 调试法</strong>，但不会 panic，适合排查问题。</p>
+<hr />
+<h2 id="_8">第六层：建立"调用链直觉"</h2>
+<p>最后，资深工程师和新手最大的区别不是工具，而是<strong>脑子里有没有一张地图</strong>。</p>
+<h3 id="61">6.1 分层记忆法</h3>
+<p>不要记单个函数，而是记<strong>分层入口</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>层级</th>
+<th>关键函数/文件</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>用户态→内核态</td>
+<td><code>el0t_64_sync</code>, <code>invoke_syscall</code></td>
+<td>ARM64 系统调用入口</td>
+</tr>
+<tr>
+<td>系统调用</td>
+<td><code>__arm64_sys_*</code>, <code>SYSCALL_DEFINE*</code></td>
+<td>具体系统调用实现</td>
+</tr>
+<tr>
+<td>模块/驱动框架</td>
+<td><code>do_one_initcall</code>, <code>platform_driver_register</code></td>
+<td>驱动生命周期</td>
+</tr>
+<tr>
+<td>核心机制</td>
+<td><code>schedule</code>, <code>__schedule</code>, <code>schedule_debug</code></td>
+<td>调度器</td>
+</tr>
+<tr>
+<td>时间/定时器</td>
+<td><code>msleep</code>, <code>schedule_timeout</code>, <code>hrtimer</code></td>
+<td>时间子系统</td>
+</tr>
+<tr>
+<td>锁机制</td>
+<td><code>spin_lock</code>, <code>raw_spin_lock</code>, <code>preempt_disable</code></td>
+<td>并发控制</td>
+</tr>
+</tbody>
+</table>
+<p>当你看到 <code>msleep</code> 的调用栈，脑子里应该立刻反应：</p>
+<blockquote>
+<p>"msleep → schedule_timeout → schedule → __schedule → schedule_debug → in_atomic"</p>
+</blockquote>
+<p>这不是背下来的，而是<strong>看多了 ftrace 和 dump_stack 后的直觉</strong>。</p>
+<h3 id="62">6.2 日常训练方法</h3>
+<ol>
+<li><strong>每周看一个 dump_stack</strong>：Android 内核日志里经常有 <code>WARNING</code> 或 <code>BUG</code>，把 <code>dump_stack()</code> 的调用链手动跟一遍，用 <code>addr2line</code> 定位源码。</li>
+<li><strong>用 ftrace 跟一次完整流程</strong>：比如 <code>open()</code> 系统调用到 <code>vfs_open</code> 的完整链。</li>
+<li><strong>读一个子系统的核心文件</strong>：比如 <code>kernel/sched/core.c</code> 的 <code>__schedule()</code>，用 cscope 看所有调用者。</li>
+</ol>
+<hr />
+<h2 id="oem">总结：手机 OEM 底软工程师的推荐工具链</h2>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>推荐工具</th>
+<th>学习成本</th>
+<th>效率</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>死机/ramdump 分析</td>
+<td><code>crash</code> + <code>vmlinux</code></td>
+<td>中</td>
+<td>极高</td>
+</tr>
+<tr>
+<td>日常调用链追踪</td>
+<td><code>ftrace</code> / <code>trace-cmd</code></td>
+<td>低</td>
+<td>极高</td>
+</tr>
+<tr>
+<td>生产环境安全追踪</td>
+<td><code>bpftrace</code></td>
+<td>中</td>
+<td>高</td>
+</tr>
+<tr>
+<td>代码阅读/跳转</td>
+<td><code>clangd</code> + VSCode</td>
+<td>低</td>
+<td>高</td>
+</tr>
+<tr>
+<td>深度调试</td>
+<td><code>GDB</code> + <code>QEMU</code></td>
+<td>中</td>
+<td>高</td>
+</tr>
+<tr>
+<td>硬件 bringup</td>
+<td><code>Trace32</code> / <code>JTAG</code></td>
+<td>高</td>
+<td>极高（硬件问题）</td>
+</tr>
+<tr>
+<td>快速定位源码行</td>
+<td><code>addr2line</code> / <code>objdump</code></td>
+<td>极低</td>
+<td>极高</td>
+</tr>
+</tbody>
+</table>
+<p><strong>最核心的建议</strong>：不要一个个函数点源码看调用链，那是学生做法。实际工程中，<strong>用 ftrace 看动态调用链 + 用 crash/addr2line 从现场反推 + 用 clangd 静态跳转</strong>，三管齐下，效率最高。</p>
+<p>你现在对 <code>preempt_count</code> 和 <code>schedule_debug</code> 的理解已经到位了，下一步就是在实际工作中<strong>用 ftrace 验证一次完整的调用链</strong>，这种"理论+工具"的结合会让你成长很快。</p>
+</blockquote>
+
+
+
+
+
+
+
+  
+    
+  
+  
+    
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Last update">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2026-07-22T19:03:02+02:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2026-07-22</span>
+  </span>
+
+    
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Created">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2026-06-25T15:55:15+02:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2026-06-25</span>
+  </span>
+
+    
+    
+    
+  </aside>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://github.com/JAILuo" target="_blank" rel="noopener" title="JAILuo" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.footer"], "search": "../../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.83f73b43.min.js"></script>
+      
+        <script src="../../../js/timeago.min.js"></script>
+      
+        <script src="../../../js/timeago_mkdocs_material.js"></script>
+      
+        <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+      
+    
+  </body>
+</html>
