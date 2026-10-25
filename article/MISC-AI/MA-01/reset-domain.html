@@ -1,0 +1,2581 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://jailuo.github.io/notes/article/MISC-AI/MA-01/reset-domain.html">
+      
+      
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.48">
+    
+    
+      
+        <title>Reset domain - Messy Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.6f8fc17f.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../css/timeago.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#1-introduction" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../index.html" title="Messy Notes" class="md-header__button md-logo" aria-label="Messy Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Messy Notes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Reset domain
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256l137.3-137.4c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/JAILuo/notes" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../index.html" title="Messy Notes" class="md-nav__button md-logo" aria-label="Messy Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Messy Notes
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/JAILuo/notes" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    首页
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Article
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Article
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/article/concurrency sumary/summary.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    concurrency-summary
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/article/toolchain/toolchain.mc" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    toolchain
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/article/mount/mount.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    mount
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Course
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Course
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    University Course
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            University Course
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1_1" id="__nav_3_1_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    jyy OS2024
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_1_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            jyy OS2024
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_1_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1_1_1" id="__nav_3_1_1_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    course note
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_1_1_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            course note
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/University%20Course/jyy%20OS2024/cousre%20note/1.%20introduction/introduction.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    introduction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/University%20Course/jyy%20OS2024/cousre%20note/2.%20concurrency/concurrency.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    concurrency
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/University%20Course/jyy%20OS2024/cousre%20note/3.%20virtualization/virtualization.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    virtualization
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/University%20Course/jyy%20OS2024/cousre%20note/4.%20kernel/kernel.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    kernel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/University%20Course/jyy%20OS2024/cousre%20note/5.%20persistence/persistence.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    persistence
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_1_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1_1_2" id="__nav_3_1_1_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Mini Labs
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_1_1_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            Mini Labs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/University%20Course/jyy%20OS2024/Mini%20Labs/M1/M1.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    M1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/University%20Course/jyy%20OS2024/Mini%20Labs/M2/M2.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    M2
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/University%20Course/jyy%20OS2024/Mini%20Labs/M3/M3.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    M3
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_1_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1_1_3" id="__nav_3_1_1_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    OS Labs
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_3_1_1_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1_1_3">
+            <span class="md-nav__icon md-icon"></span>
+            OS Labs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/University%20Course/jyy%20OS2024/OS%20Labs/L0/L0.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    L0
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/University%20Course/jyy%20OS2024/OS%20Labs/L1/L1.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    L1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    GeekTime
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            GeekTime
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2_1" id="__nav_3_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    深入理解计算机组成原理
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            深入理解计算机组成原理
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/GeekTime/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E4%B8%80%E5%91%A8%E7%9B%AE/1.%20%E6%8C%87%E4%BB%A4%E4%B8%8E%E8%BF%90%E7%AE%97/%E6%8C%87%E4%BB%A4%E4%B8%8E%E8%BF%90%E7%AE%97.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1. 指令与运算
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/GeekTime/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E4%B8%80%E5%91%A8%E7%9B%AE/2.%20%E5%A4%84%E7%90%86%E5%99%A8/%E5%A4%84%E7%90%86%E5%99%A8.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2. 处理器
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/GeekTime/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E4%B8%80%E5%91%A8%E7%9B%AE/3.%20%E5%AD%98%E5%82%A8%E4%B8%8EIO%E7%B3%BB%E7%BB%9F/%E5%AD%98%E5%82%A8%E4%B8%8EIO%E7%B3%BB%E7%BB%9F.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3. 存储与IO系统
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/GeekTime/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E4%B8%80%E5%91%A8%E7%9B%AE/4.%20%E5%BA%94%E7%94%A8/%E5%BA%94%E7%94%A8.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4. 应用
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2_2" id="__nav_3_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    计算基础实战课
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            计算基础实战课
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/1.%20MiniCPU%E8%AE%BE%E8%AE%A1/MiniCPU%E8%AE%BE%E8%AE%A1.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1. MiniCPU设计
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/2.%20%E8%AF%AD%E8%A8%80%E5%92%8C%E6%8C%87%E4%BB%A4/%E8%AF%AD%E8%A8%80%E5%92%8C%E6%8C%87%E4%BB%A4.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2. 语言和指令
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/3.%20%E5%BA%94%E7%94%A8%E5%92%8C%E5%86%85%E5%AD%98/%E5%BA%94%E7%94%A8%E5%92%8C%E5%86%85%E5%AD%98.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3. 应用和内存
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/4.%20IO%E4%B8%8E%E6%96%87%E4%BB%B6/IO%E5%92%8C%E6%96%87%E4%BB%B6.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4. IO与文件
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/5.%20%E7%BB%BC%E5%90%88%E5%BA%94%E7%94%A8/synthesis.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    5. 综合应用
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E5%92%8C%E5%B7%A5%E5%85%B7%E9%93%BE/%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    环境配置和工具链
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    ysyx
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            ysyx
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    NJU-ICS2023-PA
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            NJU-ICS2023-PA
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../ysyx/pa/pa1/pa1.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PA1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../ysyx/pa/pa2/pa2.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PA2
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../ysyx/pa/pa3/pa3.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PA3
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../ysyx/pa/pa4/pa4.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PA4
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../ysyx/pa/c_marco/macro.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    C Macro
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../ysyx/pa/summary/summary.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Summary
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../ysyx/pa/Linux_porting/porting.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Linux Porting
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../ysyx/digital-circuit/digital%20circuit.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Digital Circuit
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Tools
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Tools
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Tools/GDB/GDB.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GDB
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Vim
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            Vim
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Tools/vim/usage/usage.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    usage
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Tools/vim/vim-plugin/vim.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    vim-plugin
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Tools/doxygen/doxygen.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    doxygen
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Tools/gcc/gcc.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    gcc
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Tools/Git/Git.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Git
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Tools/md2slider/md2slider.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    md2slider
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Tools/tmux/tmux.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    tmux
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Todo%20List/todo.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TODO List
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<blockquote>
+<p>[!WARNING]</p>
+<p><strong>注意：正文内容为 AI 生成！！</strong></p>
+<p><strong>这个合集存放一些我和 AI 对话过程中，我觉得可以保留的东西，或许有人会觉得这样做很麻烦没必要，让 AI 帮你存就行了呀。fine~~不回答。</strong></p>
+</blockquote>
+<h1 id="1-introduction">1. introduction</h1>
+<p>我的疑问：</p>
+<blockquote>
+<p>这里面涉及到很多我不懂的概念。什么叫 reset scope？还有你说的什么各个 domain是啥意思？reset domain 跟 power domain。这个 domain的意思是按照区域面积划分，或者说逻辑功能的划分为某一部分某一，相当于划分到某一个子系统 subsystem。然后供电也是按照这种供电来供电的吗？我其实不太懂这种 domain 的抽象设计概念。而且好像我看到很多有这种东西。什么 power domain，以及你上面说的 reset domain。</p>
+<p>还有总之就还是拿上面这个复位的例子来说，如果就单纯想回答我这个场景的问题说，你可以举一些具体的实际那个实际的一些例子吧。因为这个 reset domain我真的是不太懂。是一个 subsystem就一个 domain，按照这样的理解是吗？</p>
+<p>然后那些无论是什么 cold reset、warm reset，它们这个复位就相当于，原来复位就只划分为这两个复位。但是呢，如果按照你说的 reset domain来划分，是不是能够单独重启某一个子系统呢？这种是不是在手册中有明确的一些定义呢？可能这种子系统是属于厂商的那种自定义实现，就是 implementation defined的那种。</p>
+<p>但是我还是觉得有必要去理解一下，用具体的那种案例来说。因为你说 reset是一个具有范围的操作嘛。</p>
+<p>还有就是你刚刚说可能是按功能区域划分的话，那是不是为各个 subsystem 供电的话，是不是就是由 PMIC 来去做这件事情的。因为 PMIC 里面有很多个DCDC跟 LDO。</p>
+<p>那做这件事情就是由 PMIC里面去控制是吧？</p>
+<p>我觉得你可以再补充一些这些实际的案例给我学习吧，或者从 first principle，并且你可以配一些交互式动画，或者说交互式动画理解 subsystem如何供电，以及理解它们的行为。</p>
+<blockquote>
+<p>[!TIP]</p>
+<p>拿到一个裸板做bringup，第一次通过按键刷机，识别到设备了...（经过一番折腾，可能没刷进去，或者别的）...想再第二次刷机，但你会发现怎么都识别不到设备了。欸，有经验的工程师会告诉你，需要断电/断电池十几秒再试试，发现这就好了。😲😦</p>
+</blockquote>
+</blockquote>
+<p>你现在问到的，其实已经不只是 Reset 了，而是 <strong>SoC 硬件架构设计中的一个非常基础、但经常被软件工程师忽略的思想：Domain（域）与控制边界。</strong></p>
+<p>我建议先不要急着记住 Power Domain、Reset Domain、Clock Domain 这些术语。</p>
+<p>我们先解决一个更根本的问题：</p>
+<blockquote>
+<p><strong>一颗 SoC 内部有 CPU、GPU、DPU、USB、DDR Controller 等许多硬件模块。为什么不能简单地给整颗芯片供电、给整颗芯片一个 Reset 信号，让所有硬件一起启动、一起停止？</strong></p>
+</blockquote>
+<p>只要理解了为什么不能这么做，Domain 的概念就很自然了。</p>
+<p>而且你有一个理解需要稍微调整：</p>
+<p><strong>一个 Subsystem 不一定对应一个 Domain；一个 Domain 也不一定只包含一个 Subsystem。</strong></p>
+<p>下面我会结合实际 SoC 的设计、PMIC 供电和 MTK 刷机案例，把这些概念串起来。</p>
+<h1 id="2-first-principles-domain">2. First Principles：为什么需要 Domain？</h1>
+<h2 id="21-soc">2.1 假设我们自己设计一颗简单的 SoC</h2>
+<p>先不考虑实际芯片的复杂程度。</p>
+<p>假设我们的 SoC 只有四个模块：</p>
+<div class="highlight"><pre><span></span><code>┌────────────────────────────────────────┐
+│                 SoC                    │
+│                                        │
+│   ┌─────────┐       ┌─────────┐        │
+│   │   CPU   │       │   GPU   │        │
+│   └─────────┘       └─────────┘        │
+│                                        │
+│   ┌─────────┐       ┌─────────┐        │
+│   │   USB   │       │   DPU   │        │
+│   └─────────┘       └─────────┘        │
+│                                        │
+└────────────────────────────────────────┘
+</code></pre></div>
+<p>最简单的设计是什么？</p>
+<p>一条供电线路，一个 Reset 信号，一个时钟。</p>
+<div class="highlight"><pre><span></span><code>                   PMIC
+                     │
+                VDD_SOC
+                     │
+       ┌─────────────┼──────────────┐
+       │             │              │
+      CPU           GPU            DPU
+                     │
+                    USB
+
+RESET ───────────────┬───────────────
+                     │
+              所有模块一起复位
+</code></pre></div>
+<p>这当然可以构成一种简单的系统设计。</p>
+<p>但是很快就会遇到问题。</p>
+<h3 id="a-gpu-cpu">问题 A：我只想关闭 GPU，为什么必须关闭 CPU？</h3>
+<p>手机待机时，GPU 可能不需要工作。</p>
+<p>但 CPU 仍然需要处理任务。</p>
+<p>如果整颗芯片只有一个不可分割的供电开关，那么就无法单独关闭 GPU 的供电。</p>
+<p>于是我们想到：</p>
+<p><strong>能否将不同模块的电源分别控制？</strong></p>
+<p>这就是 Power Domain 设计的一个重要动机。</p>
+<h3 id="busb-controller-cpu">问题 B：USB Controller 卡死了，为什么必须重启 CPU？</h3>
+<p>假设 USB Controller 内部有一个状态机：</p>
+<div class="highlight"><pre><span></span><code>IDLE → CONNECTED → TRANSFER → ERROR
+</code></pre></div>
+<p>现在因为某个硬件异常，状态机无法正常恢复。</p>
+<p>我们想让 USB Controller 重新初始化。</p>
+<p>最简单的方法是 Reset。</p>
+<p>但是，如果 CPU、GPU、DPU、USB 全部连接在同一个不可分割的 Reset 信号上，那么重置 USB 就必须连 CPU 一起重置。</p>
+<p>这显然不合理。</p>
+<p>于是我们又想到：</p>
+<p><strong>能否只对 USB Controller 施加 Reset，而不影响 CPU？</strong></p>
+<p>这就引出了 Reset Domain。</p>
+<h3 id="cusb">问题 C：USB 不工作时，为什么还要给它提供高速时钟？</h3>
+<p>即使不关闭供电，我们也可能希望停止某些模块的时钟，减少动态功耗。</p>
+<p>于是就有了 Clock Gating、Clock Domain 等概念。</p>
+<p>但这里要区分：</p>
+<ul>
+<li>Clock Gating：控制时钟是否送到某些电路。</li>
+<li>Clock Domain：一组具有特定时钟关系的时序逻辑。</li>
+<li>Power Domain：一组受到某种电源控制策略约束的逻辑。</li>
+<li>Reset Domain：一组受到某种复位控制关系约束的逻辑。</li>
+</ul>
+<p>这些 Domain 不是同一种划分。</p>
+<hr />
+<h1 id="3-domain">3. Domain 究竟是什么？是不是按面积划分？</h1>
+<p>你问得很准确：</p>
+<blockquote>
+<p>是按照区域面积划分，还是按照逻辑功能划分？</p>
+</blockquote>
+<p>答案是：</p>
+<p><strong>Domain 本质上是按照某种共同的控制关系或约束关系，对硬件资源进行分组。</strong></p>
+<p>它可能对应物理布局上的区域，但不一定。</p>
+<p>举一个更直观的例子。</p>
+<p>假设有六个硬件模块：</p>
+<div class="highlight"><pre><span></span><code>CPU0   CPU1   GPU   DPU   USB   RTC
+</code></pre></div>
+<p>我们可以按照不同标准，对同一批模块进行分组。</p>
+<p><strong>按照功能：</strong></p>
+<div class="highlight"><pre><span></span><code>Compute Subsystem
+  ├── CPU0
+  └── CPU1
+
+Graphics Subsystem
+  ├── GPU
+  └── DPU
+</code></pre></div>
+<p>这是功能架构上的划分。</p>
+<p><strong>按照供电控制：</strong></p>
+<div class="highlight"><pre><span></span><code>Power Domain A
+  ├── CPU0
+  └── CPU1
+
+Power Domain B
+  └── GPU
+
+Power Domain C
+  └── DPU
+
+Always-on Power Domain
+  └── RTC
+</code></pre></div>
+<p>这是电源控制关系上的划分。</p>
+<p><strong>按照复位控制：</strong></p>
+<div class="highlight"><pre><span></span><code>Reset Domain A
+  └── CPU0
+
+Reset Domain B
+  └── CPU1
+
+Reset Domain C
+  ├── GPU
+  └── DPU
+
+Reset Domain D
+  └── USB
+</code></pre></div>
+<p>这是一个假设性的设计，用于说明不同划分可以交叉，并不是某款芯片的实际结构。</p>
+<p>你会发现：</p>
+<p><strong>同一个 GPU，在功能架构中属于 Graphics Subsystem，在供电架构中属于 Power Domain B，在复位架构中属于 Reset Domain C。</strong></p>
+<p>它并没有变成三个 GPU。</p>
+<p>只是我们从三个不同的角度描述它。</p>
+<p>这就是 Domain 这个抽象最重要的地方。</p>
+<h2 id="31-subsystem-domain">3.1 Subsystem 和 Domain 的区别</h2>
+<table>
+<thead>
+<tr>
+<th>概念</th>
+<th>主要回答的问题</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Subsystem</td>
+<td>这个硬件模块负责什么功能？</td>
+</tr>
+<tr>
+<td>Power Domain</td>
+<td>哪些逻辑可以一起进行电源状态控制？</td>
+</tr>
+<tr>
+<td>Reset Domain</td>
+<td>哪些逻辑受到共同或相关的复位控制？</td>
+</tr>
+<tr>
+<td>Clock Domain</td>
+<td>哪些时序逻辑遵循特定的时钟关系？</td>
+</tr>
+<tr>
+<td>Voltage Domain</td>
+<td>哪些电路处于特定的电压环境？</td>
+</tr>
+</tbody>
+</table>
+<p>所以不能简单理解为：</p>
+<div class="highlight"><pre><span></span><code>一个 Subsystem = 一个 Power Domain = 一个 Reset Domain
+</code></pre></div>
+<p>真实的 SoC 往往复杂得多。</p>
+<p>例如一个 CPU Subsystem 内部，可以包含多个 CPU Core、共享缓存和其他控制逻辑。</p>
+<p>每个 CPU Core 可能有自己的复位控制，同时整个 CPU Cluster 又可以接受更大范围的复位。</p>
+<p>这就是典型的<strong>层次化控制</strong>。</p>
+<hr />
+<h1 id="4-reset-usb-reset-cpu">4. 真实案例一：一颗芯片真的可以只 Reset USB，而不 Reset CPU 吗？</h1>
+<p>可以，而且有公开的芯片手册和真实代码可以证明。</p>
+<p>我们看 <a href="https://datasheets.raspberrypi.org/rp2040/rp2040_datasheet.pdf?utm_source=chatgpt.com">Raspberry Pi RP2040 Datasheet</a>。</p>
+<p>虽然 RP2040 是微控制器，不是手机 AP SoC，但它的 Reset Controller 非常适合用来理解基本原理。</p>
+<h2 id="41-rp2040-reset-controller">4.1 RP2040 的 Reset Controller</h2>
+<p>在 RP2040 Datasheet 的 <strong>2.14 Subsystem Resets</strong> 中，存在一个真实的硬件寄存器：</p>
+<div class="highlight"><pre><span></span><code>RESETS_RESET
+</code></pre></div>
+<p>它的地址是：</p>
+<div class="highlight"><pre><span></span><code>0x4000C000
+</code></pre></div>
+<p>这个寄存器有不同的 Bit，用于控制不同外设的 Reset。</p>
+<p>例如：</p>
+<table>
+<thead>
+<tr>
+<th>Bit</th>
+<th>硬件模块</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>24</td>
+<td>USBCTRL</td>
+</tr>
+<tr>
+<td>23</td>
+<td>UART1</td>
+</tr>
+<tr>
+<td>22</td>
+<td>UART0</td>
+</tr>
+<tr>
+<td>21</td>
+<td>TIMER</td>
+</tr>
+<tr>
+<td>13</td>
+<td>PLL_USB</td>
+</tr>
+<tr>
+<td>12</td>
+<td>PLL_SYS</td>
+</tr>
+</tbody>
+</table>
+<p>这里最有意思的是：</p>
+<p><strong>USB Controller 和 USB PLL 有不同的 Reset 控制位。</strong></p>
+<p>这意味着什么？</p>
+<p>假设 USB Controller 出现了问题。</p>
+<p>CPU 可以执行类似下面的代码：</p>
+<div class="highlight"><pre><span></span><code>// 复位 USB Controller
+reset_block(RESETS_RESET_USBCTRL_BITS);
+
+// 解除 USB Controller 复位并等待完成
+unreset_block_wait(RESETS_RESET_USBCTRL_BITS);
+</code></pre></div>
+<p>这是 RP2040 SDK 中实际提供的接口。</p>
+<p><a href="https://github.com/raspberrypi/pico-sdk/blob/master/src/rp2040/hardware_regs/include/hardware/regs/resets.h?utm_source=chatgpt.com">查看官方 RP2040 Reset 寄存器定义</a></p>
+<p>在这个过程中：</p>
+<div class="highlight"><pre><span></span><code>CPU
+ │
+ │ 运行代码
+ │
+ ▼
+Reset Controller
+ │
+ │ Assert USBCTRL Reset
+ ▼
+USB Controller
+ │
+ │ 内部相关逻辑进入 Reset 状态
+ │
+ ▼
+Deassert Reset
+ │
+ ▼
+USB Controller 重新初始化
+</code></pre></div>
+<p>CPU 不需要重新从 Reset Vector 开始执行。</p>
+<p>其他没有受到该复位信号影响的模块，也不需要跟着复位。</p>
+<p>这就回答了你的问题：</p>
+<p><strong>Cold/Warm Reset 并不是硬件世界仅有的两种复位操作。</strong></p>
+<p>ARM ARM 中的 Cold/Warm Reset 是针对 PE 的架构分类。</p>
+<p>SoC 设计者完全可以设计更多具有不同作用范围的复位机制。</p>
+<p>例如：</p>
+<ul>
+<li>CPU Core Reset</li>
+<li>Cluster Reset</li>
+<li>Peripheral Reset</li>
+<li>System Reset</li>
+<li>Power-on Reset</li>
+</ul>
+<p>但这些名称的具体作用范围必须查对应芯片的文档，不能仅凭名称判断。</p>
+<h2 id="42-reset-controller-reset">4.2 更有意思：Reset Controller 自己怎么被 Reset？</h2>
+<p>这里其实存在一个递归问题。</p>
+<p>如果 Reset Controller 控制 USB、GPU、CPU，那么：</p>
+<p><strong>Reset Controller 自己由谁控制？</strong></p>
+<p>通常还会存在更上层的复位来源和复位逻辑。</p>
+<p>例如：</p>
+<div class="highlight"><pre><span></span><code>           PMIC / POR
+                │
+                ▼
+       Top-level Reset Logic
+                │
+                ▼
+         Reset Controller
+          │     │     │
+          ▼     ▼     ▼
+         CPU   USB   GPU
+</code></pre></div>
+<p>这是一种概念上的层次关系。</p>
+<p>具体芯片可能使用多个 Reset Controller，也可能由 PMIC、Watchdog、Always-on Controller 等共同参与。</p>
+<p>因此，Reset 并不一定只有一个中央控制器。</p>
+<hr />
+<h1 id="5-power-domain-pmic">5. 真实案例二：Power Domain 是怎么供电的？PMIC 负责一切吗？</h1>
+<p>你提到了 PMIC 内部的 LDO、DC-DC，这正好可以把问题讲透。</p>
+<p>但首先要纠正一个容易形成的误解：</p>
+<p><strong>一个 Power Domain 不一定对应 PMIC 的一个 LDO 或 DC-DC。</strong></p>
+<p>实际系统中，可能同时存在：</p>
+<ol>
+<li>PMIC 外部供电轨；</li>
+<li>SoC 内部的电源开关；</li>
+<li>SoC 内部的 Power Controller；</li>
+<li>控制电压、时钟、Reset 和隔离逻辑的状态机。</li>
+</ol>
+<p>我们用一个简化的手机 SoC 举例。</p>
+<div class="highlight"><pre><span></span><code>                        Battery
+                           │
+                           ▼
+                    ┌────────────┐
+                    │    PMIC    │
+                    │            │
+                    │  Buck 1    │
+                    │  Buck 2    │
+                    │  LDO 1     │
+                    └──┬────┬────┘
+                       │    │
+                  VDD_A│    │VDD_B
+                       │    │
+                       ▼    ▼
+              ┌─────────────────────┐
+              │         SoC         │
+              │                     │
+              │  ┌──────────────┐   │
+              │  │ Power Switch │   │
+              │  └──────┬───────┘   │
+              │         │           │
+              │         ▼           │
+              │    GPU Logic        │
+              │                     │
+              │  CPU Logic          │
+              │  USB Controller     │
+              └─────────────────────┘
+</code></pre></div>
+<p>这里有两个不同层次的控制。</p>
+<h3 id="pmic">第一层：PMIC 控制供电轨</h3>
+<p>例如：</p>
+<div class="highlight"><pre><span></span><code>PMIC Buck 1 → VDD_CPU
+PMIC Buck 2 → VDD_SOC
+PMIC LDO 1  → VDD_IO
+</code></pre></div>
+<p>这些只是示例名称，并不对应某个具体 MTK 平台。</p>
+<p>PMIC 可以控制输出电压、使能状态，并监测部分电源故障。</p>
+<h3 id="soc-power-domain">第二层：SoC 内部控制 Power Domain</h3>
+<p>假设：</p>
+<div class="highlight"><pre><span></span><code>PMIC Buck 2
+     │
+     ▼
+   VDD_SOC
+     │
+     ├───────────────► USB
+     │
+     ├───────────────► DPU
+     │
+     └── Power Switch ──► GPU
+</code></pre></div>
+<p>这里 GPU 和 USB 可能共用 PMIC 的一个外部电源轨。</p>
+<p>但是 GPU 内部还有一个 Power Switch。</p>
+<p>当系统不需要 GPU 时：</p>
+<div class="highlight"><pre><span></span><code>VDD_SOC 仍然存在
+       │
+       ▼
+GPU Power Switch OFF
+       │
+       ▼
+GPU 内部逻辑断电
+</code></pre></div>
+<p>所以：</p>
+<p><strong>PMIC 不需要为每一个 Power Domain 单独配置一个 LDO。</strong></p>
+<p>Power Domain 的控制可以发生在 SoC 内部。</p>
+<p>而且，Power Domain 也不一定意味着真的完全断电。它还可能支持 Retention，即保留部分状态的低功耗模式。</p>
+<h2 id="51-arm">5.1 一个真实的 Arm 参考设计</h2>
+<p>Arm Neoverse N2 Reference Design：System Power Management and Domains：https://support.arm.com/documentation/102337/latest/Functional-description/System-power-management-and-domains?utm_source=chatgpt.com</p>
+<p>这份官方文档明确描述了：</p>
+<ul>
+<li>每个 CPU Core 可以具有自己的 <code>PD_CPUn</code> Power Domain；</li>
+<li>系统存在层次化的 Power Domain 和 Voltage Domain；</li>
+<li>SCP 参与电源、时钟和 Reset 控制；</li>
+<li><code>SYSTOP</code> 可以处于 Always-active Power Domain，同时具有独立的 Reset Domain。</li>
+</ul>
+<p>最后一点尤其重要。</p>
+<p>它直接说明：</p>
+<blockquote>
+<p><strong>一个区域可以保持供电，却仍然允许单独 Reset。</strong></p>
+</blockquote>
+<p>这正是你理解 Power Domain 与 Reset Domain 不同的关键证据。https://support.arm.com/documentation/102337/latest/Functional-description/System-power-management-and-domains?utm_source=chatgpt.com</p>
+<hr />
+<h1 id="6-power-domain-off-reset">6. Power Domain OFF 时，为什么还需要 Reset？</h1>
+<p>这部分是理解硬件设计的另一个关键。</p>
+<p>假设 GPU 正在访问共享内存。</p>
+<p>现在系统决定关闭 GPU 的 Power Domain。</p>
+<p>如果直接切断 GPU 电源，会发生什么？</p>
+<p>GPU 输出到其他仍在工作的模块的信号，可能进入未知状态。</p>
+<p>因此，实际的 Power-off Sequence 往往需要更多步骤。</p>
+<p>一个简化的设计是：</p>
+<div class="highlight"><pre><span></span><code>GPU 正常运行
+      │
+      ▼
+停止提交新任务
+      │
+      ▼
+等待已有任务完成
+      │
+      ▼
+保存必要状态
+      │
+      ▼
+隔离 GPU 与其他模块
+      │
+      ▼
+Assert Reset（按设计需要）
+      │
+      ▼
+关闭 GPU Power Switch
+      │
+      ▼
+GPU Power Domain OFF
+</code></pre></div>
+<p>其中的 <strong>Isolation（隔离）</strong> 是一个很有意思的概念。</p>
+<p>假设 GPU 已经断电，但是 CPU 还在工作。</p>
+<p>CPU 和 GPU 之间仍然存在物理连接。</p>
+<p>如果 GPU 断电后的输出信号不可预测，就可能影响仍在运行的逻辑。</p>
+<p>因此，芯片内部会使用 Isolation Cell，在域边界提供受控的信号值。</p>
+<p>Arm 的 Power Control System Architecture：https://documentation-service.arm.com/static/63f3499c9567172d4e2aadd6?utm_source=chatgpt.com 第 7.2.9 节专门讨论了 Isolation 和 Reset 的协同。</p>
+<p>需要注意，以上只是典型的概念序列。具体实现中，Reset、Isolation、Clock 和 Power 的先后顺序受到硬件约束，不能直接把这段流程当作所有芯片的固定时序。</p>
+<p>现在再看 Power-on：</p>
+<div class="highlight"><pre><span></span><code>GPU Power Domain OFF
+      │
+      ▼
+打开 Power Switch
+      │
+      ▼
+等待供电稳定
+      │
+      ▼
+准备 Clock
+      │
+      ▼
+按照规定解除 Reset
+      │
+      ▼
+解除 Isolation
+      │
+      ▼
+初始化 GPU
+      │
+      ▼
+GPU Ready
+</code></pre></div>
+<p>你应该能发现：</p>
+<p><strong>Power Domain 的控制远远不只是 PMIC 打开一个 LDO。</strong></p>
+<p>它还涉及电源开关、时钟、Reset、Isolation、状态保持和软硬件握手。</p>
+<hr />
+<h1 id="7-mtk-power-domain-linux">7. 真实案例三：MTK 的 Power Domain 在 Linux 代码里是什么样的？</h1>
+<p>这次我们不看概念图，直接看 MTK 的设备树规范。</p>
+<p>Linux 主线内核中存在：</p>
+<p>MediaTek Power Domains Controller Device Tree Binding：https://code.googlesource.com/linux/torvalds/linux/%2B/75f2c0b3690702c90863c2e138cb5520670845ea/Documentation/devicetree/bindings/power/mediatek%2Cpower-controller.yaml?utm_source=chatgpt.com</p>
+<p>这份文档明确说明，MediaTek 处理器支持多个 Power Domain，可以由软件根据使用场景进行上下电控制。</p>
+<p>其中还有一个关键要求：</p>
+<p>属于某个 Power Domain 的 IP Core，可以通过设备树中的 <code>power-domains</code> 属性引用对应的电源域。</p>
+<p>例如，下面是简化的示意代码，并非某款 MTK 手机的实际 DTS：</p>
+<div class="highlight"><pre><span></span><code>power_controller: power-controller@10006000 {
+    compatible = &quot;mediatek,example-power-controller&quot;;
+    #power-domain-cells = &lt;1&gt;;
+};
+
+gpu@13000000 {
+    compatible = &quot;vendor,example-gpu&quot;;
+    power-domains = &lt;&amp;power_controller GPU_POWER_DOMAIN&gt;;
+};
+</code></pre></div>
+<p>其中：</p>
+<div class="highlight"><pre><span></span><code>power-domains = &lt;&amp;power_controller GPU_POWER_DOMAIN&gt;;
+</code></pre></div>
+<p>表达的意思是：</p>
+<p><strong>GPU 设备依赖 Power Controller 管理的某个电源域。</strong></p>
+<p>注意，这里只是声明依赖关系，并不是说 Linux 直接通过这行代码操作 PMIC 的某个 LDO。</p>
+<p>实际的电源状态转换由相应的驱动和硬件控制器实现。</p>
+<p>Linux 中还有一个专门管理这类关系的框架：</p>
+<p>Linux Generic Power Domains（genpd）相关文档：https://cdn.kernel.org/doc/html/latest/driver-api/pm/devices.html?utm_source=chatgpt.com</p>
+<p>它可以协调多个设备共享同一电源域的情况。</p>
+<p>例如：</p>
+<div class="highlight"><pre><span></span><code>GPU Driver
+    │
+    ▼
+Runtime PM
+    │
+    ▼
+Linux genpd
+    │
+    ▼
+MTK Power Controller Driver
+    │
+    ▼
+SoC Power Controller
+    │
+    ▼
+GPU Power Domain
+</code></pre></div>
+<p>这就是从软件 API 到硬件电源控制的一条真实路径。</p>
+<h2 id="71-reset-linux">7.1 Reset 也有对应的 Linux 框架</h2>
+<p>同样，Linux 也有 Reset Controller Framework。</p>
+<p>Linux Kernel Reset Controller API：https://kernel.org/doc/html/next/driver-api/reset.html?utm_source=chatgpt.com</p>
+<p>其中提供了：</p>
+<div class="highlight"><pre><span></span><code>reset_control_assert(rstc);
+reset_control_deassert(rstc);
+reset_control_reset(rstc);
+</code></pre></div>
+<p>这些 API 分别用于控制复位信号的断言、解除和触发复位操作。</p>
+<p>所以，从软件开发的角度来看：</p>
+<div class="highlight"><pre><span></span><code>Power Domain → Linux genpd
+Reset Control → Linux Reset Controller Framework
+Clock Control → Linux Common Clock Framework
+Regulator → Linux Regulator Framework
+</code></pre></div>
+<p>它们是四类不同的控制关系。</p>
+<p>当然，并非每个平台的所有硬件控制都必须经过这些框架。有些控制可能由固件、安全世界或专有驱动负责。</p>
+<p>这对你学习 MTK 和 Qualcomm BSP 都很有价值。</p>
+<hr />
+<h1 id="8">8. 重新分析你的刷机问题：为什么断电后才能恢复？</h1>
+<p>现在把前面的知识重新放回你的实际场景。</p>
+<p>假设第一次刷机时：</p>
+<div class="highlight"><pre><span></span><code>Battery
+   │
+   ▼
+PMIC
+   │
+   ▼
+SoC Power-on
+   │
+   ▼
+BootROM
+   │
+   ▼
+USB Download Mode
+   │
+   ▼
+PC 识别成功
+</code></pre></div>
+<p>随后刷机异常中断。</p>
+<p>我们假设其中一种可能的故障路径：</p>
+<div class="highlight"><pre><span></span><code>第一次刷机
+    │
+    ▼
+USB Download Mode
+    │
+    ▼
+异常中断
+    │
+    ▼
+SoC 某些状态没有恢复
+    │
+    ▼
+尝试再次进入下载模式
+    │
+    ▼
+失败
+</code></pre></div>
+<p>这里有三个值得区分的假设。</p>
+<table>
+<thead>
+<tr>
+<th>假设</th>
+<th>可能的问题</th>
+<th>如何验证</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>H1：USB 子系统状态异常</td>
+<td>USB Controller 或 PHY 未正确恢复</td>
+<td>比较 USB 枚举事件和早期启动日志</td>
+</tr>
+<tr>
+<td>H2：电源或复位状态未恢复</td>
+<td>PMIC、Reset Controller 或 Always-on 逻辑保留了状态</td>
+<td>比较不同复位方式，检查 Reset Reason</td>
+</tr>
+<tr>
+<td>H3：启动模式发生变化</td>
+<td>第二次启动没有进入预期下载路径</td>
+<td>比较启动条件、USB VID/PID、BootROM/Preloader 阶段</td>
+</tr>
+</tbody>
+</table>
+<p>你可以设计一个很简单的实验矩阵：</p>
+<table>
+<thead>
+<tr>
+<th>实验</th>
+<th>操作</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td>失败后立即重新按键</td>
+<td>记录是否识别</td>
+</tr>
+<tr>
+<td>B</td>
+<td>失败后长按电源键重启</td>
+<td>记录是否识别</td>
+</tr>
+<tr>
+<td>C</td>
+<td>拔电池后立即接回</td>
+<td>记录是否识别</td>
+</tr>
+<tr>
+<td>D</td>
+<td>拔电池、移除 USB、等待 15 秒</td>
+<td>记录是否识别</td>
+</tr>
+<tr>
+<td>E</td>
+<td>恢复供电后重新进入下载模式</td>
+<td>记录 VID/PID 和设备出现时间</td>
+</tr>
+</tbody>
+</table>
+<p>这里的关键不是哪个操作成功。</p>
+<p>而是：</p>
+<p><strong>哪个操作第一次改变了失败结果？</strong></p>
+<p>例如，如果 A、B、C 都失败，D 成功，就值得优先调查供电保持、复位覆盖范围和启动条件。</p>
+<p>如果 A 失败，B 成功，那么按键复位路径可能已经足够恢复设备，不一定需要完整掉电。</p>
+<p>如果设备始终有 USB 连接事件，但 VID/PID 不同，那么应该先确认启动阶段，而不是立即怀疑硬件复位。</p>
+<p>还有一个实际限制：你当前遇到的是 BootROM/Preloader 附近的问题，Android Linux 的 sysfs 可能根本没有机会运行。因此，这种问题的第一手证据往往来自 PC 端 USB 日志、BootROM/Preloader 日志和平台复位文档，而不是 Android 的 <code>/sys</code>。</p>
+<hr />
+<h1 id="9">9. 把整个知识体系串起来</h1>
+<p>现在可以建立一张完整的概念图：</p>
+<div class="highlight"><pre><span></span><code>                  System / Board
+                        │
+                 Battery / USB
+                        │
+                        ▼
+                       PMIC
+                        │
+                 Voltage Rails
+                        │
+                        ▼
+┌────────────────────────────────────────────┐
+│                    SoC                     │
+│                                            │
+│  Power Controller                          │
+│        │                                   │
+│        ├── Power Domain CPU                │
+│        ├── Power Domain GPU                │
+│        └── Power Domain Display            │
+│                                            │
+│  Reset Controller                          │
+│        │                                   │
+│        ├── CPU Reset                       │
+│        ├── USB Reset                       │
+│        └── GPU Reset                       │
+│                                            │
+│  Clock Controller                          │
+│        │                                   │
+│        ├── CPU Clock                       │
+│        ├── USB Clock                       │
+│        └── DPU Clock                       │
+│                                            │
+│  Functional Subsystems                     │
+│        │                                   │
+│        ├── CPU Subsystem                   │
+│        ├── GPU Subsystem                   │
+│        ├── Display Subsystem               │
+│        └── USB Subsystem                   │
+│                                            │
+└────────────────────────────────────────────┘
+</code></pre></div>
+<p>这张图有一个需要特别注意的地方：</p>
+<p><strong>它不是物理布局图，而是控制关系图。</strong></p>
+<p>Power、Reset、Clock 和功能子系统的边界可能相互交叉。</p>
+<p>而且 Power Controller、Reset Controller、Clock Controller 本身也可能分布在多个硬件模块中，并不一定各自对应一个独立的中央控制器。</p>
+<h2 id="_1">最后，推荐你按这个顺序阅读四份官方资料</h2>
+<table>
+<thead>
+<tr>
+<th>顺序</th>
+<th>资料</th>
+<th>重点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>RP2040 Datasheet：https://datasheets.raspberrypi.org/rp2040/rp2040_datasheet.pdf?utm_source=chatgpt.com</td>
+<td>2.14 Subsystem Resets，理解单独复位 USB</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Arm Neoverse N2 Reference Design：https://support.arm.com/documentation/102337/latest/Functional-description/System-power-management-and-domains?utm_source=chatgpt.com</td>
+<td>真实的 Power Domain、Reset Domain 层次</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Arm Power Control System Architecture：https://documentation-service.arm.com/static/63f3499c9567172d4e2aadd6?utm_source=chatgpt.com</td>
+<td>Power、Reset、Isolation 的协同</td>
+</tr>
+<tr>
+<td>4</td>
+<td>MediaTek Power Domain Device Tree Binding：https://code.googlesource.com/linux/torvalds/linux/%2B/75f2c0b3690702c90863c2e138cb5520670845ea/Documentation/devicetree/bindings/power/mediatek%2Cpower-controller.yaml?utm_source=chatgpt.com</td>
+<td>MTK 如何在 Linux 中描述 Power Domain</td>
+</tr>
+</tbody>
+</table>
+<p><strong>关于你想要的交互动画：</strong> 当前这条回复提供的是静态架构图和状态流程，还不是可以点击操作的动画。最值得制作的交互模型是一个简化 SoC 实验台：分别控制 PMIC 供电、GPU Power Switch、CPU Reset、USB Reset，实时显示每个模块的 <code>Powered / Reset Asserted / Initialized / Running / Fault</code> 状态，再加入“刷机失败→软件重启→断电恢复”的场景。</p>
+<p>这个模型尤其应该让你观察到三件事：</p>
+<ol>
+<li><strong>Powered ON 不代表 Reset 已解除。</strong></li>
+<li><strong>Reset 已解除不代表模块已经初始化完成。</strong></li>
+<li><strong>CPU 重新运行不代表 USB 下载链路已经恢复。</strong></li>
+</ol>
+<p>最终，你的 Bring-up 问题可以归结为一个非常适合工程调试的模型：
+$$
+\text{USB Download Ready} = f(\text{Power},\text{Reset},\text{Clock},\text{Boot State},\text{USB Initialization})
+$$
+这里的 (f) 表示这些条件之间的依赖关系，而不是简单的数学乘法。</p>
+<p><strong>下一次遇到“必须拔电池才能恢复”的现象，你要找的就不只是 Cold Reset 或 Warm Reset，而是：到底哪个状态没有被前一次复位操作恢复，为什么只有更大范围的断电操作才能让它重新满足启动条件。</strong></p>
+
+
+
+
+
+
+
+  
+    
+  
+  
+    
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Last update">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2026-10-25T13:11:09+01:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2026-10-25</span>
+  </span>
+
+    
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Created">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2026-10-25T13:11:09+01:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2026-10-25</span>
+  </span>
+
+    
+    
+    
+  </aside>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://github.com/JAILuo" target="_blank" rel="noopener" title="JAILuo" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.footer"], "search": "../../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.83f73b43.min.js"></script>
+      
+        <script src="../../../js/timeago.min.js"></script>
+      
+        <script src="../../../js/timeago_mkdocs_material.js"></script>
+      
+        <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+      
+    
+  </body>
+</html>

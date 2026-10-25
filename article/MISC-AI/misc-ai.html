@@ -8,24 +8,24 @@
       
       
       
-        <link rel="canonical" href="https://jailuo.github.io/notes/article/Learn%20BSP/bsp-basis/6.%20cpu%20pinning/affinity.html">
+        <link rel="canonical" href="https://jailuo.github.io/notes/article/MISC-AI/misc-ai.html">
       
       
       
       
-      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.48">
     
     
       
-        <title>Affinity - Messy Notes</title>
+        <title>1. introduction - Messy Notes</title>
       
     
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/main.6f8fc17f.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.6f8fc17f.min.css">
       
         
-        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
       
       
 
@@ -44,9 +44,9 @@
       
     
     
-      <link rel="stylesheet" href="../../../../css/timeago.css">
+      <link rel="stylesheet" href="../../css/timeago.css">
     
-    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -88,7 +88,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../../../../index.html" title="Messy Notes" class="md-header__button md-logo" aria-label="Messy Notes" data-md-component="logo">
+    <a href="../../index.html" title="Messy Notes" class="md-header__button md-logo" aria-label="Messy Notes" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -108,7 +108,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Affinity
+              1. introduction
             
           </span>
         </div>
@@ -221,7 +221,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../../../index.html" title="Messy Notes" class="md-nav__button md-logo" aria-label="Messy Notes" data-md-component="logo">
+    <a href="../../index.html" title="Messy Notes" class="md-nav__button md-logo" aria-label="Messy Notes" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -251,7 +251,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../index.html" class="md-nav__link">
+      <a href="../../index.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -516,7 +516,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../Course/University%20Course/jyy%20OS2024/cousre%20note/1.%20introduction/introduction.html" class="md-nav__link">
+      <a href="../../Course/University%20Course/jyy%20OS2024/cousre%20note/1.%20introduction/introduction.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -537,7 +537,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../Course/University%20Course/jyy%20OS2024/cousre%20note/2.%20concurrency/concurrency.html" class="md-nav__link">
+      <a href="../../Course/University%20Course/jyy%20OS2024/cousre%20note/2.%20concurrency/concurrency.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -558,7 +558,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../Course/University%20Course/jyy%20OS2024/cousre%20note/3.%20virtualization/virtualization.html" class="md-nav__link">
+      <a href="../../Course/University%20Course/jyy%20OS2024/cousre%20note/3.%20virtualization/virtualization.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -579,7 +579,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../Course/University%20Course/jyy%20OS2024/cousre%20note/4.%20kernel/kernel.html" class="md-nav__link">
+      <a href="../../Course/University%20Course/jyy%20OS2024/cousre%20note/4.%20kernel/kernel.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -600,7 +600,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../Course/University%20Course/jyy%20OS2024/cousre%20note/5.%20persistence/persistence.html" class="md-nav__link">
+      <a href="../../Course/University%20Course/jyy%20OS2024/cousre%20note/5.%20persistence/persistence.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -664,7 +664,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../Course/University%20Course/jyy%20OS2024/Mini%20Labs/M1/M1.html" class="md-nav__link">
+      <a href="../../Course/University%20Course/jyy%20OS2024/Mini%20Labs/M1/M1.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -685,7 +685,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../Course/University%20Course/jyy%20OS2024/Mini%20Labs/M2/M2.html" class="md-nav__link">
+      <a href="../../Course/University%20Course/jyy%20OS2024/Mini%20Labs/M2/M2.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -706,7 +706,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../Course/University%20Course/jyy%20OS2024/Mini%20Labs/M3/M3.html" class="md-nav__link">
+      <a href="../../Course/University%20Course/jyy%20OS2024/Mini%20Labs/M3/M3.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -770,7 +770,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../Course/University%20Course/jyy%20OS2024/OS%20Labs/L0/L0.html" class="md-nav__link">
+      <a href="../../Course/University%20Course/jyy%20OS2024/OS%20Labs/L0/L0.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -791,7 +791,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../Course/University%20Course/jyy%20OS2024/OS%20Labs/L1/L1.html" class="md-nav__link">
+      <a href="../../Course/University%20Course/jyy%20OS2024/OS%20Labs/L1/L1.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -906,7 +906,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../Course/GeekTime/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E4%B8%80%E5%91%A8%E7%9B%AE/1.%20%E6%8C%87%E4%BB%A4%E4%B8%8E%E8%BF%90%E7%AE%97/%E6%8C%87%E4%BB%A4%E4%B8%8E%E8%BF%90%E7%AE%97.html" class="md-nav__link">
+      <a href="../../Course/GeekTime/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E4%B8%80%E5%91%A8%E7%9B%AE/1.%20%E6%8C%87%E4%BB%A4%E4%B8%8E%E8%BF%90%E7%AE%97/%E6%8C%87%E4%BB%A4%E4%B8%8E%E8%BF%90%E7%AE%97.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -927,7 +927,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../Course/GeekTime/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E4%B8%80%E5%91%A8%E7%9B%AE/2.%20%E5%A4%84%E7%90%86%E5%99%A8/%E5%A4%84%E7%90%86%E5%99%A8.html" class="md-nav__link">
+      <a href="../../Course/GeekTime/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E4%B8%80%E5%91%A8%E7%9B%AE/2.%20%E5%A4%84%E7%90%86%E5%99%A8/%E5%A4%84%E7%90%86%E5%99%A8.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -948,7 +948,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../Course/GeekTime/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E4%B8%80%E5%91%A8%E7%9B%AE/3.%20%E5%AD%98%E5%82%A8%E4%B8%8EIO%E7%B3%BB%E7%BB%9F/%E5%AD%98%E5%82%A8%E4%B8%8EIO%E7%B3%BB%E7%BB%9F.html" class="md-nav__link">
+      <a href="../../Course/GeekTime/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E4%B8%80%E5%91%A8%E7%9B%AE/3.%20%E5%AD%98%E5%82%A8%E4%B8%8EIO%E7%B3%BB%E7%BB%9F/%E5%AD%98%E5%82%A8%E4%B8%8EIO%E7%B3%BB%E7%BB%9F.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -969,7 +969,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../Course/GeekTime/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E4%B8%80%E5%91%A8%E7%9B%AE/4.%20%E5%BA%94%E7%94%A8/%E5%BA%94%E7%94%A8.html" class="md-nav__link">
+      <a href="../../Course/GeekTime/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E4%B8%80%E5%91%A8%E7%9B%AE/4.%20%E5%BA%94%E7%94%A8/%E5%BA%94%E7%94%A8.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1033,7 +1033,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/1.%20MiniCPU%E8%AE%BE%E8%AE%A1/MiniCPU%E8%AE%BE%E8%AE%A1.html" class="md-nav__link">
+      <a href="../../Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/1.%20MiniCPU%E8%AE%BE%E8%AE%A1/MiniCPU%E8%AE%BE%E8%AE%A1.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1054,7 +1054,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/2.%20%E8%AF%AD%E8%A8%80%E5%92%8C%E6%8C%87%E4%BB%A4/%E8%AF%AD%E8%A8%80%E5%92%8C%E6%8C%87%E4%BB%A4.html" class="md-nav__link">
+      <a href="../../Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/2.%20%E8%AF%AD%E8%A8%80%E5%92%8C%E6%8C%87%E4%BB%A4/%E8%AF%AD%E8%A8%80%E5%92%8C%E6%8C%87%E4%BB%A4.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1075,7 +1075,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/3.%20%E5%BA%94%E7%94%A8%E5%92%8C%E5%86%85%E5%AD%98/%E5%BA%94%E7%94%A8%E5%92%8C%E5%86%85%E5%AD%98.html" class="md-nav__link">
+      <a href="../../Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/3.%20%E5%BA%94%E7%94%A8%E5%92%8C%E5%86%85%E5%AD%98/%E5%BA%94%E7%94%A8%E5%92%8C%E5%86%85%E5%AD%98.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1096,7 +1096,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/4.%20IO%E4%B8%8E%E6%96%87%E4%BB%B6/IO%E5%92%8C%E6%96%87%E4%BB%B6.html" class="md-nav__link">
+      <a href="../../Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/4.%20IO%E4%B8%8E%E6%96%87%E4%BB%B6/IO%E5%92%8C%E6%96%87%E4%BB%B6.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1117,7 +1117,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/5.%20%E7%BB%BC%E5%90%88%E5%BA%94%E7%94%A8/synthesis.html" class="md-nav__link">
+      <a href="../../Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/5.%20%E7%BB%BC%E5%90%88%E5%BA%94%E7%94%A8/synthesis.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1138,7 +1138,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E5%92%8C%E5%B7%A5%E5%85%B7%E9%93%BE/%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE.html" class="md-nav__link">
+      <a href="../../Course/GeekTime/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%AE%9E%E6%88%98%E8%AF%BE/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E5%92%8C%E5%B7%A5%E5%85%B7%E9%93%BE/%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1252,7 +1252,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../ysyx/pa/pa1/pa1.html" class="md-nav__link">
+      <a href="../../ysyx/pa/pa1/pa1.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1273,7 +1273,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../ysyx/pa/pa2/pa2.html" class="md-nav__link">
+      <a href="../../ysyx/pa/pa2/pa2.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1294,7 +1294,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../ysyx/pa/pa3/pa3.html" class="md-nav__link">
+      <a href="../../ysyx/pa/pa3/pa3.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1315,7 +1315,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../ysyx/pa/pa4/pa4.html" class="md-nav__link">
+      <a href="../../ysyx/pa/pa4/pa4.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1336,7 +1336,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../ysyx/pa/c_marco/macro.html" class="md-nav__link">
+      <a href="../../ysyx/pa/c_marco/macro.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1357,7 +1357,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../ysyx/pa/summary/summary.html" class="md-nav__link">
+      <a href="../../ysyx/pa/summary/summary.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1378,7 +1378,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../ysyx/pa/Linux_porting/porting.html" class="md-nav__link">
+      <a href="../../ysyx/pa/Linux_porting/porting.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1407,7 +1407,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../ysyx/digital-circuit/digital%20circuit.html" class="md-nav__link">
+      <a href="../../ysyx/digital-circuit/digital%20circuit.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1470,7 +1470,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../Tools/GDB/GDB.html" class="md-nav__link">
+      <a href="../../Tools/GDB/GDB.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1526,7 +1526,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../Tools/vim/usage/usage.html" class="md-nav__link">
+      <a href="../../Tools/vim/usage/usage.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1547,7 +1547,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../Tools/vim/vim-plugin/vim.html" class="md-nav__link">
+      <a href="../../Tools/vim/vim-plugin/vim.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1576,7 +1576,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../Tools/doxygen/doxygen.html" class="md-nav__link">
+      <a href="../../Tools/doxygen/doxygen.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1597,7 +1597,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../Tools/gcc/gcc.html" class="md-nav__link">
+      <a href="../../Tools/gcc/gcc.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1618,7 +1618,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../Tools/Git/Git.html" class="md-nav__link">
+      <a href="../../Tools/Git/Git.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1639,7 +1639,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../Tools/md2slider/md2slider.html" class="md-nav__link">
+      <a href="../../Tools/md2slider/md2slider.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1660,7 +1660,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../Tools/tmux/tmux.html" class="md-nav__link">
+      <a href="../../Tools/tmux/tmux.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1688,7 +1688,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../Todo%20List/todo.html" class="md-nav__link">
+      <a href="../../Todo%20List/todo.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1721,23 +1721,6 @@
     
   
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#2-basis" class="md-nav__link">
-    <span class="md-ellipsis">
-      2. basis
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -1754,87 +1737,8 @@
   
 
 
-<p>使用图标：</p>
-<p>重要：📌</p>
-<p>提示：💡</p>
-<p>备注：ℹ️</p>
-<p>警告：⚠️</p>
-<p>危险：🚨</p>
-<blockquote>
-<p>[!TIP]</p>
-<p>[!note]</p>
-<p>[!important]</p>
-<p>[!warning]</p>
-<p>[!caution]</p>
-</blockquote>
 <h1 id="1-introduction">1. introduction</h1>
-<p>工作、看技术文章、刷B站的时候，常常能听说什么：绑核、affinity、让某个游戏运行在某个处理器核心上、什么大小核/能效核.....</p>
-<p>很多都听不懂（我是小白）......也有可能是我懂，但我不理解他们说的这么高级的名词是啥😅😅</p>
-<p>所以我还是按照自己的感觉来学吧......所以，会有很多大家看起来弱智的问题......</p>
-<p>我的几个疑问或者理解：</p>
-<ol>
-<li>
-<p>在 Linux 上，大家说的绑核，让某个进程（还是线程呢，或者说 task）运行在指定的处理器核心上是怎么做到的呢？如果又要改变某个核心当前运行的 task，怎么做呢？</p>
-<p>因为有了 <strong>Everything is State Machine</strong> 的理解，我知道多核处理器的每一个 core，都会有自己的 regs，然后再加上共有的 memory 就能够构成每个单核的状态。</p>
-<blockquote>
-<p>在 <a href="https://mp.weixin.qq.com/s/ULNN7Pz7TmwUwRRB9U1HGg">backtrace（一）：从底层到本质：理解函数调用与 LR/FP 的设计与思想</a> 系列的文章中，我应该一直在用这个思想去理解这些东西，感兴趣的可以看看。</p>
-</blockquote>
-<p>所以，我觉得这应该是一个无关于是否有 OS 的问题？</p>
-<p>换句话说，哪怕是在什么 RTOS（FreeRTOS、Zephyr、QNX）、bare-meatl 的环境，应该也是可以实现的指定的核心运行指定的任务的。</p>
-<p><strong>但是光知道个接口我觉得还不够，底层一点硬件咋做的呢？配 affinity？为啥配 affinity 能够实现呢？</strong>值得思考......</p>
-</li>
-<li>
-<p>另外，能不能做到把某些 interrupt handler 指定放到某个 core 上做呢？咋实现呢？</p>
-</li>
-<li>
-<p>我一直想问的是，为啥超过温度，手机就会限频呢？这是由 vendor 决定的，还是手机厂商 OEM 决定的呢？</p>
-</li>
-</ol>
-<h2 id="2-basis">2. basis</h2>
-<p>基本上，看文章的人都对计算机组成原理有一点了解，也肯定知道什么五级三级流水线，取指/译码/执行......比如这条很简单的指令：</p>
-<div class="highlight"><pre><span></span><code><span class="err">0</span><span class="nl">x400000:</span><span class="w"> </span><span class="nf">ADD</span><span class="w"> </span><span class="no">x0</span><span class="p">,</span><span class="w"> </span><span class="no">x1</span><span class="p">,</span><span class="w"> </span><span class="no">x2</span>
-</code></pre></div>
-<p>获取要执行的 PC 指令(0x400000 处)，按照对应 ISA 进行指令解码（每一个操作数对应到哪一个寄存器、内存操作、分支跳转等等，知道是 <code>add</code> 操作）、具体执行出结果，放到哪里。</p>
-<p>也就是理解为：CPU = ALU + registers。</p>
-<blockquote>
-<p>说这么多是没用的，直接去做一遍南京大学的 PA 就理解了。</p>
-<p>以前我觉得写东西给别人看，或者和别人交流的时候，要考虑到”知识的诅咒“的影响，总是会想着给他们补充各种基础知识，希望他把我或者我把他当小学生来教，所以就会东讲一点，西讲一点，总是决定还是太杂乱了。但现在有了 AI 后，还是直接问吧（主要是看到现在各个平台都是各种 AI slop，公众号尤其重），没什么情绪想写那些。</p>
-<p>而且，国庆似乎想明白了点东西，写东西还是随心一点吧，<strong>首要任务是给自己用的，其次如果能改变/启发到一些人那只是额外带来的“side effect”。</strong></p>
-</blockquote>
-<p>接着，我自己对多核的理解（偏软件的）：就是每一个 core 都有自己的 regs，再使用整个系统共有的 memory，共同构成单核的 context，同时加上随时能打断 core 执行流的 interrupt，综合起来构成一个完成的执行实体；而整个系统中有多个这样的执行实体，自然就是多核了。</p>
-<blockquote>
-<p>[!Tip]</p>
-<p>如果了解 RISC-V，看过它的 spec，你就会一些类似思想的东西：</p>
-<p>[!important]</p>
-<p>对于我要讲述的话题，目前先简单理解到这里就 OK 了，但如果要实现多核、做具体开发工作，这个时候按照上面的理解就不太够了。</p>
-<p>单核私有的 cache、多核共有的 cache、cache 一致性、分支预测器等等内容都需要涉及。</p>
-<p>举个例子，哪怕按照我上面最基础的抽象模型，PC 都是系统执行流的核心部分；但如果更加现代具体对于微架构来说，更多是：预测未来 PC + 提前取指、投机执行等的 cpu core 的前端涉及。</p>
-<p>但我这里的话题到此为止。</p>
-<p>更多内容可看相关博客、官方文档介绍，详细可见文末参考的 []</p>
-<ul>
-<li>
-<p>从A76到A78——在变化中学习ARM微架构》：https://blog.csdn.net/feelabclihu/article/details/125942431?utm_source=chatgpt.com</p>
-</li>
-<li>
-<p>《Introduction to ARM AArch64 Architecture and Low-level Programming》<sup>[1]</sup></p>
-<p><img src="pic/image-20261007190100725.png" alt="image-20261007190100725" style="zoom:50%;" /></p>
-</li>
-<li>
-<p>ARM Cortex-A72 MPCore Processor Technical Reference Manual r0p3：https://support.arm.com/documentation/100095/0003/?lang=en</p>
-</li>
-</ul>
-</blockquote>
-<p>那回到话题，多核怎么就能够执行特定的程序呢？</p>
-<p>前面也说了，PC 是关键，那只要改变不同 core 的核心</p>
-<p>但是，这种 <code>Fetch → Decode → Execute</code> 理解起来没什么意思，就和网络上生成的千篇一律的 AI 文章一样，给初学者建立直觉打基础挺好的，但不适合真正要做细节的。</p>
-<p>直接看接近现代 CPU 一点的：</p>
-<ol>
-<li>理解简单原理</li>
-<li>看看如何调频率、绑核，如何操作</li>
-<li>了解一些深入的东西看看。</li>
-</ol>
-<h1 id="_1">参考</h1>
-<p>[1] Computer System Overview - Introduction to ARM AArch64 Architecture and Low-level Programming：https://hrishim.github.io/llvl_prog1_book/comp_overview.html</p>
+<p>该目录主要存放一些我和 AI 对话过程中，我觉得可以保留的东西。</p>
 
 
 
@@ -1857,7 +1761,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2026-10-07T06:14:09+02:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2026-10-07</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2026-10-25T13:11:09+01:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2026-10-25</span>
   </span>
 
     
@@ -1867,7 +1771,7 @@
     <span class="md-icon" title="Created">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2026-10-07T06:14:09+02:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2026-10-07</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago"><span class="timeago" datetime="2026-10-25T13:11:09+01:00" locale="en"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date">2026-10-25</span>
   </span>
 
     
@@ -1927,14 +1831,14 @@
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "../../../..", "features": ["navigation.footer"], "search": "../../../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.footer"], "search": "../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../../../../assets/javascripts/bundle.83f73b43.min.js"></script>
+      <script src="../../assets/javascripts/bundle.83f73b43.min.js"></script>
       
-        <script src="../../../../js/timeago.min.js"></script>
+        <script src="../../js/timeago.min.js"></script>
       
-        <script src="../../../../js/timeago_mkdocs_material.js"></script>
+        <script src="../../js/timeago_mkdocs_material.js"></script>
       
         <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
       
